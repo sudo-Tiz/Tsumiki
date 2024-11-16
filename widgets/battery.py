@@ -63,7 +63,7 @@ class BatteryLabel(Box):
         icons = self.ICONS_CHARGING if is_charging else self.ICONS_NOT_CHARGING
 
         index = min(max(battery_percent // 10, 0), 10)
-        battery_icon = NerdIcon(icons[index], size="12px")
+        battery_icon = NerdIcon(icons[index], size="14px")
 
         self.children = battery_icon
 
