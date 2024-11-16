@@ -65,7 +65,7 @@ class StatusBar(Window):
         cpu_config = config["cpu"]
 
         self.hyprsunset = CommandSwitcher(
-            command="hyprsunset -t 2800k",
+            command=f"hyprsunset -t {hypersunset_config["temperature"]}",
             enabled_icon=hypersunset_config["enabled_icon"],
             disabled_icon=hypersunset_config["disabled_icon"],
             enable_label=hypersunset_config["enable_label"],

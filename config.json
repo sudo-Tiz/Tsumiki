@@ -1,12 +1,12 @@
 {
   "hyprsunset": {
+    "temperature": "2800k",
     "enabled_icon": "󱩌",
     "disabled_icon": "󰛨",
     "enable_label": true,
     "enable_tooltip": true
   },
   "hypridle": {
-    "temperature": "2800k",
     "enabled_icon": "",
     "disabled_icon": "",
     "enable_label": true,
@@ -28,6 +28,10 @@
   },
   "window": {
     "length":20
-  }
+  },
+  "updates":{
+    "os": "arch",
+    "icon": "󱧘"
+   }
 
 }
