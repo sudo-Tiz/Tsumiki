@@ -116,6 +116,7 @@ class StatusBar(Window):
 
         hypersunset_config = config["hyprsunset"]
         hyperidle_config = config["hypridle"]
+        battery_config = config["battery"]
 
         self.hyprsunset = CommandSwitcher(
             "hyprsunset -t 2800k",
@@ -123,7 +124,6 @@ class StatusBar(Window):
             hypersunset_config["disabled_icon"],
             hypersunset_config["enable_label"],
             hypersunset_config["enable_tooltip"],
-            
         )
         self.hypridle = CommandSwitcher(
             "hypridle",
@@ -152,8 +152,10 @@ class StatusBar(Window):
         )
         self.status_container.add(VolumeWidget()) if AUDIO_WIDGET is True else None
 
-
-        self.battery = BatteryLabel(name="battery")
+        self.battery = BatteryLabel(
+            battery_config["enable_label"],
+            battery_config["enable_tooltip"],
+        )
 
         self.children = CenterBox(
             name="bar-inner",

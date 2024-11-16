@@ -5,10 +5,13 @@
     "enable_label": true,
     "enable_tooltip": true
   },
-
   "hypridle": {
     "enabled_icon": "",
     "disabled_icon": "",
+    "enable_label": true,
+    "enable_tooltip": true
+  },
+  "battery": {
     "enable_label": true,
     "enable_tooltip": true
   }
