@@ -1,40 +1,36 @@
+from fabric.widgets.label import Label
+from fabric.widgets.box import Box
+from fabric.utils import (
+    invoke_repeater,
+)
+from utils import NerdIcon
 import psutil
 
-from fabric.utils import invoke_repeater
-from fabric.widgets.box import Box
-from fabric.widgets.label import Label
 
-from utils import NerdIcon
+class Cpu(Box):
+    def __init__(
+        self,
+        icon: str = "",
+        interval: int = 2000,
+        enable_label: bool = True,
+        enable_tooltip: bool = True,
+    ):
+        super().__init__(name="cpu")
+        self.enable_label = enable_label
+        self.enable_tooltip = enable_tooltip
 
+        self.interval = interval
 
-class Stats(Box):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        invoke_repeater(2000, self.update_battery_status, initial_call=True)
+        self.cpu_icon = NerdIcon(icon, size="12px")
 
-    def update_battery_status(self):
-        battery = psutil.sensors_battery()
+        self.children = self.cpu_icon
+        self.cpu_level_label = Label()
 
-        if battery is None:
-            self.hide()
-            return
+        if self.enable_label:
+            self.children = (self.cpu_icon, self.cpu_level_label)
 
-        battery_percent = round(battery.percent) if battery else 0.0
+        invoke_repeater(self.interval, self.update_progress_bars)
 
-        print(battery_percent)
-
-        battery_label = Label(label=f"{battery_percent}%")
-
-        is_charging = battery.power_plugged if battery else False
-        icons = self.ICONS_CHARGING if is_charging else self.ICONS_NOT_CHARGING
-
-        index = min(max(battery_percent // 10, 0), 10)
-        battery_icon = NerdIcon(icons[index], size="16px")
-
-        self.children = (battery_icon, battery_label)
-
-        ## fix this to display time left for charging
-        # if not  is_charging:
-        #   self.set_tooltip_text(format_time(battery.secsleft))
-
+    def update_progress_bars(self):
+        self.cpu_level_label.set_label(f"{psutil.cpu_percent()}%")
         return True

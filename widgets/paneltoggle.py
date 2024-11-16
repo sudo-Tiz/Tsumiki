@@ -12,8 +12,8 @@ class CommandSwitcher(Button):
         command: str,
         enabled_icon: str,
         disabled_icon: str,
-        enable_label: bool | None = None,
-        enable_tooltip: bool | None = None,
+        enable_label: bool = True,
+        enable_tooltip: bool = True,
     ):
         self.command = command
         self.command_without_args = self.command.split(" ")[0]  # command without args
@@ -44,7 +44,7 @@ class CommandSwitcher(Button):
         return self.update()
 
     def update(self, *_):
-        if self.enable_label and self.enable_label is not None:
+        if self.enable_label:
             self.set_label(
                 self.cat_icon(
                     "On" if self.is_active() else "Off",

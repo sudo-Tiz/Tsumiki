@@ -13,6 +13,13 @@
   },
   "battery": {
     "enable_label": true,
-    "enable_tooltip": true
+    "enable_tooltip": true,
+    "interval": 2000
+  },
+  "cpu": {
+    "icon":"",
+    "enable_label": true,
+    "enable_tooltip": true,
+    "interval": 2000
   }
 }

@@ -1,8 +1,5 @@
-import psutil
 from fabric import Application
 from fabric.widgets.box import Box
-from fabric.widgets.label import Label
-from fabric.widgets.overlay import Overlay
 from fabric.widgets.datetime import DateTime
 from fabric.widgets.centerbox import CenterBox
 from fabric.system_tray.widgets import SystemTray
@@ -12,13 +9,13 @@ from fabric.hyprland.widgets import Language, ActiveWindow, Workspaces, Workspac
 from fabric.utils import (
     FormattedString,
     bulk_replace,
-    invoke_repeater,
     get_relative_path,
 )
 
 from utils import read_config
 from widgets.battery import BatteryLabel
 from widgets.paneltoggle import CommandSwitcher
+from widgets.stats import Cpu
 from widgets.volume import AUDIO_WIDGET, VolumeWidget
 
 config = read_config()
@@ -66,6 +63,7 @@ class StatusBar(Window):
         hypersunset_config = config["hyprsunset"]
         hyperidle_config = config["hypridle"]
         battery_config = config["battery"]
+        cpu_config = config["cpu"]
 
         self.hyprsunset = CommandSwitcher(
             "hyprsunset -t 2800k",
@@ -82,28 +80,24 @@ class StatusBar(Window):
             hyperidle_config["enable_tooltip"],
         )
 
-        self.cpu_progress_bar = CircularProgressBar(
-            name="cpu-progress-bar", pie=True, size=24, tooltip_text="cpu"
-        )
-        self.progress_bars_overlay = Overlay(
-            child=self.ram_progress_bar,
-            overlays=[
-                self.cpu_progress_bar,
-                Label("", style="margin: 0px 6px 0px 0px; font-size: 12px"),
-            ],
-        )
-
         self.status_container = Box(
             name="widgets-container",
             spacing=4,
             orientation="h",
-            children=self.progress_bars_overlay,
         )
         self.status_container.add(VolumeWidget()) if AUDIO_WIDGET is True else None
 
         self.battery = BatteryLabel(
-            battery_config["enable_label"],
-            battery_config["enable_tooltip"],
+            enable_label=battery_config["enable_label"],
+            enable_tooltip=battery_config["enable_tooltip"],
+            interval=battery_config["interval"],
+        )
+
+        self.cpu = Cpu(
+            icon=cpu_config["icon"],
+            enable_label=cpu_config["enable_label"],
+            enable_tooltip=cpu_config["enable_tooltip"],
+            interval=cpu_config["interval"],
         )
 
         self.children = CenterBox(
@@ -128,6 +122,7 @@ class StatusBar(Window):
                 spacing=4,
                 orientation="h",
                 children=[
+                    self.cpu,
                     self.battery,
                     self.hypridle,
                     self.hyprsunset,
@@ -137,14 +132,7 @@ class StatusBar(Window):
             ),
         )
 
-        invoke_repeater(1000, self.update_progress_bars)
-
         self.show_all()
-
-    def update_progress_bars(self):
-        self.ram_progress_bar.value = psutil.virtual_memory().percent / 100
-        self.cpu_progress_bar.value = psutil.cpu_percent() / 100
-        return True
 
 
 if __name__ == "__main__":

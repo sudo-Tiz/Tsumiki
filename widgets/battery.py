@@ -36,13 +36,17 @@ class BatteryLabel(Box):
     ]
 
     def __init__(
-        self, enable_label: bool | None = None, enable_tooltip: bool | None = None
+        self,
+        interval: int = 2000,
+        enable_label: bool = True,
+        enable_tooltip: bool = True,
     ):
         super().__init__(name="battery")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
+        self.interval = interval
 
-        invoke_repeater(2000, self.update_battery_status, initial_call=True)
+        invoke_repeater(self.interval, self.update_battery_status, initial_call=True)
 
     def update_battery_status(self):
         battery = psutil.sensors_battery()
@@ -59,11 +63,11 @@ class BatteryLabel(Box):
         icons = self.ICONS_CHARGING if is_charging else self.ICONS_NOT_CHARGING
 
         index = min(max(battery_percent // 10, 0), 10)
-        battery_icon = NerdIcon(icons[index], size="16px")
+        battery_icon = NerdIcon(icons[index], size="12px")
 
         self.children = battery_icon
 
-        if self.enable_label and self.enable_label is not None:
+        if self.enable_label:
             self.children = (battery_icon, battery_label)
 
         ## fix this to display time left for charging
