@@ -3,7 +3,6 @@ from fabric.widgets.box import Box
 from fabric.widgets.datetime import DateTime
 from fabric.widgets.centerbox import CenterBox
 from fabric.system_tray.widgets import SystemTray
-from fabric.widgets.circularprogressbar import CircularProgressBar
 from fabric.widgets.wayland import WaylandWindow as Window
 from fabric.hyprland.widgets import Language, ActiveWindow, Workspaces, WorkspaceButton
 from fabric.utils import (
@@ -56,9 +55,6 @@ class StatusBar(Window):
         self.date_time = DateTime(name="date-time")
         self.system_tray = SystemTray(name="system-tray", spacing=4)
 
-        self.ram_progress_bar = CircularProgressBar(
-            name="ram-progress-bar", pie=True, size=24, tooltip_text="ram"
-        )
 
         hypersunset_config = config["hyprsunset"]
         hyperidle_config = config["hypridle"]

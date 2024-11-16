@@ -42,7 +42,7 @@ class Memory(Box):
         enable_label: bool = True,
         enable_tooltip: bool = True,
     ):
-        super().__init__(name="cpu")
+        super().__init__(name="memory")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
 
@@ -74,3 +74,4 @@ class Memory(Box):
 
     def get_total(self):
         return f"{format(convert_bytes(self.total_memory, "gb"),".1f")}"
+
