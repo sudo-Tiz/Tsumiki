@@ -5,11 +5,7 @@ from fabric.widgets.centerbox import CenterBox
 from fabric.system_tray.widgets import SystemTray
 from fabric.widgets.wayland import WaylandWindow as Window
 from fabric.hyprland.widgets import Language, ActiveWindow, Workspaces, WorkspaceButton
-from fabric.utils import (
-    FormattedString,
-    bulk_replace,
-    get_relative_path,
-)
+from fabric.utils import FormattedString, bulk_replace, get_relative_path, truncate
 
 from utils import read_config
 from widgets.battery import BatteryLabel
@@ -36,10 +32,17 @@ class StatusBar(Window):
         self.workspaces = Workspaces(
             name="workspaces",
             spacing=4,
-            buttons=[WorkspaceButton(id=i, label=str(i)) for i in range(1, 11)],
+            buttons=[WorkspaceButton(id=i, label=str(i)) for i in range(1, 8)],
             buttons_factory=lambda ws_id: WorkspaceButton(id=ws_id, label=str(ws_id)),
         )
-        self.active_window = ActiveWindow(name="hyprland-window")
+        self.active_window = ActiveWindow(
+            name="hyprland-window",
+            formatter=FormattedString(
+                "{'Desktop' if not win_title else truncate(win_title, 42)}",
+                truncate=truncate,
+            ),
+        )
+
         self.language = Language(
             formatter=FormattedString(
                 "{replace_lang(language)}",
@@ -55,14 +58,13 @@ class StatusBar(Window):
         self.date_time = DateTime(name="date-time")
         self.system_tray = SystemTray(name="system-tray", spacing=4)
 
-
         hypersunset_config = config["hyprsunset"]
         hyperidle_config = config["hypridle"]
         battery_config = config["battery"]
         cpu_config = config["cpu"]
 
         self.hyprsunset = CommandSwitcher(
-            command="hyprsunset -t 2800k",
+            command=f"hyprsunset -t {hypersunset_config["temperature"]}",
             enabled_icon=hypersunset_config["enabled_icon"],
             disabled_icon=hypersunset_config["disabled_icon"],
             enable_label=hypersunset_config["enable_label"],

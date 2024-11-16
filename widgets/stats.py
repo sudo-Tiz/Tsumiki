@@ -74,4 +74,3 @@ class Memory(Box):
 
     def get_total(self):
         return f"{format(convert_bytes(self.total_memory, "gb"),".1f")}"
-

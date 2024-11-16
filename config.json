@@ -6,6 +6,7 @@
     "enable_tooltip": true
   },
   "hypridle": {
+    "temperature": "2800k",
     "enabled_icon": "",
     "disabled_icon": "",
     "enable_label": true,
@@ -24,6 +25,9 @@
   },
   "workspaces": {
     "count":8
+  },
+  "window": {
+    "length":20
   }
 
 }
