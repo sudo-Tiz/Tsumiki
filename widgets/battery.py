@@ -44,9 +44,8 @@ class BatteryLabel(Box):
         super().__init__(name="battery")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
-        self.interval = interval
 
-        invoke_repeater(self.interval, self.update_battery_status, initial_call=True)
+        invoke_repeater(interval, self.update_battery_status, initial_call=True)
 
     def update_battery_status(self):
         battery = psutil.sensors_battery()

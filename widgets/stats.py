@@ -19,17 +19,15 @@ class Cpu(Box):
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
 
-        self.interval = interval
+        cpu_icon = NerdIcon(icon, size="12px")
 
-        self.cpu_icon = NerdIcon(icon, size="12px")
-
-        self.children = self.cpu_icon
+        self.children = cpu_icon
         self.cpu_level_label = Label()
 
         if self.enable_label:
-            self.children = (self.cpu_icon, self.cpu_level_label)
+            self.children = (cpu_icon, self.cpu_level_label)
 
-        invoke_repeater(self.interval, self.update_progress_bars)
+        invoke_repeater(interval, self.update_progress_bars)
 
     def update_progress_bars(self):
         self.cpu_level_label.set_label(f"{psutil.cpu_percent()}%")

@@ -14,6 +14,7 @@ class CommandSwitcher(Button):
         disabled_icon: str,
         enable_label: bool = True,
         enable_tooltip: bool = True,
+        interval: int = 2000,
     ):
         self.command = command
         self.command_without_args = self.command.split(" ")[0]  # command without args
@@ -26,7 +27,7 @@ class CommandSwitcher(Button):
         self.enable_tooltip = enable_tooltip
 
         self.connect("clicked", self.toggle)
-        invoke_repeater(2000, self.update)
+        invoke_repeater(interval, self.update)
 
     def is_active(self, *_):
         return (
