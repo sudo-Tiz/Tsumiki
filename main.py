@@ -11,6 +11,7 @@ from utils import read_config
 from widgets.battery import BatteryLabel
 from widgets.paneltoggle import CommandSwitcher
 from widgets.stats import Cpu, Memory
+from widgets.updates import Updates
 from widgets.volume import AUDIO_WIDGET, VolumeWidget
 
 config = read_config()
@@ -38,7 +39,7 @@ class StatusBar(Window):
         self.active_window = ActiveWindow(
             name="hyprland-window",
             formatter=FormattedString(
-                "{'Desktop' if not win_title else truncate(win_title, 42)}",
+                "A {'Desktop' if not win_title else truncate(win_title, 42)}",
                 truncate=truncate,
             ),
         )
@@ -64,7 +65,7 @@ class StatusBar(Window):
         cpu_config = config["cpu"]
 
         self.hyprsunset = CommandSwitcher(
-            command=f"hyprsunset -t {hypersunset_config["temperature"]}",
+            command="hyprsunset -t 2800k",
             enabled_icon=hypersunset_config["enabled_icon"],
             disabled_icon=hypersunset_config["disabled_icon"],
             enable_label=hypersunset_config["enable_label"],
@@ -99,6 +100,7 @@ class StatusBar(Window):
         )
 
         self.memory = Memory()
+        self.updates = Updates()
 
         self.children = CenterBox(
             name="bar-inner",
@@ -123,6 +125,7 @@ class StatusBar(Window):
                 orientation="h",
                 children=[
                     self.cpu,
+                    self.updates,
                     self.memory,
                     self.battery,
                     self.hypridle,
