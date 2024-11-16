@@ -1,0 +1,4 @@
+[] updates
+[] cpu/gpu temp
+[] mpris
+[] clipboard

@@ -12,7 +12,7 @@ class CommandSwitcher(Button):
         command: str,
         enabled_icon: str,
         disabled_icon: str,
-        name = "panel-button",
+        name="panel-button",
         enable_label: bool = True,
         enable_tooltip: bool = True,
         interval: int = 2000,
@@ -20,7 +20,7 @@ class CommandSwitcher(Button):
         self.command = command
         self.command_without_args = self.command.split(" ")[0]  # command without args
 
-        super().__init__(label=self.cat_icon("On", ""), name = name)
+        super().__init__(label=self.cat_icon("On", ""), name=name)
 
         self.enabled_icon = enabled_icon
         self.disabled_icon = disabled_icon
@@ -28,7 +28,7 @@ class CommandSwitcher(Button):
         self.enable_tooltip = enable_tooltip
 
         self.connect("clicked", self.toggle)
-        invoke_repeater(interval, self.update)
+        invoke_repeater(interval, self.update, initial_call=True)
 
     def is_active(self, *_):
         return (

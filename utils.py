@@ -31,13 +31,12 @@ def format_time(secs):
     return "%d h %02d min" % (hh, mm)
 
 
-def convert_bytes(bytes: int, to: Literal["kb","mb","gb"]):
+def convert_bytes(bytes: int, to: Literal["kb", "mb", "gb"]):
     multiplier = 1
 
-    if(to == "mb"):
+    if to == "mb":
         multiplier = 2
-    elif(to == "gb"):
+    elif to == "gb":
         multiplier = 3
 
-
-    return (bytes/(1024 ** multiplier))
+    return bytes / (1024**multiplier)

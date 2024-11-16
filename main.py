@@ -100,7 +100,7 @@ class StatusBar(Window):
             interval=cpu_config["interval"],
         )
 
-        self.memory = Memory( )
+        self.memory = Memory()
 
         self.children = CenterBox(
             name="bar-inner",
