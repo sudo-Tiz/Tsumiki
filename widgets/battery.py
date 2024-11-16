@@ -47,14 +47,11 @@ class BatteryLabel(Box):
     def update_battery_status(self):
         battery = psutil.sensors_battery()
 
-        print(battery.percent)
         if battery is None:
             self.hide()
             return
 
         battery_percent = round(battery.percent) if battery else 0.0
-
-        print(battery_percent)
 
         battery_label = Label(label=f"{battery_percent}%")
 

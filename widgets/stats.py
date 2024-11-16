@@ -15,7 +15,6 @@ class Stats(Box):
     def update_battery_status(self):
         battery = psutil.sensors_battery()
 
-        print(battery.percent)
         if battery is None:
             self.hide()
             return
