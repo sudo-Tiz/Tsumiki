@@ -15,7 +15,7 @@ from fabric.utils import (
 from utils import read_config
 from widgets.battery import BatteryLabel
 from widgets.paneltoggle import CommandSwitcher
-from widgets.stats import Cpu
+from widgets.stats import Cpu, Memory
 from widgets.volume import AUDIO_WIDGET, VolumeWidget
 
 config = read_config()
@@ -66,18 +66,18 @@ class StatusBar(Window):
         cpu_config = config["cpu"]
 
         self.hyprsunset = CommandSwitcher(
-            "hyprsunset -t 2800k",
-            hypersunset_config["enabled_icon"],
-            hypersunset_config["disabled_icon"],
-            hypersunset_config["enable_label"],
-            hypersunset_config["enable_tooltip"],
+            command="hyprsunset -t 2800k",
+            enabled_icon=hypersunset_config["enabled_icon"],
+            disabled_icon=hypersunset_config["disabled_icon"],
+            enable_label=hypersunset_config["enable_label"],
+            enable_tooltip=hypersunset_config["enable_tooltip"],
         )
         self.hypridle = CommandSwitcher(
-            "hypridle",
-            hyperidle_config["enabled_icon"],
-            hyperidle_config["disabled_icon"],
-            hyperidle_config["enable_label"],
-            hyperidle_config["enable_tooltip"],
+            command="hypridle",
+            enabled_icon=hyperidle_config["enabled_icon"],
+            disabled_icon=hyperidle_config["disabled_icon"],
+            enable_label=hyperidle_config["enable_label"],
+            enable_tooltip=hyperidle_config["enable_tooltip"],
         )
 
         self.status_container = Box(
@@ -99,6 +99,8 @@ class StatusBar(Window):
             enable_tooltip=cpu_config["enable_tooltip"],
             interval=cpu_config["interval"],
         )
+
+        self.memory = Memory( )
 
         self.children = CenterBox(
             name="bar-inner",
@@ -123,6 +125,7 @@ class StatusBar(Window):
                 orientation="h",
                 children=[
                     self.cpu,
+                    self.memory,
                     self.battery,
                     self.hypridle,
                     self.hyprsunset,
