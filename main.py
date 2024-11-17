@@ -39,7 +39,7 @@ class StatusBar(Window):
         self.active_window = ActiveWindow(
             name="hyprland-window",
             formatter=FormattedString(
-                "A {'Desktop' if not win_title else truncate(win_title, 42)}",
+                " {'Desktop' if not win_title else truncate(win_title, 42)}",
                 truncate=truncate,
             ),
         )
