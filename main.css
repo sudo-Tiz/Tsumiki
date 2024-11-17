@@ -4,11 +4,57 @@
 * {
     all: unset;
     color: var(--main-fg);
-    font-size: 1rem;
+    font-size: 16px;
     font-family: "JetBrainsMono Nerd Font";
     border-radius: 100px;
     font-weight: bold;
 }
+
+label {
+    font-size: 1rem;
+}
+
+
+
+
+#hyprland-language,
+#hyprland-window {
+    background-color: var(--main-bg);
+    padding: 0px 8px;
+}
+
+/*initial styles for all modules*/
+
+#panel-button,
+#date-time,
+#backlight,
+#battery,
+#bluetooth,
+#cpu,
+#storage,
+#hyprland-window,
+#custom-keybindhint,
+#language,
+#memory,
+#mpris,
+#network,
+#pulseaudio,
+#taskbar,
+#tray,
+#updates,
+#custom-wallchange,
+#custom-wbar,
+#window,
+#workspaces{
+    color: var(--main-fg);
+    background: var(--main-bg);
+    padding: 0px 20px;
+}
+
+#hyprland-window{
+    padding: 6px 10px;
+}
+
 
 
 #bar-inner {
@@ -19,14 +65,12 @@
 }
 
 #workspaces {
-    padding: 6px;
-    min-width: 0px;
-    background-color: var(--main-bg);
-
+    padding-top: 1px;
+    padding-bottom: 1px;
 }
 
 #workspaces>button {
-    padding: 0px 8px;
+    padding: 0 0.5rem;
     transition: padding 0.05s steps(8);
 }
 
@@ -41,7 +85,6 @@
     padding: 0 1rem;
     background-color: var(--ws-active);
     min-width: 1.4rem;
-    min-height: 1.6rem;
 }
 
 #workspaces>button.active > label{
@@ -119,43 +162,12 @@ tooltip>* {
 
 
 
-#hyprland-language,
-#hyprland-window {
-    background-color: var(--main-bg);
-    padding: 0px 8px;
-}
-
-/*initial styles for all modules*/
-
-#panel-button,
-#date-time,
-#backlight,
-#battery,
-#bluetooth,
-#cpu,
-#storage,
-#hyprland-window,
-#custom-keybindhint,
-#language,
-#memory,
-#mpris,
-#network,
-#pulseaudio,
-#taskbar,
-#tray,
-#updates,
-#custom-wallchange,
-#custom-wbar,
-#window,
-#workspaces{
-    color: var(--main-fg);
-    background: var(--main-bg);
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-
 .box-label{
     margin-left: 10px;
+}
+
+.nerd-icon{
+    min-width: 12px;
+    min-height: 12px;
 }
  

@@ -13,7 +13,7 @@ def read_config():
 def NerdIcon(icon: str, size: str = "24px", props: dict = None):
     label_props = {
         "label": icon,  # Directly use the provided icon name
-        "name": "nerd_icon",
+        "name": "nerd-icon",
         "style": f"font-size: {size}; ",  # Set font family for Material Icons
         "h_align": "center",  # Align horizontally
         "v_align": "center",  # Align vertically

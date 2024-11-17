@@ -34,7 +34,7 @@ class StatusBar(Window):
         self.workspaces = Workspaces(
             name="workspaces",
             spacing=4,
-            buttons=[WorkspaceButton(id=i, label=str(i)) for i in range(1, 8)],
+            buttons=[WorkspaceButton(id=i, label=str(i)) for i in range(1, 9)],
             buttons_factory=lambda ws_id: WorkspaceButton(id=ws_id, label=str(ws_id)),
         )
 
@@ -59,7 +59,7 @@ class StatusBar(Window):
             ),
             name="hyprland-window",
         )
-        self.date_time = DateTime(name="date-time", formatters="%H:%M - %A %e")
+        self.date_time = DateTime(name="date-time")
         self.system_tray = SystemTray(name="system-tray", spacing=4)
 
         hypersunset_config = config["hyprsunset"]
