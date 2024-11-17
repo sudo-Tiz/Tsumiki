@@ -8,9 +8,9 @@ from fabric.hyprland.widgets import Language, ActiveWindow, Workspaces, Workspac
 from fabric.utils import FormattedString, bulk_replace, get_relative_path, truncate
 
 from utils import read_config
-from widgets import player
 from widgets.battery import BatteryLabel
 from widgets.paneltoggle import CommandSwitcher
+from widgets.player import Player
 from widgets.stats import Cpu, Memory, Storage
 from widgets.updates import Updates
 from widgets.volume import AUDIO_WIDGET, VolumeWidget
@@ -103,7 +103,7 @@ class StatusBar(Window):
 
         self.memory = Memory()
         self.storage = Storage()
-        self.player = player()
+        self.player = Player()
         self.updates = Updates(os=updates_config["os"])
 
         self.children = CenterBox(
@@ -121,7 +121,7 @@ class StatusBar(Window):
                 name="center-container",
                 spacing=4,
                 orientation="h",
-                children=[self.date_time,self.player],
+                children=[self.date_time, self.player],
             ),
             end_children=Box(
                 name="end-container",
