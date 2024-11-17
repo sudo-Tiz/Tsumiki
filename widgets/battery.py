@@ -78,6 +78,5 @@ class BatteryLabel(Box):
                 self.set_tooltip_text(f"Time to full: {format_time(battery.secsleft)}")
             else:
                 self.set_tooltip_text(f"Time to empty: {format_time(battery.secsleft)}")
-            
 
         return True
