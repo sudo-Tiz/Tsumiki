@@ -15,7 +15,7 @@ class Updates(Box):
         enable_label: bool = True,
         enable_tooltip: bool = True,
     ):
-        super().__init__(name="cpu")
+        super().__init__(name="updates")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
         self.icon = NerdIcon(icon, size="14px")

@@ -8,6 +8,7 @@ from fabric.hyprland.widgets import Language, ActiveWindow, Workspaces, Workspac
 from fabric.utils import FormattedString, bulk_replace, get_relative_path, truncate
 
 from utils import read_config
+from widgets import player
 from widgets.battery import BatteryLabel
 from widgets.paneltoggle import CommandSwitcher
 from widgets.stats import Cpu, Memory, Storage
@@ -102,6 +103,7 @@ class StatusBar(Window):
 
         self.memory = Memory()
         self.storage = Storage()
+        self.player = player()
         self.updates = Updates(os=updates_config["os"])
 
         self.children = CenterBox(
@@ -119,7 +121,7 @@ class StatusBar(Window):
                 name="center-container",
                 spacing=4,
                 orientation="h",
-                children=self.date_time,
+                children=[self.date_time,self.player],
             ),
             end_children=Box(
                 name="end-container",
