@@ -55,8 +55,6 @@ label {
     padding: 6px 10px;
 }
 
-
-
 #bar-inner {
     padding: 4px;
     border-color: var(--border-color);
@@ -65,8 +63,8 @@ label {
 }
 
 #workspaces {
-    padding-top: 1px;
-    padding-bottom: 1px;
+    padding-top: 3px;
+    padding-bottom: 3px;
 }
 
 #workspaces>button {
