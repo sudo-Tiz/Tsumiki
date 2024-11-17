@@ -7,7 +7,7 @@ class Mpris(Button):
     def __init__(
         self,
         length=30,
-        enable_tooltip: bool = True,
+        enable_tooltip=True,
     ):
         super().__init__(name="mpris")
         self.enable_tooltip = enable_tooltip

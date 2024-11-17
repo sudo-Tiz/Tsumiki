@@ -13,8 +13,8 @@ class Cpu(Box):
         icon: str = "",
         icon_size="12px",
         interval: int = 2000,
-        enable_label: bool = True,
-        enable_tooltip: bool = True,
+        enable_label=True,
+        enable_tooltip=True,
     ):
         super().__init__(name="cpu")
         self.enable_label = enable_label
@@ -41,8 +41,8 @@ class Memory(Box):
         icon: str = "",
         icon_size="12px",
         interval: int = 2000,
-        enable_label: bool = True,
-        enable_tooltip: bool = True,
+        enable_label=True,
+        enable_tooltip=True,
     ):
         super().__init__(name="memory")
         self.enable_label = enable_label
@@ -84,8 +84,8 @@ class Storage(Box):
         icon: str = "󰋊",
         icon_size="14px",
         interval: int = 2000,
-        enable_label: bool = True,
-        enable_tooltip: bool = True,
+        enable_label=True,
+        enable_tooltip=True,
     ):
         super().__init__(name="storage")
         self.enable_label = enable_label

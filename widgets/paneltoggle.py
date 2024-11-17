@@ -13,8 +13,8 @@ class CommandSwitcher(Button):
         enabled_icon: str,
         disabled_icon: str,
         name="panel-button",
-        enable_label: bool = True,
-        enable_tooltip: bool = True,
+        enable_label=True,
+        enable_tooltip=True,
         interval: int = 2000,
     ):
         self.command = command

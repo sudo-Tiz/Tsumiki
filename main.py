@@ -38,7 +38,6 @@ class StatusBar(Window):
             buttons_factory=lambda ws_id: WorkspaceButton(id=ws_id, label=str(ws_id)),
         )
 
-
         self.active_window = ActiveWindow(
             name="hyprland-window",
             formatter=FormattedString(
@@ -68,7 +67,6 @@ class StatusBar(Window):
         cpu_config = config["cpu"]
         updates_config = config["updates"]
         updates_config = config["updates"]
-
 
         self.hyprsunset = CommandSwitcher(
             command=f"hyprsunset -t {hypersunset_config["temperature"]}",

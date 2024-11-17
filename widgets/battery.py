@@ -39,8 +39,8 @@ class BatteryLabel(Box):
         self,
         interval: int = 2000,
         icon_size="14px",
-        enable_label: bool = True,
-        enable_tooltip: bool = True,
+        enable_label=True,
+        enable_tooltip=True,
     ):
         super().__init__(name="battery")
         self.enable_label = enable_label
@@ -56,7 +56,7 @@ class BatteryLabel(Box):
             self.hide()
             return
 
-        battery_percent = round(battery.percent) if battery else 0.0
+        battery_percent = round(battery.percent) if battery else 0
 
         battery_label = Label(label=f"{battery_percent}%", style_classes="box-label")
 
@@ -71,8 +71,13 @@ class BatteryLabel(Box):
         if self.enable_label:
             self.children = (battery_icon, battery_label)
 
-        ## fix this to display time left for charging
-        if not is_charging:
-            self.set_tooltip_text(format_time(battery.secsleft))
+        if self.enable_tooltip:
+            if battery_percent == 100:
+                self.set_tooltip_text("Full")
+            elif is_charging and battery < 100:
+                self.set_tooltip_text(f"Time to full: {format_time(battery.secsleft)}")
+            else:
+                self.set_tooltip_text(f"Time to empty: {format_time(battery.secsleft)}")
+            
 
         return True
