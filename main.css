@@ -10,9 +10,6 @@
     font-weight: bold;
 }
 
-button {
-    background-size: 400% 400%;
-}
 
 #bar-inner {
     padding: 4px;
@@ -31,37 +28,31 @@ button {
 #workspaces>button {
     padding: 0px 8px;
     transition: padding 0.05s steps(8);
-    background-color: var(--ws-inactive);
 }
 
-#workspaces>button>label {
-    font-size: 0px;
-}
 
 #workspaces>button:hover {
     background-color: var(--ws-hover);
+    
 }
 
-#workspaces>button.urgent {
-    background-color: var(--ws-urgent);
-}
 
 #workspaces>button.active {
-    padding: 0px 20px;
+    padding: 0 1rem;
     background-color: var(--ws-active);
+    min-width: 1.4rem;
+    min-height: 1.6rem;
 }
 
-#workspaces>button.empty {
-    background-color: var(--ws-empty);
+#workspaces>button.active > label{
+    color: var(--main-bg);
 }
 
 
-menu>menuitem>label,
-#date-time>label,
-#hyprland-language>label,
-#hyprland-window>label {
-    font-weight: bold;
+#workpspace > label{
+    font-size: 1rem;
 }
+
 
 /* system tray */
 #system-tray {
@@ -100,19 +91,12 @@ menu>menuitem:hover {
 }
 
 
-#cpu-progress-bar,
-#ram-progress-bar,
 #volume-progress-bar {
     color: transparent;
     background-color: transparent
 }
 
 
-#cpu-progress-bar {
-    border: solid 0px alpha(var(--color9), 0.8);
-}
-
-#ram-progress-bar,
 #volume-progress-bar {
     border: solid 0px var(--border-color);
 }
@@ -169,7 +153,6 @@ tooltip>* {
     padding-left: 20px;
     padding-right: 20px;
 }
-
 
 
 .box-label{
