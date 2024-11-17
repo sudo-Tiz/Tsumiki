@@ -2,10 +2,11 @@ from fabric.widgets.label import Label
 from fabric.widgets.button import Button
 from fabric.utils import invoke_repeater, exec_shell_command
 
+
 class Player(Button):
     def __init__(
         self,
-        length = 30,
+        length=30,
         enable_tooltip: bool = True,
     ):
         super().__init__(name="panel-player")
@@ -16,22 +17,20 @@ class Player(Button):
         self.length = length
         self.connect("clicked", self.play_pause)
 
-
-        invoke_repeater(1250, self.get_current) 
-
+        invoke_repeater(1250, self.get_current)
 
     def get_current(self):
-        self.details: str = exec_shell_command('playerctl metadata --format "{{ title }} - {{ artist }}"')
+        self.details: str = exec_shell_command(
+            'playerctl metadata --format "{{ title }} - {{ artist }}"'
+        )
 
         if len(self.details) > 30:
-            self.details = self.details[:self.length]
-
+            self.details = self.details[: self.length]
 
         self.label.set_label(f"{self.details}")
 
     def play_pause(self, *_):
         exec_shell_command("playerctl play-pause")
-        
 
 
 ## hide the whole thing when stopped. Show icon. Use fab

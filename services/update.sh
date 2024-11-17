@@ -90,6 +90,34 @@ check_fedora_updates() {
     echo "{\"total\":\"$total_updates\", \"tooltip\":\"$tooltip\"}"
 }
 
+check_opensuse_updates() {
+    official_updates=0
+    flatpak_updates=0
+
+    # Check if flatpak is installed and get Flatpak updates if it is
+    if command -v flatpak &> /dev/null; then
+        flatpak_updates=$(flatpak remote-ls --updates | wc -l)
+    fi
+
+    # Get the number of official updates using 'dnf'
+    official_updates=$(zypper lu | wc -l)
+
+    # Calculate total updates
+    total_updates=$((official_updates + flatpak_updates))
+    
+    # Build the tooltip string conditionally
+    tooltip="󱓽 Official $official_updates"
+    
+    # If Flatpak updates exist, add them to the tooltip
+    if [ "$flatpak_updates" -gt 0 ]; then
+        tooltip="$tooltip\n Flatpak $flatpak_updates"
+    fi
+
+    # Output the result as a JSON object
+    echo "{\"total\":\"$total_updates\", \"tooltip\":\"$tooltip\"}"
+}
+
+
 
 case "$1" in
 -arch)
@@ -100,6 +128,9 @@ case "$1" in
     ;;
 -fedora)
     check_fedora_updates
+    ;;
+-suse)
+    check_opensuse_updates
     ;;
 *)
     echo "0"

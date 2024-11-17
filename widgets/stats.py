@@ -11,7 +11,7 @@ class Cpu(Box):
     def __init__(
         self,
         icon: str = "",
-        icon_size = "12px",
+        icon_size="12px",
         interval: int = 2000,
         enable_label: bool = True,
         enable_tooltip: bool = True,
@@ -39,7 +39,7 @@ class Memory(Box):
     def __init__(
         self,
         icon: str = "",
-        icon_size = "12px",
+        icon_size="12px",
         interval: int = 2000,
         enable_label: bool = True,
         enable_tooltip: bool = True,
@@ -78,13 +78,11 @@ class Memory(Box):
         return f"{format(convert_bytes(self.total_memory, "gb"),".1f")}"
 
 
-
-
 class Storage(Box):
     def __init__(
         self,
         icon: str = "󰋊",
-        icon_size = "14px",
+        icon_size="14px",
         interval: int = 2000,
         enable_label: bool = True,
         enable_tooltip: bool = True,

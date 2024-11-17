@@ -25,7 +25,7 @@ class Updates(Box):
         self.update_level_label = Label(
             label="0",
         )
-        
+
         ## this is to show first 0 value
         if self.enable_label:
             self.children = (self.icon, self.update_level_label)
