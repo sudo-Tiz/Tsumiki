@@ -28,9 +28,9 @@ class Cpu(Box):
 
     def update_label(self):
         if self.enable_label:
+            self.cpu_level_label.set_label(f"{psutil.cpu_percent()}%")
             self.children = (self.icon, self.cpu_level_label)
 
-        self.cpu_level_label.set_label(f"{psutil.cpu_percent()}%")
         return True
 
 

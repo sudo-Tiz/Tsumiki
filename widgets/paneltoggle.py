@@ -53,7 +53,7 @@ class CommandSwitcher(Button):
                     self.enabled_icon if self.is_active() else self.disabled_icon,
                 )
             )
-        if self.enable_tooltip and self.enable_tooltip is not None:
+        if self.enable_tooltip:
             self.set_tooltip_text(
                 f"{self.command_without_args} enabled"
                 if self.is_active()

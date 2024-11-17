@@ -63,6 +63,7 @@ class StatusBar(Window):
         hyperidle_config = config["hypridle"]
         battery_config = config["battery"]
         cpu_config = config["cpu"]
+        updates_config = config["updates"]
 
         self.hyprsunset = CommandSwitcher(
             command=f"hyprsunset -t {hypersunset_config["temperature"]}",
@@ -100,7 +101,7 @@ class StatusBar(Window):
         )
 
         self.memory = Memory()
-        self.updates = Updates()
+        self.updates = Updates(os=updates_config["os"])
 
         self.children = CenterBox(
             name="bar-inner",
