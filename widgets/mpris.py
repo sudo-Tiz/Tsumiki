@@ -3,13 +3,13 @@ from fabric.widgets.button import Button
 from fabric.utils import invoke_repeater, exec_shell_command
 
 
-class Player(Button):
+class Mpris(Button):
     def __init__(
         self,
         length=30,
         enable_tooltip: bool = True,
     ):
-        super().__init__(name="panel-player")
+        super().__init__(name="mpris")
         self.enable_tooltip = enable_tooltip
 
         self.label = Label(label="Nothing playing")

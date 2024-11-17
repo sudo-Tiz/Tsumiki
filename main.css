@@ -124,7 +124,6 @@ menu>menuitem:hover {
 }
 
 tooltip {
-    border-color: var(--border-color);
     background-color: var(--main-bg);
     border-radius: 10px;
 }
@@ -142,55 +141,38 @@ tooltip>* {
     padding: 0px 8px;
 }
 
+/*initial styles for all modules*/
+
 #panel-button,
 #date-time,
 #backlight,
 #battery,
 #bluetooth,
-#custom-cliphist,
-#clock,
-#custom-cpuinfo,
 #cpu,
-#custom-gpuinfo,
-#idle_inhibitor,
+#storage,
+#hyprland-window,
 #custom-keybindhint,
 #language,
 #memory,
 #mpris,
 #network,
-#custom-notifications,
-#custom-power,
 #pulseaudio,
-#custom-spotify,
 #taskbar,
-#custom-theme,
 #tray,
-#custom-updates,
+#updates,
 #custom-wallchange,
 #custom-wbar,
 #window,
-#workspaces,
-#custom-l_end,
-#custom-r_end,
-#custom-sl_end,
-#custom-sr_end,
-#custom-rl_end,
-#custom-rr_end {
+#workspaces{
     color: var(--main-fg);
     background: var(--main-bg);
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-#panel-button, #battery{
-    padding-left: 10px;
-    padding-right: 10px;
+
+
+.box-label{
+    margin-left: 10px;
 }
-
-* > label{
-
- margin-left: 10px;
-    
-}
-
  

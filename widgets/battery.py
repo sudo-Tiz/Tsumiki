@@ -38,12 +38,14 @@ class BatteryLabel(Box):
     def __init__(
         self,
         interval: int = 2000,
+        icon_size="14px",
         enable_label: bool = True,
         enable_tooltip: bool = True,
     ):
         super().__init__(name="battery")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
+        self.icon_size = icon_size
 
         invoke_repeater(interval, self.update_battery_status, initial_call=True)
 
@@ -56,13 +58,13 @@ class BatteryLabel(Box):
 
         battery_percent = round(battery.percent) if battery else 0.0
 
-        battery_label = Label(label=f"{battery_percent}%")
+        battery_label = Label(label=f"{battery_percent}%", style_classes="box-label")
 
         is_charging = battery.power_plugged if battery else False
         icons = self.ICONS_CHARGING if is_charging else self.ICONS_NOT_CHARGING
 
         index = min(max(battery_percent // 10, 0), 10)
-        battery_icon = NerdIcon(icons[index], size="14px")
+        battery_icon = NerdIcon(icons[index], size=self.icon_size)
 
         self.children = battery_icon
 

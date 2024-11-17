@@ -10,7 +10,7 @@ from fabric.utils import FormattedString, bulk_replace, get_relative_path, trunc
 from utils import read_config
 from widgets.battery import BatteryLabel
 from widgets.paneltoggle import CommandSwitcher
-from widgets.player import Player
+from widgets.mpris import Mpris
 from widgets.stats import Cpu, Memory, Storage
 from widgets.updates import Updates
 from widgets.volume import AUDIO_WIDGET, VolumeWidget
@@ -103,7 +103,7 @@ class StatusBar(Window):
 
         self.memory = Memory()
         self.storage = Storage()
-        self.player = Player()
+        self.player = Mpris()
         self.updates = Updates(os=updates_config["os"])
 
         self.children = CenterBox(

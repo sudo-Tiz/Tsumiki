@@ -11,6 +11,7 @@ class Updates(Box):
         self,
         os: str,
         icon: str = "󱧘",
+        icon_size="14px",
         interval: int = 30 * 60000,
         enable_label: bool = True,
         enable_tooltip: bool = True,
@@ -18,13 +19,11 @@ class Updates(Box):
         super().__init__(name="updates")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
-        self.icon = NerdIcon(icon, size="14px")
+        self.icon = NerdIcon(icon, size=icon_size)
         self.os = os
 
         self.children = self.icon
-        self.update_level_label = Label(
-            label="0",
-        )
+        self.update_level_label = Label(label="0", style_classes="box-label")
 
         ## this is to show first 0 value
         if self.enable_label:

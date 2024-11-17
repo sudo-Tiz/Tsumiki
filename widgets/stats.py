@@ -23,7 +23,7 @@ class Cpu(Box):
         self.icon = NerdIcon(icon, size=icon_size)
 
         self.children = self.icon
-        self.cpu_level_label = Label(label="0")
+        self.cpu_level_label = Label(label="0%", style_classes="box-label")
 
         invoke_repeater(interval, self.update_label, initial_call=True)
 
@@ -51,7 +51,7 @@ class Memory(Box):
         self.icon = NerdIcon(icon, size=icon_size)
 
         self.children = self.icon
-        self.memory_level_label = Label(label="0")
+        self.memory_level_label = Label(label="0%", style_classes="box-label")
 
         invoke_repeater(interval, self.update_values, initial_call=True)
 
@@ -94,7 +94,7 @@ class Storage(Box):
         self.icon = NerdIcon(icon, size=icon_size)
 
         self.children = self.icon
-        self.storage_level_label = Label(label="0")
+        self.storage_level_label = Label(label="0", style_classes="box-label")
 
         invoke_repeater(interval, self.update_values, initial_call=True)
 
