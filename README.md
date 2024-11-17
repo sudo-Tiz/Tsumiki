@@ -5,4 +5,9 @@ Head over to https://its-darsh.github.io/fabric-wiki/introduction/installation-g
 
 Then clone the repo, and start with `python main.py`
 
+
+For hyperland, add `python main.py` on `hypr.conf`.
+Similar for other Window managers.
+
+
 This is still in early development and will include breaking changes
