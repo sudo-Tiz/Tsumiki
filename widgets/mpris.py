@@ -1,8 +1,10 @@
 from fabric import Fabricator
 from fabric.widgets.label import Label
-from fabric.widgets.button import Button
+from fabric.widgets.revealer import Revealer
 from fabric.widgets.box import Box
-from fabric.utils import exec_shell_command
+from fabric.widgets.eventbox import EventBox
+from fabric.widgets.button import Button
+from fabric.utils import exec_shell_command, bulk_connect
 
 playerInfo = Fabricator(
     poll_from=lambda: {
@@ -17,7 +19,7 @@ playerInfo = Fabricator(
 )
 
 
-class Mpris(Box):
+class Mpris(EventBox):
     def __init__(
         self,
         length=30,
@@ -27,10 +29,33 @@ class Mpris(Box):
         self.enable_tooltip = enable_tooltip
 
         self.label = Label(label="Nothing playing", style_classes="box-label")
-        self.button = Button(label="", name="mpris-button")
-        self.children = [self.button, self.label]
+        self.icon = Label(label="",style="padding: 0 10px;")
+
+        self.revealer = Revealer(
+            name="player-info-revealer",
+            transition_type="slide-right",
+            transition_duration=300,
+            child=self.label,
+            reveal_child=False,
+        )
+
+        self.box = Box(name="mpris-container", children=[self.icon, self.revealer])
+
+        self.children = self.box
         self.length = length
-        self.button.connect("clicked", self.play_pause)
+
+        bulk_connect(
+            self,
+            {
+                "enter-notify-event": lambda *_: (self.revealer.set_reveal_child(True)
+                if not self.revealer.get_reveal_child()
+                else None),
+                "leave-notify-event": lambda *_: self.revealer.set_reveal_child(False)
+                if self.revealer.get_reveal_child()
+                else None,
+                "button-press-event": lambda *_: self.play_pause(),
+            },
+        )
 
         playerInfo.connect(
             "changed",
@@ -38,14 +63,21 @@ class Mpris(Box):
         )
 
     def get_current(self, value):
-        if value["status"] == "Playing":
-            self.button.set_label("")
-        elif value["status"] == "Paused":
-            self.button.set_label("")
-        self.label.set_label(value["info"])
+        info = value["info"] if len(value["info"]) < 30 else value["info"][:30]
+        status = value["status"]
+
+        if status == "Playing":
+            self.icon.set_label("")
+            self.label.set_label(info)
+
+        elif status == "Paused":
+            self.icon.set_label("")
+            self.label.set_label(info)
+
+        else:
+            self.is_visible = False
+
+        return True
 
     def play_pause(self, *_):
         exec_shell_command("playerctl play-pause")
-
-
-## hide the whole thing when stopped. Show icon. Use fab

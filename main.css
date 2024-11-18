@@ -16,7 +16,6 @@ label {
 
 
 
-
 #hyprland-language,
 #hyprland-window {
     background-color: var(--main-bg);
@@ -36,7 +35,6 @@ label {
 #custom-keybindhint,
 #language,
 #memory,
-#mpris,
 #network,
 #pulseaudio,
 #taskbar,
@@ -49,6 +47,12 @@ label {
     color: var(--main-fg);
     background: var(--main-bg);
     padding: 0px 20px;
+}
+
+
+#mpris-container{
+    color: var(--main-fg);
+    background: var(--main-bg);   
 }
 
 #hyprland-window{
