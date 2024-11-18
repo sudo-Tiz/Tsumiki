@@ -1,7 +1,6 @@
 from fabric import Application
-from fabric.hyprland.widgets import ActiveWindow, Language, WorkspaceButton, Workspaces
+from fabric.utils import get_relative_path
 from fabric.system_tray.widgets import SystemTray
-from fabric.utils import FormattedString, bulk_replace, get_relative_path, truncate
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.datetime import DateTime
@@ -11,10 +10,13 @@ from utils import read_config
 from widgets.battery import BatteryLabel
 from widgets.hypridle import HyprIdle
 from widgets.hyprsunset import HyprSunset
+from widgets.language import LanguageBox
 from widgets.mpris import Mpris
 from widgets.stats import Cpu, Memory, Storage
 from widgets.updates import Updates
 from widgets.volume import AUDIO_WIDGET, VolumeWidget
+from widgets.window import WindowBox
+from widgets.workspace import WorkSpaceBox
 
 config = read_config()
 
@@ -32,33 +34,12 @@ class StatusBar(Window):
             visible=False,
             all_visible=False,
         )
-        self.workspaces = Workspaces(
-            name="workspaces",
-            spacing=4,
-            buttons=[WorkspaceButton(id=i, label=str(i)) for i in range(1, 9)],
-            buttons_factory=lambda ws_id: WorkspaceButton(id=ws_id, label=str(ws_id)),
-        )
+        self.workspaces = WorkSpaceBox()
 
-        self.active_window = ActiveWindow(
-            name="hyprland-window",
-            formatter=FormattedString(
-                " {'Desktop' if not win_title else truncate(win_title, 30)}",
-                truncate=truncate,
-            ),
-        )
+        self.active_window = WindowBox()
 
-        self.language = Language(
-            formatter=FormattedString(
-                "{replace_lang(language)}",
-                replace_lang=lambda lang: bulk_replace(
-                    lang,
-                    (r".*Eng.*", r".*Ar.*"),
-                    ("ENG", "ARA"),
-                    regex=True,
-                ),
-            ),
-            name="hyprland-window",
-        )
+        self.language = LanguageBox()
+
         self.date_time = DateTime(name="date-time")
         self.system_tray = SystemTray(name="system-tray", spacing=4)
 
@@ -101,10 +82,7 @@ class StatusBar(Window):
                 name="start-container",
                 spacing=4,
                 orientation="h",
-                children=[
-                    self.workspaces,
-                    self.active_window,
-                ],
+                children=[self.workspaces, self.active_window, self.language],
             ),
             center_children=Box(
                 name="center-container",

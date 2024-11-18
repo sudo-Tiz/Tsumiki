@@ -15,13 +15,6 @@ label {
 }
 
 
-
-#hyprland-language,
-#hyprland-window {
-    background-color: var(--main-bg);
-    padding: 0px 8px;
-}
-
 /*initial styles for all modules*/
 
 #panel-button,
@@ -35,6 +28,7 @@ label {
 #custom-keybindhint,
 #language,
 #memory,
+#window,
 #network,
 #pulseaudio,
 #taskbar,
@@ -43,32 +37,33 @@ label {
 #custom-wallchange,
 #custom-wbar,
 #window,
-#workspaces{
+#workspaces {
     color: var(--main-fg);
     background: var(--main-bg);
-    padding: 0px 20px;
+    padding: 0 1.25em;
 }
 
 
-#mpris-container{
+#mpris-container {
     color: var(--main-fg);
-    background: var(--main-bg);   
+    background: var(--main-bg);
 }
 
-#hyprland-window{
-    padding: 6px 10px;
-}
 
 #bar-inner {
-    padding: 4px;
+    padding: 0.25em;
     border-color: var(--border-color);
     background-color: var(--window-bg);
     min-height: 28px;
 }
 
-#workspaces {
-    padding-top: 3px;
-    padding-bottom: 3px;
+#language,
+#window {
+    padding: 0.19em 0.625em;
+}
+
+#workspaces{
+    padding: 0.19em 1.3em;   
 }
 
 #workspaces>button {
@@ -79,9 +74,11 @@ label {
 
 #workspaces>button:hover {
     background-color: var(--ws-hover);
-    
 }
 
+#workspaces>button:hover label {
+    color: var(--main-bg);
+}
 
 #workspaces>button.active {
     padding: 0 1rem;
@@ -89,34 +86,29 @@ label {
     min-width: 1.4rem;
 }
 
-#workspaces>button.active > label{
+#workspaces>button.active>label {
     color: var(--main-bg);
 }
 
 
-#workpspace > label{
-    font-size: 1rem;
-}
-
 
 /* system tray */
 #system-tray {
-    padding: 2px 4px;
+    padding: 0.125em 0.25em;
     background-color: var(--main-bg);
 }
 
 /* menu and menu items (written for the system tray) */
 menu {
-    border: solid 2px;
+    border: 2px solid var(--border-color);
     border-radius: 10px;
-    border-color: var(--border-color);
     background-color: var(--window-bg);
 }
 
 menu>menuitem {
     border-radius: 0px;
     background-color: var(--main-bg);
-    padding: 6px;
+    padding: 0.375em;
     margin-left: 2px;
     margin-right: 2px;
 }
@@ -149,7 +141,7 @@ menu>menuitem:hover {
 
 #widgets-container {
     background-color: var(--main-bg);
-    padding: 2px;
+    padding: 0.125em;
 }
 
 tooltip {
@@ -158,18 +150,16 @@ tooltip {
 }
 
 tooltip>* {
-    padding: 2px 4px
+    padding: 0.125em 0.25em
 }
 
 
 
 
-.bar-button-label{
+.bar-button-label {
     margin-left: 10px;
 }
 
-.bar-button-icon{
+.bar-button-icon {
     min-height: 4px;
 }
-
- 

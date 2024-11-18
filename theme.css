@@ -24,9 +24,9 @@
     --window-bg: alpha(var(--background), 0.6);
     --module-bg: alpha(var(--background), 0.4);
     --border-color: var(--color11);
-    --ws-active: #F0AAB5;
+    --ws-active: #a6adc8;
     --ws-inactive: var(--color3);
     --ws-empty: var(--color8);
-    --ws-hover: var(--color1);
+    --ws-hover:  #f5c2e7;
     --ws-urgent: var(--color12);
 }
