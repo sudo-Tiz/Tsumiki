@@ -1,4 +1,9 @@
 {
+  "layout": {
+    "left": {},
+    "middle": {},
+    "right": {}
+  },
   "hyprsunset": {
     "temperature": "2800k",
     "enabled_icon": "󱩌",
@@ -6,7 +11,6 @@
     "icon_size": "",
     "enable_label": true,
     "enable_tooltip": true
-    
   },
   "hypridle": {
     "enabled_icon": "",
@@ -21,35 +25,35 @@
     "interval": 2000
   },
   "cpu": {
-    "icon":"",
+    "icon": "",
     "icon_size": "12px",
     "enable_label": true,
     "enable_tooltip": true,
     "interval": 2000
   },
   "memory": {
-    "icon":"",
+    "icon": "",
     "icon_size": "12px",
     "enable_label": true,
     "enable_tooltip": true,
     "interval": 2000
   },
   "storage": {
-    "icon":"󰋊",
+    "icon": "󰋊",
     "icon_size": "14px",
     "enable_label": true,
     "enable_tooltip": true,
     "interval": 2000
   },
   "workspaces": {
-    "count":8
+    "count": 8
   },
   "window": {
-    "length":20
+    "length": 20
   },
-  "updates":{
+  "updates": {
     "os": "arch",
     "icon": "󱧘",
     "icon_size": "14px"
-   }
+  }
 }
