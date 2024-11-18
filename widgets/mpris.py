@@ -68,15 +68,17 @@ class Mpris(EventBox):
         status = value["status"]
 
         if status == "Playing":
+            self.set_visible(True)
             self.text_icon.set_label("")
             self.label.set_label(info)
 
         elif status == "Paused":
+            self.set_visible(True)
             self.text_icon.set_label("")
             self.label.set_label(info)
 
         else:
-            self.is_visible = False
+            self.set_visible(False)
 
         return True
 
