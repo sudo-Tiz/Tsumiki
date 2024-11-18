@@ -20,6 +20,8 @@ class CommandSwitcher(Button):
         self.command = command
         self.command_without_args = self.command.split(" ")[0]  # command without args
 
+        print(self.command, self.command_without_args)
+
         super().__init__(label=self.cat_icon("On", ""), name=name)
 
         self.enabled_icon = enabled_icon

@@ -1,15 +1,16 @@
 from fabric import Application
-from fabric.widgets.box import Box
-from fabric.widgets.datetime import DateTime
-from fabric.widgets.centerbox import CenterBox
+from fabric.hyprland.widgets import ActiveWindow, Language, WorkspaceButton, Workspaces
 from fabric.system_tray.widgets import SystemTray
-from fabric.widgets.wayland import WaylandWindow as Window
-from fabric.hyprland.widgets import Language, ActiveWindow, Workspaces, WorkspaceButton
 from fabric.utils import FormattedString, bulk_replace, get_relative_path, truncate
+from fabric.widgets.box import Box
+from fabric.widgets.centerbox import CenterBox
+from fabric.widgets.datetime import DateTime
+from fabric.widgets.wayland import WaylandWindow as Window
 
 from utils import read_config
 from widgets.battery import BatteryLabel
-from widgets.paneltoggle import CommandSwitcher
+from widgets.hypridle import HyprIdle
+from widgets.hyprsunset import HyprSunset
 from widgets.mpris import Mpris
 from widgets.stats import Cpu, Memory, Storage
 from widgets.updates import Updates
@@ -61,27 +62,13 @@ class StatusBar(Window):
         self.date_time = DateTime(name="date-time")
         self.system_tray = SystemTray(name="system-tray", spacing=4)
 
-        hypersunset_config = config["hyprsunset"]
-        hyperidle_config = config["hypridle"]
         battery_config = config["battery"]
         cpu_config = config["cpu"]
         updates_config = config["updates"]
         updates_config = config["updates"]
 
-        self.hyprsunset = CommandSwitcher(
-            command=f"hyprsunset -t {hypersunset_config["temperature"]}",
-            enabled_icon=hypersunset_config["enabled_icon"],
-            disabled_icon=hypersunset_config["disabled_icon"],
-            enable_label=hypersunset_config["enable_label"],
-            enable_tooltip=hypersunset_config["enable_tooltip"],
-        )
-        self.hypridle = CommandSwitcher(
-            command="hypridle",
-            enabled_icon=hyperidle_config["enabled_icon"],
-            disabled_icon=hyperidle_config["disabled_icon"],
-            enable_label=hyperidle_config["enable_label"],
-            enable_tooltip=hyperidle_config["enable_tooltip"],
-        )
+        self.hyprsunset = HyprSunset(config=config).create()
+        self.hypridle = HyprIdle(config=config).create()
 
         self.status_container = Box(
             name="widgets-container",
