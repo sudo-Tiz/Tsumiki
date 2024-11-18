@@ -1,23 +1,20 @@
 from fabric.hyprland.widgets import Language
 from fabric.widgets.box import Box
 
-from fabric.utils import FormattedString, bulk_replace
+from fabric.utils import FormattedString, truncate
 
 
 class LanguageBox(Box):
-    def __init__(self, **kwargs):
+    def __init__(self, length=3, **kwargs):
         super().__init__(name="language-box", **kwargs)
 
         self.lang = Language(
             name="language",
             formatter=FormattedString(
-                "{replace_lang(language)}",
-                replace_lang=lambda lang: bulk_replace(
-                    lang,
-                    (r".*Eng.*", r".*Ar.*"),
-                    ("ENG", "ARA"),
-                    regex=True,
-                ),
+                "{truncate(language,length,suffix)}",
+                truncate=truncate,
+                length=length,
+                suffix="",
             ),
         )
 
