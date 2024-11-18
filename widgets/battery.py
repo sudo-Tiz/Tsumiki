@@ -1,40 +1,15 @@
 import psutil
 
-from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
+from fabric.utils import invoke_repeater
 from fabric.widgets.label import Label
+from fabric.widgets.image import Image
+import math
 
-from utils import NerdIcon, format_time
+from utils import format_time
 
 
 class BatteryLabel(Box):
-    ICONS_CHARGING = [
-        "󰂆",  # 10
-        "󰂆",
-        "󰂇",
-        "󰂇",
-        "󰂈",
-        "󰢝",
-        "󰂉",
-        "󰢞",
-        "󰂊",
-        "󰂋",
-        "󰂅",
-    ]
-    ICONS_NOT_CHARGING = [
-        "󰂃",  # 0
-        "󰁺",  # 10
-        "󰁻",
-        "󰁼",
-        "󰁽",
-        "󰁾",
-        "󰁿",
-        "󰂀",
-        "󰂁",
-        "󰂂",
-        "󰁹",
-    ]
-
     def __init__(
         self,
         interval: int = 2000,
@@ -58,13 +33,17 @@ class BatteryLabel(Box):
 
         battery_percent = round(battery.percent) if battery else 0
 
-        battery_label = Label(label=f"{battery_percent}%", style_classes="box-label")
+        battery_label = Label(
+            label=f"{battery_percent}%", style_classes="bar-button-label"
+        )
 
         is_charging = battery.power_plugged if battery else False
-        icons = self.ICONS_CHARGING if is_charging else self.ICONS_NOT_CHARGING
 
-        index = min(max(battery_percent // 10, 0), 10)
-        battery_icon = NerdIcon(icons[index], size=self.icon_size)
+        battery_icon = Image(
+            icon_name=self.get_icon_name(
+                battery_percent=battery_percent, is_charging=is_charging
+            )
+        )
 
         self.children = battery_icon
 
@@ -80,3 +59,9 @@ class BatteryLabel(Box):
                 self.set_tooltip_text(f"Time to empty: {format_time(battery.secsleft)}")
 
         return True
+
+    def get_icon_name(self, battery_percent: int, is_charging: bool):
+        if battery_percent == 100:
+            return "battery-level-100-charged-symbolic"
+
+        return f"battery-level-{math.floor(battery_percent/10) * 10}{'-charging' if is_charging else''}-symbolic"

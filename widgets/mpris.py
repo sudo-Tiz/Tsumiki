@@ -3,7 +3,6 @@ from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.box import Box
 from fabric.widgets.eventbox import EventBox
-from fabric.widgets.button import Button
 from fabric.utils import exec_shell_command, bulk_connect
 
 playerInfo = Fabricator(
@@ -28,8 +27,8 @@ class Mpris(EventBox):
         super().__init__(name="mpris")
         self.enable_tooltip = enable_tooltip
 
-        self.label = Label(label="Nothing playing", style_classes="box-label")
-        self.icon = Label(label="",style="padding: 0 10px;")
+        self.label = Label(label="Nothing playing", style_classes="bar-button-label")
+        self.text_icon = Label(label="", style="padding: 0 10px;")
 
         self.revealer = Revealer(
             name="player-info-revealer",
@@ -39,7 +38,7 @@ class Mpris(EventBox):
             reveal_child=False,
         )
 
-        self.box = Box(name="mpris-container", children=[self.icon, self.revealer])
+        self.box = Box(name="mpris-container", children=[self.text_icon, self.revealer])
 
         self.children = self.box
         self.length = length
@@ -47,9 +46,11 @@ class Mpris(EventBox):
         bulk_connect(
             self,
             {
-                "enter-notify-event": lambda *_: (self.revealer.set_reveal_child(True)
-                if not self.revealer.get_reveal_child()
-                else None),
+                "enter-notify-event": lambda *_: (
+                    self.revealer.set_reveal_child(True)
+                    if not self.revealer.get_reveal_child()
+                    else None
+                ),
                 "leave-notify-event": lambda *_: self.revealer.set_reveal_child(False)
                 if self.revealer.get_reveal_child()
                 else None,
@@ -67,11 +68,11 @@ class Mpris(EventBox):
         status = value["status"]
 
         if status == "Playing":
-            self.icon.set_label("")
+            self.text_icon.set_label("")
             self.label.set_label(info)
 
         elif status == "Paused":
-            self.icon.set_label("")
+            self.text_icon.set_label("")
             self.label.set_label(info)
 
         else:

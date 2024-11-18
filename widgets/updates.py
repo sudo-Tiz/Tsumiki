@@ -3,7 +3,7 @@ import os
 from fabric.widgets.label import Label
 from fabric.widgets.box import Box
 from fabric.utils import invoke_repeater, exec_shell_command_async
-from utils import NerdIcon
+from utils import TextIcon
 
 
 class Updates(Box):
@@ -19,15 +19,17 @@ class Updates(Box):
         super().__init__(name="updates")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
-        self.icon = NerdIcon(icon, size=icon_size)
+        self.text_icon = TextIcon(
+            icon, size=icon_size, props={"style_classes": "bar-text-icon"}
+        )
         self.os = os
 
-        self.children = self.icon
-        self.update_level_label = Label(label="0", style_classes="box-label")
+        self.children = self.text_icon
+        self.update_level_label = Label(label="0", style_classes="bar-button-label")
 
         ## this is to show first 0 value
         if self.enable_label:
-            self.children = (self.icon, self.update_level_label)
+            self.children = (self.text_icon, self.update_level_label)
 
         invoke_repeater(interval, self.update, initial_call=True)
 

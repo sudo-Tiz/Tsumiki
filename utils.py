@@ -10,7 +10,7 @@ def read_config():
     return data
 
 
-def NerdIcon(icon: str, size: str = "24px", props: dict = None):
+def TextIcon(icon: str, size: str = "24px", props: dict = None):
     label_props = {
         "label": icon,  # Directly use the provided icon name
         "name": "nerd-icon",

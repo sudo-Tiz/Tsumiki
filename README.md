@@ -5,7 +5,8 @@ Head over to https://its-darsh.github.io/fabric-wiki/introduction/installation-g
 
 
 ** Prequisite
-- Jetbrains Nerd font 
+- Jetbrains Nerd font
+- `psutil` python package
 
 Then clone the repo, and start with `python main.py`
 

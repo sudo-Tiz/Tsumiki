@@ -3,7 +3,7 @@ from fabric.widgets.box import Box
 from fabric.utils import (
     invoke_repeater,
 )
-from utils import NerdIcon, convert_bytes
+from utils import TextIcon, convert_bytes
 import psutil
 
 
@@ -20,17 +20,18 @@ class Cpu(Box):
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
 
-        self.icon = NerdIcon(icon, size=icon_size)
-
-        self.children = self.icon
-        self.cpu_level_label = Label(label="0%", style_classes="box-label")
+        self.text_icon = TextIcon(
+            icon, size=icon_size, props={"style_classes": "bar-text-icon"}
+        )
+        self.children = self.text_icon
+        self.cpu_level_label = Label(label="0%", style_classes="bar-button-label")
 
         invoke_repeater(interval, self.update_label, initial_call=True)
 
     def update_label(self):
         if self.enable_label:
             self.cpu_level_label.set_label(f"{psutil.cpu_percent()}%")
-            self.children = (self.icon, self.cpu_level_label)
+            self.children = (self.text_icon, self.cpu_level_label)
 
         return True
 
@@ -48,10 +49,11 @@ class Memory(Box):
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
 
-        self.icon = NerdIcon(icon, size=icon_size)
-
+        self.icon = TextIcon(
+            icon, size=icon_size, props={"style_classes": "bar-text-icon"}
+        )
         self.children = self.icon
-        self.memory_level_label = Label(label="0%", style_classes="box-label")
+        self.memory_level_label = Label(label="0%", style_classes="bar-button-label")
 
         invoke_repeater(interval, self.update_values, initial_call=True)
 
@@ -91,10 +93,12 @@ class Storage(Box):
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
 
-        self.icon = NerdIcon(icon, size=icon_size)
+        self.icon = TextIcon(
+            icon, size=icon_size, props={"style_classes": "bar-text-icon"}
+        )
 
         self.children = self.icon
-        self.storage_level_label = Label(label="0", style_classes="box-label")
+        self.storage_level_label = Label(label="0", style_classes="bar-button-label")
 
         invoke_repeater(interval, self.update_values, initial_call=True)
 
