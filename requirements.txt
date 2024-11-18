@@ -1,0 +1,3 @@
+git+https://github.com/Fabric-Development/fabric.git
+psutil==5.9.6
+PyGObject-stubs==2.10.0

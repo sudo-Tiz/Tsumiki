@@ -6,9 +6,19 @@ Head over to https://its-darsh.github.io/fabric-wiki/introduction/installation-g
 
 ** Prequisite
 - Jetbrains Nerd font
-- `psutil` python package
 
-Then clone the repo, and start with `python main.py`
+Clone the repo
+
+
+
+Installation in a nutshell:
+- Install these arch deps
+```sh
+    sudo pacman -S gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python python-pip python-gobject python-cairo python-loguru pkgconf
+```
+- Clone the repo
+- Run, `pip install -r requirements.txt` to install the python dependencies
+
 
 
 For hyperland, add `python main.py` on `hypr.conf`.
