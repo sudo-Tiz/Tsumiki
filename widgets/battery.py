@@ -13,14 +13,12 @@ class BatteryLabel(Box):
     def __init__(
         self,
         interval: int = 2000,
-        icon_size="14px",
         enable_label=True,
         enable_tooltip=True,
     ):
         super().__init__(name="battery")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
-        self.icon_size = icon_size
 
         invoke_repeater(interval, self.update_battery_status, initial_call=True)
 
@@ -42,7 +40,8 @@ class BatteryLabel(Box):
         battery_icon = Image(
             icon_name=self.get_icon_name(
                 battery_percent=battery_percent, is_charging=is_charging
-            )
+            ),
+            icon_size=14,
         )
 
         self.children = battery_icon

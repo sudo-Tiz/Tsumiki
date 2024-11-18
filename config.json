@@ -18,7 +18,6 @@
   "battery": {
     "enable_label": true,
     "enable_tooltip": true,
-    "icon_size": "14px",
     "interval": 2000
   },
   "cpu": {
