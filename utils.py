@@ -14,7 +14,7 @@ def read_config():
 
 def TextIcon(icon: str, size: str = "24px", props: dict = None):
     label_props = {
-        "label": icon,  # Directly use the provided icon name
+        "label": str(icon),  # Directly use the provided icon name
         "name": "nerd-icon",
         "style": f"font-size: {size}; ",  # Set font family for Material Icons
         "h_align": "center",  # Align horizontally
@@ -27,7 +27,7 @@ def TextIcon(icon: str, size: str = "24px", props: dict = None):
     return Label(**label_props)
 
 
-def format_time(secs):
+def format_time(secs: int):
     mm, _ = divmod(secs, 60)
     hh, mm = divmod(mm, 60)
     return "%d h %02d min" % (hh, mm)

@@ -1,8 +1,8 @@
 import json
-import os
 from fabric.widgets.label import Label
 from fabric.widgets.box import Box
-from fabric.utils import invoke_repeater, exec_shell_command_async
+from fabric.utils import invoke_repeater, exec_shell_command_async,get_relative_path
+from icons import ICONS
 from utils import TextIcon
 
 
@@ -13,7 +13,7 @@ class Updates(Box):
     def __init__(
         self,
         os: str,
-        icon: str = "󱧘",
+        icon: str = ICONS["updates"],
         icon_size="14px",
         interval: int = 30 * 60000,
         enable_label=True,
@@ -47,8 +47,7 @@ class Updates(Box):
         return True
 
     def update(self):
-        dir = os.path.dirname(__file__)
-        filename = os.path.join(dir, "../services/update.sh")
+        filename = get_relative_path("../services/update.sh")
 
         exec_shell_command_async(
             f"{filename} -{self.os}", lambda output: self.update_values(output)

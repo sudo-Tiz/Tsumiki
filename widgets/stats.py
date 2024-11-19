@@ -3,6 +3,7 @@ from fabric.widgets.box import Box
 from fabric.utils import (
     invoke_repeater,
 )
+from icons import ICONS
 from utils import TextIcon, convert_bytes
 import psutil
 
@@ -10,7 +11,7 @@ import psutil
 class Cpu(Box):
     def __init__(
         self,
-        icon: str = "",
+       icon: str = ICONS["cpu"],
         icon_size="12px",
         interval: int = 2000,
         enable_label=True,
@@ -39,7 +40,7 @@ class Cpu(Box):
 class Memory(Box):
     def __init__(
         self,
-        icon: str = "",
+        icon: str = ICONS["memory"],
         icon_size="12px",
         interval: int = 2000,
         enable_label=True,
@@ -68,22 +69,22 @@ class Memory(Box):
 
         if self.enable_tooltip:
             self.set_tooltip_text(
-                f"󰾆 {psutil.virtual_memory().percent}%\n {self.get_used()}GB/{self.get_total()}GB"
+                f"󰾆 {psutil.virtual_memory().percent}%\n{ICONS["memory"]} {self.get_used()}/{self.get_total()}"
             )
 
         return True
 
     def get_used(self):
-        return f"{format(convert_bytes(self.used_memory, "gb"),".1f")}"
+        return f"{format(convert_bytes(self.used_memory, "gb"),".1f")}GB"
 
     def get_total(self):
-        return f"{format(convert_bytes(self.total_memory, "gb"),".1f")}"
+        return f"{format(convert_bytes(self.total_memory, "gb"),".1f")}GB"
 
 
 class Storage(Box):
     def __init__(
         self,
-        icon: str = "󰋊",
+        icon: str = ICONS["storage"],
         icon_size="14px",
         interval: int = 2000,
         enable_label=True,
@@ -105,18 +106,18 @@ class Storage(Box):
     def update_values(self):
         self.disk = psutil.disk_usage("/")
         if self.enable_label:
-            self.storage_level_label.set_label(f"{self.get_used()}GB")
+            self.storage_level_label.set_label(f"{self.get_used()}")
             self.children = (self.icon, self.storage_level_label)
 
         if self.enable_tooltip:
             self.set_tooltip_text(
-                f"󰾆 {self.disk.percent}%\n {self.get_used()}GB/{self.get_total()}GB"
+                f"󰾆 {self.disk.percent}%\n{ICONS["storage"]} {self.get_used()}/{self.get_total()}"
             )
 
         return True
 
     def get_used(self):
-        return f"{format(convert_bytes(self.disk.used, "gb"),".1f")}"
+        return f"{format(convert_bytes(self.disk.used, "gb"),".1f")}GB"
 
     def get_total(self):
-        return f"{format(convert_bytes(self.disk.total, "gb"),".1f")}"
+        return f"{format(convert_bytes(self.disk.total, "gb"),".1f")}GB"

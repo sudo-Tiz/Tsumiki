@@ -5,6 +5,8 @@ from fabric.widgets.box import Box
 from fabric.widgets.eventbox import EventBox
 from fabric.utils import exec_shell_command, bulk_connect
 
+from icons import ICONS
+
 playerInfo = Fabricator(
     poll_from=lambda: {
         "status": str(exec_shell_command("playerctl status").strip("\n")),
@@ -28,7 +30,7 @@ class Mpris(EventBox):
         self.enable_tooltip = enable_tooltip
 
         self.label = Label(label="Nothing playing", style_classes="bar-button-label")
-        self.text_icon = Label(label="", style="padding: 0 10px;")
+        self.text_icon = Label(label=ICONS["play"], style="padding: 0 10px;")
 
         self.revealer = Revealer(
             name="player-info-revealer",
@@ -71,12 +73,12 @@ class Mpris(EventBox):
 
         if status == "Playing":
             self.set_visible(True)
-            self.text_icon.set_label("")
+            self.text_icon.set_label(ICONS["pause"])
             self.label.set_label(info)
 
         elif status == "Paused":
             self.set_visible(True)
-            self.text_icon.set_label("")
+            self.text_icon.set_label(ICONS["play"])
             self.label.set_label(info)
 
         else:
