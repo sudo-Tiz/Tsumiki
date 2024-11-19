@@ -6,10 +6,9 @@ from fabric.utils import FormattedString, truncate
 
 class LanguageBox(Box):
     def __init__(self, length=3, **kwargs):
-        super().__init__(name="language-box", **kwargs)
+        super().__init__(name="language", style_classes="bar-box", **kwargs)
 
         self.lang = Language(
-            name="language",
             formatter=FormattedString(
                 "{truncate(language,length,suffix)}",
                 truncate=truncate,
@@ -17,5 +16,6 @@ class LanguageBox(Box):
                 suffix="",
             ),
         )
+        ## Todo: add tool tip
 
         self.children = self.lang

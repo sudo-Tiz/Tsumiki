@@ -17,7 +17,7 @@ if AUDIO_WIDGET is True:
 
 class VolumeWidget(Box):
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super().__init__(name="volume", style_classes="bar-box", **kwargs)
         self.audio = Audio()
 
         self.progress_bar = CircularProgressBar(

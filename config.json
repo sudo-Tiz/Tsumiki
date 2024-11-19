@@ -9,39 +9,39 @@
     "enabled_icon": "󱩌",
     "disabled_icon": "󰛨",
     "icon_size": "",
-    "enable_label": true,
+    "enable_label": false,
     "enable_tooltip": true
   },
   "hypridle": {
     "enabled_icon": "",
     "disabled_icon": "",
     "icon_size": "",
-    "enable_label": true,
+    "enable_label": false,
     "enable_tooltip": true
   },
   "battery": {
-    "enable_label": true,
+    "enable_label": false,
     "enable_tooltip": true,
     "interval": 2000
   },
   "cpu": {
     "icon": "",
     "icon_size": "12px",
-    "enable_label": true,
+    "enable_label": false,
     "enable_tooltip": true,
     "interval": 2000
   },
   "memory": {
     "icon": "",
     "icon_size": "12px",
-    "enable_label": true,
+    "enable_label": false,
     "enable_tooltip": true,
     "interval": 2000
   },
   "storage": {
     "icon": "󰋊",
     "icon_size": "14px",
-    "enable_label": true,
+    "enable_label": false,
     "enable_tooltip": true,
     "interval": 2000
   },

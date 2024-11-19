@@ -19,7 +19,7 @@ class Updates(Box):
         enable_label=True,
         enable_tooltip=True,
     ):
-        super().__init__(name="updates")
+        super().__init__(name="updates", style_classes="bar-box")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
         self.text_icon = TextIcon(

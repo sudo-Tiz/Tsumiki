@@ -4,7 +4,7 @@ from fabric.widgets.box import Box
 
 class WorkSpaces(Box):
     def __init__(self, ws_count=8, **kwargs):
-        super().__init__(name="workspaces-box", **kwargs)
+        super().__init__(name="workspaces-box", style_classes="bar-box", **kwargs)
 
         self.workspace = HyperlandWorkspace(
             name="workspaces",

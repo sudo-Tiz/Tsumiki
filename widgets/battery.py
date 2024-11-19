@@ -16,7 +16,7 @@ class BatteryLabel(Box):
         enable_label=True,
         enable_tooltip=True,
     ):
-        super().__init__(name="battery")
+        super().__init__(name="battery", style_classes="bar-box")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
 

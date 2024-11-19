@@ -16,7 +16,7 @@ class Cpu(Box):
         enable_label=True,
         enable_tooltip=True,
     ):
-        super().__init__(name="cpu")
+        super().__init__(name="cpu", style_classes="bar-box")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
 
@@ -45,7 +45,7 @@ class Memory(Box):
         enable_label=True,
         enable_tooltip=True,
     ):
-        super().__init__(name="memory")
+        super().__init__(name="memory", style_classes="bar-box")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
 
@@ -89,7 +89,7 @@ class Storage(Box):
         enable_label=True,
         enable_tooltip=True,
     ):
-        super().__init__(name="storage")
+        super().__init__(name="storage", style_classes="bar-box")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
 

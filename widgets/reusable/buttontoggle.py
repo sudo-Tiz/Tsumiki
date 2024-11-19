@@ -3,24 +3,25 @@ from fabric.utils import exec_shell_command, exec_shell_command_async, invoke_re
 
 
 class CommandSwitcher(Button):
-    @staticmethod
-    def cat_icon(text: str, icon: str):
-        return f"{icon} {text}"
-
     def __init__(
         self,
         command: str,
         enabled_icon: str,
         disabled_icon: str,
-        name="panel-button",
+        name: str,
         enable_label=True,
         enable_tooltip=True,
         interval: int = 2000,
+        **kwargs,
     ):
         self.command = command
         self.command_without_args = self.command.split(" ")[0]  # command without args
 
-        super().__init__(label=self.cat_icon("On", ""), name=name)
+        super().__init__(
+            style_classes="bar-button",
+            name=name,
+            **kwargs,
+        )
 
         self.enabled_icon = enabled_icon
         self.disabled_icon = disabled_icon
@@ -38,6 +39,9 @@ class CommandSwitcher(Button):
             == "yes"
         )
 
+    def cat_icon(self, icon: str, text: str):
+        return f"{icon} {text}"
+
     def toggle(self, *_):
         if self.is_active():
             exec_shell_command(f"pkill {self.command_without_args}")
@@ -49,10 +53,18 @@ class CommandSwitcher(Button):
         if self.enable_label:
             self.set_label(
                 self.cat_icon(
-                    "On" if self.is_active() else "Off",
-                    self.enabled_icon if self.is_active() else self.disabled_icon,
+                    icon=self.enabled_icon if self.is_active() else self.disabled_icon,
+                    text="On" if self.is_active() else "Off",
                 )
             )
+        else:
+            self.set_label(
+                self.cat_icon(
+                    icon=self.enabled_icon if self.is_active() else self.disabled_icon,
+                    text="",
+                )
+            )
+
         if self.enable_tooltip:
             self.set_tooltip_text(
                 f"{self.command_without_args} enabled"

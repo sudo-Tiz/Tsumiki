@@ -1,4 +1,4 @@
-from widgets.reusable.paneltoggle import CommandSwitcher
+from widgets.reusable.buttontoggle import CommandSwitcher
 from fabric.widgets.button import Button
 
 
@@ -17,4 +17,5 @@ class HyprSunset(Button):
             disabled_icon=self.config["disabled_icon"],
             enable_label=self.config["enable_label"],
             enable_tooltip=self.config["enable_tooltip"],
+            name="hyprsunset",
         )

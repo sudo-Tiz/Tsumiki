@@ -24,7 +24,7 @@ class Mpris(EventBox):
         length=30,
         enable_tooltip=True,
     ):
-        super().__init__(name="mpris")
+        super().__init__(name="mpris", style_classes="bar-box")
         self.enable_tooltip = enable_tooltip
 
         self.label = Label(label="Nothing playing", style_classes="bar-button-label")
@@ -38,25 +38,27 @@ class Mpris(EventBox):
             reveal_child=False,
         )
 
-        self.box = Box(name="mpris-container", children=[self.text_icon, self.revealer])
+        self.revealer.set_reveal_child(True)
+
+        self.box = Box(children=[self.text_icon, self.revealer])
 
         self.children = self.box
         self.length = length
 
-        bulk_connect(
-            self,
-            {
-                "enter-notify-event": lambda *_: (
-                    self.revealer.set_reveal_child(True)
-                    if not self.revealer.get_reveal_child()
-                    else None
-                ),
-                "leave-notify-event": lambda *_: self.revealer.set_reveal_child(False)
-                if self.revealer.get_reveal_child()
-                else None,
-                "button-press-event": lambda *_: self.play_pause(),
-            },
-        )
+        # bulk_connect(
+        #     self,
+        #     {
+        #         "enter-notify-event": lambda *_: (
+        #             self.revealer.set_reveal_child(True)
+        #             if not self.revealer.get_reveal_child()
+        #             else None
+        #         ),
+        #         "leave-notify-event": lambda *_: self.revealer.set_reveal_child(False)
+        #         if self.revealer.get_reveal_child()
+        #         else None,
+        #         "button-press-event": lambda *_: self.play_pause(),
+        #     },
+        # )
 
         playerInfo.connect(
             "changed",

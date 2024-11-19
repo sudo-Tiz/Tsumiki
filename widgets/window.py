@@ -8,7 +8,7 @@ from fabric.utils import FormattedString, truncate
 
 class WindowTitle(Box):
     def __init__(self, **kwargs):
-        super().__init__(name="window-box", **kwargs)
+        super().__init__(style_classes="bar-box", name="window-box", **kwargs)
 
         self.window = ActiveWindow(
             name="window",

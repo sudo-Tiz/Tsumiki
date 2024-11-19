@@ -14,20 +14,25 @@ label {
     font-size: 1rem;
 }
 
+.bar-button{
+    color: var(--main-fg);
+    background: var(--main-bg);
+    padding: 0 1.25em;
+}
+
+.bar-box{
+    color: var(--main-fg);
+    background: var(--main-bg);
+    padding: 0 0.9em;
+}
+
 
 /*initial styles for all modules*/
 
-#panel-button,
 #date-time,
 #backlight,
-#battery,
 #bluetooth,
-#cpu,
-#storage,
-#hyprland-window,
 #custom-keybindhint,
-#language,
-#memory,
 #window,
 #network,
 #pulseaudio,
@@ -154,12 +159,7 @@ tooltip>* {
 }
 
 
-
-
 .bar-button-label {
     margin-left: 10px;
 }
 
-.bar-button-icon {
-    min-height: 4px;
-}
