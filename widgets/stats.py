@@ -11,7 +11,7 @@ import psutil
 class Cpu(Box):
     def __init__(
         self,
-       icon: str = ICONS["cpu"],
+        icon: str = ICONS["cpu"],
         icon_size="12px",
         interval: int = 2000,
         enable_label=True,

@@ -15,6 +15,7 @@ from widgets.mpris import Mpris
 from widgets.stats import Cpu, Memory, Storage
 from widgets.updates import Updates
 from widgets.volume import AUDIO_WIDGET, VolumeWidget
+from widgets.weather import Weather
 from widgets.window import WindowTitle
 from widgets.workspace import WorkSpaces
 
@@ -73,6 +74,7 @@ class StatusBar(Window):
 
         self.memory = Memory()
         self.storage = Storage()
+        self.weather = Weather("kathmandu")
         self.player = Mpris()
         self.updates = Updates(os=updates_config["os"])
 
@@ -82,7 +84,7 @@ class StatusBar(Window):
                 name="start-container",
                 spacing=4,
                 orientation="h",
-                children=[self.workspaces, self.window_title, self.language],
+                children=[self.workspaces, self.window_title],
             ),
             center_children=Box(
                 name="center-container",
@@ -95,6 +97,7 @@ class StatusBar(Window):
                 spacing=4,
                 orientation="h",
                 children=[
+                    self.weather,
                     self.cpu,
                     self.storage,
                     self.updates,
