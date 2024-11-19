@@ -1,6 +1,8 @@
 import json
 from typing import Literal
 from fabric.widgets.label import Label
+import psutil
+import datetime
 
 
 def read_config():
@@ -40,3 +42,7 @@ def convert_bytes(bytes: int, to: Literal["kb", "mb", "gb"]):
         multiplier = 3
 
     return bytes / (1024**multiplier)
+
+
+def uptime():
+    return datetime.datetime.fromtimestamp(psutil.boot_time()).strftime("%H:%M:%S")

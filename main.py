@@ -15,8 +15,8 @@ from widgets.mpris import Mpris
 from widgets.stats import Cpu, Memory, Storage
 from widgets.updates import Updates
 from widgets.volume import AUDIO_WIDGET, VolumeWidget
-from widgets.window import WindowBox
-from widgets.workspace import WorkSpaceBox
+from widgets.window import WindowTitle
+from widgets.workspace import WorkSpaces
 
 config = read_config()
 
@@ -34,9 +34,9 @@ class StatusBar(Window):
             visible=False,
             all_visible=False,
         )
-        self.workspaces = WorkSpaceBox()
+        self.workspaces = WorkSpaces()
 
-        self.active_window = WindowBox()
+        self.window_title = WindowTitle()
 
         self.language = LanguageBox()
 
@@ -82,7 +82,7 @@ class StatusBar(Window):
                 name="start-container",
                 spacing=4,
                 orientation="h",
-                children=[self.workspaces, self.active_window, self.language],
+                children=[self.workspaces, self.window_title, self.language],
             ),
             center_children=Box(
                 name="center-container",

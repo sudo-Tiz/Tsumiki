@@ -1,15 +1,12 @@
-from fabric.hyprland.widgets import (
-    WorkspaceButton,
-    Workspaces,
-)
+from fabric.hyprland.widgets import WorkspaceButton, Workspaces as HyperlandWorkspace
 from fabric.widgets.box import Box
 
 
-class WorkSpaceBox(Box):
+class WorkSpaces(Box):
     def __init__(self, ws_count=8, **kwargs):
         super().__init__(name="workspaces-box", **kwargs)
 
-        self.workspace = Workspaces(
+        self.workspace = HyperlandWorkspace(
             name="workspaces",
             spacing=4,
             buttons=[

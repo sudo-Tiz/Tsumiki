@@ -6,6 +6,9 @@ from fabric.utils import invoke_repeater, exec_shell_command_async
 from utils import TextIcon
 
 
+## TODO: add on click to trigger refetch
+
+
 class Updates(Box):
     def __init__(
         self,

@@ -6,7 +6,7 @@ from fabric.widgets.box import Box
 from fabric.utils import FormattedString, truncate
 
 
-class WindowBox(Box):
+class WindowTitle(Box):
     def __init__(self, **kwargs):
         super().__init__(name="window-box", **kwargs)
 
