@@ -5,9 +5,9 @@ For installation and getting started with dependencies, refer to the [Fabric Wik
 
 ---
 
-## **Prerequisites**
+## Prerequisites
 
-- **JetBrains Nerd Font**
+- [JetBrains Nerd Font](https://www.nerdfonts.com)
 
 ---
 
