@@ -1,7 +1,6 @@
 # FabricPanel
 
 A semi-customizable bar written using the [Fabric Widget System](https://github.com/Fabric-Development/fabric)  
-For installation and getting started with dependencies, refer to the [Fabric Wiki Installation Guide](https://its-darsh.github.io/fabric-wiki/introduction/installation-guide/).
 
 ---
 
@@ -18,21 +17,43 @@ For installation and getting started with dependencies, refer to the [Fabric Wik
 
 Run the following command to install the required packages:
 
-```bash
+```sh
 # Arch Linux
 
-sudo pacman -S gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python python-pip python-gobject python-cairo python-loguru pkgconf
+sudo pacman -S gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python python-pip python-gobject python-psutils python-cairo python-loguru pkgconf
 
 # OpenSUSE
 
-sudo zypper install gtk3-devel cairo-devel gtk-layer-shell-devel libgirepository-1_0-1 libgirepository-2_0-0 gobject-introspection-devel python311 python311-pip python311-gobject python311-gobject-cairo python311-pycairo python311-loguru pkgconf
+sudo zypper install gtk3-devel cairo-devel gtk-layer-shell-devel libgirepository-1_0-1 libgirepository-2_0-0 gobject-introspection-devel python311 python311-pip python311-psutils python311-gobject python311-gobject-cairo python311-pycairo python311-loguru pkgconf
 ```
+
+### Optional
+
+```sh
+
+## To check for pacman updates in the default script used in the updates module
+pacman-contrib
+
+## To record screen through the dashboard record shortcut
+gpu-screen-recorder
+
+## To enable the eyedropper color picker with the default snapshot shortcut in the dashboard
+hyprpicker
+
+## To enable hyprland's very own blue light filter
+hyprsunset
+
+## To enable hyprland's very own idle inhibitor
+hypridle
+
+```
+
 
 ### **2. Clone the Repository**
 
 Clone this repository:
 
-```bash
+```sh
 git clone https://github.com/rubiin/FabricPanel.git
 cd FabricPanel
 ```
@@ -41,8 +62,8 @@ cd FabricPanel
 
 Install the requirements:
 
-```
-pip install -r requirements.txt
+```sh
+pip install git+https://github.com/Fabric-Development/fabric.git
 ```
 
 ---
@@ -53,13 +74,31 @@ pip install -r requirements.txt
 
 Add the following line to your `hypr.conf` to start FabricPanel automatically:
 
-```bash
+```sh
 exec = python main.py
 ```
 
 ### **For Other Window Managers:**
 
 Use a similar configuration for your respective window manager's autostart setup.
+
+## **Available Modules**
+- battery
+- workspaces
+- windowtitle
+- media
+- volume
+- weather
+- clock
+- systray
+- ram
+- cpu
+- storage
+- cputemp
+- updates
+- hyprsunset
+- hypridle
+
 
 > [!WARNING]
 > This is still in early development and will include breaking changes
