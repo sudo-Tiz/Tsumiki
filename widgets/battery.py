@@ -1,10 +1,10 @@
-import psutil
-
-from fabric.widgets.box import Box
-from fabric.utils import invoke_repeater
-from fabric.widgets.label import Label
-from fabric.widgets.image import Image
 import math
+
+import psutil
+from fabric.utils import invoke_repeater
+from fabric.widgets.box import Box
+from fabric.widgets.image import Image
+from fabric.widgets.label import Label
 
 from utils import format_time
 
