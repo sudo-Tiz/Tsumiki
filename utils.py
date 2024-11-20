@@ -3,11 +3,10 @@ from typing import Literal
 from fabric.widgets.label import Label
 import psutil
 import datetime
-from fabric.widgets.button import Button
-
+from fabric.utils import get_relative_path
 
 def read_config():
-    with open("config.json", "r") as file:
+    with open(get_relative_path("config.json"), "r") as file:
         # Load JSON data into a Python dictionary
         data = json.load(file)
     return data

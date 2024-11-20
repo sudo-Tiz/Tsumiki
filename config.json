@@ -1,8 +1,8 @@
 {
   "layout": {
-    "left": {},
-    "middle": {},
-    "right": {}
+    "left": ["workspaces","window_title"],
+    "middle": ["datetime"],
+    "right": ["cpu","memory"]
   },
   "hyprsunset": {
     "temperature": "2800k",

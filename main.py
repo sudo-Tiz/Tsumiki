@@ -81,13 +81,15 @@ class StatusBar(Window):
         self.player = Mpris()
         self.updates = Updates(os=updates_config["os"])
 
+        left_children = []
+
         self.children = CenterBox(
             name="bar-inner",
             start_children=Box(
                 name="start-container",
                 spacing=4,
                 orientation="h",
-                children=[self.workspaces, self.window_title],
+                children=left_children,
             ),
             center_children=Box(
                 name="center-container",
@@ -113,6 +115,9 @@ class StatusBar(Window):
                 ],
             ),
         )
+
+
+        
 
         self.show_all()
 
