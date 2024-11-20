@@ -8,6 +8,7 @@ For installation and getting started with dependencies, refer to the [Fabric Wik
 ## Prerequisites
 
 - [JetBrains Nerd Font](https://www.nerdfonts.com)
+- python 3+
 
 ---
 
