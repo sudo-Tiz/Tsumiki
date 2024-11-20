@@ -8,6 +8,7 @@ from fabric.widgets.wayland import WaylandWindow as Window
 
 from utils import read_config
 from widgets.battery import BatteryLabel
+from widgets.clickcounter import ClickCounter
 from widgets.hypridle import HyprIdle
 from widgets.hyprsunset import HyprSunset
 from widgets.language import LanguageBox
@@ -72,6 +73,8 @@ class StatusBar(Window):
             interval=cpu_config["interval"],
         )
 
+        self.click_counter = ClickCounter()
+
         self.memory = Memory()
         self.storage = Storage()
         self.weather = Weather("kathmandu")
@@ -98,7 +101,7 @@ class StatusBar(Window):
                 orientation="h",
                 children=[
                     self.weather,
-                    self.cpu,
+                    self.click_counter,
                     self.storage,
                     self.updates,
                     self.memory,

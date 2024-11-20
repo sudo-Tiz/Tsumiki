@@ -52,7 +52,7 @@ class BatteryLabel(Box):
         if self.enable_tooltip:
             if battery_percent == 100:
                 self.set_tooltip_text("Full")
-            elif is_charging and battery < 100:
+            elif is_charging and battery_percent < 100:
                 self.set_tooltip_text(f"Time to full: {format_time(battery.secsleft)}")
             else:
                 self.set_tooltip_text(f"Time to empty: {format_time(battery.secsleft)}")
