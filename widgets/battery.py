@@ -9,7 +9,7 @@ import math
 from utils import format_time
 
 
-class BatteryLabel(Box):
+class Battery(Box):
     def __init__(
         self,
         interval: int = 2000,

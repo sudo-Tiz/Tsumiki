@@ -5,6 +5,7 @@ import psutil
 import datetime
 from fabric.utils import get_relative_path
 
+
 def read_config():
     with open(get_relative_path("config.json"), "r") as file:
         # Load JSON data into a Python dictionary
@@ -46,6 +47,3 @@ def convert_bytes(bytes: int, to: Literal["kb", "mb", "gb"]):
 
 def uptime():
     return datetime.datetime.fromtimestamp(psutil.boot_time()).strftime("%H:%M:%S")
-
-
-

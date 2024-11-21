@@ -1,7 +1,7 @@
 {
   "layout": {
-    "left": ["workspaces","window_title"],
-    "middle": ["datetime"],
+    "left": ["workspaces","windowtitle"],
+    "middle": ["datetime","player"],
     "right": ["cpu","memory"]
   },
   "hyprsunset": {
