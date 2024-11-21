@@ -55,5 +55,8 @@
     "os": "arch",
     "icon": "󱧘",
     "icon_size": "14px"
+  },
+  "weather":{
+    "location": "Kathmandu"
   }
 }
