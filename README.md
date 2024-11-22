@@ -1,6 +1,7 @@
 # FabricPanel
 
-A semi-customizable bar written using the [Fabric Widget System](https://github.com/Fabric-Development/fabric)  
+A semi-customizable bar written using the [Fabric Widget System](https://github.com/Fabric-Development/fabric)
+More on [Fabric's Wiki](https://wiki.ffpy.org)
 
 ---
 
