@@ -116,7 +116,7 @@ class StatusBar(Window):
         self.storage = Storage()
         self.weather = Weather("kathmandu")
         self.player = Mpris()
-        self.updates = Updates(os=updates_config["os"])
+        self.updates = Updates(os=updates_config["os"], icon=updates_config["icon"])
 
         self.children = CenterBox(
             name="bar-inner",
@@ -130,7 +130,7 @@ class StatusBar(Window):
                 name="center-container",
                 spacing=4,
                 orientation="h",
-                children=layout["right_children"],
+                children=layout["middle_children"],
             ),
             end_children=Box(
                 name="end-container",
