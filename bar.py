@@ -9,7 +9,7 @@ from widgets.stats import Cpu, Memory, Storage
 from widgets.updates import Updates
 from widgets.volume import AUDIO_WIDGET, VolumeWidget
 from widgets.weather import Weather
-from widgets.window import WindowTitle
+from widgets.windowtitle import WindowTitle
 from widgets.workspace import WorkSpaces
 from fabric.system_tray.widgets import SystemTray
 from fabric.widgets.box import Box
@@ -43,7 +43,7 @@ class StatusBar(Window):
             # Workspaces: Displays the list of workspaces or desktops
             "workspaces": WorkSpaces(),
             # WindowTitle: Shows the title of the current window
-            "windowtitle": WindowTitle(),
+            "windowtitle": WindowTitle(config=config),
             # LanguageBox: Displays the current language selection
             "language": LanguageBox(),
             # DateTime: Displays the current date and time
@@ -82,8 +82,6 @@ class StatusBar(Window):
         }
 
         layout = self.make_layout()
-
- 
 
         self.system_tray = SystemTray(name="system-tray", spacing=4)
 

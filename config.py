@@ -63,6 +63,7 @@ class Workspaces(TypedDict):
 
 class Window(TypedDict):
     length: int
+    enable_icon: bool
 
 
 class Updates(TypedDict):

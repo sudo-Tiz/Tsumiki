@@ -8,14 +8,14 @@
     "temperature": "2800k",
     "enabled_icon": "󱩌",
     "disabled_icon": "󰛨",
-    "icon_size": "",
+    "icon_size": "12px",
     "enable_label": false,
     "enable_tooltip": true
   },
   "hypridle": {
     "enabled_icon": "",
     "disabled_icon": "",
-    "icon_size": "",
+    "icon_size": "12px",
     "enable_label": false,
     "enable_tooltip": true
   },
@@ -49,7 +49,8 @@
     "count": 8
   },
   "window": {
-    "length": 20
+    "length": 20,
+    "enable_icon": true
   },
   "updates": {
     "os": "arch",

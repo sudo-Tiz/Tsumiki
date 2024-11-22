@@ -1,4 +1,4 @@
-from widgets.reusable.buttontoggle import CommandSwitcher
+from widgets.shared.buttontoggle import CommandSwitcher
 from fabric.widgets.button import Button
 
 
