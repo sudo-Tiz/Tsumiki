@@ -115,7 +115,7 @@ class WindowTitle(Box):
         self.window = ActiveWindow(
             name="window",
             formatter=FormattedString(
-                "{'Desktop' if not win_title else get_title(win_title, win_class)}",
+                "{ '󰇄 Desktop' if not win_title else get_title(win_title, win_class)}",
                 get_title=self.get_title,
             ),
         )
