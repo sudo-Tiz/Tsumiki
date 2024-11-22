@@ -5,6 +5,7 @@ from widgets.hypridle import HyprIdle
 from widgets.hyprsunset import HyprSunset
 from widgets.language import LanguageBox
 from widgets.mpris import Mpris
+from widgets.screenrecord import ScreenRecord
 from widgets.stats import Cpu, Memory, Storage
 from widgets.updates import Updates
 from widgets.volume import AUDIO_WIDGET, VolumeWidget
@@ -136,6 +137,7 @@ class StatusBar(Window):
                 orientation="h",
                 children=[
                     self.updates,
+                    ScreenRecord(),
                     self.memory,
                     self.battery,
                     self.status_container,
