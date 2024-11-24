@@ -1,6 +1,7 @@
 from utils.config import config
 from widgets.battery import Battery
 from widgets.clickcounter import ClickCounter
+from widgets.datetime import DateTimeBox
 from widgets.hypridle import HyprIdle
 from widgets.hyprsunset import HyprSunset
 from widgets.kblayout import KeyboardLayout
@@ -16,7 +17,6 @@ from widgets.workspace import WorkSpaces
 from fabric.system_tray.widgets import SystemTray
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
-from fabric.widgets.datetime import DateTime
 from fabric.widgets.wayland import WaylandWindow as Window
 
 
@@ -50,7 +50,7 @@ class StatusBar(Window):
             # LanguageBox: Displays the current language selection
             "language": LanguageBox(),
             # DateTime: Displays the current date and time
-            "datetime": DateTime(name="date-time"),
+            "datetime": DateTimeBox(),
             # SystemTray: Represents the system tray with various icons (e.g., battery, network)
             "systemtray": SystemTray(name="system-tray", spacing=4),
             # HyprSunset: Provides information about the sunset time based on location

@@ -46,7 +46,8 @@
     "interval": 2000
   },
   "workspaces": {
-    "count": 8
+    "count": 8,
+    "occupied": true
   },
   "window": {
     "length": 20,
