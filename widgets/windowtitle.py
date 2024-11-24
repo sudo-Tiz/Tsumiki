@@ -6,7 +6,7 @@ from fabric.widgets.box import Box
 
 from fabric.utils import FormattedString, truncate
 
-from config import Config
+from utils.config import Config
 
 # taken from hyprpanel
 windowTitleMap = [

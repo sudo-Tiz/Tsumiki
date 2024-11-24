@@ -1,8 +1,9 @@
-from config import config
+from utils.config import config
 from widgets.battery import Battery
 from widgets.clickcounter import ClickCounter
 from widgets.hypridle import HyprIdle
 from widgets.hyprsunset import HyprSunset
+from widgets.kblayout import KeyboardLayout
 from widgets.language import LanguageBox
 from widgets.mpris import Mpris
 from widgets.screenrecord import ScreenRecord
@@ -43,6 +44,7 @@ class StatusBar(Window):
         self.widgets_list = {
             # Workspaces: Displays the list of workspaces or desktops
             "workspaces": WorkSpaces(),
+            "keyboard": KeyboardLayout(),
             # WindowTitle: Shows the title of the current window
             "windowtitle": WindowTitle(config=config),
             # LanguageBox: Displays the current language selection
@@ -85,9 +87,6 @@ class StatusBar(Window):
         layout = self.make_layout()
 
         self.system_tray = SystemTray(name="system-tray", spacing=4)
-
-        self.hyprsunset = HyprSunset(config=config).create()
-        self.hypridle = HyprIdle(config=config).create()
 
         self.status_container = Box(
             name="widgets-container",

@@ -92,6 +92,7 @@ Use a similar configuration for your respective window manager's autostart setup
 - weather
 - clock
 - systray
+- keyboard
 - ram
 - cpu
 - storage

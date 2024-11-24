@@ -1,6 +1,6 @@
 from typing import TypedDict, List
 
-from utils import read_config
+from utils.utils import read_config
 
 
 # Define the TypedDict types as shown previously

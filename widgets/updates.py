@@ -2,8 +2,8 @@ import json
 from fabric.widgets.label import Label
 from fabric.widgets.box import Box
 from fabric.utils import invoke_repeater, exec_shell_command_async, get_relative_path
-from icons import ICONS
-from utils import TextIcon
+from utils.icons import ICONS
+from utils.utils import TextIcon
 
 
 ## TODO: add on click to trigger refetch

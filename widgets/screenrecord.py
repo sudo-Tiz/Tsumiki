@@ -16,6 +16,7 @@ screenRecordInfo = Fabricator(
 
 ## TODO: on button click enable/disable recording
 
+
 class ScreenRecord(Button):
     def __init__(self, **kwargs):
         super().__init__(name="screen-recorder", style_classes="bar-box")

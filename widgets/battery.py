@@ -6,7 +6,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
-from utils import format_time
+from utils.utils import format_time
 
 
 class Battery(Box):

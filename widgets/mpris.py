@@ -5,7 +5,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.eventbox import EventBox
 from fabric.utils import exec_shell_command, bulk_connect
 
-from icons import ICONS
+from utils.icons import ICONS
 
 playerInfo = Fabricator(
     poll_from=lambda: {
