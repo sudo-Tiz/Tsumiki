@@ -3,7 +3,6 @@ from fabric.utils import get_relative_path
 
 from bar import StatusBar
 
-
 if __name__ == "__main__":
     # Create the status bar
     bar = StatusBar()

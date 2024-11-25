@@ -15,13 +15,11 @@ label {
 }
 
 .bar-button{
-    color: var(--main-fg);
     background: var(--main-bg);
     padding: 0 1.25em;
 }
 
 .bar-box{
-    color: var(--main-fg);
     background: var(--main-bg);
     padding: 0 0.9em;
 }
