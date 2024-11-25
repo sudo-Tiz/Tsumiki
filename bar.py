@@ -1,22 +1,28 @@
 from utils.config import config
-from widgets.battery import Battery
-from widgets.clickcounter import ClickCounter
-from widgets.datetime import DateTimeBox
-from widgets.hypridle import HyprIdle
-from widgets.hyprsunset import HyprSunset
-from widgets.kblayout import KeyboardLayout
-from widgets.language import LanguageBox
-from widgets.mpris import Mpris
-from widgets.stats import Cpu, Memory, Storage
-from widgets.updates import Updates
-from widgets.volume import AUDIO_WIDGET, VolumeWidget
-from widgets.weather import Weather
-from widgets.windowtitle import WindowTitle
-from widgets.workspace import WorkSpaces
 from fabric.system_tray.widgets import SystemTray
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow as Window
+
+from widgets import (
+    WorkSpaces,
+    KeyboardLayout,
+    WindowTitle,
+    LanguageBox,
+    DateTimeBox,
+    HyprSunset,
+    HyprIdle,
+    Battery,
+    Cpu,
+    ClickCounter,
+    Memory,
+    Storage,
+    Weather,
+    Mpris,
+    Updates,
+    VolumeWidget,
+    AUDIO_WIDGET,
+)
 
 
 class StatusBar(Window):
