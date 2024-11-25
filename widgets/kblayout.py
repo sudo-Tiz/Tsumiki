@@ -4,10 +4,7 @@ from fabric.widgets.label import Label
 from fabric.utils import exec_shell_command
 
 
-"""
-sourced from hyprpanel
-"""
-
+# sourced from hyprpanel
 KBLAYOUT_MAP = {
     "Abkhazian (Russia)": "RU (Ab)",
     "Akan": "GH (Akan)",

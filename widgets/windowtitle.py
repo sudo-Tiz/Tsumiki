@@ -8,7 +8,7 @@ from fabric.utils import FormattedString, truncate
 
 from utils.config import Config
 
-# taken from hyprpanel
+# sourced from hyprpanel
 windowTitleMap = [
     # user provided values
     # ...options.bar.windowtitle.title_map.value,
