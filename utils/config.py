@@ -2,14 +2,17 @@ from typing import TypedDict, List
 
 from utils.utils import read_config
 
+# Define the TypedDict types for various configurations
 
-# Define the TypedDict types as shown previously
+
+# Layout configuration for different sections of the bar
 class Layout(TypedDict):
     left: List[str]
     middle: List[str]
     right: List[str]
 
 
+# Configuration for HyprSunset
 class HyprSunset(TypedDict):
     temperature: str
     enabled_icon: str
@@ -19,6 +22,7 @@ class HyprSunset(TypedDict):
     enable_tooltip: bool
 
 
+# Configuration for HyprIdle
 class HyprIdle(TypedDict):
     enabled_icon: str
     disabled_icon: str
@@ -27,12 +31,14 @@ class HyprIdle(TypedDict):
     enable_tooltip: bool
 
 
+# Configuration for Battery
 class Battery(TypedDict):
     enable_label: bool
     enable_tooltip: bool
     interval: int
 
 
+# Configuration for CPU
 class Cpu(TypedDict):
     icon: str
     icon_size: str
@@ -41,6 +47,7 @@ class Cpu(TypedDict):
     interval: int
 
 
+# Configuration for Memory
 class Memory(TypedDict):
     icon: str
     icon_size: str
@@ -49,6 +56,7 @@ class Memory(TypedDict):
     interval: int
 
 
+# Configuration for Storage
 class Storage(TypedDict):
     icon: str
     icon_size: str
@@ -57,25 +65,30 @@ class Storage(TypedDict):
     interval: int
 
 
+# Configuration for Workspaces
 class Workspaces(TypedDict):
     count: int
 
 
+# Configuration for Window
 class Window(TypedDict):
     length: int
     enable_icon: bool
 
 
+# Configuration for Updates
 class Updates(TypedDict):
     os: str
     icon: str
     icon_size: str
 
 
+# Configuration for Weather
 class Weather(TypedDict):
     location: str
 
 
+# Main configuration that includes all other configurations
 class Config(TypedDict):
     layout: Layout
     hyprsunset: HyprSunset
@@ -90,6 +103,7 @@ class Config(TypedDict):
     weather: Weather
 
 
+# Read the configuration from the JSON file
 parsed_data = read_config()
 
 # Now, `parsed_data` is a Python dictionary

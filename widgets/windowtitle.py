@@ -8,7 +8,7 @@ from fabric.utils import FormattedString, truncate
 
 from utils.config import Config
 
-# sourced from hyprpanel
+# Mapping of window classes to icons and titles
 windowTitleMap = [
     # user provided values
     # ...options.bar.windowtitle.title_map.value,
@@ -106,12 +106,13 @@ windowTitleMap = [
 ]
 
 
+# This class represents a widget that displays the title of the active window
 class WindowTitle(Box):
     def __init__(self, config: Config, **kwargs):
         super().__init__(style_classes="bar-box", name="window-box", **kwargs)
-
+        # Store the configuration for the window title
         self.config = config["window"]
-
+        # Create an ActiveWindow widget to track the active window
         self.window = ActiveWindow(
             name="window",
             formatter=FormattedString(
@@ -119,16 +120,17 @@ class WindowTitle(Box):
                 get_title=self.get_title,
             ),
         )
-
+        # Add the ActiveWindow widget as a child
         self.children = self.window
 
     def get_title(self, win_title, win_class):
+        # Truncate the window title based on the configured length
         win_title = truncate(win_title, self.config["length"])
-
+        # Find a matching window class in the windowTitleMap
         matched_window = next(
             (wt for wt in windowTitleMap if re.search(wt[0], win_class.lower())), None
         )
-
+        # Return the formatted title with or without the icon
         if matched_window:
             return (
                 f"{matched_window[1]} {matched_window[2]}"

@@ -16,13 +16,16 @@ class Battery(Box):
         enable_label=True,
         enable_tooltip=True,
     ):
+        # Initialize the Box with specific name and style
         super().__init__(name="battery", style_classes="bar-box")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
 
+        # Set up a repeater to call the update_battery_status method at specified intervals
         invoke_repeater(interval, self.update_battery_status, initial_call=True)
 
     def update_battery_status(self):
+        # Get the battery status
         battery = psutil.sensors_battery()
 
         if battery is None:
@@ -46,9 +49,11 @@ class Battery(Box):
 
         self.children = battery_icon
 
+        # Update the label with the battery percentage if enabled
         if self.enable_label:
             self.children = (battery_icon, battery_label)
 
+        # Update the tooltip with the battery status details if enabled
         if self.enable_tooltip:
             if battery_percent == 100:
                 self.set_tooltip_text("Full")
@@ -60,6 +65,7 @@ class Battery(Box):
         return True
 
     def get_icon_name(self, battery_percent: int, is_charging: bool):
+        # Determine the icon name based on the battery percentage and charging status
         if battery_percent == 100:
             return "battery-level-100-charged-symbolic"
 

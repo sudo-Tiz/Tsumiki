@@ -26,6 +26,7 @@ class Mpris(EventBox):
         length=30,
         enable_tooltip=True,
     ):
+        # Initialize the EventBox with specific name and style
         super().__init__(name="mpris", style_classes="bar-box")
         self.enable_tooltip = enable_tooltip
 
@@ -47,30 +48,26 @@ class Mpris(EventBox):
         self.children = self.box
         self.length = length
 
+        # Connect the button press event to the play_pause method
         bulk_connect(
             self,
             {
-                # "enter-notify-event": lambda *_: (
-                #     self.revealer.set_reveal_child(True)
-                #     if not self.revealer.get_reveal_child()
-                #     else None
-                # ),
-                # "leave-notify-event": lambda *_: self.revealer.set_reveal_child(False)
-                # if self.revealer.get_reveal_child()
-                # else None,
                 "button-press-event": lambda *_: self.play_pause(),
             },
         )
 
+        # Connect the playerInfo changes to the get_current method
         playerInfo.connect(
             "changed",
             lambda _, value: (self.get_current(value)),
         )
 
     def get_current(self, value):
+        # Get the current player info and status
         info = value["info"] if len(value["info"]) < 30 else value["info"][:30]
         status = value["status"]
 
+        # Update the label and icon based on the player status
         if status == "Playing":
             self.set_visible(True)
             self.text_icon.set_label(ICONS["pause"])
@@ -87,4 +84,5 @@ class Mpris(EventBox):
         return True
 
     def play_pause(self, *_):
+        # Toggle play/pause using playerctl
         exec_shell_command("playerctl play-pause")
