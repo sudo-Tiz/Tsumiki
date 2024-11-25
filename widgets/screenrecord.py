@@ -6,7 +6,7 @@ screenRecordInfo = Fabricator(
     poll_from=lambda: {
         "status": str(
             exec_shell_command(
-                get_relative_path("../services/screen_record.sh status")
+                get_relative_path("../assets/scripts/screen_record.sh status")
             ).strip("\n")
         )
     },

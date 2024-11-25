@@ -1,15 +1,19 @@
+from curses.panel import update_panels
 import json
 from fabric.widgets.label import Label
+from fabric.widgets.eventbox import EventBox
 from fabric.widgets.box import Box
-from fabric.utils import invoke_repeater, exec_shell_command_async, get_relative_path
+from fabric.utils import (
+    invoke_repeater,
+    exec_shell_command_async,
+    get_relative_path,
+    bulk_connect,
+)
 from utils.icons import ICONS
 from utils.utils import TextIcon
 
 
-## TODO: add on click to trigger refetch
-
-
-class Updates(Box):
+class Updates(EventBox):
     def __init__(
         self,
         os: str,
@@ -27,14 +31,25 @@ class Updates(Box):
         )
         self.os = os
 
-        self.children = self.text_icon
+        self.box = Box()
+
+        self.children = self.box
+
+        self.box.children = self.text_icon
         self.update_level_label = Label(label="0", style_classes="bar-button-label")
 
         ## this is to show first 0 value
         if self.enable_label:
-            self.children = (self.text_icon, self.update_level_label)
+            self.box.children = (self.text_icon, self.update_level_label)
 
         invoke_repeater(interval, self.update, initial_call=True)
+
+        bulk_connect(
+            self,
+            {
+                "button-press-event": lambda *_: (self.update()),
+            },
+        )
 
     def update_values(self, value: str):
         value = json.loads(value)
@@ -47,7 +62,7 @@ class Updates(Box):
         return True
 
     def update(self):
-        filename = get_relative_path("../services/update.sh")
+        filename = get_relative_path("../assets/scripts/updates.sh")
 
         exec_shell_command_async(
             f"{filename} -{self.os}", lambda output: self.update_values(output)
