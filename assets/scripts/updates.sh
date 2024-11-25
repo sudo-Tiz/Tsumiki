@@ -7,13 +7,11 @@ check_arch_updates() {
     aur_updates=0
     flatpak_updates=0
 
-
      # Check if flatpak is installed
     if command -v flatpak &> /dev/null; then
         # Get the number of Flatpak updates if flatpak is installed
         flatpak_updates=$(flatpak remote-ls --updates | wc -l)
     fi
-
 
     # Get the number of official updates using 'checkupdates'
     official_updates=$(checkupdates 2>/dev/null | wc -l)

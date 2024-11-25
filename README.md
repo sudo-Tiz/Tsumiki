@@ -1,6 +1,6 @@
 # FabricPanel
 
-A semi-customizable bar written using the [Fabric Widget System](https://github.com/Fabric-Development/fabric)
+A semi-customizable bar written using the [Fabric Widget System](https://github.com/Fabric-Development/fabric) taking inpirations from hyprpanel and waybar for some widgets
 More on [Fabric's Wiki](https://wiki.ffpy.org)
 
 ---
@@ -92,6 +92,7 @@ Use a similar configuration for your respective window manager's autostart setup
 - weather
 - clock
 - systray
+- keyboard
 - ram
 - cpu
 - storage

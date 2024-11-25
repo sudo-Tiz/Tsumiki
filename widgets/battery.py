@@ -6,10 +6,10 @@ from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
-from utils import format_time
+from utils.utils import format_time
 
 
-class BatteryLabel(Box):
+class Battery(Box):
     def __init__(
         self,
         interval: int = 2000,

@@ -5,7 +5,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.eventbox import EventBox
 from fabric.utils import exec_shell_command, bulk_connect
 
-from icons import ICONS
+from utils.icons import ICONS
 
 playerInfo = Fabricator(
     poll_from=lambda: {
@@ -47,20 +47,20 @@ class Mpris(EventBox):
         self.children = self.box
         self.length = length
 
-        # bulk_connect(
-        #     self,
-        #     {
-        #         "enter-notify-event": lambda *_: (
-        #             self.revealer.set_reveal_child(True)
-        #             if not self.revealer.get_reveal_child()
-        #             else None
-        #         ),
-        #         "leave-notify-event": lambda *_: self.revealer.set_reveal_child(False)
-        #         if self.revealer.get_reveal_child()
-        #         else None,
-        #         "button-press-event": lambda *_: self.play_pause(),
-        #     },
-        # )
+        bulk_connect(
+            self,
+            {
+                # "enter-notify-event": lambda *_: (
+                #     self.revealer.set_reveal_child(True)
+                #     if not self.revealer.get_reveal_child()
+                #     else None
+                # ),
+                # "leave-notify-event": lambda *_: self.revealer.set_reveal_child(False)
+                # if self.revealer.get_reveal_child()
+                # else None,
+                "button-press-event": lambda *_: self.play_pause(),
+            },
+        )
 
         playerInfo.connect(
             "changed",

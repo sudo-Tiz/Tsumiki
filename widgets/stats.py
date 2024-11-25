@@ -3,8 +3,8 @@ from fabric.widgets.box import Box
 from fabric.utils import (
     invoke_repeater,
 )
-from icons import ICONS
-from utils import TextIcon, convert_bytes
+from utils.icons import ICONS
+from utils.utils import TextIcon, convert_bytes
 import psutil
 
 
