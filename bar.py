@@ -23,6 +23,7 @@ from widgets import (
     VolumeWidget,
     AUDIO_WIDGET,
 )
+from widgets.taskbar import TaskBar
 
 
 class StatusBar(Window):
@@ -49,6 +50,7 @@ class StatusBar(Window):
         self.widgets_list = {
             # Workspaces: Displays the list of workspaces or desktops
             "workspaces": WorkSpaces(),
+            "taskbar": TaskBar(),
             "keyboard": KeyboardLayout(),
             # WindowTitle: Shows the title of the current window
             "windowtitle": WindowTitle(config=config),

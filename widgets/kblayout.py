@@ -601,6 +601,7 @@ class KeyboardLayout(Box):
         self.children = self.kb_label
 
         self.data = json.loads(exec_shell_command("hyprctl devices -j"))
+        self.get_keyboard()
 
     def get_keyboard(self):
         keyboards = self.data["keyboards"]
@@ -613,4 +614,5 @@ class KeyboardLayout(Box):
             main_kb = keyboards[len(keyboards) - 1]
 
         layout = main_kb["active_keymap"]
-        self.kb_label.set_label(KBLAYOUT_MAP[layout])
+        self.set_tooltip_text(layout)
+        self.kb_label.set_label(f"󰌌 ${KBLAYOUT_MAP[layout]}")
