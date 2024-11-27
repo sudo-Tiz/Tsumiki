@@ -25,34 +25,6 @@ label {
 }
 
 
-/*initial styles for all modules*/
-
-#date-time,
-#backlight,
-#bluetooth,
-#custom-keybindhint,
-#window,
-#network,
-#pulseaudio,
-#taskbar,
-#tray,
-#updates,
-#custom-wallchange,
-#custom-wbar,
-#window,
-#workspaces {
-    color: var(--main-fg);
-    background: var(--main-bg);
-    padding: 0 1.25em;
-}
-
-
-#mpris-container {
-    color: var(--main-fg);
-    background: var(--main-bg);
-}
-
-
 #bar-inner {
     padding: 0.25em;
     border-color: var(--border-color);
@@ -66,7 +38,7 @@ label {
 }
 
 #workspaces{
-    padding: 0.19em 1.3em;   
+    padding: 0.19em 1em;   
 }
 
 #workspaces>button {

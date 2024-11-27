@@ -27,14 +27,15 @@ class Mpris(EventBox):
         enable_tooltip=True,
     ):
         # Initialize the EventBox with specific name and style
-        super().__init__(name="mpris", style_classes="bar-box")
+        super().__init__(name="mpris")
         self.enable_tooltip = enable_tooltip
 
         self.label = Label(label="Nothing playing", style_classes="bar-button-label")
         self.text_icon = Label(label=ICONS["play"], style="padding: 0 10px;")
 
         self.revealer = Revealer(
-            name="player-info-revealer",
+            name="player-revealer",
+            style_classes="bar-box",
             transition_type="slide-right",
             transition_duration=300,
             child=self.label,

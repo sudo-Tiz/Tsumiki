@@ -21,9 +21,10 @@ class Updates(EventBox):
         interval: int = 30 * 60000,
         enable_label=True,
         enable_tooltip=True,
+        **kwargs,
     ):
         # Initialize the EventBox with specific name and style
-        super().__init__(name="updates", style_classes="bar-box")
+        super().__init__(name="updates", **kwargs)
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
         # Create a TextIcon with the specified icon and size
@@ -32,7 +33,8 @@ class Updates(EventBox):
         )
         self.os = os
 
-        self.box = Box()
+        # for some reason, the style class is not being applied to the eventbox
+        self.box = Box(style_classes="bar-box")
 
         self.children = self.box
 

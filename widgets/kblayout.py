@@ -594,7 +594,7 @@ KBLAYOUT_MAP = {
 
 class KeyboardLayout(Box):
     def __init__(self, **kwargs):
-        super().__init__(name="language", style_classes="bar-box", **kwargs)
+        super().__init__(name="keyboard", style_classes="bar-box", **kwargs)
 
         self.kb_label = Label(label="")
 
@@ -615,4 +615,4 @@ class KeyboardLayout(Box):
 
         layout = main_kb["active_keymap"]
         self.set_tooltip_text(layout)
-        self.kb_label.set_label(f"󰌌 ${KBLAYOUT_MAP[layout]}")
+        self.kb_label.set_label(f"󰌌 {KBLAYOUT_MAP[layout]}")
