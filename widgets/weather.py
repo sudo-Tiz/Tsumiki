@@ -1,5 +1,6 @@
 from fabric.widgets.label import Label
 from fabric.widgets.box import Box
+from fabric.widgets.button import Button
 from fabric.utils import (
     invoke_repeater,
 )
@@ -25,7 +26,7 @@ sample_popup = PopupWindow(
 )
 
 
-class Weather(Box):
+class Weather(Button):
     def __init__(
         self,
         city: str,
@@ -41,6 +42,10 @@ class Weather(Box):
             label="Fetching weather...", style_classes="bar-button-label"
         )
         self.children = self.weather_label
+
+
+
+        self.connect("clicked", lambda *_: print("Weather button clicked"))
 
         # Set up a repeater to call the update_label method at specified intervals
         invoke_repeater(interval, self.update_label, initial_call=True)
