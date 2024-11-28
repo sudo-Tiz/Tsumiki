@@ -1,3 +1,4 @@
+from venv import logger
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.circularprogressbar import CircularProgressBar
 from fabric.widgets.label import Label
@@ -10,7 +11,7 @@ if AUDIO_WIDGET is True:
     try:
         from fabric.audio.service import Audio
     except Exception as e:
-        print(e)
+        logger.error(f"Error: {e}")
         AUDIO_WIDGET = False
 
 

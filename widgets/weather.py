@@ -3,7 +3,9 @@ from fabric.widgets.box import Box
 from fabric.utils import (
     invoke_repeater,
 )
+from loguru import logger
 from services.weather import WeatherInfo
+import threading
 
 
 class Weather(Box):
@@ -18,17 +20,28 @@ class Weather(Box):
         self.enable_tooltip = enable_tooltip
         self.city = city
 
-        self.weather_service = WeatherInfo()
-
-        self.weather_label = Label(label="weather", style_classes="bar-button-label")
+        self.weather_label = Label(
+            label="Fetching weather...", style_classes="bar-button-label"
+        )
         self.children = self.weather_label
 
         # Set up a repeater to call the update_label method at specified intervals
         invoke_repeater(interval, self.update_label, initial_call=True)
 
     def update_label(self):
-        # Get the weather information for the specified city
-        res = self.weather_service.simple_weather_info(city=self.city)
+        weather_thread = threading.Thread(
+            target=self.fetch_weather_in_thread, args=(self.city,)
+        )
+        weather_thread.start()
+        # Continue running the main program (non-blocking)
+        logger.info(
+            "[Weather] Weather information is being fetched in a separate thread..."
+        )
+
+    # This function will run the weather fetch in a separate thread
+    def fetch_weather_in_thread(self, city: str):
+        weather = WeatherInfo()
+        res = weather.simple_weather_info(city)
         # Update the label with the weather icon and temperature
         self.weather_label.set_label(f"{res['icon']} {res['temperature']}")
 
