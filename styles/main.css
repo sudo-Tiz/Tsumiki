@@ -153,3 +153,21 @@ tooltip>* {
   #taskbar > button:last-child {
     margin-right: 0px;
   }
+
+
+  #notification {
+    padding: 0.8rem;
+    border: solid 1px var(--border-color);
+    border-radius: 1rem;
+    background-color: var(--background);
+}
+
+#notification .summary {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#notification .body {
+    color: darker(var(--foreground));
+    font-weight: normal;
+}

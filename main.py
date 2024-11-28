@@ -3,7 +3,8 @@ from fabric.utils import get_relative_path, monitor_file
 
 from loguru import logger
 
-from bar import StatusBar
+from modules.bar import StatusBar
+from modules.notifications import NotificationsPopup
 
 
 def apply_style(app: Application):
@@ -14,8 +15,9 @@ def apply_style(app: Application):
 if __name__ == "__main__":
     # Create the status bar
     bar = StatusBar()
+    notifications = NotificationsPopup()
     # Initialize the application with the status bar
-    app = Application("bar", bar)
+    app = Application("fabric-bar", bar, notifications)
 
     # Monitor main.css file for changes
     main_css_file = monitor_file(get_relative_path("styles/main.css"))
