@@ -8,6 +8,7 @@ from fabric.utils import (
     get_relative_path,
     bulk_connect,
 )
+from loguru import logger
 from utils.icons import ICONS
 from utils.functions import text_icon
 
@@ -72,6 +73,8 @@ class Updates(EventBox):
     def update(self):
         # Get the path to the update script
         filename = get_relative_path("../assets/scripts/updates.sh")
+
+        logger.info("[Updates] Checking for updates...")
 
         # Execute the update script asynchronously and update values
         exec_shell_command_async(
