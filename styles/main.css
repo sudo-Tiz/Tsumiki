@@ -15,12 +15,12 @@ label {
     font-size: 1rem;
 }
 
-.bar-button{
+.bar-button {
     background: var(--main-bg);
     padding: 0 1.25em;
 }
 
-.bar-box{
+.bar-box {
     background: var(--main-bg);
     padding: 0 0.9em;
 }
@@ -37,8 +37,8 @@ label {
     padding: 0.19em 0.625em;
 }
 
-#workspaces{
-    padding: 0.19em 1em;   
+#workspaces {
+    padding: 0.19em 1em;
 }
 
 #workspaces>button {
@@ -119,9 +119,20 @@ menu>menuitem:hover {
     padding: 0.125em;
 }
 
+
 tooltip {
     background-color: var(--main-bg);
     border-radius: 10px;
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+tooltip label {
+    outline: none;
+    border: none;
+    box-shadow: none;
+    font-weight: normal;
 }
 
 tooltip>* {
@@ -141,19 +152,20 @@ tooltip>* {
     background: var(--main-bg);
     padding-left: 4px;
     padding-right: 4px;
-  }
-  
-  #taskbar > button {
+}
+
+#taskbar>button {
     padding: 0px 2px;
     margin: 4px 0px;
     border: 0px;
-  }
-  #taskbar > button:last-child {
+}
+
+#taskbar>button:last-child {
     margin-right: 0px;
-  }
+}
 
 
-  #notification {
+#notification {
     padding: 0.8rem;
     border: solid 1px var(--border-color);
     border-radius: 1rem;
@@ -170,12 +182,45 @@ tooltip>* {
     font-size: 0.92rem;
 }
 
-.test{
+.test {
     color: blue;
     background-color: red;
 }
 
 
-.shadow{
+.shadow {
     box-shadow: 0 0 5px 0 #171717;
+}
+
+
+#osd-container {
+    background-color: alpha(#191A0B,0.8);
+    padding: 12px 20px;
+    border-radius: 999px;
+    border: none;
+}
+
+
+
+#osd-container scale {
+    min-width: 150px;
+}
+
+#osd-container slider {
+    min-height: 8px;
+    border-radius: 999px;
+    background: transparent;
+    border: none;
+}
+
+#osd-container trough {
+    min-height: inherit;
+    border-radius: inherit;
+    border: none;
+    background: #808080;
+}
+
+#osd-container highlight {
+    border-radius: 100px 0px 0px 100px;
+    background: #FFFFFF;
 }

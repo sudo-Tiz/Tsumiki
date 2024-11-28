@@ -5,6 +5,7 @@ from loguru import logger
 
 from modules.bar import StatusBar
 from modules.notifications import NotificationsPopup
+from modules.osd import OSDContainer
 
 
 def apply_style(app: Application):
@@ -16,8 +17,9 @@ if __name__ == "__main__":
     # Create the status bar
     bar = StatusBar()
     notifications = NotificationsPopup()
+    system_overlay = OSDContainer()
     # Initialize the application with the status bar
-    app = Application("fabric-bar", bar, notifications)
+    app = Application("fabric-bar", bar, notifications, system_overlay)
 
     # Monitor main.css file for changes
     main_css_file = monitor_file(get_relative_path("styles"))
