@@ -4,7 +4,7 @@ from fabric.utils import (
     invoke_repeater,
 )
 from utils.icons import ICONS
-from utils.utils import TextIcon, convert_bytes
+from utils.functions import text_icon, convert_bytes
 import psutil
 
 
@@ -23,7 +23,7 @@ class Cpu(Box):
         self.enable_tooltip = enable_tooltip
 
         # Create a TextIcon with the specified icon and size
-        self.text_icon = TextIcon(
+        self.text_icon = text_icon(
             icon, size=icon_size, props={"style_classes": "bar-text-icon"}
         )
         self.children = self.text_icon
@@ -56,7 +56,7 @@ class Memory(Box):
         self.enable_tooltip = enable_tooltip
 
         # Create a TextIcon with the specified icon and size
-        self.icon = TextIcon(
+        self.icon = text_icon(
             icon, size=icon_size, props={"style_classes": "bar-text-icon"}
         )
         self.children = self.icon
@@ -106,7 +106,7 @@ class Storage(Box):
         self.enable_tooltip = enable_tooltip
 
         # Create a TextIcon with the specified icon and size
-        self.icon = TextIcon(
+        self.icon = text_icon(
             icon, size=icon_size, props={"style_classes": "bar-text-icon"}
         )
 

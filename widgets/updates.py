@@ -9,7 +9,7 @@ from fabric.utils import (
     bulk_connect,
 )
 from utils.icons import ICONS
-from utils.utils import TextIcon
+from utils.functions import text_icon
 
 
 class Updates(EventBox):
@@ -28,7 +28,7 @@ class Updates(EventBox):
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
         # Create a TextIcon with the specified icon and size
-        self.text_icon = TextIcon(
+        self.text_icon = text_icon(
             icon, size=icon_size, props={"style_classes": "bar-text-icon"}
         )
         self.os = os

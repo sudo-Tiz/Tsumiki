@@ -15,7 +15,7 @@ def read_config():
 
 
 # Function to create a text icon label
-def TextIcon(icon: str, size: str = "24px", props: dict = None):
+def text_icon(icon: str, size: str = "24px", props: dict = None):
     label_props = {
         "label": str(icon),  # Directly use the provided icon name
         "name": "nerd-icon",
@@ -52,3 +52,8 @@ def convert_bytes(bytes: int, to: Literal["kb", "mb", "gb"]):
 # Function to get the system uptime
 def uptime():
     return datetime.datetime.fromtimestamp(psutil.boot_time()).strftime("%H:%M:%S")
+
+
+# Function to convert seconds to miliseconds
+def convert_seconds_to_miliseconds(seconds: int):
+    return seconds * 1000
