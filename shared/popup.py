@@ -269,7 +269,9 @@ class PopupWindow(WaylandWindow):
         self.popup_visible = False
         self.reveal_child.revealer.set_reveal_child(self.popup_visible)
 
-    def toggle_popup(self, monitor: bool = False):
+    def toggle_popup(self,event, monitor: bool = False):
+
+        print(event)
         if monitor:
             curr_monitor = self.hyprland_monitor.get_current_gdk_monitor_id()
             self.monitor = curr_monitor
