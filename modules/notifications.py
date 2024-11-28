@@ -1,11 +1,13 @@
 from typing import cast
 from fabric.widgets.box import Box
+from fabric.widgets.eventbox import EventBox
+from fabric.widgets.revealer import Revealer
 from fabric.widgets.label import Label
 from fabric.widgets.image import Image
 from fabric.widgets.button import Button
 from fabric.widgets.wayland import WaylandWindow
 from fabric.notifications import Notifications, Notification
-from fabric.utils import invoke_repeater
+from fabric.utils import invoke_repeater, bulk_connect
 
 from gi.repository import GdkPixbuf
 
@@ -14,15 +16,20 @@ NOTIFICATION_IMAGE_SIZE = 64
 NOTIFICATION_TIMEOUT = 10 * 1000  # 10 seconds
 
 
-class NotificationPopupWidget(Box):
+class NotificationPopupWidget(EventBox):
     def __init__(self, notification: Notification, **kwargs):
         super().__init__(
-            size=(NOTIFICATION_WIDTH, -1),
+            **kwargs,
+        )
+
+        notif_box = Box(
             name="notification",
             spacing=8,
             orientation="v",
-            **kwargs,
+            size=(NOTIFICATION_WIDTH, -1),
         )
+
+        self.children = notif_box
 
         self._notification = notification
 
@@ -91,11 +98,12 @@ class NotificationPopupWidget(Box):
             )
         )
 
-        self.add(body_container)
+        notif_box.add(body_container)
 
         if actions := self._notification.actions:
-            self.add(
-                Box(
+            self.actions_revealer = Revealer(
+                transition_type="slide_down",
+                child=Box(
                     spacing=4,
                     orientation="h",
                     children=[
@@ -107,10 +115,26 @@ class NotificationPopupWidget(Box):
                         )
                         for action in actions
                     ],
-                )
+                ),
+                reveal_child=False,
             )
 
+        notif_box.add(self.actions_revealer)
+
+        bulk_connect(
+            self,
+            {
+                "enter-notify-event": lambda *_: (
+                    self.actions_revealer.set_reveal_child(True)
+                ),
+                "leave-notify-event": lambda *_: (
+                    self.actions_revealer.set_reveal_child(False)
+                ),
+            },
+        )
+
         # destroy this widget once the notification is closed
+
         self._notification.connect(
             "closed",
             lambda *_: (
