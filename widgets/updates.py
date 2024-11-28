@@ -15,7 +15,6 @@ from utils.functions import text_icon
 from utils.icons import ICONS
 
 
-
 class Updates(EventBox):
     def __init__(
         self,
@@ -55,9 +54,7 @@ class Updates(EventBox):
         # Connect the button press event to the update method
         bulk_connect(
             self,
-            {
-                "button-press-event": lambda _event: (self.update()),
-            },
+            {"button-press-event": lambda _event: (self.update())},
         )
 
     def update_values(self, value: str):
@@ -85,7 +82,3 @@ class Updates(EventBox):
         )
 
         return True
-
-
-
-

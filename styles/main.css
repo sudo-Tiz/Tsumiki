@@ -137,7 +137,6 @@ tooltip>* {
 
 
 #taskbar {
-    border-radius: 100px;
     font-style: normal;
     color: var(--main-fg);
     background: var(--main-bg);
@@ -148,7 +147,6 @@ tooltip>* {
   #taskbar > button {
     padding: 0px 2px;
     margin: 4px 0px;
-    border-radius: 100px;
     border: 0px;
   }
   #taskbar > button:last-child {
@@ -171,4 +169,9 @@ tooltip>* {
     color: darker(var(--main-fg));
     font-weight: 600;
     font-size: 0.92rem;
+}
+
+.test{
+    color: blue;
+    background-color: red;
 }

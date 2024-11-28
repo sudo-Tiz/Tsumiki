@@ -67,12 +67,9 @@ class TaskBar(Box):
 
                 button = Button(image=icon, tooltip_text=client["title"])
                 if client["address"] == active_window_address:
-                    button.set_style(
-                        "background-color: @surfaceVariant; border-radius:100px;"
+                    button.connect(
+                        "button-press-event", self.on_icon_click, client["address"]
                     )
-                button.connect(
-                    "button-press-event", self.on_icon_click, client["address"]
-                )
 
                 self.add(button)
 

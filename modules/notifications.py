@@ -100,23 +100,24 @@ class NotificationPopupWidget(EventBox):
 
         notif_box.add(body_container)
 
+        self.actions_revealer = Revealer(
+            transition_type="slide_down",
+            reveal_child=False,
+        )
+
         if actions := self._notification.actions:
-            self.actions_revealer = Revealer(
-                transition_type="slide_down",
-                child=Box(
-                    spacing=4,
-                    orientation="h",
-                    children=[
-                        Button(
-                            h_expand=True,
-                            v_expand=True,
-                            label=action.label,
-                            on_clicked=lambda *_, action=action: action.invoke(),
-                        )
-                        for action in actions
-                    ],
-                ),
-                reveal_child=False,
+            self.actions_revealer.children = Box(
+                spacing=4,
+                orientation="h",
+                children=[
+                    Button(
+                        h_expand=True,
+                        v_expand=True,
+                        label=action.label,
+                        on_clicked=lambda *_, action=action: action.invoke(),
+                    )
+                    for action in actions
+                ],
             )
 
         notif_box.add(self.actions_revealer)

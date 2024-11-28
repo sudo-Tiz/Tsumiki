@@ -10,7 +10,6 @@ import threading
 from shared.popup import PopupWindow
 
 
-
 class SampleElement(Box):
     def __init__(self, **kwargs):
         super().__init__(orientation="v", name="weather-menu", **kwargs)
@@ -18,16 +17,12 @@ class SampleElement(Box):
 
 
 sample_popup = PopupWindow(
-        transition_duration=350,
-        anchor="top-right",
-        transition_type="slide-down",
-        child=SampleElement(),
-        enable_inhibitor=True)
-
-
-
-
-
+    transition_duration=350,
+    anchor="top-right",
+    transition_type="slide-down",
+    child=SampleElement(),
+    enable_inhibitor=True,
+)
 
 
 class Weather(Box):

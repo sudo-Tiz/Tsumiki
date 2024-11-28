@@ -17,6 +17,7 @@ playerInfo = Fabricator(
         ),
     },
     interval=1000,
+    initial_poll=True,
 )
 
 

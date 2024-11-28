@@ -9,7 +9,6 @@ from fabric.widgets.wayland import WaylandWindow
 from fabric.widgets.widget import Widget
 
 
-
 class Padding(EventBox):
     def __init__(self, name: str | None = None, style: str = "", **kwargs):
         super().__init__(
@@ -269,8 +268,7 @@ class PopupWindow(WaylandWindow):
         self.popup_visible = False
         self.reveal_child.revealer.set_reveal_child(self.popup_visible)
 
-    def toggle_popup(self,event, monitor: bool = False):
-
+    def toggle_popup(self, event, monitor: bool = False):
         print(event)
         if monitor:
             curr_monitor = self.hyprland_monitor.get_current_gdk_monitor_id()
@@ -288,8 +286,6 @@ class PopupWindow(WaylandWindow):
         self.reveal_child.revealer.set_reveal_child(self.popup_visible)
 
     def popup_timeout(self):
-
-
         if not self.popup_visible:
             self.reveal_child.revealer.show()
         if self.popup_running:
