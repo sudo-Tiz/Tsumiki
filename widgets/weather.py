@@ -11,7 +11,7 @@ import threading
 from shared.popup import PopupWindow
 
 
-class SampleElement(Box):
+class WeatherMenu(Box):
     def __init__(self, **kwargs):
         super().__init__(orientation="v", name="weather-menu", **kwargs)
         self.children = Label(label="Prayer Times", style_classes="bar-button-label")
@@ -21,7 +21,7 @@ sample_popup = PopupWindow(
     transition_duration=350,
     anchor="top-right",
     transition_type="slide-down",
-    child=SampleElement(),
+    child=WeatherMenu(),
     enable_inhibitor=True,
 )
 
@@ -43,9 +43,7 @@ class Weather(Button):
         )
         self.children = self.weather_label
 
-
-
-        self.connect("clicked", lambda *_: print("Weather button clicked"))
+        self.connect("clicked", lambda *_: (sample_popup.toggle_popup()))
 
         # Set up a repeater to call the update_label method at specified intervals
         invoke_repeater(interval, self.update_label, initial_call=True)

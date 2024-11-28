@@ -175,3 +175,8 @@ tooltip>* {
     color: blue;
     background-color: red;
 }
+
+
+.shadow{
+    box-shadow: 0 0 5px 0 #171717;
+}
