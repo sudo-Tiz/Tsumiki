@@ -35,7 +35,6 @@ class Mpris(EventBox):
 
         self.revealer = Revealer(
             name="player-revealer",
-            style_classes="bar-box",
             transition_type="slide-right",
             transition_duration=300,
             child=self.label,
@@ -44,7 +43,9 @@ class Mpris(EventBox):
 
         self.revealer.set_reveal_child(True)
 
-        self.box = Box(children=[self.text_icon, self.revealer])
+        self.box = Box(
+            style_classes="bar-box", children=[self.text_icon, self.revealer]
+        )
 
         self.children = self.box
         self.length = length
