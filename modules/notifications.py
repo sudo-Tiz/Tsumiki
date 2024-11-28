@@ -126,7 +126,7 @@ class NotificationPopupWidget(EventBox):
             self,
             {
                 "enter-notify-event": lambda *_: (
-                    self.actions_revealer.set_reveal_child(True)
+                    self.actions_revealer.set_reveal_child(True),
                 ),
                 "leave-notify-event": lambda *_: (
                     self.actions_revealer.set_reveal_child(False)

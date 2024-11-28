@@ -30,7 +30,6 @@ label {
     padding: 0.25em;
     border-color: var(--border-color);
     background-color: var(--window-bg);
-    min-height: 28px;
 }
 
 #language,
