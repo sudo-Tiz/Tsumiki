@@ -159,15 +159,15 @@ tooltip>* {
     padding: 0.8rem;
     border: solid 1px var(--border-color);
     border-radius: 1rem;
-    background-color: var(--background);
+    background: var(--main-bg);
 }
 
 #notification .summary {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 0.98rem;
 }
 
 #notification .body {
-    color: darker(var(--foreground));
-    font-weight: normal;
+    color: darker(var(--main-fg));
+    font-weight: 600;
+    font-size: 0.92rem;
 }

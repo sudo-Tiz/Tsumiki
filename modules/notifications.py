@@ -14,7 +14,7 @@ NOTIFICATION_IMAGE_SIZE = 64
 NOTIFICATION_TIMEOUT = 10 * 1000  # 10 seconds
 
 
-class NotificationWidget(Box):
+class NotificationPopupWidget(Box):
     def __init__(self, notification: Notification, **kwargs):
         super().__init__(
             size=(NOTIFICATION_WIDTH, -1),
@@ -65,7 +65,7 @@ class NotificationWidget(Box):
                             Button(
                                 image=Image(
                                     icon_name="close-symbolic",
-                                    icon_size=18,
+                                    icon_size=16,
                                 ),
                                 v_align="center",
                                 h_align="end",
@@ -127,20 +127,19 @@ class NotificationWidget(Box):
         )
 
 
-
 class NotificationsPopup(WaylandWindow):
     def __init__(self, **kwargs):
         super().__init__(
             margin="8px 8px 8px 8px",
             anchor="top right",
-      child=Box(
+            child=Box(
                 size=2,  # so it's not ignored by the compositor
                 spacing=4,
                 orientation="v",
             ).build(
                 lambda viewport, _: Notifications(
                     on_notification_added=lambda notifs_service, nid: viewport.add(
-                        NotificationWidget(
+                        NotificationPopupWidget(
                             cast(
                                 Notification,
                                 notifs_service.get_notification_from_id(nid),
@@ -153,4 +152,3 @@ class NotificationsPopup(WaylandWindow):
             all_visible=True,
             **kwargs,
         )
-
