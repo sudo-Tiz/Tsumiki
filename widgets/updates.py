@@ -9,8 +9,27 @@ from fabric.utils import (
     bulk_connect,
 )
 from loguru import logger
+from shared.popup import PopupWindow
 from utils.icons import ICONS
 from utils.functions import text_icon
+
+
+
+class SampleElement(Box):
+    def __init__(self, **kwargs):
+        super().__init__(orientation="v", name="sample", **kwargs)
+        self.children = Label(label="Prayer Times", style_classes="bar-button-label")
+
+
+sample_popup = PopupWindow(
+        transition_duration=350,
+        anchor="top-left",
+        transition_type="slide-down",
+        child=SampleElement(),
+        enable_inhibitor=True)
+
+
+
 
 
 class Updates(EventBox):
@@ -53,7 +72,7 @@ class Updates(EventBox):
         bulk_connect(
             self,
             {
-                "button-press-event": lambda *_: (self.update()),
+                "button-press-event": lambda *_: (sample_popup.toggle_popup()),
             },
         )
 
@@ -82,3 +101,7 @@ class Updates(EventBox):
         )
 
         return True
+
+
+
+
