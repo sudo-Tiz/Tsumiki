@@ -1,3 +1,4 @@
+from calendar import c
 import time
 
 from fabric.audio import Audio
@@ -65,10 +66,25 @@ class BrightnessOSDContainer(Box):
                 current_brightness / self.brightness_service.max_screen
             ) * 101
             self.scale.animate_value(normalized_brightness)
+        self.update_icon(current_brightness / 100)
+
+    def update_icon(self, current_brightness):
+        icon_name = self._get_brightness_icon_name(current_brightness)
+        self.icon.set_from_icon_name(icon_name)
 
     def on_brightness_changed(self, sender, value, *args):
         normalized_brightness = (value / self.brightness_service.max_screen) * 101
         self.scale.animate_value(normalized_brightness)
+
+    def _get_brightness_icon_name(self, level: int) -> str:
+        if level >= 66:
+            return "display-brightness-high-symbolic"
+        elif level < 32 and level > 0:
+            return "display-brightness-off-symbolic"
+        elif level <= 0:
+            return "display-brightness-muted-symbolic"
+        else:
+            return "display-brightness-medium-symbolic"
 
 
 class AudioOSDContainer(Box):
