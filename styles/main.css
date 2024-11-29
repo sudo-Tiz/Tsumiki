@@ -172,10 +172,6 @@ tooltip>* {
     background: var(--main-bg);
 }
 
-#notification .summary {
-    font-size: 0.98rem;
-}
-
 #notification .body {
     color: darker(var(--main-fg));
     font-weight: 600;

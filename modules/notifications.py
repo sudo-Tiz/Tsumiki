@@ -38,7 +38,11 @@ class NotificationPopupWidget(EventBox):
         header_container.children = (
             self.get_icon(notification.app_icon),
             Label(
-                str(notification.app_name),
+                str(
+                    self._notification.summary
+                    if self._notification.summary
+                    else notification.app_name
+                ),
                 h_align="start",
                 style="font-weight: 900;",
             ),
@@ -78,21 +82,6 @@ class NotificationPopupWidget(EventBox):
                 spacing=4,
                 orientation="v",
                 children=[
-                    # a box for holding both the "summary" label and the "close" button
-                    Box(
-                        orientation="h",
-                        children=[
-                            Label(
-                                label=self._notification.summary,
-                                ellipsization="middle",
-                            )
-                            .build()
-                            .add_style_class("summary")
-                            .unwrap(),
-                        ],
-                        h_expand=True,
-                        v_expand=True,
-                    ),
                     Label(
                         label=self._notification.body,
                         line_wrap="word-char",
@@ -114,6 +103,7 @@ class NotificationPopupWidget(EventBox):
         self.actions_revealer = Revealer(
             transition_type="slide_down",
             reveal_child=False,
+            transition_duration=300
         )
 
         if actions := self._notification.actions:
