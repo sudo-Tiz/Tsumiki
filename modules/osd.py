@@ -2,7 +2,6 @@ from calendar import c
 import time
 from typing import Literal
 
-import click
 from fabric.audio import Audio
 from fabric.widgets.box import Box
 from fabric.widgets.revealer import Revealer

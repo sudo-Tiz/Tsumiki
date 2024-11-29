@@ -4,7 +4,6 @@ from fabric.widgets.label import Label
 import psutil
 import datetime
 from fabric.utils import get_relative_path
-import math
 
 
 # Function to read the configuration file

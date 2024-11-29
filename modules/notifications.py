@@ -13,7 +13,7 @@ from gi.repository import GdkPixbuf
 
 NOTIFICATION_WIDTH = 360
 NOTIFICATION_IMAGE_SIZE = 64
-NOTIFICATION_TIMEOUT = 10 * 1000  # 10 seconds
+NOTIFICATION_TIMEOUT = 100 * 1000  # 10 seconds
 
 
 class NotificationPopupWidget(EventBox):
@@ -55,8 +55,8 @@ class NotificationPopupWidget(EventBox):
                         image=Image(
                             icon_name="close-symbolic",
                             icon_size=16,
-                            style_classes="close-button",
                         ),
+                        style_classes="close-button",
                         v_align="center",
                         h_align="end",
                         on_clicked=lambda *_: self._notification.close(),

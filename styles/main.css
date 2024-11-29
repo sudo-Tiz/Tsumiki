@@ -1,6 +1,7 @@
 @import "theme.css";
 @import "overview.css";
 
+
 /* unset so we can style everything from the ground up. */
 * {
     all: unset;
@@ -170,8 +171,8 @@ tooltip>* {
     border: solid 1px var(--border-color);
     border-radius: 1rem;
     background: var(--main-bg);
-
 }
+
 
 #notification .body {
     color: darker(var(--main-fg));
@@ -180,10 +181,12 @@ tooltip>* {
 }
 
 
-.shadow {
-    box-shadow: 0 0 5px 0 #171717;
-}
-
+.close-button:hover {
+    box-shadow: none;
+    background: alpha(var(--main-fg), 0.2);
+    transition: background 0.15s ease-in-out;
+    border: none;
+  }
 
 #osd-container {
     background-color: alpha(#191A0B,0.8);
@@ -194,9 +197,8 @@ tooltip>* {
 }
 
 
-
 #osd-container scale {
-    min-width: 150px;
+    min-width: 140px;
 }
 
 #osd-container slider {
