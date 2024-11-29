@@ -58,38 +58,3 @@ def uptime():
 # Function to convert seconds to miliseconds
 def convert_seconds_to_miliseconds(seconds: int):
     return seconds * 1000
-
-
-def get_relative_time(param_time, get_real_time):
-    value = ""
-
-    diff = (get_real_time() * 0.000001) - param_time
-    secs = diff / 60
-    hours = secs / 60
-    days = hours / 24
-
-    if secs < 1:
-        value = "Just now"  # Consider more specific wording, "Now" is a bit unclear
-    elif secs >= 1 and hours < 1:
-        # 1m - 1h
-        val = math.floor(secs)
-        value = f"{val} minute"
-        if val > 1:
-            value += "s"
-        value += " ago"
-    elif hours >= 1 and hours < 24:
-        # 1h - 24h
-        val = math.floor(hours)
-        value = f"{val} hour"
-        if val > 1:
-            value += "s"
-        value += " ago"
-    else:
-        # Days
-        val = math.floor(days)
-        value = f"{val} day"
-        if val > 1:
-            value += "s"
-        value += " ago"
-
-    return value

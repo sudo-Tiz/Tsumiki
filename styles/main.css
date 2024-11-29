@@ -170,24 +170,13 @@ tooltip>* {
     border: solid 1px var(--border-color);
     border-radius: 1rem;
     background: var(--main-bg);
+
 }
 
 #notification .body {
     color: darker(var(--main-fg));
     font-weight: 600;
     font-size: 0.92rem;
-}
-
-#notification .timestamp {
-    color: var(--main-fg);
-    font-size: 0.8rem;
-    font-weight: 400;
-    
-}
-
-.test {
-    color: blue;
-    background-color: red;
 }
 
 

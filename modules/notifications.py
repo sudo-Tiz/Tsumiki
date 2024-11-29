@@ -51,11 +51,11 @@ class NotificationPopupWidget(EventBox):
         header_container.pack_end(
             Box(
                 children=(
-                    Label(label="now", style_classes="timestamp"),
                     Button(
                         image=Image(
                             icon_name="close-symbolic",
                             icon_size=16,
+                            style_classes="close-button",
                         ),
                         v_align="center",
                         h_align="end",
@@ -131,6 +131,7 @@ class NotificationPopupWidget(EventBox):
             {
                 "enter-notify-event": lambda *_: (
                     self.actions_revealer.set_reveal_child(True),
+                    notif_box.add_style_class("shadow"),
                 ),
                 "leave-notify-event": lambda *_: (
                     self.actions_revealer.set_reveal_child(False)
