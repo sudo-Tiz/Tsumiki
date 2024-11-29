@@ -49,14 +49,19 @@ class NotificationPopupWidget(EventBox):
         )
 
         header_container.pack_end(
-            Button(
-                image=Image(
-                    icon_name="close-symbolic",
-                    icon_size=16,
-                ),
-                v_align="center",
-                h_align="end",
-                on_clicked=lambda *_: self._notification.close(),
+            Box(
+                children=(
+                    Label(label="now", style_classes="timestamp"),
+                    Button(
+                        image=Image(
+                            icon_name="close-symbolic",
+                            icon_size=16,
+                        ),
+                        v_align="center",
+                        h_align="end",
+                        on_clicked=lambda *_: self._notification.close(),
+                    ),
+                )
             ),
             False,
             False,
@@ -101,9 +106,7 @@ class NotificationPopupWidget(EventBox):
         notif_box.add(body_container)
 
         self.actions_revealer = Revealer(
-            transition_type="slide_down",
-            reveal_child=False,
-            transition_duration=300
+            transition_type="slide_down", reveal_child=False, transition_duration=300
         )
 
         if actions := self._notification.actions:

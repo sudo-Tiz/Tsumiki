@@ -178,6 +178,13 @@ tooltip>* {
     font-size: 0.92rem;
 }
 
+#notification .timestamp {
+    color: var(--main-fg);
+    font-size: 0.8rem;
+    font-weight: 400;
+    
+}
+
 .test {
     color: blue;
     background-color: red;
@@ -222,3 +229,4 @@ tooltip>* {
     background: #FFFFFF;
 }
   
+
