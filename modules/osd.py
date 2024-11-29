@@ -1,8 +1,11 @@
 from calendar import c
 import time
+from typing import Literal
 
+import click
 from fabric.audio import Audio
 from fabric.widgets.box import Box
+from fabric.widgets.revealer import Revealer
 from fabric.widgets.image import Image
 from fabric.widgets.scale import Scale, ScaleMark
 from fabric.widgets.wayland import WaylandWindow as Window
@@ -161,28 +164,41 @@ class AudioOSDContainer(Box):
 
 
 class OSDContainer(Window):
-    def __init__(self, anchor: str = "bottom center", timeout: int = 1000, **kwargs):
+    def __init__(
+        self,
+        anchor: str = "bottom center",
+        timeout=1000,
+        transition_duration=100,
+        keyboard_mode: Literal["none", "exclusive", "on-demand"] = "on-demand",
+        **kwargs,
+    ):
         self.audio_container = AudioOSDContainer()
         self.brightness_container = BrightnessOSDContainer()
+
+        self.timeout = timeout
+
+        self.revealer = Revealer(
+            name="osd-revealer",
+            transition_type="slide-up",
+            transition_duration=transition_duration,
+            child_revealed=False,
+        )
 
         self.main_box = Box(
             orientation="v",
             spacing=13,
-            children=[self.audio_container, self.brightness_container],
+            children=[self.revealer],
         )
 
-        self.timeout = timeout
-
         super().__init__(
-            **kwargs,
             layer="overlay",
             anchor=anchor,
             child=self.main_box,
             visible=False,
+            pass_through=True,
+            keyboard_mode=keyboard_mode,
+            **kwargs,
         )
-
-        self.audio_container.set_visible(False)
-        self.brightness_container.set_visible(False)
 
         self.last_activity_time = time.time()
 
@@ -195,17 +211,20 @@ class OSDContainer(Window):
         GLib.timeout_add(100, self.check_inactivity)
 
     def show_audio(self, *_):
-        self.show_box(self.audio_container)
+        self.show_box(box_to_show="audio")
         self.reset_inactivity_timer()
 
     def show_brightness(self, *_):
-        self.show_box(self.brightness_container)
+        self.show_box(box_to_show="brightness")
         self.reset_inactivity_timer()
 
-    def show_box(self, box_to_show):
-        self.audio_container.set_visible(box_to_show == self.audio_container)
-        self.brightness_container.set_visible(box_to_show == self.brightness_container)
+    def show_box(self, box_to_show: Literal["audio", "brightness"]):
         self.set_visible(True)
+        if box_to_show == "audio":
+            self.revealer.children = self.audio_container
+        elif box_to_show == "brightness":
+            self.revealer.children = self.brightness_container
+        self.revealer.set_reveal_child(True)
         self.reset_inactivity_timer()
 
     def start_hide_timer(self):
