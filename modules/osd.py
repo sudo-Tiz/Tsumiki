@@ -136,7 +136,7 @@ class AudioOSDContainer(Box):
     def _get_audio_icon_name(self, volume: int) -> str:
         if volume >= 66:
             return "audio-volume-high-symbolic"
-        elif volume < 32:
+        elif volume < 32 and volume > 0:
             return "audio-volume-low-symbolic"
         elif volume <= 0:
             return "audio-volume-muted-symbolic"
