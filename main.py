@@ -19,7 +19,7 @@ if __name__ == "__main__":
     notifications = NotificationsPopup()
     system_overlay = OSDContainer()
     # Initialize the application with the status bar
-    app = Application("fabric-bar", bar, notifications, system_overlay)
+    app = Application("fabric-bar", bar, notifications)
 
     # Monitor main.css file for changes
     main_css_file = monitor_file(get_relative_path("styles"))
