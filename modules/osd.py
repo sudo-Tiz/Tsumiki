@@ -79,7 +79,7 @@ class AudioOSDContainer(Box):
     def __init__(self, **kwargs):
         super().__init__(**kwargs, orientation="h", spacing=13, name="osd-container")
         self.audio = Audio()
-        self.icon = self._create_icon("audio-volume-medium-symbolic", 29)
+        self.icon = self._create_icon("audio-volume-medium-symbolic", 28)
         self.scale = self._create_audio_scale()
 
         self.add(self.icon)
@@ -134,10 +134,12 @@ class AudioOSDContainer(Box):
         self.icon.set_from_icon_name(icon_name)
 
     def _get_audio_icon_name(self, volume: int) -> str:
-        if volume >= 81:
+        if volume >= 66:
             return "audio-volume-high-symbolic"
-        elif volume < 51:
+        elif volume < 32:
             return "audio-volume-low-symbolic"
+        elif volume <= 0:
+            return "audio-volume-muted-symbolic"
         else:
             return "audio-volume-medium-symbolic"
 
