@@ -33,8 +33,35 @@ class NotificationPopupWidget(EventBox):
 
         self._notification = notification
 
+        header_container = Box(spacing=12, orientation="h")
+
+        header_container.children = (
+            self.get_icon(notification.app_icon),
+            Label(
+                str(notification.app_name),
+                h_align="start",
+                style="font-weight: 900;",
+            ),
+        )
+
+        header_container.pack_end(
+            Button(
+                image=Image(
+                    icon_name="close-symbolic",
+                    icon_size=16,
+                ),
+                v_align="center",
+                h_align="end",
+                on_clicked=lambda *_: self._notification.close(),
+            ),
+            False,
+            False,
+            0,
+        )
+
         body_container = Box(spacing=4, orientation="h")
 
+        # Use provided image if available, otherwise use "notification-symbolic" icon
         if image_pixbuf := self._notification.image_pixbuf:
             body_container.add(
                 Image(
@@ -65,23 +92,6 @@ class NotificationPopupWidget(EventBox):
                         ],
                         h_expand=True,
                         v_expand=True,
-                    )
-                    # add the "close" button
-                    .build(
-                        lambda box, _: box.pack_end(
-                            Button(
-                                image=Image(
-                                    icon_name="close-symbolic",
-                                    icon_size=16,
-                                ),
-                                v_align="center",
-                                h_align="end",
-                                on_clicked=lambda *_: self._notification.close(),
-                            ),
-                            False,
-                            False,
-                            0,
-                        )
                     ),
                     Label(
                         label=self._notification.body,
@@ -98,6 +108,7 @@ class NotificationPopupWidget(EventBox):
             )
         )
 
+        notif_box.add(header_container)
         notif_box.add(body_container)
 
         self.actions_revealer = Revealer(
@@ -150,6 +161,27 @@ class NotificationPopupWidget(EventBox):
             lambda: self._notification.close("expired"),
             initial_call=False,
         )
+
+    def get_icon(self, app_icon) -> Image:
+        match app_icon:
+            case str(x) if "file://" in x:
+                return Image(
+                    name="notification-icon",
+                    image_file=app_icon[7:],
+                    size=24,
+                )
+            case str(x) if len(x) > 0 and "/" == x[0]:
+                return Image(
+                    name="notification-icon",
+                    image_file=app_icon,
+                    size=24,
+                )
+            case _:
+                return Image(
+                    name="notification-icon",
+                    icon_name=app_icon if app_icon else "dialog-information-symbolic",
+                    size=24,
+                )
 
 
 class NotificationsPopup(WaylandWindow):
