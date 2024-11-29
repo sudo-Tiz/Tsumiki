@@ -22,12 +22,12 @@ label {
 
 .bar-box {
     background: var(--main-bg);
-    padding: 0 0.9em;
+    padding: 0.1em 0.9em;
 }
 
 
 #bar-inner {
-    padding: 0.25em;
+    padding: 0.1em 0.25em;
     border-color: var(--border-color);
     background-color: var(--window-bg);
 }
