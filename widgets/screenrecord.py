@@ -2,24 +2,19 @@ from fabric import Fabricator
 from fabric.widgets.button import Button
 from fabric.utils import exec_shell_command, get_relative_path
 
-screenRecordInfo = Fabricator(
-    poll_from=lambda: {
-        "status": str(
-            exec_shell_command(
-                get_relative_path("../assets/scripts/screen_record.sh status")
-            ).strip("\n")
-        )
-    },
-    interval=1000,
-)
-
 
 ## TODO: on button click enable/disable recording
 
 
 class ScreenRecord(Button):
     def __init__(self, **kwargs):
-        super().__init__(name="screen-recorder", style_classes="bar-box")
+        super().__init__(name="screen-recorder", style_classes="bar-box", **kwargs)
+        screenRecordInfo = Fabricator(
+            poll_from=exec_shell_command(
+                get_relative_path("../assets/scripts/screen_record.sh status")
+            ).strip("\n"),
+            stream=True,
+        )
 
         screenRecordInfo.connect(
             "changed",

@@ -7,19 +7,6 @@ from fabric.utils import exec_shell_command, bulk_connect
 
 from utils.icons import ICONS
 
-playerInfo = Fabricator(
-    poll_from=lambda: {
-        "status": str(exec_shell_command("playerctl status").strip("\n")),
-        "info": str(
-            exec_shell_command(
-                'playerctl metadata --format "{{ title }} - {{ artist }}"'
-            ).strip("\n")
-        ),
-    },
-    interval=1000,
-    initial_poll=True,
-)
-
 
 class Mpris(EventBox):
     def __init__(
@@ -57,6 +44,18 @@ class Mpris(EventBox):
             {
                 "button-press-event": lambda *_: self.play_pause(),
             },
+        )
+
+        playerInfo = Fabricator(
+            poll_from=lambda: {
+                "status": str(exec_shell_command("playerctl status").strip("\n")),
+                "info": str(
+                    exec_shell_command(
+                        'playerctl metadata --format "{{ title }} - {{ artist }}"'
+                    ).strip("\n")
+                ),
+            },
+            stream=True,
         )
 
         # Connect the playerInfo changes to the get_current method
