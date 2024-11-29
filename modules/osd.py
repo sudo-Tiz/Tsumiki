@@ -161,7 +161,7 @@ class AudioOSDContainer(Box):
 
 
 class OSDContainer(Window):
-    def __init__(self, **kwargs):
+    def __init__(self, anchor: str = "bottom center", timeout: int = 1000, **kwargs):
         self.audio_container = AudioOSDContainer()
         self.brightness_container = BrightnessOSDContainer()
 
@@ -171,10 +171,12 @@ class OSDContainer(Window):
             children=[self.audio_container, self.brightness_container],
         )
 
+        self.timeout = timeout
+
         super().__init__(
             **kwargs,
-            layer="top",
-            anchor="bottom",
+            layer="overlay",
+            anchor=anchor,
             child=self.main_box,
             visible=False,
         )
@@ -213,6 +215,6 @@ class OSDContainer(Window):
         self.last_activity_time = time.time()
 
     def check_inactivity(self):
-        if time.time() - self.last_activity_time >= 2:
+        if time.time() - self.last_activity_time >= (self.timeout / 1000):
             self.start_hide_timer()
         return True
