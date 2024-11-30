@@ -6,12 +6,12 @@ from fabric.audio import Audio
 from fabric.widgets.label import Label
 from fabric.widgets.box import Box
 from fabric.widgets.revealer import Revealer
-from fabric.widgets.image import Image
 from fabric.widgets.scale import Scale, ScaleMark
 from fabric.widgets.wayland import WaylandWindow as Window
 from gi.repository import GLib, GObject
 from services.brightness import Brightness
 from utils.animator import Animator
+from utils.functions import create_icon
 
 
 class AnimatedScale(Scale):
@@ -38,7 +38,7 @@ class BrightnessOSDContainer(Box):
         super().__init__(**kwargs, orientation="h", spacing=12, name="osd-container")
         self.brightness_service = Brightness()
         self.level = Label()
-        self.icon = self._create_icon("display-brightness-symbolic", 28)
+        self.icon = create_icon("display-brightness-symbolic", 28)
         self.scale = self._create_brightness_scale()
 
         self.add(self.icon)
@@ -48,11 +48,6 @@ class BrightnessOSDContainer(Box):
 
         self.scale.connect("value-changed", lambda *_: self.update_brightness())
         self.brightness_service.connect("screen", self.on_brightness_changed)
-
-    def _create_icon(self, icon_name: str, pixel_size: int) -> Image:
-        icon = Image(icon_name=icon_name)
-        icon.set_pixel_size(pixel_size)
-        return icon
 
     def _create_brightness_scale(self) -> AnimatedScale:
         return AnimatedScale(
@@ -102,7 +97,7 @@ class AudioOSDContainer(Box):
     def __init__(self, **kwargs):
         super().__init__(**kwargs, orientation="h", spacing=13, name="osd-container")
         self.audio = Audio()
-        self.icon = self._create_icon("audio-volume-medium-symbolic", 28)
+        self.icon = create_icon("audio-volume-medium-symbolic", 28)
         self.level = Label(name="osd-level")
         self.scale = self._create_audio_scale()
 
@@ -113,11 +108,6 @@ class AudioOSDContainer(Box):
 
         self.scale.connect("value-changed", self.on_volume_changed)
         self.audio.connect("notify::speaker", self.on_audio_speaker_changed)
-
-    def _create_icon(self, icon_name: str, pixel_size: int) -> Image:
-        icon = Image(icon_name=icon_name)
-        icon.set_pixel_size(pixel_size)
-        return icon
 
     def _create_audio_scale(self) -> AnimatedScale:
         return AnimatedScale(

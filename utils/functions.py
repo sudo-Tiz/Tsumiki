@@ -1,6 +1,7 @@
 import json
 from typing import Literal
 from fabric.widgets.label import Label
+from fabric.widgets.image import Image
 import psutil
 import datetime
 from fabric.utils import get_relative_path
@@ -57,3 +58,9 @@ def uptime():
 # Function to convert seconds to miliseconds
 def convert_seconds_to_miliseconds(seconds: int):
     return seconds * 1000
+
+
+def create_icon(icon_name: str, pixel_size: int) -> Image:
+    icon = Image(icon_name=icon_name)
+    icon.set_pixel_size(pixel_size)
+    return icon
