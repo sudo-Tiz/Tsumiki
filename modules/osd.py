@@ -13,6 +13,7 @@ from gi.repository import GLib, GObject
 from services.brightness import Brightness
 from utils.animator import Animator
 
+
 class AnimatedScale(Scale):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -37,7 +38,7 @@ class BrightnessOSDContainer(Box):
         super().__init__(**kwargs, orientation="h", spacing=12, name="osd-container")
         self.brightness_service = Brightness()
         self.level = Label()
-        self.icon = Image(icon_name="display-brightness-symbolic",icon_size=28)
+        self.icon = Image(icon_name="display-brightness-symbolic", icon_size=28)
         self.scale = self._create_brightness_scale()
 
         self.add(self.icon)

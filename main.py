@@ -4,8 +4,9 @@ from fabric.utils import get_relative_path, monitor_file
 from loguru import logger
 
 from modules.bar import StatusBar
-from modules.notifications import NotificationsPopup
+from modules.notifications import NotificationPopup
 from modules.osd import OSDContainer
+
 
 def apply_style(app: Application):
     logger.info("[Main] CSS applied")
@@ -15,12 +16,11 @@ def apply_style(app: Application):
 if __name__ == "__main__":
     # Create the status bar
     bar = StatusBar()
-    notifications = NotificationsPopup()
+    notifications = NotificationPopup()
     system_overlay = OSDContainer()
 
-
     # Initialize the application with the status bar
-    app = Application("fabric-bar", bar, notifications)
+    app = Application("fabric-bar", bar, notifications, system_overlay)
 
     # Monitor main.css file for changes
     main_css_file = monitor_file(get_relative_path("styles"))

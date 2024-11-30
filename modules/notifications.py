@@ -55,7 +55,9 @@ class NotificationPopupWidget(EventBox):
                 children=(
                     Button(
                         image=Image(
-                            icon_name=check_icon_exists("close-symbolic","window-close-symbolic"),
+                            icon_name=check_icon_exists(
+                                "close-symbolic", "window-close-symbolic"
+                            ),
                             icon_size=16,
                         ),
                         style_classes="close-button",
@@ -180,7 +182,7 @@ class NotificationPopupWidget(EventBox):
                 )
 
 
-class NotificationsPopup(WaylandWindow):
+class NotificationPopup(WaylandWindow):
     def __init__(self, **kwargs):
         super().__init__(
             margin="8px 8px 8px 8px",

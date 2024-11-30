@@ -47,7 +47,6 @@ class StatusBar(Window):
         updates_config = config["updates"]
         updates_config = config["updates"]
 
-
         # TODO: fix this . This is initialized by default
         self.widgets_list = {
             # Workspaces: Displays the list of workspaces or desktops
