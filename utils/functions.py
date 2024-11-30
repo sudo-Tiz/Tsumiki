@@ -1,10 +1,14 @@
+import datetime
 import json
 from typing import Literal
-from fabric.widgets.label import Label
-from fabric.widgets.image import Image
+
+import gi
 import psutil
-import datetime
 from fabric.utils import get_relative_path
+from fabric.widgets.label import Label
+
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk
 
 
 # Function to read the configuration file
@@ -60,7 +64,8 @@ def convert_seconds_to_miliseconds(seconds: int):
     return seconds * 1000
 
 
-def create_icon(icon_name: str, pixel_size: int) -> Image:
-    icon = Image(icon_name=icon_name)
-    icon.set_pixel_size(pixel_size)
-    return icon
+# Function to check if an icon exists, otherwise use a fallback icon
+def check_icon_exists(icon_name: str, fallback_icon: str) -> str:
+    if Gtk.IconTheme.get_default().has_icon(icon_name):
+        return icon_name
+    return fallback_icon

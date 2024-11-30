@@ -11,6 +11,8 @@ from fabric.utils import invoke_repeater, bulk_connect
 
 from gi.repository import GdkPixbuf
 
+from utils.functions import check_icon_exists
+
 NOTIFICATION_WIDTH = 360
 NOTIFICATION_IMAGE_SIZE = 64
 NOTIFICATION_TIMEOUT = 100 * 1000  # 10 seconds
@@ -52,10 +54,8 @@ class NotificationPopupWidget(EventBox):
             Box(
                 children=(
                     Button(
-
-                        ## TODO: some icon pack has different name for close icon
                         image=Image(
-                            icon_name="close-symbolic",
+                            icon_name=check_icon_exists("close-symbolic","window-close-symbolic"),
                             icon_size=16,
                         ),
                         style_classes="close-button",

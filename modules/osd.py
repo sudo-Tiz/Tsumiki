@@ -4,6 +4,7 @@ from typing import Literal
 
 from fabric.audio import Audio
 from fabric.widgets.label import Label
+from fabric.widgets.image import Image
 from fabric.widgets.box import Box
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.scale import Scale, ScaleMark
@@ -11,8 +12,6 @@ from fabric.widgets.wayland import WaylandWindow as Window
 from gi.repository import GLib, GObject
 from services.brightness import Brightness
 from utils.animator import Animator
-from utils.functions import create_icon
-
 
 class AnimatedScale(Scale):
     def __init__(self, **kwargs):
@@ -38,7 +37,7 @@ class BrightnessOSDContainer(Box):
         super().__init__(**kwargs, orientation="h", spacing=12, name="osd-container")
         self.brightness_service = Brightness()
         self.level = Label()
-        self.icon = create_icon("display-brightness-symbolic", 28)
+        self.icon = Image(icon_name="display-brightness-symbolic",icon_size=28)
         self.scale = self._create_brightness_scale()
 
         self.add(self.icon)
@@ -97,7 +96,7 @@ class AudioOSDContainer(Box):
     def __init__(self, **kwargs):
         super().__init__(**kwargs, orientation="h", spacing=13, name="osd-container")
         self.audio = Audio()
-        self.icon = create_icon("audio-volume-medium-symbolic", 28)
+        self.icon = Image(icon_name="audio-volume-medium-symbolic", icon_size=28)
         self.level = Label(name="osd-level")
         self.scale = self._create_audio_scale()
 
