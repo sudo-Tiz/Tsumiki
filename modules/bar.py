@@ -23,6 +23,7 @@ from widgets import (
     VolumeWidget,
     AUDIO_WIDGET,
 )
+from widgets.systray import SystemTray
 from widgets.taskbar import TaskBar
 
 
@@ -92,7 +93,7 @@ class StatusBar(Window):
 
         layout = self.make_layout()
 
-        self.system_tray = SystemTray(name="system-tray", spacing=4)
+        self.system_tray = SystemTray()
 
         self.status_container = Box(
             name="widgets-container",

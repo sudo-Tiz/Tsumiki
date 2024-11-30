@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
     # Monitor main.css file for changes
     main_css_file = monitor_file(get_relative_path("styles"))
-    main_css_file.connect("changed", lambda *args: apply_style(app))
+    main_css_file.connect("changed", lambda *_: apply_style(app))
 
     apply_style(app)
 
