@@ -47,6 +47,8 @@ class StatusBar(Window):
         updates_config = config["updates"]
         updates_config = config["updates"]
 
+
+        # TODO: fix this . This is initialized by default
         self.widgets_list = {
             # Workspaces: Displays the list of workspaces or desktops
             "workspaces": WorkSpaces(),
@@ -58,8 +60,6 @@ class StatusBar(Window):
             "language": LanguageBox(),
             # DateTime: Displays the current date and time
             "datetime": DateTimeBox(),
-            # SystemTray: Represents the system tray with various icons (e.g., battery, network)
-            "systemtray": SystemTray(name="system-tray", spacing=4),
             # HyprSunset: Provides information about the sunset time based on location
             "hyprsunset": HyprSunset(config=config).create(),
             # HyprIdle: Shows the idle time for the system
