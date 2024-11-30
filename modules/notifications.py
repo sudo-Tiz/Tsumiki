@@ -34,7 +34,6 @@ class NotificationPopupWidget(EventBox):
         self._notification = notification
 
         header_container = Box(spacing=12, orientation="h")
-        
 
         header_container.children = (
             self.get_icon(notification.app_icon),

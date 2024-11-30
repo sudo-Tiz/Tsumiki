@@ -3,6 +3,7 @@ import time
 from typing import Literal
 
 from fabric.audio import Audio
+from fabric.widgets.label import Label
 from fabric.widgets.box import Box
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.image import Image
@@ -36,11 +37,13 @@ class BrightnessOSDContainer(Box):
     def __init__(self, **kwargs):
         super().__init__(**kwargs, orientation="h", spacing=12, name="osd-container")
         self.brightness_service = Brightness()
+        self.level = Label()
         self.icon = self._create_icon("display-brightness-symbolic", 28)
         self.scale = self._create_brightness_scale()
 
         self.add(self.icon)
         self.add(self.scale)
+
         self.update_brightness()
 
         self.scale.connect("value-changed", lambda *_: self.update_brightness())
@@ -66,12 +69,14 @@ class BrightnessOSDContainer(Box):
         if current_brightness != 0:
             normalized_brightness = (
                 current_brightness / self.brightness_service.max_screen
-            ) * 101
+            ) * 100
             self.scale.animate_value(normalized_brightness)
-        self.update_icon(current_brightness / 100)
+        print(current_brightness)
+        self.update_icon(int(normalized_brightness))
 
     def update_icon(self, current_brightness):
         icon_name = self._get_brightness_icon_name(current_brightness)
+        self.level.set_label(f"{current_brightness}%")
         self.icon.set_from_icon_name(icon_name)
 
     def on_brightness_changed(self, sender, value, *args):
@@ -82,9 +87,9 @@ class BrightnessOSDContainer(Box):
         if level >= 66:
             return "display-brightness-high-symbolic"
         elif level < 32 and level > 0:
+            return "display-brightness-medium-symbolic"
+        elif level <= 1:
             return "display-brightness-off-symbolic"
-        elif level <= 0:
-            return "display-brightness-muted-symbolic"
         else:
             return "display-brightness-medium-symbolic"
 
@@ -98,10 +103,12 @@ class AudioOSDContainer(Box):
         super().__init__(**kwargs, orientation="h", spacing=13, name="osd-container")
         self.audio = Audio()
         self.icon = self._create_icon("audio-volume-medium-symbolic", 28)
+        self.level = Label(name="osd-level")
         self.scale = self._create_audio_scale()
 
         self.add(self.icon)
         self.add(self.scale)
+        self.add(self.level)
         self.sync_with_audio()
 
         self.scale.connect("value-changed", self.on_volume_changed)
@@ -149,6 +156,7 @@ class AudioOSDContainer(Box):
 
     def update_icon(self, volume):
         icon_name = self._get_audio_icon_name(volume)
+        self.level.set_label(f"{volume}%")
         self.icon.set_from_icon_name(icon_name)
 
     def _get_audio_icon_name(self, volume: int) -> str:
