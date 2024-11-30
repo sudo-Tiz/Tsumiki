@@ -9,7 +9,7 @@ from fabric.widgets.revealer import Revealer
 
 gi.require_version("Gray", "0.1")
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gdk, Gray, GdkPixbuf, Gtk 
+from gi.repository import Gdk, Gray, GdkPixbuf, Gtk
 
 
 class SystemTray(Box):
@@ -96,7 +96,7 @@ class SystemTrayRevealer(Box):
             name="panel-button",
         )
 
-        self.revealed_box = SystemTrayWidget(pixel_size=icon_size)
+        self.revealed_box = SystemTray(pixel_size=icon_size)
 
         self.revealer = Revealer(
             transition_type="slide-left",
