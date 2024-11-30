@@ -35,12 +35,12 @@ class NotificationPopupWidget(EventBox):
 
         self._notification = notification
 
-        header_container = Box(spacing=4, orientation="h")
+        header_container = Box(spacing=8, orientation="h")
 
         header_container.children = (
             self.get_icon(notification.app_icon, 16),
             Label(
-                str(
+                markup=str(
                     self._notification.summary
                     if self._notification.summary
                     else notification.app_name
@@ -92,7 +92,7 @@ class NotificationPopupWidget(EventBox):
                 orientation="v",
                 children=[
                     Label(
-                        label=self._notification.body,
+                        markup=self._notification.body,
                         line_wrap="word-char",
                         v_align="start",
                         h_align="start",
