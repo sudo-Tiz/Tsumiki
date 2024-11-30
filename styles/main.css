@@ -189,6 +189,26 @@ tooltip>* {
   }
 
 
+  #notification_action_button button.start-action {
+    margin-left: 0;
+  }
+  
+  #notification_action_button button.end-action {
+    margin-right: 0;
+  }
+  
+  #notification_action_button button {
+    padding: 0.6rem;
+    font-weight: 600;
+    border-radius: 3rem;
+    background-color: var(--main-bg);
+  }
+  
+  #notification_action_button button:hover {
+    background-color: lighter(var(--main-bg));
+  }
+  
+
 /* OSD */
 #osd-container {
     background-color: alpha(#191A0B,0.8);
@@ -222,4 +242,3 @@ tooltip>* {
     background: #FFFFFF;
 }
   
-

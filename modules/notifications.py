@@ -1,37 +1,60 @@
-from typing import cast
-from fabric.widgets.box import Box
-from fabric.widgets.eventbox import EventBox
-from fabric.widgets.revealer import Revealer
-from fabric.widgets.label import Label
-from fabric.widgets.image import Image
-from fabric.widgets.button import Button
-from fabric.widgets.wayland import WaylandWindow
-from fabric.notifications import Notifications, Notification
-from fabric.utils import invoke_repeater, bulk_connect
-
-from gi.repository import GdkPixbuf
+import gi
 
 from utils.functions import check_icon_exists
 
-NOTIFICATION_WIDTH = 360
+gi.require_version("GdkPixbuf", "2.0")
+from gi.repository import GdkPixbuf
+
+from fabric.notifications import (
+    Notification,
+    NotificationAction,
+    Notifications,
+    NotificationCloseReason,
+)
+from fabric.utils import invoke_repeater
+from fabric.widgets.box import Box
+from fabric.widgets.button import Button
+from fabric.widgets.image import Image
+from fabric.widgets.label import Label
+from fabric.widgets.revealer import Revealer
+from fabric.widgets.wayland import WaylandWindow
+
+NOTIFICATION_WIDTH = 400
 NOTIFICATION_IMAGE_SIZE = 64
-NOTIFICATION_TIMEOUT = 100 * 1000  # 10 seconds
+NOTIFICATION_TIMEOUT = 5 * 1000  # 10 seconds
 
 
-class NotificationPopupWidget(EventBox):
+class ActionButton(Button):
+    def __init__(
+        self, action: NotificationAction, action_number: int, total_actions: int
+    ):
+        self.action = action
+        super().__init__(
+            label=action.label,
+            h_expand=True,
+            on_clicked=self.on_clicked,
+        )
+        if action_number == 0:
+            self.add_style_class("start-action")
+        elif action_number == total_actions - 1:
+            self.add_style_class("end-action")
+        else:
+            self.add_style_class("middle-action")
+
+    def on_clicked(self, *_):
+        self.action.invoke()
+        self.action.parent.close("dismissed-by-user")
+
+
+class NotificationWidget(Box):
     def __init__(self, notification: Notification, **kwargs):
         super().__init__(
-            **kwargs,
-        )
-
-        notif_box = Box(
+            size=(NOTIFICATION_WIDTH, -1),
             name="notification",
             spacing=8,
             orientation="v",
-            size=(NOTIFICATION_WIDTH, -1),
+            **kwargs,
         )
-
-        self.children = notif_box
 
         self._notification = notification
 
@@ -87,77 +110,43 @@ class NotificationPopupWidget(EventBox):
             )
 
         body_container.add(
+            Label(
+                markup=self._notification.body,
+                line_wrap="word-char",
+                v_align="start",
+                max_chars_width=40,
+                h_align="start",
+            )
+        )
+
+        self.add(header_container)
+        self.add(body_container)
+
+        self.add(
             Box(
                 spacing=4,
-                orientation="v",
+                orientation="h",
+                name="notification_action_button",
                 children=[
-                    Label(
-                        markup=self._notification.body,
-                        line_wrap="word-char",
-                        v_align="start",
-                        h_align="start",
-                    )
-                    .build()
-                    .add_style_class("body")
-                    .unwrap(),
+                    ActionButton(action, i, len(self._notification.actions))
+                    for i, action in enumerate(self._notification.actions)
                 ],
                 h_expand=True,
-                v_expand=True,
             )
         )
 
-        notif_box.add(header_container)
-        notif_box.add(body_container)
-
-        self.actions_revealer = Revealer(
-            transition_type="slide_down", reveal_child=False, transition_duration=300
-        )
-
-        if actions := self._notification.actions:
-            self.actions_revealer.children = Box(
-                spacing=4,
-                orientation="h",
-                children=[
-                    Button(
-                        h_expand=True,
-                        v_expand=True,
-                        label=action.label,
-                        on_clicked=lambda *_, action=action: action.invoke(),
-                    )
-                    for action in actions
-                ],
-            )
-
-        notif_box.add(self.actions_revealer)
-
-        bulk_connect(
-            self,
-            {
-                "enter-notify-event": lambda *_: (
-                    self.actions_revealer.set_reveal_child(True),
-                    notif_box.add_style_class("shadow"),
-                ),
-                "leave-notify-event": lambda *_: (
-                    self.actions_revealer.set_reveal_child(False)
-                ),
-            },
-        )
-
-        # destroy this widget once the notification is closed
-
+        # Destroy this widget once the notification is closed
         self._notification.connect(
             "closed",
             lambda *_: (
                 parent.remove(self) if (parent := self.get_parent()) else None,  # type: ignore
                 self.destroy(),
             ),
-        )
-
-        # automatically close the notification after the timeout period
-        invoke_repeater(
-            NOTIFICATION_TIMEOUT,
-            lambda: self._notification.close("expired"),
-            initial_call=False,
+            invoke_repeater(
+                NOTIFICATION_TIMEOUT,
+                lambda: self._notification.close("expired"),
+                initial_call=False,
+            ),
         )
 
     def get_icon(self, app_icon, size) -> Image:
@@ -182,28 +171,56 @@ class NotificationPopupWidget(EventBox):
                 )
 
 
-class NotificationPopup(WaylandWindow):
-    def __init__(self, **kwargs):
+class NotificationRevealer(Revealer):
+    def __init__(self, notification: Notification, **kwargs):
+        self.notif_box = NotificationWidget(notification)
+        self._notification = notification
         super().__init__(
-            margin="8px 8px 8px 8px",
-            anchor="top right",
             child=Box(
-                size=2,  # so it's not ignored by the compositor
-                spacing=4,
-                orientation="v",
-            ).build(
-                lambda viewport, _: Notifications(
-                    on_notification_added=lambda notifs_service, nid: viewport.add(
-                        NotificationPopupWidget(
-                            cast(
-                                Notification,
-                                notifs_service.get_notification_from_id(nid),
-                            )
-                        )
-                    )
-                )
+                style="margin: 12px;",
+                children=[self.notif_box],
             ),
-            visible=True,
-            all_visible=True,
-            **kwargs,
+            transition_duration=500,
+            transition_type="crossfade",
         )
+
+        self.connect(
+            "notify::child-revealed",
+            lambda *_: self.destroy() if not self.get_child_revealed() else None,
+        )
+
+        self._notification.connect("closed", self.on_resolved)
+
+    def on_resolved(
+        self,
+        notification: Notification,
+        reason: NotificationCloseReason,
+    ):
+        self.set_reveal_child(False)
+
+
+class NotificationPopup(WaylandWindow):
+    def __init__(self):
+        self._server = Notifications()
+        self.notifications = Box(
+            v_expand=True,
+            h_expand=True,
+            style="margin: 1px 0px 1px 1px;",
+            orientation="v",
+            spacing=5,
+        )
+        self._server.connect("notification-added", self.on_new_notification)
+
+        super().__init__(
+            anchor="top right",
+            child=self.notifications,
+            layer="overlay",
+            all_visible=True,
+            visible=True,
+            exclusive=False,
+        )
+
+    def on_new_notification(self, fabric_notif, id):
+        new_box = NotificationRevealer(fabric_notif.get_notification_from_id(id))
+        self.notifications.add(new_box)
+        new_box.set_reveal_child(True)

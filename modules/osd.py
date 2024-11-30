@@ -65,7 +65,6 @@ class BrightnessOSDContainer(Box):
                 current_brightness / self.brightness_service.max_screen
             ) * 100
             self.scale.animate_value(normalized_brightness)
-        print(current_brightness)
         self.update_icon(int(normalized_brightness))
 
     def update_icon(self, current_brightness):
