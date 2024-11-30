@@ -52,6 +52,8 @@ class NotificationPopupWidget(EventBox):
             Box(
                 children=(
                     Button(
+
+                        ## TODO: some icon pack has different name for close icon
                         image=Image(
                             icon_name="close-symbolic",
                             icon_size=16,
