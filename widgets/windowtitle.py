@@ -109,7 +109,7 @@ windowTitleMap = [
 # This class represents a widget that displays the title of the active window
 class WindowTitle(Box):
     def __init__(self, config: Config, **kwargs):
-        super().__init__(style_classes="bar-box", name="window-box", **kwargs)
+        super().__init__(style_classes="panel-box", name="window-box", **kwargs)
         # Store the configuration for the window title
         self.config = config["window"]
         # Create an ActiveWindow widget to track the active window

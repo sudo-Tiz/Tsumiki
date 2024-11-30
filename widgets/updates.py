@@ -37,12 +37,12 @@ class Updates(EventBox):
         self.os = os
 
         # for some reason, the style class is not being applied to the eventbox
-        self.box = Box(style_classes="bar-box")
+        self.box = Box(style_classes="panel-box")
 
         self.children = self.box
 
         self.box.children = self.text_icon
-        self.update_level_label = Label(label="0", style_classes="bar-button-label")
+        self.update_level_label = Label(label="0", style_classes="panel-buuton-label")
 
         # Show initial value of 0 if label is enabled
         if self.enable_label:

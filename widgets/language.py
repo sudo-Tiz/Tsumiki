@@ -6,7 +6,7 @@ from fabric.utils import FormattedString, truncate
 
 class LanguageBox(Box):
     def __init__(self, length=3, **kwargs):
-        super().__init__(name="language", style_classes="bar-box", **kwargs)
+        super().__init__(name="language", style_classes="panel-box", **kwargs)
 
         self.lang = Language(
             formatter=FormattedString(

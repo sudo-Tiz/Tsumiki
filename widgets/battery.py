@@ -17,7 +17,7 @@ class Battery(Box):
         enable_tooltip=True,
     ):
         # Initialize the Box with specific name and style
-        super().__init__(name="battery", style_classes="bar-box")
+        super().__init__(name="battery", style_classes="panel-box")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
 
@@ -35,7 +35,7 @@ class Battery(Box):
         battery_percent = round(battery.percent) if battery else 0
 
         battery_label = Label(
-            label=f"{battery_percent}%", style_classes="bar-button-label"
+            label=f"{battery_percent}%", style_classes="panel-buuton-label"
         )
 
         is_charging = battery.power_plugged if battery else False

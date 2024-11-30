@@ -16,18 +16,18 @@ label {
     font-size: 1rem;
 }
 
-.bar-button {
+.panel-button{
     background: var(--main-bg);
     padding: 0 1.25em;
 }
 
-.bar-box {
+.panel-box {
     background: var(--main-bg);
     padding: 0.1em 0.9em;
 }
 
 
-#bar-inner {
+#panel-inner {
     padding: 0.1em 0.25em;
     border-color: var(--border-color);
     background-color: var(--window-bg);
@@ -38,6 +38,7 @@ label {
     padding: 0.19em 0.625em;
 }
 
+/** workspace switcher */
 #workspaces {
     padding: 0.19em 1em;
 }
@@ -141,12 +142,12 @@ tooltip>* {
 }
 
 
-.bar-button-label {
+.panel-buuton-label {
     margin-left: 10px;
 }
 
 
-
+/** taskbar **/
 #taskbar {
     font-style: normal;
     color: var(--main-fg);
@@ -165,7 +166,7 @@ tooltip>* {
     margin-right: 0px;
 }
 
-
+/** notification **/
 #notification {
     padding: 0.8rem;
     border: solid 1px var(--border-color);
@@ -180,7 +181,6 @@ tooltip>* {
     font-size: 0.92rem;
 }
 
-
 .close-button:hover {
     box-shadow: none;
     background: alpha(var(--main-fg), 0.2);
@@ -188,6 +188,8 @@ tooltip>* {
     border: none;
   }
 
+
+/* OSD */
 #osd-container {
     background-color: alpha(#191A0B,0.8);
     padding: 12px 20px;

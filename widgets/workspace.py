@@ -5,7 +5,7 @@ from fabric.widgets.box import Box
 # This class represents a widget that displays workspace buttons
 class WorkSpaces(Box):
     def __init__(self, occupied=True, count=8, **kwargs):
-        super().__init__(name="workspaces-box", style_classes="bar-box", **kwargs)
+        super().__init__(name="workspaces-box", style_classes="panel-box", **kwargs)
         # Create a HyperlandWorkspace widget to manage workspace buttons
         self.workspace = HyperlandWorkspace(
             name="workspaces",

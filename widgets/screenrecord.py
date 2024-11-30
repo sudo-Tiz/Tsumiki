@@ -8,7 +8,7 @@ from fabric.utils import exec_shell_command, get_relative_path
 
 class ScreenRecord(Button):
     def __init__(self, **kwargs):
-        super().__init__(name="screen-recorder", style_classes="bar-box", **kwargs)
+        super().__init__(name="screen-recorder", style_classes="panel-box", **kwargs)
         screenRecordInfo = Fabricator(
             poll_from=exec_shell_command(
                 get_relative_path("../assets/scripts/screen_record.sh status")

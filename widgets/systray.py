@@ -14,7 +14,7 @@ from gi.repository import Gdk, Gray, GdkPixbuf, Gtk
 
 class SystemTray(Box):
     def __init__(self, pixel_size: int = 16, **kwargs) -> None:
-        super().__init__(name="system-tray", style_classes="bar-box", **kwargs)
+        super().__init__(name="system-tray", style_classes="panel-box", **kwargs)
         self.pixel_size = pixel_size
         self.watcher = Gray.Watcher()
         self.watcher.connect("item-added", self.on_item_added)

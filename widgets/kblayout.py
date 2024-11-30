@@ -594,7 +594,7 @@ KBLAYOUT_MAP = {
 
 class KeyboardLayout(Box):
     def __init__(self, **kwargs):
-        super().__init__(name="keyboard", style_classes="bar-box", **kwargs)
+        super().__init__(name="keyboard", style_classes="panel-box", **kwargs)
 
         self.kb_label = Label(label="")
 

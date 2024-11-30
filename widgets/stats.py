@@ -18,7 +18,7 @@ class Cpu(Box):
         enable_tooltip=True,
     ):
         # Initialize the Box with specific name and style
-        super().__init__(name="cpu", style_classes="bar-box")
+        super().__init__(name="cpu", style_classes="panel-box")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
 
@@ -27,7 +27,7 @@ class Cpu(Box):
             icon, size=icon_size, props={"style_classes": "bar-text-icon"}
         )
         self.children = self.text_icon
-        self.cpu_level_label = Label(label="0%", style_classes="bar-button-label")
+        self.cpu_level_label = Label(label="0%", style_classes="panel-buuton-label")
 
         # Set up a repeater to call the update_label method at specified intervals
         invoke_repeater(interval, self.update_label, initial_call=True)
@@ -51,7 +51,7 @@ class Memory(Box):
         enable_tooltip=True,
     ):
         # Initialize the Box with specific name and style
-        super().__init__(name="memory", style_classes="bar-box")
+        super().__init__(name="memory", style_classes="panel-box")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
 
@@ -60,7 +60,7 @@ class Memory(Box):
             icon, size=icon_size, props={"style_classes": "bar-text-icon"}
         )
         self.children = self.icon
-        self.memory_level_label = Label(label="0%", style_classes="bar-button-label")
+        self.memory_level_label = Label(label="0%", style_classes="panel-buuton-label")
 
         # Set up a repeater to call the update_values method at specified intervals
         invoke_repeater(interval, self.update_values, initial_call=True)
@@ -101,7 +101,7 @@ class Storage(Box):
         enable_tooltip=True,
     ):
         # Initialize the Box with specific name and style
-        super().__init__(name="storage", style_classes="bar-box")
+        super().__init__(name="storage", style_classes="panel-box")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
 
@@ -111,7 +111,7 @@ class Storage(Box):
         )
 
         self.children = self.icon
-        self.storage_level_label = Label(label="0", style_classes="bar-button-label")
+        self.storage_level_label = Label(label="0", style_classes="panel-buuton-label")
 
         # Set up a repeater to call the update_values method at specified intervals
         invoke_repeater(interval, self.update_values, initial_call=True)

@@ -2,6 +2,7 @@ from fabric import Application
 from fabric.utils import get_relative_path, monitor_file
 
 from loguru import logger
+import setproctitle
 
 from modules.bar import StatusBar
 from modules.notifications import NotificationPopup
@@ -20,7 +21,9 @@ if __name__ == "__main__":
     system_overlay = OSDContainer()
 
     # Initialize the application with the status bar
-    app = Application("fabric-bar", bar, notifications, system_overlay)
+    app = Application("fabricpanel", bar, notifications, system_overlay)
+
+    setproctitle.setproctitle("fabricpanel")
 
     # Monitor main.css file for changes
     main_css_file = monitor_file(get_relative_path("styles"))

@@ -124,7 +124,7 @@ class StatusBar(Window):
         self.updates = Updates(os=updates_config["os"], icon=updates_config["icon"])
 
         self.children = CenterBox(
-            name="bar-inner",
+            name="panel-inner",
             start_children=Box(
                 name="start-container",
                 spacing=4,

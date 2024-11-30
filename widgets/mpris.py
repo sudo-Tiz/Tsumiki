@@ -18,7 +18,7 @@ class Mpris(EventBox):
         super().__init__(name="mpris")
         self.enable_tooltip = enable_tooltip
 
-        self.label = Label(label="Nothing playing", style_classes="bar-button-label")
+        self.label = Label(label="Nothing playing", style_classes="panel-buuton-label")
         self.text_icon = Label(label=ICONS["play"], style="padding: 0 10px;")
 
         self.revealer = Revealer(
@@ -32,7 +32,7 @@ class Mpris(EventBox):
         self.revealer.set_reveal_child(True)
 
         self.box = Box(
-            style_classes="bar-box", children=[self.text_icon, self.revealer]
+            style_classes="panel-box", children=[self.text_icon, self.revealer]
         )
 
         self.children = self.box

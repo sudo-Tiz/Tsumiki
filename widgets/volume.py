@@ -18,7 +18,7 @@ if AUDIO_WIDGET is True:
 # This class represents a widget that displays and controls the volume
 class VolumeWidget(Box):
     def __init__(self, **kwargs):
-        super().__init__(name="volume", style_classes="bar-box", **kwargs)
+        super().__init__(name="volume", style_classes="panel-box", **kwargs)
         # Initialize the audio service
         self.audio = Audio()
         # Create a circular progress bar to display the volume level
