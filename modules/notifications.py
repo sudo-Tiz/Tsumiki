@@ -35,10 +35,10 @@ class NotificationPopupWidget(EventBox):
 
         self._notification = notification
 
-        header_container = Box(spacing=12, orientation="h")
+        header_container = Box(spacing=4, orientation="h")
 
         header_container.children = (
-            self.get_icon(notification.app_icon),
+            self.get_icon(notification.app_icon, 16),
             Label(
                 str(
                     self._notification.summary
@@ -160,25 +160,25 @@ class NotificationPopupWidget(EventBox):
             initial_call=False,
         )
 
-    def get_icon(self, app_icon) -> Image:
+    def get_icon(self, app_icon, size) -> Image:
         match app_icon:
             case str(x) if "file://" in x:
                 return Image(
                     name="notification-icon",
                     image_file=app_icon[7:],
-                    size=24,
+                    icon_size=size,
                 )
             case str(x) if len(x) > 0 and "/" == x[0]:
                 return Image(
                     name="notification-icon",
                     image_file=app_icon,
-                    size=24,
+                    icon_size=size,
                 )
             case _:
                 return Image(
                     name="notification-icon",
                     icon_name=app_icon if app_icon else "dialog-information-symbolic",
-                    size=24,
+                    icon_size=size,
                 )
 
 
