@@ -1,8 +1,16 @@
-
-
-
 /* system tray */
 #system-tray {
     padding: 0.125em 0.25em;
-    background-color: var(--main-bg);
+    background-color: var(--background-dark);
+}
+
+
+#system-tray>button {
+    margin: 0px 2px;
+    padding: 0 4px;
+}
+
+
+#system-tray>button:hover{
+    background-color: var(--surface-disabled);
 }

@@ -10,7 +10,7 @@
 /* unset so we can style everything from the ground up. */
 * {
     all: unset;
-    color: var(--main-fg);
+    color: var(--text-main);
     font-size: 16px;
     font-family: "JetBrainsMono Nerd Font";
     border-radius: 100px;
@@ -22,12 +22,12 @@ label {
 }
 
 .panel-button{
-    background: var(--main-bg);
+    background: var(--background-dark);
     padding: 0 1.25em;
 }
 
 .panel-box {
-    background: var(--main-bg);
+    background: var(--background-dark);
     padding: 0.1em 0.9em;
 }
 
@@ -35,7 +35,7 @@ label {
 #panel-inner {
     padding: 0.1em 0.25em;
     border-color: var(--border-color);
-    background-color: var(--window-bg);
+    background-color: transparent;
 }
 
 
@@ -47,37 +47,6 @@ label {
 #language,
 #window {
     padding: 0.19em 0.625em;
-}
-
-
-
-/* menu and menu items (written for the system tray) */
-menu {
-    border: 2px solid var(--border-color);
-    border-radius: 10px;
-    background-color: var(--window-bg);
-}
-
-menu>menuitem {
-    border-radius: 0px;
-    background-color: var(--main-bg);
-    padding: 0.375em;
-    margin-left: 2px;
-    margin-right: 2px;
-}
-
-menu>menuitem:first-child {
-    margin-top: 1px;
-    border-radius: 8px 8px 0px 0px;
-}
-
-menu>menuitem:last-child {
-    margin-bottom: 1px;
-    border-radius: 0px 0px 8px 8px;
-}
-
-menu>menuitem:hover {
-    background-color: var(--border-color);
 }
 
 
@@ -93,13 +62,13 @@ menu>menuitem:hover {
 
 
 #widgets-container {
-    background-color: var(--main-bg);
+    background-color: var(--background-dark);
     padding: 0.125em;
 }
 
 
 tooltip {
-    background-color: var(--main-bg);
+    background-color: var(--background-dark);
     border-radius: 10px;
     outline: none;
     border: none;

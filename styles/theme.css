@@ -1,32 +1,73 @@
 /* we can use webcss variables, fabric compiles that to gtk css.
    global variables can be stored in :vars */
-   :vars {
-    --main-bg: #11111b;
-    --main-fg: #cdd6f4;
-    --background: transparent;
-    --foreground: #f5dbc4;
-    --color0: #150d16;
-    --color1: #72448D;
-    --color2: #9C5995;
-    --color3: #D5719F;
-    --color4: #9A62F3;
-    --color5: #E075DF;
-    --color6: #F98F9F;
-    --color7: #f5dbc4;
-    --color8: #ab9989;
-    --color9: #72448D;
-    --color10: #9C5995;
-    --color11: #313244;
-    --color12: #9A62F3;
-    --color13: #E075DF;
-    --color14: #F98F9F;
-    --color15: #f5dbc4;
+:vars {
+
+    /* Base Colors */
+    --background: #1E1E2E;
+    /* Main background */
+    --background-alt: #181825;
+    /* Secondary background */
+    --background-dark: #11111B;
+    /* Darkest background */
+
+    /* Text Colors */
+    --text-main: #CDD6F4;
+    /* Primary text color */
+    --text-secondary: #BAC2DE;
+    /* Secondary text color */
+    --text-muted: #A6ADC8;
+    /* Tertiary text, muted */
+
+    /* Surface Colors */
+    --surface-disabled: #313244;
+    /* Background for disabled items */
+    --surface-neutral: #45475A;
+    /* Neutral surface for cards, panels */
+    --surface-highlight: #585B70;
+    /* Selection and highlights */
+
+    /* Accent Colors */
+    --accent-light: #F5E0DC;
+    /* Lightest accent (Rosewater) */
+    --accent-pink: #F5C2E7;
+    /* Pink accent */
+    --accent-purple: #CBA6F7;
+    /* Mauve accent */
+    --accent-red: #F38BA8;
+    /* Red for errors and warnings */
+    --accent-orange: #FAB387;
+    /* Orange for warnings and alerts */
+    --accent-yellow: #F9E2AF;
+    /* Yellow for highlights */
+    --accent-green: #A6E3A1;
+    /* Green for success */
+    --accent-teal: #94E2D5;
+    /* Teal for information */
+    --accent-blue: #89B4FA;
+    /* Blue for links and actions */
+    --accent-light-blue: #89DCEB;
+    /* Sky blue accent */
+    --accent-lavender: #B4BEFE;
+    /* Lavender for subtle highlights */
+
+    /* Overlay Colors */
+    --text-disabled: #6C7086;
+    /* Text for disabled elements */
+    --text-muted-light: #7F849C;
+    /* Light-muted text for hints */
+    --text-muted-dark: #9399B2;
+    /* Dark-muted text */
+
+    /* Shadow */
+    --shadow-default: rgba(0, 0, 0, 0.5);
+    /* Default shadow for elements */
+
     --window-bg: alpha(var(--background), 0.6);
-    --module-bg: alpha(var(--background), 0.4);
-    --border-color: var(--color11);
-    --ws-active: #a6adc8;
-    --ws-inactive: var(--color3);
-    --ws-empty: var(--color8);
-    --ws-hover:  #f5c2e7;
-    --ws-urgent: var(--color12);
+    --border-color: var( --surface-disabled);
+    --ws-active: var(--text-muted);
+    --ws-inactive: var(--accent-red);
+    --ws-empty: var(--text-disabled);
+    --ws-hover:var(--accent-pink);
+    --ws-urgent: var(--accent-purple);
+
 }

@@ -23,15 +23,15 @@
   }
   
   #overview-client-box {
-    background-color: alpha(var(--main-fg), 1);
+    background-color: alpha(var(--text-main), 1);
   }
   
   #overview-client-box:hover {
-    background-color: alpha(var(--main-fg), 0.7);
+    background-color: alpha(var(--text-main), 0.7);
   }
   
   #overview-client-box:active {
-    background-color: alpha(var(--main-fg), 1);
+    background-color: alpha(var(--text-main), 1);
   }
   
   #overview-workspace-bg {

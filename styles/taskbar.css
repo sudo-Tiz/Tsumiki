@@ -2,8 +2,8 @@
 /** taskbar **/
 #taskbar {
     font-style: normal;
-    color: var(--main-fg);
-    background: var(--main-bg);
+    color: var(--text-main);
+    background: var(--background-dark);
     padding-left: 4px;
     padding-right: 4px;
 }
