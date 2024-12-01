@@ -1,0 +1,28 @@
+/** workspace switcher */
+#workspaces {
+    padding: 0.19em 1em;
+}
+
+#workspaces>button {
+    padding: 0 0.5rem;
+    transition: padding 0.05s steps(8);
+}
+
+
+#workspaces>button:hover {
+    background-color: var(--ws-hover);
+}
+
+#workspaces>button:hover label {
+    color: var(--main-bg);
+}
+
+#workspaces>button.active {
+    padding: 0 1rem;
+    background-color: var(--ws-active);
+    min-width: 1.4rem;
+}
+
+#workspaces>button.active>label {
+    color: var(--main-bg);
+}

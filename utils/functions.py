@@ -7,8 +7,10 @@ import psutil
 from fabric.utils import get_relative_path
 from fabric.widgets.label import Label
 
+from utils.icons import DISTRO_ICONS
+
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, GLib
 
 
 # Function to read the configuration file
@@ -69,3 +71,12 @@ def check_icon_exists(icon_name: str, fallback_icon: str) -> str:
     if Gtk.IconTheme.get_default().has_icon(icon_name):
         return icon_name
     return fallback_icon
+
+
+def get_distro_icon():
+    distro_id = GLib.get_os_info("ID")
+    # Search for the icon in the list
+    icon = next((icon for id, icon in DISTRO_ICONS if id == distro_id), None)
+
+    # Return the found icon or default to '' if not found
+    return icon if icon else ""

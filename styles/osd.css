@@ -1,0 +1,34 @@
+
+
+/* OSD */
+#osd-container {
+  background-color: alpha(#191A0B,0.8);
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: none;
+  margin-bottom: 100px;
+}
+
+
+#osd-container scale {
+  min-width: 140px;
+}
+
+#osd-container slider {
+  min-height: 8px;
+  border-radius: 999px;
+  background: transparent;
+  border: none;
+}
+
+#osd-container trough {
+  min-height: inherit;
+  border-radius: inherit;
+  border: none;
+  background: #808080;
+}
+
+#osd-container highlight {
+  border-radius: 100px 0px 0px 100px;
+  background: #FFFFFF;
+}

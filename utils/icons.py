@@ -8,6 +8,40 @@ ICONS = {
     "updates": "󱧘",
 }
 
+
+DISTRO_ICONS = {
+    "deepin": "",
+    "fedora": "",
+    "arch": "",
+    "nixos": "",
+    "debian": "",
+    "opensuse-tumbleweed": "",
+    "ubuntu": "",
+    "endeavouros": "",
+    "manjaro": "",
+    "popos": "",
+    "garuda": "",
+    "zorin": "",
+    "mxlinux": "",
+    "arcolinux": "",
+    "gentoo": "",
+    "artix": "",
+    "centos": "",
+    "hyperbola": "",
+    "kubuntu": "",
+    "mandriva": "",
+    "xerolinux": "",
+    "parabola": "",
+    "void": "",
+    "linuxmint": "",
+    "archlabs": "",
+    "devuan": "",
+    "freebsd": "",
+    "openbsd": "",
+    "slackware": "",
+}
+
+
 WEATHER_ICONS = {
     "warning": "󰼯",
     "sunny": "󰖙",

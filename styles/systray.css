@@ -1,0 +1,8 @@
+
+
+
+/* system tray */
+#system-tray {
+    padding: 0.125em 0.25em;
+    background-color: var(--main-bg);
+}
