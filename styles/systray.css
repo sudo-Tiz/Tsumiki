@@ -1,16 +1,27 @@
 /* system tray */
 #system-tray {
     padding: 0.125em 0.25em;
+    opacity: 1;
     background-color: var(--background-dark);
 }
 
 
 #system-tray>button {
-    margin: 0px 2px;
-    padding: 0 4px;
+    margin: 0 0.1em;
+    padding: 0 0.15em;
 }
 
 
 #system-tray>button:hover{
     background-color: var(--surface-disabled);
 }
+
+
+#ystem-tray menu * {
+    min-height: 16px
+}
+
+#ystem-tray menu separator {
+    min-height: 10px
+}
+

@@ -6,11 +6,13 @@
 #workspaces>button {
     padding: 0 0.5rem;
     transition: padding 0.05s steps(8);
+    
 }
 
 
 #workspaces>button:hover {
     background-color: var(--ws-hover);
+    transition: all 0.4s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
 #workspaces>button:hover label {
@@ -21,6 +23,7 @@
     padding: 0 1rem;
     background-color: var(--ws-active);
     min-width: 1.4rem;
+    transition: all 0.4s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
 #workspaces>button.active>label {
