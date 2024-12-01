@@ -42,7 +42,7 @@ class Updates(EventBox):
         self.children = self.box
 
         self.box.children = self.text_icon
-        self.update_level_label = Label(label="0", style_classes="panel-buuton-label")
+        self.update_level_label = Label(label="0", style_classes="panel-button-label")
 
         # Show initial value of 0 if label is enabled
         if self.enable_label:

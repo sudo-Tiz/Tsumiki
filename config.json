@@ -20,7 +20,7 @@
     "enable_tooltip": true
   },
   "battery": {
-    "enable_label": false,
+    "enable_label": true,
     "enable_tooltip": true,
     "interval": 2000
   },

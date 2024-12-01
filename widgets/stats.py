@@ -27,7 +27,7 @@ class Cpu(Box):
             icon, size=icon_size, props={"style_classes": "bar-text-icon"}
         )
         self.children = self.text_icon
-        self.cpu_level_label = Label(label="0%", style_classes="panel-buuton-label")
+        self.cpu_level_label = Label(label="0%", style_classes="panel-button-label")
 
         # Set up a repeater to call the update_label method at specified intervals
         invoke_repeater(interval, self.update_label, initial_call=True)
@@ -60,7 +60,7 @@ class Memory(Box):
             icon, size=icon_size, props={"style_classes": "bar-text-icon"}
         )
         self.children = self.icon
-        self.memory_level_label = Label(label="0%", style_classes="panel-buuton-label")
+        self.memory_level_label = Label(label="0%", style_classes="panel-button-label")
 
         # Set up a repeater to call the update_values method at specified intervals
         invoke_repeater(interval, self.update_values, initial_call=True)
@@ -111,7 +111,7 @@ class Storage(Box):
         )
 
         self.children = self.icon
-        self.storage_level_label = Label(label="0", style_classes="panel-buuton-label")
+        self.storage_level_label = Label(label="0", style_classes="panel-button-label")
 
         # Set up a repeater to call the update_values method at specified intervals
         invoke_repeater(interval, self.update_values, initial_call=True)

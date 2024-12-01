@@ -18,7 +18,7 @@ class Mpris(EventBox):
         super().__init__(name="mpris")
         self.enable_tooltip = enable_tooltip
 
-        self.label = Label(label="Nothing playing", style_classes="panel-buuton-label")
+        self.label = Label(label="Nothing playing", style_classes="panel-button-label")
         self.text_icon = Label(label=ICONS["play"], style="padding: 0 10px;")
 
         self.revealer = Revealer(

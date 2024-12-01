@@ -22,16 +22,6 @@ label {
     font-size: 1rem;
 }
 
-.panel-button{
-    background: var(--background-dark);
-    padding: 0 1.25em;
-}
-
-.panel-box {
-    background: var(--background-dark);
-    padding: 0.1em 0.9em;
-}
-
 
 #panel-inner {
     padding: 0.1em 0.25em;
@@ -39,8 +29,19 @@ label {
     background-color: transparent;
 }
 
+.panel-box {
+    background: var(--background-dark);
+    padding: 0.1em 0.9em;
+}
 
-.panel-buuton-label {
+.panel-button{
+    background: var(--background-dark);
+    padding: 0 1.25em;
+}
+
+
+
+.panel-button-label {
     margin-left: 10px;
 }
 
