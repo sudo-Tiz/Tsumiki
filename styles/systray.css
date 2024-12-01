@@ -5,7 +5,6 @@
     background-color: var(--background-dark);
 }
 
-
 #system-tray>button {
     margin: 0 0.1em;
     padding: 0 0.15em;
@@ -15,17 +14,6 @@
 #system-tray>button:hover {
     background-color: var(--surface-disabled);
 }
-
-
-#ystem-tray menu * {
-    min-height: 16px
-}
-
-#ystem-tray menu separator {
-    min-height: 10px
-}
-
-
 
 
 #system-tray>button:active {
@@ -79,35 +67,28 @@
 
 #system-tray-menu>menuitem menu>menuitem:disabled,
 #system-tray-menu>menuitem:disabled {
-  background-color: var(--background-alt);
+  background-color: var(--background-dark);
 }
 
 #submenu-button {
   background-color: var(--background-alt);
-  padding: 8px;
+  padding: 0.5em;
   border-radius: 10px;
 }
 
 #system-tray-menu>menuitem menu>menuitem,
 #system-tray-menu>menuitem {
   background-color: var(--background-alt);
-  padding: 5px;
+  padding: 0.3em;
   border-radius: 10px;
 }
 
 #system-tray-menu>menuitem menu,
 #system-tray-menu,
 #submenu {
-  /* min-width: 450px; */
   background-color: alpha(var(--background-dark), 1);
-  border-radius: 20px;
-
+  border-radius: 1em;
   border-color: alpha(var(--accent-light), 1);
   padding: 10px;
 }
 
-#system-tray{
-  margin-left: 2px;
-  font-size: 25px;
-  margin-right: 2px;
-}
