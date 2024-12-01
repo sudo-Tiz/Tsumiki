@@ -15,11 +15,13 @@ class Battery(Box):
         interval: int = 2000,
         enable_label=True,
         enable_tooltip=True,
+        hide_label_when_full = True
     ):
         # Initialize the Box with specific name and style
         super().__init__(name="battery", style_classes="panel-box")
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
+        self.hide_label_when_full = hide_label_when_full
 
         # Set up a repeater to call the update_battery_status method at specified intervals
         invoke_repeater(interval, self.update_battery_status, initial_call=True)
@@ -52,6 +54,11 @@ class Battery(Box):
         # Update the label with the battery percentage if enabled
         if self.enable_label:
             self.children = (battery_icon, battery_label)
+
+            ## Hide the label when the battery is full
+            if self.hide_label_when_full and battery_percent == 100:
+                self.children = (battery_icon)
+            
 
         # Update the tooltip with the battery status details if enabled
         if self.enable_tooltip:
