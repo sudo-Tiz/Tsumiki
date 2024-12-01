@@ -9,7 +9,6 @@
     
 }
 
-
 #workspaces>button:hover {
     background-color: var(--ws-hover);
     transition: all 0.4s cubic-bezier(.55,-0.68,.48,1.682);

@@ -12,7 +12,7 @@
 }
 
 
-#system-tray>button:hover{
+#system-tray>button:hover {
     background-color: var(--surface-disabled);
 }
 
@@ -25,3 +25,89 @@
     min-height: 10px
 }
 
+
+
+
+#system-tray>button:active {
+    background-color: var(--text-main);
+    color: var(--background-dark);
+}
+
+
+#system-tray-menu>menuitem menu>menuitem:hover,
+#system-tray-menu>menuitem:hover,
+#submenu-button:hover {
+    background-color: alpha(var(--background-dark), 0.8);
+    border-color: alpha(var(--text-main), 0.1);
+}
+
+
+#submenu-button:active {
+    background-color: var(--accent-light);
+}
+
+#submenu-button:active>* {
+    color: var(--background);
+}
+
+
+#submenu-title {
+    border-style: solid;
+    border-bottom-width: 2px;
+    border-color: var(--background-alt);
+    margin-bottom: 5px;
+}
+
+#submenu-label {
+    margin-left: 5px;
+}
+
+#submenu-title-label {
+    font-size: 17px;
+}
+
+#submenu-item {
+    margin: 5px;
+}
+
+
+#system-tray-menu>menuitem menu>menuitem,
+#system-tray-menu>menuitem {
+  border-color: var(--text-secondary);
+  margin: 5px 0px;
+}
+
+#system-tray-menu>menuitem menu>menuitem:disabled,
+#system-tray-menu>menuitem:disabled {
+  background-color: var(--background-alt);
+}
+
+#submenu-button {
+  background-color: var(--background-alt);
+  padding: 8px;
+  border-radius: 10px;
+}
+
+#system-tray-menu>menuitem menu>menuitem,
+#system-tray-menu>menuitem {
+  background-color: var(--background-alt);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+#system-tray-menu>menuitem menu,
+#system-tray-menu,
+#submenu {
+  /* min-width: 450px; */
+  background-color: alpha(var(--background-dark), 1);
+  border-radius: 20px;
+
+  border-color: alpha(var(--accent-light), 1);
+  padding: 10px;
+}
+
+#system-tray{
+  margin-left: 2px;
+  font-size: 25px;
+  margin-right: 2px;
+}
