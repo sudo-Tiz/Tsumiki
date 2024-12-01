@@ -1,0 +1,10 @@
+
+#volume-progress-bar {
+    color: transparent;
+    background-color: transparent
+}
+
+
+#volume-progress-bar {
+    border: solid 0px var(--border-color);
+}

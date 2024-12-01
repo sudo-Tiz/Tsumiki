@@ -1,4 +1,6 @@
 /* system tray */
+
+/* TODO: see other traybar styles from kde,gnome  */
 #system-tray {
     padding: 0.125em 0.25em;
     opacity: 1;

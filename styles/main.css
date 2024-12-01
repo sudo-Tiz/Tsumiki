@@ -5,6 +5,7 @@
 @import "systray.css";
 @import "taskbar.css";
 @import "workspace.css";
+@import "volume.css";
 
 
 /* unset so we can style everything from the ground up. */
@@ -49,16 +50,6 @@ label {
     padding: 0.19em 0.625em;
 }
 
-
-#volume-progress-bar {
-    color: transparent;
-    background-color: transparent
-}
-
-
-#volume-progress-bar {
-    border: solid 0px var(--border-color);
-}
 
 
 #widgets-container {
