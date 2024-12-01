@@ -1,19 +1,18 @@
-
 /** taskbar **/
 #taskbar {
-    font-style: normal;
-    color: var(--text-main);
-    background: var(--background-dark);
-    padding-left: 4px;
-    padding-right: 4px;
+  font-style: normal;
+  color: var(--text-main);
+  background: var(--background-dark);
+  padding-left: 4px;
+  padding-right: 4px;
 }
 
-#taskbar>button {
-    padding: 0px 2px;
-    margin: 4px 0px;
-    border: 0px;
+#taskbar > button {
+  padding: 0px 2px;
+  margin: 4px 0px;
+  border: 0px;
 }
 
-#taskbar>button:last-child {
-    margin-right: 0px;
+#taskbar > button:last-child {
+  margin-right: 0px;
 }

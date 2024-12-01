@@ -32,7 +32,7 @@ class Updates(EventBox):
         self.enable_tooltip = enable_tooltip
         # Create a TextIcon with the specified icon and size
         self.text_icon = text_icon(
-            icon, size=icon_size, props={"style_classes": "bar-text-icon"}
+            icon, size=icon_size, props={"style_classes": "panel-text-icon"}
         )
         self.os = os
 
@@ -42,7 +42,7 @@ class Updates(EventBox):
         self.children = self.box
 
         self.box.children = self.text_icon
-        self.update_level_label = Label(label="0", style_classes="panel-button-label")
+        self.update_level_label = Label(label="0", style_classes="panel-text")
 
         # Show initial value of 0 if label is enabled
         if self.enable_label:

@@ -1,14 +1,11 @@
-
-
 /* OSD */
 #osd-container {
-  background-color: alpha(#191A0B,0.8);
+  background-color: alpha(#191a0b, 0.8);
   padding: 12px 20px;
   border-radius: 999px;
   border: none;
   margin-bottom: 100px;
 }
-
 
 #osd-container scale {
   min-width: 140px;

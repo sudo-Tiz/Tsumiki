@@ -24,10 +24,10 @@ class Cpu(Box):
 
         # Create a TextIcon with the specified icon and size
         self.text_icon = text_icon(
-            icon, size=icon_size, props={"style_classes": "bar-text-icon"}
+            icon, size=icon_size, props={"style_classes": "panel-text-icon"}
         )
         self.children = self.text_icon
-        self.cpu_level_label = Label(label="0%", style_classes="panel-button-label")
+        self.cpu_level_label = Label(label="0%", style_classes="panel-text")
 
         # Set up a repeater to call the update_label method at specified intervals
         invoke_repeater(interval, self.update_label, initial_call=True)
@@ -57,10 +57,10 @@ class Memory(Box):
 
         # Create a TextIcon with the specified icon and size
         self.icon = text_icon(
-            icon, size=icon_size, props={"style_classes": "bar-text-icon"}
+            icon, size=icon_size, props={"style_classes": "panel-text-icon"}
         )
         self.children = self.icon
-        self.memory_level_label = Label(label="0%", style_classes="panel-button-label")
+        self.memory_level_label = Label(label="0%", style_classes="panel-text")
 
         # Set up a repeater to call the update_values method at specified intervals
         invoke_repeater(interval, self.update_values, initial_call=True)
@@ -107,11 +107,11 @@ class Storage(Box):
 
         # Create a TextIcon with the specified icon and size
         self.icon = text_icon(
-            icon, size=icon_size, props={"style_classes": "bar-text-icon"}
+            icon, size=icon_size, props={"style_classes": "panel-text-icon"}
         )
 
         self.children = self.icon
-        self.storage_level_label = Label(label="0", style_classes="panel-button-label")
+        self.storage_level_label = Label(label="0", style_classes="panel-text")
 
         # Set up a repeater to call the update_values method at specified intervals
         invoke_repeater(interval, self.update_values, initial_call=True)

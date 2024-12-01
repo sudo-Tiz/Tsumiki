@@ -37,7 +37,7 @@ class Battery(Box):
         battery_percent = round(battery.percent) if battery else 0
 
         battery_label = Label(
-            label=f"{battery_percent}%", style_classes="panel-button-label"
+            label=f"{battery_percent}%", style_classes="panel-text"
         )
 
         is_charging = battery.power_plugged if battery else False

@@ -7,75 +7,65 @@
 @import "workspace.css";
 @import "volume.css";
 
-
 /* unset so we can style everything from the ground up. */
 * {
-    all: unset;
-    color: var(--text-main);
-    font-size: 16px;
-    font-family: "JetBrainsMono Nerd Font";
-    border-radius: 100px;
-    font-weight: bold;
+  all: unset;
+  color: var(--text-main);
+  font-size: 16px;
+  font-family: "JetBrainsMono Nerd Font";
+  border-radius: 100px;
+  font-weight: bold;
 }
 
 label {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
-
 #panel-inner {
-    padding: 0.1em 0.25em;
-    border-color: var(--border-color);
-    background-color: transparent;
+  padding: 0.1em 0.25em;
+  border-color: var(--border-color);
+  background-color: transparent;
 }
 
 .panel-box {
-    background: var(--background-dark);
-    padding: 0.1em 0.9em;
+  background: var(--background-dark);
+  padding: 0.1em 0.9em;
 }
 
-.panel-button{
-    background: var(--background-dark);
-    padding: 0 1.25em;
+.panel-button {
+  background: var(--background-dark);
+  padding: 0 1.25em;
 }
 
-
-
-.panel-button-label {
-    margin-left: 10px;
+.panel-text {
+  margin-left: 10px;
 }
-
 
 #language,
 #window {
-    padding: 0.19em 0.625em;
+  padding: 0.19em 0.625em;
 }
-
-
 
 #widgets-container {
-    background-color: var(--background-dark);
-    padding: 0.125em;
+  background-color: var(--background-dark);
+  padding: 0.125em;
 }
 
-
 tooltip {
-    background-color: var(--background-dark);
-    border-radius: 10px;
-    outline: none;
-    border: none;
-    box-shadow: none;
+  background-color: var(--background-dark);
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  box-shadow: none;
 }
 
 tooltip label {
-    outline: none;
-    border: none;
-    box-shadow: none;
-    font-weight: normal;
+  outline: none;
+  border: none;
+  box-shadow: none;
+  font-weight: normal;
 }
 
-tooltip>* {
-    padding: 0.125em 0.25em
+tooltip > * {
+  padding: 0.125em 0.25em;
 }
-
-

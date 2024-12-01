@@ -1,74 +1,71 @@
 /* we can use webcss variables, fabric compiles that to gtk css.
    global variables can be stored in :vars */
 :vars {
+  /* Base Colors */
+  --background: #1e1e2e;
+  /* Main background */
+  --background-alt: #181825;
+  /* Secondary background */
+  --background-dark: #11111b;
+  /* Darkest background */
 
-    /* Base Colors */
-    --background: #1E1E2E;
-    /* Main background */
-    --background-alt: #181825;
-    /* Secondary background */
-    --background-dark: #11111B;
-    /* Darkest background */
+  /* Text Colors */
+  --text-main: #cdd6f4;
+  /* Primary text color */
+  --text-secondary: #bac2de;
+  /* Secondary text color */
+  --text-muted: #a6adc8;
+  /* Tertiary text, muted */
 
-    /* Text Colors */
-    --text-main: #CDD6F4;
-    /* Primary text color */
-    --text-secondary: #BAC2DE;
-    /* Secondary text color */
-    --text-muted: #A6ADC8;
-    /* Tertiary text, muted */
+  /* Surface Colors */
+  --surface-disabled: #313244;
+  /* Background for disabled items */
+  --surface-neutral: #45475a;
+  /* Neutral surface for cards, panels */
+  --surface-highlight: #585b70;
+  /* Selection and highlights */
 
-    /* Surface Colors */
-    --surface-disabled: #313244;
-    /* Background for disabled items */
-    --surface-neutral: #45475A;
-    /* Neutral surface for cards, panels */
-    --surface-highlight: #585B70;
-    /* Selection and highlights */
+  /* Accent Colors */
+  --accent-light: #f5e0dc;
+  /* Lightest accent (Rosewater) */
+  --accent-pink: #f5c2e7;
+  /* Pink accent */
+  --accent-purple: #cba6f7;
+  /* Mauve accent */
+  --accent-red: #f38ba8;
+  /* Red for errors and warnings */
+  --accent-orange: #fab387;
+  /* Orange for warnings and alerts */
+  --accent-yellow: #f9e2af;
+  /* Yellow for highlights */
+  --accent-green: #a6e3a1;
+  /* Green for success */
+  --accent-teal: #94e2d5;
+  /* Teal for information */
+  --accent-blue: #89b4fa;
+  /* Blue for links and actions */
+  --accent-light-blue: #89dceb;
+  /* Sky blue accent */
+  --accent-lavender: #b4befe;
+  /* Lavender for subtle highlights */
 
-    /* Accent Colors */
-    --accent-light: #F5E0DC;
-    /* Lightest accent (Rosewater) */
-    --accent-pink: #F5C2E7;
-    /* Pink accent */
-    --accent-purple: #CBA6F7;
-    /* Mauve accent */
-    --accent-red: #F38BA8;
-    /* Red for errors and warnings */
-    --accent-orange: #FAB387;
-    /* Orange for warnings and alerts */
-    --accent-yellow: #F9E2AF;
-    /* Yellow for highlights */
-    --accent-green: #A6E3A1;
-    /* Green for success */
-    --accent-teal: #94E2D5;
-    /* Teal for information */
-    --accent-blue: #89B4FA;
-    /* Blue for links and actions */
-    --accent-light-blue: #89DCEB;
-    /* Sky blue accent */
-    --accent-lavender: #B4BEFE;
-    /* Lavender for subtle highlights */
+  /* Overlay Colors */
+  --text-disabled: #6c7086;
+  /* Text for disabled elements */
+  --text-muted-light: #7f849c;
+  /* Light-muted text for hints */
+  --text-muted-dark: #9399b2;
+  /* Dark-muted text */
 
-    /* Overlay Colors */
-    --text-disabled: #6C7086;
-    /* Text for disabled elements */
-    --text-muted-light: #7F849C;
-    /* Light-muted text for hints */
-    --text-muted-dark: #9399B2;
-    /* Dark-muted text */
+  /* Shadow */
+  --shadow-default: rgba(0, 0, 0, 0.5);
+  /* Default shadow for elements */
 
-    /* Shadow */
-    --shadow-default: rgba(0, 0, 0, 0.5);
-    /* Default shadow for elements */
-
-    --window-bg: alpha(transparent, 0.6);
-    --border-color: var(--surface-disabled);
-    --ws-active: var(--text-muted);
-    --ws-inactive: var(--accent-red);
-    --ws-empty: var(--text-disabled);
-    --ws-hover:var(--accent-pink);
-    --ws-urgent: var(--accent-purple);
-
-
+  --window-bg: alpha(transparent, 0.6);
+  --border-color: var(--surface-disabled);
+  --ws-active: var(--text-muted);
+  --ws-inactive: var(--accent-red);
+  --ws-empty: var(--text-disabled);
+  --ws-hover: var(--accent-pink);
+  --ws-urgent: var(--accent-purple);
 }

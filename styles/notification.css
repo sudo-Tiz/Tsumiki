@@ -1,43 +1,39 @@
-
 /** notification **/
 #notification {
-    padding: 0.8rem;
-    border: solid 1px var(--border-color);
-    border-radius: 1rem;
-    background: var(--background-dark);
+  padding: 0.8rem;
+  border: solid 1px var(--border-color);
+  border-radius: 1rem;
+  background: var(--background-dark);
 }
 
-
 #notification .body {
-    color: darker(var(--text-main));
-    font-weight: 600;
-    font-size: 0.92rem;
+  color: darker(var(--text-main));
+  font-weight: 600;
+  font-size: 0.92rem;
 }
 
 .close-button:hover {
-    box-shadow: none;
-    background: alpha(var(--text-main), 0.2);
-    transition: background 0.15s ease-in-out;
-    border: none;
-  }
+  box-shadow: none;
+  background: alpha(var(--text-main), 0.2);
+  transition: background 0.15s ease-in-out;
+  border: none;
+}
 
+#notification_action_button button.start-action {
+  margin-left: 0;
+}
 
-  #notification_action_button button.start-action {
-    margin-left: 0;
-  }
-  
-  #notification_action_button button.end-action {
-    margin-right: 0;
-  }
-  
-  #notification_action_button button {
-    padding: 0.6rem;
-    font-weight: 600;
-    border-radius: 3rem;
-    background-color: var(--background-dark);
-  }
-  
-  #notification_action_button button:hover {
-    background-color: lighter(var(--background-dark));
-  }
-  
+#notification_action_button button.end-action {
+  margin-right: 0;
+}
+
+#notification_action_button button {
+  padding: 0.6rem;
+  font-weight: 600;
+  border-radius: 3rem;
+  background-color: var(--background-dark);
+}
+
+#notification_action_button button:hover {
+  background-color: lighter(var(--background-dark));
+}
