@@ -14,7 +14,8 @@ def apply_style(app: Application):
     logger.info("[Main] CSS applied")
     app.set_stylesheet_from_file(get_relative_path("styles/main.css"))
 
-APPLICATION_NAME="fabricpanel"
+
+APPLICATION_NAME = "fabricpanel"
 
 if __name__ == "__main__":
     # Create the status bar

@@ -15,7 +15,7 @@ class Battery(Box):
         interval: int = 2000,
         enable_label=True,
         enable_tooltip=True,
-        hide_label_when_full = True
+        hide_label_when_full=True,
     ):
         # Initialize the Box with specific name and style
         super().__init__(name="battery", style_classes="panel-box")
@@ -57,8 +57,7 @@ class Battery(Box):
 
             ## Hide the label when the battery is full
             if self.hide_label_when_full and battery_percent == 100:
-                self.children = (battery_icon)
-            
+                self.children = battery_icon
 
         # Update the tooltip with the battery status details if enabled
         if self.enable_tooltip:

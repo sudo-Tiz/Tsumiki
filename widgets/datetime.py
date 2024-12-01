@@ -1,5 +1,5 @@
-import datetime
 from fabric.widgets.box import Box
+import datetime
 from fabric.widgets.datetime import DateTime
 
 
@@ -8,7 +8,7 @@ class DateTimeBox(Box):
         super().__init__(name="date-time", style_classes="panel-box", **kwargs)
 
         # Get current date and time
-        now = datetime.now()
+        now = datetime.datetime.now()
 
         self.date_time = DateTime()
         self.children = self.date_time
