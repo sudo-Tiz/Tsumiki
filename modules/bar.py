@@ -142,10 +142,9 @@ class StatusBar(Window):
                 spacing=4,
                 orientation="h",
                 children=[
-                    self.updates,
-                    self.memory,
-                    self.battery,
                     self.status_container,
+                    self.updates,
+                    self.battery,
                     self.system_tray,
                 ],
             ),

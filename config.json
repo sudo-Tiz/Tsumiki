@@ -1,6 +1,6 @@
 {
   "layout": {
-    "left": ["workspaces","windowtitle","weather"],
+    "left": ["workspaces","windowtitle"],
     "middle": ["datetime","player"],
     "right": ["cpu","memory"]
   },

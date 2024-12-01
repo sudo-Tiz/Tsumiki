@@ -1,3 +1,4 @@
+from xmlrpc.client import APPLICATION_ERROR
 from fabric import Application
 from fabric.utils import get_relative_path, monitor_file
 
@@ -13,6 +14,7 @@ def apply_style(app: Application):
     logger.info("[Main] CSS applied")
     app.set_stylesheet_from_file(get_relative_path("styles/main.css"))
 
+APPLICATION_NAME="fabricpanel"
 
 if __name__ == "__main__":
     # Create the status bar
@@ -21,9 +23,9 @@ if __name__ == "__main__":
     system_overlay = OSDContainer()
 
     # Initialize the application with the status bar
-    app = Application("fabricpanel", bar, notifications, system_overlay)
+    app = Application(APPLICATION_NAME, bar, notifications, system_overlay)
 
-    setproctitle.setproctitle("fabricpanel")
+    setproctitle.setproctitle(APPLICATION_NAME)
 
     # Monitor main.css file for changes
     main_css_file = monitor_file(get_relative_path("styles"))
