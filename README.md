@@ -90,7 +90,11 @@ Use a similar configuration for your respective window manager's autostart setup
 - media
 - volume
 - weather
+- keyboardlayout
 - clock
+- systemtray
+- taskbar
+- language
 - systray
 - keyboard
 - ram
