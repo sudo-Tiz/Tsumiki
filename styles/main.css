@@ -38,6 +38,12 @@ label {
     background-color: var(--window-bg);
 }
 
+
+.panel-buuton-label {
+    margin-left: 10px;
+}
+
+
 #language,
 #window {
     padding: 0.19em 0.625em;
@@ -109,11 +115,6 @@ tooltip label {
 
 tooltip>* {
     padding: 0.125em 0.25em
-}
-
-
-.panel-buuton-label {
-    margin-left: 10px;
 }
 
 

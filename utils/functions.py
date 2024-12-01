@@ -73,6 +73,7 @@ def check_icon_exists(icon_name: str, fallback_icon: str) -> str:
     return fallback_icon
 
 
+# Function to get the distro icon
 def get_distro_icon():
     distro_id = GLib.get_os_info("ID")
     # Search for the icon in the list
