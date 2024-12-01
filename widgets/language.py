@@ -4,6 +4,8 @@ from fabric.widgets.box import Box
 
 
 class LanguageBox(Box):
+    """A widget to display the current language."""
+
     def __init__(self, length=3, **kwargs):
         super().__init__(name="language", style_classes="panel-box", **kwargs)
 

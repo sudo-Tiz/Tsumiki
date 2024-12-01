@@ -10,14 +10,14 @@ class ScreenRecord(Button):
 
     def __init__(self, **kwargs):
         super().__init__(name="screen-recorder", style_classes="panel-box", **kwargs)
-        screenRecordInfo = Fabricator(
+        screen_record_info = Fabricator(
             poll_from=exec_shell_command(
                 get_relative_path("../assets/scripts/screen_record.sh status"),
             ).strip("\n"),
             stream=True,
         )
 
-        screenRecordInfo.connect(
+        screen_record_info.connect(
             "changed",
             lambda _, value: (self.get_status(value)),
         )

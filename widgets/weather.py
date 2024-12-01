@@ -11,6 +11,8 @@ from shared.popup import PopupWindow
 
 
 class WeatherMenu(Box):
+    """A widget to display the weather menu."""
+
     def __init__(self, **kwargs):
         super().__init__(orientation="v", name="weather-menu", **kwargs)
         self.children = Label(label="Prayer Times", style_classes="panel-text")
@@ -26,6 +28,8 @@ sample_popup = PopupWindow(
 
 
 class Weather(Button):
+    """A widget to display the current weather."""
+
     def __init__(
         self,
         city: str,
