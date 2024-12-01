@@ -1,10 +1,8 @@
 import re
-from fabric.hyprland.widgets import (
-    ActiveWindow,
-)
-from fabric.widgets.box import Box
 
+from fabric.hyprland.widgets import ActiveWindow
 from fabric.utils import FormattedString, truncate
+from fabric.widgets.box import Box
 
 from utils.config import Config
 

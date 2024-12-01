@@ -1,13 +1,12 @@
-from fabric.widgets.label import Label
-from fabric.widgets.box import Box
-from fabric.widgets.button import Button
-from fabric.utils import (
-    invoke_repeater,
-)
-from loguru import logger
-from services.weather import WeatherInfo
 import threading
 
+from fabric.utils import invoke_repeater
+from fabric.widgets.box import Box
+from fabric.widgets.button import Button
+from fabric.widgets.label import Label
+from loguru import logger
+
+from services.weather import WeatherInfo
 from shared.popup import PopupWindow
 
 

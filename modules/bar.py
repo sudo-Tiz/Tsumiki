@@ -1,27 +1,26 @@
-from utils.config import config
-from fabric.system_tray.widgets import SystemTray
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow as Window
 
+from utils.config import config
 from widgets import (
-    WorkSpaces,
-    KeyboardLayout,
-    WindowTitle,
-    LanguageBox,
-    DateTimeBox,
-    HyprSunset,
-    HyprIdle,
+    AUDIO_WIDGET,
     Battery,
-    Cpu,
     ClickCounter,
+    Cpu,
+    DateTimeBox,
+    HyprIdle,
+    HyprSunset,
+    KeyboardLayout,
+    LanguageBox,
     Memory,
-    Storage,
-    Weather,
     Mpris,
+    Storage,
     Updates,
     VolumeWidget,
-    AUDIO_WIDGET,
+    Weather,
+    WindowTitle,
+    WorkSpaces,
 )
 from widgets.systray import SystemTray
 from widgets.taskbar import TaskBar

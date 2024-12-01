@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 
-import dbus
-import dbus.service
-import dbus.mainloop.glib
-from gi.repository import GLib
-import subprocess
 import logging
+import subprocess
+
+import dbus
+import dbus.mainloop.glib
+import dbus.service
+from gi.repository import GLib
 
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"

@@ -2,14 +2,13 @@ import json
 import os
 from typing import TypedDict
 
-from gi.repository import GdkPixbuf, GLib, Gtk
-from loguru import logger
-
 from fabric.hyprland.widgets import get_hyprland_connection
 from fabric.utils import exec_shell_command
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
+from gi.repository import GdkPixbuf, GLib, Gtk
+from loguru import logger
 
 
 class PagerClient(TypedDict):

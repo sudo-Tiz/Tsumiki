@@ -1,5 +1,5 @@
-from fabric.widgets.button import Button
 from fabric.utils import exec_shell_command, exec_shell_command_async, invoke_repeater
+from fabric.widgets.button import Button
 
 
 class CommandSwitcher(Button):

@@ -1,9 +1,7 @@
-from xmlrpc.client import APPLICATION_ERROR
+import setproctitle
 from fabric import Application
 from fabric.utils import get_relative_path, monitor_file
-
 from loguru import logger
-import setproctitle
 
 from modules.bar import StatusBar
 from modules.notifications import NotificationPopup

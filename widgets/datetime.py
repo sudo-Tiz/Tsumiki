@@ -1,5 +1,6 @@
-from fabric.widgets.box import Box
 import datetime
+
+from fabric.widgets.box import Box
 from fabric.widgets.datetime import DateTime
 
 

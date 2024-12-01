@@ -18,10 +18,10 @@ check_arch_updates() {
 
     # Get the number of AUR updates using 'yay'
     aur_updates=$(yay -Qum 2>/dev/null | wc -l)
-    
+
     # Calculate total updates
     total_updates=$((official_updates + aur_updates + flatpak_updates))
-    
+
     # Build the tooltip string conditionally
     tooltip="󱓽 Official $official_updates\n󱓾 AUR $aur_updates"
     if [ "$flatpak_updates" -gt 0 ]; then
@@ -44,13 +44,13 @@ check_ubuntu_updates() {
 
     # Get the number of official updates using 'apt-get'
     official_updates=$(apt-get -s -o Debug::NoLocking=true upgrade | grep -c ^Inst)
-    
+
     # Calculate total updates
     total_updates=$((official_updates + flatpak_updates))
-    
+
     # Build the tooltip string conditionally
     tooltip="󱓽 Official $official_updates"
-    
+
     # If Flatpak updates exist, add them to the tooltip
     if [ "$flatpak_updates" -gt 0 ]; then
         tooltip="$tooltip\n Flatpak $flatpak_updates"
@@ -75,10 +75,10 @@ check_fedora_updates() {
 
     # Calculate total updates
     total_updates=$((official_updates + flatpak_updates))
-    
+
     # Build the tooltip string conditionally
     tooltip="󱓽 Official $official_updates"
-    
+
     # If Flatpak updates exist, add them to the tooltip
     if [ "$flatpak_updates" -gt 0 ]; then
         tooltip="$tooltip\n Flatpak $flatpak_updates"
@@ -102,10 +102,10 @@ check_opensuse_updates() {
 
     # Calculate total updates
     total_updates=$((official_updates + flatpak_updates))
-    
+
     # Build the tooltip string conditionally
     tooltip="󱓽 Official $official_updates"
-    
+
     # If Flatpak updates exist, add them to the tooltip
     if [ "$flatpak_updates" -gt 0 ]; then
         tooltip="$tooltip\n Flatpak $flatpak_updates"

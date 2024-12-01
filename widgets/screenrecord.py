@@ -1,9 +1,8 @@
 from fabric import Fabricator
-from fabric.widgets.button import Button
 from fabric.utils import exec_shell_command, get_relative_path
+from fabric.widgets.button import Button
 
-
-## TODO: on button click enable/disable recording
+# TODO: on button click enable/disable recording
 
 
 class ScreenRecord(Button):

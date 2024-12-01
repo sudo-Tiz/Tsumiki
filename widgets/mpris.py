@@ -1,9 +1,9 @@
 from fabric import Fabricator
-from fabric.widgets.label import Label
-from fabric.widgets.revealer import Revealer
+from fabric.utils import bulk_connect, exec_shell_command
 from fabric.widgets.box import Box
 from fabric.widgets.eventbox import EventBox
-from fabric.utils import exec_shell_command, bulk_connect
+from fabric.widgets.label import Label
+from fabric.widgets.revealer import Revealer
 
 from utils.icons import ICONS
 

@@ -1,15 +1,13 @@
 import gi
 
-from loguru import logger
-
+gi.require_version("Gray", "0.1")
+gi.require_version("Gtk", "3.0")
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
 from fabric.widgets.revealer import Revealer
-
-gi.require_version("Gray", "0.1")
-gi.require_version("Gtk", "3.0")
-from gi.repository import Gdk, Gray, GdkPixbuf, Gtk
+from gi.repository import Gdk, GdkPixbuf, Gray, Gtk
+from loguru import logger
 
 
 class SystemTray(Box):

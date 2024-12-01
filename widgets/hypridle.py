@@ -1,5 +1,6 @@
-from shared.buttontoggle import CommandSwitcher
 from fabric.widgets.button import Button
+
+from shared.buttontoggle import CommandSwitcher
 
 
 # This class represents a button widget for controlling the hypridle command

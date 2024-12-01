@@ -1,4 +1,5 @@
-from fabric.hyprland.widgets import WorkspaceButton, Workspaces as HyperlandWorkspace
+from fabric.hyprland.widgets import WorkspaceButton
+from fabric.hyprland.widgets import Workspaces as HyperlandWorkspace
 from fabric.widgets.box import Box
 
 

@@ -1,11 +1,10 @@
-from fabric.widgets.label import Label
-from fabric.widgets.box import Box
-from fabric.utils import (
-    invoke_repeater,
-)
-from utils.icons import ICONS
-from utils.functions import text_icon, convert_bytes
 import psutil
+from fabric.utils import invoke_repeater
+from fabric.widgets.box import Box
+from fabric.widgets.label import Label
+
+from utils.functions import convert_bytes, text_icon
+from utils.icons import ICONS
 
 
 class Cpu(Box):

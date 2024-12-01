@@ -6,7 +6,8 @@ from gi.repository import GLib, Gtk
 
 class Animator(Service):
     @Signal
-    def finished(self) -> None: ...
+    def finished(self) -> None:
+        ...
 
     @Property(tuple[float, float, float, float], "read-write")
     def bezier_curve(self) -> tuple[float, float, float, float]:

@@ -1,7 +1,6 @@
 from fabric.hyprland.widgets import Language
-from fabric.widgets.box import Box
-
 from fabric.utils import FormattedString, truncate
+from fabric.widgets.box import Box
 
 
 class LanguageBox(Box):

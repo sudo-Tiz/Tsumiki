@@ -1,12 +1,11 @@
 from typing import Literal
 
-from gi.repository import GLib
-
 from fabric.widgets.box import Box
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow
 from fabric.widgets.widget import Widget
+from gi.repository import GLib
 
 
 class Padding(EventBox):

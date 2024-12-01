@@ -1,7 +1,7 @@
 from fabric.widgets.box import Box
-from fabric.widgets.wayland import WaylandWindow
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.shapes import Corner
+from fabric.widgets.wayland import WaylandWindow
 
 
 class leftCorners(WaylandWindow):

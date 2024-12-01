@@ -1,8 +1,8 @@
 {
   "layout": {
-    "left": ["workspaces","windowtitle"],
-    "middle": ["datetime","player"],
-    "right": ["cpu","memory"]
+    "left": ["workspaces", "windowtitle"],
+    "middle": ["datetime", "player"],
+    "right": ["cpu", "memory"]
   },
   "hyprsunset": {
     "temperature": "2800k",
@@ -58,7 +58,7 @@
     "icon": "󱧘",
     "icon_size": "14px"
   },
-  "weather":{
+  "weather": {
     "location": "Kathmandu"
   }
 }

@@ -1,15 +1,11 @@
 import gi
 
-from utils.functions import check_icon_exists
-
 gi.require_version("GdkPixbuf", "2.0")
-from gi.repository import GdkPixbuf
-
 from fabric.notifications import (
     Notification,
     NotificationAction,
-    Notifications,
     NotificationCloseReason,
+    Notifications,
 )
 from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
@@ -18,6 +14,9 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow
+from gi.repository import GdkPixbuf
+
+from utils.functions import check_icon_exists
 
 NOTIFICATION_WIDTH = 400
 NOTIFICATION_IMAGE_SIZE = 64

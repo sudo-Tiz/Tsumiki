@@ -10,7 +10,7 @@ from fabric.widgets.label import Label
 from utils.icons import DISTRO_ICONS
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GLib
+from gi.repository import GLib, Gtk
 
 
 # Function to read the configuration file

@@ -2,8 +2,8 @@ from .battery import *
 from .clickcounter import *
 from .dashboard import *
 from .datetime import *
-from .hyprsunset import *
 from .hypridle import *
+from .hyprsunset import *
 from .kblayout import *
 from .language import *
 from .mpris import *
@@ -11,9 +11,9 @@ from .power import *
 from .screenrecord import *
 from .stats import *
 from .stopwatch import *
+from .taskbar import *
 from .updates import *
 from .volume import *
 from .weather import *
 from .windowtitle import *
 from .workspace import *
-from .taskbar import *

@@ -1,9 +1,10 @@
 from venv import logger
-from fabric.widgets.eventbox import EventBox
+
+from fabric.widgets.box import Box
 from fabric.widgets.circularprogressbar import CircularProgressBar
+from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
-from fabric.widgets.box import Box
 
 AUDIO_WIDGET = True
 
@@ -32,7 +33,7 @@ class VolumeWidget(Box):
                 child=self.progress_bar,
                 overlays=Label(
                     label="",
-                    style="margin: 0px 6px 0px 0px; font-size: 12px",  # to center the icon glyph
+                    style="margin: 0px 6px 0px 0px; font-size: 12px",
                 ),
             ),
         )

@@ -1,8 +1,8 @@
 import json
+
+from fabric.utils import exec_shell_command
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
-from fabric.utils import exec_shell_command
-
 
 # sourced from hyprpanel
 KBLAYOUT_MAP = {

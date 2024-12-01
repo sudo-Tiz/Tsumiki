@@ -49,7 +49,6 @@ hypridle
 
 ```
 
-
 ### **2. Clone the Repository**
 
 Clone this repository:
@@ -84,6 +83,7 @@ exec = python main.py
 Use a similar configuration for your respective window manager's autostart setup.
 
 ## **Available Modules**
+
 - battery
 - workspaces
 - windowtitle
@@ -104,7 +104,6 @@ Use a similar configuration for your respective window manager's autostart setup
 - updates
 - hyprsunset
 - hypridle
-
 
 > [!WARNING]
 > This is still in early development and will include breaking changes
