@@ -3,8 +3,9 @@ from fabric.widgets.button import Button
 from shared.buttontoggle import CommandSwitcher
 
 
-# This class represents a button widget for controlling the hypridle command
 class HyprIdle(Button):
+    """A widget to control the hypridle command."""
+
     def __init__(self, config, **kwargs):
         super().__init__(**kwargs)
         # Store the configuration for hypridle

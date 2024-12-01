@@ -16,6 +16,8 @@ from utils.icons import ICONS
 
 
 class Updates(EventBox):
+    """A widget to display the number of available updates."""
+
     def __init__(
         self,
         os: str,
@@ -32,7 +34,9 @@ class Updates(EventBox):
         self.enable_tooltip = enable_tooltip
         # Create a TextIcon with the specified icon and size
         self.text_icon = text_icon(
-            icon, size=icon_size, props={"style_classes": "panel-text-icon"}
+            icon,
+            size=icon_size,
+            props={"style_classes": "panel-text-icon"},
         )
         self.os = os
 
@@ -78,7 +82,8 @@ class Updates(EventBox):
 
         # Execute the update script asynchronously and update values
         exec_shell_command_async(
-            f"{filename} -{self.os}", lambda output: self.update_values(output)
+            f"{filename} -{self.os}",
+            lambda output: self.update_values(output),
         )
 
         return True

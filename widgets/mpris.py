@@ -9,11 +9,13 @@ from utils.icons import ICONS
 
 
 class Mpris(EventBox):
+    """A widget to control the MPRIS."""
+
     def __init__(
         self,
         length=30,
         enable_tooltip=True,
-    ):
+    ) -> None:
         # Initialize the EventBox with specific name and style
         super().__init__(name="mpris")
         self.enable_tooltip = enable_tooltip
@@ -32,7 +34,8 @@ class Mpris(EventBox):
         self.revealer.set_reveal_child(True)
 
         self.box = Box(
-            style_classes="panel-box", children=[self.text_icon, self.revealer]
+            style_classes="panel-box",
+            children=[self.text_icon, self.revealer],
         )
 
         self.children = self.box
@@ -46,27 +49,27 @@ class Mpris(EventBox):
             },
         )
 
-        playerInfo = Fabricator(
+        player_info = Fabricator(
             poll_from=lambda: {
                 "status": str(exec_shell_command("playerctl status").strip("\n")),
                 "info": str(
                     exec_shell_command(
-                        'playerctl metadata --format "{{ title }} - {{ artist }}"'
-                    ).strip("\n")
+                        'playerctl metadata --format "{{ title }} - {{ artist }}"',
+                    ).strip("\n"),
                 ),
             },
             stream=True,
         )
 
         # Connect the playerInfo changes to the get_current method
-        playerInfo.connect(
+        player_info.connect(
             "changed",
             lambda _, value: (self.get_current(value)),
         )
 
     def get_current(self, value):
         # Get the current player info and status
-        info = value["info"] if len(value["info"]) < 30 else value["info"][:30]
+        info = value["info"] if len(value["info"]) < self.length else value["info"][:30]
         status = value["status"]
 
         # Update the label and icon based on the player status

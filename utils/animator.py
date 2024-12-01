@@ -6,8 +6,7 @@ from gi.repository import GLib, Gtk
 
 class Animator(Service):
     @Signal
-    def finished(self) -> None:
-        ...
+    def finished(self) -> None: ...
 
     @Property(tuple[float, float, float, float], "read-write")
     def bezier_curve(self) -> tuple[float, float, float, float]:
@@ -16,7 +15,6 @@ class Animator(Service):
     @bezier_curve.setter
     def bezier_curve(self, value: tuple[float, float, float, float]):
         self._bezier_curve = value
-        return
 
     @Property(float, "read-write")
     def value(self):
@@ -25,7 +23,6 @@ class Animator(Service):
     @value.setter
     def value(self, value: float):
         self._value = value
-        return
 
     @Property(float, "read-write")
     def max_value(self):
@@ -34,7 +31,6 @@ class Animator(Service):
     @max_value.setter
     def max_value(self, value: float):
         self._max_value = value
-        return
 
     @Property(float, "read-write")
     def min_value(self):
@@ -43,7 +39,6 @@ class Animator(Service):
     @min_value.setter
     def min_value(self, value: float):
         self._min_value = value
-        return
 
     @Property(bool, "read-write", default_value=False)
     def playing(self):
@@ -52,7 +47,6 @@ class Animator(Service):
     @playing.setter
     def playing(self, value: bool):
         self._playing = value
-        return
 
     @Property(bool, "read-write", default_value=False)
     def repeat(self):
@@ -61,7 +55,6 @@ class Animator(Service):
     @repeat.setter
     def repeat(self, value: bool):
         self._repeat = value
-        return
 
     def __init__(
         self,
@@ -111,7 +104,9 @@ class Animator(Service):
 
     def do_ease(self, time: float) -> float:
         return self.do_lerp(
-            self.min_value, self.max_value, self.do_interpolate_cubic_bezier(time)
+            self.min_value,
+            self.max_value,
+            self.do_interpolate_cubic_bezier(time),
         )
 
     def do_update_value(self, delta_time: float):
@@ -149,7 +144,6 @@ class Animator(Service):
             else:
                 GLib.source_remove(self._tick_handler)
         self._tick_handler = None
-        return
 
     def play(self):
         if self.playing:
@@ -160,7 +154,7 @@ class Animator(Service):
         if not self._tick_handler:
             if self._tick_widget:
                 self._tick_handler = self._tick_widget.add_tick_callback(
-                    self.do_handle_tick
+                    self.do_handle_tick,
                 )
             else:
                 self._tick_handler = GLib.timeout_add(16, self.do_handle_tick)
@@ -176,5 +170,5 @@ class Animator(Service):
         if not self._tick_handler:
             self._timeline_pos = 0
             self.playing = False
-            return
+            return None
         return self.do_remove_tick_handlers()

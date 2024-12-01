@@ -1,7 +1,4 @@
 import gi
-
-gi.require_version("Gray", "0.1")
-gi.require_version("Gtk", "3.0")
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
@@ -9,8 +6,13 @@ from fabric.widgets.revealer import Revealer
 from gi.repository import Gdk, GdkPixbuf, Gray, Gtk
 from loguru import logger
 
+gi.require_version("Gray", "0.1")
+gi.require_version("Gtk", "3.0")
+
 
 class SystemTray(Box):
+    """A widget to display the system tray items."""
+
     def __init__(self, pixel_size: int = 16, **kwargs) -> None:
         super().__init__(name="system-tray", style_classes="panel-box", **kwargs)
         self.pixel_size = pixel_size
@@ -51,7 +53,9 @@ class SystemTray(Box):
 
         # resize/scale the pixbuf
         pixbuf.scale_simple(
-            self.pixel_size, self.pixel_size, GdkPixbuf.InterpType.HYPER
+            self.pixel_size,
+            self.pixel_size,
+            GdkPixbuf.InterpType.HYPER,
         )
 
         image = Image(pixbuf=pixbuf, pixel_size=self.pixel_size)

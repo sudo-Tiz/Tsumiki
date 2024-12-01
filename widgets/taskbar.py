@@ -20,6 +20,8 @@ class PagerClient(TypedDict):
 
 
 class TaskBar(Box):
+    """A widget to display the taskbar items."""
+
     def __init__(self, icon_size: int = 24, **kwargs):
         super().__init__(
             orientation="h",
@@ -67,7 +69,9 @@ class TaskBar(Box):
                 button = Button(image=icon, tooltip_text=client["title"])
                 if client["address"] == active_window_address:
                     button.connect(
-                        "button-press-event", self.on_icon_click, client["address"]
+                        "button-press-event",
+                        self.on_icon_click,
+                        client["address"],
                     )
 
                 self.add(button)
@@ -80,7 +84,7 @@ class TaskBar(Box):
     def get_active_window_address(self) -> str:
         # Fetch the address of the currently active window
         active_window_info = json.loads(
-            self.connection.send_command("j/activewindow").reply.decode()
+            self.connection.send_command("j/activewindow").reply.decode(),
         )
         return active_window_info.get("address", "")
 
@@ -91,7 +95,9 @@ class TaskBar(Box):
         return json.loads(self.connection.send_command("j/clients").reply.decode())
 
     def bake_window_icon(
-        self, window_class: str, fallback_icon: str = "image-missing"
+        self,
+        window_class: str,
+        fallback_icon: str = "image-missing",
     ) -> Image:
         icon_name = self.get_icon_from_desktop_entry(window_class)
 
@@ -111,7 +117,7 @@ class TaskBar(Box):
                     if desktop_file.endswith(".desktop"):
                         file_path = os.path.join(applications_dir, desktop_file)
                         try:
-                            with open(file_path, "r") as f:
+                            with open(file_path) as f:
                                 app_name = None
                                 icon_name = None
                                 for line in f:
@@ -126,7 +132,9 @@ class TaskBar(Box):
         return None
 
     def load_icon(
-        self, icon_name: str, fallback_icon: str = "image-missing"
+        self,
+        icon_name: str,
+        fallback_icon: str = "image-missing",
     ) -> GdkPixbuf.Pixbuf:
         try:
             pixbuf = self.icon_theme.load_icon(

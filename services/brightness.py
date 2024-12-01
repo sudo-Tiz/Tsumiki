@@ -26,7 +26,7 @@ def exec_brightnessctl_async(args: str):
             logger.error(f"Error executing brightnessctl: {stderr.decode().strip()}")
         else:
             logger.debug(
-                f"brightnessctl output: {stdout.decode().strip()}"
+                f"brightnessctl output: {stdout.decode().strip()}",
             )  # Optional: Log the output
     except Exception as e:
         logger.exception(f"Exception in exec_brightnessctl_async: {e}")
@@ -34,9 +34,7 @@ def exec_brightnessctl_async(args: str):
 
 # Discover screen backlight device
 try:
-    screen_device = str(exec_shell_command("ls -w1 /sys/class/backlight")).split("\n")[
-        0
-    ]
+    screen_device = str(exec_shell_command("ls -w1 /sys/class/backlight")).split("\n")[0]
 except IndexError:
     screen_device = None
 
@@ -45,7 +43,8 @@ class NoBrightnessError(ImportError):
     # Raised when brightness-related dependencies are missing.
     def __init__(self, *args):
         super().__init__(
-            "Brightness control not available or missing dependencies", *args
+            "Brightness control not available or missing dependencies",
+            *args,
         )
 
 
@@ -55,13 +54,13 @@ class Brightness(Service):
     @Signal
     def screen(self, value: int) -> None:
         """Signal emitted when screen brightness changes."""
-        pass  # Implement as needed for your application
+        # Implement as needed for your application
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
         if not screen_device:
-            raise NoBrightnessError()
+            raise NoBrightnessError
 
         # Path for screen backlight control
         self.screen_backlight_path = f"/sys/class/backlight/{screen_device}"
@@ -74,7 +73,8 @@ class Brightness(Service):
         self.screen_monitor.connect(
             "changed",
             lambda _, file, *args: self.emit(
-                "screen", round(int(file.load_bytes()[0].get_data()))
+                "screen",
+                round(int(file.load_bytes()[0].get_data())),
             ),
         )
 

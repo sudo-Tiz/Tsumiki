@@ -15,6 +15,6 @@ class LanguageBox(Box):
                 suffix="",
             ),
         )
-        ## Todo: add tool tip
+        ## TODO: add tool tip
 
         self.children = self.lang

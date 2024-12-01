@@ -9,7 +9,8 @@ import dbus.service
 from gi.repository import GLib
 
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
 )
 
 AGENT_PATH = "/test/agent"
@@ -19,10 +20,12 @@ CAPABILITY = "NoInputNoOutput"
 def send_notification_with_actions(title, message, actions, action_handler):
     bus = dbus.SessionBus()
     notification_object = bus.get_object(
-        "org.freedesktop.Notifications", "/org/freedesktop/Notifications"
+        "org.freedesktop.Notifications",
+        "/org/freedesktop/Notifications",
     )
     notify_interface = dbus.Interface(
-        notification_object, "org.freedesktop.Notifications"
+        notification_object,
+        "org.freedesktop.Notifications",
     )
     bus.add_signal_receiver(
         action_handler,
@@ -44,7 +47,8 @@ class Agent(dbus.service.Object):
         bus = dbus.SystemBus()
         device_proxy = bus.get_object("org.bluez", device)
         device_properties = dbus.Interface(
-            device_proxy, "org.freedesktop.DBus.Properties"
+            device_proxy,
+            "org.freedesktop.DBus.Properties",
         )
         return device_properties.Get("org.bluez.Device1", "Name")
 
@@ -53,7 +57,10 @@ class Agent(dbus.service.Object):
         device_name = self.get_device_name(device)
         logging.info(f"RequestPinCode {device_name} ({device})")
         self.request_input(
-            "Enter PIN code", f"Enter PIN code for device {device_name}", device, "pin"
+            "Enter PIN code",
+            f"Enter PIN code for device {device_name}",
+            device,
+            "pin",
         )
 
     @dbus.service.method("org.bluez.Agent1", in_signature="o", out_signature="u")
@@ -98,7 +105,6 @@ class Agent(dbus.service.Object):
             actions,
             action_handler,
         )
-        return
 
     @dbus.service.method("org.bluez.Agent1", in_signature="o", out_signature="")
     def RequestAuthorization(self, device):
@@ -120,7 +126,6 @@ class Agent(dbus.service.Object):
             actions,
             action_handler,
         )
-        return
 
     @dbus.service.method("org.bluez.Agent1", in_signature="os", out_signature="")
     def AuthorizeService(self, device, uuid):
@@ -134,7 +139,7 @@ class Agent(dbus.service.Object):
                 self.send_reply(device)
             elif action_key == "deny":
                 logging.info(
-                    f"Denied authorization for service {uuid} on device {device_name}"
+                    f"Denied authorization for service {uuid} on device {device_name}",
                 )
                 self.send_error(device, "org.bluez.Error.Rejected")
 
@@ -144,7 +149,6 @@ class Agent(dbus.service.Object):
             actions,
             action_handler,
         )
-        return
 
     @dbus.service.method("org.bluez.Agent1", in_signature="", out_signature="")
     def Cancel(self):
@@ -157,6 +161,7 @@ class Agent(dbus.service.Object):
                     ["zenity", "--entry", "--title", title, "--text", message],
                     capture_output=True,
                     text=True,
+                    check=False,
                 )
                 user_input = result.stdout.strip()
                 if input_type == "pin":
@@ -183,7 +188,8 @@ class Agent(dbus.service.Object):
         agent = bus.get_object("org.bluez", device)
         agent_interface = dbus.Interface(agent, "org.bluez.Device1")
         agent_interface.Pair(
-            reply_handler=self.success_callback, error_handler=self.error_callback
+            reply_handler=self.success_callback,
+            error_handler=self.error_callback,
         )
 
     def send_error(self, device, error):
@@ -192,7 +198,8 @@ class Agent(dbus.service.Object):
         agent = bus.get_object("org.bluez", device)
         agent_interface = dbus.Interface(agent, "org.bluez.Device1")
         agent_interface.CancelPairing(
-            reply_handler=self.success_callback, error_handler=self.error_callback
+            reply_handler=self.success_callback,
+            error_handler=self.error_callback,
         )
 
     def success_callback(self):
@@ -205,7 +212,8 @@ class Agent(dbus.service.Object):
 def register_agent():
     bus = dbus.SystemBus()
     manager = dbus.Interface(
-        bus.get_object("org.bluez", "/org/bluez"), "org.bluez.AgentManager1"
+        bus.get_object("org.bluez", "/org/bluez"),
+        "org.bluez.AgentManager1",
     )
     path = AGENT_PATH
     agent = Agent(bus)

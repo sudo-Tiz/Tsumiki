@@ -15,7 +15,7 @@ from gi.repository import GLib, Gtk
 
 # Function to read the configuration file
 def read_config():
-    with open(get_relative_path("../config.json"), "r") as file:
+    with open(get_relative_path("../config.json")) as file:
         # Load JSON data into a Python dictionary
         data = json.load(file)
     return data

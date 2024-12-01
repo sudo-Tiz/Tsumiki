@@ -6,11 +6,13 @@ from fabric.widgets.button import Button
 
 
 class ScreenRecord(Button):
+    """A widget to control the screen recording."""
+
     def __init__(self, **kwargs):
         super().__init__(name="screen-recorder", style_classes="panel-box", **kwargs)
         screenRecordInfo = Fabricator(
             poll_from=exec_shell_command(
-                get_relative_path("../assets/scripts/screen_record.sh status")
+                get_relative_path("../assets/scripts/screen_record.sh status"),
             ).strip("\n"),
             stream=True,
         )

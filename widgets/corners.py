@@ -4,7 +4,7 @@ from fabric.widgets.shapes import Corner
 from fabric.widgets.wayland import WaylandWindow
 
 
-class leftCorners(WaylandWindow):
+class LeftCorners(WaylandWindow):
     def __init__(
         self,
     ):
@@ -23,14 +23,14 @@ class leftCorners(WaylandWindow):
                     orientation="top-left",
                     size=10,
                     name="corner-top-left",
-                )
+                ),
             ],
             end_children=[
                 Corner(
                     orientation="bottom-left",
                     size=10,
                     name="corner-bottom-left",
-                )
+                ),
             ],
         )
 
@@ -39,7 +39,7 @@ class leftCorners(WaylandWindow):
         self.show()
 
 
-class rightCorners(WaylandWindow):
+class RightCorners(WaylandWindow):
     def __init__(
         self,
     ):
@@ -58,14 +58,14 @@ class rightCorners(WaylandWindow):
                     orientation="top-right",
                     size=10,
                     name="corner-top-right",
-                )
+                ),
             ],
             end_children=[
                 Corner(
                     orientation="bottom-right",
                     size=10,
                     name="corner-bottom-right",
-                )
+                ),
             ],
         )
 

@@ -7,7 +7,7 @@ from fabric.widgets.box import Box
 from utils.config import Config
 
 # Mapping of window classes to icons and titles
-windowTitleMap = [
+WINDOW_TITLE_MAP = [
     # user provided values
     # ...options.bar.windowtitle.title_map.value,
     # Original Entries
@@ -104,8 +104,9 @@ windowTitleMap = [
 ]
 
 
-# This class represents a widget that displays the title of the active window
 class WindowTitle(Box):
+    """a widget that displays the title of the active window."""
+
     def __init__(self, config: Config, **kwargs):
         super().__init__(style_classes="panel-box", name="window-box", **kwargs)
         # Store the configuration for the window title
@@ -126,7 +127,8 @@ class WindowTitle(Box):
         win_title = truncate(win_title, self.config["length"])
         # Find a matching window class in the windowTitleMap
         matched_window = next(
-            (wt for wt in windowTitleMap if re.search(wt[0], win_class.lower())), None
+            (wt for wt in WINDOW_TITLE_MAP if re.search(wt[0], win_class.lower())),
+            None,
         )
         # Return the formatted title with or without the icon
         if matched_window:

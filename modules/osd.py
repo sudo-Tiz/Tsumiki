@@ -80,12 +80,11 @@ class BrightnessOSDContainer(Box):
     def _get_brightness_icon_name(self, level: int) -> str:
         if level >= 66:
             return "display-brightness-high-symbolic"
-        elif level < 32 and level > 0:
+        if level < 32 and level > 0:
             return "display-brightness-medium-symbolic"
-        elif level <= 1:
+        if level <= 1:
             return "display-brightness-off-symbolic"
-        else:
-            return "display-brightness-medium-symbolic"
+        return "display-brightness-medium-symbolic"
 
 
 class AudioOSDContainer(Box):
@@ -151,12 +150,11 @@ class AudioOSDContainer(Box):
     def _get_audio_icon_name(self, volume: int) -> str:
         if volume >= 66:
             return "audio-volume-high-symbolic"
-        elif volume < 32 and volume > 0:
+        if volume < 32 and volume > 0:
             return "audio-volume-low-symbolic"
-        elif volume <= 0:
+        if volume <= 0:
             return "audio-volume-muted-symbolic"
-        else:
-            return "audio-volume-medium-symbolic"
+        return "audio-volume-medium-symbolic"
 
 
 class OSDContainer(Window):
@@ -200,7 +198,8 @@ class OSDContainer(Window):
 
         self.audio_container.audio.connect("notify::speaker", self.show_audio)
         self.brightness_container.brightness_service.connect(
-            "screen", self.show_brightness
+            "screen",
+            self.show_brightness,
         )
         self.audio_container.connect("volume-changed", self.show_audio)
 

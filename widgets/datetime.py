@@ -5,6 +5,8 @@ from fabric.widgets.datetime import DateTime
 
 
 class DateTimeBox(Box):
+    """A widget to display the current date and time."""
+
     def __init__(self, **kwargs):
         super().__init__(name="date-time", style_classes="panel-box", **kwargs)
 

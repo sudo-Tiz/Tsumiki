@@ -34,7 +34,7 @@ class CommandSwitcher(Button):
     def is_active(self, *_):
         return (
             exec_shell_command(
-                f"bash -c 'pgrep -x {self.command_without_args} > /dev/null && echo yes || echo no'"
+                f"bash -c 'pgrep -x {self.command_without_args} > /dev/null && echo yes || echo no'",
             ).strip()
             == "yes"
         )
@@ -55,20 +55,20 @@ class CommandSwitcher(Button):
                 self.cat_icon(
                     icon=self.enabled_icon if self.is_active() else self.disabled_icon,
                     text="On" if self.is_active() else "Off",
-                )
+                ),
             )
         else:
             self.set_label(
                 self.cat_icon(
                     icon=self.enabled_icon if self.is_active() else self.disabled_icon,
                     text="",
-                )
+                ),
             )
 
         if self.enable_tooltip:
             self.set_tooltip_text(
                 f"{self.command_without_args} enabled"
                 if self.is_active()
-                else f"{self.command_without_args} disabled"
+                else f"{self.command_without_args} disabled",
             )
         return True

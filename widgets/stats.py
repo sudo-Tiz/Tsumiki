@@ -8,6 +8,8 @@ from utils.icons import ICONS
 
 
 class Cpu(Box):
+    """A widget to display the current CPU usage."""
+
     def __init__(
         self,
         icon: str = ICONS["cpu"],
@@ -23,7 +25,9 @@ class Cpu(Box):
 
         # Create a TextIcon with the specified icon and size
         self.text_icon = text_icon(
-            icon, size=icon_size, props={"style_classes": "panel-text-icon"}
+            icon,
+            size=icon_size,
+            props={"style_classes": "panel-text-icon"},
         )
         self.children = self.text_icon
         self.cpu_level_label = Label(label="0%", style_classes="panel-text")
@@ -41,6 +45,8 @@ class Cpu(Box):
 
 
 class Memory(Box):
+    """A widget to display the current memory usage."""
+
     def __init__(
         self,
         icon: str = ICONS["memory"],
@@ -56,7 +62,9 @@ class Memory(Box):
 
         # Create a TextIcon with the specified icon and size
         self.icon = text_icon(
-            icon, size=icon_size, props={"style_classes": "panel-text-icon"}
+            icon,
+            size=icon_size,
+            props={"style_classes": "panel-text-icon"},
         )
         self.children = self.icon
         self.memory_level_label = Label(label="0%", style_classes="panel-text")
@@ -78,7 +86,7 @@ class Memory(Box):
         # Update the tooltip with the memory usage details if enabled
         if self.enable_tooltip:
             self.set_tooltip_text(
-                f"󰾆 {psutil.virtual_memory().percent}%\n{ICONS['memory']} {self.get_used()}/{self.get_total()}"
+                f"󰾆 {psutil.virtual_memory().percent}%\n{ICONS['memory']} {self.get_used()}/{self.get_total()}",
             )
 
         return True
@@ -91,6 +99,8 @@ class Memory(Box):
 
 
 class Storage(Box):
+    """A widget to display the current storage usage."""
+
     def __init__(
         self,
         icon: str = ICONS["storage"],
@@ -106,7 +116,9 @@ class Storage(Box):
 
         # Create a TextIcon with the specified icon and size
         self.icon = text_icon(
-            icon, size=icon_size, props={"style_classes": "panel-text-icon"}
+            icon,
+            size=icon_size,
+            props={"style_classes": "panel-text-icon"},
         )
 
         self.children = self.icon
@@ -126,7 +138,7 @@ class Storage(Box):
         # Update the tooltip with the storage usage details if enabled
         if self.enable_tooltip:
             self.set_tooltip_text(
-                f"󰾆 {self.disk.percent}%\n{ICONS['storage']} {self.get_used()}/{self.get_total()}"
+                f"󰾆 {self.disk.percent}%\n{ICONS['storage']} {self.get_used()}/{self.get_total()}",
             )
 
         return True

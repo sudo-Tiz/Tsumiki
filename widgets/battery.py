@@ -10,6 +10,8 @@ from utils.functions import format_time
 
 
 class Battery(Box):
+    """A widget to display the current battery status."""
+
     def __init__(
         self,
         interval: int = 2000,
@@ -22,17 +24,22 @@ class Battery(Box):
         self.enable_label = enable_label
         self.enable_tooltip = enable_tooltip
         self.hide_label_when_full = hide_label_when_full
+        self.full_battery_level = 100
 
-        # Set up a repeater to call the update_battery_status method at specified intervals
+        # Set up a repeater to call the update_battery_status method
         invoke_repeater(interval, self.update_battery_status, initial_call=True)
 
     def update_battery_status(self):
+        """Update the battery status by fetching the current battery information.
+
+        Updating the icon and label, and setting the tooltip text.
+        """
         # Get the battery status
         battery = psutil.sensors_battery()
 
         if battery is None:
             self.hide()
-            return
+            return None
 
         battery_percent = round(battery.percent) if battery else 0
 
@@ -42,7 +49,8 @@ class Battery(Box):
 
         battery_icon = Image(
             icon_name=self.get_icon_name(
-                battery_percent=battery_percent, is_charging=is_charging
+                battery_percent=battery_percent,
+                is_charging=is_charging,
             ),
             icon_size=14,
         )
@@ -54,14 +62,14 @@ class Battery(Box):
             self.children = (battery_icon, battery_label)
 
             ## Hide the label when the battery is full
-            if self.hide_label_when_full and battery_percent == 100:
+            if self.hide_label_when_full and battery_percent == self.full_battery_level:
                 self.children = battery_icon
 
         # Update the tooltip with the battery status details if enabled
         if self.enable_tooltip:
-            if battery_percent == 100:
+            if battery_percent == self.full_battery_level:
                 self.set_tooltip_text("Full")
-            elif is_charging and battery_percent < 100:
+            elif is_charging and battery_percent < self.full_battery_level:
                 self.set_tooltip_text(f"Time to full: {format_time(battery.secsleft)}")
             else:
                 self.set_tooltip_text(f"Time to empty: {format_time(battery.secsleft)}")
@@ -69,8 +77,18 @@ class Battery(Box):
         return True
 
     def get_icon_name(self, battery_percent: int, is_charging: bool):
-        # Determine the icon name based on the battery percentage and charging status
-        if battery_percent == 100:
-            return "battery-level-100-charged-symbolic"
+        """Determine the icon name based on the battery percentage and charging status.
 
-        return f"battery-level-{math.floor(battery_percent / 10) * 10}{'-charging' if is_charging else ''}-symbolic"
+        Args:
+            battery_percent (int): The current battery percentage.
+            is_charging (bool): Whether the battery is currently charging.
+
+        Returns:
+            str: The name of the icon to represent the battery status.
+
+        """
+        # Determine the icon name based on the battery percentage and charging status
+        if battery_percent == self.full_battery_level:
+            return "battery-level-100-charged-symbolic"
+        icon_level = math.floor(battery_percent / 10) * 10
+        return f"battery-level-{icon_level}{'-charging' if is_charging else ''}-symbolic"

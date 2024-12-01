@@ -75,7 +75,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         ],
                     ),
                     Padding(name=name, **kwargs),
-                ]
+                ],
             )
 
         case "center":
@@ -91,7 +91,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         ],
                     ),
                     Padding(name=name, **kwargs),
-                ]
+                ],
             )
         case "center-right":
             return Box(
@@ -105,7 +105,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                             Padding(name=name, **kwargs),
                         ],
                     ),
-                ]
+                ],
             )
         case "top":
             return Box(
@@ -116,7 +116,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         children=[popup, Padding(name=name, **kwargs)],
                     ),
                     Padding(name=name, **kwargs),
-                ]
+                ],
             )
         case "top-right":
             return Box(
@@ -127,7 +127,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         orientation="vertical",
                         children=[popup, Padding(name=name, **kwargs)],
                     ),
-                ]
+                ],
             )
         case "top-center":
             return Box(
@@ -139,7 +139,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         children=[popup, Padding(name=name, **kwargs)],
                     ),
                     Padding(name=name, **kwargs),
-                ]
+                ],
             )
         case "top-left":
             return Box(
@@ -150,7 +150,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         children=[popup, Padding(name=name, **kwargs)],
                     ),
                     Padding(name=name, **kwargs),
-                ]
+                ],
             )
         case "bottom-left":
             return Box(
@@ -161,7 +161,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         children=[Padding(name=name, **kwargs), popup],
                     ),
                     Padding(name=name, **kwargs),
-                ]
+                ],
             )
         case "bottom-center":
             return Box(
@@ -173,7 +173,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         children=[Padding(name=name, **kwargs), popup],
                     ),
                     Padding(name=name, **kwargs),
-                ]
+                ],
             )
         case "bottom-right":
             return Box(
@@ -184,7 +184,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         orientation="vertical",
                         children=[Padding(name=name, **kwargs), popup],
                     ),
-                ]
+                ],
             )
         case _:
             return None

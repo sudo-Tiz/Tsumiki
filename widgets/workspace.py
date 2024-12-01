@@ -3,8 +3,9 @@ from fabric.hyprland.widgets import Workspaces as HyperlandWorkspace
 from fabric.widgets.box import Box
 
 
-# This class represents a widget that displays workspace buttons
 class WorkSpaces(Box):
+    """A widget to display the current workspaces."""
+
     def __init__(self, occupied=True, count=8, **kwargs):
         super().__init__(name="workspaces-box", style_classes="panel-box", **kwargs)
         # Create a HyperlandWorkspace widget to manage workspace buttons

@@ -16,15 +16,18 @@ if AUDIO_WIDGET is True:
         AUDIO_WIDGET = False
 
 
-# This class represents a widget that displays and controls the volume
 class VolumeWidget(Box):
+    """a widget that displays and controls the volume."""
+
     def __init__(self, **kwargs):
         super().__init__(name="volume", style_classes="panel-box", **kwargs)
         # Initialize the audio service
         self.audio = Audio()
         # Create a circular progress bar to display the volume level
         self.progress_bar = CircularProgressBar(
-            name="volume-progress-bar", pie=True, size=24
+            name="volume-progress-bar",
+            pie=True,
+            size=24,
         )
         # Create an event box to handle scroll events for volume control
         self.event_box = EventBox(
@@ -51,7 +54,6 @@ class VolumeWidget(Box):
                 self.audio.speaker.volume += 8
             case 1:
                 self.audio.speaker.volume -= 8
-        return
 
     def on_speaker_changed(self, *_):
         # Update the progress bar value based on the speaker volume
@@ -59,6 +61,9 @@ class VolumeWidget(Box):
             return
         self.progress_bar.value = self.audio.speaker.volume / 100
         self.audio.speaker.bind(
-            "volume", "value", self.progress_bar, lambda _, v: v / 100
+            "volume",
+            "value",
+            self.progress_bar,
+            lambda _, v: v / 100,
         )
         return

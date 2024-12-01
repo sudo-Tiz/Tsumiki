@@ -38,7 +38,8 @@ class Weather(Button):
         self.city = city
 
         self.weather_label = Label(
-            label="Fetching weather...", style_classes="panel-text"
+            label="Fetching weather...",
+            style_classes="panel-text",
         )
         self.children = self.weather_label
 
@@ -49,12 +50,13 @@ class Weather(Button):
 
     def update_label(self):
         weather_thread = threading.Thread(
-            target=self.fetch_weather_in_thread, args=(self.city,)
+            target=self.fetch_weather_in_thread,
+            args=(self.city,),
         )
         weather_thread.start()
         # Continue running the main program (non-blocking)
         logger.info(
-            "[Weather] Weather information is being fetched in a separate thread..."
+            "[Weather] Weather information is being fetched in a separate thread...",
         )
 
     # This function will run the weather fetch in a separate thread

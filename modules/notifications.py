@@ -1,6 +1,4 @@
 import gi
-
-gi.require_version("GdkPixbuf", "2.0")
 from fabric.notifications import (
     Notification,
     NotificationAction,
@@ -18,6 +16,8 @@ from gi.repository import GdkPixbuf
 
 from utils.functions import check_icon_exists
 
+gi.require_version("GdkPixbuf", "2.0")
+
 NOTIFICATION_WIDTH = 400
 NOTIFICATION_IMAGE_SIZE = 64
 NOTIFICATION_TIMEOUT = 5 * 1000  # 10 seconds
@@ -25,7 +25,10 @@ NOTIFICATION_TIMEOUT = 5 * 1000  # 10 seconds
 
 class ActionButton(Button):
     def __init__(
-        self, action: NotificationAction, action_number: int, total_actions: int
+        self,
+        action: NotificationAction,
+        action_number: int,
+        total_actions: int,
     ):
         self.action = action
         super().__init__(
@@ -65,7 +68,7 @@ class NotificationWidget(Box):
                 markup=str(
                     self._notification.summary
                     if self._notification.summary
-                    else notification.app_name
+                    else notification.app_name,
                 ),
                 h_align="start",
                 style="font-weight: 900;",
@@ -78,7 +81,8 @@ class NotificationWidget(Box):
                     Button(
                         image=Image(
                             icon_name=check_icon_exists(
-                                "close-symbolic", "window-close-symbolic"
+                                "close-symbolic",
+                                "window-close-symbolic",
                             ),
                             icon_size=16,
                         ),
@@ -87,7 +91,7 @@ class NotificationWidget(Box):
                         h_align="end",
                         on_clicked=lambda *_: self._notification.close(),
                     ),
-                )
+                ),
             ),
             False,
             False,
@@ -104,8 +108,8 @@ class NotificationWidget(Box):
                         NOTIFICATION_IMAGE_SIZE,
                         NOTIFICATION_IMAGE_SIZE,
                         GdkPixbuf.InterpType.BILINEAR,
-                    )
-                )
+                    ),
+                ),
             )
 
         body_container.add(
@@ -115,7 +119,7 @@ class NotificationWidget(Box):
                 v_align="start",
                 max_chars_width=40,
                 h_align="start",
-            )
+            ),
         )
 
         self.add(header_container)
@@ -131,7 +135,7 @@ class NotificationWidget(Box):
                     for i, action in enumerate(self._notification.actions)
                 ],
                 h_expand=True,
-            )
+            ),
         )
 
         # Destroy this widget once the notification is closed
@@ -156,7 +160,7 @@ class NotificationWidget(Box):
                     image_file=app_icon[7:],
                     icon_size=size,
                 )
-            case str(x) if len(x) > 0 and "/" == x[0]:
+            case str(x) if len(x) > 0 and x[0] == "/":
                 return Image(
                     name="notification-icon",
                     image_file=app_icon,
