@@ -21,7 +21,7 @@ gi.require_version("GdkPixbuf", "2.0")
 
 NOTIFICATION_WIDTH = 400
 NOTIFICATION_IMAGE_SIZE = 64
-NOTIFICATION_TIMEOUT = 3600 * 1000  # 10 seconds
+NOTIFICATION_TIMEOUT = 5 * 1000  # 5 seconds
 
 
 class ActionButton(Button):
@@ -67,10 +67,12 @@ class NotificationWidget(EventBox):
             orientation="v",
         )
 
-
         self.connect("button-press-event", self.on_button_press)
 
         self._notification = notification
+
+        print("timeout", notification._timeout)
+
         self.time = GLib.DateTime.new_now_local().to_unix()
 
         header_container = Box(
@@ -110,7 +112,9 @@ class NotificationWidget(EventBox):
                         style_classes="close-button",
                         v_align="center",
                         h_align="end",
-                        on_clicked=lambda *_: self._notification.close("dismissed-by-user"),
+                        on_clicked=lambda *_: self._notification.close(
+                            "dismissed-by-user"
+                        ),
                     ),
                 ),
             ),
@@ -163,8 +167,6 @@ class NotificationWidget(EventBox):
         self.notification_box.add(body_container)
         self.notification_box.add(actions_container)
 
-
-
         # Add the notification box to the EventBox
         self.add(self.notification_box)
 
@@ -176,7 +178,7 @@ class NotificationWidget(EventBox):
                 self.destroy(),
             ),
             invoke_repeater(
-                NOTIFICATION_TIMEOUT,
+                self.get_timeout(),
                 lambda: self._notification.close("expired"),
                 initial_call=False,
             ),
@@ -203,10 +205,16 @@ class NotificationWidget(EventBox):
                     icon_size=size,
                 )
 
-
     def on_button_press(self, _, event):
         if event.button != 1:
-            self._notification.close("dismissed-by-user"),
+            (self._notification.close("dismissed-by-user"),)
+
+    def get_timeout(self):
+        return (
+            self._notification.timeout
+            if self._notification.timeout != -1
+            else NOTIFICATION_TIMEOUT
+        )
 
 
 class NotificationRevealer(Revealer):
