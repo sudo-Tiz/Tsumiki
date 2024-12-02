@@ -12,6 +12,8 @@ from loguru import logger
 
 
 class PagerClient(TypedDict):
+    """A dictionary type for pager client information."""
+
     title: str
     initialClass: str
     mapped: bool

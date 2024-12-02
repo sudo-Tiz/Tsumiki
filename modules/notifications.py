@@ -67,6 +67,9 @@ class NotificationWidget(EventBox):
             orientation="v",
         )
 
+
+        self.connect("button-press-event", self.on_button_press)
+
         self._notification = notification
         self.time = GLib.DateTime.new_now_local().to_unix()
 
@@ -107,7 +110,7 @@ class NotificationWidget(EventBox):
                         style_classes="close-button",
                         v_align="center",
                         h_align="end",
-                        on_clicked=lambda *_: self._notification.close(),
+                        on_clicked=lambda *_: self._notification.close("dismissed-by-user"),
                     ),
                 ),
             ),
@@ -199,6 +202,11 @@ class NotificationWidget(EventBox):
                     icon_name=app_icon if app_icon else "dialog-information-symbolic",
                     icon_size=size,
                 )
+
+
+    def on_button_press(self, _, event):
+        if event.button != 1:
+            self._notification.close("dismissed-by-user"),
 
 
 class NotificationRevealer(Revealer):
