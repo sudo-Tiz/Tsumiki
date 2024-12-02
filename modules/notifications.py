@@ -21,7 +21,7 @@ gi.require_version("GdkPixbuf", "2.0")
 
 NOTIFICATION_WIDTH = 400
 NOTIFICATION_IMAGE_SIZE = 64
-NOTIFICATION_TIMEOUT = 5 * 1000  # 10 seconds
+NOTIFICATION_TIMEOUT = 3600 * 1000  # 10 seconds
 
 
 class ActionButton(Button):
@@ -36,6 +36,7 @@ class ActionButton(Button):
             label=action.label,
             h_expand=True,
             on_clicked=self.on_clicked,
+            style_classes="notification-action",
         )
         if action_number == 0:
             self.add_style_class("start-action")
@@ -61,10 +62,12 @@ class NotificationWidget(Box):
 
         self._notification = notification
 
-        header_container = Box(spacing=8, orientation="h")
+        header_container = Box(
+            spacing=8, orientation="h", style_classes="notification-header"
+        )
 
         header_container.children = (
-            self.get_icon(notification.app_icon, 16),
+            self.get_icon(notification.app_icon, 25),
             Label(
                 markup=str(
                     self._notification.summary
@@ -72,7 +75,7 @@ class NotificationWidget(Box):
                     else notification.app_name,
                 ),
                 h_align="start",
-                style="font-weight: 900;",
+                style_classes="summary",
             ),
         )
 
@@ -100,17 +103,20 @@ class NotificationWidget(Box):
             0,
         )
 
-        body_container = Box(spacing=4, orientation="h", style_classes="body")
+        body_container = Box(
+            spacing=4, orientation="h", style_classes="notification-body"
+        )
 
         # Use provided image if available, otherwise use "notification-symbolic" icon
         if image_pixbuf := self._notification.image_pixbuf:
             body_container.add(
-                CustomImage(
+                Image(
                     pixbuf=image_pixbuf.scale_simple(
                         NOTIFICATION_IMAGE_SIZE,
                         NOTIFICATION_IMAGE_SIZE,
                         GdkPixbuf.InterpType.BILINEAR,
                     ),
+                    style_classes="image",
                 ),
             )
 
@@ -121,6 +127,7 @@ class NotificationWidget(Box):
                 v_align="start",
                 max_chars_width=40,
                 h_align="start",
+                style_classes="body",
             ),
         )
 
@@ -131,7 +138,7 @@ class NotificationWidget(Box):
             Box(
                 spacing=4,
                 orientation="h",
-                name="notification_action_button",
+                name="notification-action-box",
                 children=[
                     ActionButton(action, i, len(self._notification.actions))
                     for i, action in enumerate(self._notification.actions)
@@ -160,7 +167,7 @@ class NotificationWidget(Box):
                 return Image(
                     name="notification-icon",
                     image_file=app_icon[7:],
-                    icon_size=size,
+                    size=size,
                 )
             case str(x) if len(x) > 0 and x[0] == "/":
                 return Image(

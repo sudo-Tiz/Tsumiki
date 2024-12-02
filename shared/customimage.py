@@ -6,7 +6,8 @@ from gi.repository import Gtk
 
 
 class CustomImage(Image):
-    """ A custom image widget with rounded corners. """
+    """A custom image widget with rounded corners."""
+
     def do_render_rectangle(
         self, cr: cairo.Context, width: int, height: int, radius: int = 0
     ):
