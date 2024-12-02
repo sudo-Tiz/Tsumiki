@@ -3,6 +3,8 @@ from fabric.widgets.button import Button
 
 
 class CommandSwitcher(Button):
+    """A button widget to toggle a command. Useful for making services with two states."""
+
     def __init__(
         self,
         command: str,

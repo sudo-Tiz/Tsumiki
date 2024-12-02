@@ -24,6 +24,8 @@ NOTIFICATION_TIMEOUT = 3600 * 1000  # 10 seconds
 
 
 class ActionButton(Button):
+    """A button widget to represent a notification action."""
+
     def __init__(
         self,
         action: NotificationAction,
@@ -50,6 +52,8 @@ class ActionButton(Button):
 
 
 class NotificationWidget(Box):
+    """A widget to display a notification."""
+
     def __init__(self, notification: Notification, **kwargs):
         super().__init__(
             size=(NOTIFICATION_WIDTH, -1),
@@ -183,6 +187,8 @@ class NotificationWidget(Box):
 
 
 class NotificationRevealer(Revealer):
+    """A widget to reveal a notification."""
+
     def __init__(self, notification: Notification, **kwargs):
         self.notif_box = NotificationWidget(notification)
         self._notification = notification
@@ -193,6 +199,7 @@ class NotificationRevealer(Revealer):
             ),
             transition_duration=500,
             transition_type="crossfade",
+            **kwargs,
         )
 
         self.connect(
@@ -211,6 +218,8 @@ class NotificationRevealer(Revealer):
 
 
 class NotificationPopup(WaylandWindow):
+    """A widget to grab and display notifications."""
+
     def __init__(self):
         self._server = Notifications()
         self.notifications = Box(

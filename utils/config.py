@@ -7,6 +7,8 @@ from utils.functions import read_config
 
 # Layout configuration for different sections of the bar
 class Layout(TypedDict):
+    """Configuration for Window"""
+
     left: List[str]
     middle: List[str]
     right: List[str]
@@ -14,6 +16,8 @@ class Layout(TypedDict):
 
 # Configuration for HyprSunset
 class HyprSunset(TypedDict):
+    """Configuration for Window"""
+
     temperature: str
     enabled_icon: str
     disabled_icon: str
@@ -24,6 +28,8 @@ class HyprSunset(TypedDict):
 
 # Configuration for HyprIdle
 class HyprIdle(TypedDict):
+    """Configuration for Window"""
+
     enabled_icon: str
     disabled_icon: str
     icon_size: str
@@ -33,6 +39,8 @@ class HyprIdle(TypedDict):
 
 # Configuration for Battery
 class Battery(TypedDict):
+    """Configuration for Window"""
+
     enable_label: bool
     enable_tooltip: bool
     interval: int
@@ -40,6 +48,8 @@ class Battery(TypedDict):
 
 # Configuration for CPU
 class Cpu(TypedDict):
+    """Configuration for Window"""
+
     icon: str
     icon_size: str
     enable_label: bool
@@ -49,6 +59,8 @@ class Cpu(TypedDict):
 
 # Configuration for Memory
 class Memory(TypedDict):
+    """Configuration for Window"""
+
     icon: str
     icon_size: str
     enable_label: bool
@@ -58,6 +70,8 @@ class Memory(TypedDict):
 
 # Configuration for Storage
 class Storage(TypedDict):
+    """Configuration for Window"""
+
     icon: str
     icon_size: str
     enable_label: bool
@@ -67,17 +81,23 @@ class Storage(TypedDict):
 
 # Configuration for Workspaces
 class Workspaces(TypedDict):
+    """Configuration for Window"""
+
     count: int
 
 
 # Configuration for Window
 class Window(TypedDict):
+    """Configuration for Window"""
+
     length: int
     enable_icon: bool
 
 
 # Configuration for Updates
 class Updates(TypedDict):
+    """Configuration for Updates"""
+
     os: str
     icon: str
     icon_size: str
@@ -85,11 +105,15 @@ class Updates(TypedDict):
 
 # Configuration for Weather
 class Weather(TypedDict):
+    """Configuration for Window"""
+
     location: str
 
 
 # Main configuration that includes all other configurations
 class Config(TypedDict):
+    """Main configuration"""
+
     layout: Layout
     hyprsunset: HyprSunset
     hypridle: HyprIdle

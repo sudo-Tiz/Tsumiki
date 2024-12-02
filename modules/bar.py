@@ -27,6 +27,8 @@ from widgets.taskbar import TaskBar
 
 
 class StatusBar(Window):
+    """A widget to display the status bar panel."""
+
     def __init__(
         self,
     ):

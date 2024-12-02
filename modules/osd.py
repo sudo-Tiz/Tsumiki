@@ -15,6 +15,8 @@ from utils.animator import Animator
 
 
 class AnimatedScale(Scale):
+    """A widget to display a scale with animated transitions."""
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.animator = Animator(
@@ -34,6 +36,8 @@ class AnimatedScale(Scale):
 
 
 class BrightnessOSDContainer(Box):
+    """A widget to display the OSD for brightness."""
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs, orientation="h", spacing=12, name="osd-container")
         self.brightness_service = Brightness()
@@ -88,6 +92,8 @@ class BrightnessOSDContainer(Box):
 
 
 class AudioOSDContainer(Box):
+    """A widget to display the OSD for audio."""
+
     __gsignals__ = {
         "volume-changed": (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE, ()),
     }
@@ -158,6 +164,8 @@ class AudioOSDContainer(Box):
 
 
 class OSDContainer(Window):
+    """A widget to display the OSD for audio and brightness."""
+
     def __init__(
         self,
         anchor: str = "bottom center",

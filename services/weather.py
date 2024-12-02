@@ -1,8 +1,9 @@
 import urllib.request
 
 
-# This class provides weather information for a given city
 class WeatherInfo:
+    """This class provides weather information for a given city."""
+
     def simple_weather_info(self, city: str):
         try:
             # Construct the URL for fetching weather information

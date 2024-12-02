@@ -40,7 +40,7 @@ class Agent(dbus.service.Object):
         dbus.service.Object.__init__(self, bus, AGENT_PATH)
 
     @dbus.service.method("org.bluez.Agent1", in_signature="", out_signature="")
-    def Release(self):
+    def release(self):
         logging.info("Release")
 
     def get_device_name(self, device):
@@ -53,7 +53,7 @@ class Agent(dbus.service.Object):
         return device_properties.Get("org.bluez.Device1", "Name")
 
     @dbus.service.method("org.bluez.Agent1", in_signature="o", out_signature="")
-    def RequestPinCode(self, device):
+    def request_pin_code(self, device):
         device_name = self.get_device_name(device)
         logging.info(f"RequestPinCode {device_name} ({device})")
         self.request_input(
@@ -64,7 +64,7 @@ class Agent(dbus.service.Object):
         )
 
     @dbus.service.method("org.bluez.Agent1", in_signature="o", out_signature="u")
-    def RequestPasskey(self, device):
+    def request_passkey(self, device):
         device_name = self.get_device_name(device)
         logging.info(f"RequestPasskey {device_name} ({device})")
         self.request_input(
@@ -75,7 +75,7 @@ class Agent(dbus.service.Object):
         )
 
     @dbus.service.method("org.bluez.Agent1", in_signature="ou", out_signature="")
-    def DisplayPasskey(self, device, passkey):
+    def display_passkey(self, device, passkey):
         device_name = self.get_device_name(device)
         logging.info(f"DisplayPasskey {device_name} passkey {passkey}")
         send_notification_with_actions(
@@ -86,7 +86,7 @@ class Agent(dbus.service.Object):
         )
 
     @dbus.service.method("org.bluez.Agent1", in_signature="ou", out_signature="")
-    def RequestConfirmation(self, device, passkey):
+    def request_confirmation(self, device, passkey):
         device_name = self.get_device_name(device)
         logging.info(f"RequestConfirmation {device_name} passkey {passkey}")
         actions = ["confirm", "Confirm", "deny", "Deny"]
@@ -107,7 +107,7 @@ class Agent(dbus.service.Object):
         )
 
     @dbus.service.method("org.bluez.Agent1", in_signature="o", out_signature="")
-    def RequestAuthorization(self, device):
+    def request_authorization(self, device):
         device_name = self.get_device_name(device)
         logging.info(f"RequestAuthorization {device_name}")
         actions = ["confirm", "Confirm", "deny", "Deny"]
@@ -128,7 +128,7 @@ class Agent(dbus.service.Object):
         )
 
     @dbus.service.method("org.bluez.Agent1", in_signature="os", out_signature="")
-    def AuthorizeService(self, device, uuid):
+    def authorize_service(self, device, uuid):
         device_name = self.get_device_name(device)
         logging.info(f"AuthorizeService {device_name} uuid {uuid}")
         actions = ["confirm", "Confirm", "deny", "Deny"]
@@ -151,7 +151,7 @@ class Agent(dbus.service.Object):
         )
 
     @dbus.service.method("org.bluez.Agent1", in_signature="", out_signature="")
-    def Cancel(self):
+    def cancel(self):
         logging.info("Cancel")
 
     def request_input(self, title, message, device, input_type):
@@ -216,7 +216,7 @@ def register_agent():
         "org.bluez.AgentManager1",
     )
     path = AGENT_PATH
-    agent = Agent(bus)
+    _agent = Agent(bus)
     manager.RegisterAgent(path, CAPABILITY)
     manager.RequestDefaultAgent(path)
     logging.info("Agent registered")

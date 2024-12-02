@@ -1,3 +1,4 @@
+# ruff: noqa: F403
 from .battery import *
 from .clickcounter import *
 from .dashboard import *
@@ -11,6 +12,7 @@ from .power import *
 from .screenrecord import *
 from .stats import *
 from .stopwatch import *
+from .systray import *
 from .taskbar import *
 from .updates import *
 from .volume import *

@@ -4,7 +4,7 @@ import subprocess
 from fabric.core.service import Property, Service, Signal
 from fabric.utils import exec_shell_command, monitor_file
 from gi.repository import GLib
-from loguru import logger  # Import loguru logger
+from loguru import logger
 
 
 # Helper function to execute brightnessctl asynchronously
@@ -42,7 +42,8 @@ except IndexError:
 
 
 class NoBrightnessError(ImportError):
-    # Raised when brightness-related dependencies are missing.
+    """Raised when brightness-related dependencies are missing."""
+
     def __init__(self, *args):
         super().__init__(
             "Brightness control not available or missing dependencies",
@@ -51,7 +52,7 @@ class NoBrightnessError(ImportError):
 
 
 class Brightness(Service):
-    # Service to manage screen brightness levels.
+    """Service to manage screen brightness levels."""
 
     @Signal
     def screen(self, value: int) -> None:

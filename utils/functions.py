@@ -6,11 +6,11 @@ import gi
 import psutil
 from fabric.utils import get_relative_path
 from fabric.widgets.label import Label
+from gi.repository import GLib, Gtk
 
 from utils.icons import DISTRO_ICONS
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import GLib, Gtk
 
 
 # Function to read the configuration file

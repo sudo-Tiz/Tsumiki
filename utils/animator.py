@@ -5,6 +5,8 @@ from gi.repository import GLib, Gtk
 
 
 class Animator(Service):
+    """A service to animate transitions between values."""
+
     @Signal
     def finished(self) -> None: ...
 

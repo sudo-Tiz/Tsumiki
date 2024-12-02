@@ -2,7 +2,6 @@ import gi
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
-from fabric.widgets.revealer import Revealer
 from gi.repository import Gdk, GdkPixbuf, Gray, Gtk
 from loguru import logger
 
@@ -82,35 +81,3 @@ class SystemTray(Box):
                     )
                 else:
                     item.context_menu(event.x, event.y)
-
-
-class SystemTrayRevealer(Box):
-    def __init__(self, icon_size=20, **kwargs):
-        self.icon_size = icon_size
-        super().__init__(**kwargs)
-
-        self.button_image = Image(
-            icon_name="pan-start-symbolic",
-            icon_size=self.icon_size,
-        )
-        self.reveal_button = Button(
-            image=self.button_image,
-            name="panel-button",
-        )
-
-        self.revealed_box = SystemTray(pixel_size=icon_size)
-
-        self.revealer = Revealer(
-            transition_type="slide-left",
-            transition_duration=300,
-            child=self.revealed_box,
-        )
-        self.add(self.revealer)
-        self.add(self.reveal_button)
-
-        self.reveal_button.connect(
-            "clicked",
-            lambda *_: [
-                self.revealer.set_reveal_child(not self.revealer.get_reveal_child()),
-            ],
-        )

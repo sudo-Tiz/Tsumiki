@@ -5,7 +5,8 @@
   border-radius: 1rem;
   background: var(--background-dark);
 }
-z .notification-header #notification-icon {
+
+.notification-header #notification-icon {
   /* Notification app icon (only visible when the primary image is set) */
   /* -gtk-icon-effect: highlight;              TODO: might use this on hover     */
   /* -gtk-icon-shadow: 0 1px 4px var(--text-main); */
