@@ -8,8 +8,11 @@
 
 #notification .body {
   color: darker(var(--text-main));
-  font-weight: 600;
   font-size: 0.92rem;
+}
+
+#notification .body label {
+  padding-left: 0.8em;
 }
 
 .close-button:hover {

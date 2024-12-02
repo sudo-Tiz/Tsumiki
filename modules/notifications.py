@@ -98,7 +98,7 @@ class NotificationWidget(Box):
             0,
         )
 
-        body_container = Box(spacing=4, orientation="h")
+        body_container = Box(spacing=4, orientation="h", style_classes="body")
 
         # Use provided image if available, otherwise use "notification-symbolic" icon
         if image_pixbuf := self._notification.image_pixbuf:
