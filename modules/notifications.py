@@ -1,3 +1,5 @@
+import datetime
+import time
 import gi
 from fabric.notifications import (
     Notification,
@@ -71,9 +73,7 @@ class NotificationWidget(EventBox):
 
         self._notification = notification
 
-        print("timeout", notification._timeout)
-
-        self.time = GLib.DateTime.new_now_local().to_unix()
+        self.time = GLib.DateTime.new_from_unix_local(time.time()).format("%m/%d")
 
         header_container = Box(
             spacing=8, orientation="h", style_classes="notification-header"
@@ -89,11 +89,7 @@ class NotificationWidget(EventBox):
                 ),
                 h_align="start",
                 style_classes="summary",
-            ),
-            Label(
-                label=str(self.time),
-                h_align="start",
-                style_classes="timestamp",
+                ellipsization="end",
             ),
         )
 
@@ -110,8 +106,6 @@ class NotificationWidget(EventBox):
                             icon_size=16,
                         ),
                         style_classes="close-button",
-                        v_align="center",
-                        h_align="end",
                         on_clicked=lambda *_: self._notification.close(
                             "dismissed-by-user"
                         ),
@@ -144,8 +138,8 @@ class NotificationWidget(EventBox):
             Label(
                 markup=self._notification.body,
                 line_wrap="word-char",
+                ellipsization="end",
                 v_align="start",
-                max_chars_width=40,
                 h_align="start",
                 style_classes="body",
             ),

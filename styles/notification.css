@@ -27,9 +27,10 @@
 
 /* Notification timestamp */
 .notification-header .timestamp {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   text-shadow: none;
+  margin-right: 10px;
 }
 
 #notification .notification-body {
