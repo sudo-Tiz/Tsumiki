@@ -14,6 +14,7 @@ from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow
 from gi.repository import GdkPixbuf
 
+from shared.customimage import CustomImage
 from utils.functions import check_icon_exists
 
 gi.require_version("GdkPixbuf", "2.0")
@@ -104,7 +105,7 @@ class NotificationWidget(Box):
         # Use provided image if available, otherwise use "notification-symbolic" icon
         if image_pixbuf := self._notification.image_pixbuf:
             body_container.add(
-                Image(
+                CustomImage(
                     pixbuf=image_pixbuf.scale_simple(
                         NOTIFICATION_IMAGE_SIZE,
                         NOTIFICATION_IMAGE_SIZE,
