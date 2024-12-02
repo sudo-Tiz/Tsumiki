@@ -77,6 +77,7 @@ class NotificationWidget(Box):
 
         header_container.pack_end(
             Box(
+                v_align="start",
                 children=(
                     Button(
                         image=Image(

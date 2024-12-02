@@ -15,6 +15,15 @@
   padding-left: 0.8em;
 }
 
+
+#notification-image image {
+  border-radius: 10px;
+}
+
+#notification-icon {
+  margin-right: 5px;
+}
+
 .close-button:hover {
   box-shadow: none;
   background: alpha(var(--text-main), 0.2);
