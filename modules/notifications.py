@@ -7,12 +7,13 @@ from fabric.notifications import (
 )
 from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
+from fabric.widgets.eventbox import EventBox
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow
-from gi.repository import GdkPixbuf
+from gi.repository import GdkPixbuf, GLib
 
 from utils.functions import check_icon_exists
 
@@ -51,19 +52,23 @@ class ActionButton(Button):
         self.action.parent.close("dismissed-by-user")
 
 
-class NotificationWidget(Box):
+class NotificationWidget(EventBox):
     """A widget to display a notification."""
 
     def __init__(self, notification: Notification, **kwargs):
         super().__init__(
             size=(NOTIFICATION_WIDTH, -1),
-            name="notification",
-            spacing=8,
-            orientation="v",
             **kwargs,
         )
 
+        self.notification_box = Box(
+            spacing=8,
+            name="notification",
+            orientation="v",
+        )
+
         self._notification = notification
+        self.time = GLib.DateTime.new_now_local().to_unix()
 
         header_container = Box(
             spacing=8, orientation="h", style_classes="notification-header"
@@ -79,6 +84,11 @@ class NotificationWidget(Box):
                 ),
                 h_align="start",
                 style_classes="summary",
+            ),
+            Label(
+                label=str(self.time),
+                h_align="start",
+                style_classes="timestamp",
             ),
         )
 
@@ -134,21 +144,26 @@ class NotificationWidget(Box):
             ),
         )
 
-        self.add(header_container)
-        self.add(body_container)
-
-        self.add(
-            Box(
-                spacing=4,
-                orientation="h",
-                name="notification-action-box",
-                children=[
-                    ActionButton(action, i, len(self._notification.actions))
-                    for i, action in enumerate(self._notification.actions)
-                ],
-                h_expand=True,
-            ),
+        actions_container = Box(
+            spacing=4,
+            orientation="h",
+            name="notification-action-box",
+            children=[
+                ActionButton(action, i, len(self._notification.actions))
+                for i, action in enumerate(self._notification.actions)
+            ],
+            h_expand=True,
         )
+
+        # Add the header, body, and actions to the notification box
+        self.notification_box.add(header_container)
+        self.notification_box.add(body_container)
+        self.notification_box.add(actions_container)
+
+
+
+        # Add the notification box to the EventBox
+        self.add(self.notification_box)
 
         # Destroy this widget once the notification is closed
         self._notification.connect(
@@ -176,7 +191,7 @@ class NotificationWidget(Box):
                 return Image(
                     name="notification-icon",
                     image_file=app_icon,
-                    icon_size=size,
+                    size=size,
                 )
             case _:
                 return Image(

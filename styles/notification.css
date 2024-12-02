@@ -4,28 +4,33 @@
   border: solid 1px var(--border-color);
   border-radius: 1rem;
   background: var(--background-dark);
+  color: var(--text-main);
 }
 
 .notification-header #notification-icon {
   /* Notification app icon (only visible when the primary image is set) */
   /* -gtk-icon-effect: highlight;              TODO: might use this on hover     */
   /* -gtk-icon-shadow: 0 1px 4px var(--text-main); */
-  margin: 5px 0;
+
 }
 
+/* Notification summary/title */
 .notification-header .summary {
-  /* Notification summary/title */
   font-size: 14px;
   font-weight: bold;
-  background: transparent;
-  color: var(--text-main);
+  text-shadow: none;
+}
+
+/* Notification timestamp */
+.notification-header .timestamp {
+  font-size: 14px;
+  font-weight: bold;
   text-shadow: none;
 }
 
 #notification .notification-body {
   font-size: 0.92rem;
   padding: 0.25em;
-  margin: 0.25em;
 }
 
 .notification-body .body {
@@ -33,7 +38,7 @@
   font-size: 13px;
   font-weight: normal;
   background: transparent;
-  color: var(--text-main);
+
   text-shadow: none;
   padding: 5px;
 }
@@ -46,9 +51,9 @@
 
 .close-button:hover {
   box-shadow: none;
+  border: none;
   background: alpha(var(--text-main), 0.2);
   transition: background 0.15s ease-in-out;
-  border: none;
 }
 
 #notification-action-box button.start-action {

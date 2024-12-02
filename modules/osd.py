@@ -1,5 +1,5 @@
 import time
-from typing import Literal
+from typing import ClassVar, Literal
 
 from fabric.audio import Audio
 from fabric.widgets.box import Box
@@ -94,7 +94,7 @@ class BrightnessOSDContainer(Box):
 class AudioOSDContainer(Box):
     """A widget to display the OSD for audio."""
 
-    __gsignals__ = {
+    __gsignals__: ClassVar[dict] = {
         "volume-changed": (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE, ()),
     }
 
