@@ -91,4 +91,6 @@ class Battery(Box):
         if battery_percent == self.full_battery_level:
             return "battery-level-100-charged-symbolic"
         icon_level = math.floor(battery_percent / 10) * 10
-        return f"battery-level-{icon_level}{'-charging' if is_charging else ''}-symbolic"
+        return (
+            f"battery-level-{icon_level}{'-charging' if is_charging else ''}-symbolic"
+        )

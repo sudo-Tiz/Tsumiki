@@ -58,7 +58,7 @@ class Updates(EventBox):
         # Connect the button press event to the update method
         bulk_connect(
             self,
-            {"button-press-event": lambda _event: (self.update())},
+            {"button-press-event": lambda *_: self.update()},
         )
 
     def update_values(self, value: str):
