@@ -37,7 +37,7 @@
 #system-tray-menu > menuitem menu > menuitem:disabled,
 #system-tray-menu > menuitem:disabled {
   background-color: transparent;
-  color: #8c7b78;
+  color: var(--text-muted-dark);
 }
 
 #system-tray-menu > menuitem menu > menuitem:hover,
