@@ -12,7 +12,7 @@ gi.require_version("Gtk", "3.0")
 class SystemTray(Box):
     """A widget to display the system tray items."""
 
-    def __init__(self, pixel_size: int = 16, **kwargs) -> None:
+    def __init__(self, pixel_size=22, **kwargs) -> None:
         super().__init__(name="system-tray", style_classes="panel-box", **kwargs)
         self.pixel_size = pixel_size
         self.watcher = Gray.Watcher()
@@ -27,6 +27,8 @@ class SystemTray(Box):
 
     def do_bake_item_button(self, item: Gray.Item) -> Button:
         button = Button()
+
+        button.set_tooltip_text(item.get_property("title"))
 
         # context menu handler
         button.connect(
