@@ -3,8 +3,6 @@
 /* TODO: see other traybar styles from kde,gnome  */
 #system-tray {
   padding: 0.125em 0.25em;
-  opacity: 1;
-  background-color: var(--background-dark);
 }
 
 #system-tray > button {
@@ -21,69 +19,30 @@
   color: var(--background-dark);
 }
 
-#system-tray-menu > menuitem menu > menuitem:hover,
-#system-tray-menu > menuitem:hover,
-#submenu-button:hover {
-  background-color: alpha(var(--background-dark), 0.8);
-  border-color: alpha(var(--text-main), 0.1);
-}
-
-#submenu-button:active {
-  background-color: var(--accent-light);
-}
-
-#submenu-button:active > * {
-  color: var(--background);
-}
-
-#submenu-title {
-  border-style: solid;
-  border-bottom-width: 2px;
-  border-color: var(--background-alt);
-  margin-bottom: 5px;
-}
-
-#submenu-label {
-  margin-left: 5px;
-}
-
-#submenu-title-label {
-  font-size: 17px;
-}
-
-#submenu-item {
-  margin: 5px;
+#system-tray-menu > menuitem menu,
+#system-tray-menu {
+  background-color: var(--surface-disabled);
+  border-radius: 1em;
+  padding: 10px;
 }
 
 #system-tray-menu > menuitem menu > menuitem,
 #system-tray-menu > menuitem {
-  border-color: var(--text-secondary);
   margin: 5px 0px;
+  background-color: var(--surface-disabled);
+  padding: 0.3em 0.5em;
+  border-radius: 10px;
 }
 
 #system-tray-menu > menuitem menu > menuitem:disabled,
 #system-tray-menu > menuitem:disabled {
-  background-color: var(--background-dark);
+  background-color: transparent;
+  color: #8c7b78;
 }
 
-#submenu-button {
-  background-color: var(--background-alt);
-  padding: 0.5em;
-  border-radius: 10px;
-}
-
-#system-tray-menu > menuitem menu > menuitem,
-#system-tray-menu > menuitem {
-  background-color: var(--background-alt);
-  padding: 0.3em;
-  border-radius: 10px;
-}
-
-#system-tray-menu > menuitem menu,
-#system-tray-menu,
-#submenu {
-  background-color: alpha(var(--background-dark), 1);
-  border-radius: 1em;
-  border-color: alpha(var(--accent-light), 1);
-  padding: 10px;
+#system-tray-menu > menuitem menu > menuitem:hover,
+#system-tray-menu > menuitem:hover,
+#submenu-button:hover {
+  background-color: var(--surface-neutral);
+  color: var(--accent-purple);
 }

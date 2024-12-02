@@ -5,11 +5,9 @@
   border-radius: 1rem;
   background: var(--background-dark);
 }
-z
-
-.notification-header #notification-icon {
+z .notification-header #notification-icon {
   /* Notification app icon (only visible when the primary image is set) */
-  /* -gtk-icon-effect: highlight;              TODO: might use this on hover     */ 
+  /* -gtk-icon-effect: highlight;              TODO: might use this on hover     */
   /* -gtk-icon-shadow: 0 1px 4px var(--text-main); */
   margin: 5px 0;
 }
@@ -43,9 +41,7 @@ z
   /* Notification Primary Image */
   -gtk-icon-effect: none;
   margin-top: 5px;
-
 }
-
 
 .close-button:hover {
   box-shadow: none;

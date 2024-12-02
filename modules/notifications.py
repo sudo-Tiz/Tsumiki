@@ -14,7 +14,6 @@ from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow
 from gi.repository import GdkPixbuf
 
-from shared.customimage import CustomImage
 from utils.functions import check_icon_exists
 
 gi.require_version("GdkPixbuf", "2.0")

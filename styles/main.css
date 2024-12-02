@@ -10,7 +10,6 @@
 /* unset so we can style everything from the ground up. */
 * {
   all: unset;
-  color: var(--text-main);
   font-size: 16px;
   font-family: "JetBrainsMono Nerd Font";
   border-radius: 100px;
@@ -30,6 +29,7 @@ label {
 .panel-box {
   background: var(--background-dark);
   padding: 0.1em 0.9em;
+  color: var(--text-main);
 }
 
 .panel-button {
