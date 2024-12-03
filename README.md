@@ -8,7 +8,7 @@ More on [Fabric's Wiki](https://wiki.ffpy.org)
 ## Prerequisites
 
 - [JetBrains Nerd Font](https://www.nerdfonts.com)
-- python 3+
+- [python 3+](https://www.python.org/downloads/)
 
 ---
 
