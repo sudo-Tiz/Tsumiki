@@ -77,14 +77,15 @@ Add the following line to your `hypr.conf` to start FabricPanel automatically:
 ```sh
 exec = python main.py
 ```
+
 or in virtual environment as
 
 ```sh
 source "$HOME/bar/.venv/bin/activate" && python "$HOME/bar/main.py"
 
 ```
-modify the path accordingly
 
+modify the path accordingly
 
 ### **For Other Window Managers:**
 

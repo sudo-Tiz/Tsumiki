@@ -5,6 +5,8 @@ from fabric.widgets.wayland import WaylandWindow
 
 
 class LeftCorners(WaylandWindow):
+    """A window that displays corners on the left side of the screen."""
+
     def __init__(
         self,
     ):
@@ -40,6 +42,8 @@ class LeftCorners(WaylandWindow):
 
 
 class RightCorners(WaylandWindow):
+    """A window that displays corners on the right side of the screen."""
+
     def __init__(
         self,
     ):

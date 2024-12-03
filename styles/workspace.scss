@@ -1,33 +1,36 @@
-@use "variables.scss";;
+@use "common/variables.scss";
+
+$workspace-transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 
 /** workspace switcher */
+
 #workspaces {
   padding: 0.19em 1em;
   font-weight: bold;
-}
 
-#workspaces > button {
-  padding: 0 0.5rem;
-  transition: padding 0.05s steps(8);
-  border-radius: 100px;
-}
+  & > button {
+    padding: 0 0.5rem;
+    transition: padding 0.05s steps(8);
+    border-radius: 100px;
 
-#workspaces > button:hover {
-  background-color: variables.$ws-hover;
-  transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
-}
+    &:hover {
+      background-color: variables.$ws-hover;
+      transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 
-#workspaces > button:hover label {
-  color: variables.$background-dark;
-}
+      label {
+        color: variables.$background-dark;
+      }
+    }
 
-#workspaces > button.active {
-  padding: 0 1rem;
-  background-color: variables.$ws-active;
-  min-width: 1.4rem;
-  transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
-}
+    &.active {
+      padding: 0 1rem;
+      background-color: variables.$ws-active;
+      min-width: 1.4rem;
+      transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 
-#workspaces > button.active > label {
-  color: variables.$background-dark;
+      & > label {
+        color: variables.$background-dark;
+      }
+    }
+  }
 }

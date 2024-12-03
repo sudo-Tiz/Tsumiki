@@ -1,24 +1,24 @@
-@use "variables.scss";;
-
+@use "common/variables.scss";
 /* system tray */
 
 /* TODO: see other traybar styles from kde,gnome  */
+
 #system-tray {
   padding: 0.125em 0.25em;
-}
 
-#system-tray > button {
-  margin: 0 0.1em;
-  padding: 0 0.15em;
-}
+  & > button {
+    margin: 0 0.1em;
+    padding: 0 0.15em;
 
-#system-tray > button:hover {
-  background-color: variables.$surface-disabled;
-}
+    &:hover {
+      background-color: variables.$surface-disabled;
+    }
 
-#system-tray > button:active {
-  background-color: variables.$text-main;
-  color: variables.$background-dark;
+    &:active {
+      background-color: variables.$text-main;
+      color: variables.$background-dark;
+    }
+  }
 }
 
 #system-tray-menu > menuitem menu,

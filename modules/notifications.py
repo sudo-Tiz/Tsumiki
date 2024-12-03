@@ -1,5 +1,5 @@
-import datetime
 import time
+
 import gi
 from fabric.notifications import (
     Notification,
@@ -9,8 +9,8 @@ from fabric.notifications import (
 )
 from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
-from fabric.widgets.eventbox import EventBox
 from fabric.widgets.button import Button
+from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer

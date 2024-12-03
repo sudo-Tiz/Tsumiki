@@ -1,7 +1,5 @@
-@use "variables";
-
-@use 'sass:color';
-
+@use "sass:color";
+@use "common/variables.scss";
 
 /** notification **/
 #notification {
@@ -11,90 +9,89 @@
   background: variables.$background-dark;
   color: variables.$text-main;
   border: 1px solid variables.$border-color;
+
+  .notification-body {
+    padding: 0.25em;
+  }
 }
 
 .hover {
   border: 2px solid variables.$border-color;
 }
 
-/* .notification-header #notification-icon {
-  Notification app icon (only visible when the primary image is set) */
-  /* -gtk-icon-effect: highlight;              TODO: might use this on hover     */
-  /* -gtk-icon-shadow: 0 1px 4px $text-main);
+.notification-header {
+  .summary {
+    font-size: 14px;
+    font-weight: bold;
+    text-shadow: none;
+  }
 
-} */
-
-/* Notification summary/title */
-.notification-header .summary {
-  font-size: 14px;
-  font-weight: bold;
-  text-shadow: none;
+  .timestamp {
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: none;
+    margin-right: 10px;
+  }
 }
 
-/* Notification timestamp */
-.notification-header .timestamp {
-  font-size: 12px;
-  font-weight: bold;
-  text-shadow: none;
-  margin-right: 10px;
+.notification-body {
+  .body {
+    font-size: 13px;
+    font-weight: 500;
+    background: transparent;
+    text-shadow: none;
+    padding: 5px;
+  }
+
+  .image {
+    -gtk-icon-effect: none;
+    margin-top: 5px;
+  }
 }
 
-#notification .notification-body {
-  padding: 0.25em;
-}
-
-.notification-body .body {
-  /* Notification body */
-  font-size: 13px;
-  font-weight: 500;
-  background: transparent;
-  text-shadow: none;
-  padding: 5px;
-}
-
-.notification-body .image {
-  /* Notification Primary Image */
-  -gtk-icon-effect: none;
-  margin-top: 5px;
-}
-
-.close-button{
+.close-button {
   padding: 0.2em;
   border-radius: 100px;
+
+  &:hover {
+    box-shadow: none;
+    border: none;
+    background: color.mix(variables.$text-main, transparent, 20%);
+    transition: variables.$hover-tranistion;
+  }
 }
 
-.close-button:hover {
-  box-shadow: none;
-  border: none;
-  background: color.mix(variables.$text-main,transparent, 20%);
-  transition: background 0.15s ease-in-out;
+#notification-action-box {
+  button {
+    padding: 4px;
+    margin: 0;
+    font-weight: 600;
+    border-radius: 3rem;
+    box-shadow: none;
+    background: transparent;
+    transition: variables.$hover-tranistion;
+
+    &.start-action {
+      margin-left: 0;
+    }
+
+    &.end-action {
+      margin-right: 0;
+    }
+
+    &:hover {
+      background: variables.$background;
+    }
+  }
 }
 
-#notification-action-box button.start-action {
-  margin-left: 0;
-}
+/* .notification-header #notification-icon {
+  Notification app icon (only visible when the primary image is set) */
+/* -gtk-icon-effect: highlight;              TODO: might use this on hover     */
+/* -gtk-icon-shadow: 0 1px 4px $text-main);
 
-#notification-action-box button.end-action {
-  margin-right: 0;
-}
-
-#notification-action-box button {
-  padding: 4px;
-  margin: 0;
-  font-weight: 600;
-  border-radius: 3rem;
-  box-shadow: none;
-  background: transparent;
-  transition: background 0.15s ease-in-out;
-}
-
-#notification-action-box button:hover {
-  background: variables.$background;
-}
-
-
-
-/* 
+} */
+/*
 .low{
 
 }

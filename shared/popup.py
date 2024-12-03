@@ -9,6 +9,8 @@ from gi.repository import GLib
 
 
 class Padding(EventBox):
+    """A padding box."""
+
     def __init__(self, name: str | None = None, style: str = "", **kwargs):
         super().__init__(
             name=name,
@@ -22,6 +24,8 @@ class Padding(EventBox):
 
 
 class PopupRevealer(Box):
+    """A revealer that can be toggled on and off."""
+
     def __init__(
         self,
         popup_window: WaylandWindow,
@@ -191,6 +195,8 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
 
 
 class PopupWindow(WaylandWindow):
+    """A popup window that can be toggled on and off."""
+
     def __init__(
         self,
         name: str = "popup-window",

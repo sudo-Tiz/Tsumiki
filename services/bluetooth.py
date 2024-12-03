@@ -36,6 +36,8 @@ def send_notification_with_actions(title, message, actions, action_handler):
 
 
 class Agent(dbus.service.Object):
+    """Bluetooth agent for pairing devices"""
+
     def __init__(self, bus):
         dbus.service.Object.__init__(self, bus, AGENT_PATH)
 

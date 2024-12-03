@@ -1,6 +1,3 @@
-/* we can use webcss variables, fabric compiles that to gtk css.
-   global variables can be stored in :vars */
-
 /* based on catpuccin mocha theme */
 
 /* Base Colors */
@@ -47,3 +44,5 @@ $ws-inactive: $accent-red;
 $ws-empty: $text-disabled;
 $ws-hover: $accent-pink;
 $ws-urgent: $accent-purple;
+
+$hover-tranistion: background 0.15s ease-in-out;

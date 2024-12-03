@@ -1,7 +1,6 @@
-@use 'sass:color';
+@use "sass:color";
 
-
-@use "variables.scss";;
+@use "common/variables.scss";
 @use "common/mixins.scss";
 @use "notification.scss";
 @use "osd.scss";
@@ -10,7 +9,6 @@
 @use "taskbar.scss";
 @use "workspace.scss";
 @use "volume.scss";
-
 
 /* unset so we can style everything from the ground up. */
 * {
@@ -22,7 +20,6 @@
 label {
   font-size: 1rem;
 }
-
 
 #panel-inner {
   padding: 0.1em 0.25em;
@@ -65,8 +62,8 @@ tooltip {
 }
 
 tooltip label {
-  @include mixins.no-style;
   font-weight: normal;
+  @include mixins.no-style;
 }
 
 tooltip > * {
