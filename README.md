@@ -63,7 +63,7 @@ cd FabricPanel
 Install the requirements:
 
 ```sh
-pip install git+https://github.com/Fabric-Development/fabric.git
+pip install -r requirements.txt
 ```
 
 ---

@@ -1,2 +1,4 @@
 git+https://github.com/Fabric-Development/fabric.git
 PyGObject-stubs==2.10.0
+setproctitle==1.3.4
+psutil==6.1.0
