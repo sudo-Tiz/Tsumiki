@@ -1,8 +1,10 @@
+@use "variables.scss";;
+
 /** taskbar **/
 #taskbar {
   font-style: normal;
-  color: var(--text-main);
-  background: var(--background-dark);
+  color: variables.$text-main;
+  background: variables.$background-dark;
   padding-left: 4px;
   padding-right: 4px;
 }

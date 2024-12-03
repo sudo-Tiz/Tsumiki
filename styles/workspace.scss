@@ -1,3 +1,5 @@
+@use "variables.scss";;
+
 /** workspace switcher */
 #workspaces {
   padding: 0.19em 1em;
@@ -11,21 +13,21 @@
 }
 
 #workspaces > button:hover {
-  background-color: var(--ws-hover);
+  background-color: variables.$ws-hover;
   transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
 
 #workspaces > button:hover label {
-  color: var(--background-dark);
+  color: variables.$background-dark;
 }
 
 #workspaces > button.active {
   padding: 0 1rem;
-  background-color: var(--ws-active);
+  background-color: variables.$ws-active;
   min-width: 1.4rem;
   transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
 
 #workspaces > button.active > label {
-  color: var(--background-dark);
+  color: variables.$background-dark;
 }

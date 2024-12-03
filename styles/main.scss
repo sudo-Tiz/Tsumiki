@@ -1,11 +1,16 @@
-@import "theme.css";
-@import "notification.css";
-@import "osd.css";
-@import "overview.css";
-@import "systray.css";
-@import "taskbar.css";
-@import "workspace.css";
-@import "volume.css";
+@use 'sass:color';
+
+
+@use "variables.scss";;
+@use "common/mixins.scss";
+@use "notification.scss";
+@use "osd.scss";
+@use "overview.scss";
+@use "systray.scss";
+@use "taskbar.scss";
+@use "workspace.scss";
+@use "volume.scss";
+
 
 /* unset so we can style everything from the ground up. */
 * {
@@ -18,22 +23,23 @@ label {
   font-size: 1rem;
 }
 
+
 #panel-inner {
   padding: 0.1em 0.25em;
-  border-color: var(--border-color);
+  border-color: variables.$border-color;
   background-color: transparent;
 }
 
 .panel-box {
   font-weight: bold;
-  background: var(--background-dark);
+  background: variables.$background-dark;
   padding: 0.1em 0.9em;
-  color: var(--text-main);
+  color: variables.$text-main;
   border-radius: 100px;
 }
 
 .panel-button {
-  background: var(--background-dark);
+  background: variables.$background-dark;
   padding: 0 1.25em;
 }
 
@@ -48,22 +54,18 @@ label {
 }
 
 #widgets-container {
-  background-color: var(--background-dark);
+  background-color: variables.$background-dark;
   padding: 0.125em;
 }
 
 tooltip {
-  background-color: var(--background-dark);
+  background-color: variables.$background-dark;
   border-radius: 10px;
-  outline: none;
-  border: none;
-  box-shadow: none;
+  @include mixins.no-style;
 }
 
 tooltip label {
-  outline: none;
-  border: none;
-  box-shadow: none;
+  @include mixins.no-style;
   font-weight: normal;
 }
 

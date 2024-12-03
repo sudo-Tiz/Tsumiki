@@ -1,9 +1,13 @@
+@use 'sass:color';
+@use "variables.scss";;
+
 /* OSD */
 #osd-container {
-  background-color: alpha(#191a0b, 0.8);
+  background-color: color.mix(#191a0b,transparent, 20%);
   padding: 12px 20px;
   border-radius: 999px;
   border: none;
+
   margin-bottom: 100px;
 }
 

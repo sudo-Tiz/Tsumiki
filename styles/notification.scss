@@ -1,21 +1,26 @@
+@use "variables";
+
+@use 'sass:color';
+
+
 /** notification **/
 #notification {
   padding: 0.8rem;
-  border: solid 1px var(--border-color);
+  border: solid 1px variables.$border-color;
   border-radius: 1rem;
-  background: var(--background-dark);
-  color: var(--text-main);
-  border: 1px solid var(--border-color);
+  background: variables.$background-dark;
+  color: variables.$text-main;
+  border: 1px solid variables.$border-color;
 }
 
 .hover {
-  border: 2px solid var(--border-color);
+  border: 2px solid variables.$border-color;
 }
 
 /* .notification-header #notification-icon {
   Notification app icon (only visible when the primary image is set) */
   /* -gtk-icon-effect: highlight;              TODO: might use this on hover     */
-  /* -gtk-icon-shadow: 0 1px 4px var(--text-main);
+  /* -gtk-icon-shadow: 0 1px 4px $text-main);
 
 } */
 
@@ -61,7 +66,7 @@
 .close-button:hover {
   box-shadow: none;
   border: none;
-  background: alpha(var(--text-main), 0.2);
+  background: color.mix(variables.$text-main,transparent, 20%);
   transition: background 0.15s ease-in-out;
 }
 
@@ -84,7 +89,7 @@
 }
 
 #notification-action-box button:hover {
-  background: var(--background);
+  background: variables.$background;
 }
 
 
