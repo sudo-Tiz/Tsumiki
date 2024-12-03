@@ -12,7 +12,7 @@ gi.require_version("Gtk", "3.0")
 class SystemTray(Box):
     """A widget to display the system tray items."""
 
-    def __init__(self, pixel_size=22, **kwargs) -> None:
+    def __init__(self, pixel_size=20, **kwargs) -> None:
         super().__init__(name="system-tray", style_classes="panel-box", **kwargs)
         self.pixel_size = pixel_size
         self.watcher = Gray.Watcher()

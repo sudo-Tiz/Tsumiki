@@ -4,6 +4,10 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.4.0 # Use the latest stable version
     hooks:
+      - id: fix-byte-order-marker
+      - id: check-case-conflict
+      - id: check-symlinks
+      - id: debug-statements
       - id: end-of-file-fixer # Ensures files end with a newline
       - id: trailing-whitespace # Removes trailing whitespace
       - id: mixed-line-ending # Converts mixed line endings to LF
@@ -40,5 +44,7 @@ repos:
     rev: v1.4.0
     hooks:
       - id: detect-secrets
+        name: Detect secrets
+        description: Detects high entropy strings that are likely to be passwords.
 
 default_stages: [pre-commit, pre-push]
