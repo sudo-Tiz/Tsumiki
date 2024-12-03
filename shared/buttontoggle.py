@@ -1,5 +1,6 @@
 from fabric.utils import exec_shell_command, exec_shell_command_async, invoke_repeater
 from fabric.widgets.button import Button
+from loguru import logger
 
 from utils.functions import executable_exists
 
@@ -27,7 +28,8 @@ class CommandSwitcher(Button):
             **kwargs,
         )
 
-        executable_exists(self.command_without_args)
+        if not executable_exists(self.command_without_args):
+            logger.error(f"Command {self.command_without_args} not found")
 
         self.enabled_icon = enabled_icon
         self.disabled_icon = disabled_icon

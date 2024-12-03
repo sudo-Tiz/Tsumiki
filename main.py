@@ -6,14 +6,15 @@ from loguru import logger
 from modules.bar import StatusBar
 from modules.notifications import NotificationPopup
 from modules.osd import OSDContainer
-from utils.functions import executable_exists
+from utils.functions import ExecutableNotFoundError, executable_exists
 
 
 def compile_apply_style(app: Application):
-    executable_exists("sass")
+    if not executable_exists("sass"):
+        raise ExecutableNotFoundError("sass")
     logger.info("[Main] Compiling CSS")
     exec_shell_command("sass styles/main.scss dist/main.css")
-    logger.error("[Main] CSS applied")
+    logger.info("[Main] CSS applied")
     app.set_stylesheet_from_file(get_relative_path("dist/main.css"))
 
 
