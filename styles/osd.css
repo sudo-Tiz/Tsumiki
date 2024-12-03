@@ -20,7 +20,7 @@
 
 #osd-container trough {
   min-height: inherit;
-  border-radius: inherit;
+  border-radius: 999px;
   border: none;
   background: #808080;
 }

@@ -5,10 +5,11 @@
   border-radius: 1rem;
   background: var(--background-dark);
   color: var(--text-main);
+  border: 1px solid var(--border-color);
 }
 
-#notification:hover {
-  color: aqua;
+.hover {
+  border: 2px solid var(--border-color);
 }
 
 /* .notification-header #notification-icon {
@@ -52,6 +53,11 @@
   margin-top: 5px;
 }
 
+.close-button{
+  padding: 0.2em;
+  border-radius: 100px;
+}
+
 .close-button:hover {
   box-shadow: none;
   border: none;
@@ -78,7 +84,7 @@
 }
 
 #notification-action-box button:hover {
-  background: lighter(var(--background-dark));
+  background: var(--background);
 }
 
 

@@ -25,6 +25,7 @@ label {
 }
 
 .panel-box {
+  font-weight: bold;
   background: var(--background-dark);
   padding: 0.1em 0.9em;
   color: var(--text-main);
