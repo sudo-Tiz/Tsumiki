@@ -14,8 +14,6 @@ More on [Fabric's Wiki](https://wiki.ffpy.org)
 
 ## **Installation**
 
-### **1. Install Dependencies**
-
 ###  Required
 
 Most of these are already installed on existing working machines

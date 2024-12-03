@@ -1,6 +1,8 @@
 from fabric.utils import exec_shell_command, exec_shell_command_async, invoke_repeater
 from fabric.widgets.button import Button
 
+from utils.functions import executable_exists
+
 
 class CommandSwitcher(Button):
     """A button widget to toggle a command. Useful for making services with two states."""
@@ -24,6 +26,8 @@ class CommandSwitcher(Button):
             name=name,
             **kwargs,
         )
+
+        executable_exists(self.command_without_args)
 
         self.enabled_icon = enabled_icon
         self.disabled_icon = disabled_icon

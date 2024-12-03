@@ -1,5 +1,6 @@
 import datetime
 import json
+import shutil
 from typing import Literal
 
 import gi
@@ -11,6 +12,13 @@ from gi.repository import GLib, Gtk
 from utils.icons import DISTRO_ICONS
 
 gi.require_version("Gtk", "3.0")
+
+
+class ExecutableNotFoundError(FileNotFoundError):
+    """Raised when an executable is not found."""
+
+    def __init__(self, executable_name: str):
+        super().__init__(f"Executable {executable_name} not found. Please install it using your package manager.")
 
 
 # Function to read the configuration file
@@ -81,3 +89,10 @@ def get_distro_icon():
 
     # Return the found icon or default to '' if not found
     return icon if icon else ""
+
+
+# Function to check if an executable exists
+def executable_exists(executable_name):
+    executable_path = shutil.which(executable_name)
+    if not executable_path:
+        raise ExecutableNotFoundError(executable_name)
