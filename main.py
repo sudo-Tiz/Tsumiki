@@ -11,7 +11,10 @@ from utils.functions import ExecutableNotFoundError, executable_exists
 
 def compile_apply_style(app: Application):
     if not executable_exists("sass"):
-        raise ExecutableNotFoundError("sass")
+        raise ExecutableNotFoundError(
+            "sass"
+        )  # Raise an error if sass is not found and exit the application
+
     logger.info("[Main] Compiling CSS")
     exec_shell_command("sass styles/main.scss dist/main.css")
     logger.info("[Main] CSS applied")

@@ -6,10 +6,16 @@ from fabric.utils import exec_shell_command, monitor_file
 from gi.repository import GLib
 from loguru import logger
 
+from utils.functions import executable_exists
+
 
 # Helper function to execute brightnessctl asynchronously
 def exec_brightnessctl_async(args: str):
     # Executes brightnessctl command asynchronously, ensuring no resource leaks.
+
+    if not executable_exists("brightnessctl"):
+        logger.error("Command brightnessctl not found")
+
     try:
         # Use subprocess.Popen to run the command without blocking
         process = subprocess.Popen(
