@@ -1,11 +1,13 @@
 /** workspace switcher */
 #workspaces {
   padding: 0.19em 1em;
+  font-weight: bold;
 }
 
 #workspaces > button {
   padding: 0 0.5rem;
   transition: padding 0.05s steps(8);
+  border-radius: 100px;
 }
 
 #workspaces > button:hover {

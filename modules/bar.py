@@ -2,6 +2,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow as Window
 
+from shared.widget_conrainer import WidgetContainer
 from utils.config import config
 from widgets import (
     AUDIO_WIDGET,
@@ -96,11 +97,7 @@ class StatusBar(Window):
 
         self.system_tray = SystemTray()
 
-        self.status_container = Box(
-            name="widgets-container",
-            spacing=4,
-            orientation="h",
-        )
+        self.status_container = WidgetContainer()
         self.status_container.add(VolumeWidget()) if AUDIO_WIDGET is True else None
 
         self.battery = Battery(
