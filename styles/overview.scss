@@ -1,6 +1,8 @@
 @use "sass:color";
 @use "common/variables.scss";
 
+/* overview  widget */
+
 #overview-window {
   background-color: color.mix(black, transparent, 90%);
   border-radius: 50px;

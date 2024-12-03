@@ -1,6 +1,8 @@
 @use "sass:color";
 @use "common/variables.scss";
-/* OSD */
+
+/* OSD widget*/
+
 #osd-container {
   background-color: variables.$shadow-default;
   padding: 12px 20px;

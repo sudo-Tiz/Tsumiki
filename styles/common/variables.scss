@@ -37,7 +37,7 @@ $text-muted-dark: #9399b2; // Dark-muted text
 $shadow-default: rgba(0, 0, 0, 0.5); // Default shadow for elements
 
 /* Custom Colors */
-$window-bg: transparent; // Mixed transparent color (adjusted with mix)
+$window-bg: transparent; // Mixed transparent color (adjusted with mix) // TODO: fix this
 $border-color: $surface-disabled;
 $ws-active: $text-muted;
 $ws-inactive: $accent-red;
