@@ -9,13 +9,13 @@ $workspace-transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
   font-weight: bold;
 
   & > button {
-    padding: 0 0.5rem;
+    padding: 0 0.5em;
     transition: padding 0.05s steps(8);
     border-radius: variables.$border-radius;
 
     &:hover {
       background-color: variables.$ws-hover;
-      transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
+      transition: $workspace-transition;
 
       label {
         color: variables.$background-dark;
@@ -23,10 +23,11 @@ $workspace-transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
     }
 
     &.active {
-      padding: 0 1rem;
+      font-weight: 600;
+      padding: 2px 14px;
       background-color: variables.$ws-active;
       min-width: 1.4rem;
-      transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
+      transition: $workspace-transition;
 
       & > label {
         color: variables.$background-dark;
