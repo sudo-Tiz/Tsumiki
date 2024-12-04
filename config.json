@@ -1,15 +1,15 @@
 {
   "layout": {
-    "left": ["workspaces", "window_title"],
-    "middle": ["datetime", "player"],
-    "right": ["updates", "battery", "system_tray"]
+    "left_section": ["workspaces", "window_title"],
+    "middle_section": ["datetime", "player"],
+    "right_section": ["updates", "battery", "system_tray"]
   },
   "hypr_sunset": {
     "temperature": "2800k",
     "enabled_icon": "󱩌",
     "disabled_icon": "󰛨",
     "icon_size": "12px",
-    "enable_label": false,
+    "enable_label": true,
     "enable_tooltip": true,
     "interval": 2000
   },
@@ -17,7 +17,7 @@
     "enabled_icon": "",
     "disabled_icon": "",
     "icon_size": "12px",
-    "enable_label": false,
+    "enable_label": true,
     "enable_tooltip": true,
     "interval": 2000
   },
@@ -29,21 +29,21 @@
   "cpu": {
     "icon": "",
     "icon_size": "12px",
-    "enable_label": false,
+    "enable_label": true,
     "enable_tooltip": true,
     "interval": 2000
   },
   "memory": {
     "icon": "",
     "icon_size": "12px",
-    "enable_label": false,
+    "enable_label": true,
     "enable_tooltip": true,
     "interval": 2000
   },
   "storage": {
     "icon": "󰋊",
     "icon_size": "14px",
-    "enable_label": false,
+    "enable_label": true,
     "enable_tooltip": true,
     "interval": 2000
   },
@@ -65,7 +65,7 @@
   "keyboard": {
     "icon": "󰌌",
     "icon_size": "14px",
-    "enable_label": false,
+    "enable_label": true,
     "enable_tooltip": true
   },
   "task_bar": {

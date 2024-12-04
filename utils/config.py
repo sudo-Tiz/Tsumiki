@@ -2,16 +2,15 @@ from typing import List, TypedDict
 
 from utils.functions import read_config
 
-
 # Default poll interval for widgets that need not be updated frequently
 high_poll_interval = 1000 * 60 * 10  # 10 minutes
 
 # Default configuration values
 DEFAULT_CONFIG = {
     "layout": {
-        "left": ["workspaces", "window_title"],
-        "middle": ["datetime", "player"],
-        "right": [
+        "left_section": ["workspaces", "window_title"],
+        "middle_section": ["datetime", "player"],
+        "right_section": [
             "weather",
             "battery",
             "system_tray",
@@ -253,6 +252,8 @@ for key, value in parsed_data.items():
     if key in DEFAULT_CONFIG:
         parsed_data[key] = merge_defaults(value, DEFAULT_CONFIG[key])
 
+
+## TODO: validate the name of widget is within the dict
 
 # Optionally, cast the parsed data to match our TypedDict using type hints
 config: BarConfig = parsed_data

@@ -74,49 +74,38 @@ class StatusBar(Window):
 
         layout = self.make_layout()
 
-
-
         self.children = CenterBox(
             name="panel-inner",
             start_children=Box(
                 name="start-container",
                 spacing=4,
                 orientation="h",
-                children=layout["left_children"],
+                children=layout["left_section"],
             ),
             center_children=Box(
                 name="center-container",
                 spacing=4,
                 orientation="h",
-                children=layout["middle_children"],
+                children=layout["middle_section"],
             ),
             end_children=Box(
                 name="end-container",
                 spacing=4,
                 orientation="h",
-                children=layout["right_children"],
+                children=layout["right_section"],
             ),
         )
 
         self.show_all()
 
     def make_layout(self):
-        layout = {"left_children": [], "middle_children": [], "right_children": []}
+        """assigns the three sections their respective widgets"""
 
-        # firset set of widgets (Left)
-        layout["left_children"].extend(
-           self.widgets_list[widget](config) for widget in config["layout"]["left"]
-        )
+        layout = {"left_section": [], "middle_section": [], "right_section": []}
 
-        # second set of widgets (Center)
-        layout["middle_children"].extend(
-            self.widgets_list[widget](config) for widget in config["layout"]["middle"]
-        )
-
-             # second set of widgets (Center)
-        layout["right_children"].extend(
-            self.widgets_list[widget](config) for widget in config["layout"]["right"]
-        )
-
+        for key in layout:
+            layout[key].extend(
+                self.widgets_list[widget](config) for widget in config["layout"][key]
+            )
 
         return layout
