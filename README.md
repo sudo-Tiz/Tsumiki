@@ -117,24 +117,23 @@ Use a similar configuration for your respective window manager's autostart setup
 
 - battery
 - workspaces
-- windowtitle
+- window_title
 - media
 - volume
 - weather
-- keyboardlayout
+- keyboard
 - clock
-- systemtray
+- system_tray
 - taskbar
 - language
-- systray
 - keyboard
 - ram
 - cpu
 - storage
 - cputemp
 - updates
-- hyprsunset
-- hypridle
+- hypr_sunset
+- hypr_idle
 
 # Screenshots
 ![image](https://github.com/user-attachments/assets/84467254-b7e9-400c-95a2-55353c298a60)
