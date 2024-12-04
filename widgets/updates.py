@@ -14,8 +14,6 @@ from loguru import logger
 from utils.functions import text_icon
 from utils.icons import ICONS
 
-# TODO: always show flatpak updates even if 0
-
 class Updates(EventBox):
     """A widget to display the number of available updates."""
 
