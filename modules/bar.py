@@ -31,7 +31,7 @@ class StatusBar(Window):
             name="bar",
             layer="top",
             anchor="left top right",
-            margin="10px 10px -2px 10px",
+            pass_through=False,
             exclusivity="auto",
             visible=False,
             all_visible=False,

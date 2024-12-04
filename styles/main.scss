@@ -21,10 +21,13 @@ label {
   font-size: 1rem;
 }
 
+#bar {
+  background-color: rgba(46, 46, 46, 0.3);
+}
+
 #panel-inner {
-  padding: 0.1em 0.25em;
+  padding: 0.4em 1.8em;
   border-color: variables.$border-color;
-  background-color: transparent;
 }
 
 .panel-box {
