@@ -136,5 +136,11 @@ Use a similar configuration for your respective window manager's autostart setup
 - hyprsunset
 - hypridle
 
+# Screenshots
+![image](https://github.com/user-attachments/assets/84467254-b7e9-400c-95a2-55353c298a60)
+
+
+
+
 > [!WARNING]
 > This is still in early development and will include breaking changes
