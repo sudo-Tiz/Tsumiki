@@ -17,6 +17,7 @@ from widgets import (
     WindowTitle,
     WorkSpaces,
 )
+from widgets.hyprsunset import HyprSunset
 from widgets.systray import SystemTray
 from widgets.taskbar import TaskBar
 
@@ -51,7 +52,7 @@ class StatusBar(Window):
             # DateTime: Displays the current date and time
             "datetime": DateTimeBox,
             # HyprSunset: Provides information about the sunset time based on location
-            # "hypr_sunset": HyprSunset.create(),
+            "hypr_sunset": HyprSunset.create(),
             # # HyprIdle: Shows the idle time for the system
             # "hypr_idle": HyprIdle.create(),
             # Battery: Displays the battery status with optional label and tooltip

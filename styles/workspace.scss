@@ -9,7 +9,7 @@ $workspace-transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
   font-weight: bold;
 
   & > button {
-    padding: 0 0.5em;
+    padding: 2px 0.5em;
     transition: padding 0.05s steps(8);
     border-radius: variables.$border-radius;
 
@@ -24,7 +24,8 @@ $workspace-transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 
     &.active {
       font-weight: 600;
-      padding: 2px 14px;
+      padding-left: 14px;
+      padding-right: 14px;
       background-color: variables.$ws-active;
       min-width: 1.4rem;
       transition: $workspace-transition;
