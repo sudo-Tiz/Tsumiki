@@ -78,6 +78,7 @@ class Mpris(EventBox):
 
     def get_playback_status(self, *_):
         # Get the current playback status and change the icon accordingly
+        self.show()
 
         status = self.player.playback_status.lower()
         if status == "playing":
