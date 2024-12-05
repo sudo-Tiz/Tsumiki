@@ -1,7 +1,7 @@
 {
   "layout": {
     "left_section": ["workspaces", "window_title"],
-    "middle_section": ["datetime", "player"],
+    "middle_section": ["datetime","mpris"],
     "right_section": ["updates", "battery", "system_tray"]
   },
   "hypr_sunset": {
@@ -74,7 +74,7 @@
   "language": {
     "length": 2
   },
-  "player": {
+  "mpris": {
     "length": 20
   },
   "system_tray": {

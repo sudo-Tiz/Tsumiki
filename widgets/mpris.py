@@ -1,10 +1,11 @@
-from fabric import Fabricator
-from fabric.utils import bulk_connect, exec_shell_command
+from fabric.utils import bulk_connect
 from fabric.widgets.box import Box
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
+from loguru import logger
 
+from services.mpris import MprisPlayer, MprisPlayerManager
 from utils.config import BarConfig
 from utils.icons import ICONS
 
@@ -18,13 +19,24 @@ class Mpris(EventBox):
     ):
         # Initialize the EventBox with specific name and style
         super().__init__(name="mpris")
-        self.config = config["player"]
+        self.config = config["mpris"]
+
+        # Services
+        self.mpris_manager = MprisPlayerManager()
+
+        for player in self.mpris_manager.players:
+            logger.info(
+                f"[PLAYER MANAGER] player found: {player.get_property('player-name')}",
+            )
+            self.player = MprisPlayer(player)
+
+        self.player.connect("notify::metadata", self.get_current)
 
         self.label = Label(label="Nothing playing", style_classes="panel-text")
-        self.text_icon = Label(label=ICONS["play"], style="padding: 0 10px;")
+        self.text_icon = Label(label=ICONS["playing"], style="padding: 0 10px;")
 
         self.revealer = Revealer(
-            name="player-revealer",
+            name="mpris-revealer",
             transition_type="slide-right",
             transition_duration=300,
             child=self.label,
@@ -48,53 +60,24 @@ class Mpris(EventBox):
             },
         )
 
-        player_info = Fabricator(
-            poll_from=lambda: {
-                "status": str(exec_shell_command("playerctl status").strip("\n")),
-                "info": str(
-                    exec_shell_command(
-                        'playerctl metadata --format "{{ title }} - {{ artist }}"',
-                    ).strip("\n"),
-                ),
-            },
-            stream=True,
-        )
-
-        # Connect the playerInfo changes to the get_current method
-        player_info.connect(
-            "changed",
-            lambda _, value: (self.get_current(value)),
-        )
-
-    def get_current(self, value):
+    def get_current(self, *_):
         # Get the current player info and status
-        info = value["info"]
+        metadata = self.player.metadata
+
+        bar_label = metadata["xesam:title"]
+        player_status: str = self.player.playback_status
+
         trucated_info = (
-            value["info"]
-            if len(value["info"]) < self.config["length"]
-            else value["info"][:30]
+            bar_label if len(bar_label) < self.config["length"] else bar_label[:30]
         )
-        status = value["status"]
+
+        self.label.set_label(trucated_info)
 
         if self.config["enable_tooltip"]:
-            self.set_tooltip_text(info)
+            self.set_tooltip_text(bar_label)
 
-        # Update the label and icon based on the player status
-        if status == "Playing":
-            self.set_visible(True)
-            self.text_icon.set_label(ICONS["pause"])
-            self.label.set_label(trucated_info)
-
-        elif status == "Paused":
-            self.set_visible(True)
-            self.text_icon.set_label(ICONS["play"])
-            self.label.set_label(trucated_info)
-
-        else:
-            self.set_visible(False)
-
-        return True
+        self.text_icon.set_label(ICONS[player_status.lower()])
 
     def play_pause(self, *_):
         # Toggle play/pause using playerctl
-        exec_shell_command("playerctl play-pause")
+        self.player.play_pause()

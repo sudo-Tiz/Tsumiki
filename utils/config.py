@@ -9,7 +9,7 @@ high_poll_interval = 1000 * 60 * 10  # 10 minutes
 DEFAULT_CONFIG = {
     "layout": {
         "left_section": ["workspaces", "window_title"],
-        "middle_section": ["datetime", "player"],
+        "middle_section": ["datetime"],
         "right_section": [
             "weather",
             "battery",
@@ -85,7 +85,7 @@ DEFAULT_CONFIG = {
         "enable_label": True,
         "enable_tooltip": True,
     },
-    "player": {
+    "mpris": {
         "length": 30,
         "enable_tooltip": True,
     },
@@ -154,8 +154,8 @@ class Cpu(TypedDict, BaseConfig):
     icon: str
 
 
-class Player(TypedDict, BaseConfig):
-    """Configuration for bar player"""
+class Mpris(TypedDict, BaseConfig):
+    """Configuration for bar mpris"""
 
     length: int
 
@@ -225,7 +225,7 @@ class BarConfig(TypedDict):
     language: Language
     layout: Layout
     memory: Memory
-    player: Player
+    mpris: Mpris
     storage: Storage
     system_tray: SystemTray
     task_bar: TaskBar

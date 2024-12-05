@@ -66,8 +66,8 @@ class StatusBar(Window):
             "storage": Storage,
             # Weather: Displays the weather for a given city (e.g., Kathmandu)
             "weather": Weather,
-            # Player: Displays information about the current media player status
-            "player": Mpris,
+            # Mpris: Displays information about the current media player status
+            "mpris": Mpris,
             # Updates: Shows available system updates based on the OS
             "updates": Updates,
         }

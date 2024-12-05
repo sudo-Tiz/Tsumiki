@@ -1,6 +1,6 @@
 ICONS = {
-    "play": "",
-    "pause": "",
+    "playing": "",
+    "paused": "",
     "power": "",
     "cpu": "",
     "memory": "",
