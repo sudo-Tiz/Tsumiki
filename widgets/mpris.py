@@ -31,9 +31,10 @@ class Mpris(EventBox):
             self.player = MprisPlayer(player)
 
         self.player.connect("notify::metadata", self.get_current)
+        self.player.connect("notify::playback-status", self.get_playback_status)
 
         self.label = Label(label="Nothing playing", style_classes="panel-text")
-        self.text_icon = Label(label=ICONS["playing"], style="padding: 0 10px;")
+        self.text_icon = Label(label=ICONS["playing"], style="padding: 0 5px;")
 
         self.revealer = Revealer(
             name="mpris-revealer",
@@ -65,7 +66,6 @@ class Mpris(EventBox):
         metadata = self.player.metadata
 
         bar_label = metadata["xesam:title"]
-        player_status: str = self.player.playback_status
 
         trucated_info = (
             bar_label if len(bar_label) < self.config["length"] else bar_label[:30]
@@ -76,7 +76,12 @@ class Mpris(EventBox):
         if self.config["enable_tooltip"]:
             self.set_tooltip_text(bar_label)
 
-        self.text_icon.set_label(ICONS[player_status.lower()])
+    def get_playback_status(self, *_):
+        status = self.player.playback_status.lower()
+        if status == "playing":
+            self.text_icon.set_label(ICONS["paused"])
+        else:
+            self.text_icon.set_label(ICONS["playing"])
 
     def play_pause(self, *_):
         # Toggle play/pause using playerctl
