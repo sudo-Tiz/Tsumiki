@@ -217,22 +217,22 @@ class Language(TypedDict):
 class BarConfig(TypedDict):
     """Main configuration that includes all other configurations"""
 
-    layout: Layout
-    hypr_sunset: HyprSunset
-    hypr_idle: HyprIdle
     battery: Battery
     cpu: Cpu
-    memory: Memory
-    language: Language
-    task_bar: TaskBar
+    hypr_sunset: HyprSunset
+    hypr_idle: HyprIdle
     keyboard: Keyboard
+    language: Language
+    layout: Layout
+    memory: Memory
     player: Player
     storage: Storage
+    system_tray: SystemTray
+    task_bar: TaskBar
+    updates: Updates
     workspaces: Workspaces
     window_title: WindowTitle
-    updates: Updates
     weather: Weather
-    system_tray: SystemTray
 
 
 # Read the configuration from the JSON file
@@ -247,6 +247,7 @@ def merge_defaults(data: dict, defaults: dict):
 # Now, `parsed_data` is a Python dictionary
 # You can access individual items like this:
 layout = parsed_data["layout"]
+
 
 for key, value in parsed_data.items():
     if key in DEFAULT_CONFIG:

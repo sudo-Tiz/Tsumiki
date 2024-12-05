@@ -23,6 +23,8 @@ def process_and_apply_css(app: Application):
 
 APPLICATION_NAME = "fabricpanel"
 
+logger.disable("fabric.hyprland.widgets")
+
 if __name__ == "__main__":
     # Create the status bar
     bar = StatusBar()
