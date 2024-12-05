@@ -77,11 +77,15 @@ class Mpris(EventBox):
             self.set_tooltip_text(bar_label)
 
     def get_playback_status(self, *_):
+        # Get the current playback status and change the icon accordingly
+
         status = self.player.playback_status.lower()
         if status == "playing":
             self.text_icon.set_label(ICONS["paused"])
-        else:
+        elif status == "paused":
             self.text_icon.set_label(ICONS["playing"])
+        else:
+            self.hide()
 
     def play_pause(self, *_):
         # Toggle play/pause using playerctl

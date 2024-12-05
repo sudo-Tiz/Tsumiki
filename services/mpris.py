@@ -1,9 +1,10 @@
+import contextlib
+
 import gi
-from fabric.core.service import Service, Signal, Property
+from fabric.core.service import Property, Service, Signal
 from fabric.utils import bulk_connect
 from gi.repository import GLib  # type: ignore
 from loguru import logger
-import contextlib
 
 try:
     gi.require_version("Playerctl", "2.0")
