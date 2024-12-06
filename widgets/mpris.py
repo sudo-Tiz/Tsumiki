@@ -23,6 +23,9 @@ class Mpris(EventBox):
 
         # Services
         self.mpris_manager = MprisPlayerManager()
+        self.player = None
+
+        self.hide()
 
         for player in self.mpris_manager.players:
             logger.info(
@@ -30,8 +33,11 @@ class Mpris(EventBox):
             )
             self.player = MprisPlayer(player)
 
-        self.player.connect("notify::metadata", self.get_current)
-        self.player.connect("notify::playback-status", self.get_playback_status)
+        if self.player is not None:
+            self.show()
+            self.player.connect("notify::metadata", self.get_current)
+            self.player.connect("notify::playback-status", self.get_playback_status)
+
 
         self.label = Label(label="Nothing playing", style_classes="panel-text")
         self.text_icon = Label(label=ICONS["playing"], style="padding: 0 5px;")
