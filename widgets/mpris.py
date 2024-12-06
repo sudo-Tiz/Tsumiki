@@ -34,7 +34,6 @@ class Mpris(EventBox):
             self.player = MprisPlayer(player)
 
         if self.player is not None:
-            self.show()
             self.player.connect("notify::metadata", self.get_current)
             self.player.connect("notify::playback-status", self.get_playback_status)
 
