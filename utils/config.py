@@ -12,11 +12,10 @@ DEFAULT_CONFIG = {
         "middle_section": ["datetime"],
         "right_section": [
             "weather",
-            "battery",
-            "system_tray",
             "updates",
-            "hypr_idle",
-            "hypr_sunset",
+            "battery",
+            "bluetooth",
+            "system_tray"
         ],
     },
     "hypr_sunset": {
@@ -82,6 +81,11 @@ DEFAULT_CONFIG = {
     "keyboard": {
         "icon": "󰌌",
         "icon_size": "14px",
+        "enable_label": True,
+        "enable_tooltip": True,
+    },
+    "bluetooth": {
+        "icon_size": 22,
         "enable_label": True,
         "enable_tooltip": True,
     },

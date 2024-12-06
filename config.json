@@ -2,7 +2,7 @@
   "layout": {
     "left_section": ["workspaces", "window_title"],
     "middle_section": ["datetime", "mpris"],
-    "right_section": ["updates", "battery", "system_tray"]
+    "right_section": ["updates","bluetooth", "battery", "system_tray"]
   },
   "hypr_sunset": {
     "temperature": "2800k",

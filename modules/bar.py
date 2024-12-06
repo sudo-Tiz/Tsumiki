@@ -17,6 +17,7 @@ from widgets import (
     WindowTitle,
     WorkSpaces,
 )
+from widgets.bluetooth import Bluetooth
 from widgets.systray import SystemTray
 from widgets.taskbar import TaskBar
 
@@ -43,6 +44,7 @@ class StatusBar(Window):
             "workspaces": WorkSpaces,
             "system_tray": SystemTray,
             "task_bar": TaskBar,
+            "bluetooth": Bluetooth,
             "keyboard": KeyboardLayout,
             # WindowTitle: Shows the title of the current window
             "window_title": WindowTitle,
