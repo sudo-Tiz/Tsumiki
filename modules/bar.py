@@ -17,7 +17,6 @@ from widgets import (
     WindowTitle,
     WorkSpaces,
 )
-from widgets.hyprsunset import HyprSunset
 from widgets.systray import SystemTray
 from widgets.taskbar import TaskBar
 

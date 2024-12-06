@@ -9,17 +9,18 @@ from fabric.utils import get_relative_path
 from fabric.widgets.label import Label
 from gi.repository import GLib, Gtk
 
+from utils.colors import Colors
 from utils.icons import DISTRO_ICONS
 
 gi.require_version("Gtk", "3.0")
 
 
-class ExecutableNotFoundError(FileNotFoundError):
+class ExecutableNotFoundError(ImportError):
     """Raised when an executable is not found."""
 
     def __init__(self, executable_name: str):
         super().__init__(
-            f"Executable {executable_name} not found. Please install it using your package manager."
+            f"{Colors.FAIL}Executable {executable_name} not found. Please install it using your package manager."
         )
 
 

@@ -21,25 +21,19 @@ class Mpris(EventBox):
         super().__init__(name="mpris")
         self.config = config["mpris"]
 
+        self.label = Label(label="Nothing playing", style_classes="panel-text")
+        self.text_icon = Label(label=ICONS["playing"], style="padding: 0 5px;")
+
         # Services
         self.mpris_manager = MprisPlayerManager()
-        self.player = None
-
-        self.hide()
 
         for player in self.mpris_manager.players:
             logger.info(
                 f"[PLAYER MANAGER] player found: {player.get_property('player-name')}",
             )
             self.player = MprisPlayer(player)
-
-        if self.player is not None:
             self.player.connect("notify::metadata", self.get_current)
             self.player.connect("notify::playback-status", self.get_playback_status)
-
-
-        self.label = Label(label="Nothing playing", style_classes="panel-text")
-        self.text_icon = Label(label=ICONS["playing"], style="padding: 0 5px;")
 
         self.revealer = Revealer(
             name="mpris-revealer",
@@ -83,15 +77,12 @@ class Mpris(EventBox):
 
     def get_playback_status(self, *_):
         # Get the current playback status and change the icon accordingly
-        self.show()
 
         status = self.player.playback_status.lower()
         if status == "playing":
             self.text_icon.set_label(ICONS["paused"])
         elif status == "paused":
             self.text_icon.set_label(ICONS["playing"])
-        else:
-            self.hide()
 
     def play_pause(self, *_):
         # Toggle play/pause using playerctl

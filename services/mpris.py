@@ -6,11 +6,15 @@ from fabric.utils import bulk_connect
 from gi.repository import GLib  # type: ignore
 from loguru import logger
 
+from utils.colors import Colors
+
 try:
     gi.require_version("Playerctl", "2.0")
     from gi.repository import Playerctl
 except ValueError:
-    raise ImportError("Playerctl is not installed, please install it first")
+    raise ImportError(
+        f"{Colors.FAIL}Playerctl is not installed, please install it first"
+    )
 
 
 class MprisPlayer(Service):
