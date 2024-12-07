@@ -63,6 +63,9 @@ class Weather(EventBox):
         # Initialize the Box with specific name and style
         super().__init__()
 
+        # Set the widget as not ready until the weather information is fetched
+        self.is_ready = False
+
         self.config = config["weather"]
 
         self.box = Box(
@@ -79,7 +82,7 @@ class Weather(EventBox):
             child=WeatherMenu(),
             enable_inhibitor=True,
         )
-        self.connect("button-press-event", lambda _: self.weather_menu.toggle_popup())
+        self.connect("button-press-event", lambda *_: self.weather_menu.toggle_popup())
 
         self.weather_icon = text_icon(icon="", size="15px")
 
