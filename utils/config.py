@@ -83,6 +83,11 @@ DEFAULT_CONFIG = {
         "enable_label": True,
         "enable_tooltip": True,
     },
+    "volume": {
+        "icon_size": "14px",
+        "enable_label": True,
+        "enable_tooltip": True,
+    },
     "mpris": {
         "length": 30,
         "enable_tooltip": True,
@@ -191,6 +196,14 @@ class Updates(TypedDict, BaseConfig):
     icon: str
 
 
+class BlueTooth(TypedDict):
+    """Configuration for bluetooth"""
+
+    enable_label: bool
+    enable_tooltip: bool
+    icon_size: int
+
+
 class Weather(TypedDict):
     """Configuration for weather"""
 
@@ -212,10 +225,15 @@ class Language(TypedDict):
     length: int
 
 
+class Volume(TypedDict, BaseConfig):
+    """Configuration for volume"""
+
+
 class BarConfig(TypedDict):
     """Main configuration that includes all other configurations"""
 
     battery: Battery
+    bluetooth: BlueTooth
     cpu: Cpu
     hypr_sunset: HyprSunset
     hypr_idle: HyprIdle
@@ -228,6 +246,7 @@ class BarConfig(TypedDict):
     system_tray: SystemTray
     task_bar: TaskBar
     updates: Updates
+    volume: Volume
     workspaces: Workspaces
     window_title: WindowTitle
     weather: Weather

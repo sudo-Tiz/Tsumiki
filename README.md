@@ -40,14 +40,24 @@ brightnessctl
 
 Run the following command to install the required packages:
 
-```sh
 # Arch Linux
 
-sudo pacman -S pipewire playerctl dart-sass networkmanager wl-clipboard brightnessctl python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python python-pip python-gobject python-psutils python-cairo python-loguru pkgconf
+```sh
+sudo pacman -S pipewire playerctl python-fabric dart-sass networkmanager wl-clipboard brightnessctl python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python python-pip python-gobject python-psutils python-cairo python-loguru pkgconf
+```
 
 # OpenSUSE
 
+```
 sudo zypper install pipewire playerctl networkmanager wl-clipboard brightnessctl python gtk3-devel cairo-devel gtk-layer-shell-devel libgirepository-1_0-1 libgirepository-2_0-0 gobject-introspection-devel python311 python311-pip python311-psutils python311-gobject python311-gobject-cairo python311-pycairo python311-loguru pkgconf
+```
+
+# On venv
+
+Install the requirements:
+
+```sh
+pip install -r requirements.txt
 ```
 
 ### Optional
@@ -80,16 +90,6 @@ git clone https://github.com/rubiin/FabricPanel.git
 cd FabricPanel
 ```
 
-### **3. Install Dependencies**
-
-Install the requirements:
-
-```sh
-pip install -r requirements.txt
-```
-
----
-
 ## **Usage**
 
 ### **For Hyprland:**
@@ -97,17 +97,17 @@ pip install -r requirements.txt
 Add the following line to your `hypr.conf` to start FabricPanel automatically:
 
 ```sh
-exec = python main.py
+exec = python "$HOME/bar/main.py"
 ```
 
 or in virtual environment as
 
 ```sh
-source "$HOME/bar/.venv/bin/activate" && python "$HOME/bar/main.py"
+exec = source "$HOME/bar/.venv/bin/activate" && python "$HOME/bar/main.py"
 
 ```
 
-modify the path accordingly
+> **Note**: modify the path accordingly
 
 ### **For Other Window Managers:**
 
@@ -120,6 +120,7 @@ Use a similar configuration for your respective window manager's autostart setup
 - window_title
 - media
 - volume
+- bluetooth
 - weather
 - keyboard
 - clock
@@ -137,7 +138,7 @@ Use a similar configuration for your respective window manager's autostart setup
 
 # Screenshots
 
-![image](https://github.com/user-attachments/assets/84467254-b7e9-400c-95a2-55353c298a60)
+![image](https://github.com/user-attachments/assets/4bd1fd6d-6c35-43e1-ae47-f0f76089f447)
 
 > [!WARNING]
 > This is still in early development and will include breaking changes

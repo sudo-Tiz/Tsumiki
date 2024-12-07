@@ -1,8 +1,15 @@
 {
   "layout": {
     "left_section": ["workspaces", "window_title"],
-    "middle_section": ["datetime", "mpris"],
-    "right_section": ["weather","updates","bluetooth", "volume", "battery", "system_tray"]
+    "middle_section": ["datetime"],
+    "right_section": [
+      "weather",
+      "updates",
+      "bluetooth",
+      "volume",
+      "battery",
+      "system_tray"
+    ]
   },
   "hypr_sunset": {
     "temperature": "2800k",
@@ -79,5 +86,15 @@
   },
   "system_tray": {
     "icon_size": 20
+  },
+  "bluetooth": {
+    "icon_size": 22,
+    "enable_label": true,
+    "enable_tooltip": true
+  },
+  "volume": {
+    "icon_size": "14px",
+    "enable_label": true,
+    "enable_tooltip": true
   }
 }

@@ -1,57 +1,55 @@
 @use "common/variables.scss";
 @use "sass:color";
 
-
-#calendar
- {
-    background-color: mix(black, variables.$background-dark, 30%);
-    border-radius: 20px;
-    /*border: 2px solid mix(@foreground, @background, 0.9);*/
-    padding: 8px;
-    min-width: 35rem;
-    min-height: 13rem;
+#calendar {
+  background-color: mix(black, variables.$background-dark, 30%);
+  border-radius: 20px;
+  /*border: 2px solid mix(@foreground, @background, 0.9);*/
+  padding: 8px;
+  min-width: 35rem;
+  min-height: 13rem;
 }
 
 #week-days {
-    font-size: 10pt;
-    color: variables.$text-main ;
-    font-weight: normal;
+  font-size: 10pt;
+  color: variables.$text-main;
+  font-weight: normal;
 }
 
 #day,
 #current-day,
 #dimmed {
-    transition: all 0.1s ease;
-    font-size: 10pt;
-    margin: 0px;
-    padding: 5px 4px;
-    margin: 4px 7px;
-    border-radius: 999px;
+  transition: all 0.1s ease;
+  font-size: 10pt;
+  margin: 0px;
+  padding: 5px 4px;
+  margin: 4px 7px;
+  border-radius: 999px;
 }
 
 #day,
 #month {
-    color: variables.$text-main;
+  color: variables.$text-main;
 }
 
 #current-day {
-    color: variables.$background-dark;
-    background-color: variables.$text-main;
+  color: variables.$background-dark;
+  background-color: variables.$text-main;
 }
 
-#chevron>* {
-    color: color.mix(variables.$text-main,transparent, 30%);
+#chevron > * {
+  color: color.mix(variables.$text-main, transparent, 30%);
 }
 
-#chevron:hover>* {
-    color: variables.$text-main;
+#chevron:hover > * {
+  color: variables.$text-main;
 }
 
 #header {
-    margin: 8px;
+  margin: 8px;
 }
 
 #month {
-    margin: 0px 8px;
-    min-width: 110px;
+  margin: 0px 8px;
+  min-width: 110px;
 }

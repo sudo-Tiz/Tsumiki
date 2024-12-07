@@ -5,6 +5,7 @@ from fabric.widgets.wayland import WaylandWindow as Window
 from utils.config import config
 from widgets import (
     Battery,
+    CalendarWidget,
     Cpu,
     DateTimeBox,
     KeyboardLayout,
@@ -16,9 +17,8 @@ from widgets import (
     Weather,
     WindowTitle,
     WorkSpaces,
-    CalendarWidget,
 )
-from widgets.bluetooth import Bluetooth
+from widgets.bluetooth import BlueToothWidget
 from widgets.systray import SystemTray
 from widgets.taskbar import TaskBar
 from widgets.volume import VolumeWidget
@@ -46,7 +46,7 @@ class StatusBar(Window):
             "system_tray": SystemTray,
             "task_bar": TaskBar,
             "calendar": CalendarWidget,
-            "bluetooth": Bluetooth,
+            "bluetooth": BlueToothWidget,
             "keyboard": KeyboardLayout,
             # WindowTitle: Shows the title of the current window
             "window_title": WindowTitle,

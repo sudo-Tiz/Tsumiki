@@ -1,19 +1,17 @@
-from fabric.widgets.box import Box
-from fabric.widgets.eventbox import EventBox
-from fabric.widgets.revealer import Revealer
-from fabric.widgets.button import Button
-from fabric.widgets.label import Label
-from fabric.widgets.overlay import Overlay
-from datetime import datetime
 import calendar
+from datetime import datetime
 
 import gi
-
 from fabric.utils import bulk_connect
+from fabric.widgets.box import Box
+from fabric.widgets.button import Button
+from fabric.widgets.eventbox import EventBox
+from fabric.widgets.label import Label
+from fabric.widgets.overlay import Overlay
+from fabric.widgets.revealer import Revealer
 from gi.repository import GLib, Gtk
 
 from utils.config import BarConfig
-
 
 gi.require_version("Gtk", "3.0")
 
@@ -178,7 +176,7 @@ class CalendarWidget(EventBox):
                 if day == 0:
                     label = Label(
                         name="dimmed",
-                        label="× ",
+                        label="x",
                         h_expand=True,
                         h_align="fill",
                         v_expand=True,

@@ -1,12 +1,11 @@
 import threading
+
 from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
-from fabric.widgets.eventbox import EventBox
-from fabric.widgets.image import Image
 from fabric.widgets.centerbox import CenterBox
+from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from loguru import logger
-
 
 from services.weather import WeatherInfo
 from shared.popup import PopupWindow
@@ -115,7 +114,6 @@ class Weather(EventBox):
         res = weather.simple_weather_info(city)
         # Update the label with the weather icon and temperature
 
-        print(res["temperature"], res["icon"])
         self.weather_label.set_label(f"{res['temperature']}°C")
         self.weather_icon.set_label(res["icon"])
 

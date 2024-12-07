@@ -1,37 +1,32 @@
 @use "common/variables.scss";
 
+#weather-menu {
+  min-width: 3em;
+  background-color: variables.$background-dark;
 
-#weather-menu{
-    min-width: 3em;
-    background-color: variables.$background-dark;
+  border: 2px solid green;
 
-    
-    #weather-container{
-        padding: 2em;
-        background-color: variables.$background;
-        #start-container{
-            margin: 0.2em;
-            label {
-                color: aqua;
-            }
-        }
-    
-        #center-container{
-            margin: 0.2em 2em;
-            .temperature{
-                font-size: 2rem;
-                font-weight: bold;
-                padding: 0.2em;
-            }
-        }
-    
-        #end-container{
-            margin: 0.2em 2em;
-       
-        }
-
- 
+  #weather-container {
+    padding: 2em;
+    background-color: variables.$background;
+    #start-container {
+      margin: 0.2em;
+      label {
+        color: aqua;
+      }
     }
 
+    #center-container {
+      margin: 0.2em 2em;
+      .temperature {
+        font-size: 2rem;
+        font-weight: bold;
+        padding: 0.2em;
+      }
+    }
 
+    #end-container {
+      margin: 0.2em 2em;
+    }
+  }
 }

@@ -1,5 +1,6 @@
 # ruff: noqa: F403
 from .battery import *
+from .calendar import *
 from .clickcounter import *
 from .dashboard import *
 from .datetime import *
@@ -19,4 +20,3 @@ from .volume import *
 from .weather import *
 from .windowtitle import *
 from .workspace import *
-from .calendar import *
