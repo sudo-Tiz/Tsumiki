@@ -1,6 +1,6 @@
 from fabric.utils import exec_shell_command, exec_shell_command_async, invoke_repeater
 from fabric.widgets.button import Button
-from loguru import logger
+
 
 from utils.functions import ExecutableNotFoundError, executable_exists
 

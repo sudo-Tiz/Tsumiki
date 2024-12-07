@@ -19,3 +19,4 @@ from .volume import *
 from .weather import *
 from .windowtitle import *
 from .workspace import *
+from .calendar import *

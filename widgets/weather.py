@@ -1,15 +1,58 @@
 import threading
-
 from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
+from fabric.widgets.button import Button
+from fabric.widgets.image import Image
+from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.label import Label
 from loguru import logger
 
+
 from services.weather import WeatherInfo
+from shared.popup import PopupWindow
 from utils.config import BarConfig
 
 
-class Weather(Box):
+class WeatherMenu(Box):
+    """A menu to display the weather information."""
+
+    def __init__(
+        self,
+    ):
+        super().__init__(name="weather-menu", orientation="vertical")
+
+        self.upper = CenterBox(
+            start_children=Box(
+                name="start-container",
+                spacing=4,
+                orientation="h",
+                children=Image(
+                    name="weather-icon",
+                    icon_name="weather-showers",
+                ),
+            ),
+            center_children=Box(
+                name="center-container",
+                spacing=4,
+                orientation="h",
+                children=[
+                    Label(
+                        label="Fetching weather...",
+                        style_classes="panel-text",
+                    )
+                ],
+            ),
+            end_children=Box(
+                name="end-container",
+                spacing=4,
+                orientation="h",
+                children=[],
+            ),
+        )
+        self.children = self.upper
+
+
+class Weather(Button):
     """A widget to display the current weather."""
 
     def __init__(
@@ -20,6 +63,15 @@ class Weather(Box):
         super().__init__(name="weather", style_classes="panel-box")
 
         self.config = config["weather"]
+
+        self.weather_menu = PopupWindow(
+            transition_duration=350,
+            anchor="top-right",
+            transition_type="slide-down",
+            child=WeatherMenu(),
+            enable_inhibitor=True,
+        )
+        self.connect("clicked", lambda _: self.weather_menu.toggle_popup())
 
         self.weather_label = Label(
             label="Fetching weather...",

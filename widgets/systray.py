@@ -26,21 +26,25 @@ class SystemTray(Box):
         item = self.watcher.get_item_for_identifier(identifier)
         item_button = self.do_bake_item_button(item)
         item.connect("removed", lambda *args: item_button.destroy())
+        item.connect(
+            "icon-changed",
+            lambda icon_item: self.do_update_item_button(icon_item, item_button),
+        )
         item_button.show_all()
         self.add(item_button)
 
     def do_bake_item_button(self, item: Gray.Item) -> Button:
         button = Button()
-
-        button.set_tooltip_text(item.get_property("title"))
-
         # context menu handler
         button.connect(
             "button-press-event",
             lambda button, event: self.on_button_click(button, item, event),
         )
+        self.do_update_item_button(item, button)
 
-        # get pixel map of item's icon
+        return button
+
+    def do_update_item_button(self, item: Gray.Item, item_button: Button):
         pixmap = Gray.get_pixmap_for_pixmaps(item.get_icon_pixmaps(), 24)
 
         # convert the pixmap to a pixbuf
@@ -55,18 +59,7 @@ class SystemTray(Box):
                 Gtk.IconLookupFlags.FORCE_SIZE,
             )
         )
-
-        # resize/scale the pixbuf
-        pixbuf.scale_simple(
-            self.config["icon_size"],
-            self.config["icon_size"],
-            GdkPixbuf.InterpType.HYPER,
-        )
-
-        image = Image(pixbuf=pixbuf, pixel_size=self.config["icon_size"])
-        button.set_image(image)
-
-        return button
+        item_button.set_image(Image(pixbuf=pixbuf, pixel_size=self.config["icon_size"]))
 
     def on_button_click(self, button, item: Gray.Item, event):
         match event.button:

@@ -16,6 +16,7 @@ from widgets import (
     Weather,
     WindowTitle,
     WorkSpaces,
+    CalendarWidget,
 )
 from widgets.bluetooth import Bluetooth
 from widgets.systray import SystemTray
@@ -38,12 +39,12 @@ class StatusBar(Window):
             all_visible=False,
         )
 
-        # TODO: fix this . This is initialized by default
         self.widgets_list = {
             # Workspaces: Displays the list of workspaces or desktops
             "workspaces": WorkSpaces,
             "system_tray": SystemTray,
             "task_bar": TaskBar,
+            "calendar": CalendarWidget,
             "bluetooth": Bluetooth,
             "keyboard": KeyboardLayout,
             # WindowTitle: Shows the title of the current window

@@ -8,7 +8,7 @@ from utils.config import BarConfig
 class Bluetooth(Box):
     """A widget to display the Bluetooth status."""
 
-    def __init__(self,config: BarConfig, **kwargs):
+    def __init__(self, config: BarConfig, **kwargs):
         super().__init__(**kwargs, style_classes="panel-box")
         self.bluetooth_client = BluetoothClient()
 
