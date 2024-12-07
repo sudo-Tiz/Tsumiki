@@ -115,6 +115,9 @@ Use a similar configuration for your respective window manager's autostart setup
 
 ## **Available Modules**
 
+<details>
+<summary>Click to expand modules</summary>
+
 - battery
 - workspaces
 - window_title
@@ -135,6 +138,9 @@ Use a similar configuration for your respective window manager's autostart setup
 - updates
 - hypr_sunset
 - hypr_idle
+
+</details>
+
 
 # Screenshots
 
