@@ -1,7 +1,7 @@
 import threading
 from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
-from fabric.widgets.button import Button
+from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.label import Label
@@ -11,6 +11,7 @@ from loguru import logger
 from services.weather import WeatherInfo
 from shared.popup import PopupWindow
 from utils.config import BarConfig
+from utils.functions import text_icon
 
 
 class WeatherMenu(Box):
@@ -52,7 +53,7 @@ class WeatherMenu(Box):
         self.children = self.upper
 
 
-class Weather(Button):
+class Weather(EventBox):
     """A widget to display the current weather."""
 
     def __init__(
@@ -60,9 +61,16 @@ class Weather(Button):
         config: BarConfig,
     ):
         # Initialize the Box with specific name and style
-        super().__init__(name="weather", style_classes="panel-box")
+        super().__init__()
 
         self.config = config["weather"]
+
+        self.box = Box(
+            name="weather",
+            style_classes="panel-box",
+        )
+
+        self.children = self.box
 
         self.weather_menu = PopupWindow(
             transition_duration=350,
@@ -71,13 +79,15 @@ class Weather(Button):
             child=WeatherMenu(),
             enable_inhibitor=True,
         )
-        self.connect("clicked", lambda _: self.weather_menu.toggle_popup())
+        self.connect("button-press-event", lambda _: self.weather_menu.toggle_popup())
+
+        self.weather_icon = text_icon(icon="", size="15px")
 
         self.weather_label = Label(
             label="Fetching weather...",
             style_classes="panel-text",
         )
-        self.children = self.weather_label
+        self.box.children = (self.weather_icon, self.weather_label)
 
         # Set up a repeater to call the update_label method at specified intervals
         invoke_repeater(self.config["interval"], self.update_label, initial_call=True)
@@ -98,7 +108,10 @@ class Weather(Button):
         weather = WeatherInfo()
         res = weather.simple_weather_info(city)
         # Update the label with the weather icon and temperature
-        self.weather_label.set_label(f"{res['icon']} {res['temperature']}")
+
+        print(res["temperature"], res["icon"])
+        self.weather_label.set_label(res["temperature"])
+        self.weather_icon.set_label(res["icon"])
 
         # Update the tooltip with the city and weather condition if enabled
         if self.config["enable_tooltip"]:

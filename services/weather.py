@@ -1,4 +1,7 @@
+import json
 import urllib.request
+
+from utils.icons import WEATHER
 
 
 class WeatherInfo:
@@ -7,17 +10,23 @@ class WeatherInfo:
     def simple_weather_info(self, city: str):
         try:
             # Construct the URL for fetching weather information
-            url = f"http://wttr.in/{city.capitalize()}?format='%l,%c,%t,%C'"
+            url = f"http://wttr.in/{city.capitalize()}?format=j1"
             contents = urllib.request.urlopen(url).read().decode("utf-8")
 
             # Parse the weather information
-            data = str(contents).split(",")
+            data = json.loads(contents)
+
+            current_weather = data["current_condition"][0]
+            hourly_weather = data["weather"][0]["hourly"]
+
             return {
-                "city": data[0].strip(),
-                "icon": data[1].strip(),
-                "temperature": data[2].strip(),
-                "condition": data[3].strip(),
+                "city": city,
+                "icon": WEATHER[current_weather["weatherCode"]]["icon"],
+                "temperature": current_weather["FeelsLikeC"],
+                "condition": current_weather["weatherDesc"][0]["value"],
+                "hourly": hourly_weather,
             }
+
         except Exception as e:
             # Handle any errors that occur during the request
             return {"error": str(e)}
