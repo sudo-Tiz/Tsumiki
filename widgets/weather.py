@@ -116,7 +116,7 @@ class Weather(EventBox):
         # Update the label with the weather icon and temperature
 
         print(res["temperature"], res["icon"])
-        self.weather_label.set_label(res["temperature"])
+        self.weather_label.set_label(f"{res['temperature']}°C")
         self.weather_icon.set_label(res["icon"])
 
         self.weather_menu = PopupWindow(
