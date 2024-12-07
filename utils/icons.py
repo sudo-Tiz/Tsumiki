@@ -6,6 +6,7 @@ ICONS = {
     "memory": "",
     "storage": "󰋊",
     "updates": "󱧘",
+    "thermometer": "",
 }
 
 

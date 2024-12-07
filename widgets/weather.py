@@ -12,35 +12,42 @@ from services.weather import WeatherInfo
 from shared.popup import PopupWindow
 from utils.config import BarConfig
 from utils.functions import text_icon
+from utils.icons import ICONS
 
 
 class WeatherMenu(Box):
     """A menu to display the weather information."""
 
-    def __init__(
-        self,
-    ):
-        super().__init__(name="weather-menu", orientation="vertical")
+    def __init__(self, data: dict):
+        super().__init__(name="weather-menu")
+
+
+        self.weather_container = Box(orientation="h", spacing=4, name="weather-container")
 
         self.upper = CenterBox(
+            name="weather-upper",
             start_children=Box(
                 name="start-container",
-                spacing=4,
-                orientation="h",
-                children=Image(
-                    name="weather-icon",
-                    icon_name="weather-showers",
+                  v_align="center",
+                  h_align="center",
+                children=text_icon(
+                    icon=data["icon"],
+                    size="40px",
                 ),
             ),
             center_children=Box(
                 name="center-container",
-                spacing=4,
-                orientation="h",
+              v_align="center",
+                  h_align="center",
                 children=[
                     Label(
-                        label="Fetching weather...",
-                        style_classes="panel-text",
-                    )
+                        style_classes="temperature",
+                        label=f"{data["temperature"]}°C",
+                    ),
+                    text_icon(
+                        icon=ICONS["thermometer"],
+                        size="20px",
+                    ),
                 ],
             ),
             end_children=Box(
@@ -50,7 +57,12 @@ class WeatherMenu(Box):
                 children=[],
             ),
         )
-        self.children = self.upper
+
+        self.bottom = Box()
+        self.weather_container.add(self.upper)
+
+        self.add(self.weather_container)
+
 
 
 class Weather(EventBox):
@@ -74,15 +86,6 @@ class Weather(EventBox):
         )
 
         self.children = self.box
-
-        self.weather_menu = PopupWindow(
-            transition_duration=350,
-            anchor="top-right",
-            transition_type="slide-down",
-            child=WeatherMenu(),
-            enable_inhibitor=True,
-        )
-        self.connect("button-press-event", lambda *_: self.weather_menu.toggle_popup())
 
         self.weather_icon = text_icon(icon="", size="15px")
 
@@ -115,6 +118,15 @@ class Weather(EventBox):
         print(res["temperature"], res["icon"])
         self.weather_label.set_label(res["temperature"])
         self.weather_icon.set_label(res["icon"])
+
+        self.weather_menu = PopupWindow(
+            transition_duration=350,
+            anchor="top-right",
+            transition_type="slide-down",
+            child=WeatherMenu(res),
+            enable_inhibitor=True,
+        )
+        self.connect("button-press-event", lambda *_: self.weather_menu.toggle_popup())
 
         # Update the tooltip with the city and weather condition if enabled
         if self.config["enable_tooltip"]:
