@@ -21,15 +21,16 @@ class WeatherMenu(Box):
     def __init__(self, data: dict):
         super().__init__(name="weather-menu")
 
-
-        self.weather_container = Box(orientation="h", spacing=4, name="weather-container")
+        self.weather_container = Box(
+            orientation="h", spacing=4, name="weather-container"
+        )
 
         self.upper = CenterBox(
             name="weather-upper",
             start_children=Box(
                 name="start-container",
-                  v_align="center",
-                  h_align="center",
+                v_align="center",
+                h_align="center",
                 children=text_icon(
                     icon=data["icon"],
                     size="40px",
@@ -37,8 +38,8 @@ class WeatherMenu(Box):
             ),
             center_children=Box(
                 name="center-container",
-              v_align="center",
-                  h_align="center",
+                v_align="center",
+                h_align="center",
                 children=[
                     Label(
                         style_classes="temperature",
@@ -62,7 +63,6 @@ class WeatherMenu(Box):
         self.weather_container.add(self.upper)
 
         self.add(self.weather_container)
-
 
 
 class Weather(EventBox):

@@ -1,10 +1,13 @@
 from venv import logger
-
+import gi
 from fabric.widgets.box import Box
 from fabric.widgets.circularprogressbar import CircularProgressBar
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
+
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gdk
 
 from utils.config import BarConfig
 
@@ -33,7 +36,7 @@ class VolumeWidget(Box):
         )
         # Create an event box to handle scroll events for volume control
         self.event_box = EventBox(
-            events="scroll",
+            events=["scroll", "smooth-scroll"],
             child=Overlay(
                 child=self.progress_bar,
                 overlays=Label(
@@ -46,16 +49,19 @@ class VolumeWidget(Box):
         self.audio.connect("notify::speaker", self.on_speaker_changed)
         # Connect the event box to handle scroll events
         self.event_box.connect("scroll-event", self.on_scroll)
+
         # Add the event box as a child
         self.add(self.event_box)
 
     def on_scroll(self, _, event):
         # Adjust the volume based on the scroll direction
-        match event.direction:
-            case 0:
-                self.audio.speaker.volume += 8
-            case 1:
-                self.audio.speaker.volume -= 8
+
+        val_y = event.delta_y
+
+        if val_y > 0:
+            self.audio.speaker.volume += 5
+        else:
+            self.audio.speaker.volume -= 5
 
     def on_speaker_changed(self, *_):
         # Update the progress bar value based on the speaker volume

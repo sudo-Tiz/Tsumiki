@@ -21,6 +21,7 @@ from widgets import (
 from widgets.bluetooth import Bluetooth
 from widgets.systray import SystemTray
 from widgets.taskbar import TaskBar
+from widgets.volume import VolumeWidget
 
 
 class StatusBar(Window):
@@ -53,6 +54,7 @@ class StatusBar(Window):
             "language": LanguageBox,
             # DateTime: Displays the current date and time
             "datetime": DateTimeBox,
+            "volume": VolumeWidget,
             # HyprSunset: Provides information about the sunset time based on location
             # "hypr_sunset": HyprSunset.create(),
             # # HyprIdle: Shows the idle time for the system
