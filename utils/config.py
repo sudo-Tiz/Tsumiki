@@ -10,7 +10,14 @@ DEFAULT_CONFIG = {
     "layout": {
         "left_section": ["workspaces", "window_title"],
         "middle_section": ["datetime"],
-        "right_section": ["weather", "updates", "battery", "bluetooth", "system_tray"],
+        "right_section": [
+            "weather",
+            "updates",
+            "battery",
+            "bluetooth",
+            "system_tray",
+            "power",
+        ],
     },
     "hypr_sunset": {
         "temperature": "2800k",

@@ -19,6 +19,7 @@ from widgets import (
     WorkSpaces,
 )
 from widgets.bluetooth import BlueToothWidget
+from widgets.power import PowerButton
 from widgets.systray import SystemTray
 from widgets.taskbar import TaskBar
 from widgets.volume import VolumeWidget
@@ -48,6 +49,7 @@ class StatusBar(Window):
             "calendar": CalendarWidget,
             "bluetooth": BlueToothWidget,
             "keyboard": KeyboardLayout,
+            "power": PowerButton,
             # WindowTitle: Shows the title of the current window
             "window_title": WindowTitle,
             # LanguageBox: Displays the current language selection

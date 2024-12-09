@@ -1,0 +1,27 @@
+@use "sass:color";
+@use "common/variables.scss";
+
+#power-control-button {
+  padding: 40px 120px;
+  border-radius: 0;
+  border-color: variables.$border-color;
+  text-decoration-color: variables.$text-main;
+  color: variables.$text-main;
+  background-color: variables.$background;
+  border-style: solid;
+  border-width: 1px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 25%;
+
+  label {
+    margin-top: 4.5em;
+  }
+
+  &:focus,
+  &:active,
+  &:hover {
+    background-color: #3700b3;
+    outline-style: none;
+  }
+}
