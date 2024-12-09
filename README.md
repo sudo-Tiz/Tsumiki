@@ -146,5 +146,14 @@ Use a similar configuration for your respective window manager's autostart setup
 
 ![image](https://github.com/user-attachments/assets/4bd1fd6d-6c35-43e1-ae47-f0f76089f447)
 
+
+## Notification
+![image](https://github.com/user-attachments/assets/07be6619-067d-4322-9e10-6d0a646e257f)
+
+## OSD
+![image](https://github.com/user-attachments/assets/25e171ff-f85e-4b62-9ed3-8e3479c2e4b4)
+
+
+
 > [!WARNING]
 > This is still in early development and will include breaking changes
