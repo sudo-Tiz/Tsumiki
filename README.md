@@ -4,7 +4,7 @@ A semi-customizable bar written using the [Fabric Widget System](https://github.
 More on [Fabric's Wiki](https://wiki.ffpy.org)
 
 The panel focuses on providing an all-in-one, fully integrated panel experience, where users don’t have to rely on separate, theme-less third-party tools to manage niche functions like buetooth, notifications,on screen display.
-Many aspects of the bar including the look and functionalities are inspired from [waybar](https://github.com/Alexays/Waybar) and [hyprpanel](https://hyprpanel.com).
+Many aspects of the bar including the look and functionalities are inspired from [waybar](https://github.com/Alexays/Waybar), [hyprpanel](https://hyprpanel.com) and [swayosd](https://github.com/ErikReider/SwayOSD).
 
 ---
 
