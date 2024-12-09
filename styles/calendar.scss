@@ -2,7 +2,7 @@
 @use "sass:color";
 
 #calendar {
-  background-color: mix(black, variables.$background-dark, 30%);
+  background-color: color.mix(black, variables.$background-dark, 30%);
   border-radius: 20px;
   /*border: 2px solid mix(@foreground, @background, 0.9);*/
   padding: 8px;

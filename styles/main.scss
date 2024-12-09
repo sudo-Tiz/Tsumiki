@@ -134,13 +134,13 @@ check {
 
 check:hover,
 radio:hover {
-  box-shadow: 0 0 0 4px transparentize(variables.$background-dark, 0.9);
+  box-shadow: 0 0 0 4px color.adjust(variables.$background-dark, $alpha: -0.9);
   background-color: variables.$background-dark;
 }
 
 check:active,
 radio:active {
-  box-shadow: 0 0 0 4px transparentize(variables.$background-dark, 0.9);
+  box-shadow: 0 0 0 4px color.adjust(variables.$background-dark, $alpha: -0.9);
   background-color: variables.$background-dark;
 }
 
@@ -156,7 +156,7 @@ check:checked:hover,
 check:indeterminate:hover,
 radio:checked:hover,
 radio:indeterminate:hover {
-  box-shadow: 0 0 0 4px transparentize(variables.$text-main, 0.9);
+  box-shadow: 0 0 0 4px color.adjust(variables.$text-main, $alpha: -0.9);
   background-color: variables.$text-main;
 }
 
@@ -164,7 +164,7 @@ check:checked:active,
 check:indeterminate:active,
 radio:checked:active,
 radio:indeterminate:active {
-  box-shadow: 0 0 0 4px transparentize(variables.$text-main, 0.9);
+  box-shadow: 0 0 0 4px color.adjust(variables.$text-main, $alpha: -0.9);
   background-color: variables.$text-main;
 }
 
