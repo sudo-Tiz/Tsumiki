@@ -156,5 +156,10 @@ Use a similar configuration for your respective window manager's autostart setup
 
 ![image](https://github.com/user-attachments/assets/25e171ff-f85e-4b62-9ed3-8e3479c2e4b4)
 
+## Logout 
+
+![image](https://github.com/user-attachments/assets/18b5c851-4d3a-4801-b4c3-dbb555cfbae9)
+
+
 > [!WARNING]
 > This is still in early development and will include breaking changes
