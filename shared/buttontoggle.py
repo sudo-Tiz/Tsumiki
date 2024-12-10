@@ -22,7 +22,7 @@ class CommandSwitcher(Button):
         self.command_without_args = self.command.split(" ")[0]  # command without args
 
         super().__init__(
-            style_classes="bar-button",
+            style_classes="panel-button",
             name=name,
             **kwargs,
         )

@@ -5,7 +5,7 @@ class ClickCounter(Button):
     """A widget to count the number of clicks."""
 
     def __init__(self, **kwargs):
-        super().__init__(name="click-counter", style_classes="bar-button", **kwargs)
+        super().__init__(name="click-counter", style_classes="panel-button", **kwargs)
         self.count = 0
         self.set_label(f"{self.count}")
 

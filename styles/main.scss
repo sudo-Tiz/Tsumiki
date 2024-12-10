@@ -10,6 +10,7 @@
 @use "weather.scss";
 @use "calendar.scss";
 @use "workspace.scss";
+@use "power.scss";
 @use "volume.scss";
 
 /* unset so we can style everything from the ground up. */
@@ -43,6 +44,7 @@ label {
 .panel-button {
   background: variables.$background-dark;
   padding: 0 1.25em;
+  border-radius: variables.$border-radius;
 }
 
 .panel-text {
