@@ -102,6 +102,7 @@ DEFAULT_CONFIG = {
     "language": {"length": 3},
     "task_bar": {"icon_size": 22},
     "system_tray": {"icon_size": 22},
+    "power": {"icon": "󰐥", "icon_size": 22, "enable_tooltip": True},
 }
 
 
@@ -120,6 +121,14 @@ class Layout(TypedDict):
     left: List[str]
     middle: List[str]
     right: List[str]
+
+
+class PowerButton(TypedDict):
+    """Configuration for power button"""
+
+    icon: str
+    icon_size: int
+    enable_tooltip: bool
 
 
 class HyprSunset(TypedDict, BaseConfig):
@@ -253,6 +262,7 @@ class BarConfig(TypedDict):
     system_tray: SystemTray
     task_bar: TaskBar
     updates: Updates
+    power: PowerButton
     volume: Volume
     workspaces: Workspaces
     window_title: WindowTitle

@@ -29,13 +29,13 @@ class PowerControlButtons(Button):
             super().__init__(
                 orientation="v",
                 name="power-control-button",
-                on_clicked=lambda button: self.on_button_press(button, name),
+                on_clicked=lambda button: self.on_button_press(pressed_button=name),
                 child=Box(
                     orientation="v",
                     children=[
                         Image(
                             image_file=get_relative_path(f"../assets/icons/{name}.png"),
-                            size=100,
+                            size=size,
                         ),
                         Label(label=label),
                     ],
@@ -43,12 +43,37 @@ class PowerControlButtons(Button):
             ),
         )
 
+    def on_button_press(
+        self,
+        pressed_button: Literal[
+            "lock",
+            "logout",
+            "suspend",
+            "hibernate",
+            "shutdown",
+            "reboot",
+        ],
+    ):
+        print(pressed_button)
+        match pressed_button:
+            case "shutdown":
+                exec_shell_command_async("systemctl poweroff")
+            case "reboot":
+                exec_shell_command_async("systemctl reboot")
+            case "hibernate":
+                exec_shell_command_async("systemctl hibernate")
+            case "suspend":
+                exec_shell_command_async("systemctl suspend")
+            case "lock":
+                exec_shell_command_async("loginctl lock-session")
+            case "logout":
+                exec_shell_command_async("loginctl terminate-user $USER")
+
 
 class PowerMenuPopup(PopupWindow):
     """A popup window to show power options."""
 
     def __init__(self):
-        # State
         self.selected_operation: (
             Literal[
                 "lock",
@@ -60,35 +85,9 @@ class PowerMenuPopup(PopupWindow):
             | None
         ) = None
 
-        # Props
         self.box_name = "power-menu"
-        self.button_name = "appmenu-button"
+        self.button_name = "power-control-button"
         self.icon_size = 100
-
-        # Widgets
-        self.confirm_menu: Revealer = Revealer(
-            child=Box(
-                orientation="v",
-                children=[
-                    Label("Are You Sure?"),
-                    Button(
-                        name=self.button_name,
-                        label="YES",
-                        on_clicked=lambda _: self.do_confirm(True),
-                    ),
-                    Button(
-                        name=self.button_name,
-                        label="NO",
-                        style="background-color: red;",
-                        on_clicked=lambda _: self.do_confirm(False),
-                    ),
-                ],
-            ),
-            transition_type="slide-down",
-            notify_reveal_child=lambda _, child_reveal: self.set_action_buttons_focus(
-                not self.confirm_menu.get_reveal_child()
-            ),
-        )
 
         self.menu = Box(
             name=self.box_name,
@@ -116,11 +115,9 @@ class PowerMenuPopup(PopupWindow):
                         for value in POWER_BUTTONS[3:]
                     ],
                 ),
-                self.confirm_menu,
             ],
         )
 
-        # Setup
         super().__init__(
             transition_type="crossfade",
             child=self.menu,
@@ -133,44 +130,24 @@ class PowerMenuPopup(PopupWindow):
             child: Widget = child
             child.set_can_focus(can_focus)
 
-    def do_confirm(self, confirmation: bool):
-        if confirmation:
-            print(f"Okay lets go, {self.selected_operation}")
-            match self.selected_operation:
-                case "shutdown":
-                    exec_shell_command_async("systemctl poweroff")
-                case "reboot":
-                    exec_shell_command_async("systemctl reboot")
-                case "hibernate":
-                    exec_shell_command_async("systemctl hibernate")
-                case "suspend":
-                    exec_shell_command_async("systemctl suspend")
-                case "lock":
-                    exec_shell_command_async("loginctl lock-session")
-                case "logout":
-                    exec_shell_command_async("loginctl terminate-user $USER")
-            self.toggle_popup()
-        else:
-            self.confirm_menu.set_reveal_child(False)
-
-    def on_button_press(
-        self,
-        button: Button,
-        pressed_button: Literal[
-            "lock",
-            "logout",
-            "suspend",
-            "hibernate",
-            "shutdown",
-            "reboot",
-        ],
-    ):
-        self.selected_operation = pressed_button
-        self.confirm_menu.set_reveal_child(True)
+    def do_confirm(self):
+        match self.selected_operation:
+            case "shutdown":
+                exec_shell_command_async("systemctl poweroff")
+            case "reboot":
+                exec_shell_command_async("systemctl reboot")
+            case "hibernate":
+                exec_shell_command_async("systemctl hibernate")
+            case "suspend":
+                exec_shell_command_async("systemctl suspend")
+            case "lock":
+                exec_shell_command_async("loginctl lock-session")
+            case "logout":
+                exec_shell_command_async("loginctl terminate-user $USER")
+        self.toggle_popup()
 
     def toggle_popup(self, monitor: bool = False):
         self.selected_operation = None
-        self.confirm_menu.set_reveal_child(False)
         self.set_action_buttons_focus(True)
         return super().toggle_popup()
 

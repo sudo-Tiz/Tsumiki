@@ -97,5 +97,10 @@
     "icon_size": "14px",
     "enable_label": true,
     "enable_tooltip": true
-  }
+  },
+  "power": {
+    "icon": "󰐥",
+    "icon_size": 22,
+    "enable_tooltip": true
+}
 }
