@@ -9,6 +9,7 @@ from fabric.widgets.widget import Widget
 
 from shared.popup import PopupWindow
 from utils.config import BarConfig
+from utils.functions import text_icon
 
 POWER_BUTTONS = [
     {"name": "lock", "label": "Lock"},
@@ -124,8 +125,14 @@ class PowerControlButtons(Button):
 class PowerButton(Button):
     """A widget to power off the system."""
 
-    def __init__(self, config: BarConfig, icon="", **kwargs):
+    def __init__(self, config: BarConfig, **kwargs):
         super().__init__(name="power", style_classes="panel-button", **kwargs)
-        self.set_label(icon)
+
+        self.config = config["power"]
+
+        self.children = text_icon(self.config["icon"], self.config["icon_size"])
+
+        if self.config["enable_tooltip"]:
+            self.set_tooltip_text("Power")
 
         self.connect("clicked", lambda *_: PowerMenuPopup().toggle_popup())
