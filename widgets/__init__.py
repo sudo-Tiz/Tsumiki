@@ -9,7 +9,7 @@ from .hyprsunset import *
 from .kblayout import *
 from .language import *
 from .mpris import *
-from .power import *
+from .powerbutton import *
 from .screenrecord import *
 from .stats import *
 from .stopwatch import *

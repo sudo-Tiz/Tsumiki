@@ -19,7 +19,7 @@ from widgets import (
     WorkSpaces,
 )
 from widgets.bluetooth import BlueToothWidget
-from widgets.power import PowerButton
+from widgets.powerbutton import PowerButton
 from widgets.systray import SystemTray
 from widgets.taskbar import TaskBar
 from widgets.volume import VolumeWidget

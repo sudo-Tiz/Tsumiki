@@ -106,7 +106,6 @@ class PowerControlButtons(Button):
             "reboot",
         ],
     ):
-        PowerMenuPopup().toggle_popup()
         match pressed_button:
             case "shutdown":
                 exec_shell_command_async("systemctl poweroff")
