@@ -6,6 +6,8 @@ from fabric.widgets.box import Box
 
 from utils.config import BarConfig
 
+
+# TODO: replace with actual image
 # Mapping of window classes to icons and titles
 WINDOW_TITLE_MAP = [
     # user provided values
