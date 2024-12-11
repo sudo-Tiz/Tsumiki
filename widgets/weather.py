@@ -101,6 +101,7 @@ class Weather(EventBox):
         weather_thread = threading.Thread(
             target=self.fetch_weather_in_thread,
             args=(self.config["location"],),
+            daemon=True
         )
         weather_thread.start()
         # Continue running the main program (non-blocking)
