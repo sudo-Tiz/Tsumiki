@@ -12,6 +12,7 @@ from gi.repository import GLib, GObject
 
 from services.brightness import Brightness
 from utils.animator import Animator
+from utils.functions import get_audio_icon_name
 
 
 class AnimatedScale(Scale):
@@ -150,21 +151,9 @@ class AudioOSDContainer(Box):
             self.update_icon(volume)
 
     def update_icon(self, volume):
-        icon_name = self._get_audio_icon_name(volume)
+        icon_name = get_audio_icon_name(volume, self.audio.speaker.muted)["icon"]
         self.level.set_label(f"{volume}%")
         self.icon.set_from_icon_name(icon_name)
-
-    def _get_audio_icon_name(self, volume: int) -> str:
-        if volume <= 0 or self.audio.speaker.muted:
-            return "audio-volume-muted-symbolic"
-        if volume > 0 and volume < 32:
-            return "audio-volume-low-symbolic"
-        if volume > 32 and volume < 66:
-            return "audio-volume-medium-symbolic"
-        if volume >= 66 and volume <= 100:
-            return "audio-volume-high-symbolic"
-        if volume > 100:
-            return "audio-volume-overamplified-symbolic"
 
 
 class OSDContainer(Window):

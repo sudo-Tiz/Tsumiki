@@ -610,8 +610,9 @@ class KeyboardLayout(Box):
             props={"style_classes": "panel-text-icon"},
         )
 
-        self.children = self.icon
-        self.kb_label = Label(label="0", style_classes="panel-text")
+        self.kb_label = Label(label="0", style_classes="panel-text", visible=False)
+
+        self.children = (self.icon, self.kb_label)
 
         self.data = json.loads(exec_shell_command("hyprctl devices -j"))
 
@@ -635,4 +636,4 @@ class KeyboardLayout(Box):
         # Update the label with the used storage if enabled
         if self.config["enable_label"]:
             self.kb_label.set_label(f"󰌌 {KBLAYOUT_MAP[layout]}")
-            self.children = (self.icon, self.kb_label)
+            self.kb_label.show()

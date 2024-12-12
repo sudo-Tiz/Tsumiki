@@ -7,7 +7,7 @@ from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
 
 from utils.config import BarConfig
-from utils.functions import text_icon
+from utils.functions import get_audio_icon_name, text_icon
 
 AUDIO_WIDGET = True
 
@@ -42,7 +42,7 @@ class VolumeWidget(EventBox):
             size=24,
         )
 
-        self.volume_label = Label(style_classes="panel-label")
+        self.volume_label = Label(style_classes="panel-label", visible=False)
 
         self.icon = text_icon(
             icon="",
@@ -57,7 +57,10 @@ class VolumeWidget(EventBox):
             spacing=4,
             name="volume",
             style_classes="panel-box",
-            children=(Overlay(child=self.progress_bar, overlays=self.icon)),
+            children=(
+                Overlay(child=self.progress_bar, overlays=self.icon),
+                self.volume_label,
+            ),
         )
         # Connect the audio service to update the progress bar on volume change
         self.audio.connect("notify::speaker", self.on_speaker_changed)
@@ -81,33 +84,27 @@ class VolumeWidget(EventBox):
         # Update the progress bar value based on the speaker volume
         if not self.audio.speaker:
             return
-        self.progress_bar.value = self.audio.speaker.volume / 100
-
-        self.volume_label.set_label(f"{round(self.audio.speaker.volume)}%")
-        self.audio.speaker.bind(
-            "volume",
-            "value",
-            self.progress_bar,
-            lambda _, v: v / 100,
-        )
-
-        if self.config["enable_label"]:
-            self.box.add(self.volume_label)
-            self.audio.speaker.bind(
-                "volume",
-                "label",
-                self.volume_label,
-                lambda _, v: f"{round(v)}%",
-            )
 
         if self.config["enable_tooltip"]:
             self.set_tooltip_text(self.audio.speaker.description)
 
-        return
+        self.audio.speaker.connect("notify::volume", self.update_volume)
+        self.update_volume()
 
-# TODO: add mute and unmute functionality
-def toggle_mute(self):
+    def toggle_mute(self):
         current_stream = self.audio_service.speaker
         if current_stream:
             current_stream.muted = not current_stream.muted
- 
+
+    def update_volume(self, *_):
+        if self.audio.speaker:
+            volume = round(self.audio.speaker.volume)
+            self.progress_bar.set_value(volume / 100)
+
+        if self.config["enable_label"]:
+            self.volume_label.show()
+            self.volume_label.set_text(f"{volume}%")
+
+        self.icon.set_text(
+            get_audio_icon_name(volume, self.audio.speaker.muted)["text_icon"]
+        )

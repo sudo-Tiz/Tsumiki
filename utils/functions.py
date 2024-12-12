@@ -101,7 +101,9 @@ def executable_exists(executable_name):
 
 
 # Function to get the volume icons
-def get_volume_icons(volume, is_muted):
+def get_audio_icon_name(
+    volume: int, is_muted: bool
+) -> dict[Literal["icon_text", "icon"], str]:
     if volume <= 0 or is_muted:
         return {
             "text_icon": VOLUME_TEXT_ICONS["muted"],
@@ -122,7 +124,7 @@ def get_volume_icons(volume, is_muted):
             "text_icon": VOLUME_TEXT_ICONS["high"],
             "icon": "audio-volume-high-symbolic",
         }
-    if volume > 100:
+    else:
         return {
             "text_icon": VOLUME_TEXT_ICONS["overamplified"],
             "icon": "audio-volume-overamplified-symbolic",

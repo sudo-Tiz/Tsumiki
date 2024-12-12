@@ -40,11 +40,13 @@ class Battery(Box):
 
         battery_percent = round(battery.percent) if battery else 0
 
-        battery_label = Label(label=f"{battery_percent}%", style_classes="panel-text")
+        self.battery_label = Label(
+            label=f"{battery_percent}%", style_classes="panel-text", visible=False
+        )
 
         is_charging = battery.power_plugged if battery else False
 
-        battery_icon = Image(
+        self.battery_icon = Image(
             icon_name=self.get_icon_name(
                 battery_percent=battery_percent,
                 is_charging=is_charging,
@@ -52,18 +54,18 @@ class Battery(Box):
             icon_size=14,
         )
 
-        self.children = battery_icon
+        self.children = (self.battery_icon, self.battery_label)
 
         # Update the label with the battery percentage if enabled
         if self.config["enable_label"]:
-            self.children = (battery_icon, battery_label)
+            self.battery_label.show()
 
             ## Hide the label when the battery is full
             if (
                 self.config["hide_label_when_full"]
                 and battery_percent == self.full_battery_level
             ):
-                self.children = battery_icon
+                self.battery_label.hide()
 
         # Update the tooltip with the battery status details if enabled
         if self.config["enable_tooltip"]:

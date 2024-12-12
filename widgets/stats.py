@@ -23,8 +23,12 @@ class Cpu(Box):
             size=self.config["icon_size"],
             props={"style_classes": "panel-text-icon"},
         )
-        self.children = self.text_icon
-        self.cpu_level_label = Label(label="0%", style_classes="panel-text")
+
+        self.cpu_level_label = Label(
+            label="0%", style_classes="panel-text", visible=False
+        )
+
+        self.children = (self.text_icon, self.cpu_level)
 
         # Set up a repeater to call the update_label method at specified intervals
         invoke_repeater(self.config["interval"], self.update_label, initial_call=True)
@@ -32,8 +36,8 @@ class Cpu(Box):
     def update_label(self):
         # Update the label with the current CPU usage if enabled
         if self.config["enable_label"]:
+            self.cpu_level_label.show()
             self.cpu_level_label.set_label(f"{psutil.cpu_percent()}%")
-            self.children = (self.text_icon, self.cpu_level_label)
 
         return True
 
@@ -53,8 +57,11 @@ class Memory(Box):
             size=self.config["icon_size"],
             props={"style_classes": "panel-text-icon"},
         )
-        self.children = self.icon
-        self.memory_level_label = Label(label="0%", style_classes="panel-text")
+        self.memory_level_label = Label(
+            label="0%", style_classes="panel-text", visible=False
+        )
+
+        self.children = (self.icon, self.memory_level_label)
 
         # Set up a repeater to call the update_values method at specified intervals
         invoke_repeater(self.config["interval"], self.update_values, initial_call=True)
@@ -68,7 +75,7 @@ class Memory(Box):
         # Update the label with the used memory if enabled
         if self.config["enable_label"]:
             self.memory_level_label.set_label(self.get_used())
-            self.children = (self.icon, self.memory_level_label)
+            self.memory_level_label.show()
 
         # Update the tooltip with the memory usage details if enabled
         if self.config["enable_tooltip"]:
@@ -100,8 +107,11 @@ class Storage(Box):
             props={"style_classes": "panel-text-icon"},
         )
 
-        self.children = self.icon
-        self.storage_level_label = Label(label="0", style_classes="panel-text")
+        self.storage_level_label = Label(
+            label="0", style_classes="panel-text", visible=False
+        )
+
+        self.children = (self.icon, self.storage_level_label)
 
         # Set up a repeater to call the update_values method at specified intervals
         invoke_repeater(self.config["interval"], self.update_values, initial_call=True)
@@ -113,7 +123,7 @@ class Storage(Box):
         # Update the label with the used storage if enabled
         if self.config["enable_label"]:
             self.storage_level_label.set_label(f"{self.get_used()}")
-            self.children = (self.icon, self.storage_level_label)
+            self.storage_level_label.show()
 
         # Update the tooltip with the storage usage details if enabled
         if self.config["enable_tooltip"]:

@@ -39,12 +39,15 @@ class Updates(EventBox):
 
         self.children = self.box
 
-        self.box.children = self.text_icon
-        self.update_level_label = Label(label="0", style_classes="panel-text")
+        self.update_level_label = Label(
+            label="0", style_classes="panel-text", visible=False
+        )
+
+        self.box.children = (self.text_icon, self.update_level_label)
 
         # Show initial value of 0 if label is enabled
         if self.config["enable_label"]:
-            self.box.children = (self.text_icon, self.update_level_label)
+            self.update_level_label.show()
 
         # Set up a repeater to call the update method at specified intervals
         invoke_repeater(self.config["interval"], self.update, initial_call=True)
