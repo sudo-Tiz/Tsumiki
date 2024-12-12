@@ -104,3 +104,10 @@ class VolumeWidget(EventBox):
             self.set_tooltip_text(self.audio.speaker.description)
 
         return
+
+# TODO: add mute and unmute functionality
+def toggle_mute(self):
+        current_stream = self.audio_service.speaker
+        if current_stream:
+            current_stream.muted = not current_stream.muted
+ 
