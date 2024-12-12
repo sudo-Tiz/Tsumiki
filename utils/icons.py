@@ -97,9 +97,9 @@ WEATHER_TEXT_ICONS = {
 
 
 VOLUME_TEXT_ICONS = {
-    101: "󰕾",
-    66: "󰕾",
-    34: "󰖀",
-    1: "󰕿",
-    0: "󰝟",
+    "overamplified": "󰕾",
+    "high": "󰕾",
+    "medium": "󰖀",
+    "low": "󰕿",
+    "muted": "󰝟",
 }

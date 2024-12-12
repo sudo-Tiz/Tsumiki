@@ -102,14 +102,28 @@ def executable_exists(executable_name):
 
 # Function to get the volume icons
 def get_volume_icons(volume, is_muted):
-    if is_muted:
-        return VOLUME_TEXT_ICONS[0]
-    found_vol = next(
-        (threshold for threshold in [101, 66, 34, 1, 0] if threshold <= volume * 100),
-        None,
-    )
-
-    if found_vol:
-        return VOLUME_TEXT_ICONS[found_vol]
-
-    return "󰝟"
+    if volume <= 0 or is_muted:
+        return {
+            "text_icon": VOLUME_TEXT_ICONS["muted"],
+            "icon": "audio-volume-muted-symbolic",
+        }
+    if volume > 0 and volume < 32:
+        return {
+            "text_icon": VOLUME_TEXT_ICONS["low"],
+            "icon": "audio-volume-low-symbolic",
+        }
+    if volume > 32 and volume < 66:
+        return {
+            "text_icon": VOLUME_TEXT_ICONS["medium"],
+            "icon": "audio-volume-medium-symbolic",
+        }
+    if volume >= 66 and volume <= 100:
+        return {
+            "text_icon": VOLUME_TEXT_ICONS["high"],
+            "icon": "audio-volume-high-symbolic",
+        }
+    if volume > 100:
+        return {
+            "text_icon": VOLUME_TEXT_ICONS["overamplified"],
+            "icon": "audio-volume-overamplified-symbolic",
+        }
