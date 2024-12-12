@@ -37,20 +37,21 @@ class VolumeWidget(EventBox):
         )
 
         self.volume_label = Label(style_classes="panel-label")
+
+        self.icon = text_icon(
+            icon="",
+            size=self.config["icon_size"],
+            props={
+                "style": "margin: 0px 6px 0px 0px;",
+            },
+        )
+
         # Create an event box to handle scroll events for volume control
         self.box = Box(
             spacing=4,
             name="volume",
             style_classes="panel-box",
-            children=(
-                Overlay(
-                    child=self.progress_bar,
-                    overlays=text_icon(
-                        icon="",
-                        size=self.config["icon_size"],
-                    ),
-                )
-            ),
+            children=(Overlay(child=self.progress_bar, overlays=self.icon)),
         )
         # Connect the audio service to update the progress bar on volume change
         self.audio.connect("notify::speaker", self.on_speaker_changed)

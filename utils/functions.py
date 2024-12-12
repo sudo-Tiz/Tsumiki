@@ -37,7 +37,7 @@ def text_icon(icon: str, size: str = "24px", props=None):
     label_props = {
         "label": str(icon),  # Directly use the provided icon name
         "name": "nerd-icon",
-        "style": f"font-size: {size}; ",  # Set font family for Material Icons
+        "style": f"font-size: {size}; ",
         "h_align": "center",  # Align horizontally
         "v_align": "center",  # Align vertically
     }
