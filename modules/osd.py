@@ -155,13 +155,14 @@ class AudioOSDContainer(Box):
         self.icon.set_from_icon_name(icon_name)
 
     def _get_audio_icon_name(self, volume: int) -> str:
+        if volume <= 0 or self.audio.speaker.muted:
+            return "audio-volume-muted-symbolic"
+        if volume > 32 and volume < 66:
+            return "audio-volume-medium-symbolic"
         if volume >= 66:
             return "audio-volume-high-symbolic"
         if volume < 32 and volume > 0:
             return "audio-volume-low-symbolic"
-        if volume <= 0:
-            return "audio-volume-muted-symbolic"
-        return "audio-volume-medium-symbolic"
 
 
 class OSDContainer(Window):

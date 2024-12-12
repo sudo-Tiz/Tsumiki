@@ -21,6 +21,7 @@ if AUDIO_WIDGET is True:
 
 # TODO: handle mute and unmute events
 
+
 class VolumeWidget(EventBox):
     """a widget that displays and controls the volume."""
 
