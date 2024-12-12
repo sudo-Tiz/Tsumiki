@@ -8,6 +8,7 @@ from fabric.widgets.overlay import Overlay
 
 from utils.config import BarConfig
 from utils.functions import get_audio_icon_name, text_icon
+from utils.icons import VOLUME_TEXT_ICONS
 
 AUDIO_WIDGET = True
 
@@ -34,7 +35,6 @@ class VolumeWidget(EventBox):
         self.audio = Audio()
 
         self.config = config["volume"]
-
 
         self.connect("button-press-event", lambda *_: self.toggle_mute())
 
@@ -94,10 +94,14 @@ class VolumeWidget(EventBox):
         self.audio.speaker.connect("notify::volume", self.update_volume)
         self.update_volume()
 
+    # Mute and unmute the speaker
     def toggle_mute(self):
         current_stream = self.audio.speaker
         if current_stream:
             current_stream.muted = not current_stream.muted
+            self.icon.set_text(
+                VOLUME_TEXT_ICONS["muted"]
+            ) if current_stream.muted else self.update_volume()
 
     def update_volume(self, *_):
         if self.audio.speaker:
