@@ -95,7 +95,7 @@ class VolumeWidget(EventBox):
         self.update_volume()
 
     def toggle_mute(self):
-        current_stream = self.audio_service.speaker
+        current_stream = self.audio.speaker
         if current_stream:
             current_stream.muted = not current_stream.muted
 
