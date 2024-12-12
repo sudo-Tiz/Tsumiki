@@ -5,7 +5,7 @@ from fabric.widgets.label import Label
 
 from utils.config import BarConfig
 from utils.functions import convert_bytes, text_icon
-from utils.icons import ICONS
+from utils.icons import TEXT_ICONS
 
 
 class Cpu(Box):
@@ -73,7 +73,7 @@ class Memory(Box):
         # Update the tooltip with the memory usage details if enabled
         if self.config["enable_tooltip"]:
             self.set_tooltip_text(
-                f"󰾆 {psutil.virtual_memory().percent}%\n{ICONS['memory']} {self.get_used()}/{self.get_total()}",
+                f"󰾆 {psutil.virtual_memory().percent}%\n{TEXT_ICONS['memory']} {self.get_used()}/{self.get_total()}",
             )
 
         return True
@@ -118,7 +118,7 @@ class Storage(Box):
         # Update the tooltip with the storage usage details if enabled
         if self.config["enable_tooltip"]:
             self.set_tooltip_text(
-                f"󰾆 {self.disk.percent}%\n{ICONS['storage']} {self.get_used()}/{self.get_total()}",
+                f"󰾆 {self.disk.percent}%\n{TEXT_ICONS['storage']} {self.get_used()}/{self.get_total()}",
             )
 
         return True

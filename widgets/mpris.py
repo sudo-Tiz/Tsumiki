@@ -7,7 +7,7 @@ from loguru import logger
 
 from services.mpris import MprisPlayer, MprisPlayerManager
 from utils.config import BarConfig
-from utils.icons import ICONS
+from utils.icons import TEXT_ICONS
 
 
 class Mpris(EventBox):
@@ -22,7 +22,7 @@ class Mpris(EventBox):
         self.config = config["mpris"]
 
         self.label = Label(label="Nothing playing", style_classes="panel-text")
-        self.text_icon = Label(label=ICONS["playing"], style="padding: 0 5px;")
+        self.text_icon = Label(label=TEXT_ICONS["playing"], style="padding: 0 5px;")
 
         # Services
         self.mpris_manager = MprisPlayerManager()
@@ -80,9 +80,9 @@ class Mpris(EventBox):
 
         status = self.player.playback_status.lower()
         if status == "playing":
-            self.text_icon.set_label(ICONS["paused"])
+            self.text_icon.set_label(TEXT_ICONS["paused"])
         elif status == "paused":
-            self.text_icon.set_label(ICONS["playing"])
+            self.text_icon.set_label(TEXT_ICONS["playing"])
 
     def play_pause(self, *_):
         # Toggle play/pause using playerctl

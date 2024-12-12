@@ -11,7 +11,7 @@ from services.weather import WeatherInfo
 from shared.popup import PopupWindow
 from utils.config import BarConfig
 from utils.functions import text_icon
-from utils.icons import ICONS
+from utils.icons import TEXT_ICONS
 
 
 class WeatherMenu(Box):
@@ -45,7 +45,7 @@ class WeatherMenu(Box):
                         label=f"{data["temperature"]}°C",
                     ),
                     text_icon(
-                        icon=ICONS["thermometer"],
+                        icon=TEXT_ICONS["thermometer"],
                         size="20px",
                     ),
                 ],

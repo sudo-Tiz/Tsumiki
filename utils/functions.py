@@ -10,7 +10,7 @@ from fabric.widgets.label import Label
 from gi.repository import GLib, Gtk
 
 from utils.colors import Colors
-from utils.icons import DISTRO_ICONS
+from utils.icons import DISTRO_ICONS, VOLUME_TEXT_ICONS
 
 gi.require_version("Gtk", "3.0")
 
@@ -98,3 +98,18 @@ def get_distro_icon():
 def executable_exists(executable_name):
     executable_path = shutil.which(executable_name)
     return bool(executable_path)
+
+
+# Function to get the volume icons
+def get_volume_icons(volume, is_muted):
+    if is_muted:
+        return VOLUME_TEXT_ICONS[0]
+    found_vol = next(
+        (threshold for threshold in [101, 66, 34, 1, 0] if threshold <= volume * 100),
+        None,
+    )
+
+    if found_vol:
+        return VOLUME_TEXT_ICONS[found_vol]
+
+    return "󰝟"

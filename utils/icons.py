@@ -1,4 +1,4 @@
-ICONS = {
+TEXT_ICONS = {
     "playing": "",
     "paused": "",
     "power": "",
@@ -44,7 +44,7 @@ DISTRO_ICONS = {
 
 # sourced from wttr.in
 
-WEATHER = {
+WEATHER_TEXT_ICONS = {
     "113": {"description": "Sunny", "icon": "󰖙"},
     "116": {"description": "PartlyCloudy", "icon": "󰖕"},
     "119": {"description": "Cloudy", "icon": "󰖐"},
@@ -93,4 +93,13 @@ WEATHER = {
     "389": {"description": "ThunderyHeavyRain", "icon": "󰙾"},
     "392": {"description": "ThunderySnowShowers", "icon": "󰼶"},
     "395": {"description": "HeavySnowShowers", "icon": "󰼵"},
+}
+
+
+VOLUME_TEXT_ICONS = {
+    101: "󰕾",
+    66: "󰕾",
+    34: "󰖀",
+    1: "󰕿",
+    0: "󰝟",
 }

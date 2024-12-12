@@ -1,7 +1,7 @@
 import json
 import urllib.request
 
-from utils.icons import WEATHER
+from utils.icons import WEATHER_TEXT_ICONS
 
 
 class WeatherInfo:
@@ -21,7 +21,7 @@ class WeatherInfo:
 
             return {
                 "city": city,
-                "icon": WEATHER[current_weather["weatherCode"]]["icon"],
+                "icon": WEATHER_TEXT_ICONS[current_weather["weatherCode"]]["icon"],
                 "temperature": current_weather["FeelsLikeC"],
                 "condition": current_weather["weatherDesc"][0]["value"],
                 "hourly": hourly_weather,
