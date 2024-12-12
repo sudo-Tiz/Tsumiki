@@ -35,6 +35,9 @@ class VolumeWidget(EventBox):
 
         self.config = config["volume"]
 
+
+        self.connect("button-press-event", lambda *_: self.toggle_mute())
+
         # Create a circular progress bar to display the volume level
         self.progress_bar = CircularProgressBar(
             name="volume-progress-bar",
