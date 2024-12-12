@@ -42,7 +42,7 @@ class VolumeWidget(EventBox):
             icon="",
             size=self.config["icon_size"],
             props={
-                "style": "margin: 0px 6px 0px 0px;",
+                "style_classes": "volume-icon",
             },
         )
 
