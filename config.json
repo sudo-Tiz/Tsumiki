@@ -100,7 +100,7 @@
   },
   "power": {
     "icon": "󰐥",
-    "icon_size": 22,
+    "icon_size": "22px",
     "enable_tooltip": true
   }
 }

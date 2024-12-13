@@ -102,7 +102,7 @@ DEFAULT_CONFIG = {
     "language": {"length": 3},
     "task_bar": {"icon_size": 22},
     "system_tray": {"icon_size": 22},
-    "power": {"icon": "󰐥", "icon_size": 22, "enable_tooltip": True},
+    "power": {"icon": "󰐥", "icon_size": "22px", "enable_tooltip": True},
 }
 
 
