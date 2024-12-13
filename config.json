@@ -4,6 +4,7 @@
     "middle_section": ["datetime"],
     "right_section": [
       "weather",
+      "hypr_sunset",
       "updates",
       "bluetooth",
       "volume",

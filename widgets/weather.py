@@ -64,7 +64,7 @@ class WeatherMenu(Box):
         self.add(self.weather_container)
 
 
-class Weather(EventBox):
+class WeatherWidget(EventBox):
     """A widget to display the current weather."""
 
     def __init__(

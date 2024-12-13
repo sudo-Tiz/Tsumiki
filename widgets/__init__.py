@@ -1,5 +1,6 @@
 # ruff: noqa: F403
 from .battery import *
+from .bluetooth import *
 from .calendar import *
 from .clickcounter import *
 from .dashboard import *

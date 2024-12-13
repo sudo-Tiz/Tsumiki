@@ -23,7 +23,7 @@ class PagerClient(TypedDict):
     address: str
 
 
-class TaskBar(Box):
+class TaskBarWidget(Box):
     """A widget to display the taskbar items."""
 
     def __init__(self, config: BarConfig, **kwargs):

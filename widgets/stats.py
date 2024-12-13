@@ -8,7 +8,7 @@ from utils.functions import convert_bytes, text_icon
 from utils.icons import TEXT_ICONS
 
 
-class Cpu(Box):
+class CpuWidget(Box):
     """A widget to display the current CPU usage."""
 
     def __init__(self, config: BarConfig):
@@ -42,7 +42,7 @@ class Cpu(Box):
         return True
 
 
-class Memory(Box):
+class MemoryWidget(Box):
     """A widget to display the current memory usage."""
 
     def __init__(self, config: BarConfig):
@@ -92,7 +92,7 @@ class Memory(Box):
         return f"{format(convert_bytes(self.total_memory, 'gb'),'.1f')}GB"
 
 
-class Storage(Box):
+class StorageWidget(Box):
     """A widget to display the current storage usage."""
 
     def __init__(self, config: BarConfig):

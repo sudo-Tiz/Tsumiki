@@ -5,7 +5,7 @@ from fabric.widgets.box import Box
 from utils.config import BarConfig
 
 
-class WorkSpaces(Box):
+class WorkSpacesWidget(Box):
     """A widget to display the current workspaces."""
 
     def __init__(self, config: BarConfig, **kwargs):

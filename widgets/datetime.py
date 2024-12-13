@@ -4,7 +4,7 @@ from fabric.widgets.datetime import DateTime
 from utils.config import BarConfig
 
 
-class DateTimeBox(Box):
+class DateTimeWidget(Box):
     """A widget to display the current date and time."""
 
     def __init__(self, config: BarConfig, **kwargs):

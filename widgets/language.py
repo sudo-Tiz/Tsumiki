@@ -5,7 +5,7 @@ from fabric.widgets.box import Box
 from utils.config import BarConfig
 
 
-class LanguageBox(Box):
+class LanguageWidget(Box):
     """A widget to display the current language."""
 
     def __init__(self, config: BarConfig, **kwargs):

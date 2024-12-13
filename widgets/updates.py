@@ -15,7 +15,7 @@ from utils.config import BarConfig
 from utils.functions import text_icon
 
 
-class Updates(EventBox):
+class UpdatesWidget(EventBox):
     """A widget to display the number of available updates."""
 
     def __init__(

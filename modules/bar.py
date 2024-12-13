@@ -5,24 +5,26 @@ from fabric.widgets.wayland import WaylandWindow as Window
 from utils.config import config
 from widgets import (
     Battery,
+    BlueToothWidget,
     CalendarWidget,
-    Cpu,
-    DateTimeBox,
-    KeyboardLayout,
-    LanguageBox,
-    Memory,
+    CpuWidget,
+    DateTimeWidget,
+    HyprSunsetWidget,
+    KeyboardLayoutWidget,
+    LanguageWidget,
+    MemoryWidget,
     Mpris,
-    Storage,
-    Updates,
-    Weather,
-    WindowTitle,
-    WorkSpaces,
+    PowerButton,
+    StorageWidget,
+    SystemTray,
+    TaskBarWidget,
+    UpdatesWidget,
+    VolumeWidget,
+    WeatherWidget,
+    WindowTitleWidget,
+    WorkSpacesWidget,
 )
-from widgets.bluetooth import BlueToothWidget
-from widgets.powerbutton import PowerButton
-from widgets.systray import SystemTray
-from widgets.taskbar import TaskBar
-from widgets.volume import VolumeWidget
+from widgets.hypridle import HyprIdleWidget
 
 
 class StatusBar(Window):
@@ -43,40 +45,40 @@ class StatusBar(Window):
 
         self.widgets_list = {
             # Workspaces: Displays the list of workspaces or desktops
-            "workspaces": WorkSpaces,
+            "workspaces": WorkSpacesWidget,
             "system_tray": SystemTray,
-            "task_bar": TaskBar,
+            "task_bar": TaskBarWidget,
             "calendar": CalendarWidget,
             "bluetooth": BlueToothWidget,
-            "keyboard": KeyboardLayout,
+            "keyboard": KeyboardLayoutWidget,
             "power": PowerButton,
             # WindowTitle: Shows the title of the current window
-            "window_title": WindowTitle,
+            "window_title": WindowTitleWidget,
             # LanguageBox: Displays the current language selection
-            "language": LanguageBox,
+            "language": LanguageWidget,
             # DateTime: Displays the current date and time
-            "datetime": DateTimeBox,
+            "datetime": DateTimeWidget,
             "volume": VolumeWidget,
             # HyprSunset: Provides information about the sunset time based on location
-            # "hypr_sunset": HyprSunset.create(),
+            "hypr_sunset": HyprSunsetWidget,
             # # HyprIdle: Shows the idle time for the system
-            # "hypr_idle": HyprIdle.create(),
+            "hypr_idle": HyprIdleWidget,
             # Battery: Displays the battery status with optional label and tooltip
             "battery": Battery,
             # Cpu: Displays CPU usage information with optional label and tooltip
-            "cpu": Cpu,
+            "cpu": CpuWidget,
             # # ClickCounter: Tracks the number of clicks on a widget or component
             # "click_counter": ClickCounter(),
             # Memory: Displays the system's memory usage
-            "memory": Memory,
+            "memory": MemoryWidget,
             # Storage: Shows the system's storage usage (e.g., disk space)
-            "storage": Storage,
+            "storage": StorageWidget,
             # Weather: Displays the weather for a given city (e.g., Kathmandu)
-            "weather": Weather,
+            "weather": WeatherWidget,
             # Mpris: Displays information about the current media player status
             "mpris": Mpris,
             # Updates: Shows available system updates based on the OS
-            "updates": Updates,
+            "updates": UpdatesWidget,
         }
 
         layout = self.make_layout()

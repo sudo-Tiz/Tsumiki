@@ -595,7 +595,7 @@ KBLAYOUT_MAP = {
 }
 
 
-class KeyboardLayout(Box):
+class KeyboardLayoutWidget(Box):
     """A widget to display the current keyboard layout."""
 
     def __init__(self, config: BarConfig, **kwargs):
