@@ -49,7 +49,6 @@
 }
 
 .close-button {
-  padding: 0.2em;
   border-radius: variables.$border-radius;
 
   &:hover {
@@ -59,6 +58,7 @@
     transition: variables.$hover-tranistion;
   }
 }
+
 
 #notification-action-box {
   button {
@@ -83,6 +83,13 @@
     }
   }
 }
+
+
+#notification-circular-progress-bar {
+  border: solid 0px rgb(151, 151, 177);
+  color: transparent;
+}
+
 
 /* .notification-header #notification-icon {
   Notification app icon (only visible when the primary image is set) */

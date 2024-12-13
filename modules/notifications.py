@@ -14,17 +14,49 @@ from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
+from fabric.widgets.circularprogressbar import CircularProgressBar
 from fabric.widgets.wayland import WaylandWindow
-from gi.repository import GdkPixbuf, GLib
+from fabric.widgets.overlay import Overlay
+from gi.repository import GdkPixbuf, GLib, GObject
 
 from shared.customimage import CustomImage
+from utils.animator import Animator
 from utils.functions import check_icon_exists
 
 gi.require_version("GdkPixbuf", "2.0")
 
 NOTIFICATION_WIDTH = 400
 NOTIFICATION_IMAGE_SIZE = 64
-NOTIFICATION_TIMEOUT = 5 * 1000  # 5 seconds
+NOTIFICATION_TIMEOUT = 5  # 5 seconds
+
+
+class AnimatedCircularProgressBar(CircularProgressBar):
+    """A circular progress bar widget with animation support."""
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        self.animator = (
+            Animator(
+                # edit the following parameters to customize the animation
+                bezier_curve=(0.34, 1.56, 0.64, 1.0),
+                duration=1.75,
+                min_value=self.min_value,
+                max_value=self.value,
+                tick_widget=self,
+                notify_value=lambda p, *_: self.set_value(p.value),
+            )
+            .build()
+            .play()
+            .unwrap()
+        )
+
+    def animate_value(self, value: float):
+        self.animator.pause()
+        self.animator.min_value = self.value
+        self.animator.max_value = value
+        self.animator.play()
+        return
 
 
 class ActionButton(Button):
@@ -63,6 +95,13 @@ class NotificationWidget(EventBox):
             size=(NOTIFICATION_WIDTH, -1),
             **kwargs,
         )
+        self._notification = notification
+        self._timer = None
+        self.anim_parts = 10
+        self.anim_interval = self.get_timeout() / self.anim_parts
+        self.timeout_in_sec = self.get_timeout() / 1000
+
+        self.time = GLib.DateTime.new_from_unix_local(time.time()).format("%m/%d")
 
         self.notification_box = Box(
             spacing=8,
@@ -72,12 +111,17 @@ class NotificationWidget(EventBox):
 
         self.connect("button-press-event", self.on_button_press)
 
-        self._notification = notification
-
-        self.time = GLib.DateTime.new_from_unix_local(time.time()).format("%m/%d")
-
         header_container = Box(
             spacing=8, orientation="h", style_classes="notification-header"
+        )
+
+        self.progress_timeout = AnimatedCircularProgressBar(
+            name="notification-circular-progress-bar",
+            size=30,
+            min_value=0,
+            max_value=1,
+            radius_color=True,
+            value=0,
         )
 
         header_container.children = (
@@ -98,17 +142,20 @@ class NotificationWidget(EventBox):
             Box(
                 v_align="start",
                 children=(
-                    Button(
-                        image=Image(
-                            icon_name=check_icon_exists(
-                                "close-symbolic",
-                                "window-close-symbolic",
+                    Overlay(
+                        child=self.progress_timeout,
+                        overlays=Button(
+                            image=Image(
+                                icon_name=check_icon_exists(
+                                    "close-symbolic",
+                                    "window-close-symbolic",
+                                ),
+                                icon_size=16,
                             ),
-                            icon_size=16,
-                        ),
-                        style_classes="close-button",
-                        on_clicked=lambda *_: self._notification.close(
-                            "dismissed-by-user"
+                            style_classes="close-button",
+                            on_clicked=lambda *_: self._notification.close(
+                                "dismissed-by-user"
+                            ),
                         ),
                     ),
                 ),
@@ -183,6 +230,25 @@ class NotificationWidget(EventBox):
             ),
         )
 
+        self.start_timer()
+
+    def start_timer(self):
+        self._timer = GObject.timeout_add(200, self.update_progress)
+
+    def update_progress(self):
+        self.progress_timeout.animate_value(
+            self.progress_timeout.value + 1 / self.anim_parts
+        )
+        if self.progress_timeout.value >= self.timeout_in_sec:
+            self.progress_timeout.value = self.timeout_in_sec
+            self.stop_timer()
+        return True  # Continue the timer
+
+    def stop_timer(self):
+        if self._timer:
+            GObject.source_remove(self._timer)
+            self._timer = None
+
     def get_icon(self, app_icon, size) -> Image:
         match app_icon:
             case str(x) if "file://" in x:
@@ -212,7 +278,7 @@ class NotificationWidget(EventBox):
         return (
             self._notification.timeout
             if self._notification.timeout != -1
-            else NOTIFICATION_TIMEOUT
+            else NOTIFICATION_TIMEOUT * 1000
         )
 
 
