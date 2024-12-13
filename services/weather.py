@@ -1,7 +1,11 @@
 import json
+import ssl
 import urllib.request
 
 from utils.icons import WEATHER_TEXT_ICONS
+
+# Create an SSLContext that ignores certificate validation
+context = ssl._create_unverified_context()
 
 
 class WeatherInfo:
@@ -10,8 +14,10 @@ class WeatherInfo:
     def simple_weather_info(self, city: str):
         try:
             # Construct the URL for fetching weather information
-            url = f"http://wttr.in/{city.capitalize()}?format=j1"
-            contents = urllib.request.urlopen(url).read().decode("utf-8")
+            url = f"https://wttr.in/{city.capitalize()}?format=j1"
+            contents = (
+                urllib.request.urlopen(url, context=context).read().decode("utf-8")
+            )
 
             # Parse the weather information
             data = json.loads(contents)
