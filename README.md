@@ -116,6 +116,8 @@ exec = source "$HOME/bar/.venv/bin/activate" && python "$HOME/bar/main.py"
 
 Use a similar configuration for your respective window manager's autostart setup.
 
+## Check wiki for configuring individual widgets
+
 ## **Available Modules**
 
 <details>
