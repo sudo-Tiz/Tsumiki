@@ -3,7 +3,6 @@
     "left_section": ["workspaces", "window_title"],
     "middle_section": ["datetime"],
     "right_section": [
-      "weather",
       "hypr_sunset",
       "updates",
       "bluetooth",
@@ -67,10 +66,6 @@
   },
   "updates": {
     "os": "arch"
-  },
-  "weather": {
-    "location": "Kathmandu",
-    "enable_tooltip": true
   },
   "keyboard": {
     "icon": "󰌌",

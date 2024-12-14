@@ -23,9 +23,9 @@ from widgets import (
     WeatherWidget,
     WindowTitleWidget,
     WorkSpacesWidget,
+    HyprIdleWidget,
+    BrightnessWidget,
 )
-from widgets.brightness import BrightnessWidget
-from widgets.hypridle import HyprIdleWidget
 
 
 class StatusBar(Window):

@@ -10,7 +10,6 @@ from fabric.notifications import (
 from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
-from fabric.widgets.circularprogressbar import CircularProgressBar
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
@@ -20,7 +19,6 @@ from fabric.widgets.wayland import WaylandWindow
 from gi.repository import GdkPixbuf, GLib, GObject
 
 from shared.customimage import CustomImage
-from utils.animator import Animator
 from utils.functions import check_icon_exists
 
 gi.require_version("GdkPixbuf", "2.0")
@@ -28,35 +26,6 @@ gi.require_version("GdkPixbuf", "2.0")
 NOTIFICATION_WIDTH = 400
 NOTIFICATION_IMAGE_SIZE = 64
 NOTIFICATION_TIMEOUT = 5  # 5 seconds
-
-
-class AnimatedCircularProgressBar(CircularProgressBar):
-    """A circular progress bar widget with animation support."""
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-
-        self.animator = (
-            Animator(
-                # edit the following parameters to customize the animation
-                bezier_curve=(0.34, 1.56, 0.64, 1.0),
-                duration=1.75,
-                min_value=self.min_value,
-                max_value=self.value,
-                tick_widget=self,
-                notify_value=lambda p, *_: self.set_value(p.value),
-            )
-            .build()
-            .play()
-            .unwrap()
-        )
-
-    def animate_value(self, value: float):
-        self.animator.pause()
-        self.animator.min_value = self.value
-        self.animator.max_value = value
-        self.animator.play()
-        return
 
 
 class ActionButton(Button):
@@ -97,7 +66,7 @@ class NotificationWidget(EventBox):
         )
         self._notification = notification
         self._timer = None
-        self.anim_parts = 10
+        self.anim_parts = 20
         self.anim_interval = self.get_timeout() / self.anim_parts
         self.timeout_in_sec = self.get_timeout() / 1000
 

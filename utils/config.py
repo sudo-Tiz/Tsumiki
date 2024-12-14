@@ -11,7 +11,6 @@ DEFAULT_CONFIG = {
         "left_section": ["workspaces", "window_title"],
         "middle_section": ["datetime"],
         "right_section": [
-            "weather",
             "updates",
             "battery",
             "bluetooth",
@@ -69,12 +68,6 @@ DEFAULT_CONFIG = {
         "os": "arch",
         "icon": "󱧘",
         "icon_size": "14px",
-        "interval": high_poll_interval,
-        "enable_tooltip": True,
-        "enable_label": True,
-    },
-    "weather": {
-        "location": "Kathmandu",
         "interval": high_poll_interval,
         "enable_tooltip": True,
         "enable_label": True,
