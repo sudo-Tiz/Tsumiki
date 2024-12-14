@@ -18,6 +18,7 @@ from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow
 from gi.repository import GdkPixbuf, GLib, GObject
 
+from modules.animated.circularprogress import AnimatedCircularProgressBar
 from shared.customimage import CustomImage
 from utils.functions import check_icon_exists
 
