@@ -21,7 +21,7 @@ def process_and_apply_css(app: Application):
     app.set_stylesheet_from_file(get_relative_path("dist/main.css"))
 
 
-APPLICATION_NAME = "fabricpanel"
+APPLICATION_NAME = "hydepanel"
 
 logger.disable("fabric.hyprland.widgets")
 
