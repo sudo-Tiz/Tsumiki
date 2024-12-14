@@ -103,3 +103,10 @@ VOLUME_TEXT_ICONS = {
     "low": "󰕿",
     "muted": "󰝟",
 }
+
+BRIGHTNESS_TEXT_ICONS = {
+    "off": "",  # lowest brightness
+    "low": "",
+    "medium": "",
+    "high": "",  # highest brightness
+}

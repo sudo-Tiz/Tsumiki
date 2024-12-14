@@ -20,9 +20,6 @@ if AUDIO_WIDGET is True:
         AUDIO_WIDGET = False
 
 
-# TODO: handle mute and unmute events
-
-
 class VolumeWidget(EventBox):
     """a widget that displays and controls the volume."""
 
@@ -48,7 +45,7 @@ class VolumeWidget(EventBox):
         self.volume_label = Label(style_classes="panel-label", visible=False)
 
         self.icon = text_icon(
-            icon="",
+            icon=VOLUME_TEXT_ICONS["medium"],
             size=self.config["icon_size"],
             props={
                 "style_classes": "volume-icon",
@@ -72,6 +69,9 @@ class VolumeWidget(EventBox):
 
         # Add the event box as a child
         self.add(self.box)
+
+        if self.config["enable_label"]:
+            self.volume_label.show()
 
     def on_scroll(self, _, event):
         # Adjust the volume based on the scroll direction
@@ -108,8 +108,6 @@ class VolumeWidget(EventBox):
             volume = round(self.audio.speaker.volume)
             self.progress_bar.set_value(volume / 100)
 
-        if self.config["enable_label"]:
-            self.volume_label.show()
             self.volume_label.set_text(f"{volume}%")
 
         self.icon.set_text(

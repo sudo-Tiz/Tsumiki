@@ -8,6 +8,7 @@
       "updates",
       "bluetooth",
       "volume",
+      "brightness",
       "battery",
       "system_tray",
       "power"
@@ -95,6 +96,11 @@
     "enable_tooltip": true
   },
   "volume": {
+    "icon_size": "14px",
+    "enable_label": true,
+    "enable_tooltip": true
+  },
+  "brightness": {
     "icon_size": "14px",
     "enable_label": true,
     "enable_tooltip": true

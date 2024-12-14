@@ -10,13 +10,13 @@ from fabric.notifications import (
 from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
+from fabric.widgets.circularprogressbar import CircularProgressBar
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
-from fabric.widgets.revealer import Revealer
-from fabric.widgets.circularprogressbar import CircularProgressBar
-from fabric.widgets.wayland import WaylandWindow
 from fabric.widgets.overlay import Overlay
+from fabric.widgets.revealer import Revealer
+from fabric.widgets.wayland import WaylandWindow
 from gi.repository import GdkPixbuf, GLib, GObject
 
 from shared.customimage import CustomImage

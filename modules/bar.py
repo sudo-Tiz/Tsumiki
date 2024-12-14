@@ -24,6 +24,7 @@ from widgets import (
     WindowTitleWidget,
     WorkSpacesWidget,
 )
+from widgets.brightness import BrightnessWidget
 from widgets.hypridle import HyprIdleWidget
 
 
@@ -51,6 +52,7 @@ class StatusBar(Window):
             "calendar": CalendarWidget,
             "bluetooth": BlueToothWidget,
             "keyboard": KeyboardLayoutWidget,
+            "brightness": BrightnessWidget,
             "power": PowerButton,
             # WindowTitle: Shows the title of the current window
             "window_title": WindowTitleWidget,

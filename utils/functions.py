@@ -1,6 +1,7 @@
 import datetime
 import json
 import shutil
+import subprocess
 from typing import Literal
 
 import gi
@@ -10,7 +11,7 @@ from fabric.widgets.label import Label
 from gi.repository import GLib, Gtk
 
 from utils.colors import Colors
-from utils.icons import DISTRO_ICONS, VOLUME_TEXT_ICONS
+from utils.icons import BRIGHTNESS_TEXT_ICONS, DISTRO_ICONS, VOLUME_TEXT_ICONS
 
 gi.require_version("Gtk", "3.0")
 
@@ -100,6 +101,31 @@ def executable_exists(executable_name):
     return bool(executable_path)
 
 
+# Function to get the brightness icons
+def get_brightness_icon_name(level: int) -> dict[Literal["icon_text", "icon"], str]:
+    if level <= 0:
+        return {
+            "text_icon": BRIGHTNESS_TEXT_ICONS["off"],
+            "icon": "display-brightness-off-symbolic",
+        }
+
+    if level > 0 and level < 32:
+        return {
+            "text_icon": BRIGHTNESS_TEXT_ICONS["low"],
+            "icon": "display-brightness-low-symbolic",
+        }
+    if level > 32 and level < 66:
+        return {
+            "text_icon": BRIGHTNESS_TEXT_ICONS["medium"],
+            "icon": "display-brightness-medium-symbolic",
+        }
+    if level >= 66 and level <= 100:
+        return {
+            "text_icon": BRIGHTNESS_TEXT_ICONS["high"],
+            "icon": "display-brightness-high-symbolic",
+        }
+
+
 # Function to get the volume icons
 def get_audio_icon_name(
     volume: int, is_muted: bool
@@ -129,3 +155,51 @@ def get_audio_icon_name(
             "text_icon": VOLUME_TEXT_ICONS["overamplified"],
             "icon": "audio-volume-overamplified-symbolic",
         }
+
+
+def send_notification(
+    title, message, urgency="normal", timeout=0, icon=None, category=None, hint=None
+):
+    """
+    Send a notification using the notify-send command with customizable parameters.
+
+    :param title: The title of the notification
+    :param message: The message content of the notification
+    :param urgency: The urgency level (low, normal, critical)
+    :param timeout: The timeout in milliseconds (0 means no timeout)
+    :param icon: The path to an icon image (optional)
+    :param category: The category of the notification (optional)
+    :param hint: Extra hints as a dictionary (optional)
+    """
+    command = ["notify-send"]
+
+    # Add title and message
+    command.append(title)
+    command.append(message)
+
+    # Add urgency if specified
+    if urgency in ["low", "normal", "critical"]:
+        command.extend(["-u", urgency])
+
+    # Add timeout if specified
+    if timeout > 0:
+        command.extend(["-t", str(timeout)])
+
+    # Add icon if specified
+    if icon:
+        command.extend(["-i", icon])
+
+    # Add category if specified
+    if category:
+        command.extend(["--category", category])
+
+    # Add hints (if any)
+    if hint:
+        for key, value in hint.items():
+            command.extend([f"--hint={key}={value}"])
+
+    # Send the notification
+    try:
+        subprocess.run(command, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error sending notification: {e}")

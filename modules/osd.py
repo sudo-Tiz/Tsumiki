@@ -12,7 +12,7 @@ from gi.repository import GLib, GObject
 
 from services.brightness import Brightness
 from utils.animator import Animator
-from utils.functions import get_audio_icon_name
+from utils.functions import get_audio_icon_name, get_brightness_icon_name
 
 
 class AnimatedScale(Scale):
@@ -66,16 +66,12 @@ class BrightnessOSDContainer(Box):
         )
 
     def update_brightness(self):
-        current_brightness = self.brightness_service.screen_brightness
-        if current_brightness != 0:
-            normalized_brightness = (
-                current_brightness / self.brightness_service.max_screen
-            ) * 100
-            self.scale.animate_value(normalized_brightness)
+        normalized_brightness = self.normalized_brightness()
+        self.scale.animate_value(normalized_brightness)
         self.update_icon(int(normalized_brightness))
 
     def update_icon(self, current_brightness):
-        icon_name = self._get_brightness_icon_name(current_brightness)
+        icon_name = get_brightness_icon_name(current_brightness)["icon"]
         self.level.set_label(f"{current_brightness}%")
         self.icon.set_from_icon_name(icon_name)
 
@@ -83,14 +79,14 @@ class BrightnessOSDContainer(Box):
         normalized_brightness = (value / self.brightness_service.max_screen) * 101
         self.scale.animate_value(normalized_brightness)
 
-    def _get_brightness_icon_name(self, level: int) -> str:
-        if level >= 66:
-            return "display-brightness-high-symbolic"
-        if level < 32 and level > 0:
-            return "display-brightness-medium-symbolic"
-        if level <= 1:
-            return "display-brightness-off-symbolic"
-        return "display-brightness-medium-symbolic"
+    def normalized_brightness(self):
+        return int(
+            (
+                self.brightness_service.screen_brightness
+                / self.brightness_service.max_screen
+            )
+            * 100
+        )
 
 
 class AudioOSDContainer(Box):

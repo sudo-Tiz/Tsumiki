@@ -95,6 +95,11 @@ DEFAULT_CONFIG = {
         "enable_label": True,
         "enable_tooltip": True,
     },
+    "brightness": {
+        "icon_size": "14px",
+        "enable_label": True,
+        "enable_tooltip": True,
+    },
     "mpris": {
         "length": 30,
         "enable_tooltip": True,
@@ -245,6 +250,10 @@ class Volume(TypedDict, BaseConfig):
     """Configuration for volume"""
 
 
+class Brightness(TypedDict, BaseConfig):
+    """Configuration for brightness"""
+
+
 class BarConfig(TypedDict):
     """Main configuration that includes all other configurations"""
 
@@ -264,6 +273,7 @@ class BarConfig(TypedDict):
     updates: Updates
     power: PowerButton
     volume: Volume
+    brightness: Brightness
     workspaces: Workspaces
     window_title: WindowTitle
     weather: Weather

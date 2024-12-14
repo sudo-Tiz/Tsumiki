@@ -128,6 +128,7 @@ Use a similar configuration for your respective window manager's autostart setup
 - window_title
 - media
 - volume
+- brightness
 - bluetooth
 - weather
 - keyboard
