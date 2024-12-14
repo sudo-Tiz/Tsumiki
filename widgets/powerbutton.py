@@ -7,8 +7,8 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.widget import Widget
 
-from shared.popup import PopupWindow
-from utils.config import BarConfig
+from shared import PopupWindow
+from utils.widget_config import BarConfig
 from utils.functions import text_icon
 
 POWER_BUTTONS = [
@@ -124,10 +124,10 @@ class PowerControlButtons(Button):
 class PowerButton(Button):
     """A widget to power off the system."""
 
-    def __init__(self, config: BarConfig, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(name="power", style_classes="panel-button", **kwargs)
 
-        self.config = config["power"]
+        self.config = widget_config["power"]
 
         self.children = text_icon(self.config["icon"], self.config["icon_size"])
 

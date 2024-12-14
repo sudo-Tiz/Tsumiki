@@ -5,7 +5,7 @@ from fabric.widgets.image import Image
 from gi.repository import Gdk, GdkPixbuf, Gray, Gtk
 from loguru import logger
 
-from utils.config import BarConfig
+from utils.widget_config import BarConfig
 
 gi.require_version("Gray", "0.1")
 gi.require_version("Gtk", "3.0")
@@ -14,10 +14,10 @@ gi.require_version("Gtk", "3.0")
 class SystemTray(Box):
     """A widget to display the system tray items."""
 
-    def __init__(self, config: BarConfig, **kwargs) -> None:
+    def __init__(self, widget_config: BarConfig, **kwargs) -> None:
         super().__init__(name="system-tray", style_classes="panel-box", **kwargs)
 
-        self.config = config["system_tray"]
+        self.config = widget_config["system_tray"]
 
         self.watcher = Gray.Watcher()
         self.watcher.connect("item-added", self.on_item_added)

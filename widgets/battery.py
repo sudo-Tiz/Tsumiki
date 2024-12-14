@@ -6,7 +6,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
-from utils.config import BarConfig
+from utils.widget_config import BarConfig
 from utils.functions import format_time
 
 
@@ -15,11 +15,11 @@ class Battery(Box):
 
     def __init__(
         self,
-        config: BarConfig,
+        widget_config: BarConfig,
     ):
         # Initialize the Box with specific name and style
         super().__init__(name="battery", style_classes="panel-box")
-        self.config = config["battery"]
+        self.config = widget_config["battery"]
         self.full_battery_level = 100
 
         # Set up a repeater to call the update_battery_status method

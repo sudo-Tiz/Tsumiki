@@ -4,7 +4,7 @@ from fabric.utils import exec_shell_command
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
-from utils.config import BarConfig
+from utils.widget_config import BarConfig
 from utils.functions import text_icon
 
 # sourced from hyprpanel
@@ -598,10 +598,10 @@ KBLAYOUT_MAP = {
 class KeyboardLayoutWidget(Box):
     """A widget to display the current keyboard layout."""
 
-    def __init__(self, config: BarConfig, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(name="keyboard", style_classes="panel-box", **kwargs)
 
-        self.config = config["keyboard"]
+        self.config = widget_config["keyboard"]
 
         # Create a TextIcon with the specified icon and size
         self.icon = text_icon(

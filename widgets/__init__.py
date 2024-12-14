@@ -1,6 +1,7 @@
 # ruff: noqa: F403
 from .battery import *
 from .bluetooth import *
+from .brightness import *
 from .calendar import *
 from .clickcounter import *
 from .dashboard import *
@@ -11,7 +12,6 @@ from .kblayout import *
 from .language import *
 from .mpris import *
 from .powerbutton import *
-from .brightness import *
 from .screenrecord import *
 from .stats import *
 from .stopwatch import *

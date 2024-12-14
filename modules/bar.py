@@ -2,13 +2,15 @@ from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow as Window
 
-from utils.config import config
+from utils.widget_config import widget_config
 from widgets import (
     Battery,
     BlueToothWidget,
+    BrightnessWidget,
     CalendarWidget,
     CpuWidget,
     DateTimeWidget,
+    HyprIdleWidget,
     HyprSunsetWidget,
     KeyboardLayoutWidget,
     LanguageWidget,
@@ -23,8 +25,6 @@ from widgets import (
     WeatherWidget,
     WindowTitleWidget,
     WorkSpacesWidget,
-    HyprIdleWidget,
-    BrightnessWidget,
 )
 
 
@@ -116,7 +116,8 @@ class StatusBar(Window):
 
         for key in layout:
             layout[key].extend(
-                self.widgets_list[widget](config) for widget in config["layout"][key]
+                self.widgets_list[widget](widget_config)
+                for widget in widget_config["layout"][key]
             )
 
         return layout

@@ -2,7 +2,7 @@ import json
 import ssl
 import urllib.request
 
-from utils.icons import WEATHER_TEXT_ICONS
+from utils.icons import weather_text_icons
 
 # Create an SSLContext that ignores certificate validation
 context = ssl._create_unverified_context()
@@ -27,7 +27,7 @@ class WeatherInfo:
 
             return {
                 "city": city,
-                "icon": WEATHER_TEXT_ICONS[current_weather["weatherCode"]]["icon"],
+                "icon": weather_text_icons[current_weather["weatherCode"]]["icon"],
                 "temperature": current_weather["FeelsLikeC"],
                 "condition": current_weather["weatherDesc"][0]["value"],
                 "hourly": hourly_weather,

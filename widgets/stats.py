@@ -3,22 +3,22 @@ from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
-from utils.config import BarConfig
-from utils.functions import convert_bytes, text_icon
-from utils.icons import TEXT_ICONS
+from utils.widget_config import BarConfig
+import utils.functions as helpers
+from utils.icons import common_text_icons
 
 
 class CpuWidget(Box):
     """A widget to display the current CPU usage."""
 
-    def __init__(self, config: BarConfig):
+    def __init__(self, widget_config: BarConfig):
         # Initialize the Box with specific name and style
         super().__init__(name="cpu", style_classes="panel-box")
 
-        self.config = config["cpu"]
+        self.config = widget_config["cpu"]
 
         # Create a TextIcon with the specified icon and size
-        self.text_icon = text_icon(
+        self.text_icon = helpers.text_icon(
             icon=self.config["icon"],
             size=self.config["icon_size"],
             props={"style_classes": "panel-text-icon"},
@@ -45,14 +45,14 @@ class CpuWidget(Box):
 class MemoryWidget(Box):
     """A widget to display the current memory usage."""
 
-    def __init__(self, config: BarConfig):
+    def __init__(self, widget_config: BarConfig):
         # Initialize the Box with specific name and style
         super().__init__(name="memory", style_classes="panel-box")
 
-        self.config = config["memory"]
+        self.config = widget_config["memory"]
 
         # Create a TextIcon with the specified icon and size
-        self.icon = text_icon(
+        self.icon = helpers.text_icon(
             icon=self.config["icon"],
             size=self.config["icon_size"],
             props={"style_classes": "panel-text-icon"},
@@ -80,28 +80,28 @@ class MemoryWidget(Box):
         # Update the tooltip with the memory usage details if enabled
         if self.config["enable_tooltip"]:
             self.set_tooltip_text(
-                f"󰾆 {psutil.virtual_memory().percent}%\n{TEXT_ICONS['memory']} {self.get_used()}/{self.get_total()}",
+                f"󰾆 {psutil.virtual_memory().percent}%\n{common_text_icons['memory']} {self.get_used()}/{self.get_total()}",
             )
 
         return True
 
     def get_used(self):
-        return f"{format(convert_bytes(self.used_memory, 'gb'),'.1f')}GB"
+        return f"{format(helpers.convert_bytes(self.used_memory, 'gb'),'.1f')}GB"
 
     def get_total(self):
-        return f"{format(convert_bytes(self.total_memory, 'gb'),'.1f')}GB"
+        return f"{format(helpers.convert_bytes(self.total_memory, 'gb'),'.1f')}GB"
 
 
 class StorageWidget(Box):
     """A widget to display the current storage usage."""
 
-    def __init__(self, config: BarConfig):
+    def __init__(self, widget_config: BarConfig):
         # Initialize the Box with specific name and style
         super().__init__(name="storage", style_classes="panel-box")
-        self.config = config["storage"]
+        self.config = widget_config["storage"]
 
         # Create a TextIcon with the specified icon and size
-        self.icon = text_icon(
+        self.icon = helpers.text_icon(
             icon=self.config["icon"],
             size=self.config["icon_size"],
             props={"style_classes": "panel-text-icon"},
@@ -128,13 +128,13 @@ class StorageWidget(Box):
         # Update the tooltip with the storage usage details if enabled
         if self.config["enable_tooltip"]:
             self.set_tooltip_text(
-                f"󰾆 {self.disk.percent}%\n{TEXT_ICONS['storage']} {self.get_used()}/{self.get_total()}",
+                f"󰾆 {self.disk.percent}%\n{common_text_icons['storage']} {self.get_used()}/{self.get_total()}",
             )
 
         return True
 
     def get_used(self):
-        return f"{format(convert_bytes(self.disk.used, 'gb'),'.1f')}GB"
+        return f"{format(helpers.convert_bytes(self.disk.used, 'gb'),'.1f')}GB"
 
     def get_total(self):
-        return f"{format(convert_bytes(self.disk.total, 'gb'),'.1f')}GB"
+        return f"{format(helpers.convert_bytes(self.disk.total, 'gb'),'.1f')}GB"

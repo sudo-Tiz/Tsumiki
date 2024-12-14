@@ -294,4 +294,4 @@ for key, value in parsed_data.items():
 ## TODO: validate the name of widget is within the dict
 
 # Optionally, cast the parsed data to match our TypedDict using type hints
-config: BarConfig = parsed_data
+widget_config: BarConfig = parsed_data

@@ -5,9 +5,9 @@ from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
 from loguru import logger
 
-from services.mpris import MprisPlayer, MprisPlayerManager
-from utils.config import BarConfig
-from utils.icons import TEXT_ICONS
+from services import MprisPlayer, MprisPlayerManager
+from utils.widget_config import BarConfig
+from utils.icons import common_text_icons
 
 
 class Mpris(EventBox):
@@ -15,14 +15,16 @@ class Mpris(EventBox):
 
     def __init__(
         self,
-        config: BarConfig,
+        widget_config: BarConfig,
     ):
         # Initialize the EventBox with specific name and style
         super().__init__(name="mpris")
-        self.config = config["mpris"]
+        self.config = widget_config["mpris"]
 
         self.label = Label(label="Nothing playing", style_classes="panel-text")
-        self.text_icon = Label(label=TEXT_ICONS["playing"], style="padding: 0 5px;")
+        self.text_icon = Label(
+            label=common_text_icons["playing"], style="padding: 0 5px;"
+        )
 
         # Services
         self.mpris_manager = MprisPlayerManager()
@@ -80,9 +82,9 @@ class Mpris(EventBox):
 
         status = self.player.playback_status.lower()
         if status == "playing":
-            self.text_icon.set_label(TEXT_ICONS["paused"])
+            self.text_icon.set_label(common_text_icons["paused"])
         elif status == "paused":
-            self.text_icon.set_label(TEXT_ICONS["playing"])
+            self.text_icon.set_label(common_text_icons["playing"])
 
     def play_pause(self, *_):
         # Toggle play/pause using playerctl

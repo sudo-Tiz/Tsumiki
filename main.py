@@ -6,12 +6,12 @@ from loguru import logger
 from modules.bar import StatusBar
 from modules.notifications import NotificationPopup
 from modules.osd import OSDContainer
-from utils.functions import ExecutableNotFoundError, executable_exists
+import utils.functions as helpers
 
 
 def process_and_apply_css(app: Application):
-    if not executable_exists("sass"):
-        raise ExecutableNotFoundError(
+    if not helpers.executable_exists("sass"):
+        raise helpers.ExecutableNotFoundError(
             "sass"
         )  # Raise an error if sass is not found and exit the application
 

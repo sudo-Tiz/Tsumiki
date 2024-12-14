@@ -10,7 +10,7 @@ from fabric.widgets.image import Image
 from gi.repository import GdkPixbuf, GLib, Gtk
 from loguru import logger
 
-from utils.config import BarConfig
+from utils.widget_config import BarConfig
 
 
 class PagerClient(TypedDict):
@@ -26,7 +26,7 @@ class PagerClient(TypedDict):
 class TaskBarWidget(Box):
     """A widget to display the taskbar items."""
 
-    def __init__(self, config: BarConfig, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(
             orientation="h",
             spacing=7,
@@ -35,7 +35,7 @@ class TaskBarWidget(Box):
         )
         self.connection = get_hyprland_connection()
 
-        self.config = config["task_bar"]
+        self.config = widget_config["task_bar"]
 
         self.icon_theme = Gtk.IconTheme.get_default()
 

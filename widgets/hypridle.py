@@ -1,12 +1,13 @@
-from shared.buttontoggle import CommandSwitcher
+from shared import CommandSwitcher
+from utils.widget_config import BarConfig
 
 
 class HyprIdleWidget(CommandSwitcher):
     """A widget to control the hypridle command."""
 
-    def __init__(self, config, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         # Store the configuration for hypridle
-        self.config = config["hypr_idle"]
+        self.config = widget_config["hypr_idle"]
 
         # Set the command to hypridle
         self.command = "hypridle"

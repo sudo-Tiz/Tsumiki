@@ -18,9 +18,9 @@ from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow
 from gi.repository import GdkPixbuf, GLib, GObject
 
-from modules.animated.circularprogress import AnimatedCircularProgressBar
-from shared.customimage import CustomImage
-from utils.functions import check_icon_exists
+from shared import CustomImage, AnimatedCircularProgressBar
+import utils.functions as helpers
+import utils.icons as icons
 
 gi.require_version("GdkPixbuf", "2.0")
 
@@ -116,9 +116,9 @@ class NotificationWidget(EventBox):
                         child=self.progress_timeout,
                         overlays=Button(
                             image=Image(
-                                icon_name=check_icon_exists(
+                                icon_name=helpers.check_icon_exists(
                                     "close-symbolic",
-                                    "window-close-symbolic",
+                                    icons.icons["ui"]["close"],
                                 ),
                                 icon_size=16,
                             ),
@@ -179,9 +179,11 @@ class NotificationWidget(EventBox):
         )
 
         # Add the header, body, and actions to the notification box
-        self.notification_box.add(header_container)
-        self.notification_box.add(body_container)
-        self.notification_box.add(actions_container)
+        self.notification_box.children = (
+            header_container,
+            body_container,
+            actions_container,
+        )
 
         # Add the notification box to the EventBox
         self.add(self.notification_box)
@@ -236,7 +238,9 @@ class NotificationWidget(EventBox):
             case _:
                 return Image(
                     name="notification-icon",
-                    icon_name=app_icon if app_icon else "dialog-information-symbolic",
+                    icon_name=app_icon
+                    if app_icon
+                    else icons.icons["fallback"]["notification"],
                     icon_size=size,
                 )
 

@@ -1,7 +1,7 @@
 from fabric.utils import exec_shell_command, exec_shell_command_async, invoke_repeater
 from fabric.widgets.button import Button
 
-from utils.functions import ExecutableNotFoundError, executable_exists
+import utils.functions as helpers
 
 
 class CommandSwitcher(Button):
@@ -27,8 +27,8 @@ class CommandSwitcher(Button):
             **kwargs,
         )
 
-        if not executable_exists(self.command_without_args):
-            raise ExecutableNotFoundError(self.command_without_args)
+        if not helpers.executable_exists(self.command_without_args):
+            raise helpers.ExecutableNotFoundError(self.command_without_args)
 
         self.enabled_icon = enabled_icon
         self.disabled_icon = disabled_icon

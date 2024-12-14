@@ -7,11 +7,11 @@ from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from loguru import logger
 
-from services.weather import WeatherInfo
-from shared.popup import PopupWindow
-from utils.config import BarConfig
+from services import WeatherInfo
+from shared import PopupWindow
+from utils.widget_config import BarConfig
 from utils.functions import text_icon
-from utils.icons import TEXT_ICONS
+from utils.icons import common_text_icons
 
 
 class WeatherMenu(Box):
@@ -45,7 +45,7 @@ class WeatherMenu(Box):
                         label=f"{data["temperature"]}°C",
                     ),
                     text_icon(
-                        icon=TEXT_ICONS["thermometer"],
+                        icon=common_text_icons["thermometer"],
                         size="20px",
                     ),
                 ],
@@ -69,7 +69,7 @@ class WeatherWidget(EventBox):
 
     def __init__(
         self,
-        config: BarConfig,
+        widget_config: BarConfig,
     ):
         # Initialize the Box with specific name and style
         super().__init__()
@@ -77,7 +77,7 @@ class WeatherWidget(EventBox):
         # Set the widget as not ready until the weather information is fetched
         self.is_ready = False
 
-        self.config = config["weather"]
+        self.config = widget_config["weather"]
 
         self.box = Box(
             name="weather",

@@ -2,16 +2,16 @@ from fabric.hyprland.widgets import Language
 from fabric.utils import FormattedString, truncate
 from fabric.widgets.box import Box
 
-from utils.config import BarConfig
+from utils.widget_config import BarConfig
 
 
 class LanguageWidget(Box):
     """A widget to display the current language."""
 
-    def __init__(self, config: BarConfig, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(name="language", style_classes="panel-box", **kwargs)
 
-        self.config = config["language"]
+        self.config = widget_config["language"]
 
         self.lang = Language(
             formatter=FormattedString(

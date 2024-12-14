@@ -6,34 +6,14 @@ from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
-from fabric.widgets.scale import Scale, ScaleMark
+from fabric.widgets.scale import ScaleMark
 from fabric.widgets.wayland import WaylandWindow as Window
 from gi.repository import GLib, GObject
 
-from services.brightness import Brightness
-from utils.animator import Animator
-from utils.functions import get_audio_icon_name, get_brightness_icon_name
-
-
-class AnimatedScale(Scale):
-    """A widget to display a scale with animated transitions."""
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.animator = Animator(
-            bezier_curve=(0.34, 1.56, 0.64, 1.0),
-            duration=0.8,
-            min_value=self.min_value,
-            max_value=self.value,
-            tick_widget=self,
-            notify_value=lambda p, *_: self.set_value(p.value),
-        )
-
-    def animate_value(self, value: float):
-        self.animator.pause()
-        self.animator.min_value = self.value
-        self.animator.max_value = value
-        self.animator.play()
+from services import Brightness
+from shared import AnimatedScale
+import utils.functions as helpers
+import utils.icons as icons
 
 
 class BrightnessOSDContainer(Box):
@@ -43,13 +23,10 @@ class BrightnessOSDContainer(Box):
         super().__init__(**kwargs, orientation="h", spacing=12, name="osd-container")
         self.brightness_service = Brightness()
         self.level = Label(name="osd-level")
-        self.icon = Image(icon_name="display-brightness-symbolic", icon_size=28)
+        self.icon = Image(icon_name=icons.icons["brightness"]["screen"], icon_size=28)
         self.scale = self._create_brightness_scale()
 
-        self.add(self.icon)
-        self.add(self.scale)
-        self.add(self.level)
-
+        self.children = (self.icon, self.scale, self.level)
         self.update_brightness()
 
         self.scale.connect("value-changed", lambda *_: self.update_brightness())
@@ -71,7 +48,7 @@ class BrightnessOSDContainer(Box):
         self.update_icon(int(normalized_brightness))
 
     def update_icon(self, current_brightness):
-        icon_name = get_brightness_icon_name(current_brightness)["icon"]
+        icon_name = helpers.get_brightness_icon_name(current_brightness)["icon"]
         self.level.set_label(f"{current_brightness}%")
         self.icon.set_from_icon_name(icon_name)
 
@@ -99,13 +76,13 @@ class AudioOSDContainer(Box):
     def __init__(self, **kwargs):
         super().__init__(**kwargs, orientation="h", spacing=13, name="osd-container")
         self.audio = Audio()
-        self.icon = Image(icon_name="audio-volume-medium-symbolic", icon_size=28)
+        self.icon = Image(
+            icon_name=icons.icons["audio"]["volume"]["medium"], icon_size=28
+        )
         self.level = Label(name="osd-level")
         self.scale = self._create_audio_scale()
 
-        self.add(self.icon)
-        self.add(self.scale)
-        self.add(self.level)
+        self.children = (self.icon, self.scale, self.level)
         self.sync_with_audio()
 
         self.scale.connect("value-changed", self.on_volume_changed)
@@ -147,7 +124,9 @@ class AudioOSDContainer(Box):
             self.update_icon(volume)
 
     def update_icon(self, volume):
-        icon_name = get_audio_icon_name(volume, self.audio.speaker.muted)["icon"]
+        icon_name = helpers.get_audio_icon_name(volume, self.audio.speaker.muted)[
+            "icon"
+        ]
         self.level.set_label(f"{volume}%")
         self.icon.set_from_icon_name(icon_name)
 

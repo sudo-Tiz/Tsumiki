@@ -5,15 +5,14 @@ from fabric.core.service import Property, Service, Signal
 from fabric.utils import exec_shell_command, monitor_file
 from gi.repository import GLib
 from loguru import logger
-
-from utils.functions import executable_exists
+import utils.functions as helpers
 
 
 # Helper function to execute brightnessctl asynchronously
 def exec_brightnessctl_async(args: str):
     # Executes brightnessctl command asynchronously, ensuring no resource leaks.
 
-    if not executable_exists("brightnessctl"):
+    if not helpers.executable_exists("brightnessctl"):
         logger.error("Command brightnessctl not found")
 
     try:

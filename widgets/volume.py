@@ -6,9 +6,9 @@ from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
 
-from utils.config import BarConfig
-from utils.functions import get_audio_icon_name, text_icon
-from utils.icons import VOLUME_TEXT_ICONS
+from utils.widget_config import BarConfig
+import utils.functions as helpers
+from utils.icons import volume_text_icons
 
 AUDIO_WIDGET = True
 
@@ -23,7 +23,7 @@ if AUDIO_WIDGET is True:
 class VolumeWidget(EventBox):
     """a widget that displays and controls the volume."""
 
-    def __init__(self, config: BarConfig, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(events=["scroll", "smooth-scroll"], **kwargs)
 
         self.change_volume_by = 5
@@ -31,7 +31,7 @@ class VolumeWidget(EventBox):
         # Initialize the audio service
         self.audio = Audio()
 
-        self.config = config["volume"]
+        self.config = widget_config["volume"]
 
         self.connect("button-press-event", lambda *_: self.toggle_mute())
 
@@ -44,8 +44,8 @@ class VolumeWidget(EventBox):
 
         self.volume_label = Label(style_classes="panel-label", visible=False)
 
-        self.icon = text_icon(
-            icon=VOLUME_TEXT_ICONS["medium"],
+        self.icon = helpers.text_icon(
+            icon=volume_text_icons["medium"],
             size=self.config["icon_size"],
             props={
                 "style_classes": "volume-icon",
@@ -100,7 +100,7 @@ class VolumeWidget(EventBox):
         if current_stream:
             current_stream.muted = not current_stream.muted
             self.icon.set_text(
-                VOLUME_TEXT_ICONS["muted"]
+                volume_text_icons["muted"]
             ) if current_stream.muted else self.update_volume()
 
     def update_volume(self, *_):
@@ -111,5 +111,5 @@ class VolumeWidget(EventBox):
             self.volume_label.set_text(f"{volume}%")
 
         self.icon.set_text(
-            get_audio_icon_name(volume, self.audio.speaker.muted)["text_icon"]
+            helpers.get_audio_icon_name(volume, self.audio.speaker.muted)["text_icon"]
         )

@@ -4,16 +4,16 @@ from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
 
-from services.brightness import Brightness
-from utils.config import BarConfig
-from utils.functions import get_brightness_icon_name, text_icon
-from utils.icons import BRIGHTNESS_TEXT_ICONS
+from services import Brightness
+from utils.widget_config import BarConfig
+from utils.icons import brightness_text_icons
+import utils.functions as helpers
 
 
 class BrightnessWidget(EventBox):
     """a widget that displays and controls the brightness."""
 
-    def __init__(self, config: BarConfig, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(events=["scroll", "smooth-scroll"], **kwargs)
 
         self.change_brightness_by = 5
@@ -21,7 +21,7 @@ class BrightnessWidget(EventBox):
         # Initialize the audio service
         self.brightness_service = Brightness()
 
-        self.config = config["brightness"]
+        self.config = widget_config["brightness"]
 
         # Create a circular progress bar to display the brightness level
         self.progress_bar = CircularProgressBar(
@@ -38,8 +38,8 @@ class BrightnessWidget(EventBox):
             label=f"{self.normalized_brightness()}%",
         )
 
-        self.icon = text_icon(
-            icon=BRIGHTNESS_TEXT_ICONS["medium"],
+        self.icon = helpers.text_icon(
+            icon=brightness_text_icons["medium"],
             size=self.config["icon_size"],
             props={
                 "style_classes": "brightness-icon",
@@ -90,7 +90,9 @@ class BrightnessWidget(EventBox):
 
         self.brightness_label.set_text(f"{normalized_brightness}%")
 
-        self.icon.set_text(get_brightness_icon_name(normalized_brightness)["text_icon"])
+        self.icon.set_text(
+            helpers.get_brightness_icon_name(normalized_brightness)["text_icon"]
+        )
 
     def normalized_brightness(self):
         return int(

@@ -1,13 +1,13 @@
-from shared.buttontoggle import CommandSwitcher
-from utils.config import BarConfig
+from shared import CommandSwitcher
+from utils.widget_config import BarConfig
 
 
 class HyprSunsetWidget(CommandSwitcher):
     """A widget to control the hyprsunset command."""
 
-    def __init__(self, config: BarConfig, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         # Store the configuration for hyprsunset
-        self.config = config["hypr_sunset"]
+        self.config = widget_config["hypr_sunset"]
 
         # Set the command to adjust the screen temperature
         self.command = f"hyprsunset -t {self.config['temperature']}"

@@ -11,7 +11,7 @@ from fabric.widgets.overlay import Overlay
 from fabric.widgets.revealer import Revealer
 from gi.repository import GLib, Gtk
 
-from utils.config import BarConfig
+from utils.widget_config import BarConfig
 
 gi.require_version("Gtk", "3.0")
 
@@ -19,7 +19,7 @@ gi.require_version("Gtk", "3.0")
 class CalendarWidget(EventBox):
     """Calendar widget that displays the current month"""
 
-    def __init__(self, config: BarConfig):
+    def __init__(self, widget_config: BarConfig):
         super().__init__(
             h_expand=True,
             h_align="fill",

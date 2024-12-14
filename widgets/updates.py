@@ -11,7 +11,7 @@ from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from loguru import logger
 
-from utils.config import BarConfig
+from utils.widget_config import BarConfig
 from utils.functions import text_icon
 
 
@@ -20,12 +20,12 @@ class UpdatesWidget(EventBox):
 
     def __init__(
         self,
-        config: BarConfig,
+        widget_config: BarConfig,
         **kwargs,
     ):
         # Initialize the EventBox with specific name and style
         super().__init__(name="updates", **kwargs)
-        self.config = config["updates"]
+        self.config = widget_config["updates"]
 
         # Create a TextIcon with the specified icon and size
         self.text_icon = text_icon(
