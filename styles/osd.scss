@@ -6,34 +6,35 @@
 #osd-container {
   background-color: variables.$shadow-color;
   padding: 12px 20px;
-  border-radius: 999px;
+  border-radius: variables.$border-radius;
   border: none;
   margin-bottom: 100px;
 
-  scale {
-    min-width: 140px;
-  }
 
   slider {
     min-height: 8px;
-    border-radius: 999px;
+    border-radius: variables.$border-radius;
     background: transparent;
     border: none;
     box-shadow: 0 0 3px 0 variables.$shadow-color;
+  }
 
+
+  scale {
+    min-width: 145px;
   }
 
   trough {
     min-height: inherit;
-    border-radius: 999px;
+    border-radius: variables.$border-radius;
     border: none;
     background: variables.$background-alt;
   }
 
   highlight,
   progress {
-    border-radius: 100px 0px 0px 100px;
     background: white;
+    border-radius: variables.$border-radius;
   }
 }
 
