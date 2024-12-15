@@ -4,8 +4,8 @@ from fabric.utils import exec_shell_command
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
-from utils.widget_config import BarConfig
 from utils.functions import text_icon
+from utils.widget_config import BarConfig
 
 # sourced from hyprpanel
 KBLAYOUT_MAP = {

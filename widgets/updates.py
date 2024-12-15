@@ -11,8 +11,8 @@ from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from loguru import logger
 
-from utils.widget_config import BarConfig
 from utils.functions import text_icon
+from utils.widget_config import BarConfig
 
 
 class UpdatesWidget(EventBox):

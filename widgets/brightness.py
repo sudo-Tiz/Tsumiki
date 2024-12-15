@@ -4,10 +4,10 @@ from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
 
-from services import Brightness
-from utils.widget_config import BarConfig
-from utils.icons import brightness_text_icons
 import utils.functions as helpers
+from services import Brightness
+from utils.icons import brightness_text_icons
+from utils.widget_config import BarConfig
 
 
 class BrightnessWidget(EventBox):

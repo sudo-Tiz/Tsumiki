@@ -8,8 +8,8 @@ from fabric.widgets.label import Label
 from fabric.widgets.widget import Widget
 
 from shared import PopupWindow
-from utils.widget_config import BarConfig
 from utils.functions import text_icon
+from utils.widget_config import BarConfig
 
 POWER_BUTTONS = [
     {"name": "lock", "label": "Lock"},

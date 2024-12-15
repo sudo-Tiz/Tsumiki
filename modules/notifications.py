@@ -18,9 +18,9 @@ from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow
 from gi.repository import GdkPixbuf, GLib, GObject
 
-from shared import CustomImage, AnimatedCircularProgressBar
 import utils.functions as helpers
 import utils.icons as icons
+from shared import AnimatedCircularProgressBar, CustomImage
 
 gi.require_version("GdkPixbuf", "2.0")
 

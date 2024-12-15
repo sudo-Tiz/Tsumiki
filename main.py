@@ -3,10 +3,10 @@ from fabric import Application
 from fabric.utils import exec_shell_command, get_relative_path, monitor_file
 from loguru import logger
 
+import utils.functions as helpers
 from modules.bar import StatusBar
 from modules.notifications import NotificationPopup
 from modules.osd import OSDContainer
-import utils.functions as helpers
 
 
 def process_and_apply_css(app: Application):

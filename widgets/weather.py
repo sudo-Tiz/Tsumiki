@@ -9,9 +9,9 @@ from loguru import logger
 
 from services import WeatherInfo
 from shared import PopupWindow
-from utils.widget_config import BarConfig
 from utils.functions import text_icon
 from utils.icons import common_text_icons
+from utils.widget_config import BarConfig
 
 
 class WeatherMenu(Box):

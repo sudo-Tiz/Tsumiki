@@ -64,14 +64,15 @@ label {
 }
 
 tooltip {
+  @include mixins.no-style;
   background-color: variables.$background-dark;
   border-radius: 10px;
-  @include mixins.no-style;
-}
+  box-shadow: 0 0 3px 0 variables.$shadow-color;
 
-tooltip label {
-  font-weight: normal;
-  @include mixins.no-style;
+  label {
+    @include mixins.no-style;
+    font-weight: normal;
+  }
 }
 
 tooltip > * {
@@ -91,9 +92,9 @@ menuitem {
   }
 
   separator {
-    min-height: 1px;
+    min-height: variables.$border-width;
     margin: 4px 0;
-    background-color: variables.$background-alt;
+    background-color: variables.$background;
   }
 }
 
@@ -169,10 +170,4 @@ radio:checked:active,
 radio:indeterminate:active {
   box-shadow: 0 0 0 4px color.adjust(variables.$text-main, $alpha: -0.9);
   background-color: variables.$text-main;
-}
-
-separator {
-  min-width: 1px;
-  min-height: 1px;
-  background-color: variables.$background;
 }

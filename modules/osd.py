@@ -10,10 +10,10 @@ from fabric.widgets.scale import ScaleMark
 from fabric.widgets.wayland import WaylandWindow as Window
 from gi.repository import GLib, GObject
 
-from services import Brightness
-from shared import AnimatedScale
 import utils.functions as helpers
 import utils.icons as icons
+from services import Brightness
+from shared import AnimatedScale
 
 
 class BrightnessOSDContainer(Box):

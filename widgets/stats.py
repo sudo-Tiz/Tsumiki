@@ -3,9 +3,9 @@ from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
-from utils.widget_config import BarConfig
 import utils.functions as helpers
 from utils.icons import common_text_icons
+from utils.widget_config import BarConfig
 
 
 class CpuWidget(Box):

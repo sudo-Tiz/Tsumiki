@@ -6,8 +6,8 @@ from fabric.widgets.revealer import Revealer
 from loguru import logger
 
 from services import MprisPlayer, MprisPlayerManager
-from utils.widget_config import BarConfig
 from utils.icons import common_text_icons
+from utils.widget_config import BarConfig
 
 
 class Mpris(EventBox):

@@ -6,9 +6,9 @@ from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
 
-from utils.widget_config import BarConfig
 import utils.functions as helpers
 from utils.icons import volume_text_icons
+from utils.widget_config import BarConfig
 
 AUDIO_WIDGET = True
 
