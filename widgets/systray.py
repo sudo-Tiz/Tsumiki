@@ -40,6 +40,8 @@ class SystemTray(Box):
             "button-press-event",
             lambda button, event: self.on_button_click(button, item, event),
         )
+        button.set_tooltip_text(item.get_property("title"))
+
         self.do_update_item_button(item, button)
 
         return button
