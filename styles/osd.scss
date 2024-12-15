@@ -1,5 +1,6 @@
 @use "sass:color";
 @use "common/variables.scss";
+@use "common/mixins.scss";
 
 /* OSD widget*/
 
@@ -10,34 +11,9 @@
   border: none;
   margin-bottom: 100px;
 
-
-  slider {
-    min-height: 8px;
-    border-radius: variables.$border-radius;
-    background: transparent;
-    border: none;
-    box-shadow: 0 0 3px 0 variables.$shadow-color;
+  #osd-level {
+    font-weight: 600;
   }
 
-
-  scale {
-    min-width: 145px;
-  }
-
-  trough {
-    min-height: inherit;
-    border-radius: variables.$border-radius;
-    border: none;
-    background: variables.$background-alt;
-  }
-
-  highlight,
-  progress {
-    background: white;
-    border-radius: variables.$border-radius;
-  }
-}
-
-#osd-level {
-  font-weight: 600;
+  @include mixins.slider();
 }
