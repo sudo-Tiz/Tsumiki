@@ -3,7 +3,6 @@ from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
 from gi.repository import Gdk, GdkPixbuf, Gray, Gtk
-from loguru import logger
 
 from utils.widget_config import BarConfig
 
@@ -65,12 +64,7 @@ class SystemTray(Box):
 
     def on_button_click(self, button, item: Gray.Item, event):
         match event.button:
-            case 1:
-                try:
-                    item.activate(event.x, event.y)
-                except Exception as e:
-                    logger.error(e)
-            case 3:
+            case 1 | 3:
                 menu = item.get_property("menu")
                 menu.set_name("system-tray-menu")
                 if menu:
