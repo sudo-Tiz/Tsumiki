@@ -19,16 +19,19 @@
     border-radius: 999px;
     background: transparent;
     border: none;
+    box-shadow: 0 0 3px 0 variables.$shadow-color;
+
   }
 
   trough {
     min-height: inherit;
     border-radius: 999px;
     border: none;
-    background: #808080;
+    background: variables.$background-alt;
   }
 
-  highlight {
+  highlight,
+  progress {
     border-radius: 100px 0px 0px 100px;
     background: white;
   }
