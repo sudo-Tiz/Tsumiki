@@ -43,7 +43,10 @@ class BrightnessOSDContainer(Box):
         )
 
     def update_brightness(self):
-        normalized_brightness = self.normalized_brightness()
+        normalized_brightness = helpers.convert_to_percent(
+            self.brightness_service.screen_brightness,
+            self.brightness_service.max_screen,
+        )
         self.scale.animate_value(normalized_brightness)
         self.update_icon(int(normalized_brightness))
 
@@ -55,15 +58,6 @@ class BrightnessOSDContainer(Box):
     def on_brightness_changed(self, sender, value, *args):
         normalized_brightness = (value / self.brightness_service.max_screen) * 101
         self.scale.animate_value(normalized_brightness)
-
-    def normalized_brightness(self):
-        return int(
-            (
-                self.brightness_service.screen_brightness
-                / self.brightness_service.max_screen
-            )
-            * 100
-        )
 
 
 class AudioOSDContainer(Box):

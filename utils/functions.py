@@ -200,3 +200,13 @@ def send_notification(
         subprocess.run(command, check=True)
     except subprocess.CalledProcessError as e:
         print(f"Error sending notification: {e}")
+
+
+# Function to get the percentage of a value
+def convert_to_percent(
+    current: int | float, max: int | float, is_int=True
+) -> int | float:
+    if is_int:
+        return int((current / max) * 100)
+    else:
+        return (current / max) * 100

@@ -23,6 +23,11 @@ class BrightnessWidget(EventBox):
 
         self.config = widget_config["brightness"]
 
+        normalized_brightness = helpers.convert_to_percent(
+            self.brightness_service.screen_brightness
+            / self.brightness_service.max_screen
+        )
+
         # Create a circular progress bar to display the brightness level
 
         self.progress_bar = CircularProgressBar(
@@ -31,13 +36,13 @@ class BrightnessWidget(EventBox):
             size=24,
             min_value=0,
             max_value=1,
-            value=self.normalized_brightness() / 100,
+            value=normalized_brightness / 100,
         )
 
         self.brightness_label = Label(
             style_classes="panel-label",
             visible=False,
-            label=f"{self.normalized_brightness()}%",
+            label=f"{normalized_brightness}%",
         )
 
         self.icon = helpers.text_icon(
@@ -87,20 +92,14 @@ class BrightnessWidget(EventBox):
         self.update_brightness()
 
     def update_brightness(self, *_):
-        normalized_brightness = self.normalized_brightness()
+        normalized_brightness = helpers.convert_to_percent(
+            self.brightness_service.screen_brightness
+            / self.brightness_service.max_screen
+        )
         self.progress_bar.set_value(normalized_brightness / 100)
 
         self.brightness_label.set_text(f"{normalized_brightness}%")
 
         self.icon.set_text(
             helpers.get_brightness_icon_name(normalized_brightness)["text_icon"]
-        )
-
-    def normalized_brightness(self):
-        return int(
-            (
-                self.brightness_service.screen_brightness
-                / self.brightness_service.max_screen
-            )
-            * 100
         )
