@@ -34,7 +34,7 @@ def read_config():
 
 
 # Function to create a text icon label
-def text_icon(icon: str, size: str = "24px", props=None):
+def text_icon(icon: str, size: str = "16px", props=None):
     label_props = {
         "label": str(icon),  # Directly use the provided icon name
         "name": "nerd-icon",

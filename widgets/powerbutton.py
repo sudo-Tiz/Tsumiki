@@ -129,7 +129,11 @@ class PowerButton(Button):
 
         self.config = widget_config["power"]
 
-        self.children = text_icon(self.config["icon"], self.config["icon_size"])
+        self.children = text_icon(
+            self.config["icon"],
+            self.config["icon_size"],
+            props={"style_classes": "panel-text-icon"},
+        )
 
         if self.config["enable_tooltip"]:
             self.set_tooltip_text("Power")
