@@ -63,7 +63,11 @@ DEFAULT_CONFIG = {
         "enable_tooltip": True,
     },
     "workspaces": {"count": 8, "occupied": True},
-    "window_title": {"length": 20, "enable_icon": True},
+    "window_title": {
+        "enable_icon": True,
+        "truncation": True,
+        "truncation_size": 50,
+    },
     "updates": {
         "os": "arch",
         "icon": "󱧘",
@@ -201,6 +205,8 @@ class WindowTitle(TypedDict):
 
     length: int
     enable_icon: bool
+    truncation: bool
+    truncation_size: int
 
 
 class Updates(TypedDict, BaseConfig):

@@ -32,9 +32,7 @@ if __name__ == "__main__":
     system_overlay = OSDContainer()
 
     # Initialize the application with the status bar
-    app = Application(
-        APPLICATION_NAME, bar, notifications, system_overlay
-    )
+    app = Application(APPLICATION_NAME, bar, notifications, system_overlay)
 
     setproctitle.setproctitle(APPLICATION_NAME)
 

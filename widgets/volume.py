@@ -5,9 +5,9 @@ from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
 
 import utils.functions as helpers
+from utils.config import audio_service
 from utils.icons import volume_text_icons
 from utils.widget_config import BarConfig
-from utils.config import audio_service
 
 
 class VolumeWidget(EventBox):
