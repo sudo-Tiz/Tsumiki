@@ -1,78 +1,45 @@
 from fabric.widgets.box import Box
-from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.shapes import Corner
 from fabric.widgets.wayland import WaylandWindow
 
 
-class LeftCorners(WaylandWindow):
-    """A window that displays corners on the left side of the screen."""
+class ScreenCorners(WaylandWindow):
+    """A widget to display the corners of the screen."""
 
-    def __init__(
-        self,
-    ):
+    def __init__(self):
         super().__init__(
-            title="corners-left",
-            layer="overlay",
-            exclusive=False,
-            anchor="left top bottom",
-            margin="0px 0px -51px 0px",
+            layer="top",
+            anchor="top left bottom right",
+            pass_through=True,
+            child=Box(
+                orientation="vertical",
+                children=[
+                    Box(
+                        children=[
+                            self.make_corner("top-left"),
+                            Box(h_expand=True),
+                            self.make_corner("top-right"),
+                        ]
+                    ),
+                    Box(v_expand=True),
+                    Box(
+                        children=[
+                            self.make_corner("bottom-left"),
+                            Box(h_expand=True),
+                            self.make_corner("bottom-right"),
+                        ]
+                    ),
+                ],
+            ),
         )
 
-        self.right = CenterBox(
-            orientation="v",
-            start_children=[
-                Corner(
-                    orientation="top-left",
-                    size=10,
-                    name="corner-top-left",
-                ),
-            ],
-            end_children=[
-                Corner(
-                    orientation="bottom-left",
-                    size=10,
-                    name="corner-bottom-left",
-                ),
-            ],
+    def make_corner(self, orientation) -> Box:
+        return Box(
+            h_expand=False,
+            v_expand=False,
+            name="panel-corner",
+            children=Corner(
+                orientation=orientation,  # type: ignore
+                size=15,
+            ),
         )
-
-        self.add(Box(orientation="h", children=[self.right]))
-
-        self.show()
-
-
-class RightCorners(WaylandWindow):
-    """A window that displays corners on the right side of the screen."""
-
-    def __init__(
-        self,
-    ):
-        super().__init__(
-            title="corners-right",
-            layer="overlay",
-            exclusive=False,
-            anchor="right top bottom",
-            margin="0px 0px -51px 0px",
-        )
-
-        self.right = CenterBox(
-            orientation="v",
-            start_children=[
-                Corner(
-                    orientation="top-right",
-                    size=10,
-                    name="corner-top-right",
-                ),
-            ],
-            end_children=[
-                Corner(
-                    orientation="bottom-right",
-                    size=10,
-                    name="corner-bottom-right",
-                ),
-            ],
-        )
-
-        self.add(Box(orientation="h", children=[self.right]))
-
-        self.show()

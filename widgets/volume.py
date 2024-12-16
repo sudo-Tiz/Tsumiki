@@ -1,5 +1,3 @@
-from venv import logger
-
 from fabric.widgets.box import Box
 from fabric.widgets.circularprogressbar import CircularProgressBar
 from fabric.widgets.eventbox import EventBox
@@ -9,15 +7,7 @@ from fabric.widgets.overlay import Overlay
 import utils.functions as helpers
 from utils.icons import volume_text_icons
 from utils.widget_config import BarConfig
-
-AUDIO_WIDGET = True
-
-if AUDIO_WIDGET is True:
-    try:
-        from fabric.audio.service import Audio
-    except Exception as e:
-        logger.error(f"Error: {e}")
-        AUDIO_WIDGET = False
+from utils.config import audio_service
 
 
 class VolumeWidget(EventBox):
@@ -29,7 +19,7 @@ class VolumeWidget(EventBox):
         self.change_volume_by = 5
 
         # Initialize the audio service
-        self.audio = Audio()
+        self.audio = audio_service
 
         self.config = widget_config["volume"]
 

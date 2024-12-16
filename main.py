@@ -7,6 +7,7 @@ import utils.functions as helpers
 from modules.bar import StatusBar
 from modules.notifications import NotificationPopup
 from modules.osd import OSDContainer
+from widgets.corners import ScreenCorners
 
 
 def process_and_apply_css(app: Application):
@@ -28,11 +29,14 @@ logger.disable("fabric.hyprland.widgets")
 if __name__ == "__main__":
     # Create the status bar
     bar = StatusBar()
+    screen_corners = ScreenCorners()
     notifications = NotificationPopup()
     system_overlay = OSDContainer()
 
     # Initialize the application with the status bar
-    app = Application(APPLICATION_NAME, bar, notifications, system_overlay)
+    app = Application(
+        APPLICATION_NAME, bar, notifications, system_overlay
+    )
 
     setproctitle.setproctitle(APPLICATION_NAME)
 

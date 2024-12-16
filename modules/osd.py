@@ -1,7 +1,6 @@
 import time
 from typing import ClassVar, Literal
 
-from fabric.audio import Audio
 from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
@@ -12,8 +11,8 @@ from gi.repository import GLib, GObject
 
 import utils.functions as helpers
 import utils.icons as icons
-from services import Brightness
 from shared import AnimatedScale
+from utils.config import audio_service, brightness_service
 
 
 class BrightnessOSDContainer(Box):
@@ -21,7 +20,7 @@ class BrightnessOSDContainer(Box):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs, orientation="h", spacing=12, name="osd-container")
-        self.brightness_service = Brightness()
+        self.brightness_service = brightness_service
         self.level = Label(name="osd-level")
         self.icon = Image(icon_name=icons.icons["brightness"]["screen"], icon_size=28)
         self.scale = self._create_brightness_scale()
@@ -69,7 +68,7 @@ class AudioOSDContainer(Box):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs, orientation="h", spacing=13, name="osd-container")
-        self.audio = Audio()
+        self.audio = audio_service
         self.icon = Image(
             icon_name=icons.icons["audio"]["volume"]["medium"], icon_size=28
         )
@@ -143,7 +142,7 @@ class OSDContainer(Window):
 
         self.revealer = Revealer(
             name="osd-revealer",
-            transition_type="slide-up",
+            transition_type="slide-right",
             transition_duration=transition_duration,
             child_revealed=False,
         )

@@ -5,9 +5,9 @@ from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
 
 import utils.functions as helpers
-from services import Brightness
 from utils.icons import brightness_text_icons
 from utils.widget_config import BarConfig
+from utils.config import brightness_service
 
 
 class BrightnessWidget(EventBox):
@@ -19,7 +19,7 @@ class BrightnessWidget(EventBox):
         self.change_brightness_by = 5
 
         # Initialize the audio service
-        self.brightness_service = Brightness()
+        self.brightness_service = brightness_service
 
         self.config = widget_config["brightness"]
 
