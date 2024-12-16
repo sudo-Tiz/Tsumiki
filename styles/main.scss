@@ -11,8 +11,6 @@
 @use "calendar.scss";
 @use "workspace.scss";
 @use "power.scss";
-@use "volume.scss";
-@use "brightness.scss";
 
 /* unset so we can style everything from the ground up. */
 * {
@@ -27,30 +25,42 @@ label {
 
 #panel {
   background-color: rgba(46, 46, 46, 0.1);
+
+  &-inner {
+    padding: 0.6em 1.8em 0.35em 1.8em;
+    border-color: variables.$border-color;
+  }
 }
 
-#panel-inner {
-  padding: 0.6em 1.8em 0.35em 1.8em;
-  border-color: variables.$border-color;
+.panel-box,
+.panel-button {
+  background: variables.$background-dark;
+  border-radius: variables.$border-radius;
 }
 
 .panel-box {
-  background: variables.$background-dark;
   padding: 0.1em 0.9em;
   color: variables.$text-main;
   font-weight: bold;
-  border-radius: variables.$border-radius;
 }
 
 .panel-button {
-  background: variables.$background-dark;
   padding: 0 1.25em;
-  border-radius: variables.$border-radius;
 }
 
 .panel-text {
   margin-left: 10px;
   font-weight: bold;
+}
+
+.overlay-progress-bar {
+  color: transparent;
+  background-color: transparent;
+  border-color: variables.$border-color;
+}
+
+.overlay-icon {
+  margin: 0px 6px 0px 0px;
 }
 
 #language,

@@ -37,18 +37,18 @@ class VolumeWidget(EventBox):
 
         # Create a circular progress bar to display the volume level
         self.progress_bar = CircularProgressBar(
-            name="volume-progress-bar",
+            style_classes="overlay-progress-bar",
             pie=True,
             size=24,
         )
 
-        self.volume_label = Label(style_classes="panel-label", visible=False)
+        self.volume_label = Label(visible=False)
 
         self.icon = helpers.text_icon(
             icon=volume_text_icons["medium"],
             size=self.config["icon_size"],
             props={
-                "style_classes": "volume-icon",
+                "style_classes": "overlay-icon",
             },
         )
 
@@ -58,7 +58,7 @@ class VolumeWidget(EventBox):
             name="volume",
             style_classes="panel-box",
             children=(
-                Overlay(child=self.progress_bar, overlays=self.icon),
+                Overlay(child=self.progress_bar, overlays=self.icon, name="overlay"),
                 self.volume_label,
             ),
         )
