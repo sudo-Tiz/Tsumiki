@@ -25,7 +25,7 @@ class BlueToothWidget(Box):
             icon_size=self.icon_size,
         )
 
-        self.bt_label = Label(label="", visible=False)
+        self.bt_label = Label(label="", visible=False, style_classes="panel-text")
 
         self.bluetooth_client.connect("changed", self.update_bluetooth_status)
 
