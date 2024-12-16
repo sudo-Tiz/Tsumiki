@@ -24,12 +24,14 @@ class BrightnessWidget(EventBox):
         self.config = widget_config["brightness"]
 
         # Create a circular progress bar to display the brightness level
+
         self.progress_bar = CircularProgressBar(
             name="brightness-progress-bar",
             pie=True,
             size=24,
             min_value=0,
             max_value=1,
+            value=self.normalized_brightness() / 100,
         )
 
         self.brightness_label = Label(
