@@ -109,7 +109,7 @@ DEFAULT_CONFIG = {
     },
     "language": {"length": 3},
     "task_bar": {"icon_size": 22},
-    "system_tray": {"icon_size": 22},
+    "system_tray": {"icon_size": 22, "ignore": []},
     "power": {"icon": "󰐥", "icon_size": "18px", "enable_tooltip": True},
 }
 
@@ -157,6 +157,7 @@ class SystemTray(TypedDict):
     """Configuration for system tray"""
 
     icon_size: int
+    ignore: List[str]
 
 
 class HyprIdle(TypedDict, BaseConfig):

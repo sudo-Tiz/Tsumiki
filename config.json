@@ -87,7 +87,8 @@
     "length": 20
   },
   "system_tray": {
-    "icon_size": 20
+    "icon_size": 20,
+    "ignore": []
   },
   "bluetooth": {
     "icon_size": 22,

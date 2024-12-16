@@ -23,6 +23,13 @@ class SystemTray(Box):
 
     def on_item_added(self, _, identifier: str):
         item = self.watcher.get_item_for_identifier(identifier)
+
+        if (
+            self.config["ignore"]
+            and item.get_property("title") in self.config["ignore"]
+        ):
+            return
+
         item_button = self.do_bake_item_button(item)
         item.connect("removed", lambda *args: item_button.destroy())
         item.connect(
