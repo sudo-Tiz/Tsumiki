@@ -35,7 +35,7 @@ class StatusBar(Window):
         self,
     ):
         super().__init__(
-            name="bar",
+            name="panel",
             layer="top",
             anchor="left top right",
             pass_through=False,
