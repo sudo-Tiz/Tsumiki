@@ -26,6 +26,8 @@ class WorkSpacesWidget(Box):
             else None,
             # Factory function to create buttons for each workspace
             buttons_factory=lambda ws_id: WorkspaceButton(id=ws_id, label=str(ws_id)),
+            invert_scroll=self.config["reverse_scroll"],
+            empty_scroll=self.config["empty_scroll"],
         )
         # Add the HyperlandWorkspace widget as a child
         self.children = self.workspace

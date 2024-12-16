@@ -62,7 +62,13 @@ DEFAULT_CONFIG = {
         "enable_label": True,
         "enable_tooltip": True,
     },
-    "workspaces": {"count": 8, "occupied": True},
+    "workspaces": {
+        "count": 8,
+        "occupied": True,
+        "ignored": [],
+        "reverse_scroll": False,
+        "empty_scroll": False,
+    },
     "window_title": {
         "enable_icon": True,
         "truncation": True,
@@ -198,6 +204,7 @@ class Workspaces(TypedDict):
 
     count: int
     occupied: bool
+    ignored: List[int]
 
 
 class WindowTitle(TypedDict):

@@ -58,7 +58,10 @@
   },
   "workspaces": {
     "count": 8,
-    "occupied": true
+    "occupied": true,
+    "reverse_scroll": false,
+    "empty_scroll": false,
+    "ignored": []
   },
   "window_title": {
     "enable_icon": true,

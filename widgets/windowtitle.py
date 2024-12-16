@@ -129,7 +129,7 @@ class WindowTitleWidget(Box):
     def get_title(self, win_title, win_class):
         # Truncate the window title based on the configured length
         win_title = (
-            truncate(win_title, self.config["length"])
+            truncate(win_title, self.config["truncation_size"])
             if self.config["truncation"]
             else win_title
         )
