@@ -17,6 +17,15 @@ Many aspects of the bar including the look and functionalities are inspired from
 
 ## **Installation**
 
+### ** Clone the Repository**
+
+Clone this repository:
+
+```sh
+git clone https://github.com/rubiin/FabricPanel.git
+cd FabricPanel
+```
+
 ### Required
 
 Most of these are already installed on existing working machines
@@ -55,7 +64,7 @@ sudo pacman -S pipewire playerctl gray-git python-fabric dart-sass networkmanage
 sudo zypper install pipewire playerctl networkmanager wl-clipboard brightnessctl python gtk3-devel cairo-devel gtk-layer-shell-devel libgirepository-1_0-1 libgirepository-2_0-0 gobject-introspection-devel python311 python311-pip python311-psutils python311-gobject python311-gobject-cairo python311-pycairo python311-loguru pkgconf
 ```
 
-# On venv
+# On venv (Recommended)
 
 Install the requirements:
 
@@ -82,15 +91,6 @@ hyprsunset
 ## To enable hyprland's very own idle inhibitor
 hypridle
 
-```
-
-### **2. Clone the Repository**
-
-Clone this repository:
-
-```sh
-git clone https://github.com/rubiin/FabricPanel.git
-cd FabricPanel
 ```
 
 ## **Usage**
