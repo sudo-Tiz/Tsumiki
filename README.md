@@ -22,8 +22,8 @@ Many aspects of the bar including the look and functionalities are inspired from
 Clone this repository:
 
 ```sh
-git clone https://github.com/rubiin/FabricPanel.git
-cd FabricPanel
+git clone https://github.com/rubiin/HyDePanel.git bar
+cd bar
 ```
 
 ### Required
