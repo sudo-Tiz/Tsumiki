@@ -86,10 +86,10 @@ class MemoryWidget(Box):
         return True
 
     def get_used(self):
-        return f"{format(helpers.convert_bytes(self.used_memory, 'gb'),'.1f')}GB"
+        return f"{format(helpers.convert_bytes(self.used_memory, 'gb'),'.1f')}"
 
     def get_total(self):
-        return f"{format(helpers.convert_bytes(self.total_memory, 'gb'),'.1f')}GB"
+        return f"{format(helpers.convert_bytes(self.total_memory, 'gb'),'.1f')}"
 
 
 class StorageWidget(Box):
@@ -134,7 +134,7 @@ class StorageWidget(Box):
         return True
 
     def get_used(self):
-        return f"{format(helpers.convert_bytes(self.disk.used, 'gb'),'.1f')}GB"
+        return f"{format(helpers.convert_bytes(self.disk.used, 'gb'),'.1f')}"
 
     def get_total(self):
-        return f"{format(helpers.convert_bytes(self.disk.total, 'gb'),'.1f')}GB"
+        return f"{format(helpers.convert_bytes(self.disk.total, 'gb'),'.1f')}"

@@ -65,7 +65,7 @@ def convert_bytes(bytes: int, to: Literal["kb", "mb", "gb"]):
     elif to == "gb":
         multiplier = 3
 
-    return bytes / (1024**multiplier)
+    return f"{bytes / (1024**multiplier)}{to.upper()}"
 
 
 # Function to get the system uptime
