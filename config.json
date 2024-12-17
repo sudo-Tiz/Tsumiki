@@ -1,4 +1,7 @@
 {
+  "theme": {
+    "name": "onedark"
+  },
   "layout": {
     "left_section": ["workspaces", "window_title"],
     "middle_section": ["datetime"],
@@ -10,7 +13,8 @@
       "brightness",
       "battery",
       "system_tray",
-      "power"
+      "power",
+      "theme_switcher"
     ]
   },
   "hypr_sunset": {
@@ -110,6 +114,12 @@
   "power": {
     "icon": "󰐥",
     "icon_size": "18px",
+    "enable_tooltip": true
+  },
+  "theme_switcher": {
+    "icon": "󰌌",
+    "icon_size": "14px",
+    "enable_label": true,
     "enable_tooltip": true
   }
 }

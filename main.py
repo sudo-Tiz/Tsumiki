@@ -7,6 +7,7 @@ import utils.functions as helpers
 from modules.bar import StatusBar
 from modules.notifications import NotificationPopup
 from modules.osd import OSDContainer
+from utils.widget_config import widget_config
 
 
 def process_and_apply_css(app: Application):
@@ -35,6 +36,8 @@ if __name__ == "__main__":
     app = Application(APPLICATION_NAME, bar, notifications, system_overlay)
 
     setproctitle.setproctitle(APPLICATION_NAME)
+
+    helpers.copy_theme(widget_config["theme"]["name"])
 
     # Monitor styles folder for changes
     main_css_file = monitor_file(get_relative_path("styles"))

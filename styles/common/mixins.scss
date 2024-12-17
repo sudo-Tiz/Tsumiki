@@ -1,4 +1,4 @@
-@use "variables.scss";
+@use "../theme.scss";
 
 @mixin no-style() {
   outline: none;
@@ -6,17 +6,13 @@
   box-shadow: none;
 }
 
-@mixin slider(
-  $radius: variables.$border-radius,
-  $highlight-color: white,
-  $length: 145px
-) {
+@mixin slider($radius: 100px, $highlight-color: white, $length: 145px) {
   slider {
     min-height: 8px;
     border-radius: $radius;
     background: transparent;
     border: none;
-    box-shadow: 0 0 3px 0 variables.$shadow-color;
+    box-shadow: 0 0 3px 0 theme.$shadow-color;
   }
 
   scale {
@@ -27,7 +23,7 @@
     min-height: inherit;
     border-radius: $radius;
     border: none;
-    background: variables.$background-alt;
+    background: theme.$background-alt;
   }
 
   highlight,

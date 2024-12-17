@@ -1,5 +1,5 @@
 @use "sass:color";
-@use "common/variables.scss";
+@use "theme.scss";
 
 /* overview  widget */
 
@@ -27,14 +27,14 @@
 }
 
 #overview-client-box {
-  background-color: color.mix(variables.$text-main, transparent, 100%);
+  background-color: color.mix(theme.$text-main, transparent, 100%);
 
   &:hover {
-    background-color: color.mix(variables.$text-main, transparent, 70%);
+    background-color: color.mix(theme.$text-main, transparent, 70%);
   }
 
   &:active {
-    background-color: color.mix(variables.$text-main, transparent, 100%);
+    background-color: color.mix(theme.$text-main, transparent, 100%);
   }
 }
 

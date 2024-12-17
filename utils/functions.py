@@ -1,5 +1,6 @@
 import datetime
 import json
+import os
 import shutil
 import subprocess
 from typing import Literal
@@ -25,8 +26,33 @@ class ExecutableNotFoundError(ImportError):
         )
 
 
+# Function to get the system icon theme
+def copy_theme(theme: str):
+    destination_file = get_relative_path("../styles/theme.scss")
+    source_file = get_relative_path(f"../styles/themes/{theme}.scss")
+
+    if not os.path.exists(source_file):
+        print(
+            f"Warning: The theme file '{theme}.scss' was not found. Using default theme."
+        )
+        source_file = get_relative_path("../styles/themes/catpuccin-mocha.scss")
+
+    try:
+        with open(source_file, "r") as source_file:
+            content = source_file.read()
+
+        # Open the destination file in write mode
+        with open(destination_file, "w") as destination_file:
+            destination_file.write(content)
+
+    except FileNotFoundError:
+        print(f"Error: The theme file '{source_file}' was not found.")
+        exit(1)
+
+
 # Function to read the configuration file
 def read_config():
+    print("Reading configuration file")
     with open(get_relative_path("../config.json")) as file:
         # Load JSON data into a Python dictionary
         data = json.load(file)

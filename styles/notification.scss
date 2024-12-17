@@ -1,14 +1,16 @@
 @use "sass:color";
-@use "common/variables.scss";
+@use "theme.scss";
+
+$hover-tranistion: background 0.15s ease-in-out;
 
 /* notification widget*/
 
 #notification {
   padding: 0.8rem;
   border-radius: 1rem;
-  background: variables.$background-alt;
-  color: variables.$text-main;
-  border: 1px solid variables.$border-color;
+  background: theme.$background-alt;
+  color: theme.$text-main;
+  border: 1px solid theme.$surface-disabled;
 
   .notification-body {
     padding: 0.25em;
@@ -16,7 +18,7 @@
 }
 
 .hover {
-  border: 2px solid variables.$border-color;
+  border: 2px solid theme.$surface-disabled;
 }
 
 .notification-header {
@@ -49,13 +51,13 @@
 }
 
 .close-button {
-  border-radius: variables.$border-radius;
+  border-radius: 100px;
 
   &:hover {
     box-shadow: none;
     border: none;
-    background: color.mix(variables.$text-main, transparent, 20%);
-    transition: variables.$hover-tranistion;
+    background: color.mix(theme.$text-main, transparent, 20%);
+    transition: $hover-tranistion;
   }
 }
 
@@ -67,7 +69,7 @@
     border-radius: 3rem;
     box-shadow: none;
     background: transparent;
-    transition: variables.$hover-tranistion;
+    transition: $hover-tranistion;
 
     &.start-action {
       margin-left: 0;
@@ -78,7 +80,7 @@
     }
 
     &:hover {
-      background: variables.$background;
+      background: theme.$background;
     }
   }
 }

@@ -1,6 +1,6 @@
-/* based on catpuccin mocha theme */
-
-/* Base Colors */
+/* ---------------------------- */
+/* Base Colors                  */
+/* ---------------------------- */
 $background: #1e1e2e; // Main background
 $background-alt: #181825; // Secondary background
 $background-dark: #11111b; // Darkest background
@@ -33,19 +33,5 @@ $text-disabled: #6c7086; // Text for disabled elements
 $text-muted-light: #7f849c; // Light-muted text for hints
 $text-muted-dark: #9399b2; // Dark-muted text
 
-/* Shadow */
-$shadow-color: rgba(0, 0, 0, 0.6); // Default shadow for elements
-
-/* Custom Colors */
-$window-bg: transparent; // Mixed transparent color (adjusted with mix) // TODO: fix this
-$border-color: $surface-disabled;
-$ws-active: $text-muted;
-$ws-inactive: $accent-red;
-$ws-empty: $text-disabled;
-$ws-hover: $accent-pink;
-$ws-urgent: $accent-purple;
-
-$border-radius: 100px;
-$border-width: 1px;
 $bar-background: rgba(46, 46, 46, 0.1);
-$hover-tranistion: background 0.15s ease-in-out;
+$shadow-color: rgba(0, 0, 0, 0.6);

@@ -1,13 +1,13 @@
 @use "sass:color";
-@use "common/variables.scss";
+@use "theme.scss";
 
 #power-control-button {
   padding: 40px 120px;
   border-radius: 0;
-  border-color: variables.$border-color;
-  text-decoration-color: variables.$text-main;
-  color: variables.$text-main;
-  background-color: variables.$background;
+  border-color: theme.$surface-disabled;
+  text-decoration-color: theme.$text-main;
+  color: theme.$text-main;
+  background-color: theme.$background;
   border-style: solid;
   border-width: 1px;
   background-repeat: no-repeat;
