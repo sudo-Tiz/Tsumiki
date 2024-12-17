@@ -3,11 +3,11 @@ from fabric import Application
 from fabric.utils import exec_shell_command, get_relative_path, monitor_file
 from loguru import logger
 
-from utils.widget_config import widget_config
 import utils.functions as helpers
 from modules.bar import StatusBar
 from modules.notifications import NotificationPopup
 from modules.osd import OSDContainer
+from utils.widget_config import widget_config
 
 
 def process_and_apply_css(app: Application):
@@ -28,7 +28,7 @@ logger.disable("fabric.hyprland.widgets")
 
 if __name__ == "__main__":
     # Create the status bar
-    bar = StatusBar(widget_config=widget_config)
+    bar = StatusBar()
     notifications = NotificationPopup()
     system_overlay = OSDContainer()
 
@@ -36,7 +36,6 @@ if __name__ == "__main__":
     app = Application(APPLICATION_NAME, bar, notifications, system_overlay)
 
     setproctitle.setproctitle(APPLICATION_NAME)
-
 
     helpers.copy_theme(widget_config["theme"]["name"])
 

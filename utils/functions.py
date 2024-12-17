@@ -1,9 +1,10 @@
 import datetime
 import json
+import os
 import shutil
 import subprocess
 from typing import Literal
-import os
+
 import gi
 import psutil
 from fabric.utils import get_relative_path
@@ -24,6 +25,7 @@ class ExecutableNotFoundError(ImportError):
             f"{Colors.FAIL}Executable {executable_name} not found. Please install it using your package manager."
         )
 
+
 # Function to get the system icon theme
 def copy_theme(theme):
     destination_file = get_relative_path("../styles/theme.scss")
@@ -33,23 +35,21 @@ def copy_theme(theme):
         # Check if the destination file is empty
         if os.path.exists(destination_file):
             # Open the source file in read mode
-            with open(source_file, 'r') as source_file:
+            with open(source_file, "r") as source_file:
                 content = source_file.read()
 
             # Open the destination file in write mode
-            with open(destination_file, 'w') as destination_file:
+            with open(destination_file, "w") as destination_file:
                 destination_file.write(content)
 
-            print(f"Contents of '{source_file}' have been copied to '{destination_file}'.")
+            print(
+                f"Contents of '{source_file}' have been copied to '{destination_file}'."
+            )
 
     except FileNotFoundError:
         print(f"Error: The source file '{source_file}' was not found.")
     except Exception as e:
         print(f"An error occurred: {e}")
-
-
-
-
 
 
 # Function to read the configuration file

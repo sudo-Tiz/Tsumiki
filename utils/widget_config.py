@@ -180,6 +180,7 @@ class Battery(TypedDict):
     hide_label_when_full: bool
     interval: int
 
+
 class Theme(TypedDict):
     """Configuration for battery"""
 
