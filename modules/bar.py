@@ -2,7 +2,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow as Window
 
-from utils.widget_config import widget_config
+from utils.widget_config import BarConfig
 from widgets import (
     Battery,
     BlueToothWidget,
@@ -33,6 +33,7 @@ class StatusBar(Window):
 
     def __init__(
         self,
+        widget_config: BarConfig
     ):
         super().__init__(
             name="panel",
@@ -41,8 +42,10 @@ class StatusBar(Window):
             pass_through=False,
             exclusivity="auto",
             visible=False,
-            all_visible=False,
+            all_visible=False
         )
+
+        self.widget_config = widget_config
 
         self.widgets_list = {
             # Workspaces: Displays the list of workspaces or desktops
@@ -116,8 +119,8 @@ class StatusBar(Window):
 
         for key in layout:
             layout[key].extend(
-                self.widgets_list[widget](widget_config)
-                for widget in widget_config["layout"][key]
+                self.widgets_list[widget](self.widget_config)
+                for widget in self.widget_config["layout"][key]
             )
 
         return layout

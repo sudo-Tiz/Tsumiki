@@ -1,5 +1,7 @@
 {
-  "theme": "catpuccin-frappe",
+  "theme": {
+    "name": "catpuccin-mocha"
+  },
   "layout": {
     "left_section": ["workspaces", "window_title"],
     "middle_section": ["datetime"],

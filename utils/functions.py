@@ -26,11 +26,12 @@ class ExecutableNotFoundError(ImportError):
 
 # Function to get the system icon theme
 def copy_theme(theme):
-    destination_file = get_relative_path("../theme.scss")
-    source_file = get_relative_path(f"../themes/{theme}.scss")
+    destination_file = get_relative_path("../styles/theme.scss")
+    source_file = get_relative_path(f"../styles/themes/{theme}.scss")
+
     try:
         # Check if the destination file is empty
-        if os.path.exists(destination_file) and os.stat(destination_file).st_size == 0:
+        if os.path.exists(destination_file):
             # Open the source file in read mode
             with open(source_file, 'r') as source_file:
                 content = source_file.read()
@@ -40,9 +41,6 @@ def copy_theme(theme):
                 destination_file.write(content)
 
             print(f"Contents of '{source_file}' have been copied to '{destination_file}'.")
-
-        else:
-            print(f"Destination file '{destination_file}' is not empty. No content copied.")
 
     except FileNotFoundError:
         print(f"Error: The source file '{source_file}' was not found.")
@@ -56,6 +54,7 @@ def copy_theme(theme):
 
 # Function to read the configuration file
 def read_config():
+    print("Reading configuration file")
     with open(get_relative_path("../config.json")) as file:
         # Load JSON data into a Python dictionary
         data = json.load(file)

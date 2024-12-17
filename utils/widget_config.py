@@ -7,6 +7,9 @@ high_poll_interval = 1000 * 60 * 10  # 10 minutes
 
 # Default configuration values
 DEFAULT_CONFIG = {
+    "theme": {
+        "name": "catpuccin-frappe",
+    },
     "layout": {
         "left_section": ["workspaces", "window_title"],
         "middle_section": ["datetime"],
@@ -177,6 +180,11 @@ class Battery(TypedDict):
     hide_label_when_full: bool
     interval: int
 
+class Theme(TypedDict):
+    """Configuration for battery"""
+
+    name: str
+
 
 class Cpu(TypedDict, BaseConfig):
     """Configuration for Cpu"""
@@ -277,6 +285,7 @@ class BarConfig(TypedDict):
     hypr_idle: HyprIdle
     keyboard: Keyboard
     language: Language
+    theme: Theme
     layout: Layout
     memory: Memory
     mpris: Mpris
