@@ -1,6 +1,6 @@
 {
   "theme": {
-    "name": "catpuccin-mocha"
+    "name": "onedark"
   },
   "layout": {
     "left_section": ["workspaces", "window_title"],

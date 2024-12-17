@@ -51,7 +51,7 @@ $hover-tranistion: background 0.15s ease-in-out;
 }
 
 .close-button {
-  border-radius: theme.$border-radius;
+  border-radius: 100px;
 
   &:hover {
     box-shadow: none;

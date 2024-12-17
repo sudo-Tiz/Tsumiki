@@ -6,11 +6,7 @@
   box-shadow: none;
 }
 
-@mixin slider(
-  $radius: theme.$border-radius,
-  $highlight-color: white,
-  $length: 145px
-) {
+@mixin slider($radius: 100px, $highlight-color: white, $length: 145px) {
   slider {
     min-height: 8px;
     border-radius: $radius;

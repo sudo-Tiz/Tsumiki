@@ -1,0 +1,38 @@
+/* ---------------------------- */
+/* Base Colors                  */
+/* ---------------------------- */
+$background: #2e3440; // Main background
+$background-alt: #3b4252; // Secondary background
+$background-dark: #232d37; // Darkest background
+
+/* Text Colors */
+$text-main: #d8dee9; // Primary text color
+$text-secondary: #81a1c1; // Secondary text color
+$text-muted: #4c566a; // Tertiary text, muted
+
+/* Surface Colors */
+$surface-disabled: #434c5e; // Background for disabled items
+$surface-neutral: #3b4252; // Neutral surface for cards, panels
+$surface-highlight: #88c0d0; // Selection and highlights
+
+/* Accent Colors */
+$accent-light: #d8dee9; // Light accent (soft grayish white)
+$accent-pink: #bf616a; // Pink accent
+$accent-purple: #b48ead; // Purple accent
+$accent-red: #bf616a; // Red for errors and warnings
+$accent-orange: #d08770; // Orange for warnings and alerts
+$accent-yellow: #ebcb8b; // Yellow for highlights
+$accent-green: #a3be8c; // Green for success
+$accent-teal: #88c0d0; // Teal for information
+$accent-blue: #5e81ac; // Blue for links and actions
+$accent-light-blue: #81a1c1; // Sky blue accent
+$accent-lavender: #b48ead; // Lavender for subtle highlights
+
+/* Overlay Colors */
+$text-disabled: #4c566a; // Text for disabled elements
+$text-muted-light: #e5e9f0; // Light-muted text for hints
+$text-muted-dark: #a3b2c2; // Dark-muted text
+
+/* Additional UI Elements */
+$bar-background: rgba(59, 66, 82, 0.8); // Panel background
+$shadow-color: rgba(0, 0, 0, 0.6); // Shadow color
