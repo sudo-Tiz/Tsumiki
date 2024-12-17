@@ -116,6 +116,12 @@ DEFAULT_CONFIG = {
     "task_bar": {"icon_size": 22},
     "system_tray": {"icon_size": 22, "ignore": []},
     "power": {"icon": "󰐥", "icon_size": "18px", "enable_tooltip": True},
+    "theme_switcher": {
+        "icon": "󰌌",
+        "icon_size": "14px",
+        "enable_label": True,
+        "enable_tooltip": True,
+    },
 }
 
 
@@ -258,6 +264,12 @@ class Keyboard(TypedDict, BaseConfig):
     icon: str
 
 
+class ThemeSwitcher(TypedDict, BaseConfig):
+    """Configuration for keyboard"""
+
+    icon: str
+
+
 class Language(TypedDict):
     """Configuration for language"""
 
@@ -287,6 +299,7 @@ class BarConfig(TypedDict):
     keyboard: Keyboard
     language: Language
     theme: Theme
+    theme_switcher: ThemeSwitcher
     layout: Layout
     memory: Memory
     mpris: Mpris

@@ -17,6 +17,7 @@ from .stats import *
 from .stopwatch import *
 from .systray import *
 from .taskbar import *
+from .theme import *
 from .updates import *
 from .volume import *
 from .weather import *

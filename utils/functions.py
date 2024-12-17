@@ -27,7 +27,7 @@ class ExecutableNotFoundError(ImportError):
 
 
 # Function to get the system icon theme
-def copy_theme(theme):
+def copy_theme(theme: str):
     destination_file = get_relative_path("../styles/theme.scss")
     source_file = get_relative_path(f"../styles/themes/{theme}.scss")
 

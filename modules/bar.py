@@ -20,6 +20,7 @@ from widgets import (
     StorageWidget,
     SystemTray,
     TaskBarWidget,
+    ThemeSwitcherWidget,
     UpdatesWidget,
     VolumeWidget,
     WeatherWidget,
@@ -81,6 +82,7 @@ class StatusBar(Window):
             "mpris": Mpris,
             # Updates: Shows available system updates based on the OS
             "updates": UpdatesWidget,
+            "theme_switcher": ThemeSwitcherWidget,
         }
 
         layout = self.make_layout()
