@@ -16,12 +16,10 @@ class BrightnessWidget(EventBox):
     def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(events=["scroll", "smooth-scroll"], **kwargs)
 
-        self.change_brightness_by = 5
+        self.config = widget_config["brightness"]
 
         # Initialize the audio service
         self.brightness_service = brightness_service
-
-        self.config = widget_config["brightness"]
 
         normalized_brightness = helpers.convert_to_percent(
             self.brightness_service.screen_brightness,
@@ -78,9 +76,8 @@ class BrightnessWidget(EventBox):
         val_y = event.delta_y
 
         if val_y > 0:
-            self.brightness_service.screen_brightness += self.change_brightness_by
-        else:
-            self.brightness_service.screen_brightness -= self.change_brightness_by
+            self.brightness_service.screen_brightness += self.config["step_size"]
+            self.brightness_service.screen_brightness -= self.config["step_size"]
 
     def on_brightness_changed(self, *_):
         if self.config["enable_tooltip"]:

@@ -97,11 +97,13 @@ DEFAULT_CONFIG = {
         "icon_size": "14px",
         "enable_label": True,
         "enable_tooltip": True,
+        "step_size": 5,
     },
     "brightness": {
         "icon_size": "14px",
         "enable_label": True,
         "enable_tooltip": True,
+        "step_size": 5,
     },
     "mpris": {
         "length": 30,
@@ -256,9 +258,13 @@ class Language(TypedDict):
 class Volume(TypedDict, BaseConfig):
     """Configuration for volume"""
 
+    step_size: int
+
 
 class Brightness(TypedDict, BaseConfig):
     """Configuration for brightness"""
+
+    step_size: int
 
 
 class BarConfig(TypedDict):

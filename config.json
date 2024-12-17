@@ -98,12 +98,14 @@
   "volume": {
     "icon_size": "14px",
     "enable_label": true,
-    "enable_tooltip": true
+    "enable_tooltip": true,
+    "step_size": 5
   },
   "brightness": {
     "icon_size": "14px",
     "enable_label": true,
-    "enable_tooltip": true
+    "enable_tooltip": true,
+    "step_size": 5
   },
   "power": {
     "icon": "󰐥",

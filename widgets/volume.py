@@ -16,8 +16,6 @@ class VolumeWidget(EventBox):
     def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(events=["scroll", "smooth-scroll"], **kwargs)
 
-        self.change_volume_by = 5
-
         # Initialize the audio service
         self.audio = audio_service
 
@@ -69,9 +67,9 @@ class VolumeWidget(EventBox):
         val_y = event.delta_y
 
         if val_y > 0:
-            self.audio.speaker.volume += self.change_volume_by
+            self.audio.speaker.volume += self.config["step_size"]
         else:
-            self.audio.speaker.volume -= self.change_volume_by
+            self.audio.speaker.volume -= self.config["step_size"]
 
     def on_speaker_changed(self, *_):
         # Update the progress bar value based on the speaker volume
