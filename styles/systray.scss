@@ -1,4 +1,4 @@
-@use "common/variables.scss";
+@use "theme.scss";
 
 /* system tray widget*/
 /* TODO: see other traybar styles from kde,gnome  */
@@ -9,21 +9,21 @@
   & > button {
     margin: 0 0.1em;
     padding: 0 0.15em;
-    border-radius: variables.$border-radius;
+    border-radius: theme.$border-radius;
     &:hover {
-      background-color: variables.$surface-disabled;
+      background-color: theme.$surface-disabled;
     }
 
     &:active {
-      background-color: variables.$text-main;
-      color: variables.$background-dark;
+      background-color: theme.$text-main;
+      color: theme.$background-dark;
     }
   }
 }
 
 #system-tray-menu > menuitem menu,
 #system-tray-menu {
-  background-color: variables.$surface-disabled;
+  background-color: theme.$surface-disabled;
   border-radius: 1em;
   padding: 10px;
   min-width: 100px;
@@ -32,7 +32,7 @@
 #system-tray-menu > menuitem menu > menuitem,
 #system-tray-menu > menuitem {
   margin: 5px 0px;
-  background-color: variables.$surface-disabled;
+  background-color: theme.$surface-disabled;
   padding: 0.3em 0.5em;
   border-radius: 10px;
 }
@@ -40,12 +40,12 @@
 #system-tray-menu > menuitem menu > menuitem:disabled,
 #system-tray-menu > menuitem:disabled {
   background-color: transparent;
-  color: variables.$text-muted-dark;
+  color: theme.$text-muted-dark;
 }
 
 #system-tray-menu > menuitem menu > menuitem:hover,
 #system-tray-menu > menuitem:hover,
 #submenu-button:hover {
-  background-color: variables.$surface-neutral;
-  color: variables.$accent-purple;
+  background-color: theme.$surface-neutral;
+  color: theme.$accent-purple;
 }

@@ -1,11 +1,11 @@
-@use "common/variables.scss";
+@use "theme.scss";
 
 /** taskbar widget **/
 
 #taskbar {
   font-style: normal;
-  color: variables.$text-main;
-  background: variables.$background-dark;
+  color: theme.$text-main;
+  background: theme.$background-dark;
   padding-left: 4px;
   padding-right: 4px;
 

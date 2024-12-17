@@ -1,14 +1,14 @@
-@use "common/variables.scss";
+@use "theme.scss";
 
 #weather-menu {
   min-width: 3em;
-  background-color: variables.$background-dark;
+  background-color: theme.$background-dark;
 
   border: 2px solid green;
 
   #weather-container {
     padding: 2em;
-    background-color: variables.$background;
+    background-color: theme.$background;
     #start-container {
       margin: 0.2em;
       label {

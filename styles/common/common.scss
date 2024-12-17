@@ -1,30 +1,31 @@
 @use "sass:color";
 
-@use "variables.scss";
+@use "../theme.scss";
 @use "mixins.scss";
+
 
 label {
   font-size: 1rem;
 }
 
 #panel {
-  background-color: variables.$bar-background;
+  background-color: theme.$bar-background;
 
   &-inner {
     padding: 0.6em 1.8em 0.35em 1.8em;
-    border-color: variables.$border-color;
+    border-color: theme.$surface-disabled;
   }
 }
 
 .panel-box,
 .panel-button {
-  background: variables.$background-dark;
-  border-radius: variables.$border-radius;
+  background: theme.$background-dark;
+  border-radius: theme.$border-radius;
 }
 
 .panel-box {
   padding: 0.1em 0.9em;
-  color: variables.$text-main;
+  color: theme.$text-main;
   font-weight: bold;
 }
 
@@ -38,13 +39,13 @@ label {
 }
 
 .panel-text-icon {
-  color: variables.$text-main;
+  color: theme.$text-main;
 }
 
 .overlay-progress-bar {
   color: transparent;
   background-color: transparent;
-  border-color: variables.$border-color;
+  border-color: theme.$surface-disabled;
 }
 
 .overlay-icon {
@@ -57,15 +58,15 @@ label {
 }
 
 #widgets-container {
-  background-color: variables.$background-dark;
+  background-color: theme.$background-dark;
   padding: 0.125em;
 }
 
 tooltip {
   @include mixins.no-style;
-  background-color: variables.$background-dark;
+  background-color: theme.$background-dark;
   border-radius: 10px;
-  box-shadow: 0 0 3px 0 variables.$shadow-color;
+  box-shadow: 0 0 3px 0 theme.$shadow-color;
 
   label {
     @include mixins.no-style;
@@ -80,10 +81,10 @@ tooltip > * {
 menu {
   margin: 6px;
   padding: 6px;
-  background-color: variables.$background-alt;
+  background-color: theme.$background-alt;
   background-clip: border-box;
   border-radius: 12px;
-  border: 1px solid variables.$border-color;
+  border: 1px solid theme.$surface-disabled;
 }
 
 menuitem {
@@ -100,9 +101,9 @@ menuitem {
   }
 
   separator {
-    min-height: variables.$border-width;
+    min-height: 1px;
     margin: 4px 0;
-    background-color: variables.$background;
+    background-color: theme.$background;
   }
 }
 
@@ -110,7 +111,7 @@ menu > arrow {
   min-height: 16px;
   min-width: 16px;
   padding: 4px;
-  color: variables.$background-alt;
+  color: theme.$background-alt;
 }
 
 menu > arrow.top {
@@ -132,8 +133,8 @@ radio {
   min-width: 15px;
   margin: 4px;
   padding: 0;
-  background-color: variables.$background-alt;
-  border-radius: variables.$border-radius;
+  background-color: theme.$background-alt;
+  border-radius: theme.$border-radius;
   transition:
     all 75ms cubic-bezier(0, 0, 0.2, 1),
     box-shadow 150ms cubic-bezier(0, 0, 0.2, 1);
@@ -146,38 +147,38 @@ check {
 
 check:hover,
 radio:hover {
-  box-shadow: 0 0 0 4px color.adjust(variables.$background-dark, $alpha: -0.9);
-  background-color: variables.$background-dark;
+  box-shadow: 0 0 0 4px color.adjust(theme.$background-dark, $alpha: -0.9);
+  background-color: theme.$background-dark;
 }
 
 check:active,
 radio:active {
-  box-shadow: 0 0 0 4px color.adjust(variables.$background-dark, $alpha: -0.9);
-  background-color: variables.$background-dark;
+  box-shadow: 0 0 0 4px color.adjust(theme.$background-dark, $alpha: -0.9);
+  background-color: theme.$background-dark;
 }
 
 check:checked,
 check:indeterminate,
 radio:checked,
 radio:indeterminate {
-  color: variables.$background-dark;
-  background-color: variables.$text-main;
+  color: theme.$background-dark;
+  background-color: theme.$text-main;
 }
 
 check:checked:hover,
 check:indeterminate:hover,
 radio:checked:hover,
 radio:indeterminate:hover {
-  box-shadow: 0 0 0 4px color.adjust(variables.$text-main, $alpha: -0.9);
-  background-color: variables.$text-main;
+  box-shadow: 0 0 0 4px color.adjust(theme.$text-main, $alpha: -0.9);
+  background-color: theme.$text-main;
 }
 
 check:checked:active,
 check:indeterminate:active,
 radio:checked:active,
 radio:indeterminate:active {
-  box-shadow: 0 0 0 4px color.adjust(variables.$text-main, $alpha: -0.9);
-  background-color: variables.$text-main;
+  box-shadow: 0 0 0 4px color.adjust(theme.$text-main, $alpha: -0.9);
+  background-color: theme.$text-main;
 }
 
 switch {
@@ -185,14 +186,14 @@ switch {
   margin: 4px 0;
   border: none;
   border-radius: 9999px;
-  background-color: variables.$background-alt;
+  background-color: theme.$background-alt;
   background-clip: padding-box;
   font-size: 0;
   color: transparent;
 }
 
 switch:checked {
-  background-color: variables.$background-dark;
+  background-color: theme.$background-dark;
 }
 
 switch:disabled {
@@ -206,7 +207,7 @@ switch slider {
   margin: 3px;
   border-radius: 9999px;
   outline: none;
-  background-color: variables.$text-main;
+  background-color: theme.$text-main;
   border: none;
   color: transparent;
 }
@@ -231,9 +232,9 @@ spinner:checked {
 separator {
   min-width: 1px;
   min-height: 1px;
-  background-color: variables.$border-color;
+  background-color: theme.$surface-disabled;
 }
 
 #panel-corner * {
-  background-color: variables.$bar-background;
+  background-color: theme.$bar-background;
 }
