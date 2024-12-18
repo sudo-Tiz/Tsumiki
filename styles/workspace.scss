@@ -14,7 +14,7 @@ $workspace-transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
     border-radius: 100px;
 
     &:hover {
-      background-color: theme.$ws-hovet;
+      background-color: theme.$ws-hover;
       transition: $workspace-transition;
 
       label {
