@@ -7,6 +7,7 @@ import utils.functions as helpers
 from modules.bar import StatusBar
 from modules.notifications import NotificationPopup
 from modules.osd import OSDContainer
+from utils.colors import Colors
 from utils.widget_config import widget_config
 
 
@@ -16,9 +17,9 @@ def process_and_apply_css(app: Application):
             "sass"
         )  # Raise an error if sass is not found and exit the application
 
-    logger.info("{Colors.OKBLUE}[Main] Compiling CSS")
+    logger.info(f"{Colors.OKBLUE}[Main] Compiling CSS")
     exec_shell_command("sass styles/main.scss dist/main.css --no-source-map")
-    logger.info("{Colors.OKBLUE}[Main] CSS applied")
+    logger.info(f"{Colors.OKBLUE}[Main] CSS applied")
     app.set_stylesheet_from_file(get_relative_path("dist/main.css"))
 
 

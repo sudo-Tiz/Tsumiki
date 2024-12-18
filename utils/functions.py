@@ -45,7 +45,7 @@ def copy_theme(theme: str):
         # Open the destination file in write mode
         with open(destination_file, "w") as destination_file:
             destination_file.write(content)
-            logger.info(f"{Colors.OKBLUE}[THEME] Theme '{theme}' applied successfully.")
+            logger.info(f"{Colors.OKBLUE}[THEME] '{theme}' applied successfully.")
 
     except FileNotFoundError:
         logger.error(
