@@ -117,10 +117,9 @@ DEFAULT_CONFIG = {
     "system_tray": {"icon_size": 22, "ignore": []},
     "power": {"icon": "󰐥", "icon_size": "18px", "enable_tooltip": True},
     "theme_switcher": {
-        "icon": "󰌌",
+        "icon": "",
         "icon_size": "14px",
-        "enable_label": True,
-        "enable_tooltip": True,
+        "silent": True,  # Whether to show a notification when the theme is changed
     },
 }
 

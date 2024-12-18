@@ -30,13 +30,9 @@ class ThemeSwitcherWidget(Button):
 
         self.connect("clicked", self.cycle_themes)
 
-        if self.config["enable_tooltip"]:
-            self.set_tooltip_text(self.current_theme)
-
     def cycle_themes(self, *_):
         """Cycle through the themes."""
         copy_theme(self.current_theme)
-        self.set_tooltip_text(self.current_theme)
         self.current_theme = self.themes_list[
             (self.themes_list.index(self.current_theme) + 1) % len(self.themes_list)
         ]

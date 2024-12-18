@@ -119,7 +119,6 @@
   "theme_switcher": {
     "icon": "󰌌",
     "icon_size": "14px",
-    "enable_label": true,
-    "enable_tooltip": true
+    "silent": false
   }
 }
