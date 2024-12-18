@@ -11,6 +11,7 @@ from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from loguru import logger
 
+from utils.colors import Colors
 from utils.functions import text_icon
 from utils.widget_config import BarConfig
 
@@ -75,7 +76,7 @@ class UpdatesWidget(EventBox):
         # Get the path to the update script
         filename = get_relative_path("../assets/scripts/updates.sh")
 
-        logger.info("[Updates] Checking for updates...")
+        logger.info(f"{Colors.OKBLUE}[Updates] Checking for updates...")
 
         # Execute the update script asynchronously and update values
         exec_shell_command_async(

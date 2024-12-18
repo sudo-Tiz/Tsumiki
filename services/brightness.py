@@ -7,6 +7,7 @@ from gi.repository import GLib
 from loguru import logger
 
 import utils.functions as helpers
+from utils.colors import Colors
 
 
 # Helper function to execute brightnessctl asynchronously
@@ -14,7 +15,7 @@ def exec_brightnessctl_async(args: str):
     # Executes brightnessctl command asynchronously, ensuring no resource leaks.
 
     if not helpers.executable_exists("brightnessctl"):
-        logger.error("Command brightnessctl not found")
+        logger.error(f"{Colors.FAIL}Command brightnessctl not found")
 
     try:
         # Use subprocess.Popen to run the command without blocking
@@ -29,10 +30,12 @@ def exec_brightnessctl_async(args: str):
         stdout, stderr = process.communicate()
 
         if process.returncode != 0:
-            logger.error(f"Error executing brightnessctl: {stderr.decode().strip()}")
+            logger.error(
+                f"{Colors.FAIL}Error executing brightnessctl: {stderr.decode().strip()}"
+            )
         else:
             logger.debug(
-                f"brightnessctl output: {stdout.decode().strip()}",
+                f"{Colors.OKBLUE}brightnessctl output: {stdout.decode().strip()}",
             )  # Optional: Log the output
     except Exception as e:
         logger.exception(f"Exception in exec_brightnessctl_async: {e}")
@@ -88,7 +91,9 @@ class Brightness(Service):
         )
 
         # Log the initialization of the service
-        logger.info(f"Brightness service initialized for device: {screen_device}")
+        logger.info(
+            f"{Colors.OKBLUE}Brightness service initialized for device: {screen_device}"
+        )
 
     def _read_max_brightness(self, path: str) -> int:
         # Reads the maximum brightness value from the specified path.
@@ -105,7 +110,9 @@ class Brightness(Service):
         if os.path.exists(brightness_path):
             with open(brightness_path) as f:
                 return int(f.read().strip())
-        logger.warning(f"Brightness file does not exist: {brightness_path}")
+        logger.warning(
+            f"{Colors.WARNING}Brightness file does not exist: {brightness_path}"
+        )
         return -1  # Return -1 if file doesn't exist, indicating error.
 
     @screen_brightness.setter
@@ -117,8 +124,10 @@ class Brightness(Service):
         try:
             exec_brightnessctl_async(f"--device '{screen_device}' set {value}")
             self.emit("screen", int((value / self.max_screen) * 100))
-            logger.info(f"Set screen brightness to {value} (out of {self.max_screen})")
+            logger.info(
+                f"{Colors.OKBLUE}Set screen brightness to {value} (out of {self.max_screen})"
+            )
         except GLib.Error as e:
-            logger.error(f"Error setting screen brightness: {e.message}")
+            logger.error(f"{Colors.FAIL}Error setting screen brightness: {e.message}")
         except Exception as e:
             logger.exception(f"Unexpected error setting screen brightness: {e}")

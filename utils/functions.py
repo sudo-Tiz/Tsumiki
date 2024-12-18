@@ -12,8 +12,8 @@ from fabric.widgets.label import Label
 from gi.repository import GLib, Gtk
 from loguru import logger
 
+import utils.icons as icons
 from utils.colors import Colors
-from utils.icons import brightness_text_icons, distro_text_icons, volume_text_icons
 
 gi.require_version("Gtk", "3.0")
 
@@ -33,8 +33,8 @@ def copy_theme(theme: str):
     source_file = get_relative_path(f"../styles/themes/{theme}.scss")
 
     if not os.path.exists(source_file):
-        print(
-            f"Warning: The theme file '{theme}.scss' was not found. Using default theme."
+        logger.warning(
+            f"{Colors.WARNING}Warning: The theme file '{theme}.scss' was not found. Using default theme."
         )
         source_file = get_relative_path("../styles/themes/catpuccin-mocha.scss")
 
@@ -45,16 +45,17 @@ def copy_theme(theme: str):
         # Open the destination file in write mode
         with open(destination_file, "w") as destination_file:
             destination_file.write(content)
-            logger.info(f"Theme '{theme}' applied successfully.")
+            logger.info(f"{Colors.OKBLUE}[THEME] Theme '{theme}' applied successfully.")
 
     except FileNotFoundError:
-        print(f"Error: The theme file '{source_file}' was not found.")
+        logger.error(
+            f"{Colors.FAIL}Error: The theme file '{source_file}' was not found."
+        )
         exit(1)
 
 
 # Function to read the configuration file
 def read_config():
-    print("Reading configuration file")
     with open(get_relative_path("../config.json")) as file:
         # Load JSON data into a Python dictionary
         data = json.load(file)
@@ -117,7 +118,7 @@ def check_icon_exists(icon_name: str, fallback_icon: str) -> str:
 def get_distro_icon():
     distro_id = GLib.get_os_info("ID")
     # Search for the icon in the list
-    icon = next((icon for id, icon in distro_text_icons if id == distro_id), None)
+    icon = next((icon for id, icon in icons.distro_text_icons if id == distro_id), None)
 
     # Return the found icon or default to '' if not found
     return icon if icon else ""
@@ -133,23 +134,23 @@ def executable_exists(executable_name):
 def get_brightness_icon_name(level: int) -> dict[Literal["icon_text", "icon"], str]:
     if level <= 0:
         return {
-            "text_icon": brightness_text_icons["off"],
+            "text_icon": icons.brightness_text_icons["off"],
             "icon": "display-brightness-off-symbolic",
         }
 
     if level > 0 and level < 32:
         return {
-            "text_icon": brightness_text_icons["low"],
+            "text_icon": icons.brightness_text_icons["low"],
             "icon": "display-brightness-low-symbolic",
         }
     if level > 32 and level < 66:
         return {
-            "text_icon": brightness_text_icons["medium"],
+            "text_icon": icons.brightness_text_icons["medium"],
             "icon": "display-brightness-medium-symbolic",
         }
     if level >= 66 and level <= 100:
         return {
-            "text_icon": brightness_text_icons["high"],
+            "text_icon": icons.icons.brightness_text_icons["high"],
             "icon": "display-brightness-high-symbolic",
         }
 
@@ -162,22 +163,22 @@ def get_audio_icon_name(
         return
     if volume > 0 and volume < 32:
         return {
-            "text_icon": volume_text_icons["low"],
+            "text_icon": icons.volume_text_icons["low"],
             "icon": "audio-volume-low-symbolic",
         }
     if volume > 32 and volume < 66:
         return {
-            "text_icon": volume_text_icons["medium"],
+            "text_icon": icons.volume_text_icons["medium"],
             "icon": "audio-volume-medium-symbolic",
         }
     if volume >= 66 and volume <= 100:
         return {
-            "text_icon": volume_text_icons["high"],
+            "text_icon": icons.volume_text_icons["high"],
             "icon": "audio-volume-high-symbolic",
         }
     else:
         return {
-            "text_icon": volume_text_icons["overamplified"],
+            "text_icon": icons.volume_text_icons["overamplified"],
             "icon": "audio-volume-overamplified-symbolic",
         }
 
@@ -227,7 +228,7 @@ def send_notification(
     try:
         subprocess.run(command, check=True)
     except subprocess.CalledProcessError as e:
-        print(f"Error sending notification: {e}")
+        logger.error(f"{Colors.FAIL}Error sending notification: {e}")
 
 
 # Function to get the percentage of a value

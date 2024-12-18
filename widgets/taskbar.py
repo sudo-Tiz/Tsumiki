@@ -10,6 +10,7 @@ from fabric.widgets.image import Image
 from gi.repository import GdkPixbuf, GLib, Gtk
 from loguru import logger
 
+from utils.colors import Colors
 from utils.widget_config import BarConfig
 
 
@@ -134,7 +135,7 @@ class TaskBarWidget(Box):
                                         if window_class in app_name:
                                             return icon_name
                         except Exception as e:
-                            logger.error(f"Error reading {file_path}: {e}")
+                            logger.error(f"{Colors.FAIL}Error reading {file_path}: {e}")
         return None
 
     def load_icon(

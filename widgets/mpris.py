@@ -6,6 +6,7 @@ from fabric.widgets.revealer import Revealer
 from loguru import logger
 
 from services import MprisPlayer, MprisPlayerManager
+from utils.colors import Colors
 from utils.icons import common_text_icons
 from utils.widget_config import BarConfig
 
@@ -31,7 +32,7 @@ class Mpris(EventBox):
 
         for player in self.mpris_manager.players:
             logger.info(
-                f"[PLAYER MANAGER] player found: {player.get_property('player-name')}",
+                f"{Colors.OKBLUE}[PLAYER MANAGER] player found: {player.get_property('player-name')}",
             )
             self.player = MprisPlayer(player)
             self.player.connect("notify::metadata", self.get_current)

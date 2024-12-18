@@ -9,6 +9,7 @@ from loguru import logger
 
 from services import WeatherInfo
 from shared import PopupWindow
+from utils.colors import Colors
 from utils.functions import text_icon
 from utils.icons import common_text_icons
 from utils.widget_config import BarConfig
@@ -106,7 +107,7 @@ class WeatherWidget(EventBox):
         weather_thread.start()
         # Continue running the main program (non-blocking)
         logger.info(
-            "[Weather] Weather information is being fetched in a separate thread...",
+            f"{Colors.OKBLUE}[Weather] Weather information is being fetched in a separate thread...",
         )
 
     # This function will run the weather fetch in a separate thread

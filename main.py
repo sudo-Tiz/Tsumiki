@@ -16,9 +16,9 @@ def process_and_apply_css(app: Application):
             "sass"
         )  # Raise an error if sass is not found and exit the application
 
-    logger.info("[Main] Compiling CSS")
+    logger.info("{Colors.OKBLUE}[Main] Compiling CSS")
     exec_shell_command("sass styles/main.scss dist/main.css --no-source-map")
-    logger.info("[Main] CSS applied")
+    logger.info("{Colors.OKBLUE}[Main] CSS applied")
     app.set_stylesheet_from_file(get_relative_path("dist/main.css"))
 
 

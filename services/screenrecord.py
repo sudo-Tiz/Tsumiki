@@ -6,6 +6,8 @@ from fabric.utils import exec_shell_command
 from gi.repository import Gio, GLib
 from loguru import logger
 
+from utils.colors import Colors
+
 
 def exec_shell_command_async(cmd: str) -> bool:
     if isinstance(cmd, str):
@@ -46,7 +48,7 @@ class ScreenRecorder(Service):
                 file_path=file_path if file_path else None,
             )
         except Exception:
-            logger.error(f"[SCREENSHOT] Failed to run command: {command}")
+            logger.error(f"{Colors.FAIL}[SCREENSHOT] Failed to run command: {command}")
 
     def screencast_start(self, fullscreen=False):
         time = datetime.datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
@@ -92,7 +94,7 @@ class ScreenRecorder(Service):
                 _, stdout, stderr = process.communicate_utf8_finish(task)
             except Exception:
                 logger.error(
-                    f"[SCREENSHOT] Failed read notification action with error {stderr}"
+                    f"{Colors.FAIL}[SCREENSHOT] Failed read notification action with error {stderr}"
                 )
                 return
 
