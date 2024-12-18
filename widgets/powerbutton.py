@@ -135,7 +135,7 @@ class PowerButton(Button):
             props={"style_classes": "panel-text-icon"},
         )
 
-        if self.config["enable_tooltip"]:
+        if self.config["tooltip"]:
             self.set_tooltip_text("Power")
 
         self.connect("clicked", lambda *_: PowerMenuPopup().toggle_popup())

@@ -74,7 +74,7 @@ class Mpris(EventBox):
 
         self.label.set_label(trucated_info)
 
-        if self.config["enable_tooltip"]:
+        if self.config["tooltip"]:
             self.set_tooltip_text(bar_label)
 
     def get_playback_status(self, *_):

@@ -16,8 +16,8 @@ class HyprSunsetWidget(CommandSwitcher):
             command=self.command,
             enabled_icon=self.config["enabled_icon"],
             disabled_icon=self.config["disabled_icon"],
-            enable_label=self.config["enable_label"],
-            enable_tooltip=self.config["enable_tooltip"],
+            label=self.config["label"],
+            tooltip=self.config["tooltip"],
             name="hyprsunset",
             **kwargs,
         )

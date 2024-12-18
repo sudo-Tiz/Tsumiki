@@ -22,42 +22,42 @@
     "enabled_icon": "󱩌",
     "disabled_icon": "󰛨",
     "icon_size": "12px",
-    "enable_label": true,
-    "enable_tooltip": true,
+    "label": true,
+    "tooltip": true,
     "interval": 2000
   },
   "hypr_idle": {
     "enabled_icon": "",
     "disabled_icon": "",
     "icon_size": "12px",
-    "enable_label": true,
-    "enable_tooltip": true,
+    "label": true,
+    "tooltip": true,
     "interval": 2000
   },
   "battery": {
-    "enable_label": true,
-    "enable_tooltip": true,
+    "label": true,
+    "tooltip": true,
     "interval": 2000
   },
   "cpu": {
     "icon": "",
     "icon_size": "12px",
-    "enable_label": true,
-    "enable_tooltip": true,
+    "label": true,
+    "tooltip": true,
     "interval": 2000
   },
   "memory": {
     "icon": "",
     "icon_size": "12px",
-    "enable_label": true,
-    "enable_tooltip": true,
+    "label": true,
+    "tooltip": true,
     "interval": 2000
   },
   "storage": {
     "icon": "󰋊",
     "icon_size": "14px",
-    "enable_label": true,
-    "enable_tooltip": true,
+    "label": true,
+    "tooltip": true,
     "interval": 2000
   },
   "workspaces": {
@@ -78,8 +78,8 @@
   "keyboard": {
     "icon": "󰌌",
     "icon_size": "14px",
-    "enable_label": true,
-    "enable_tooltip": true
+    "label": true,
+    "tooltip": true
   },
   "task_bar": {
     "icon_size": 22
@@ -96,25 +96,25 @@
   },
   "bluetooth": {
     "icon_size": 22,
-    "enable_label": true,
-    "enable_tooltip": true
+    "label": true,
+    "tooltip": true
   },
   "volume": {
     "icon_size": "14px",
-    "enable_label": true,
-    "enable_tooltip": true,
+    "label": true,
+    "tooltip": true,
     "step_size": 5
   },
   "brightness": {
     "icon_size": "14px",
-    "enable_label": true,
-    "enable_tooltip": true,
+    "label": true,
+    "tooltip": true,
     "step_size": 5
   },
   "power": {
     "icon": "󰐥",
     "icon_size": "18px",
-    "enable_tooltip": true
+    "tooltip": true
   },
   "theme_switcher": {
     "icon": "󰌌",

@@ -27,20 +27,20 @@ DEFAULT_CONFIG = {
         "disabled_icon": "󰛨",
         "icon_size": "12px",
         "interval": 2000,
-        "enable_label": True,
-        "enable_tooltip": True,
+        "label": True,
+        "tooltip": True,
     },
     "hypr_idle": {
         "enabled_icon": "",
         "disabled_icon": "",
         "icon_size": "12px",
         "interval": 2000,
-        "enable_label": True,
-        "enable_tooltip": True,
+        "label": True,
+        "tooltip": True,
     },
     "battery": {
-        "enable_label": True,
-        "enable_tooltip": True,
+        "label": True,
+        "tooltip": True,
         "interval": 2000,
         "hide_label_when_full": True,
     },
@@ -48,22 +48,22 @@ DEFAULT_CONFIG = {
         "icon": "",
         "icon_size": "12px",
         "interval": 2000,
-        "enable_label": True,
-        "enable_tooltip": True,
+        "label": True,
+        "tooltip": True,
     },
     "memory": {
         "icon": "",
         "interval": 2000,
         "icon_size": "12px",
-        "enable_label": True,
-        "enable_tooltip": True,
+        "label": True,
+        "tooltip": True,
     },
     "storage": {
         "icon": "󰋊",
         "interval": 2000,
         "icon_size": "14px",
-        "enable_label": True,
-        "enable_tooltip": True,
+        "label": True,
+        "tooltip": True,
     },
     "workspaces": {
         "count": 8,
@@ -82,40 +82,40 @@ DEFAULT_CONFIG = {
         "icon": "󱧘",
         "icon_size": "14px",
         "interval": high_poll_interval,
-        "enable_tooltip": True,
-        "enable_label": True,
+        "tooltip": True,
+        "label": True,
     },
     "keyboard": {
         "icon": "󰌌",
         "icon_size": "14px",
-        "enable_label": True,
-        "enable_tooltip": True,
+        "label": True,
+        "tooltip": True,
     },
     "bluetooth": {
         "icon_size": 22,
-        "enable_label": True,
-        "enable_tooltip": True,
+        "label": True,
+        "tooltip": True,
     },
     "volume": {
         "icon_size": "14px",
-        "enable_label": True,
-        "enable_tooltip": True,
+        "label": True,
+        "tooltip": True,
         "step_size": 5,
     },
     "brightness": {
         "icon_size": "14px",
-        "enable_label": True,
-        "enable_tooltip": True,
+        "label": True,
+        "tooltip": True,
         "step_size": 5,
     },
     "mpris": {
         "length": 30,
-        "enable_tooltip": True,
+        "tooltip": True,
     },
     "language": {"length": 3},
     "task_bar": {"icon_size": 22},
     "system_tray": {"icon_size": 22, "ignore": []},
-    "power": {"icon": "󰐥", "icon_size": "18px", "enable_tooltip": True},
+    "power": {"icon": "󰐥", "icon_size": "18px", "tooltip": True},
     "theme_switcher": {
         "icon": "",
         "icon_size": "14px",
@@ -128,8 +128,8 @@ class BaseConfig(TypedDict):
     """Common configuration for some sections"""
 
     icon_size: str
-    enable_label: bool
-    enable_tooltip: bool
+    label: bool
+    tooltip: bool
     interval: int
 
 
@@ -146,7 +146,7 @@ class PowerButton(TypedDict):
 
     icon: str
     icon_size: int
-    enable_tooltip: bool
+    tooltip: bool
 
 
 class HyprSunset(TypedDict, BaseConfig):
@@ -180,8 +180,8 @@ class HyprIdle(TypedDict, BaseConfig):
 class Battery(TypedDict):
     """Configuration for battery"""
 
-    enable_label: bool
-    enable_tooltip: bool
+    label: bool
+    tooltip: bool
     hide_label_when_full: bool
     interval: int
 
@@ -243,8 +243,8 @@ class Updates(TypedDict, BaseConfig):
 class BlueTooth(TypedDict):
     """Configuration for bluetooth"""
 
-    enable_label: bool
-    enable_tooltip: bool
+    label: bool
+    tooltip: bool
     icon_size: int
 
 
@@ -253,8 +253,8 @@ class Weather(TypedDict):
 
     location: str
     interval: int
-    enable_tooltip: bool
-    enable_label: bool
+    tooltip: bool
+    label: bool
 
 
 class Keyboard(TypedDict, BaseConfig):

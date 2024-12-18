@@ -35,7 +35,7 @@ class CpuWidget(Box):
 
     def update_label(self):
         # Update the label with the current CPU usage if enabled
-        if self.config["enable_label"]:
+        if self.config["label"]:
             self.cpu_level_label.show()
             self.cpu_level_label.set_label(f"{psutil.cpu_percent()}%")
 
@@ -73,12 +73,12 @@ class MemoryWidget(Box):
         self.percent_used = psutil.virtual_memory().percent
 
         # Update the label with the used memory if enabled
-        if self.config["enable_label"]:
+        if self.config["label"]:
             self.memory_level_label.set_label(self.get_used())
             self.memory_level_label.show()
 
         # Update the tooltip with the memory usage details if enabled
-        if self.config["enable_tooltip"]:
+        if self.config["tooltip"]:
             self.set_tooltip_text(
                 f"󰾆 {psutil.virtual_memory().percent}%\n{common_text_icons['memory']} {self.get_used()}/{self.get_total()}",
             )
@@ -121,12 +121,12 @@ class StorageWidget(Box):
         self.disk = psutil.disk_usage("/")
 
         # Update the label with the used storage if enabled
-        if self.config["enable_label"]:
+        if self.config["label"]:
             self.storage_level_label.set_label(f"{self.get_used()}")
             self.storage_level_label.show()
 
         # Update the tooltip with the storage usage details if enabled
-        if self.config["enable_tooltip"]:
+        if self.config["tooltip"]:
             self.set_tooltip_text(
                 f"󰾆 {self.disk.percent}%\n{common_text_icons['storage']} {self.get_used()}/{self.get_total()}",
             )

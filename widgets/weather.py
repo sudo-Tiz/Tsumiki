@@ -128,6 +128,6 @@ class WeatherWidget(EventBox):
         self.connect("button-press-event", lambda *_: self.weather_menu.toggle_popup())
 
         # Update the tooltip with the city and weather condition if enabled
-        if self.config["enable_tooltip"]:
+        if self.config["tooltip"]:
             self.set_tooltip_text(f"{res['city']}, {res['condition']}".strip("'"))
         return True

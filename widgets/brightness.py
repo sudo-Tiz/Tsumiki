@@ -67,7 +67,7 @@ class BrightnessWidget(EventBox):
         # Add the event box as a child
         self.add(self.box)
 
-        if self.config["enable_label"]:
+        if self.config["label"]:
             self.brightness_label.show()
 
     def on_scroll(self, _, event):
@@ -80,7 +80,7 @@ class BrightnessWidget(EventBox):
             self.brightness_service.screen_brightness -= self.config["step_size"]
 
     def on_brightness_changed(self, *_):
-        if self.config["enable_tooltip"]:
+        if self.config["tooltip"]:
             self.set_tooltip_text("")
 
         self.update_brightness()

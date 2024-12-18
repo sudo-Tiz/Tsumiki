@@ -46,7 +46,7 @@ class UpdatesWidget(EventBox):
         self.box.children = (self.text_icon, self.update_level_label)
 
         # Show initial value of 0 if label is enabled
-        if self.config["enable_label"]:
+        if self.config["label"]:
             self.update_level_label.show()
 
         # Set up a repeater to call the update method at specified intervals
@@ -63,11 +63,11 @@ class UpdatesWidget(EventBox):
         value = json.loads(value)
 
         # Update the label if enabled
-        if self.config["enable_label"]:
+        if self.config["label"]:
             self.update_level_label.set_label(value["total"])
 
         # Update the tooltip if enabled
-        if self.config["enable_tooltip"]:
+        if self.config["tooltip"]:
             self.set_tooltip_text(value["tooltip"])
         return True
 

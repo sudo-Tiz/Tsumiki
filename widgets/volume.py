@@ -58,7 +58,7 @@ class VolumeWidget(EventBox):
         # Add the event box as a child
         self.add(self.box)
 
-        if self.config["enable_label"]:
+        if self.config["label"]:
             self.volume_label.show()
 
     def on_scroll(self, _, event):
@@ -76,7 +76,7 @@ class VolumeWidget(EventBox):
         if not self.audio.speaker:
             return
 
-        if self.config["enable_tooltip"]:
+        if self.config["tooltip"]:
             self.set_tooltip_text(self.audio.speaker.description)
 
         self.audio.speaker.connect("notify::volume", self.update_volume)

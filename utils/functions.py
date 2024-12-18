@@ -10,6 +10,7 @@ import psutil
 from fabric.utils import get_relative_path
 from fabric.widgets.label import Label
 from gi.repository import GLib, Gtk
+from loguru import logger
 
 from utils.colors import Colors
 from utils.icons import brightness_text_icons, distro_text_icons, volume_text_icons
@@ -44,6 +45,7 @@ def copy_theme(theme: str):
         # Open the destination file in write mode
         with open(destination_file, "w") as destination_file:
             destination_file.write(content)
+            logger.info(f"Theme '{theme}' applied successfully.")
 
     except FileNotFoundError:
         print(f"Error: The theme file '{source_file}' was not found.")

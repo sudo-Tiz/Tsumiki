@@ -42,11 +42,11 @@ class BlueToothWidget(Box):
         self.bluetooth_icon.set_from_icon_name(icon, icon_size=self.icon_size)
         self.children = (self.bluetooth_icon, self.bt_label)
 
-        if self.config["enable_label"]:
+        if self.config["label"]:
             self.bt_label.set_text(bt_status.capitalize())
             self.bt_label.show()
 
-        if self.config["enable_tooltip"]:
+        if self.config["tooltip"]:
             self.set_tooltip_text(f"Bluetooth is {bt_status}")
 
     def on_destroy(self):

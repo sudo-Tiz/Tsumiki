@@ -1,48 +1,43 @@
 /* ---------------------------- */
 /* Base Colors                  */
 /* ---------------------------- */
-$background: #1a1b26; // Main background (deep dark blue-gray)
-$background-alt: #1f2430; // Secondary background (dark, bluish-gray)
-$background-dark: #161821; // Darkest background (almost black with a hint of blue)
+$background: #282828; // Main background (dark brownish gray)
+$background-alt: #3c3836; // Secondary background (dark brown)
+$background-dark: #1d2021; // Darkest background (deep brownish black)
 
 /* Text Colors */
-$text-main: #c0caf5; // Primary text color (soft light purple)
-$text-secondary: #e0e0e0; // Secondary text color (light gray)
-$text-muted: #7f8c8d; // Tertiary text, muted (muted grayish blue)
+$text-main: #ebdbb2; // Primary text color (light beige)
+$text-secondary: #d5c4a1; // Secondary text color (soft tan)
+$text-muted: #bdae93; // Tertiary text, muted (warm, muted yellow)
 
 /* Surface Colors */
-$surface-disabled: #44475a; // Disabled items (muted bluish-gray)
-$surface-neutral: #282c34; // Neutral surface for cards, panels (dark gray with a touch of blue)
-$surface-highlight: #61afef; // Selection and highlights (neon light blue)
+$surface-disabled: #7c6f64; // Disabled items (muted brown-gray)
+$surface-neutral: #504945; // Neutral surface for cards, panels (dark olive gray)
+$surface-highlight: #d79921; // Selection and highlights (soft yellow)
 
 /* Accent Colors */
-$accent-light: #9cdcfe; // Light accent (bright sky blue)
-$accent-pink: #ff79c6; // Pink accent (neon pink)
-$accent-purple: #bb80b3; // Purple accent (soft neon purple)
-$accent-red: #f44747; // Red for errors and warnings (neon red)
-$accent-orange: #ffaf00; // Orange for alerts (bright orange)
-$accent-yellow: #e5c07b; // Yellow for highlights (warm yellow)
-$accent-green: #98c379; // Green for success (soft green)
-$accent-teal: #56b6c2; // Teal for information (soft teal)
-$accent-blue: #61afef; // Blue for links and actions (neon light blue)
-$accent-light-blue: #56b6c2; // Sky blue accent (teal-blue)
-$accent-lavender: #c084f0; // Lavender for subtle highlights (light purple)
+$accent-light: #b8bb26; // Light accent (vibrant yellow-green)
+$accent-pink: #d75f5f; // Pink accent (muted red-pink)
+$accent-purple: #b16286; // Purple accent (soft purple)
+$accent-red: #fb4934; // Red for errors and warnings (vibrant red)
+$accent-orange: #fe8019; // Orange for alerts (bright orange)
+$accent-yellow: #fabd2f; // Yellow for highlights (warm yellow)
+$accent-green: #8ec07c; // Green for success (soft green)
+$accent-teal: #89b482; // Teal for information (soft teal)
+$accent-blue: #83a598; // Blue for links and actions (muted blue)
+$accent-light-blue: #8ec07c; // Sky blue accent (soft blue-green)
+$accent-lavender: #d3869b; // Lavender for subtle highlights (soft lavender)
 
 /* Overlay Colors */
-$text-disabled: #555c66; // Disabled text (muted bluish-gray)
-$text-muted-light: #6c7c7e; // Light-muted text for hints (light gray)
-$text-muted-dark: #4c5861; // Dark-muted text (darker bluish-gray)
+$text-disabled: #7c6f64; // Disabled text (muted brown-gray)
+$text-muted-light: #928374; // Light-muted text for hints (soft, muted gray)
+$text-muted-dark: #3c3836; // Dark-muted text (brownish gray)
 
 /* Additional UI Elements */
 $bar-background: rgba(
-  26,
-  27,
-  38,
+  40,
+  40,
+  40,
   0.8
-); // Panel background (semi-transparent deep blue)
-$shadow-color: rgba(
-  0,
-  0,
-  0,
-  0.5
-); // Shadow color (soft shadows with high contrast)
+); // Panel background (semi-transparent dark gray)
+$shadow-color: rgba(0, 0, 0, 0.6); // Shadow color (soft, dark shadow)

@@ -630,10 +630,10 @@ class KeyboardLayoutWidget(Box):
 
         layout = main_kb["active_keymap"]
 
-        if self.config["enable_tooltip"]:
+        if self.config["tooltip"]:
             self.set_tooltip_text(layout)
 
         # Update the label with the used storage if enabled
-        if self.config["enable_label"]:
+        if self.config["label"]:
             self.kb_label.set_label(f"󰌌 {KBLAYOUT_MAP[layout]}")
             self.kb_label.show()

@@ -57,7 +57,7 @@ class Battery(Box):
         self.children = (self.battery_icon, self.battery_label)
 
         # Update the label with the battery percentage if enabled
-        if self.config["enable_label"]:
+        if self.config["label"]:
             self.battery_label.show()
 
             ## Hide the label when the battery is full
@@ -68,7 +68,7 @@ class Battery(Box):
                 self.battery_label.hide()
 
         # Update the tooltip with the battery status details if enabled
-        if self.config["enable_tooltip"]:
+        if self.config["tooltip"]:
             if battery_percent == self.full_battery_level:
                 self.set_tooltip_text("Full")
             elif is_charging and battery_percent < self.full_battery_level:
