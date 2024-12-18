@@ -4,7 +4,7 @@
   },
   "layout": {
     "left_section": ["workspaces", "window_title"],
-    "middle_section": ["datetime"],
+    "middle_section": ["notification", "datetime"],
     "right_section": [
       "hypr_sunset",
       "updates",
@@ -16,6 +16,11 @@
       "power",
       "theme_switcher"
     ]
+  },
+  "notification": {
+    "icon": "",
+    "icon_size": "12px",
+    "tooltip": true
   },
   "hypr_sunset": {
     "temperature": "2800k",

@@ -21,6 +21,7 @@ DEFAULT_CONFIG = {
             "power",
         ],
     },
+    "notification": {"icon_size": "12px", "tooltip": True},
     "hypr_sunset": {
         "temperature": "2800k",
         "enabled_icon": "󱩌",
@@ -111,6 +112,9 @@ DEFAULT_CONFIG = {
     "mpris": {
         "length": 30,
         "tooltip": True,
+    },
+    "notification": {
+        "icon": "",
     },
     "language": {"length": 3},
     "task_bar": {"icon_size": 22},
@@ -263,6 +267,13 @@ class Keyboard(TypedDict, BaseConfig):
     icon: str
 
 
+class Notification(TypedDict, BaseConfig):
+    """Configuration for keyboard"""
+
+    icon: str
+    icon_size: str
+
+
 class ThemeSwitcher(TypedDict, BaseConfig):
     """Configuration for keyboard"""
 
@@ -301,6 +312,7 @@ class BarConfig(TypedDict):
     theme_switcher: ThemeSwitcher
     layout: Layout
     memory: Memory
+    notifications: Notification
     mpris: Mpris
     storage: Storage
     system_tray: SystemTray

@@ -27,6 +27,7 @@ from widgets import (
     WindowTitleWidget,
     WorkSpacesWidget,
 )
+from widgets.notification import NotificationWidget
 
 
 class StatusBar(Window):
@@ -49,6 +50,7 @@ class StatusBar(Window):
             # Workspaces: Displays the list of workspaces or desktops
             "workspaces": WorkSpacesWidget,
             "system_tray": SystemTray,
+            "notification": NotificationWidget,
             "task_bar": TaskBarWidget,
             "calendar": CalendarWidget,
             "bluetooth": BlueToothWidget,
