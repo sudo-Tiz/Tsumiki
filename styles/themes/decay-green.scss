@@ -1,8 +1,8 @@
 /* ---------------------------- */
 /* Base Colors                  */
 /* ---------------------------- */
-$background: #1A1D22; // Main background (dark graphite gray)
-$background-alt: #2A2F35; // Secondary background (lighter graphite gray)
+$background: #1a1d22; // Main background (dark graphite gray)
+$background-alt: #2a2f35; // Secondary background (lighter graphite gray)
 $background-dark: #101419; // Darkest background (charcoal gray)
 
 /* Text Colors */
@@ -34,5 +34,9 @@ $text-muted-light: #717b7d; // Light-muted text for hints (light gray)
 $text-muted-dark: #1e252a; // Dark-muted text (very dark gray)
 
 /* Additional UI Elements */
-$bar-background:rgb(30, 34, 39); // Panel background (semi-transparent dark graphite gray)
+$bar-background: rgb(
+  30,
+  34,
+  39
+); // Panel background (semi-transparent dark graphite gray)
 $shadow-color: rgba(0, 0, 0, 0.5); // Shadow color (soft dark gray shadows)
