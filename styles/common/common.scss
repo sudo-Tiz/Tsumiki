@@ -30,6 +30,10 @@ label {
 
 .panel-button {
   padding: 0 1.25em;
+
+  label {
+    color: theme.$text-main;
+  }
 }
 
 .panel-text {
