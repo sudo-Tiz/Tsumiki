@@ -18,6 +18,7 @@ from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow
 from gi.repository import GdkPixbuf, GLib, GObject
 
+import utils.config as config
 import utils.functions as helpers
 import utils.icons as icons
 from shared import AnimatedCircularProgressBar, CustomImage
@@ -311,6 +312,8 @@ class NotificationPopup(WaylandWindow):
         )
 
     def on_new_notification(self, fabric_notif, id):
-        new_box = NotificationRevealer(fabric_notif.get_notification_from_id(id))
+        notification = fabric_notif.get_notification_from_id(id)
+        new_box = NotificationRevealer(notification)
+        config.notif_cache_service.cache_notification(notification)
         self.notifications.add(new_box)
         new_box.set_reveal_child(True)

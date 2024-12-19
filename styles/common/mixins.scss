@@ -33,7 +33,6 @@
   }
 }
 
-
 @mixin floating-widget {
   margin: max(12pt, 8px);
   border: 1px solid theme.$surface-disabled; // TODO: change this color

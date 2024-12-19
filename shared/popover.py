@@ -1,6 +1,7 @@
+import contextlib
+
 import gi
 from fabric.widgets.wayland import WaylandWindow
-import contextlib
 from gi.repository import Gtk, GtkLayerShell
 
 gi.require_version("GtkLayerShell", "0.1")

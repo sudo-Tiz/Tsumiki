@@ -1,17 +1,14 @@
+import gi
 from fabric.widgets.box import Box
-from fabric.widgets.label import Label
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
+from fabric.widgets.label import Label
 
 from shared.popover import PopOverWindow
 from utils.icons import icons
 from utils.widget_config import BarConfig
 
-import gi
-
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
-
 
 
 class DateNotificationMenu(Box):
@@ -20,7 +17,7 @@ class DateNotificationMenu(Box):
     def __init__(self):
         super().__init__(name="notification-menu")
 
-        notif_header =Box(
+        notif_header = Box(
             style_classes="header",
             orientation="h",
             children=(Label(label="Notifications"),),
