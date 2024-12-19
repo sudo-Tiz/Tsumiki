@@ -9,6 +9,7 @@ gi.require_version("Gtk", "3.0")
 
 class PopOverWindow(WaylandWindow):
     """A popover window to show the content."""
+
     def __init__(
         self,
         parent: WaylandWindow,

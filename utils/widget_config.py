@@ -21,7 +21,11 @@ DEFAULT_CONFIG = {
             "power",
         ],
     },
-    "notification": {"icon_size": "12px", "tooltip": True,"icon": "",},
+    "notification": {
+        "icon_size": "12px",
+        "tooltip": True,
+        "icon": "",
+    },
     "hypr_sunset": {
         "temperature": "2800k",
         "enabled_icon": "󱩌",
