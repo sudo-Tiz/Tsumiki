@@ -108,7 +108,7 @@ WINDOW_TITLE_MAP = [
 class WindowTitleWidget(Box):
     """a widget that displays the title of the active window."""
 
-    def __init__(self, widget_config: BarConfig, **kwargs):
+    def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(style_classes="panel-box", name="window-box", **kwargs)
 
         # Store the configuration for the window title

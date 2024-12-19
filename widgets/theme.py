@@ -10,7 +10,7 @@ from utils.widget_config import BarConfig
 class ThemeSwitcherWidget(Button):
     """A widget to switch themes."""
 
-    def __init__(self, widget_config: BarConfig, **kwargs):
+    def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(name="theme_switcher", style_classes="panel-button", **kwargs)
 
         self.config = widget_config["theme_switcher"]

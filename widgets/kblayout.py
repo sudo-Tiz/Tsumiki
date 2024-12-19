@@ -598,7 +598,7 @@ KBLAYOUT_MAP = {
 class KeyboardLayoutWidget(Box):
     """A widget to display the current keyboard layout."""
 
-    def __init__(self, widget_config: BarConfig, **kwargs):
+    def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(name="keyboard", style_classes="panel-box", **kwargs)
 
         self.config = widget_config["keyboard"]

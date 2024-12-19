@@ -71,6 +71,7 @@ class WeatherWidget(EventBox):
     def __init__(
         self,
         widget_config: BarConfig,
+        bar,
     ):
         # Initialize the Box with specific name and style
         super().__init__()

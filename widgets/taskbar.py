@@ -27,7 +27,7 @@ class PagerClient(TypedDict):
 class TaskBarWidget(Box):
     """A widget to display the taskbar items."""
 
-    def __init__(self, widget_config: BarConfig, **kwargs):
+    def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(
             orientation="h",
             spacing=7,

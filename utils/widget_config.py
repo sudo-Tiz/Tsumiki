@@ -21,7 +21,7 @@ DEFAULT_CONFIG = {
             "power",
         ],
     },
-    "notification": {"icon_size": "12px", "tooltip": True},
+    "notification": {"icon_size": "12px", "tooltip": True,"icon": "",},
     "hypr_sunset": {
         "temperature": "2800k",
         "enabled_icon": "󱩌",
@@ -112,9 +112,6 @@ DEFAULT_CONFIG = {
     "mpris": {
         "length": 30,
         "tooltip": True,
-    },
-    "notification": {
-        "icon": "",
     },
     "language": {"length": 3},
     "task_bar": {"icon_size": 22},

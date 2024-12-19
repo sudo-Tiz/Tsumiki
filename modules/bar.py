@@ -120,7 +120,7 @@ class StatusBar(Window):
 
         for key in layout:
             layout[key].extend(
-                self.widgets_list[widget](widget_config)
+                self.widgets_list[widget](widget_config, bar=self)
                 for widget in widget_config["layout"][key]
             )
 
