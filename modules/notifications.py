@@ -314,6 +314,6 @@ class NotificationPopup(WaylandWindow):
     def on_new_notification(self, fabric_notif, id):
         notification = fabric_notif.get_notification_from_id(id)
         new_box = NotificationRevealer(notification)
-        config.notif_cache_service.cache_notification(notification)
         self.notifications.add(new_box)
         new_box.set_reveal_child(True)
+        config.notif_cache_service.cache_notification(notification)
