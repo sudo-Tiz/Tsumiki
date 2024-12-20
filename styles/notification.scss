@@ -118,19 +118,26 @@ $hover-tranistion: background 0.15s ease-in-out;
 
 #notification-menu {
   @include mixins.floating-widget;
-  font-weight: bold;
 
   .header {
-    min-width: 440px;
+    min-width: 360px;
     margin-bottom: 12pt;
     margin-right: 2pt;
 
     label {
-      margin-right: 5px;
+      margin-right: 4px;
+      font-size: 11px;
+      font-weight: 600;
     }
 
-    #clear-btn:hover {
-      -gtk-icon-effect: highlight;
+    .header-action{
+      border: 2px solid theme.$surface-disabled;
+      background-color: theme.$background;
+      padding: 2px;
+      border-radius: 10px;
+
     }
+
+ 
   }
 }

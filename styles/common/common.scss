@@ -187,16 +187,16 @@ radio:indeterminate:active {
 switch {
   transition: all 75ms cubic-bezier(0, 0, 0.2, 1);
   margin: 4px 0;
-  border: none;
+  border: 1px solid theme.$text-main;
   border-radius: 9999px;
-  background-color: theme.$background-alt;
+  background-color: theme.$background;
   background-clip: padding-box;
   font-size: 0;
   color: transparent;
 }
 
 switch:checked {
-  background-color: theme.$background-dark;
+  background-color: theme.$background-alt;
 }
 
 switch:disabled {
@@ -205,8 +205,8 @@ switch:disabled {
 
 switch slider {
   transition: all 75ms cubic-bezier(0, 0, 0.2, 1);
-  min-width: 18px;
-  min-height: 18px;
+  min-width: 12px;
+  min-height: 12px;
   margin: 3px;
   border-radius: 9999px;
   outline: none;

@@ -3,8 +3,10 @@ from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
+from fabric.widgets.eventbox import EventBox
 
 from shared.popover import PopOverWindow
+from shared.switch import Switch
 from utils.icons import icons
 from utils.widget_config import BarConfig
 
@@ -20,21 +22,24 @@ class DateNotificationMenu(Box):
         notif_header = Box(
             style_classes="header",
             orientation="h",
-            children=(Label(label="Notifications"),),
+            children=(
+                Label("Do Not Disturb"),
+                Switch(
+                    name="notification-switch",
+                    active=True,
+                ),
+            ),
         )
 
         notif_header.pack_end(
-            Box(
-                style_classes="header-actions",
-                children=(
-                    Label(label="Clear"),
-                    Button(
-                        name="clear-btn",
-                        image=Image(
-                            icon_name=icons["notifications"]["noisy"], icon_size=14
-                        ),
+            EventBox(
+                child=Box(
+                    style_classes="header-action",
+                    children=(
+                        Label("Clear"),
+                        Image(icon_name=icons["notifications"]["noisy"], icon_size=13),
                     ),
-                ),
+                )
             ),
             False,
             False,
