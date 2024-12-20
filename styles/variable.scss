@@ -1,0 +1,22 @@
+@use "sass:color";
+@use "theme.scss";
+
+$radius: 10px;
+$padding: 7pt;
+$spacing: 12pt;
+
+$border-width: 1px;
+$border-color: theme.$surface-disabled;
+$border: $border-width solid $border-color;
+
+$text-shadow: 2pt 2pt 2pt theme.$shadow-color;
+$box-shadow: 2pt 2pt 2pt 0 theme.$shadow-color;
+
+$popover-padding: $padding * 1.6;
+$popover-radius: 0;
+
+@if $radius !=0 {
+    $popover-radius: $radius + $popover-padding;
+}
+
+$popover-border-color: color.adjust(theme.$surface-disabled, $alpha: -0.95);

@@ -8,7 +8,7 @@ from gi.repository import Gtk
 gi.require_version("Gtk", "3.0")
 
 
-class Switch(Gtk.Switch, Widget):
+class GtkCalendar(Gtk.Calendar, Widget):
     """A switch widget."""
 
     def __init__(
@@ -30,7 +30,7 @@ class Switch(Gtk.Switch, Widget):
         style_classes: Iterable[str] | str | None = None,
         **kwargs,
     ):
-        Gtk.Switch.__init__(self)  # type: ignore
+        Gtk.Calendar.__init__(self)  # type: ignore
         Widget.__init__(
             self,
             name,

@@ -1,0 +1,104 @@
+@use "sass:color";
+@use "theme.scss";
+@use "common/mixins.scss";
+@use "variable.scss";
+
+/************** DATE MENU **************/
+
+#datemenu {
+    @include mixins.floating-widget;
+    @include mixins.spacing;
+    padding: 10px;
+  
+  
+    #notification-menu {
+      .header {
+        margin-bottom: variable.$spacing;
+        margin-right: variable.$spacing;
+  
+        > label {
+          margin-left: variable.$radius * 0.5;
+        }
+  
+        label {
+          margin-right: 4px;
+          font-size: 11px;
+          font-weight: 600;
+        }
+  
+        .header-action {
+          border: 2px solid theme.$surface-disabled;
+          background-color: theme.$background;
+          padding: 2px;
+          border-radius: variable.$radius;
+        }
+      }
+  
+      .body {
+      }
+    }
+  
+    .date-column {
+      .clock-box {
+        padding: variable.$padding;
+  
+        .clock {
+          font-size: 4.5em;
+        }
+  
+        .uptime {
+          color: color.adjust(theme.$text-main, $alpha: -0.2);
+        }
+      }
+  
+      .calendar {
+        @include mixins.widget;
+  
+        padding: variable.$padding * 2 variable.$padding * 2 0;
+  
+        calendar {
+          all: unset;
+  
+          &.button {
+            all: unset;
+            transition: 200ms;
+            border-radius: variable.$radius;
+            color: theme.$text-main;
+            background-color: transparent;
+            background-image: none;
+            box-shadow: none;
+          }
+  
+          &:selected {
+            box-shadow:
+              inset 0 -7px 0 0 color.adjust(theme.$ws-active, $alpha: -0.5),
+              inset 0 0 0 1px theme.$ws-active;
+            border-radius: variable.$radius * 0.6;
+          }
+  
+          &.header {
+            background-color: transparent;
+            border: none;
+            color: color.adjust(theme.$text-main, $alpha: -0.5);
+          }
+  
+          &.highlight {
+            background-color: transparent;
+            color: color.adjust(theme.$text-main, $alpha: -0.5);
+          }
+
+          &:hover {
+            color: red;
+          }
+  
+          &:indeterminate {
+            color: color.adjust(theme.$text-main, $alpha: -0.9);
+          }
+  
+          font-size: 0.98em;
+          padding: 0.28em;
+        }
+      }
+    }
+  }
+  

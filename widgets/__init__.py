@@ -2,7 +2,6 @@
 from .battery import *
 from .bluetooth import *
 from .brightness import *
-from .calendar import *
 from .clickcounter import *
 from .dashboard import *
 from .datetime import *

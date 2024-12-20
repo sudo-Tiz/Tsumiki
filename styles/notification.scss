@@ -1,6 +1,7 @@
 @use "sass:color";
 @use "theme.scss";
 @use "common/mixins.scss";
+@use "variable.scss";
 
 $hover-tranistion: background 0.15s ease-in-out;
 
@@ -15,15 +16,11 @@ $hover-tranistion: background 0.15s ease-in-out;
   border-radius: 1rem;
   background: theme.$background-alt;
   color: theme.$text-main;
-  border: 1px solid theme.$surface-disabled;
+  border: variable.$border-width solid theme.$surface-disabled;
 
   .notification-body {
     padding: 0.25em;
   }
-}
-
-.hover {
-  border: 2px solid theme.$surface-disabled;
 }
 
 .notification-header {
@@ -113,34 +110,3 @@ $hover-tranistion: background 0.15s ease-in-out;
 .critical{
 
 } */
-
-/************** NOTIFICATION MENU **************/
-
-#notification-menu {
-  @include mixins.floating-widget;
-  padding: 10px;
-
-  .header {
-    min-width: 360px;
-    margin-bottom: 12pt;
-    margin-right: 2pt;
-
-    label {
-      margin-right: 4px;
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .header-action {
-      border: 2px solid theme.$surface-disabled;
-      background-color: theme.$background;
-      padding: 2px;
-      border-radius: 10px;
-    }
-  }
-
-  .body {
-    background-color: red;
-    min-height: 10rem;
-  }
-}

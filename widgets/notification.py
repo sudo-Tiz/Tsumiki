@@ -1,24 +1,31 @@
-import gi
+import time
+
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
-from fabric.widgets.scrolledwindow import ScrolledWindow
+from gi.repository import GLib
 
+from shared.calendar import GtkCalendar
 from shared.popover import PopOverWindow
 from shared.switch import Switch
 from utils.icons import icons
 from utils.widget_config import BarConfig
-
-gi.require_version("Gtk", "3.0")
 
 
 class DateNotificationMenu(Box):
     """A menu to display the weather information."""
 
     def __init__(self):
-        super().__init__(name="notification-menu", orientation="v")
+        super().__init__(name="datemenu", orientation="h")
+
+        GLib.timeout_add(1000, self.update_clock)
+
+        self.clock_label = Label(
+            "10:00",
+            style_classes="clock",
+        )
 
         notif_header = Box(
             style_classes="header",
@@ -32,10 +39,29 @@ class DateNotificationMenu(Box):
             ),
         )
 
-        notif_body = ScrolledWindow(
-            style_classes="body",
-            child=Box(
-                orientation="v",
+        notification_colum = Box(
+            style_classes="notification-column",
+            orientation="v",
+            children=(notif_header,),
+        )
+
+        date_column = Box(
+            style_classes="date-column",
+            orientation="v",
+            children=(
+                Box(
+                    style_classes="clock-box",
+                    orientation="v",
+                    children=(self.clock_label),
+                ),
+                Box(
+                    style_classes="calendar",
+                    children=(
+                        GtkCalendar(
+                            h_expand=True,
+                        ),
+                    ),
+                ),
             ),
         )
 
@@ -53,8 +79,13 @@ class DateNotificationMenu(Box):
             False,
             0,
         )
-        self.add(notif_header)
-        self.add(notif_body)
+
+        self.add(notification_colum)
+        self.add(date_column)
+
+    def update_clock(self):
+        self.clock_label.set_text(time.strftime("%H:%M"))
+        return True
 
 
 class NotificationWidget(Box):
