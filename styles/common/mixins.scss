@@ -42,3 +42,16 @@
   padding: 20px;
   box-shadow: 0 0 1px 0 theme.$shadow-color;
 }
+
+@mixin switch {
+  slider {
+    background-color: theme.$background-dark;
+    border-radius: 100px;
+    min-width: 24px;
+    min-height: 24px;
+  }
+
+  image {
+    color: transparent;
+  }
+}
