@@ -3,9 +3,7 @@ import os
 from typing import List
 
 from fabric.core.service import Service
-from fabric.notifications import (
-    Notification,
-)
+from fabric.notifications import Notification
 from gi.repository import GLib
 
 CACHE_DIR = GLib.get_user_cache_dir()

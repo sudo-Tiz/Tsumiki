@@ -118,6 +118,7 @@ $hover-tranistion: background 0.15s ease-in-out;
 
 #notification-menu {
   @include mixins.floating-widget;
+  padding: 10px;
 
   .header {
     min-width: 360px;
@@ -130,14 +131,16 @@ $hover-tranistion: background 0.15s ease-in-out;
       font-weight: 600;
     }
 
-    .header-action{
+    .header-action {
       border: 2px solid theme.$surface-disabled;
       background-color: theme.$background;
       padding: 2px;
       border-radius: 10px;
-
     }
+  }
 
- 
+  .body {
+    background-color: red;
+    min-height: 10rem;
   }
 }

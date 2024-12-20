@@ -1,9 +1,10 @@
 import gi
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
+from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
-from fabric.widgets.eventbox import EventBox
+from fabric.widgets.scrolledwindow import ScrolledWindow
 
 from shared.popover import PopOverWindow
 from shared.switch import Switch
@@ -17,7 +18,7 @@ class DateNotificationMenu(Box):
     """A menu to display the weather information."""
 
     def __init__(self):
-        super().__init__(name="notification-menu")
+        super().__init__(name="notification-menu", orientation="v")
 
         notif_header = Box(
             style_classes="header",
@@ -28,6 +29,13 @@ class DateNotificationMenu(Box):
                     name="notification-switch",
                     active=True,
                 ),
+            ),
+        )
+
+        notif_body = ScrolledWindow(
+            style_classes="body",
+            child=Box(
+                orientation="v",
             ),
         )
 
@@ -46,6 +54,7 @@ class DateNotificationMenu(Box):
             0,
         )
         self.add(notif_header)
+        self.add(notif_body)
 
 
 class NotificationWidget(Box):
@@ -60,14 +69,13 @@ class NotificationWidget(Box):
         popup = PopOverWindow(
             parent=bar,
             name="popup",
-            margin="10px 10px 10px 10px",
-            orientation="v",
             child=(DateNotificationMenu()),
             visible=False,
             all_visible=False,
         )
 
         btn = Button(
+            style_classes="notification-button",
             image=Image(icon_name=icons["notifications"]["noisy"], icon_size=14),
             on_clicked=lambda _: popup.set_visible(not popup.get_visible()),
         )
