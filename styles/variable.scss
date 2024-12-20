@@ -16,7 +16,7 @@ $popover-padding: $padding * 1.6;
 $popover-radius: 0;
 
 @if $radius !=0 {
-    $popover-radius: $radius + $popover-padding;
+  $popover-radius: $radius + $popover-padding;
 }
 
 $popover-border-color: color.adjust(theme.$surface-disabled, $alpha: -0.95);

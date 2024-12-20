@@ -26,7 +26,6 @@ from widgets import (
     WindowTitleWidget,
     WorkSpacesWidget,
 )
-from widgets.notification import NotificationWidget
 
 
 class StatusBar(Window):
@@ -49,7 +48,6 @@ class StatusBar(Window):
             # Workspaces: Displays the list of workspaces or desktops
             "workspaces": WorkSpacesWidget,
             "system_tray": SystemTray,
-            "notification": NotificationWidget,
             "task_bar": TaskBarWidget,
             "bluetooth": BlueToothWidget,
             "keyboard": KeyboardLayoutWidget,
@@ -60,7 +58,7 @@ class StatusBar(Window):
             # LanguageBox: Displays the current language selection
             "language": LanguageWidget,
             # DateTime: Displays the current date and time
-            "datetime": DateTimeWidget,
+            "date_time": DateTimeWidget,
             "volume": VolumeWidget,
             # HyprSunset: Provides information about the sunset time based on location
             "hypr_sunset": HyprSunsetWidget,

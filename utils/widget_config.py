@@ -2,6 +2,10 @@ from typing import List, TypedDict
 
 from utils.functions import read_config
 
+
+#TODO: convert to typed dict
+
+
 # Default poll interval for widgets that need not be updated frequently
 high_poll_interval = 1000 * 60 * 10  # 10 minutes
 
@@ -12,7 +16,7 @@ DEFAULT_CONFIG = {
     },
     "layout": {
         "left_section": ["workspaces", "window_title"],
-        "middle_section": ["datetime"],
+        "middle_section": ["date_time"],
         "right_section": [
             "updates",
             "battery",
@@ -268,7 +272,7 @@ class Keyboard(TypedDict, BaseConfig):
     icon: str
 
 
-class Notification(TypedDict, BaseConfig):
+class DateTimeMenu(TypedDict, BaseConfig):
     """Configuration for keyboard"""
 
     icon: str
@@ -313,7 +317,7 @@ class BarConfig(TypedDict):
     theme_switcher: ThemeSwitcher
     layout: Layout
     memory: Memory
-    notifications: Notification
+    date_time: DateTimeMenu
     mpris: Mpris
     storage: Storage
     system_tray: SystemTray
