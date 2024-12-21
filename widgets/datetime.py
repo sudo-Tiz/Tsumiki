@@ -1,6 +1,7 @@
 import time
 
 from fabric.widgets.box import Box
+from fabric.widgets.button import Button
 from fabric.widgets.datetime import DateTime
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
@@ -12,6 +13,7 @@ from shared.calendar import GtkCalendar
 from shared.popover import PopOverWindow
 from shared.separator import GtkSeparator
 from shared.switch import Switch
+from utils.functions import uptime
 from utils.icons import icons
 from utils.widget_config import BarConfig
 
@@ -22,13 +24,16 @@ class DateNotificationMenu(Box):
     def __init__(self):
         super().__init__(name="datemenu", orientation="h")
 
-        GLib.timeout_add(1000, self.update_clock)
-
         self.clock_label = Label(
-            "10:00",
+            label=time.strftime("%H:%M"),
             style_classes="clock",
         )
 
+        self.uptime = Label(style_classes="uptime", label=uptime())
+
+        GLib.timeout_add(1000, self.update_lables)
+
+        # Placeholder for when there are no notifications
         placeholder = Box(
             style_classes="placeholder",
             orientation="v",
@@ -47,6 +52,7 @@ class DateNotificationMenu(Box):
             ),
         )
 
+        # Header for the notification column
         notif_header = Box(
             style_classes="header",
             orientation="h",
@@ -59,6 +65,23 @@ class DateNotificationMenu(Box):
             ),
         )
 
+        clear_button = Button(
+            child=Box(
+                children=(
+                    Label("Clear"),
+                    Image(icon_name=icons["notifications"]["noisy"], icon_size=13),
+                )
+            )
+        )
+
+        notif_header.pack_end(
+            clear_button,
+            False,
+            False,
+            0,
+        )
+
+        # Notification body column
         notification_colum = Box(
             name="notification-column",
             orientation="v",
@@ -73,6 +96,7 @@ class DateNotificationMenu(Box):
             ),
         )
 
+        # Date and time column
         date_column = Box(
             style_classes="date-column",
             orientation="v",
@@ -80,7 +104,7 @@ class DateNotificationMenu(Box):
                 Box(
                     style_classes="clock-box",
                     orientation="v",
-                    children=(self.clock_label),
+                    children=(self.clock_label, self.uptime),
                 ),
                 Box(
                     style_classes="calendar",
@@ -93,29 +117,15 @@ class DateNotificationMenu(Box):
             ),
         )
 
-        notif_header.pack_end(
-            EventBox(
-                child=Box(
-                    style_classes="header-action",
-                    children=(
-                        Label("Clear"),
-                        Image(icon_name=icons["notifications"]["noisy"], icon_size=13),
-                    ),
-                )
-            ),
-            False,
-            False,
-            0,
-        )
-
         self.children = (
             notification_colum,
             GtkSeparator(),
             date_column,
         )
 
-    def update_clock(self):
+    def update_lables(self):
         self.clock_label.set_text(time.strftime("%H:%M"))
+        self.uptime.set_text(uptime())
         return True
 
 

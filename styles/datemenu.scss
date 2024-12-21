@@ -13,20 +13,6 @@
   #notification-column {
     min-width: 350px;
 
-    .notification-list {
-      margin-right: variable.$spacing;
-    }
-
-    .placeholder {
-      image {
-        font-size: 7em;
-      }
-
-      label {
-        font-size: 1em;
-      }
-    }
-
     .header {
       margin-bottom: variable.$spacing;
       margin-right: variable.$spacing;
@@ -47,9 +33,26 @@
         padding: 2px;
         border-radius: variable.$radius;
       }
+
+      button {
+        padding: variable.$padding * 0.7 variable.$padding;
+      }
     }
 
     .body {
+      .notification-list {
+        margin-right: variable.$spacing;
+      }
+
+      .placeholder {
+        image {
+          font-size: 7em;
+        }
+
+        label {
+          font-size: 1em;
+        }
+      }
     }
   }
 
