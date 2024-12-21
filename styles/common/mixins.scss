@@ -40,7 +40,6 @@
 
 @mixin floating-widget {
   box-shadow: 0 0 1px 0 theme.$shadow-color;
-
   margin: max(variable.$spacing, 8px);
   border: variable.$border-width solid variable.$popover-border-color;
   background-color: theme.$background-dark;

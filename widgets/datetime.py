@@ -71,9 +71,13 @@ class DateNotificationMenu(Box):
             child=Box(
                 children=(
                     Label("Clear"),
-                    Image(icon_name=icons["notifications"]["noisy"], icon_size=13, name="clear-icon"),
+                    Image(
+                        icon_name=icons["notifications"]["noisy"],
+                        icon_size=13,
+                        name="clear-icon",
+                    ),
                 )
-            )
+            ),
         )
 
         notif_header.pack_end(

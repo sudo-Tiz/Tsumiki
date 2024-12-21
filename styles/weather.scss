@@ -1,32 +1,54 @@
 @use "theme.scss";
+@use "common/mixins.scss";
 
-#weather-menu {
-  min-width: 3em;
-  background-color: theme.$background-dark;
+$base_padding: 6px; 
+$base_margin: 4px;   
 
-  border: 2px solid green;
+  .weather-box {
+    //spacing: $base_padding;
+    @include mixins.floating-widget;
 
-  #weather-container {
-    padding: 2em;
-    background-color: theme.$background;
-    #start-container {
-      margin: 0.2em;
-      label {
-        color: aqua;
+
+    // header
+    .weather-header-box {
+     // spacing: $base_padding;
+
+      .weather-header {
+        font-weight: 700;
+        font-size: 11pt;
+        color: white;
+
+         // change style when no location is configured
+        &.no-location {
+          color: wheat;
+        }
+
+        &.location {
+          font-weight: normal;
+        }
       }
     }
 
-    #center-container {
-      margin: 0.2em 2em;
-      .temperature {
-        font-size: 2rem;
+    // weather items
+    .weather-grid {
+      // spacing-rows: $base_padding;
+      // spacing-columns: $base_padding * 2;
+
+      .weather-forecast-time {
+        font-weight: 400;
+        font-size: 9pt;
+        padding-top: $base_padding;
+        padding-bottom: $base_padding;
+      }
+      .weather-forecast-icon {
+        //icon-size: 64px;
+        margin-bottom: $base_margin;
+      }
+
+      .weather-forecast-temp {
+        font-feature-settings: "tnum";
         font-weight: bold;
-        padding: 0.2em;
       }
     }
-
-    #end-container {
-      margin: 0.2em 2em;
     }
-  }
-}
+    

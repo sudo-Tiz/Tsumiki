@@ -99,6 +99,12 @@ DEFAULT_CONFIG = {
         "label": True,
         "tooltip": True,
     },
+    "weather": {
+        "location": "kathmandu",
+        "label": True,
+        "tooltip": True,
+        "interval": high_poll_interval,
+    },
     "volume": {
         "icon_size": "14px",
         "label": True,
@@ -129,207 +135,101 @@ DEFAULT_CONFIG = {
 
 # Common configuration fields that will be reused
 BaseConfig = TypedDict(
-    'BaseConfig', {
-        'icon_size': str,
-        'label': bool,
-        'tooltip': bool,
-        'interval': int
-    }
+    "BaseConfig", {"icon_size": str, "label": bool, "tooltip": bool, "interval": int}
 )
 
 # Layout configuration
 Layout = TypedDict(
-    'Layout', {
-        'left': List[str],
-        'middle': List[str],
-        'right': List[str]
-    }
+    "Layout", {"left": List[str], "middle": List[str], "right": List[str]}
 )
 
 # Power button configuration
-PowerButton = TypedDict(
-    'PowerButton', {
-        'icon': str,
-        'icon_size': int,
-        'tooltip': bool
-    }
-)
+PowerButton = TypedDict("PowerButton", {"icon": str, "icon_size": int, "tooltip": bool})
 
 # HyprSunset configuration
 HyprSunset = TypedDict(
-    'HyprSunset', {
+    "HyprSunset",
+    {
         **BaseConfig.__annotations__,
-        'temperature': str,
-        'enabled_icon': str,
-        'disabled_icon': str
-    }
+        "temperature": str,
+        "enabled_icon": str,
+        "disabled_icon": str,
+    },
 )
 
 # TaskBar configuration
-TaskBar = TypedDict(
-    'TaskBar', {
-        'icon_size': int
-    }
-)
+TaskBar = TypedDict("TaskBar", {"icon_size": int})
 
 # SystemTray configuration
-SystemTray = TypedDict(
-    'SystemTray', {
-        'icon_size': int,
-        'ignore': List[str]
-    }
-)
+SystemTray = TypedDict("SystemTray", {"icon_size": int, "ignore": List[str]})
 
 # HyprIdle configuration
 HyprIdle = TypedDict(
-    'HyprIdle', {
-        **BaseConfig.__annotations__,
-        'enabled_icon': str,
-        'disabled_icon': str
-    }
+    "HyprIdle",
+    {**BaseConfig.__annotations__, "enabled_icon": str, "disabled_icon": str},
 )
 
 # Battery configuration
 Battery = TypedDict(
-    'Battery', {
-        'label': bool,
-        'tooltip': bool,
-        'hide_label_when_full': bool,
-        'interval': int
-    }
+    "Battery",
+    {"label": bool, "tooltip": bool, "hide_label_when_full": bool, "interval": int},
 )
 
 # Theme configuration
-Theme = TypedDict(
-    'Theme', {
-        'name': str
-    }
-)
+Theme = TypedDict("Theme", {"name": str})
 
 # Cpu configuration
-Cpu = TypedDict(
-    'Cpu', {
-        **BaseConfig.__annotations__,
-        'icon': str
-    }
-)
+Cpu = TypedDict("Cpu", {**BaseConfig.__annotations__, "icon": str})
 
 # Mpris configuration
-Mpris = TypedDict(
-    'Mpris', {
-        **BaseConfig.__annotations__,
-        'length': int
-    }
-)
+Mpris = TypedDict("Mpris", {**BaseConfig.__annotations__, "length": int})
 
 # Memory configuration
-Memory = TypedDict(
-    'Memory', {
-        **BaseConfig.__annotations__,
-        'icon': str
-    }
-)
+Memory = TypedDict("Memory", {**BaseConfig.__annotations__, "icon": str})
 
 # Storage configuration
-Storage = TypedDict(
-    'Storage', {
-        **BaseConfig.__annotations__,
-        'icon': str
-    }
-)
+Storage = TypedDict("Storage", {**BaseConfig.__annotations__, "icon": str})
 
 # Workspaces configuration
 Workspaces = TypedDict(
-    'Workspaces', {
-        'count': int,
-        'occupied': bool,
-        'ignored': List[int]
-    }
+    "Workspaces", {"count": int, "occupied": bool, "ignored": List[int]}
 )
 
 # WindowTitle configuration
 WindowTitle = TypedDict(
-    'WindowTitle', {
-        'length': int,
-        'enable_icon': bool,
-        'truncation': bool,
-        'truncation_size': int
-    }
+    "WindowTitle",
+    {"length": int, "enable_icon": bool, "truncation": bool, "truncation_size": int},
 )
 
 # Updates configuration
-Updates = TypedDict(
-    'Updates', {
-        **BaseConfig.__annotations__,
-        'os': str,
-        'icon': str
-    }
-)
+Updates = TypedDict("Updates", {**BaseConfig.__annotations__, "os": str, "icon": str})
 
 # Bluetooth configuration
-BlueTooth = TypedDict(
-    'BlueTooth', {
-        'label': bool,
-        'tooltip': bool,
-        'icon_size': int
-    }
-)
+BlueTooth = TypedDict("BlueTooth", {"label": bool, "tooltip": bool, "icon_size": int})
 
 # Weather configuration
 Weather = TypedDict(
-    'Weather', {
-        'location': str,
-        'interval': int,
-        'tooltip': bool,
-        'label': bool
-    }
+    "Weather", {"location": str, "interval": int, "tooltip": bool, "label": bool}
 )
 
 # Keyboard configuration
-Keyboard = TypedDict(
-    'Keyboard', {
-        **BaseConfig.__annotations__,
-        'icon': str
-    }
-)
+Keyboard = TypedDict("Keyboard", {**BaseConfig.__annotations__, "icon": str})
 
 # DateTimeMenu configuration
-DateTimeMenu = TypedDict(
-    'DateTimeMenu', {
-        'format': str
-    }
-)
+DateTimeMenu = TypedDict("DateTimeMenu", {"format": str})
 
 # ThemeSwitcher configuration
-ThemeSwitcher = TypedDict(
-    'ThemeSwitcher', {
-        **BaseConfig.__annotations__,
-        'icon': str
-    }
-)
+ThemeSwitcher = TypedDict("ThemeSwitcher", {**BaseConfig.__annotations__, "icon": str})
 
 # Language configuration
-Language = TypedDict(
-    'Language', {
-        'length': int
-    }
-)
+Language = TypedDict("Language", {"length": int})
 
 # Volume configuration
-Volume = TypedDict(
-    'Volume', {
-        **BaseConfig.__annotations__,
-        'step_size': int
-    }
-)
+Volume = TypedDict("Volume", {**BaseConfig.__annotations__, "step_size": int})
 
 # Brightness configuration
-Brightness = TypedDict(
-    'Brightness', {
-        **BaseConfig.__annotations__,
-        'step_size': int
-    }
-)
+Brightness = TypedDict("Brightness", {**BaseConfig.__annotations__, "step_size": int})
+
 
 class BarConfig(TypedDict):
     """Main configuration that includes all other configurations"""
