@@ -24,11 +24,6 @@ DEFAULT_CONFIG = {
             "power",
         ],
     },
-    "notification": {
-        "icon_size": "12px",
-        "tooltip": True,
-        "icon": "",
-    },
     "hypr_sunset": {
         "temperature": "2800k",
         "enabled_icon": "󱩌",
@@ -51,6 +46,9 @@ DEFAULT_CONFIG = {
         "tooltip": True,
         "interval": 2000,
         "hide_label_when_full": True,
+    },
+    "date_time": {
+        "format": "%b %d %H:%M",
     },
     "cpu": {
         "icon": "",
@@ -271,11 +269,10 @@ class Keyboard(TypedDict, BaseConfig):
     icon: str
 
 
-class DateTimeMenu(TypedDict, BaseConfig):
+class DateTimeMenu(TypedDict):
     """Configuration for keyboard"""
 
-    icon: str
-    icon_size: str
+    format: str
 
 
 class ThemeSwitcher(TypedDict, BaseConfig):

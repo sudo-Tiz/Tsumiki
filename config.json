@@ -17,11 +17,6 @@
       "theme_switcher"
     ]
   },
-  "notification": {
-    "icon": "",
-    "icon_size": "12px",
-    "tooltip": true
-  },
   "hypr_sunset": {
     "temperature": "2800k",
     "enabled_icon": "󱩌",
@@ -125,5 +120,8 @@
     "icon": "󰌌",
     "icon_size": "14px",
     "silent": false
+  },
+  "date_time": {
+    "format": "%b %d %H:%M"
   }
 }

@@ -3,7 +3,6 @@ import time
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.datetime import DateTime
-from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
@@ -129,12 +128,12 @@ class DateNotificationMenu(Box):
         return True
 
 
-class DateTimeWidget(EventBox):
+class DateTimeWidget(Box):
     """A widget to power off the system."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(name="date-time-button", **kwargs)
-        self.config = widget_config["notification"]
+        super().__init__(name="date-time-button", style_classes="panel-box", **kwargs)
+        self.config = widget_config["date_time"]
         popup = PopOverWindow(
             parent=bar,
             name="popup",
@@ -143,20 +142,9 @@ class DateTimeWidget(EventBox):
             all_visible=False,
         )
 
-        self.connect(
-            "button-press-event", lambda *_: popup.set_visible(not popup.get_visible())
-        )
-
         popup.set_pointing_to(self)
 
-        self.children = Box(
-            style_classes="panel-box",
-            children=(
-                Image(
-                    icon_name=icons["notifications"]["noisy"],
-                    icon_size=14,
-                    style="margin-right: 5px;",
-                ),
-                DateTime("%H:%M"),
-            ),
+        self.children = DateTime(
+            self.config["format"],
+            on_clicked=lambda *_: popup.set_visible(not popup.get_visible()),
         )
