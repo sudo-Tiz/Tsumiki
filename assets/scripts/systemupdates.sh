@@ -113,20 +113,48 @@ check_opensuse_updates() {
     echo "{\"total\":\"$total_updates\", \"tooltip\":\"$tooltip\"}"
 }
 
+
+update_arch() {
+    command="
+    fastfetch
+    yay -Syu
+    read -n 1 -p 'Press any key to continue...'
+    "
+    kitty --title systemupdate sh -c "${command}"
+}
+
+
 case "$1" in
 -arch)
-    check_arch_updates
+    if [ -z "$2" ]; then  # If second argument is null (not provided)
+        check_arch_updates
+    else
+        update_arch
+    fi
     ;;
 -ubuntu)
-    check_ubuntu_updates
+    if [ -z "$2" ]; then  # If second argument is null (not provided)
+        check_ubuntu_updates
+    else
+        update_ubuntu
+    fi
     ;;
 -fedora)
-    check_fedora_updates
+    if [ -z "$2" ]; then  # If second argument is null (not provided)
+        check_fedora_updates
+    else
+        update_fedora
+    fi
     ;;
 -suse)
-    check_opensuse_updates
+    if [ -z "$2" ]; then  # If second argument is null (not provided)
+        check_opensuse_updates
+    else
+        update_arch
+    fi
     ;;
 *)
-    echo "0"
+    echo "Usage: $0 [-arch|-ubuntu|-fedora|-suse] [up (optional)]"
+    exit 1
     ;;
 esac
