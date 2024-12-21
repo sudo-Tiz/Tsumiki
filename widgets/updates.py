@@ -16,6 +16,8 @@ from utils.functions import text_icon
 from utils.widget_config import BarConfig
 
 
+#TODO: Implement updating on terminal when the user clicks on the widget
+
 class UpdatesWidget(EventBox):
     """A widget to display the number of available updates."""
 
