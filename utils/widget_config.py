@@ -2,9 +2,6 @@ from typing import List, TypedDict
 
 from utils.functions import read_config
 
-# TODO: convert to typed dict
-
-
 # Default poll interval for widgets that need not be updated frequently
 high_poll_interval = 1000 * 60 * 10  # 10 minutes
 
@@ -130,174 +127,209 @@ DEFAULT_CONFIG = {
 }
 
 
-class BaseConfig(TypedDict):
-    """Common configuration for some sections"""
-
-    icon_size: str
-    label: bool
-    tooltip: bool
-    interval: int
-
-
-class Layout(TypedDict):
-    """ayout configuration for different sections of the bar"""
-
-    left: List[str]
-    middle: List[str]
-    right: List[str]
-
-
-class PowerButton(TypedDict):
-    """Configuration for power button"""
-
-    icon: str
-    icon_size: int
-    tooltip: bool
-
-
-class HyprSunset(TypedDict, BaseConfig):
-    """Configuration for hyprsunset"""
-
-    temperature: str
-    enabled_icon: str
-    disabled_icon: str
-
-
-class TaskBar(TypedDict):
-    """Configuration for taskbar"""
-
-    icon_size: int
-
-
-class SystemTray(TypedDict):
-    """Configuration for system tray"""
-
-    icon_size: int
-    ignore: List[str]
-
-
-class HyprIdle(TypedDict, BaseConfig):
-    """Configuration for hypridle"""
-
-    enabled_icon: str
-    disabled_icon: str
-
-
-class Battery(TypedDict):
-    """Configuration for battery"""
-
-    label: bool
-    tooltip: bool
-    hide_label_when_full: bool
-    interval: int
-
-
-class Theme(TypedDict):
-    """Configuration for battery"""
-
-    name: str
-
-
-class Cpu(TypedDict, BaseConfig):
-    """Configuration for Cpu"""
-
-    icon: str
-
-
-class Mpris(TypedDict, BaseConfig):
-    """Configuration for bar mpris"""
-
-    length: int
-
-
-class Memory(TypedDict, BaseConfig):
-    """Configuration for window"""
-
-    icon: str
-
-
-class Storage(TypedDict, BaseConfig):
-    """Configuration for storage"""
-
-    icon: str
-
-
-class Workspaces(TypedDict):
-    """Configuration for Workspaces"""
-
-    count: int
-    occupied: bool
-    ignored: List[int]
-
-
-class WindowTitle(TypedDict):
-    """Configuration for Window"""
-
-    length: int
-    enable_icon: bool
-    truncation: bool
-    truncation_size: int
-
-
-class Updates(TypedDict, BaseConfig):
-    """Configuration for updates"""
-
-    os: str
-    icon: str
-
-
-class BlueTooth(TypedDict):
-    """Configuration for bluetooth"""
-
-    label: bool
-    tooltip: bool
-    icon_size: int
-
-
-class Weather(TypedDict):
-    """Configuration for weather"""
-
-    location: str
-    interval: int
-    tooltip: bool
-    label: bool
-
-
-class Keyboard(TypedDict, BaseConfig):
-    """Configuration for keyboard"""
-
-    icon: str
-
-
-class DateTimeMenu(TypedDict):
-    """Configuration for keyboard"""
-
-    format: str
-
-
-class ThemeSwitcher(TypedDict, BaseConfig):
-    """Configuration for keyboard"""
-
-    icon: str
-
-
-class Language(TypedDict):
-    """Configuration for language"""
-
-    length: int
-
-
-class Volume(TypedDict, BaseConfig):
-    """Configuration for volume"""
-
-    step_size: int
-
-
-class Brightness(TypedDict, BaseConfig):
-    """Configuration for brightness"""
-
-    step_size: int
-
+# Common configuration fields that will be reused
+BaseConfig = TypedDict(
+    'BaseConfig', {
+        'icon_size': str,
+        'label': bool,
+        'tooltip': bool,
+        'interval': int
+    }
+)
+
+# Layout configuration
+Layout = TypedDict(
+    'Layout', {
+        'left': List[str],
+        'middle': List[str],
+        'right': List[str]
+    }
+)
+
+# Power button configuration
+PowerButton = TypedDict(
+    'PowerButton', {
+        'icon': str,
+        'icon_size': int,
+        'tooltip': bool
+    }
+)
+
+# HyprSunset configuration
+HyprSunset = TypedDict(
+    'HyprSunset', {
+        **BaseConfig.__annotations__,
+        'temperature': str,
+        'enabled_icon': str,
+        'disabled_icon': str
+    }
+)
+
+# TaskBar configuration
+TaskBar = TypedDict(
+    'TaskBar', {
+        'icon_size': int
+    }
+)
+
+# SystemTray configuration
+SystemTray = TypedDict(
+    'SystemTray', {
+        'icon_size': int,
+        'ignore': List[str]
+    }
+)
+
+# HyprIdle configuration
+HyprIdle = TypedDict(
+    'HyprIdle', {
+        **BaseConfig.__annotations__,
+        'enabled_icon': str,
+        'disabled_icon': str
+    }
+)
+
+# Battery configuration
+Battery = TypedDict(
+    'Battery', {
+        'label': bool,
+        'tooltip': bool,
+        'hide_label_when_full': bool,
+        'interval': int
+    }
+)
+
+# Theme configuration
+Theme = TypedDict(
+    'Theme', {
+        'name': str
+    }
+)
+
+# Cpu configuration
+Cpu = TypedDict(
+    'Cpu', {
+        **BaseConfig.__annotations__,
+        'icon': str
+    }
+)
+
+# Mpris configuration
+Mpris = TypedDict(
+    'Mpris', {
+        **BaseConfig.__annotations__,
+        'length': int
+    }
+)
+
+# Memory configuration
+Memory = TypedDict(
+    'Memory', {
+        **BaseConfig.__annotations__,
+        'icon': str
+    }
+)
+
+# Storage configuration
+Storage = TypedDict(
+    'Storage', {
+        **BaseConfig.__annotations__,
+        'icon': str
+    }
+)
+
+# Workspaces configuration
+Workspaces = TypedDict(
+    'Workspaces', {
+        'count': int,
+        'occupied': bool,
+        'ignored': List[int]
+    }
+)
+
+# WindowTitle configuration
+WindowTitle = TypedDict(
+    'WindowTitle', {
+        'length': int,
+        'enable_icon': bool,
+        'truncation': bool,
+        'truncation_size': int
+    }
+)
+
+# Updates configuration
+Updates = TypedDict(
+    'Updates', {
+        **BaseConfig.__annotations__,
+        'os': str,
+        'icon': str
+    }
+)
+
+# Bluetooth configuration
+BlueTooth = TypedDict(
+    'BlueTooth', {
+        'label': bool,
+        'tooltip': bool,
+        'icon_size': int
+    }
+)
+
+# Weather configuration
+Weather = TypedDict(
+    'Weather', {
+        'location': str,
+        'interval': int,
+        'tooltip': bool,
+        'label': bool
+    }
+)
+
+# Keyboard configuration
+Keyboard = TypedDict(
+    'Keyboard', {
+        **BaseConfig.__annotations__,
+        'icon': str
+    }
+)
+
+# DateTimeMenu configuration
+DateTimeMenu = TypedDict(
+    'DateTimeMenu', {
+        'format': str
+    }
+)
+
+# ThemeSwitcher configuration
+ThemeSwitcher = TypedDict(
+    'ThemeSwitcher', {
+        **BaseConfig.__annotations__,
+        'icon': str
+    }
+)
+
+# Language configuration
+Language = TypedDict(
+    'Language', {
+        'length': int
+    }
+)
+
+# Volume configuration
+Volume = TypedDict(
+    'Volume', {
+        **BaseConfig.__annotations__,
+        'step_size': int
+    }
+)
+
+# Brightness configuration
+Brightness = TypedDict(
+    'Brightness', {
+        **BaseConfig.__annotations__,
+        'step_size': int
+    }
+)
 
 class BarConfig(TypedDict):
     """Main configuration that includes all other configurations"""
