@@ -2,8 +2,7 @@ from typing import List, TypedDict
 
 from utils.functions import read_config
 
-
-#TODO: convert to typed dict
+# TODO: convert to typed dict
 
 
 # Default poll interval for widgets that need not be updated frequently

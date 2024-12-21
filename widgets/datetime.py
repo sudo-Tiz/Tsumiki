@@ -5,10 +5,12 @@ from fabric.widgets.datetime import DateTime
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
+from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import GLib
 
 from shared.calendar import GtkCalendar
 from shared.popover import PopOverWindow
+from shared.separator import GtkSeparator
 from shared.switch import Switch
 from utils.icons import icons
 from utils.widget_config import BarConfig
@@ -27,6 +29,24 @@ class DateNotificationMenu(Box):
             style_classes="clock",
         )
 
+        placeholder = Box(
+            style_classes="placeholder",
+            orientation="v",
+            h_align="center",
+            v_align="center",
+            v_expand=True,
+            h_expand=True,
+            visible=True,  # visible if no notifications
+            children=(
+                Image(
+                    icon_name=icons["notifications"]["silent"],
+                    icon_size=64,
+                    style="margin-bottom: 10px;",
+                ),
+                Label("Your inbox is empty"),
+            ),
+        )
+
         notif_header = Box(
             style_classes="header",
             orientation="h",
@@ -40,9 +60,17 @@ class DateNotificationMenu(Box):
         )
 
         notification_colum = Box(
-            style_classes="notification-column",
+            name="notification-column",
             orientation="v",
-            children=(notif_header,),
+            children=(
+                notif_header,
+                ScrolledWindow(
+                    v_expand=True,
+                    style_classes="notification-scrollable",
+                    h_scrollbar_policy="never",
+                    child=Box(children=(placeholder)),
+                ),
+            ),
         )
 
         date_column = Box(
@@ -80,8 +108,11 @@ class DateNotificationMenu(Box):
             0,
         )
 
-        self.add(notification_colum)
-        self.add(date_column)
+        self.children = (
+            notification_colum,
+            GtkSeparator(),
+            date_column,
+        )
 
     def update_clock(self):
         self.clock_label.set_text(time.strftime("%H:%M"))
@@ -92,9 +123,7 @@ class DateTimeWidget(EventBox):
     """A widget to power off the system."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(
-            name="date-time-button", **kwargs
-        )
+        super().__init__(name="date-time-button", **kwargs)
         self.config = widget_config["notification"]
         popup = PopOverWindow(
             parent=bar,
@@ -111,9 +140,13 @@ class DateTimeWidget(EventBox):
         popup.set_pointing_to(self)
 
         self.children = Box(
-             style_classes="panel-box",
+            style_classes="panel-box",
             children=(
-                Image(icon_name=icons["notifications"]["noisy"], icon_size=14 , style="margin-right: 5px;"),
+                Image(
+                    icon_name=icons["notifications"]["noisy"],
+                    icon_size=14,
+                    style="margin-right: 5px;",
+                ),
                 DateTime("%H:%M"),
-            )
+            ),
         )

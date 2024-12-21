@@ -19,4 +19,4 @@ $popover-radius: 0;
   $popover-radius: $radius + $popover-padding;
 }
 
-$popover-border-color: color.adjust(theme.$surface-disabled, $alpha: -0.95);
+$popover-border-color: color.adjust($border-color, $alpha: -0.95);

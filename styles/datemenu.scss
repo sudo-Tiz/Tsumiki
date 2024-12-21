@@ -10,7 +10,23 @@
   @include mixins.spacing;
   padding: 10px;
 
-  #notification-menu {
+  #notification-column {
+    min-width: 350px;
+
+    .notification-list {
+      margin-right: variable.$spacing;
+    }
+
+    .placeholder {
+      image {
+        font-size: 7em;
+      }
+
+      label {
+        font-size: 1em;
+      }
+    }
+
     .header {
       margin-bottom: variable.$spacing;
       margin-right: variable.$spacing;
@@ -35,6 +51,12 @@
 
     .body {
     }
+  }
+
+  separator {
+    background-color: variable.$popover-border-color;
+    border-radius: variable.$radius;
+    margin-right: variable.$spacing;
   }
 
   .date-column {
