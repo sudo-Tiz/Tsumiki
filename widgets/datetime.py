@@ -60,15 +60,18 @@ class DateNotificationMenu(Box):
                 Switch(
                     name="notification-switch",
                     active=True,
+                    v_align="center",
                 ),
             ),
         )
 
         clear_button = Button(
+            name="clear-button",
+            v_align="center",
             child=Box(
                 children=(
                     Label("Clear"),
-                    Image(icon_name=icons["notifications"]["noisy"], icon_size=13),
+                    Image(icon_name=icons["notifications"]["noisy"], icon_size=13, name="clear-icon"),
                 )
             )
         )

@@ -22,21 +22,28 @@
       }
 
       label {
+        font-weight: 600;
         margin-right: 4px;
         font-size: 11px;
-        font-weight: 600;
       }
+      
 
-      .header-action {
-        border: 2px solid theme.$surface-disabled;
-        background-color: theme.$background;
-        padding: 2px;
+
+
+      #clear-button {
+        padding: variable.$padding * 0.5 variable.$padding;
+        border: variable.$border;
         border-radius: variable.$radius;
+        background-color: theme.$background;
+        border-width: 2px;
+
+        &:hover {
+          background-color: theme.$background-alt;
+
+        
+        }
       }
 
-      button {
-        padding: variable.$padding * 0.7 variable.$padding;
-      }
     }
 
     .body {
@@ -88,7 +95,7 @@
           transition: 200ms;
           border-radius: variable.$radius;
           color: theme.$text-main;
-        //  background-color: theme.$accent-blue;
+          //  background-color: theme.$accent-blue;
         }
 
         &:hover {
