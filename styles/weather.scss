@@ -12,10 +12,26 @@ $base_margin: 4px;
   .weather-header-box {
     font-size: 11pt;
     color: white;
+    font-weight: 500;
 
     .temperature {
-      font-weight: 500;
       font-size: 2em;
+    }
+
+    .feels-like{
+      font-size: 0.79em;
+    }
+
+    .location {
+      font-size: 0.9em;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+ 
+    .windspeed{
+     margin: 10px 50px 0 50px;
+     font-size: 1.1em;
     }
 
   }

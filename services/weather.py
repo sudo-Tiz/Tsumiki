@@ -2,7 +2,6 @@ import json
 import ssl
 import urllib.request
 
-from utils.icons import weather_text_icons
 
 # Create an SSLContext that ignores certificate validation
 context = ssl._create_unverified_context()
@@ -11,10 +10,10 @@ context = ssl._create_unverified_context()
 class WeatherService:
     """This class provides weather information for a given city."""
 
-    def simple_weather_info(self, city: str):
+    def simple_weather_info(self, location: str):
         try:
             # Construct the URL for fetching weather information
-            url = f"https://wttr.in/{city.capitalize()}?format=j1"
+            url = f"https://wttr.in/{location.capitalize()}?format=j1"
             contents = (
                 urllib.request.urlopen(url, context=context).read().decode("utf-8")
             )
@@ -26,11 +25,8 @@ class WeatherService:
             hourly_weather = data["weather"][0]["hourly"]
 
             return {
-                "city": city,
-                "icon": weather_text_icons[current_weather["weatherCode"]]["icon"],
-                "temperature": current_weather["FeelsLikeC"],
-                "weatherCode": current_weather["weatherCode"],
-                "condition": current_weather["weatherDesc"][0]["value"],
+                "location": location.capitalize(),
+                "current": current_weather,  # the current weather information
                 "hourly": hourly_weather,  # the data for the next 24 hours in tri-hourly intervals
             }
 

@@ -7,7 +7,7 @@ from fabric.widgets.label import Label
 from shared.popover import PopOverWindow
 from utils.functions import text_icon
 from utils.widget_config import BarConfig
-from utils.icons import weather_text_icons_v2
+from utils.icons import weather_text_icons_v2, weather_text_icons
 from services import weather_service
 
 import gi
@@ -30,33 +30,68 @@ class WeatherMenu(Box):
             style_classes="weather-box", orientation="v", h_expand=True, spacing=5
         )
 
+        current_weather = data["current"]
+
+        # Get the next 4 hours forecast
+        hourly_forecast = data["hourly"][4:8]
+
         weather_icons_dir = get_relative_path("../assets/icons/weather")
 
         title_box = CenterBox(
             style_classes="weather-header-box",
+            spacing=10,
             start_children=(
                 Image(
-                    image_file=f"{weather_icons_dir}/{weather_text_icons_v2[data["weatherCode"]]["image"]}",
+                    image_file=f"{weather_icons_dir}/{weather_text_icons_v2[current_weather["weatherCode"]]["image"]}",
                     size=80,
+                    v_align="start",
+                ),
+                Box(
+                    orientation="v",
                     v_align="center",
-                    style_classes="icon",
-                )
+                    children=(
+                        Label(
+                            style_classes="condition",
+                            v_align="center",
+                            h_align="center",
+                            label=f"{current_weather["weatherDesc"][0]["value"]}",
+                        ),
+                        Label(
+                            style_classes="temperature",
+                            v_align="center",
+                            h_align="center",
+                            label=f"{current_weather['temp_C']}°C",
+                        ),
+                    ),
+                ),
             ),
             center_children=(
                 Label(
-                    style_classes="condition",
-                    v_align="center",
+                    style_classes="windspeed",
+                    v_align="start",
                     h_align="center",
-                    label=f"{data['condition']}",
-                ),
+                    label=f" {current_weather['windspeedKmph']}mph",
+                )
             ),
             end_children=(
-                Label(
-                    style_classes="temperature",
-                    v_align="center",
-                    h_align="center",
-                    label=f"{data['temperature']}°C",
-                ),
+                Box(
+                    orientation="v",
+                    v_align="start",
+                    children=(
+                        Label(
+                            style_classes="location",
+                            v_align="center",
+                            h_align="center",
+                            label=f"{data['location']}",
+                        ),
+                        Label(
+                            style_classes="feels-like",
+                            v_align="center",
+                            h_align="center",
+                            label=f"Feels Like {current_weather['FeelsLikeC']}°C",
+                        ),
+                    ),
+                )
             ),
         )
 
@@ -76,10 +111,8 @@ class WeatherMenu(Box):
             visible=True,
         )
 
-        hourly_forecast = data["hourly"][3:8]
-
         # show next 5 hours forecast
-        for col in range(5):
+        for col in range(4):
             column_data = hourly_forecast[col]
 
             time = Label(
@@ -161,12 +194,19 @@ class WeatherWidget(Button):
 
     def update_ui(self, res):
         # Update the label with the weather icon and temperature in the main thread
-        self.weather_label.set_label(f"{res['temperature']}°C")
-        self.weather_icon.set_label(res["icon"])
+
+        current_weather = res["current"]
+        text_icon = weather_text_icons[current_weather["weatherCode"]]["icon"]
+        self.weather_label.set_label(f"{current_weather["FeelsLikeC"]}°C")
+        self.weather_icon.set_label(text_icon)
 
         # Update the tooltip with the city and weather condition if enabled
         if self.config["tooltip"]:
-            self.set_tooltip_text(f"{res['city']}, {res['condition']}".strip("'"))
+            self.set_tooltip_text(
+                f"{res['location']}, {current_weather["weatherDesc"][0]["value"]}".strip(
+                    "'"
+                )
+            )
 
         popup = PopOverWindow(
             parent=self.bar,
