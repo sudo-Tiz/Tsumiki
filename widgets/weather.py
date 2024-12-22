@@ -1,5 +1,6 @@
 from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
+from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.image import Image
 from fabric.widgets.button import Button
 from fabric.widgets.label import Label
@@ -29,27 +30,38 @@ class WeatherMenu(Box):
             style_classes="weather-box", orientation="v", h_expand=True, spacing=5
         )
 
-        title_box = Box(style_classes="weather-header-box")
-
-        self.title_label = Label(
-            style_classes="weather-header",
-            h_align="start",
-            h_expand=True,
-            v_align="end",
-            label="Weather Forecast",
+        title_box = CenterBox(
+            style_classes="weather-header-box",
+            start_children=(
+                Image(
+                    icon_name=weather_text_icons_v2[data["weatherCode"]]["image"],
+                    icon_size=64,
+                    v_align="center",
+                    style_classes="icon",
+                )
+            ),
+            center_children=(
+                Label(
+                    style_classes="condition",
+                    v_align="center",
+                    h_align="center",
+                    label=f"{data['condition']}",
+                ),
+            ),
+            end_children=(
+                Label(
+                    style_classes="temperature",
+                    v_align="center",
+                    h_align="center",
+                    label=f"{data['temperature']}°C",
+                ),
+            ),
         )
-
-        self.title_location = Label(
-            style_classes="weather-header location",
-            v_align="end",
-            h_align="end",
-            label="Location",
-        )
-        title_box.children = (self.title_label, self.title_location)
 
         self.forecast_box = Gtk.Grid(
             row_spacing=10,
             column_spacing=20,
+            name="weather-grid",
         )
 
         hourly_forecast = data["hourly"][3:8]
@@ -82,6 +94,11 @@ class WeatherMenu(Box):
 
         self.children = (
             title_box,
+            Gtk.Separator(
+                orientation=Gtk.Orientation.HORIZONTAL,
+                visible=True,
+                name="weather-separator",
+            ),
             self.forecast_box,
         )
 
