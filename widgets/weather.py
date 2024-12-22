@@ -6,6 +6,7 @@ from fabric.widgets.label import Label
 from shared.popover import PopOverWindow
 from utils.functions import text_icon
 from utils.widget_config import BarConfig
+from utils.icons import weather_text_icons_v2
 from services import weather_service
 
 import gi
@@ -61,7 +62,9 @@ class WeatherMenu(Box):
                 h_align="center",
             )
             icon = Image(
-                icon_name="weather-clear-symbolic",
+                icon_name=weather_text_icons_v2[hourly_forecast[col]["weatherCode"]][
+                    "image"
+                ],
                 icon_size=64,
                 h_align="center",
                 h_expand=True,

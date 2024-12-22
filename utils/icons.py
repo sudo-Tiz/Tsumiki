@@ -96,6 +96,210 @@ weather_text_icons = {
 }
 
 
+weather_text_icons_v2 = {
+    "113": {"description": "Sunny", "icon": "󰖙", "image": "weather-sunny-symbolic"},
+    "116": {
+        "description": "PartlyCloudy",
+        "icon": "󰖕",
+        "image": "weather-partly-cloudy-symbolic",
+    },
+    "119": {"description": "Cloudy", "icon": "󰖐", "image": "weather-cloudy-symbolic"},
+    "122": {
+        "description": "VeryCloudy",
+        "icon": "󰖕",
+        "image": "weather-overcast-symbolic",
+    },
+    "143": {"description": "Fog", "icon": "󰖑", "image": "weather-fog-symbolic"},
+    "176": {
+        "description": "LightShowers",
+        "icon": "󰼳",
+        "image": "weather-showers-scattered-symbolic",
+    },
+    "179": {
+        "description": "LightSleetShowers",
+        "icon": "󰼵",
+        "image": "weather-sleet-showers-symbolic",
+    },
+    "182": {
+        "description": "LightSleet",
+        "icon": "󰙿",
+        "image": "weather-sleet-symbolic",
+    },
+    "185": {
+        "description": "LightSleet",
+        "icon": "󰙿",
+        "image": "weather-sleet-symbolic",
+    },
+    "200": {
+        "description": "ThunderyShowers",
+        "icon": "󰙾",
+        "image": "weather-thunderstorms-symbolic",
+    },
+    "227": {"description": "LightSnow", "icon": "󰼴", "image": "weather-snow-symbolic"},
+    "230": {
+        "description": "HeavySnow",
+        "icon": "󰼶",
+        "image": "weather-snow-heavy-symbolic",
+    },
+    "248": {"description": "Fog", "icon": "󰖑", "image": "weather-fog-symbolic"},
+    "260": {"description": "Fog", "icon": "󰖑", "image": "weather-fog-symbolic"},
+    "263": {
+        "description": "LightShowers",
+        "icon": "󰼳",
+        "image": "weather-showers-symbolic",
+    },
+    "266": {"description": "LightRain", "icon": "󰼳", "image": "weather-rain-symbolic"},
+    "281": {
+        "description": "LightSleet",
+        "icon": "󰙿",
+        "image": "weather-sleet-symbolic",
+    },
+    "284": {
+        "description": "LightSleet",
+        "icon": "󰙿",
+        "image": "weather-sleet-symbolic",
+    },
+    "293": {"description": "LightRain", "icon": "󰼳", "image": "weather-rain-symbolic"},
+    "296": {"description": "LightRain", "icon": "󰼳", "image": "weather-rain-symbolic"},
+    "299": {
+        "description": "HeavyShowers",
+        "icon": "󰖖",
+        "image": "weather-rain-heavy-symbolic",
+    },
+    "302": {
+        "description": "HeavyRain",
+        "icon": "󰖖",
+        "image": "weather-rain-heavy-symbolic",
+    },
+    "305": {
+        "description": "HeavyShowers",
+        "icon": "󰖖",
+        "image": "weather-rain-heavy-symbolic",
+    },
+    "308": {
+        "description": "HeavyRain",
+        "icon": "󰖖",
+        "image": "weather-rain-heavy-symbolic",
+    },
+    "311": {
+        "description": "LightSleet",
+        "icon": "󰙿",
+        "image": "weather-sleet-symbolic",
+    },
+    "314": {
+        "description": "LightSleet",
+        "icon": "󰙿",
+        "image": "weather-sleet-symbolic",
+    },
+    "317": {
+        "description": "LightSleet",
+        "icon": "󰙿",
+        "image": "weather-sleet-symbolic",
+    },
+    "320": {"description": "LightSnow", "icon": "󰼴", "image": "weather-snow-symbolic"},
+    "323": {
+        "description": "LightSnowShowers",
+        "icon": "󰼵",
+        "image": "weather-snow-showers-symbolic",
+    },
+    "326": {
+        "description": "LightSnowShowers",
+        "icon": "󰼵",
+        "image": "weather-snow-showers-symbolic",
+    },
+    "329": {
+        "description": "HeavySnow",
+        "icon": "󰼶",
+        "image": "weather-snow-heavy-symbolic",
+    },
+    "332": {
+        "description": "HeavySnow",
+        "icon": "󰼶",
+        "image": "weather-snow-heavy-symbolic",
+    },
+    "335": {
+        "description": "HeavySnowShowers",
+        "icon": "󰼵",
+        "image": "weather-snow-heavy-symbolic",
+    },
+    "338": {
+        "description": "HeavySnow",
+        "icon": "󰼶",
+        "image": "weather-snow-heavy-symbolic",
+    },
+    "350": {
+        "description": "LightSleet",
+        "icon": "󰙿",
+        "image": "weather-sleet-symbolic",
+    },
+    "353": {
+        "description": "LightShowers",
+        "icon": "󰼳",
+        "image": "weather-showers-scattered-symbolic",
+    },
+    "356": {
+        "description": "HeavyShowers",
+        "icon": "󰖖",
+        "image": "weather-rain-heavy-symbolic",
+    },
+    "359": {
+        "description": "HeavyRain",
+        "icon": "󰖖",
+        "image": "weather-rain-heavy-symbolic",
+    },
+    "362": {
+        "description": "LightSleetShowers",
+        "icon": "󰼵",
+        "image": "weather-sleet-showers-symbolic",
+    },
+    "365": {
+        "description": "LightSleetShowers",
+        "icon": "󰼵",
+        "image": "weather-sleet-showers-symbolic",
+    },
+    "368": {
+        "description": "LightSnowShowers",
+        "icon": "󰼵",
+        "image": "weather-snow-showers-symbolic",
+    },
+    "371": {
+        "description": "HeavySnowShowers",
+        "icon": "󰼵",
+        "image": "weather-snow-heavy-symbolic",
+    },
+    "374": {
+        "description": "LightSleetShowers",
+        "icon": "󰼵",
+        "image": "weather-sleet-showers-symbolic",
+    },
+    "377": {
+        "description": "LightSleet",
+        "icon": "󰙿",
+        "image": "weather-sleet-symbolic",
+    },
+    "386": {
+        "description": "ThunderyShowers",
+        "icon": "󰙾",
+        "image": "weather-thunderstorms-symbolic",
+    },
+    "389": {
+        "description": "ThunderyHeavyRain",
+        "icon": "󰙾",
+        "image": "weather-thunderstorms-symbolic",
+    },
+    "392": {
+        "description": "ThunderySnowShowers",
+        "icon": "󰼶",
+        "image": "weather-snow-thunderstorms-symbolic",
+    },
+    "395": {
+        "description": "HeavySnowShowers",
+        "icon": "󰼵",
+        "image": "weather-snow-heavy-symbolic",
+    },
+}
+
+
 volume_text_icons = {
     "overamplified": "󰕾",
     "high": "󰕾",
