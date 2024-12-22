@@ -4,10 +4,15 @@ from fabric.widgets.image import Image
 from fabric.widgets.button import Button
 from fabric.widgets.label import Label
 from services import WeatherInfo
-from shared.grid import GtkGrid
 from shared.popover import PopOverWindow
 from utils.functions import text_icon
 from utils.widget_config import BarConfig
+
+import gi
+
+from gi.repository import Gtk
+
+gi.require_version("Gtk", "3.0")
 
 
 class WeatherMenu(Box):
@@ -36,7 +41,10 @@ class WeatherMenu(Box):
         )
         title_box.children = (self.title_label, self.title_location)
 
-        self.forecast_box = GtkGrid()
+        self.forecast_box = Gtk.Grid(
+            row_spacing=10,
+            column_spacing=20,
+        )
 
         # show next 5 hours forecast
         for col in range(5):
@@ -62,6 +70,8 @@ class WeatherMenu(Box):
             title_box,
             self.forecast_box,
         )
+
+        self.forecast_box.show()
 
 
 class WeatherWidget(Button):
