@@ -10,7 +10,7 @@ from services import weather_service
 
 import gi
 
-from gi.repository import Gtk
+from gi.repository import Gtk, GLib
 
 gi.require_version("Gtk", "3.0")
 
@@ -18,7 +18,12 @@ gi.require_version("Gtk", "3.0")
 class WeatherMenu(Box):
     """A menu to display the weather information."""
 
-    def __init__(self):
+    # wttr.in time are in 300,400...2100 format , we need to convert it to 3:00, 4:00...21:00
+    def format_wttr_time(self, time: str):
+        time_value = int(int(time) / 100)
+        return f"{time_value}:00" if time_value > 9 else f"0{time_value}:00"
+
+    def __init__(self, data):
         super().__init__(
             style_classes="weather-box", orientation="v", h_expand=True, spacing=5
         )
@@ -46,10 +51,14 @@ class WeatherMenu(Box):
             column_spacing=20,
         )
 
+        hourly_forecast = data["hourly"][3:8]
+
         # show next 5 hours forecast
         for col in range(5):
             time = Label(
-                style_classes="weather-forecast-time", label="12:00", h_align="center"
+                style_classes="weather-forecast-time",
+                label=f"{self.format_wttr_time(hourly_forecast[col]["time"])}",
+                h_align="center",
             )
             icon = Image(
                 icon_name="weather-clear-symbolic",
@@ -60,7 +69,9 @@ class WeatherMenu(Box):
             )
 
             temp = Label(
-                style_classes="weather-forecast-temp", label="17", h_align="center"
+                style_classes="weather-forecast-temp",
+                label=f"{hourly_forecast[col]["tempC"]}°C",
+                h_align="center",
             )
             self.forecast_box.attach(time, col, 0, 1, 1)
             self.forecast_box.attach(icon, col, 1, 1, 1)
@@ -85,10 +96,9 @@ class WeatherWidget(Button):
         # Initialize the Box with specific name and style
         super().__init__()
 
-        # TODO: cache the weather data
-        self.is_data_ready = True
-
         self.config = widget_config["weather"]
+
+        self.bar = bar
 
         self.box = Box(
             name="weather",
@@ -99,40 +109,46 @@ class WeatherWidget(Button):
 
         self.weather_icon = text_icon(icon="", size="15px")
 
-        popup = PopOverWindow(
-            parent=bar,
-            name="popup",
-            child=(WeatherMenu()),
-            visible=False,
-            all_visible=False,
-        )
-
         self.weather_label = Label(
             label="Fetching weather...",
             style_classes="panel-text",
         )
         self.box.children = (self.weather_icon, self.weather_label)
 
-        popup.set_pointing_to(self)
-
-        self.connect(
-            "clicked",
-            lambda *_: self.is_data_ready
-            and popup.set_visible(not popup.get_visible()),
-        )
-
         # Set up a repeater to call the update_label method at specified intervals
-        invoke_repeater(self.config["interval"], self.update_label, initial_call=False)
+        invoke_repeater(self.config["interval"], self.update_label, initial_call=True)
 
-    # This function will run the weather fetch in a separate thread
     def update_label(self):
-        res = weather_service.simple_weather_info(self.config["location"])
-        # Update the label with the weather icon and temperature
+        # Create a background thread to fetch weather data
+        GLib.Thread.new("thread", self.fetch_weather, None)
+        return True
 
+    def fetch_weather(self, _data):
+        res = weather_service.simple_weather_info(self.config["location"])
+
+        GLib.idle_add(self.update_ui, res)
+        return False
+
+    def update_ui(self, res):
+        # Update the label with the weather icon and temperature in the main thread
         self.weather_label.set_label(f"{res['temperature']}°C")
         self.weather_icon.set_label(res["icon"])
 
         # Update the tooltip with the city and weather condition if enabled
         if self.config["tooltip"]:
             self.set_tooltip_text(f"{res['city']}, {res['condition']}".strip("'"))
-        return True
+
+        popup = PopOverWindow(
+            parent=self.bar,
+            name="popup",
+            child=(WeatherMenu(data=res)),
+            visible=False,
+            all_visible=False,
+        )
+
+        popup.set_pointing_to(self)
+
+        self.connect(
+            "clicked",
+            lambda *_: popup.set_visible(not popup.get_visible()),
+        )

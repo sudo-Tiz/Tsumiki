@@ -30,7 +30,7 @@ class WeatherService:
                 "icon": weather_text_icons[current_weather["weatherCode"]]["icon"],
                 "temperature": current_weather["FeelsLikeC"],
                 "condition": current_weather["weatherDesc"][0]["value"],
-                "hourly": hourly_weather,
+                "hourly": hourly_weather,  # the data for the next 24 hours in tri-hourly intervals
             }
 
         except Exception as e:

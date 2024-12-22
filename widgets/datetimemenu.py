@@ -12,7 +12,6 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import GLib, Gtk
 
 from shared.popover import PopOverWindow
-from shared.separator import GtkSeparator
 from utils.functions import uptime
 from utils.icons import icons
 from utils.widget_config import BarConfig
