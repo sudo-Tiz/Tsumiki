@@ -1,18 +1,17 @@
-from fabric.utils import invoke_repeater, get_relative_path
+import gi
+from fabric.utils import get_relative_path, invoke_repeater
 from fabric.widgets.box import Box
+from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.image import Image
-from fabric.widgets.button import Button
 from fabric.widgets.label import Label
+from gi.repository import GLib, Gtk
+
+from services import weather_service
 from shared.popover import PopOverWindow
 from utils.functions import text_icon
+from utils.icons import weather_text_icons, weather_text_icons_v2
 from utils.widget_config import BarConfig
-from utils.icons import weather_text_icons_v2, weather_text_icons
-from services import weather_service
-
-import gi
-
-from gi.repository import Gtk, GLib
 
 gi.require_version("Gtk", "3.0")
 
@@ -184,7 +183,13 @@ class WeatherWidget(Button):
 
         self.children = self.box
 
-        self.weather_icon = text_icon(icon="", size="15px")
+        self.weather_icon = text_icon(
+            icon="",
+            size="15px",
+            props={
+                "style_classes": "weather-bar-icon",
+            },
+        )
 
         self.weather_label = Label(
             label="Fetching weather...",

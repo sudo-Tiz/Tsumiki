@@ -229,16 +229,20 @@ expander {
   arrow {
     min-width: 16px;
     min-height: 16px;
-    -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
-    color: lighten(variable.$border-color,30%);
+    -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
+    color: lighten(variable.$border-color, 30%);
 
-    &:dir(rtl) { -gtk-icon-source: -gtk-icontheme('pan-end-symbolic-rtl'); }
-    &:hover { color: lighten(variable.$border-color,60%); }
-    &:checked { -gtk-icon-source: -gtk-icontheme('pan-down-symbolic'); }
-
+    &:dir(rtl) {
+      -gtk-icon-source: -gtk-icontheme("pan-end-symbolic-rtl");
+    }
+    &:hover {
+      color: lighten(variable.$border-color, 60%);
+    }
+    &:checked {
+      -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
+    }
   }
 }
-
 
 spinner {
   background: none;

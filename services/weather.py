@@ -2,7 +2,6 @@ import json
 import ssl
 import urllib.request
 
-
 # Create an SSLContext that ignores certificate validation
 context = ssl._create_unverified_context()
 

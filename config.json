@@ -4,7 +4,7 @@
   },
   "layout": {
     "left_section": ["workspaces", "window_title"],
-    "middle_section": ["date_time","weather"],
+    "middle_section": ["date_time", "weather"],
     "right_section": [
       "hypr_sunset",
       "updates",
@@ -21,7 +21,7 @@
     "label": true,
     "tooltip": true,
     "interval": 700000
-},
+  },
   "hypr_sunset": {
     "temperature": "2800k",
     "enabled_icon": "󱩌",

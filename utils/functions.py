@@ -12,9 +12,9 @@ from fabric.widgets.label import Label
 from gi.repository import GLib, Gtk
 from loguru import logger
 
-from utils.config import APP_CACHE_DIRECTORY
 import utils.icons as icons
 from utils.colors import Colors
+from utils.config import APP_CACHE_DIRECTORY
 
 gi.require_version("Gtk", "3.0")
 

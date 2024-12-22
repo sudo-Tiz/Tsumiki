@@ -11,8 +11,8 @@ from gi.repository import GLib, GObject
 
 import utils.functions as helpers
 import utils.icons as icons
-from shared import AnimatedScale
 from services import audio_service, brightness_service
+from shared import AnimatedScale
 
 
 class BrightnessOSDContainer(Box):

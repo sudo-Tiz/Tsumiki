@@ -18,7 +18,7 @@ $base_margin: 4px;
       font-size: 2em;
     }
 
-    .feels-like{
+    .feels-like {
       font-size: 0.79em;
     }
 
@@ -28,18 +28,15 @@ $base_margin: 4px;
       margin-top: 10px;
     }
 
- 
-    .windspeed{
-     margin: 10px 50px 0 50px;
-     font-size: 1.1em;
-    }
-
-    .humidity{
+    .windspeed {
+      margin: 10px 50px 0 50px;
       font-size: 1.1em;
     }
 
+    .humidity {
+      font-size: 1.1em;
+    }
   }
-
 
   #weather-separator {
     margin-top: 10px;
@@ -49,14 +46,11 @@ $base_margin: 4px;
 
   // weather items
   #weather-grid {
-
     .weather-forecast-time {
       font-weight: 500;
       font-size: 10pt;
       padding-top: variable.$padding;
-      ;
       padding-bottom: variable.$padding;
-      ;
     }
 
     .weather-forecast-icon {
@@ -66,7 +60,10 @@ $base_margin: 4px;
     .weather-forecast-temp {
       font-feature-settings: "tnum";
       font-weight: bold;
-
     }
   }
+}
+
+.weather-bar-icon {
+  font-weight: 700;
 }

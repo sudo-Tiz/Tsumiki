@@ -3,12 +3,12 @@ from fabric import Application
 from fabric.utils import exec_shell_command, get_relative_path, monitor_file
 from loguru import logger
 
-from utils.config import APPLICATION_NAME
 import utils.functions as helpers
 from modules.bar import StatusBar
 from modules.notifications import NotificationPopup
 from modules.osd import OSDContainer
 from utils.colors import Colors
+from utils.config import APPLICATION_NAME
 from utils.widget_config import widget_config
 
 

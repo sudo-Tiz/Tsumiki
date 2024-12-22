@@ -1,8 +1,6 @@
 import time
 
 import gi
-
-
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.datetime import DateTime
