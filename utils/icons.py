@@ -97,7 +97,7 @@ weather_text_icons = {
 
 
 weather_text_icons_v2 = {
-    "113": {"description": "Sunny", "icon": "󰖙", "image": "weather-sunny-symbolic"},
+    "113": {"description": "Sunny", "icon": "󰖙", "image": "cloudy.svg"},
     "116": {
         "description": "PartlyCloudy",
         "icon": "󰖕",

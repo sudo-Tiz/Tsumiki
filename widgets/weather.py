@@ -1,4 +1,4 @@
-from fabric.utils import invoke_repeater
+from fabric.utils import invoke_repeater, get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.image import Image
@@ -30,12 +30,14 @@ class WeatherMenu(Box):
             style_classes="weather-box", orientation="v", h_expand=True, spacing=5
         )
 
+        weather_icons_dir = get_relative_path("../assets/icons/weather")
+
         title_box = CenterBox(
             style_classes="weather-header-box",
             start_children=(
                 Image(
-                    icon_name=weather_text_icons_v2[data["weatherCode"]]["image"],
-                    icon_size=64,
+                    image_file=f"{weather_icons_dir}/{weather_text_icons_v2[data["weatherCode"]]["image"]}",
+                    size=80,
                     v_align="center",
                     style_classes="icon",
                 )
@@ -58,26 +60,36 @@ class WeatherMenu(Box):
             ),
         )
 
+        expander = Gtk.Expander(
+            child=title_box,
+            visible=True,
+            expanded=True,
+            name="weather-expander",
+        )
+
+        # Create a grid to display the hourly forecast
+
         self.forecast_box = Gtk.Grid(
             row_spacing=10,
             column_spacing=20,
             name="weather-grid",
+            visible=True,
         )
 
         hourly_forecast = data["hourly"][3:8]
 
         # show next 5 hours forecast
         for col in range(5):
+            column_data = hourly_forecast[col]
+
             time = Label(
                 style_classes="weather-forecast-time",
-                label=f"{self.format_wttr_time(hourly_forecast[col]["time"])}",
+                label=f"{self.format_wttr_time(column_data["time"])}",
                 h_align="center",
             )
             icon = Image(
-                icon_name=weather_text_icons_v2[hourly_forecast[col]["weatherCode"]][
-                    "image"
-                ],
-                icon_size=64,
+                image_file=f"{weather_icons_dir}/{weather_text_icons_v2[column_data["weatherCode"]]["image"]}",
+                size=70,
                 h_align="center",
                 h_expand=True,
                 style_classes="weather-forecast-icon",
@@ -85,7 +97,7 @@ class WeatherMenu(Box):
 
             temp = Label(
                 style_classes="weather-forecast-temp",
-                label=f"{hourly_forecast[col]["tempC"]}°C",
+                label=f"{column_data["tempC"]}°C",
                 h_align="center",
             )
             self.forecast_box.attach(time, col, 0, 1, 1)
@@ -93,7 +105,7 @@ class WeatherMenu(Box):
             self.forecast_box.attach(temp, col, 2, 1, 1)
 
         self.children = (
-            title_box,
+            expander,
             Gtk.Separator(
                 orientation=Gtk.Orientation.HORIZONTAL,
                 visible=True,
@@ -101,8 +113,6 @@ class WeatherMenu(Box):
             ),
             self.forecast_box,
         )
-
-        self.forecast_box.show()
 
 
 class WeatherWidget(Button):

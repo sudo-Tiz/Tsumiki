@@ -2,50 +2,51 @@
 @use "common/mixins.scss";
 @use "variable.scss";
 
-$base_margin: 4px;   
+$base_margin: 4px;
 
-  .weather-box {
-    @include mixins.floating-widget;
+.weather-box {
+  @include mixins.floating-widget;
 
+  // header
 
-    // header
-    
-      .weather-header-box {
-        font-size: 11pt;
-        color: white;
+  .weather-header-box {
+    font-size: 11pt;
+    color: white;
 
-        .temperature{
-          font-weight: 500;
-          font-size: 2em;
-        }
-
-      }
-    
-
-    #weather-separator{
-      margin-top: 10px;
-      margin-bottom: 10px;
-      min-height: 2px;
+    .temperature {
+      font-weight: 500;
+      font-size: 2em;
     }
 
-    // weather items
-    #weather-grid {
+  }
 
-      .weather-forecast-time {
-        font-weight: 500;
-        font-size: 10pt;
-        padding-top: variable.$padding;;
-        padding-bottom: variable.$padding;;
-      }
-      .weather-forecast-icon {
-        margin-bottom: $base_margin;
-      }
 
-      .weather-forecast-temp {
-        font-feature-settings: "tnum";
-        font-weight: bold;
-      
-      }
+  #weather-separator {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-height: 2px;
+  }
+
+  // weather items
+  #weather-grid {
+
+    .weather-forecast-time {
+      font-weight: 500;
+      font-size: 10pt;
+      padding-top: variable.$padding;
+      ;
+      padding-bottom: variable.$padding;
+      ;
     }
+
+    .weather-forecast-icon {
+      margin-bottom: $base_margin;
     }
-    
+
+    .weather-forecast-temp {
+      font-feature-settings: "tnum";
+      font-weight: bold;
+
+    }
+  }
+}
