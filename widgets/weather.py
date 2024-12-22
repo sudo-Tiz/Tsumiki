@@ -85,6 +85,9 @@ class WeatherWidget(Button):
         # Initialize the Box with specific name and style
         super().__init__()
 
+        # TODO: cache the weather data
+        self.is_data_ready = True
+
         self.config = widget_config["weather"]
 
         self.box = Box(
@@ -114,11 +117,12 @@ class WeatherWidget(Button):
 
         self.connect(
             "clicked",
-            lambda *_: popup.set_visible(not popup.get_visible()),
+            lambda *_: self.is_data_ready
+            and popup.set_visible(not popup.get_visible()),
         )
 
         # Set up a repeater to call the update_label method at specified intervals
-        invoke_repeater(self.config["interval"], self.update_label, initial_call=False)
+        invoke_repeater(self.config["interval"], self.update_label, initial_call=True)
 
     # This function will run the weather fetch in a separate thread
     def update_label(self):

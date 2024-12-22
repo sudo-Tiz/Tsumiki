@@ -4,7 +4,7 @@ from .bluetooth import *
 from .brightness import *
 from .clickcounter import *
 from .dashboard import *
-from .datetime import *
+from .datetimemenu import *
 from .hypridle import *
 from .hyprsunset import *
 from .kblayout import *

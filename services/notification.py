@@ -4,12 +4,8 @@ from typing import List
 
 from fabric.core.service import Service
 from fabric.notifications import Notification
-from gi.repository import GLib
 
-CACHE_DIR = GLib.get_user_cache_dir()
-
-NOTIFICATIONS_CACHE_PATH = f"{CACHE_DIR}/notifications"
-CACHE_FILE = f"{NOTIFICATIONS_CACHE_PATH}/notifications.json"
+CACHE_FILE = f"{APP_CACHE_DIRECTORY}/notifications.json"
 
 
 class NotificationCacheService(Service):
@@ -37,10 +33,6 @@ class NotificationCacheService(Service):
 
         # Append the new notification to the list
         self._notifications.append(data)
-
-        # Check if the directory exists, if not, create it
-        if not os.path.exists(NOTIFICATIONS_CACHE_PATH):
-            os.makedirs(NOTIFICATIONS_CACHE_PATH)
 
         # Serialize the notifications
         serialized_data = [Notification.serialize(data) for data in self._notifications]

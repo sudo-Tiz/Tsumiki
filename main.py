@@ -3,6 +3,7 @@ from fabric import Application
 from fabric.utils import exec_shell_command, get_relative_path, monitor_file
 from loguru import logger
 
+from utils.config import APPLICATION_NAME
 import utils.functions as helpers
 from modules.bar import StatusBar
 from modules.notifications import NotificationPopup
@@ -22,8 +23,6 @@ def process_and_apply_css(app: Application):
     logger.info(f"{Colors.OKBLUE}[Main] CSS applied")
     app.set_stylesheet_from_file(get_relative_path("dist/main.css"))
 
-
-APPLICATION_NAME = "hydepanel"
 
 logger.disable("fabric.hyprland.widgets")
 
@@ -45,6 +44,7 @@ if __name__ == "__main__":
     main_css_file.connect("changed", lambda *_: process_and_apply_css(app))
 
     process_and_apply_css(app)
+
 
     # Run the application
     app.run()

@@ -25,10 +25,6 @@ from shared import AnimatedCircularProgressBar, CustomImage
 
 gi.require_version("GdkPixbuf", "2.0")
 
-NOTIFICATION_WIDTH = 400
-NOTIFICATION_IMAGE_SIZE = 64
-NOTIFICATION_TIMEOUT = 5  # 5 seconds
-
 
 class ActionButton(Button):
     """A button widget to represent a notification action."""
@@ -63,7 +59,7 @@ class NotificationWidget(EventBox):
 
     def __init__(self, notification: Notification, **kwargs):
         super().__init__(
-            size=(NOTIFICATION_WIDTH, -1),
+            size=(config.NOTIFICATION_WIDTH, -1),
             **kwargs,
         )
         self._notification = notification
@@ -148,8 +144,8 @@ class NotificationWidget(EventBox):
                     v_align="center",
                     children=CustomImage(
                         pixbuf=image_pixbuf.scale_simple(
-                            NOTIFICATION_IMAGE_SIZE,
-                            NOTIFICATION_IMAGE_SIZE,
+                            config.NOTIFICATION_IMAGE_SIZE,
+                            config.NOTIFICATION_IMAGE_SIZE,
                             GdkPixbuf.InterpType.BILINEAR,
                         ),
                         style_classes="image",
@@ -253,7 +249,7 @@ class NotificationWidget(EventBox):
         return (
             self._notification.timeout
             if self._notification.timeout != -1
-            else NOTIFICATION_TIMEOUT * 1000
+            else config.NOTIFICATION_TIMEOUT * 1000
         )
 
 

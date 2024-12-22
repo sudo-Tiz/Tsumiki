@@ -248,3 +248,4 @@ def convert_to_percent(
         return int((current / max) * 100)
     else:
         return (current / max) * 100
+
