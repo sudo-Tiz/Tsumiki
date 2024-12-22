@@ -1,20 +1,23 @@
 import time
 
+import gi
+
+
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.datetime import DateTime
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
-from gi.repository import GLib
+from gi.repository import GLib, Gtk
 
-from shared.calendar import GtkCalendar
 from shared.popover import PopOverWindow
 from shared.separator import GtkSeparator
-from shared.switch import Switch
 from utils.functions import uptime
 from utils.icons import icons
 from utils.widget_config import BarConfig
+
+gi.require_version("Gtk", "3.0")
 
 
 class DateNotificationMenu(Box):
@@ -52,17 +55,17 @@ class DateNotificationMenu(Box):
         )
 
         # Header for the notification column
+        dnd_switch = Gtk.Switch(
+            name="notification-switch",
+            active=True,
+            valign=Gtk.Align.CENTER,
+            visible=True,
+        )
+
         notif_header = Box(
             style_classes="header",
             orientation="h",
-            children=(
-                Label("Do Not Disturb"),
-                Switch(
-                    name="notification-switch",
-                    active=True,
-                    v_align="center",
-                ),
-            ),
+            children=(Label("Do Not Disturb"), dnd_switch),
         )
 
         clear_button = Button(
@@ -103,6 +106,7 @@ class DateNotificationMenu(Box):
         )
 
         # Date and time column
+
         date_column = Box(
             style_classes="date-column",
             orientation="v",
@@ -115,9 +119,11 @@ class DateNotificationMenu(Box):
                 Box(
                     style_classes="calendar",
                     children=(
-                        GtkCalendar(
-                            h_expand=True,
-                        ),
+                        Gtk.Calendar(
+                            visible=True,
+                            hexpand=True,
+                            halign=Gtk.Align.CENTER,
+                        )
                     ),
                 ),
             ),
@@ -125,7 +131,9 @@ class DateNotificationMenu(Box):
 
         self.children = (
             notification_colum,
-            GtkSeparator(),
+            Gtk.Separator(
+                visible=True,
+            ),
             date_column,
         )
 
