@@ -5,7 +5,7 @@ from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
 
 import utils.functions as helpers
-from utils.config import brightness_service
+from services import brightness_service
 from utils.icons import brightness_text_icons
 from utils.widget_config import BarConfig
 

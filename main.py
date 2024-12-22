@@ -37,6 +37,8 @@ if __name__ == "__main__":
 
     setproctitle.setproctitle(APPLICATION_NAME)
 
+    helpers.ensure_cache_dir_exists()
+
     helpers.copy_theme(widget_config["theme"]["name"])
 
     # Monitor styles folder for changes
@@ -44,7 +46,6 @@ if __name__ == "__main__":
     main_css_file.connect("changed", lambda *_: process_and_apply_css(app))
 
     process_and_apply_css(app)
-
 
     # Run the application
     app.run()

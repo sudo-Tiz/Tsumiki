@@ -8,7 +8,7 @@ from utils.icons import weather_text_icons
 context = ssl._create_unverified_context()
 
 
-class WeatherInfo:
+class WeatherService:
     """This class provides weather information for a given city."""
 
     def simple_weather_info(self, city: str):

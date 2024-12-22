@@ -3,10 +3,10 @@ from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.button import Button
 from fabric.widgets.label import Label
-from services import WeatherInfo
 from shared.popover import PopOverWindow
 from utils.functions import text_icon
 from utils.widget_config import BarConfig
+from services import weather_service
 
 import gi
 
@@ -122,12 +122,11 @@ class WeatherWidget(Button):
         )
 
         # Set up a repeater to call the update_label method at specified intervals
-        invoke_repeater(self.config["interval"], self.update_label, initial_call=True)
+        invoke_repeater(self.config["interval"], self.update_label, initial_call=False)
 
     # This function will run the weather fetch in a separate thread
     def update_label(self):
-        weather = WeatherInfo()
-        res = weather.simple_weather_info(self.config["location"])
+        res = weather_service.simple_weather_info(self.config["location"])
         # Update the label with the weather icon and temperature
 
         self.weather_label.set_label(f"{res['temperature']}°C")

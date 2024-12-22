@@ -5,7 +5,7 @@ from typing import List
 from fabric.core.service import Service
 from fabric.notifications import Notification
 
-CACHE_FILE = f"{APP_CACHE_DIRECTORY}/notifications.json"
+from utils.config import NOTIFICATION_CACHE_FILE
 
 
 class NotificationCacheService(Service):
@@ -19,7 +19,7 @@ class NotificationCacheService(Service):
         """Read the notifications from the notifications file."""
         notifications = []
         try:
-            with open(CACHE_FILE, "r") as file:
+            with open(NOTIFICATION_CACHE_FILE, "r") as file:
                 for line in file:
                     notification = json.loads(line)
                     notifications.append(notification)
@@ -38,8 +38,8 @@ class NotificationCacheService(Service):
         serialized_data = [Notification.serialize(data) for data in self._notifications]
 
         # Check if the cache file exists and read existing data
-        if os.path.exists(CACHE_FILE):
-            with open(CACHE_FILE, "r") as f:
+        if os.path.exists(NOTIFICATION_CACHE_FILE):
+            with open(NOTIFICATION_CACHE_FILE, "r") as f:
                 try:
                     # Load existing data if the file is not empty
                     existing_data = json.load(f)
@@ -52,7 +52,7 @@ class NotificationCacheService(Service):
         existing_data.extend(serialized_data)
 
         # Write the updated data back to the cache file
-        with open(CACHE_FILE, "w") as f:
+        with open(NOTIFICATION_CACHE_FILE, "w") as f:
             json.dump(existing_data, f, indent=2)
 
         print("Notification cached successfully.")

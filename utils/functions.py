@@ -12,6 +12,7 @@ from fabric.widgets.label import Label
 from gi.repository import GLib, Gtk
 from loguru import logger
 
+from utils.config import APP_CACHE_DIRECTORY
 import utils.icons as icons
 from utils.colors import Colors
 
@@ -249,3 +250,8 @@ def convert_to_percent(
     else:
         return (current / max) * 100
 
+
+# Function to ensure the cache directory exists
+def ensure_cache_dir_exists():
+    if not os.path.exists(APP_CACHE_DIRECTORY):
+        os.makedirs(APP_CACHE_DIRECTORY)
