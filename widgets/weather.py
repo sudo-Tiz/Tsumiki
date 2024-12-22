@@ -66,16 +66,30 @@ class WeatherMenu(Box):
                 ),
             ),
             center_children=(
-                Label(
-                    style_classes="windspeed",
+                Box(
+                    orientation="v",
                     v_align="start",
-                    h_align="center",
-                    label=f" {current_weather['windspeedKmph']}mph",
+                    spacing=10,
+                    children=(
+                        Label(
+                            style_classes="windspeed",
+                            v_align="center",
+                            h_align="center",
+                            label=f"0 {current_weather['windspeedKmph']} mph",
+                        ),
+                        Label(
+                            style_classes="humidity",
+                            v_align="center",
+                            h_align="center",
+                            label=f"󰖎 {current_weather['humidity']}%",
+                        ),
+                    ),
                 )
             ),
             end_children=(
                 Box(
                     orientation="v",
+                    spacing=10,
                     v_align="start",
                     children=(
                         Label(
