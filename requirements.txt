@@ -1,5 +1,5 @@
 click==8.1.7
-fabric @ git+https://github.com/Fabric-Development/fabric.git@1762220bdbc7c34a0ec33d607c287c38969c4fda
+git+https://github.com/Fabric-Development/fabric.git
 loguru==0.7.2
 psutil==6.1.0
 pycairo==1.27.0

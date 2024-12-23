@@ -3,7 +3,12 @@ from operator import le
 import time
 
 import gi
-from fabric.utils import exec_shell_command, get_relative_path, invoke_repeater
+from fabric.utils import (
+    exec_shell_command,
+    get_relative_path,
+    invoke_repeater,
+    bulk_connect,
+)
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
@@ -46,6 +51,14 @@ class WeatherMenu(Box):
         )
 
         # TODO: Play the animation only if the widget is visible otherwise stop, might reduce CPU usage
+
+        bulk_connect(
+            self,
+            {
+                "show": lambda *_: self.weather_anim.set_property("do_loop", True),
+                "hide": lambda *_: self.weather_anim.set_property("do_loop", False),
+            },
+        )
 
         title_box = CenterBox(
             style_classes="weather-header-box",

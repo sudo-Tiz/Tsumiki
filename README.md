@@ -97,7 +97,7 @@ hypridle
 
 ### **For Hyprland:**
 
-Add the following line to your `hypr.conf` to start FabricPanel automatically:
+Add the following line to your `hypr.conf` to start HydePanel automatically:
 
 ```sh
 exec = python "$HOME/bar/main.py"
