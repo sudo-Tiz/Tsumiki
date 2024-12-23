@@ -43,8 +43,6 @@ class WeatherMenu(Box):
             ),
             scale=0.25,
             do_loop=True,
-            h_align="center",
-            v_align="center",
         )
 
         # TODO: Play the animation only if the widget is visible otherwise stop, might reduce CPU usage
@@ -53,7 +51,6 @@ class WeatherMenu(Box):
             style_classes="weather-header-box",
             start_children=(
                 Box(
-                    v_align="start",
                     children=(
                         self.weather_anim,
                         Box(
@@ -62,14 +59,10 @@ class WeatherMenu(Box):
                             children=(
                                 Label(
                                     style_classes="condition",
-                                    v_align="center",
-                                    h_align="center",
                                     label=f"{current_weather["weatherDesc"][0]["value"]}",
                                 ),
                                 Label(
                                     style_classes="temperature",
-                                    v_align="center",
-                                    h_align="center",
                                     label=f"{current_weather['temp_C']}°C",
                                 ),
                             ),
@@ -81,17 +74,15 @@ class WeatherMenu(Box):
                 Box(
                     name="weather-details",
                     orientation="v",
-                    v_align="start",
                     spacing=10,
+                    v_align="center",
                     children=(
                         Label(
                             style_classes="windspeed",
-                            v_align="center",
                             label=f"0 {current_weather['windspeedKmph']} mph",
                         ),
                         Label(
                             style_classes="humidity",
-                            v_align="center",
                             label=f"󰖎 {current_weather['humidity']}%",
                         ),
                     ),
@@ -101,18 +92,14 @@ class WeatherMenu(Box):
                 Box(
                     orientation="v",
                     spacing=10,
-                    v_align="start",
+                    v_align="center",
                     children=(
                         Label(
                             style_classes="location",
-                            v_align="center",
-                            h_align="center",
                             label=f"{data['location']}",
                         ),
                         Label(
                             style_classes="feels-like",
-                            v_align="center",
-                            h_align="center",
                             label=f"Feels Like {current_weather['FeelsLikeC']}°C",
                         ),
                     ),
