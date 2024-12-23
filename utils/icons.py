@@ -97,7 +97,7 @@ weather_text_icons = {
 
 
 weather_text_icons_v2 = {
-    "113": {"description": "Sunny", "icon": "󰖙", "image": "cloudy.svg"},
+    "113": {"description": "Sunny", "icon": "󰖙", "image": "clear-day"},
     "116": {
         "description": "PartlyCloudy",
         "icon": "󰖕",
@@ -109,7 +109,7 @@ weather_text_icons_v2 = {
         "icon": "󰖕",
         "image": "weather-overcast-symbolic",
     },
-    "143": {"description": "Fog", "icon": "󰖑", "image": "weather-fog-symbolic"},
+    "143": {"description": "Fog", "icon": "󰖑", "image": "fog"},
     "176": {
         "description": "LightShowers",
         "icon": "󰼳",

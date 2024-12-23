@@ -49,7 +49,7 @@ class WeatherMenu(Box):
                     v_align="start",
                     children=(
                         Image(
-                            image_file=f"{weather_icons_dir}/{weather_text_icons_v2[current_weather["weatherCode"]]["image"]}",
+                            image_file=f"{weather_icons_dir}/{weather_text_icons_v2[current_weather["weatherCode"]]["image"]}.svg",
                             size=80,
                             v_align="start",
                         ),
@@ -143,7 +143,7 @@ class WeatherMenu(Box):
                 h_align="center",
             )
             icon = Image(
-                image_file=f"{weather_icons_dir}/{weather_text_icons_v2[column_data["weatherCode"]]["image"]}",
+                image_file=f"{weather_icons_dir}/{weather_text_icons_v2[column_data["weatherCode"]]["image"]}.svg",
                 size=70,
                 h_align="center",
                 h_expand=True,
