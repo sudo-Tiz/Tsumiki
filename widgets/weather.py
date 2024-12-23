@@ -12,7 +12,7 @@ from fabric.widgets.label import Label
 from gi.repository import GLib, Gtk
 
 from services import weather_service
-from shared import LottieAnimationWidget, LottieAnimation,PopOverWindow
+from shared import LottieAnimationWidget, LottieAnimation, PopOverWindow
 from utils.functions import convert_seconds_to_miliseconds, text_icon
 from utils.icons import weather_text_icons, weather_text_icons_v2
 from utils.widget_config import BarConfig
@@ -47,7 +47,7 @@ class WeatherMenu(Box):
             v_align="center",
         )
 
-       #TODO: Play the animation only if the widget is visible otherwise stop, might reduce CPU usage
+        # TODO: Play the animation only if the widget is visible otherwise stop, might reduce CPU usage
 
         title_box = CenterBox(
             style_classes="weather-header-box",

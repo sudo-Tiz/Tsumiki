@@ -17,8 +17,8 @@
     ]
   },
   "weather": {
-    "detect_location": true,
-    "location": "miami",
+    "detect_location": false,
+    "location": "kathmandu",
     "label": true,
     "tooltip": true,
     "interval": 700000

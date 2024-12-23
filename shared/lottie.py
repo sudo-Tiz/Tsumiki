@@ -77,7 +77,6 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
         )
         self.width, self.height = self.lottie_animation.lottie_animation_get_size()
 
-
         self.width = int(self.width * scale)
         self.height = int(self.height * scale)
 
