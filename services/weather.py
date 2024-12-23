@@ -1,5 +1,4 @@
 import json
-from math import exp
 import ssl
 from urllib.error import HTTPError
 import urllib.request
