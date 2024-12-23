@@ -9,5 +9,5 @@ from .weather import *
 
 brightness_service = Brightness()
 audio_service = Audio()
-notif_cache_service = NotificationCacheService()
 weather_service = WeatherService()
+notify_cache_service = NotificationCacheService()

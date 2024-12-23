@@ -101,13 +101,13 @@ weather_text_icons_v2 = {
     "116": {
         "description": "PartlyCloudy",
         "icon": "󰖕",
-        "image": "weather-partly-cloudy-symbolic",
+        "image": "cloudy",
     },
-    "119": {"description": "Cloudy", "icon": "󰖐", "image": "weather-cloudy-symbolic"},
+    "119": {"description": "Cloudy", "icon": "󰖐", "image": "cloudy"},
     "122": {
         "description": "VeryCloudy",
         "icon": "󰖕",
-        "image": "weather-overcast-symbolic",
+        "image": "cloudy",
     },
     "143": {"description": "Fog", "icon": "󰖑", "image": "fog"},
     "176": {
@@ -225,7 +225,7 @@ weather_text_icons_v2 = {
     "338": {
         "description": "HeavySnow",
         "icon": "󰼶",
-        "image": "weather-snow-heavy-symbolic",
+        "image": "extreme-snow",
     },
     "350": {
         "description": "LightSleet",
@@ -290,7 +290,7 @@ weather_text_icons_v2 = {
     "392": {
         "description": "ThunderySnowShowers",
         "icon": "󰼶",
-        "image": "weather-snow-thunderstorms-symbolic",
+        "image": "thunderstorms-day-snow",
     },
     "395": {
         "description": "HeavySnowShowers",

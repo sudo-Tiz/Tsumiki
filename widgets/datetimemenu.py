@@ -1,4 +1,5 @@
 import time
+from typing import List
 
 import gi
 from fabric.utils import invoke_repeater
@@ -10,10 +11,14 @@ from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import Gtk
 
+from modules.notifications import NotificationWidget
 from shared.popover import PopOverWindow
 from utils.functions import uptime
 from utils.icons import icons
 from utils.widget_config import BarConfig
+from fabric.notifications import (
+    Notification,
+)
 
 gi.require_version("Gtk", "3.0")
 
@@ -29,6 +34,13 @@ class DateNotificationMenu(Box):
             style_classes="clock",
         )
 
+        notifications: List[Notification] = []
+
+        notification_list = Box(
+            visible=len(notifications) > 0,
+            children=[NotificationWidget(val) for val in notifications],
+        )
+
         self.uptime = Label(style_classes="uptime", label=uptime())
 
         invoke_repeater(1000, self.update_lables, initial_call=True)
@@ -41,7 +53,7 @@ class DateNotificationMenu(Box):
             v_align="center",
             v_expand=True,
             h_expand=True,
-            visible=True,  # visible if no notifications
+            visible=len(notifications) == 0,  # visible if no notifications
             children=(
                 Image(
                     icon_name=icons["notifications"]["silent"],
@@ -98,7 +110,7 @@ class DateNotificationMenu(Box):
                     v_expand=True,
                     style_classes="notification-scrollable",
                     h_scrollbar_policy="never",
-                    child=Box(children=(placeholder)),
+                    child=Box(children=(placeholder, notification_list)),
                 ),
             ),
         )

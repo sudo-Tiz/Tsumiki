@@ -18,7 +18,7 @@ from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow
 from gi.repository import GdkPixbuf, GLib, GObject
 
-import services as notif_cache_service
+from services import notify_cache_service
 import utils.config as config
 import utils.functions as helpers
 import utils.icons as icons
@@ -313,4 +313,4 @@ class NotificationPopup(WaylandWindow):
         new_box = NotificationRevealer(notification)
         self.notifications.add(new_box)
         new_box.set_reveal_child(True)
-        notif_cache_service.cache_notification(notification)
+        notify_cache_service.cache_notification(notification)

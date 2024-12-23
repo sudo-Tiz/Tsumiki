@@ -1,4 +1,5 @@
 import json
+from operator import le
 import time
 
 import gi
@@ -12,7 +13,7 @@ from gi.repository import GLib, Gtk
 
 from services import weather_service
 from shared.popover import PopOverWindow
-from utils.functions import text_icon
+from utils.functions import convert_seconds_to_miliseconds, text_icon
 from utils.icons import weather_text_icons, weather_text_icons_v2
 from utils.widget_config import BarConfig
 
@@ -136,7 +137,12 @@ class WeatherMenu(Box):
             self.forecast_box,
         )
 
-        invoke_repeater(600, self.update_grid, hourly_forecast, initial_call=True)
+        invoke_repeater(
+            convert_seconds_to_miliseconds(3600),
+            self.update_grid,
+            hourly_forecast,
+            initial_call=True,
+        )
 
     def update_grid(self, hourly_forecast):
         current_time = int(time.strftime("%H00"))
@@ -144,6 +150,13 @@ class WeatherMenu(Box):
         next_values = [
             value for value in hourly_forecast if current_time <= int(value["time"])
         ][:4]
+
+        prev_values = [
+            value for value in hourly_forecast if current_time > int(value["time"])
+        ]
+
+        if len(next_values) < 4:
+            next_values = [prev_values[-1], *next_values]
 
         # show next 4 hours forecast
         for col in range(4):
