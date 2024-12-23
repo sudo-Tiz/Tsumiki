@@ -48,7 +48,7 @@ class WeatherMenu(Box):
             do_loop=True,
         )
 
-        title_box = CenterBox(
+        self.title_box = CenterBox(
             style_classes="weather-header-box",
             start_children=(
                 Box(
@@ -108,13 +108,6 @@ class WeatherMenu(Box):
             ),
         )
 
-        expander = Gtk.Expander(
-            child=title_box,
-            visible=True,
-            expanded=True,
-            name="weather-expander",
-        )
-
         # Create a grid to display the hourly forecast
 
         self.forecast_box = Gtk.Grid(
@@ -125,7 +118,7 @@ class WeatherMenu(Box):
         )
 
         self.children = (
-            expander,
+            self.title_box,
             Gtk.Separator(
                 orientation=Gtk.Orientation.HORIZONTAL,
                 visible=True,
