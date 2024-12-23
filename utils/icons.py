@@ -9,7 +9,6 @@ common_text_icons = {
     "thermometer": "",
 }
 
-
 distro_text_icons = {
     "deepin": "",
     "fedora": "",
@@ -43,7 +42,6 @@ distro_text_icons = {
 }
 
 # sourced from wttr.in
-
 weather_text_icons = {
     "113": {"description": "Sunny", "icon": "󰖙"},
     "116": {"description": "PartlyCloudy", "icon": "󰖕"},
@@ -94,7 +92,6 @@ weather_text_icons = {
     "392": {"description": "ThunderySnowShowers", "icon": "󰼶"},
     "395": {"description": "HeavySnowShowers", "icon": "󰼵"},
 }
-
 
 weather_text_icons_v2 = {
     "113": {
@@ -382,7 +379,6 @@ weather_text_icons_v2 = {
     },
 }
 
-
 volume_text_icons = {
     "overamplified": "󰕾",
     "high": "󰕾",
@@ -390,7 +386,6 @@ volume_text_icons = {
     "low": "󰕿",
     "muted": "󰝟",
 }
-
 
 volume_text_icons = {
     "overamplified": "󰕾",
@@ -406,7 +401,6 @@ brightness_text_icons = {
     "medium": "",
     "high": "",  # highest brightness
 }
-
 
 icons = {
     "missing": "image-missing-symbolic",

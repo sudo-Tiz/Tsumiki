@@ -20,7 +20,9 @@ class WeatherService:
             url = f"https://wttr.in/{encoded_location}?format=j1"
 
             logger.info(f"[Weather] Fetching weather information from {url}")
-            contents = urllib.request.urlopen(url).read().decode("utf-8")
+            contents = (
+                urllib.request.urlopen(url, context=context).read().decode("utf-8")
+            )
 
             # Parse the weather information
             data = json.loads(contents)

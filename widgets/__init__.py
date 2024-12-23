@@ -11,7 +11,6 @@ from .kblayout import *
 from .language import *
 from .mpris import *
 from .powerbutton import *
-from .screenrecord import *
 from .stats import *
 from .stopwatch import *
 from .systray import *

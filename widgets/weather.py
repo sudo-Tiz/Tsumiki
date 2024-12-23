@@ -48,7 +48,6 @@ class WeatherMenu(Box):
             do_loop=True,
         )
 
-
         title_box = CenterBox(
             style_classes="weather-header-box",
             start_children=(
