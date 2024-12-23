@@ -1,3 +1,4 @@
+import datetime
 import gi
 from fabric.utils import get_relative_path, invoke_repeater
 from fabric.widgets.box import Box
@@ -32,40 +33,50 @@ class WeatherMenu(Box):
         current_weather = data["current"]
 
         # Get the next 4 hours forecast
-        hourly_forecast = data["hourly"][4:8]
+        hourly_forecast = data["hourly"][0:4]
+
+        current_time = datetime.datetime.now().strftime("%H")
+
+        if int(current_time) >= 12:
+            hourly_forecast = hourly_forecast[4:8]
 
         weather_icons_dir = get_relative_path("../assets/icons/weather")
 
         title_box = CenterBox(
             style_classes="weather-header-box",
-            spacing=10,
             start_children=(
-                Image(
-                    image_file=f"{weather_icons_dir}/{weather_text_icons_v2[current_weather["weatherCode"]]["image"]}",
-                    size=80,
-                    v_align="start",
-                ),
                 Box(
-                    orientation="v",
-                    v_align="center",
+                    v_align="start",
                     children=(
-                        Label(
-                            style_classes="condition",
-                            v_align="center",
-                            h_align="center",
-                            label=f"{current_weather["weatherDesc"][0]["value"]}",
+                        Image(
+                            image_file=f"{weather_icons_dir}/{weather_text_icons_v2[current_weather["weatherCode"]]["image"]}",
+                            size=80,
+                            v_align="start",
                         ),
-                        Label(
-                            style_classes="temperature",
+                        Box(
+                            orientation="v",
                             v_align="center",
-                            h_align="center",
-                            label=f"{current_weather['temp_C']}°C",
+                            children=(
+                                Label(
+                                    style_classes="condition",
+                                    v_align="center",
+                                    h_align="center",
+                                    label=f"{current_weather["weatherDesc"][0]["value"]}",
+                                ),
+                                Label(
+                                    style_classes="temperature",
+                                    v_align="center",
+                                    h_align="center",
+                                    label=f"{current_weather['temp_C']}°C",
+                                ),
+                            ),
                         ),
                     ),
-                ),
+                )
             ),
             center_children=(
                 Box(
+                    name="weather-details",
                     orientation="v",
                     v_align="start",
                     spacing=10,
@@ -73,13 +84,11 @@ class WeatherMenu(Box):
                         Label(
                             style_classes="windspeed",
                             v_align="center",
-                            h_align="center",
                             label=f"0 {current_weather['windspeedKmph']} mph",
                         ),
                         Label(
                             style_classes="humidity",
                             v_align="center",
-                            h_align="center",
                             label=f"󰖎 {current_weather['humidity']}%",
                         ),
                     ),
@@ -124,7 +133,7 @@ class WeatherMenu(Box):
             visible=True,
         )
 
-        # show next 5 hours forecast
+        # show next 4 hours forecast
         for col in range(4):
             column_data = hourly_forecast[col]
 
