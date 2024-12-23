@@ -21,6 +21,7 @@ from gi.repository import GdkPixbuf, GLib, GObject
 import utils.config as config
 import utils.functions as helpers
 import utils.icons as icons
+import services as notif_cache_service
 from shared import AnimatedCircularProgressBar, CustomImage
 
 gi.require_version("GdkPixbuf", "2.0")
@@ -312,4 +313,4 @@ class NotificationPopup(WaylandWindow):
         new_box = NotificationRevealer(notification)
         self.notifications.add(new_box)
         new_box.set_reveal_child(True)
-        config.notif_cache_service.cache_notification(notification)
+        notif_cache_service.cache_notification(notification)
