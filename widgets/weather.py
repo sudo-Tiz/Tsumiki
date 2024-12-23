@@ -152,7 +152,6 @@ class WeatherMenu(Box):
         if current_time > 1200:
             next_values = hourly_forecast[4:8]
 
-
         # show next 4 hours forecast
         for col in range(4):
             column_data = next_values[col]
