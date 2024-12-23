@@ -58,7 +58,6 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
             h_expand=h_expand,
             v_expand=v_expand,
         )
-        # TODO: switch to just giving it a json/tgs file
 
         # State Management Things
         self.is_playing = False
@@ -70,7 +69,6 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
         self.lottie_animation: LottieAnimation = lottie_animation
 
         # LOTTIE STUFF
-        # TODO: Error handling
         self.anim_total_duration: int = (
             self.lottie_animation.lottie_animation_get_duration()
         )
@@ -79,7 +77,7 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
         )
         self.width, self.height = self.lottie_animation.lottie_animation_get_size()
 
-        # TODO Does this need to be int?
+
         self.width = int(self.width * scale)
         self.height = int(self.height * scale)
 
@@ -116,11 +114,11 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
         self.lottie_animation.lottie_animation_render_flush()
         self.queue_draw()
         if self.do_reverse and self.curr_frame <= self.end_frame:
-            self.is_playing = False if not self.do_loop else True
+            self.is_playing = self.do_loop
             self.curr_frame = self.anim_total_frames
-            return False if not self.do_loop else True
+            return self.do_loop
         elif not self.do_reverse and self.curr_frame >= self.end_frame:
-            self.is_playing = False if not self.do_loop else True
+            self.is_playing = self.do_loop
             self.curr_frame = 0 if self.do_loop else self.curr_frame
             return self.do_loop
         self.curr_frame += -1 if self.do_reverse else 1
@@ -132,7 +130,6 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
         end_frame: int | None = None,
         is_reverse: bool = False,
     ):
-        # TODO: check if animation can be played (santizie start and end frame inputs)
         if self.is_playing or self.do_loop:
             return
         self.do_reverse = is_reverse

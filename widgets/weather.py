@@ -12,7 +12,7 @@ from fabric.widgets.label import Label
 from gi.repository import GLib, Gtk
 
 from services import weather_service
-from shared.popover import PopOverWindow
+from shared import LottieAnimationWidget, LottieAnimation,PopOverWindow
 from utils.functions import convert_seconds_to_miliseconds, text_icon
 from utils.icons import weather_text_icons, weather_text_icons_v2
 from utils.widget_config import BarConfig
@@ -35,6 +35,19 @@ class WeatherMenu(Box):
         hourly_forecast = data["hourly"]
 
         self.weather_icons_dir = get_relative_path("../assets/icons/weather")
+        self.weather_lottie_dir = get_relative_path("../assets/icons/lottie")
+
+        self.weather_anim = LottieAnimationWidget(
+            LottieAnimation.from_file(
+                f"{self.weather_lottie_dir}/{weather_text_icons_v2[current_weather["weatherCode"]]["lottie"]}.json",
+            ),
+            scale=0.25,
+            do_loop=True,
+            h_align="center",
+            v_align="center",
+        )
+
+       #TODO: Play the animation only if the widget is visible otherwise stop, might reduce CPU usage
 
         title_box = CenterBox(
             style_classes="weather-header-box",
@@ -42,11 +55,7 @@ class WeatherMenu(Box):
                 Box(
                     v_align="start",
                     children=(
-                        Image(
-                            image_file=f"{self.weather_icons_dir}/{weather_text_icons_v2[current_weather["weatherCode"]]["image"]}.svg",
-                            size=80,
-                            v_align="start",
-                        ),
+                        self.weather_anim,
                         Box(
                             orientation="v",
                             v_align="center",

@@ -4,4 +4,6 @@ from .animated.scale import *
 from .buttontoggle import *
 from .customimage import *
 from .popup import *
+from .popover import *
 from .widget_container import *
+from .lottie import *
