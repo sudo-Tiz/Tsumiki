@@ -63,6 +63,7 @@ class NotificationWidget(EventBox):
             size=(config.NOTIFICATION_WIDTH, -1),
             **kwargs,
         )
+
         self._notification = notification
         self._timer = None
         self.anim_parts = 20
@@ -244,7 +245,7 @@ class NotificationWidget(EventBox):
 
     def on_button_press(self, _, event):
         if event.button != 1:
-            (self._notification.close("dismissed-by-user"),)
+            self._notification.close("dismissed-by-user")
 
     def get_timeout(self):
         return (
@@ -260,6 +261,7 @@ class NotificationRevealer(Revealer):
     def __init__(self, notification: Notification, **kwargs):
         self.notif_box = NotificationWidget(notification)
         self._notification = notification
+
         super().__init__(
             child=Box(
                 style="margin: 12px;",
@@ -279,8 +281,6 @@ class NotificationRevealer(Revealer):
 
     def on_resolved(
         self,
-        notification: Notification,
-        reason: NotificationCloseReason,
     ):
         self.set_reveal_child(False)
 
@@ -301,11 +301,11 @@ class NotificationPopup(WaylandWindow):
 
         super().__init__(
             anchor="top right",
-            child=self.notifications,
             layer="overlay",
             all_visible=True,
             visible=True,
             exclusive=False,
+            child=self.notifications,
         )
 
     def on_new_notification(self, fabric_notif, id):

@@ -73,19 +73,16 @@ class StatusBar(Window):
         self.children = CenterBox(
             name="panel-inner",
             start_children=Box(
-                name="start-container",
                 spacing=4,
                 orientation="h",
                 children=layout["left_section"],
             ),
             center_children=Box(
-                name="center-container",
                 spacing=4,
                 orientation="h",
                 children=layout["middle_section"],
             ),
             end_children=Box(
-                name="end-container",
                 spacing=4,
                 orientation="h",
                 children=layout["right_section"],
