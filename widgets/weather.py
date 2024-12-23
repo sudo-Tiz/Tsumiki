@@ -147,16 +147,11 @@ class WeatherMenu(Box):
     def update_grid(self, hourly_forecast):
         current_time = int(time.strftime("%H00"))
 
-        next_values = [
-            value for value in hourly_forecast if current_time <= int(value["time"])
-        ][:4]
+        next_values = hourly_forecast[:4]
 
-        prev_values = [
-            value for value in hourly_forecast if current_time > int(value["time"])
-        ]
+        if current_time > 1200:
+            next_values = hourly_forecast[4:8]
 
-        if len(next_values) < 4:
-            next_values = [prev_values[-1], *next_values]
 
         # show next 4 hours forecast
         for col in range(4):
@@ -260,7 +255,6 @@ class WeatherWidget(Button):
 
     def update_ui(self, res):
         # Update the label with the weather icon and temperature in the main thread
-
         current_weather = res["current"]
         text_icon = weather_text_icons[current_weather["weatherCode"]]["icon"]
         self.weather_label.set_label(f"{current_weather["FeelsLikeC"]}°C")
