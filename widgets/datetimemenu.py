@@ -1,13 +1,14 @@
 import time
 
 import gi
+from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.datetime import DateTime
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
-from gi.repository import GLib, Gtk
+from gi.repository import Gtk
 
 from shared.popover import PopOverWindow
 from utils.functions import uptime
@@ -30,7 +31,7 @@ class DateNotificationMenu(Box):
 
         self.uptime = Label(style_classes="uptime", label=uptime())
 
-        GLib.timeout_add(1000, self.update_lables)
+        invoke_repeater(1000, self.update_lables, initial_call=True)
 
         # Placeholder for when there are no notifications
         placeholder = Box(

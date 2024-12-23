@@ -18,10 +18,10 @@ from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow
 from gi.repository import GdkPixbuf, GLib, GObject
 
+import services as notif_cache_service
 import utils.config as config
 import utils.functions as helpers
 import utils.icons as icons
-import services as notif_cache_service
 from shared import AnimatedCircularProgressBar, CustomImage
 
 gi.require_version("GdkPixbuf", "2.0")

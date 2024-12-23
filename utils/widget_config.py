@@ -1,14 +1,12 @@
 from typing import List, TypedDict
 
+from utils.config import HIGH_POLL_INTERVAL
 from utils.functions import read_config
-
-# Default poll interval for widgets that need not be updated frequently
-high_poll_interval = 1000 * 60 * 10  # 10 minutes
 
 # Default configuration values
 DEFAULT_CONFIG = {
     "theme": {
-        "name": "catpuccin-frappe",
+        "name": "catpuccin-mocha",
     },
     "layout": {
         "left_section": ["workspaces", "window_title"],
@@ -84,7 +82,7 @@ DEFAULT_CONFIG = {
         "os": "arch",
         "icon": "󱧘",
         "icon_size": "14px",
-        "interval": high_poll_interval,
+        "interval": HIGH_POLL_INTERVAL,
         "tooltip": True,
         "label": True,
     },
@@ -100,10 +98,11 @@ DEFAULT_CONFIG = {
         "tooltip": True,
     },
     "weather": {
+        "detect_location": True,
         "location": "kathmandu",
         "label": True,
         "tooltip": True,
-        "interval": high_poll_interval,
+        "interval": HIGH_POLL_INTERVAL,
     },
     "volume": {
         "icon_size": "14px",
@@ -209,7 +208,14 @@ BlueTooth = TypedDict("BlueTooth", {"label": bool, "tooltip": bool, "icon_size":
 
 # Weather configuration
 Weather = TypedDict(
-    "Weather", {"location": str, "interval": int, "tooltip": bool, "label": bool}
+    "Weather",
+    {
+        "detect_location": bool,
+        "location": str,
+        "interval": int,
+        "tooltip": bool,
+        "label": bool,
+    },
 )
 
 # Keyboard configuration

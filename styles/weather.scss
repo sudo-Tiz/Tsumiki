@@ -28,19 +28,17 @@ $base_margin: 4px;
       margin-top: 10px;
     }
 
-    #weather-details{
+    #weather-details {
       margin: 8px 50px;
-      
+
       .windspeed {
-        
         font-size: 1.1em;
       }
-      
+
       .humidity {
         font-size: 1em;
       }
     }
-
   }
 
   #weather-separator {

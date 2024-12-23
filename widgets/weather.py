@@ -1,6 +1,8 @@
-import datetime
+import json
+import time
+
 import gi
-from fabric.utils import get_relative_path, invoke_repeater
+from fabric.utils import exec_shell_command, get_relative_path, invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
@@ -20,27 +22,18 @@ gi.require_version("Gtk", "3.0")
 class WeatherMenu(Box):
     """A menu to display the weather information."""
 
-    # wttr.in time are in 300,400...2100 format , we need to convert it to 3:00, 4:00...21:00
-    def format_wttr_time(self, time: str):
-        time_value = int(int(time) / 100)
-        return f"{time_value}:00" if time_value > 9 else f"0{time_value}:00"
-
     def __init__(self, data):
         super().__init__(
             style_classes="weather-box", orientation="v", h_expand=True, spacing=5
         )
 
+        # Get the current weather
         current_weather = data["current"]
 
-        # Get the next 4 hours forecast
-        hourly_forecast = data["hourly"][0:4]
+        # Get the hourly forecast
+        hourly_forecast = data["hourly"]
 
-        current_time = datetime.datetime.now().strftime("%H")
-
-        if int(current_time) >= 12:
-            hourly_forecast = hourly_forecast[4:8]
-
-        weather_icons_dir = get_relative_path("../assets/icons/weather")
+        self.weather_icons_dir = get_relative_path("../assets/icons/weather")
 
         title_box = CenterBox(
             style_classes="weather-header-box",
@@ -49,7 +42,7 @@ class WeatherMenu(Box):
                     v_align="start",
                     children=(
                         Image(
-                            image_file=f"{weather_icons_dir}/{weather_text_icons_v2[current_weather["weatherCode"]]["image"]}.svg",
+                            image_file=f"{self.weather_icons_dir}/{weather_text_icons_v2[current_weather["weatherCode"]]["image"]}.svg",
                             size=80,
                             v_align="start",
                         ),
@@ -133,17 +126,36 @@ class WeatherMenu(Box):
             visible=True,
         )
 
+        self.children = (
+            expander,
+            Gtk.Separator(
+                orientation=Gtk.Orientation.HORIZONTAL,
+                visible=True,
+                name="weather-separator",
+            ),
+            self.forecast_box,
+        )
+
+        invoke_repeater(600, self.update_grid, hourly_forecast, initial_call=True)
+
+    def update_grid(self, hourly_forecast):
+        current_time = int(time.strftime("%H00"))
+
+        next_values = [
+            value for value in hourly_forecast if current_time <= int(value["time"])
+        ][:4]
+
         # show next 4 hours forecast
         for col in range(4):
-            column_data = hourly_forecast[col]
+            column_data = next_values[col]
 
-            time = Label(
+            hour = Label(
                 style_classes="weather-forecast-time",
-                label=f"{self.format_wttr_time(column_data["time"])}",
+                label=f"{self.convert_to_12hr_format(column_data["time"])}",
                 h_align="center",
             )
             icon = Image(
-                image_file=f"{weather_icons_dir}/{weather_text_icons_v2[column_data["weatherCode"]]["image"]}.svg",
+                image_file=f"{self.weather_icons_dir}/{weather_text_icons_v2[column_data["weatherCode"]]["image"]}.svg",
                 size=70,
                 h_align="center",
                 h_expand=True,
@@ -155,19 +167,27 @@ class WeatherMenu(Box):
                 label=f"{column_data["tempC"]}°C",
                 h_align="center",
             )
-            self.forecast_box.attach(time, col, 0, 1, 1)
+            self.forecast_box.attach(hour, col, 0, 1, 1)
             self.forecast_box.attach(icon, col, 1, 1, 1)
             self.forecast_box.attach(temp, col, 2, 1, 1)
 
-        self.children = (
-            expander,
-            Gtk.Separator(
-                orientation=Gtk.Orientation.HORIZONTAL,
-                visible=True,
-                name="weather-separator",
-            ),
-            self.forecast_box,
-        )
+    # wttr.in time are in 300,400...2100 format , we need to convert it to 3:00, 4:00...21:00
+    def convert_to_12hr_format(self, time: str) -> str:
+        time = int(time)
+        hour = time // 100  # Get the hour (e.g., 1200 -> 12)
+        minute = time % 100  # Get the minutes (e.g., 1200 -> 00)
+
+        # Convert to 12-hour format
+        period = "AM" if hour < 12 else "PM"
+
+        # Adjust hour for 12-hour format
+        if hour == 0:
+            hour = 12
+        elif hour > 12:
+            hour -= 12
+
+        # Format the time as a string
+        return f"{hour}:{minute:02d} {period}"
 
 
 class WeatherWidget(Button):
@@ -215,6 +235,11 @@ class WeatherWidget(Button):
         return True
 
     def fetch_weather(self, _data):
+        if self.config["detect_location"]:
+            self.config["location"] = json.loads(
+                exec_shell_command("curl ipinfo.io").strip("\n")
+            )["city"]
+
         res = weather_service.simple_weather_info(self.config["location"])
 
         GLib.idle_add(self.update_ui, res)
@@ -231,9 +256,7 @@ class WeatherWidget(Button):
         # Update the tooltip with the city and weather condition if enabled
         if self.config["tooltip"]:
             self.set_tooltip_text(
-                f"{res['location']}, {current_weather["weatherDesc"][0]["value"]}".strip(
-                    "'"
-                )
+                f"{res['location']}, {current_weather["weatherDesc"][0]["value"]}"
             )
 
         popup = PopOverWindow(
