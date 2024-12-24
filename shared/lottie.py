@@ -2,12 +2,9 @@ from typing import Literal
 
 import cairo
 import gi
-from rlottie_python.rlottie_wrapper import LottieAnimation
-
-
 from fabric.widgets.widget import Widget
-
 from gi.repository import GLib, Gtk
+from rlottie_python.rlottie_wrapper import LottieAnimation
 
 gi.require_version("Gtk", "3.0")
 

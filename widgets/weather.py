@@ -2,11 +2,7 @@ import json
 import time
 
 import gi
-from fabric.utils import (
-    exec_shell_command,
-    get_relative_path,
-    invoke_repeater,
-)
+from fabric.utils import exec_shell_command, get_relative_path, invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
@@ -15,7 +11,7 @@ from fabric.widgets.label import Label
 from gi.repository import GLib, Gtk
 
 from services import weather_service
-from shared import LottieAnimationWidget, LottieAnimation, PopOverWindow
+from shared import LottieAnimation, LottieAnimationWidget, PopOverWindow
 from utils.functions import convert_seconds_to_miliseconds, text_icon
 from utils.icons import weather_text_icons, weather_text_icons_v2
 from utils.widget_config import BarConfig

@@ -1,12 +1,7 @@
 import time
 
 import gi
-from fabric.notifications import (
-    Notification,
-    NotificationAction,
-    NotificationCloseReason,
-    Notifications,
-)
+from fabric.notifications import Notification, NotificationAction, Notifications
 from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
@@ -18,10 +13,10 @@ from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow
 from gi.repository import GdkPixbuf, GLib, GObject
 
-from services import notify_cache_service
 import utils.config as config
 import utils.functions as helpers
 import utils.icons as icons
+from services import notify_cache_service
 from shared import AnimatedCircularProgressBar, CustomImage
 
 gi.require_version("GdkPixbuf", "2.0")

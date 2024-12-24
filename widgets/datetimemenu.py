@@ -2,6 +2,7 @@ import time
 from typing import List
 
 import gi
+from fabric.notifications import Notification
 from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
@@ -16,9 +17,6 @@ from shared.popover import PopOverWindow
 from utils.functions import uptime
 from utils.icons import icons
 from utils.widget_config import BarConfig
-from fabric.notifications import (
-    Notification,
-)
 
 gi.require_version("Gtk", "3.0")
 

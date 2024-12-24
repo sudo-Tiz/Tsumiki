@@ -1,7 +1,7 @@
 import json
 import ssl
-from urllib.error import HTTPError
 import urllib.request
+from urllib.error import HTTPError
 
 from loguru import logger
 

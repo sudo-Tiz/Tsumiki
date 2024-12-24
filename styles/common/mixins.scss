@@ -1,7 +1,7 @@
 @use "../theme.scss";
 @use "../variable.scss";
 
-@mixin no-style() {
+@mixin unset() {
   outline: none;
   border: none;
   box-shadow: none;
