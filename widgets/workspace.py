@@ -17,13 +17,13 @@ class WorkSpacesWidget(Box):
         self.workspace = HyperlandWorkspace(
             name="workspaces",
             spacing=4,
-            # Create buttons for each workspace if not occupied
-            buttons=[
+            # Create buttons for each workspace if occupied
+            buttons=None
+            if self.config["occupied"]
+            else [
                 WorkspaceButton(id=i, label=str(i))
                 for i in range(1, self.config["count"] + 1)
-            ]
-            if not self.config["occupied"]
-            else None,
+            ],
             # Factory function to create buttons for each workspace
             buttons_factory=lambda ws_id: WorkspaceButton(id=ws_id, label=str(ws_id)),
             invert_scroll=self.config["reverse_scroll"],

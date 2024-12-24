@@ -144,10 +144,6 @@ class WeatherMenu(Box):
         if current_time > 1200:
             next_values = self.hourly_forecast[4:8]
 
-        self.weather_anim.lottie_animation = LottieAnimation.from_file(
-            f"{self.weather_lottie_dir}/{weather_text_icons_v2[self.current_weather["weatherCode"]][self.check_day_or_night()]}.json",
-        )
-
         # show next 4 hours forecast
         for col in range(4):
             column_data = next_values[col]
