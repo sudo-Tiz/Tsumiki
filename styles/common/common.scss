@@ -230,13 +230,13 @@ expander {
     min-width: 16px;
     min-height: 16px;
     -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
-    color: lighten(variable.$border-color, 30%);
+    color: color.adjust(variable.$border-color, $lightness: 30%);
 
     &:dir(rtl) {
       -gtk-icon-source: -gtk-icontheme("pan-end-symbolic-rtl");
     }
     &:hover {
-      color: lighten(variable.$border-color, 60%);
+      color: color.adjust(variable.$border-color, $lightness: 60%);
     }
     &:checked {
       -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
