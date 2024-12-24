@@ -1,5 +1,6 @@
 import json
 import time
+from datetime import datetime
 
 import gi
 from fabric.utils import exec_shell_command, get_relative_path, invoke_repeater
@@ -28,17 +29,23 @@ class WeatherMenu(Box):
         )
 
         # Get the current weather
-        current_weather = data["current"]
+        self.current_weather = data["current"]
 
         # Get the hourly forecast
-        hourly_forecast = data["hourly"]
+        self.hourly_forecast = data["hourly"]
+
+        # Get the sunrise and sunset times
+        [self.sunrise_time, self.sunset_time] = [
+            data["astronomy"]["sunrise"],
+            data["astronomy"]["sunset"],
+        ]
 
         self.weather_icons_dir = get_relative_path("../assets/icons/weather")
         self.weather_lottie_dir = get_relative_path("../assets/icons/lottie")
 
         self.weather_anim = LottieAnimationWidget(
             LottieAnimation.from_file(
-                f"{self.weather_lottie_dir}/{weather_text_icons_v2[current_weather["weatherCode"]]["lottie"]}.json",
+                f"{self.weather_lottie_dir}/{weather_text_icons_v2[self.current_weather["weatherCode"]]["image"]}.json",
             ),
             scale=0.25,
             do_loop=True,
@@ -56,11 +63,11 @@ class WeatherMenu(Box):
                             children=(
                                 Label(
                                     style_classes="condition",
-                                    label=f"{current_weather["weatherDesc"][0]["value"]}",
+                                    label=f"{self.current_weather["weatherDesc"][0]["value"]}",
                                 ),
                                 Label(
                                     style_classes="temperature",
-                                    label=f"{current_weather['temp_C']}°C",
+                                    label=f"{self.current_weather['temp_C']}°C",
                                 ),
                             ),
                         ),
@@ -76,11 +83,11 @@ class WeatherMenu(Box):
                     children=(
                         Label(
                             style_classes="windspeed",
-                            label=f"0 {current_weather['windspeedKmph']} mph",
+                            label=f"0 {self.current_weather['windspeedKmph']} mph",
                         ),
                         Label(
                             style_classes="humidity",
-                            label=f"󰖎 {current_weather['humidity']}%",
+                            label=f"󰖎 {self.current_weather['humidity']}%",
                         ),
                     ),
                 )
@@ -97,7 +104,7 @@ class WeatherMenu(Box):
                         ),
                         Label(
                             style_classes="feels-like",
-                            label=f"Feels Like {current_weather['FeelsLikeC']}°C",
+                            label=f"Feels Like {self.current_weather['FeelsLikeC']}°C",
                         ),
                     ),
                 )
@@ -125,18 +132,21 @@ class WeatherMenu(Box):
 
         invoke_repeater(
             convert_seconds_to_miliseconds(3600),
-            self.update_grid,
-            hourly_forecast,
+            self.update_widget,
             initial_call=True,
         )
 
-    def update_grid(self, hourly_forecast):
+    def update_widget(self):
         current_time = int(time.strftime("%H00"))
 
-        next_values = hourly_forecast[:4]
+        next_values = self.hourly_forecast[:4]
 
         if current_time > 1200:
-            next_values = hourly_forecast[4:8]
+            next_values = self.hourly_forecast[4:8]
+
+        self.weather_anim.lottie_animation = LottieAnimation.from_file(
+            f"{self.weather_lottie_dir}/{weather_text_icons_v2[self.current_weather["weatherCode"]][self.check_day_or_night()]}.json",
+        )
 
         # show next 4 hours forecast
         for col in range(4):
@@ -181,6 +191,22 @@ class WeatherMenu(Box):
 
         # Format the time as a string
         return f"{hour}:{minute:02d} {period}"
+
+    def check_day_or_night(self, current_time: str | None = None) -> str:
+        time_format = "%I:%M %p"
+
+        if current_time is None:
+            current_time = datetime.now().strftime(time_format)
+
+        current_time_obj = datetime.strptime(current_time, time_format)
+        sunrise_time_obj = datetime.strptime(self.sunrise_time, time_format)
+        sunset_time_obj = datetime.strptime(self.sunset_time, time_format)
+
+        # Compare current time with sunrise and sunset
+        if sunrise_time_obj <= current_time_obj < sunset_time_obj:
+            return "image"  # Day
+        else:
+            return "image-night"  # Night
 
 
 class WeatherWidget(Button):

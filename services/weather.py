@@ -28,12 +28,14 @@ class WeatherService:
             data = json.loads(contents)
 
             current_weather = data["current_condition"][0]
-            hourly_weather = data["weather"][0]["hourly"]
+            weather = data["weather"][0]
+            hourly_weather = weather["hourly"]
 
             return {
                 "location": location.capitalize(),
                 "current": current_weather,  # the current weather information
-                "hourly": hourly_weather,  # the data for the next 24 hours in tri-hourly intervals
+                "hourly": hourly_weather,  # the data for the next 24 hours in tri-hourly intervals,
+                "astronomy": weather["astronomy"][0],  # the sunrise and sunset times
             }
 
         except HTTPError as e:
