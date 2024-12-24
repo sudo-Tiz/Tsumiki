@@ -1,18 +1,19 @@
 import time
 from typing import ClassVar, Literal
 
+from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.scale import ScaleMark
 from fabric.widgets.wayland import WaylandWindow as Window
-from gi.repository import GLib, GObject
+from gi.repository import GObject
 
 import utils.functions as helpers
 import utils.icons as icons
+from services import audio_service, brightness_service
 from shared import AnimatedScale
-from utils.config import audio_service, brightness_service
 
 
 class BrightnessOSDContainer(Box):
@@ -172,7 +173,7 @@ class OSDContainer(Window):
         )
         self.audio_container.connect("volume-changed", self.show_audio)
 
-        GLib.timeout_add(100, self.check_inactivity)
+        invoke_repeater(100, self.check_inactivity, initial_call=True)
 
     def show_audio(self, *_):
         self.show_box(box_to_show="audio")

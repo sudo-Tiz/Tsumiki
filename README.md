@@ -55,7 +55,7 @@ Run the following command to install the required packages:
 # Arch Linux
 
 ```sh
-sudo pacman -S pipewire playerctl gray-git python-fabric dart-sass networkmanager wl-clipboard brightnessctl python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python python-pip python-gobject python-psutil python-cairo python-loguru pkgconf --overwrite="*"
+sudo pacman -S pipewire playerctl gray-git python-fabric dart-sass networkmanager wl-clipboard brightnessctl python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python python-pip python-gobject python-psutil python-cairo python-loguru pkgconf wf-recorder
 ```
 
 # OpenSUSE
@@ -80,7 +80,7 @@ pip install -r requirements.txt
 pacman-contrib
 
 ## To record screen through the dashboard record shortcut
-gpu-screen-recorder
+wf-recorder
 
 ## To enable the eyedropper color picker with the default snapshot shortcut in the dashboard
 hyprpicker
@@ -97,7 +97,7 @@ hypridle
 
 ### **For Hyprland:**
 
-Add the following line to your `hypr.conf` to start FabricPanel automatically:
+Add the following line to your `hypr.conf` to start HydePanel automatically:
 
 ```sh
 exec = python "$HOME/bar/main.py"

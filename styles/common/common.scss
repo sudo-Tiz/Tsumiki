@@ -2,6 +2,7 @@
 
 @use "../theme.scss";
 @use "mixins.scss";
+@use "../variable.scss";
 
 label {
   font-size: 1rem;
@@ -66,13 +67,13 @@ label {
 }
 
 tooltip {
-  @include mixins.no-style;
+  @include mixins.unset;
   background-color: theme.$background-dark;
-  border-radius: 10px;
+  border-radius: variable.$radius;
   box-shadow: 0 0 3px 0 theme.$shadow-color;
 
   label {
-    @include mixins.no-style;
+    @include mixins.unset;
     font-weight: normal;
   }
 }
@@ -87,7 +88,7 @@ menu {
   background-color: theme.$background-alt;
   background-clip: border-box;
   border-radius: 12px;
-  border: 1px solid theme.$surface-disabled;
+  border: variable.$border;
 }
 
 menuitem {
@@ -136,7 +137,7 @@ radio {
   min-width: 15px;
   margin: 4px;
   padding: 0;
-  background-color: theme.$background-alt;
+  background-color: theme.$text-main;
   border-radius: 100px;
   transition:
     all 75ms cubic-bezier(0, 0, 0.2, 1),
@@ -145,13 +146,12 @@ radio {
 
 check {
   border-radius: 4px;
-  -gtk-icon-source: -gtk-icontheme("checkmark"); // TODO: find a better solution
 }
 
 check:hover,
 radio:hover {
   box-shadow: 0 0 0 4px color.adjust(theme.$background-dark, $alpha: -0.9);
-  background-color: theme.$background-dark;
+  background-color: theme.$text-muted;
 }
 
 check:active,
@@ -166,6 +166,10 @@ radio:checked,
 radio:indeterminate {
   color: theme.$background-dark;
   background-color: theme.$text-main;
+}
+
+check:checked {
+  -gtk-icon-source: -gtk-icontheme("checkbox"); // TODO: find a better solution
 }
 
 check:checked:hover,
@@ -187,16 +191,16 @@ radio:indeterminate:active {
 switch {
   transition: all 75ms cubic-bezier(0, 0, 0.2, 1);
   margin: 4px 0;
-  border: none;
+  border: variable.$border-width solid theme.$text-main;
   border-radius: 9999px;
-  background-color: theme.$background-alt;
+  background-color: theme.$background;
   background-clip: padding-box;
   font-size: 0;
   color: transparent;
 }
 
 switch:checked {
-  background-color: theme.$background-dark;
+  background-color: theme.$background-alt;
 }
 
 switch:disabled {
@@ -205,8 +209,8 @@ switch:disabled {
 
 switch slider {
   transition: all 75ms cubic-bezier(0, 0, 0.2, 1);
-  min-width: 18px;
-  min-height: 18px;
+  min-width: 12px;
+  min-height: 12px;
   margin: 3px;
   border-radius: 9999px;
   outline: none;
@@ -218,6 +222,25 @@ switch slider {
 @keyframes spin {
   to {
     -gtk-icon-transform: rotate(1turn);
+  }
+}
+
+expander {
+  arrow {
+    min-width: 16px;
+    min-height: 16px;
+    -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
+    color: lighten(variable.$border-color, 30%);
+
+    &:dir(rtl) {
+      -gtk-icon-source: -gtk-icontheme("pan-end-symbolic-rtl");
+    }
+    &:hover {
+      color: lighten(variable.$border-color, 60%);
+    }
+    &:checked {
+      -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
+    }
   }
 }
 

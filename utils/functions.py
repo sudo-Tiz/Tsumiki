@@ -14,6 +14,7 @@ from loguru import logger
 
 import utils.icons as icons
 from utils.colors import Colors
+from utils.config import APP_CACHE_DIRECTORY
 
 gi.require_version("Gtk", "3.0")
 
@@ -99,7 +100,16 @@ def convert_bytes(bytes: int, to: Literal["kb", "mb", "gb"]):
 
 # Function to get the system uptime
 def uptime():
-    return datetime.datetime.fromtimestamp(psutil.boot_time()).strftime("%H:%M:%S")
+    boot_time = psutil.boot_time()
+    now = datetime.datetime.now()
+
+    diff = now.timestamp() - boot_time
+
+    # Convert the difference in seconds to hours and minutes
+    hours, remainder = divmod(diff, 3600)
+    minutes, _ = divmod(remainder, 60)
+
+    return f"{int(hours):02}:{int(minutes):02}"
 
 
 # Function to convert seconds to miliseconds
@@ -239,3 +249,9 @@ def convert_to_percent(
         return int((current / max) * 100)
     else:
         return (current / max) * 100
+
+
+# Function to ensure the cache directory exists
+def ensure_cache_dir_exists():
+    if not os.path.exists(APP_CACHE_DIRECTORY):
+        os.makedirs(APP_CACHE_DIRECTORY)

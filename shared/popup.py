@@ -1,11 +1,11 @@
 from typing import Literal
 
+from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow
 from fabric.widgets.widget import Widget
-from gi.repository import GLib
 
 
 class Padding(EventBox):
@@ -309,4 +309,4 @@ class PopupWindow(WaylandWindow):
             self.currtimeout += 500
             return True
 
-        GLib.timeout_add(500, popup_func)
+        invoke_repeater(500, popup_func, initial_call=True)

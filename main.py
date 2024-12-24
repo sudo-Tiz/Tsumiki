@@ -8,6 +8,7 @@ from modules.bar import StatusBar
 from modules.notifications import NotificationPopup
 from modules.osd import OSDContainer
 from utils.colors import Colors
+from utils.config import APPLICATION_NAME
 from utils.widget_config import widget_config
 
 
@@ -23,8 +24,6 @@ def process_and_apply_css(app: Application):
     app.set_stylesheet_from_file(get_relative_path("dist/main.css"))
 
 
-APPLICATION_NAME = "hydepanel"
-
 logger.disable("fabric.hyprland.widgets")
 
 if __name__ == "__main__":
@@ -37,6 +36,8 @@ if __name__ == "__main__":
     app = Application(APPLICATION_NAME, bar, notifications, system_overlay)
 
     setproctitle.setproctitle(APPLICATION_NAME)
+
+    helpers.ensure_cache_dir_exists()
 
     helpers.copy_theme(widget_config["theme"]["name"])
 

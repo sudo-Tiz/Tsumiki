@@ -5,7 +5,7 @@ from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
 
 import utils.functions as helpers
-from utils.config import brightness_service
+from services import brightness_service
 from utils.icons import brightness_text_icons
 from utils.widget_config import BarConfig
 
@@ -13,7 +13,7 @@ from utils.widget_config import BarConfig
 class BrightnessWidget(EventBox):
     """a widget that displays and controls the brightness."""
 
-    def __init__(self, widget_config: BarConfig, **kwargs):
+    def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(events=["scroll", "smooth-scroll"], **kwargs)
 
         self.config = widget_config["brightness"]

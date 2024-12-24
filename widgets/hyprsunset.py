@@ -5,7 +5,7 @@ from utils.widget_config import BarConfig
 class HyprSunsetWidget(CommandSwitcher):
     """A widget to control the hyprsunset command."""
 
-    def __init__(self, widget_config: BarConfig, **kwargs):
+    def __init__(self, widget_config: BarConfig, bar, **kwargs):
         # Store the configuration for hyprsunset
         self.config = widget_config["hypr_sunset"]
 

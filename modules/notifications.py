@@ -1,12 +1,7 @@
 import time
 
 import gi
-from fabric.notifications import (
-    Notification,
-    NotificationAction,
-    NotificationCloseReason,
-    Notifications,
-)
+from fabric.notifications import Notification, NotificationAction, Notifications
 from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
@@ -18,15 +13,13 @@ from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow
 from gi.repository import GdkPixbuf, GLib, GObject
 
+import utils.config as config
 import utils.functions as helpers
 import utils.icons as icons
+from services import notify_cache_service
 from shared import AnimatedCircularProgressBar, CustomImage
 
 gi.require_version("GdkPixbuf", "2.0")
-
-NOTIFICATION_WIDTH = 400
-NOTIFICATION_IMAGE_SIZE = 64
-NOTIFICATION_TIMEOUT = 5  # 5 seconds
 
 
 class ActionButton(Button):
@@ -62,9 +55,10 @@ class NotificationWidget(EventBox):
 
     def __init__(self, notification: Notification, **kwargs):
         super().__init__(
-            size=(NOTIFICATION_WIDTH, -1),
+            size=(config.NOTIFICATION_WIDTH, -1),
             **kwargs,
         )
+
         self._notification = notification
         self._timer = None
         self.anim_parts = 20
@@ -147,8 +141,8 @@ class NotificationWidget(EventBox):
                     v_align="center",
                     children=CustomImage(
                         pixbuf=image_pixbuf.scale_simple(
-                            NOTIFICATION_IMAGE_SIZE,
-                            NOTIFICATION_IMAGE_SIZE,
+                            config.NOTIFICATION_IMAGE_SIZE,
+                            config.NOTIFICATION_IMAGE_SIZE,
                             GdkPixbuf.InterpType.BILINEAR,
                         ),
                         style_classes="image",
@@ -246,13 +240,13 @@ class NotificationWidget(EventBox):
 
     def on_button_press(self, _, event):
         if event.button != 1:
-            (self._notification.close("dismissed-by-user"),)
+            self._notification.close("dismissed-by-user")
 
     def get_timeout(self):
         return (
             self._notification.timeout
             if self._notification.timeout != -1
-            else NOTIFICATION_TIMEOUT * 1000
+            else config.NOTIFICATION_TIMEOUT * 1000
         )
 
 
@@ -262,6 +256,7 @@ class NotificationRevealer(Revealer):
     def __init__(self, notification: Notification, **kwargs):
         self.notif_box = NotificationWidget(notification)
         self._notification = notification
+
         super().__init__(
             child=Box(
                 style="margin: 12px;",
@@ -281,8 +276,6 @@ class NotificationRevealer(Revealer):
 
     def on_resolved(
         self,
-        notification: Notification,
-        reason: NotificationCloseReason,
     ):
         self.set_reveal_child(False)
 
@@ -303,14 +296,16 @@ class NotificationPopup(WaylandWindow):
 
         super().__init__(
             anchor="top right",
-            child=self.notifications,
             layer="overlay",
             all_visible=True,
             visible=True,
             exclusive=False,
+            child=self.notifications,
         )
 
     def on_new_notification(self, fabric_notif, id):
-        new_box = NotificationRevealer(fabric_notif.get_notification_from_id(id))
+        notification = fabric_notif.get_notification_from_id(id)
+        new_box = NotificationRevealer(notification)
         self.notifications.add(new_box)
         new_box.set_reveal_child(True)
+        notify_cache_service.cache_notification(notification)

@@ -1,84 +1,202 @@
-import threading
+import json
+import time
 
-from fabric.utils import invoke_repeater
+import gi
+from fabric.utils import exec_shell_command, get_relative_path, invoke_repeater
 from fabric.widgets.box import Box
+from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
-from fabric.widgets.eventbox import EventBox
+from fabric.widgets.image import Image
 from fabric.widgets.label import Label
-from loguru import logger
+from gi.repository import GLib, Gtk
 
-from services import WeatherInfo
-from shared import PopupWindow
-from utils.colors import Colors
-from utils.functions import text_icon
-from utils.icons import common_text_icons
+from services import weather_service
+from shared import LottieAnimation, LottieAnimationWidget, PopOverWindow
+from utils.functions import convert_seconds_to_miliseconds, text_icon
+from utils.icons import weather_text_icons, weather_text_icons_v2
 from utils.widget_config import BarConfig
+
+gi.require_version("Gtk", "3.0")
 
 
 class WeatherMenu(Box):
     """A menu to display the weather information."""
 
-    def __init__(self, data: dict):
-        super().__init__(name="weather-menu")
-
-        self.weather_container = Box(
-            orientation="h", spacing=4, name="weather-container"
+    def __init__(self, data):
+        super().__init__(
+            style_classes="weather-box", orientation="v", h_expand=True, spacing=5
         )
 
-        self.upper = CenterBox(
-            name="weather-upper",
-            start_children=Box(
-                name="start-container",
-                v_align="center",
-                h_align="center",
-                children=text_icon(
-                    icon=data["icon"],
-                    size="40px",
-                ),
+        # Get the current weather
+        current_weather = data["current"]
+
+        # Get the hourly forecast
+        hourly_forecast = data["hourly"]
+
+        self.weather_icons_dir = get_relative_path("../assets/icons/weather")
+        self.weather_lottie_dir = get_relative_path("../assets/icons/lottie")
+
+        self.weather_anim = LottieAnimationWidget(
+            LottieAnimation.from_file(
+                f"{self.weather_lottie_dir}/{weather_text_icons_v2[current_weather["weatherCode"]]["lottie"]}.json",
             ),
-            center_children=Box(
-                name="center-container",
-                v_align="center",
-                h_align="center",
-                children=[
-                    Label(
-                        style_classes="temperature",
-                        label=f"{data["temperature"]}°C",
+            scale=0.25,
+            do_loop=True,
+        )
+
+        self.title_box = CenterBox(
+            style_classes="weather-header-box",
+            start_children=(
+                Box(
+                    children=(
+                        self.weather_anim,
+                        Box(
+                            orientation="v",
+                            v_align="center",
+                            children=(
+                                Label(
+                                    style_classes="condition",
+                                    label=f"{current_weather["weatherDesc"][0]["value"]}",
+                                ),
+                                Label(
+                                    style_classes="temperature",
+                                    label=f"{current_weather['temp_C']}°C",
+                                ),
+                            ),
+                        ),
                     ),
-                    text_icon(
-                        icon=common_text_icons["thermometer"],
-                        size="20px",
-                    ),
-                ],
+                )
             ),
-            end_children=Box(
-                name="end-container",
-                spacing=4,
-                orientation="h",
-                children=[],
+            center_children=(
+                Box(
+                    name="weather-details",
+                    orientation="v",
+                    spacing=10,
+                    v_align="center",
+                    children=(
+                        Label(
+                            style_classes="windspeed",
+                            label=f"0 {current_weather['windspeedKmph']} mph",
+                        ),
+                        Label(
+                            style_classes="humidity",
+                            label=f"󰖎 {current_weather['humidity']}%",
+                        ),
+                    ),
+                )
+            ),
+            end_children=(
+                Box(
+                    orientation="v",
+                    spacing=10,
+                    v_align="center",
+                    children=(
+                        Label(
+                            style_classes="location",
+                            label=f"{data['location']}",
+                        ),
+                        Label(
+                            style_classes="feels-like",
+                            label=f"Feels Like {current_weather['FeelsLikeC']}°C",
+                        ),
+                    ),
+                )
             ),
         )
 
-        self.bottom = Box()
-        self.weather_container.add(self.upper)
+        # Create a grid to display the hourly forecast
 
-        self.add(self.weather_container)
+        self.forecast_box = Gtk.Grid(
+            row_spacing=10,
+            column_spacing=20,
+            name="weather-grid",
+            visible=True,
+        )
+
+        self.children = (
+            self.title_box,
+            Gtk.Separator(
+                orientation=Gtk.Orientation.HORIZONTAL,
+                visible=True,
+                name="weather-separator",
+            ),
+            self.forecast_box,
+        )
+
+        invoke_repeater(
+            convert_seconds_to_miliseconds(3600),
+            self.update_grid,
+            hourly_forecast,
+            initial_call=True,
+        )
+
+    def update_grid(self, hourly_forecast):
+        current_time = int(time.strftime("%H00"))
+
+        next_values = hourly_forecast[:4]
+
+        if current_time > 1200:
+            next_values = hourly_forecast[4:8]
+
+        # show next 4 hours forecast
+        for col in range(4):
+            column_data = next_values[col]
+
+            hour = Label(
+                style_classes="weather-forecast-time",
+                label=f"{self.convert_to_12hr_format(column_data["time"])}",
+                h_align="center",
+            )
+            icon = Image(
+                image_file=f"{self.weather_icons_dir}/{weather_text_icons_v2[column_data["weatherCode"]]["image"]}.svg",
+                size=70,
+                h_align="center",
+                h_expand=True,
+                style_classes="weather-forecast-icon",
+            )
+
+            temp = Label(
+                style_classes="weather-forecast-temp",
+                label=f"{column_data["tempC"]}°C",
+                h_align="center",
+            )
+            self.forecast_box.attach(hour, col, 0, 1, 1)
+            self.forecast_box.attach(icon, col, 1, 1, 1)
+            self.forecast_box.attach(temp, col, 2, 1, 1)
+
+    # wttr.in time are in 300,400...2100 format , we need to convert it to 3:00, 4:00...21:00
+    def convert_to_12hr_format(self, time: str) -> str:
+        time = int(time)
+        hour = time // 100  # Get the hour (e.g., 1200 -> 12)
+        minute = time % 100  # Get the minutes (e.g., 1200 -> 00)
+
+        # Convert to 12-hour format
+        period = "AM" if hour < 12 else "PM"
+
+        # Adjust hour for 12-hour format
+        if hour == 0:
+            hour = 12
+        elif hour > 12:
+            hour -= 12
+
+        # Format the time as a string
+        return f"{hour}:{minute:02d} {period}"
 
 
-class WeatherWidget(EventBox):
+class WeatherWidget(Button):
     """A widget to display the current weather."""
 
     def __init__(
         self,
         widget_config: BarConfig,
+        bar,
     ):
         # Initialize the Box with specific name and style
         super().__init__()
 
-        # Set the widget as not ready until the weather information is fetched
-        self.is_ready = False
-
         self.config = widget_config["weather"]
+
+        self.bar = bar
 
         self.box = Box(
             name="weather",
@@ -87,7 +205,13 @@ class WeatherWidget(EventBox):
 
         self.children = self.box
 
-        self.weather_icon = text_icon(icon="", size="15px")
+        self.weather_icon = text_icon(
+            icon="",
+            size="15px",
+            props={
+                "style_classes": "weather-bar-icon",
+            },
+        )
 
         self.weather_label = Label(
             label="Fetching weather...",
@@ -99,36 +223,45 @@ class WeatherWidget(EventBox):
         invoke_repeater(self.config["interval"], self.update_label, initial_call=True)
 
     def update_label(self):
-        weather_thread = threading.Thread(
-            target=self.fetch_weather_in_thread,
-            args=(self.config["location"],),
-            daemon=True,
-        )
-        weather_thread.start()
-        # Continue running the main program (non-blocking)
-        logger.info(
-            f"{Colors.OKBLUE}[Weather] Weather information is being fetched in a separate thread...",
-        )
+        # Create a background thread to fetch weather data
+        GLib.Thread.new("thread", self.fetch_weather, None)
+        return True
 
-    # This function will run the weather fetch in a separate thread
-    def fetch_weather_in_thread(self, city: str):
-        weather = WeatherInfo()
-        res = weather.simple_weather_info(city)
-        # Update the label with the weather icon and temperature
+    def fetch_weather(self, _data):
+        if self.config["detect_location"]:
+            self.config["location"] = json.loads(
+                exec_shell_command("curl ipinfo.io").strip("\n")
+            )["city"]
 
-        self.weather_label.set_label(f"{res['temperature']}°C")
-        self.weather_icon.set_label(res["icon"])
+        res = weather_service.simple_weather_info(self.config["location"])
 
-        self.weather_menu = PopupWindow(
-            transition_duration=350,
-            anchor="top-right",
-            transition_type="slide-down",
-            child=WeatherMenu(res),
-            enable_inhibitor=True,
-        )
-        self.connect("button-press-event", lambda *_: self.weather_menu.toggle_popup())
+        GLib.idle_add(self.update_ui, res)
+        return False
+
+    def update_ui(self, res):
+        # Update the label with the weather icon and temperature in the main thread
+        current_weather = res["current"]
+        text_icon = weather_text_icons[current_weather["weatherCode"]]["icon"]
+        self.weather_label.set_label(f"{current_weather["FeelsLikeC"]}°C")
+        self.weather_icon.set_label(text_icon)
 
         # Update the tooltip with the city and weather condition if enabled
         if self.config["tooltip"]:
-            self.set_tooltip_text(f"{res['city']}, {res['condition']}".strip("'"))
-        return True
+            self.set_tooltip_text(
+                f"{res['location']}, {current_weather["weatherDesc"][0]["value"]}"
+            )
+
+        popup = PopOverWindow(
+            parent=self.bar,
+            name="popup",
+            child=(WeatherMenu(data=res)),
+            visible=False,
+            all_visible=False,
+        )
+
+        popup.set_pointing_to(self)
+
+        self.connect(
+            "clicked",
+            lambda *_: popup.set_visible(not popup.get_visible()),
+        )

@@ -1,0 +1,132 @@
+@use "sass:color";
+@use "theme.scss";
+@use "common/mixins.scss";
+@use "variable.scss";
+
+/************** DATE MENU **************/
+
+#datemenu {
+  @include mixins.floating-widget;
+  @include mixins.spacing;
+  padding: 10px;
+
+  #notification-column {
+    min-width: 350px;
+
+    .header {
+      margin-bottom: variable.$spacing;
+      margin-right: variable.$spacing;
+
+      > label {
+        margin-left: variable.$radius * 0.5;
+      }
+
+      label {
+        font-weight: 600;
+        margin-right: 4px;
+        font-size: 11px;
+      }
+
+      #clear-button {
+        padding: variable.$padding * 0.5 variable.$padding;
+        border: variable.$border;
+        border-radius: variable.$radius;
+        background-color: theme.$background;
+        border-width: 2px;
+
+        &:hover {
+          background-color: theme.$background-alt;
+
+          #clear-icon {
+            -gtk-icon-transform: scale(1.05);
+            -gtk-icon-effect: highlight;
+          }
+        }
+      }
+    }
+
+    .body {
+      .notification-list {
+        margin-right: variable.$spacing;
+      }
+
+      .placeholder {
+        image {
+          font-size: 7em;
+        }
+
+        label {
+          font-size: 1em;
+        }
+      }
+    }
+  }
+
+  separator {
+    background-color: variable.$popover-border-color;
+    border-radius: variable.$radius;
+    margin-right: variable.$spacing;
+  }
+
+  .date-column {
+    .clock-box {
+      padding: variable.$padding;
+
+      .clock {
+        font-size: 4.5em;
+      }
+
+      .uptime {
+        color: color.adjust(theme.$text-main, $alpha: -0.2);
+      }
+    }
+
+    .calendar {
+      @include mixins.widget;
+      background-color: theme.$background-alt;
+
+      padding: variable.$padding * 2 variable.$padding * 2 0;
+
+      calendar {
+        all: unset;
+
+        &.button {
+          transition: 200ms;
+          border-radius: variable.$radius;
+          color: theme.$text-main;
+          //  background-color: theme.$accent-blue;
+        }
+
+        &:hover {
+          color: red;
+        }
+
+        &:selected {
+          box-shadow:
+            inset 0 -5px 0 0 color.adjust(theme.$ws-active, $alpha: -0.5),
+            inset 0 0 0 1px theme.$ws-active;
+          border-radius: variable.$radius * 0.6;
+        }
+
+        &.header {
+          background-color: transparent;
+          border: none;
+          color: theme.$accent-blue;
+          //  &:backdrop { border-bottom-color: transparentize(black, 0.9); }
+        }
+
+        &.highlight {
+          background-color: transparent;
+          color: theme.$accent-teal;
+        }
+
+        &:indeterminate {
+          color: color.adjust(theme.$text-main, $alpha: -0.9);
+        }
+
+        font-size: 0.98em;
+        padding: 0.28em;
+      }
+    }
+  }
+}

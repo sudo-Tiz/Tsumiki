@@ -16,6 +16,7 @@ class Battery(Box):
     def __init__(
         self,
         widget_config: BarConfig,
+        bar,
     ):
         # Initialize the Box with specific name and style
         super().__init__(name="battery", style_classes="panel-box")

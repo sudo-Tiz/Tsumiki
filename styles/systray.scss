@@ -1,4 +1,5 @@
 @use "theme.scss";
+@use "variable.scss";
 
 /* system tray widget*/
 /* TODO: see other traybar styles from kde,gnome  */
@@ -34,7 +35,7 @@
   margin: 5px 0px;
   background-color: theme.$surface-disabled;
   padding: 0.3em 0.5em;
-  border-radius: 10px;
+  border-radius: variable.$radius;
 }
 
 #system-tray-menu > menuitem menu > menuitem:disabled,

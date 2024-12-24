@@ -4,18 +4,24 @@
   },
   "layout": {
     "left_section": ["workspaces", "window_title"],
-    "middle_section": ["datetime"],
+    "middle_section": ["date_time", "weather"],
     "right_section": [
       "hypr_sunset",
       "updates",
       "bluetooth",
       "volume",
-      "brightness",
       "battery",
       "system_tray",
       "power",
       "theme_switcher"
     ]
+  },
+  "weather": {
+    "detect_location": false,
+    "location": "kathmandu",
+    "label": true,
+    "tooltip": true,
+    "interval": 700000
   },
   "hypr_sunset": {
     "temperature": "2800k",
@@ -120,5 +126,8 @@
     "icon": "󰌌",
     "icon_size": "14px",
     "silent": false
+  },
+  "date_time": {
+    "format": "%b %d %H:%M"
   }
 }

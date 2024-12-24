@@ -1,5 +1,6 @@
 @use "sass:color";
 @use "theme.scss";
+@use "variable.scss";
 
 /* overview  widget */
 
@@ -23,7 +24,7 @@
 #overview-client-box,
 #overview-workspace-bg,
 #overview-frame {
-  border-radius: 10px;
+  border-radius: variable.$radius;
 }
 
 #overview-client-box {

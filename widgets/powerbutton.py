@@ -124,7 +124,7 @@ class PowerControlButtons(Button):
 class PowerButton(Button):
     """A widget to power off the system."""
 
-    def __init__(self, widget_config: BarConfig, **kwargs):
+    def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(name="power", style_classes="panel-button", **kwargs)
 
         self.config = widget_config["power"]

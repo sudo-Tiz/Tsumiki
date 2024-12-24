@@ -7,7 +7,6 @@ from widgets import (
     Battery,
     BlueToothWidget,
     BrightnessWidget,
-    CalendarWidget,
     CpuWidget,
     DateTimeWidget,
     HyprIdleWidget,
@@ -46,43 +45,27 @@ class StatusBar(Window):
         )
 
         self.widgets_list = {
-            # Workspaces: Displays the list of workspaces or desktops
-            "workspaces": WorkSpacesWidget,
+            "battery": Battery,
+            "bluetooth": BlueToothWidget,
+            "brightness": BrightnessWidget,
+            "cpu": CpuWidget,
+            "date_time": DateTimeWidget,
+            "hypr_idle": HyprIdleWidget,
+            "hypr_sunset": HyprSunsetWidget,
+            "keyboard": KeyboardLayoutWidget,
+            "language": LanguageWidget,
+            "memory": MemoryWidget,
+            "mpris": Mpris,
+            "power": PowerButton,
+            "storage": StorageWidget,
             "system_tray": SystemTray,
             "task_bar": TaskBarWidget,
-            "calendar": CalendarWidget,
-            "bluetooth": BlueToothWidget,
-            "keyboard": KeyboardLayoutWidget,
-            "brightness": BrightnessWidget,
-            "power": PowerButton,
-            # WindowTitle: Shows the title of the current window
-            "window_title": WindowTitleWidget,
-            # LanguageBox: Displays the current language selection
-            "language": LanguageWidget,
-            # DateTime: Displays the current date and time
-            "datetime": DateTimeWidget,
-            "volume": VolumeWidget,
-            # HyprSunset: Provides information about the sunset time based on location
-            "hypr_sunset": HyprSunsetWidget,
-            # # HyprIdle: Shows the idle time for the system
-            "hypr_idle": HyprIdleWidget,
-            # Battery: Displays the battery status with optional label and tooltip
-            "battery": Battery,
-            # Cpu: Displays CPU usage information with optional label and tooltip
-            "cpu": CpuWidget,
-            # # ClickCounter: Tracks the number of clicks on a widget or component
-            # "click_counter": ClickCounter(),
-            # Memory: Displays the system's memory usage
-            "memory": MemoryWidget,
-            # Storage: Shows the system's storage usage (e.g., disk space)
-            "storage": StorageWidget,
-            # Weather: Displays the weather for a given city (e.g., Kathmandu)
-            "weather": WeatherWidget,
-            # Mpris: Displays information about the current media player status
-            "mpris": Mpris,
-            # Updates: Shows available system updates based on the OS
-            "updates": UpdatesWidget,
             "theme_switcher": ThemeSwitcherWidget,
+            "updates": UpdatesWidget,
+            "volume": VolumeWidget,
+            "weather": WeatherWidget,
+            "window_title": WindowTitleWidget,
+            "workspaces": WorkSpacesWidget,
         }
 
         layout = self.make_layout()
@@ -90,19 +73,16 @@ class StatusBar(Window):
         self.children = CenterBox(
             name="panel-inner",
             start_children=Box(
-                name="start-container",
                 spacing=4,
                 orientation="h",
                 children=layout["left_section"],
             ),
             center_children=Box(
-                name="center-container",
                 spacing=4,
                 orientation="h",
                 children=layout["middle_section"],
             ),
             end_children=Box(
-                name="end-container",
                 spacing=4,
                 orientation="h",
                 children=layout["right_section"],
@@ -118,7 +98,7 @@ class StatusBar(Window):
 
         for key in layout:
             layout[key].extend(
-                self.widgets_list[widget](widget_config)
+                self.widgets_list[widget](widget_config, bar=self)
                 for widget in widget_config["layout"][key]
             )
 
