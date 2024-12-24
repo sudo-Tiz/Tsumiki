@@ -1,5 +1,12 @@
 # HyDePanel
 
+<p align="center">
+ <a href="https://github.com/rubiin/HyDePanel/blob/master/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/rubiin/HyDePanel"></a>
+  <a href='http://makeapullrequest.com'><img alt='PRs Welcome' src='https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields'/></a>
+  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/rubiin/HyDePanel"/>
+  <img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed/rubiin/HyDePanel"/>
+</p>
+
 A semi-customizable bar written using the [Fabric Widget System](https://github.com/Fabric-Development/fabric) taking inpirations from hyprpanel and waybar for some widgets
 More on [Fabric's Wiki](https://wiki.ffpy.org)
 

@@ -1,7 +1,12 @@
 import time
 
 import gi
-from fabric.notifications import Notification, NotificationAction, Notifications
+from fabric.notifications import (
+    Notification,
+    NotificationAction,
+    NotificationCloseReason,
+    Notifications,
+)
 from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
@@ -276,6 +281,8 @@ class NotificationRevealer(Revealer):
 
     def on_resolved(
         self,
+        notification: Notification,
+        reason: NotificationCloseReason,
     ):
         self.set_reveal_child(False)
 
