@@ -72,6 +72,7 @@ DEFAULT_CONFIG = {
         "ignored": [],
         "reverse_scroll": False,
         "empty_scroll": False,
+        "icon_map": {},
     },
     "window_title": {
         "enable_icon": True,
@@ -191,7 +192,8 @@ Storage = TypedDict("Storage", {**BaseConfig.__annotations__, "icon": str})
 
 # Workspaces configuration
 Workspaces = TypedDict(
-    "Workspaces", {"count": int, "occupied": bool, "ignored": List[int]}
+    "Workspaces",
+    {"count": int, "occupied": bool, "ignored": List[int], "icon_map": dict},
 )
 
 # WindowTitle configuration
