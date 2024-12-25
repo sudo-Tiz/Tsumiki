@@ -68,7 +68,7 @@
   },
   "workspaces": {
     "count": 8,
-    "occupied": true,
+    "hide_unoccupied": true,
     "reverse_scroll": false,
     "empty_scroll": false,
     "ignored": []

@@ -18,8 +18,8 @@ class WorkSpacesWidget(Box):
             name="workspaces",
             spacing=4,
             # Create buttons for each workspace if occupied
-            buttons=None
-            if self.config["occupied"]
+            buttons=None  # sending None to the buttons parameter will create only the occupied workspaces
+            if self.config["hide_unoccupied"]
             else [
                 WorkspaceButton(id=i, label=str(i))
                 for i in range(1, self.config["count"] + 1)

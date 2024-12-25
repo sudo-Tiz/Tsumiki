@@ -68,7 +68,7 @@ DEFAULT_CONFIG = {
     },
     "workspaces": {
         "count": 8,
-        "occupied": True,
+        "hide_unoccupied": True,
         "ignored": [],
         "reverse_scroll": False,
         "empty_scroll": False,
