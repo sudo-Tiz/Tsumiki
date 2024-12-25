@@ -5,6 +5,8 @@ from urllib.error import HTTPError
 
 from loguru import logger
 
+from utils.colors import Colors
+
 # Create an SSLContext that ignores certificate validation
 context = ssl._create_unverified_context()
 
@@ -40,7 +42,9 @@ class WeatherService:
 
         except HTTPError as e:
             if e.code == 404:
-                print("Error: City not found. Try a different city.")
+                logger.error(
+                    f"{Colors.FAIL}Error: City not found. Try a different city."
+                )
         except Exception as e:
             print(f"Error: {e}")
             return None

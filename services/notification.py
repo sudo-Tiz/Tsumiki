@@ -4,7 +4,9 @@ from typing import List
 
 from fabric.core.service import Service
 from fabric.notifications import Notification
+from loguru import logger
 
+from utils.colors import Colors
 from utils.config import NOTIFICATION_CACHE_FILE
 
 
@@ -55,4 +57,4 @@ class NotificationCacheService(Service):
         with open(NOTIFICATION_CACHE_FILE, "w") as f:
             json.dump(existing_data, f, indent=2)
 
-        print("Notification cached successfully.")
+        logger.info(f"{Colors.OKBLUE}[Notifocation] Notification cached successfully.")
