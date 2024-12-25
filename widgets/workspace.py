@@ -25,7 +25,10 @@ class WorkSpacesWidget(Box):
                 for i in range(1, self.config["count"] + 1)
             ],
             # Factory function to create buttons for each workspace
-            buttons_factory=lambda ws_id: WorkspaceButton(id=ws_id, label=str(ws_id)),
+            buttons_factory=lambda ws_id: WorkspaceButton(
+                id=ws_id,
+                label=str(ws_id) if ws_id not in self.config["ignored"] else None,
+            ),
             invert_scroll=self.config["reverse_scroll"],
             empty_scroll=self.config["empty_scroll"],
         )
