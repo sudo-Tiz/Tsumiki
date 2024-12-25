@@ -34,14 +34,12 @@ class DateNotificationMenu(Box):
 
         notifications: List[Notification] = []
 
-        notification_list = Box(
+        self.notification_list = Box(
             visible=len(notifications) > 0,
             children=[NotificationWidget(val) for val in notifications],
         )
 
         self.uptime = Label(style_classes="uptime", label=uptime())
-
-        invoke_repeater(1000, self.update_lables, initial_call=True)
 
         # Placeholder for when there are no notifications
         placeholder = Box(
@@ -108,7 +106,7 @@ class DateNotificationMenu(Box):
                     v_expand=True,
                     style_classes="notification-scrollable",
                     h_scrollbar_policy="never",
-                    child=Box(children=(placeholder, notification_list)),
+                    child=Box(children=(placeholder, self.notification_list)),
                 ),
             ),
         )
@@ -144,6 +142,8 @@ class DateNotificationMenu(Box):
             ),
             date_column,
         )
+
+        invoke_repeater(1000, self.update_lables, initial_call=True)
 
     def update_lables(self):
         self.clock_label.set_text(time.strftime("%H:%M"))

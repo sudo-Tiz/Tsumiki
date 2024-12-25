@@ -49,10 +49,10 @@ class UpdatesWidget(Button):
         if self.config["label"]:
             self.update_level_label.show()
 
+        self.connect("button-press-event", self.on_button_press)
+
         # Set up a repeater to call the update method at specified intervals
         invoke_repeater(self.config["interval"], self.update, initial_call=True)
-
-        self.connect("button-press-event", self.on_button_press)
 
     def update_values(self, value: str):
         # Parse the JSON value
