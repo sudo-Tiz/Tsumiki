@@ -78,6 +78,7 @@ DEFAULT_CONFIG = {
         "enable_icon": True,
         "truncation": True,
         "truncation_size": 50,
+        "title_map": [],
     },
     "updates": {
         "os": "arch",
@@ -199,7 +200,13 @@ Workspaces = TypedDict(
 # WindowTitle configuration
 WindowTitle = TypedDict(
     "WindowTitle",
-    {"length": int, "enable_icon": bool, "truncation": bool, "truncation_size": int},
+    {
+        "length": int,
+        "enable_icon": bool,
+        "truncation": bool,
+        "truncation_size": int,
+        "title_map": any,
+    },
 )
 
 # Updates configuration

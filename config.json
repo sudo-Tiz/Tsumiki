@@ -3,8 +3,14 @@
     "name": "catpuccin-mocha"
   },
   "layout": {
-    "left_section": ["workspaces", "window_title"],
-    "middle_section": ["date_time", "weather"],
+    "left_section": [
+      "workspaces",
+      "window_title"
+    ],
+    "middle_section": [
+      "date_time",
+      "weather"
+    ],
     "right_section": [
       "hypr_sunset",
       "updates",
@@ -76,7 +82,9 @@
   "window_title": {
     "enable_icon": true,
     "truncation": true,
-    "truncation_size": 50
+    "truncation_size": 50,
+    "title_map": [
+    ]
   },
   "updates": {
     "os": "arch"

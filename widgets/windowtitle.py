@@ -37,9 +37,12 @@ class WindowTitleWidget(Box):
             if self.config["truncation"]
             else win_title
         )
+
+        merged_titles = self.config["title_map"] + WINDOW_TITLE_MAP
+
         # Find a matching window class in the windowTitleMap
         matched_window = next(
-            (wt for wt in WINDOW_TITLE_MAP if re.search(wt[0], win_class.lower())),
+            (wt for wt in merged_titles if re.search(wt[0], win_class.lower())),
             None,
         )
         # Return the formatted title with or without the icon

@@ -604,8 +604,6 @@ KBLAYOUT_MAP = {
 
 
 WINDOW_TITLE_MAP = [
-    # user provided values
-    # ...options.bar.windowtitle.title_map.value,
     # Original Entries
     ["kitty", "󰄛", "Kitty Terminal"],
     ["firefox", "󰈹", "Firefox"],
