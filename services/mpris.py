@@ -13,7 +13,7 @@ try:
     from gi.repository import Playerctl
 except ValueError:
     raise ImportError(
-        f"{Colors.FAIL}Playerctl is not installed, please install it first"
+        f"{Colors.ERROR}Playerctl is not installed, please install it first"
     )
 
 

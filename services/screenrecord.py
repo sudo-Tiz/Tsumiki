@@ -48,7 +48,7 @@ class ScreenRecorder(Service):
                 file_path=file_path if file_path else None,
             )
         except Exception:
-            logger.error(f"{Colors.FAIL}[SCREENSHOT] Failed to run command: {command}")
+            logger.error(f"{Colors.ERROR}[SCREENSHOT] Failed to run command: {command}")
 
     def screencast_start(self, fullscreen=False):
         time = datetime.datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
@@ -94,7 +94,7 @@ class ScreenRecorder(Service):
                 _, stdout, stderr = process.communicate_utf8_finish(task)
             except Exception:
                 logger.error(
-                    f"{Colors.FAIL}[SCREENSHOT] Failed read notification action with error {stderr}"
+                    f"{Colors.ERROR}[SCREENSHOT] Failed read notification action with error {stderr}"
                 )
                 return
 

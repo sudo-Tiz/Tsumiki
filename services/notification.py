@@ -57,4 +57,4 @@ class NotificationCacheService(Service):
         with open(NOTIFICATION_CACHE_FILE, "w") as f:
             json.dump(existing_data, f, indent=2)
 
-        logger.info(f"{Colors.OKBLUE}[Notifocation] Notification cached successfully.")
+        logger.info(f"{Colors.INFO}[Notifocation] Notification cached successfully.")

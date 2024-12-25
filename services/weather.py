@@ -43,7 +43,7 @@ class WeatherService:
         except HTTPError as e:
             if e.code == 404:
                 logger.error(
-                    f"{Colors.FAIL}Error: City not found. Try a different city."
+                    f"{Colors.ERROR}Error: City not found. Try a different city."
                 )
         except Exception as e:
             print(f"Error: {e}")

@@ -135,7 +135,7 @@ class TaskBarWidget(Box):
                                         if window_class in app_name:
                                             return icon_name
                         except Exception as e:
-                            logger.error(f"{Colors.FAIL}Error reading {file_path}: {e}")
+                            logger.error(f"{Colors.ERROR}Error reading {file_path}: {e}")
         return None
 
     def load_icon(

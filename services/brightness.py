@@ -15,7 +15,7 @@ def exec_brightnessctl_async(args: str):
     # Executes brightnessctl command asynchronously, ensuring no resource leaks.
 
     if not helpers.executable_exists("brightnessctl"):
-        logger.error(f"{Colors.FAIL}Command brightnessctl not found")
+        logger.error(f"{Colors.ERROR}Command brightnessctl not found")
 
     try:
         # Use subprocess.Popen to run the command without blocking
@@ -31,11 +31,11 @@ def exec_brightnessctl_async(args: str):
 
         if process.returncode != 0:
             logger.error(
-                f"{Colors.FAIL}Error executing brightnessctl: {stderr.decode().strip()}"
+                f"{Colors.ERROR}Error executing brightnessctl: {stderr.decode().strip()}"
             )
         else:
             logger.debug(
-                f"{Colors.OKBLUE}brightnessctl output: {stdout.decode().strip()}",
+                f"{Colors.INFO}brightnessctl output: {stdout.decode().strip()}",
             )  # Optional: Log the output
     except Exception as e:
         logger.exception(f"Exception in exec_brightnessctl_async: {e}")
@@ -92,7 +92,7 @@ class Brightness(Service):
 
         # Log the initialization of the service
         logger.info(
-            f"{Colors.OKBLUE}Brightness service initialized for device: {screen_device}"
+            f"{Colors.INFO}Brightness service initialized for device: {screen_device}"
         )
 
     def _read_max_brightness(self, path: str) -> int:
@@ -125,9 +125,9 @@ class Brightness(Service):
             exec_brightnessctl_async(f"--device '{screen_device}' set {value}")
             self.emit("screen", int((value / self.max_screen) * 100))
             logger.info(
-                f"{Colors.OKBLUE}Set screen brightness to {value} (out of {self.max_screen})"
+                f"{Colors.INFO}Set screen brightness to {value} (out of {self.max_screen})"
             )
         except GLib.Error as e:
-            logger.error(f"{Colors.FAIL}Error setting screen brightness: {e.message}")
+            logger.error(f"{Colors.ERROR}Error setting screen brightness: {e.message}")
         except Exception as e:
             logger.exception(f"Unexpected error setting screen brightness: {e}")

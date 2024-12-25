@@ -75,7 +75,7 @@ class UpdatesWidget(Button):
             self.update()
 
     def update(self):
-        logger.info(f"{Colors.OKBLUE}[Updates] Checking for updates...")
+        logger.info(f"{Colors.INFO}[Updates] Checking for updates...")
 
         # Execute the update script asynchronously and update values
         exec_shell_command_async(

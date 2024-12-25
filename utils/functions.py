@@ -24,7 +24,7 @@ class ExecutableNotFoundError(ImportError):
 
     def __init__(self, executable_name: str):
         super().__init__(
-            f"{Colors.FAIL}Executable {executable_name} not found. Please install it using your package manager."
+            f"{Colors.ERROR}Executable {executable_name} not found. Please install it using your package manager."
         )
 
 
@@ -46,11 +46,11 @@ def copy_theme(theme: str):
         # Open the destination file in write mode
         with open(destination_file, "w") as destination_file:
             destination_file.write(content)
-            logger.info(f"{Colors.OKBLUE}[THEME] '{theme}' applied successfully.")
+            logger.info(f"{Colors.INFO}[THEME] '{theme}' applied successfully.")
 
     except FileNotFoundError:
         logger.error(
-            f"{Colors.FAIL}Error: The theme file '{source_file}' was not found."
+            f"{Colors.ERROR}Error: The theme file '{source_file}' was not found."
         )
         exit(1)
 
@@ -238,7 +238,7 @@ def send_notification(
     try:
         subprocess.run(command, check=True)
     except subprocess.CalledProcessError as e:
-        logger.error(f"{Colors.FAIL}Error sending notification: {e}")
+        logger.error(f"{Colors.ERROR}Error sending notification: {e}")
 
 
 # Function to get the percentage of a value
