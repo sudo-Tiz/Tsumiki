@@ -246,10 +246,15 @@ Volume = TypedDict("Volume", {**BaseConfig.__annotations__, "step_size": int})
 Brightness = TypedDict("Brightness", {**BaseConfig.__annotations__, "step_size": int})
 
 
+# Notification configuration
+Notification = TypedDict("Notification", {"ignored": List[str]})
+
+
 class BarConfig(TypedDict):
     """Main configuration that includes all other configurations"""
 
     battery: Battery
+    notification: Notification
     bluetooth: BlueTooth
     cpu: Cpu
     hypr_sunset: HyprSunset

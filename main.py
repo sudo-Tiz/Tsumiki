@@ -29,7 +29,7 @@ logger.disable("fabric.hyprland.widgets")
 if __name__ == "__main__":
     # Create the status bar
     bar = StatusBar()
-    notifications = NotificationPopup()
+    notifications = NotificationPopup(widget_config)
     system_overlay = OSDContainer()
 
     # Initialize the application with the status bar

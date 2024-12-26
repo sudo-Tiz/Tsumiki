@@ -5,7 +5,6 @@ from fabric.notifications import (
     Notification,
     NotificationAction,
     NotificationCloseReason,
-    Notifications,
 )
 from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
@@ -21,8 +20,9 @@ from gi.repository import GdkPixbuf, GLib, GObject
 import utils.config as config
 import utils.functions as helpers
 import utils.icons as icons
-from services import notify_cache_service
+from services import notification_service, notify_cache_service
 from shared import AnimatedCircularProgressBar, CustomImage
+from utils.widget_config import BarConfig
 
 gi.require_version("GdkPixbuf", "2.0")
 
@@ -290,8 +290,13 @@ class NotificationRevealer(Revealer):
 class NotificationPopup(WaylandWindow):
     """A widget to grab and display notifications."""
 
-    def __init__(self):
-        self._server = Notifications()
+    def __init__(self, widget_config: BarConfig):
+        self._server = notification_service
+
+        self.config = widget_config["notification"]
+
+        self.ignored_apps = helpers.unique_list(self.config["ignored"])
+
         self.notifications = Box(
             v_expand=True,
             h_expand=True,
@@ -311,7 +316,11 @@ class NotificationPopup(WaylandWindow):
         )
 
     def on_new_notification(self, fabric_notif, id):
-        notification = fabric_notif.get_notification_from_id(id)
+        notification: Notification = fabric_notif.get_notification_from_id(id)
+
+        if notification.app_name in self.ignored_apps:
+            return
+
         new_box = NotificationRevealer(notification)
         self.notifications.add(new_box)
         new_box.set_reveal_child(True)

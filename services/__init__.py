@@ -1,5 +1,6 @@
 # ruff: noqa: F403,F405
 from fabric.audio import Audio
+from fabric.notifications import Notifications
 
 from .brightness import *
 from .mpris import *
@@ -11,3 +12,4 @@ brightness_service = Brightness()
 audio_service = Audio()
 weather_service = WeatherService()
 notify_cache_service = NotificationCacheService()
+notification_service = Notifications()

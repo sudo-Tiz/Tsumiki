@@ -3,6 +3,7 @@ import json
 import os
 import shutil
 import subprocess
+from ast import List
 from typing import Literal
 
 import gi
@@ -255,3 +256,7 @@ def convert_to_percent(
 def ensure_cache_dir_exists():
     if not os.path.exists(APP_CACHE_DIRECTORY):
         os.makedirs(APP_CACHE_DIRECTORY)
+
+
+def unique_list(lst) -> List:
+    return list(set(lst))
