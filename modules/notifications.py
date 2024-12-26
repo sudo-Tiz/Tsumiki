@@ -36,13 +36,18 @@ class ActionButton(Button):
         action_number: int,
         total_actions: int,
     ):
-        self.action = action
         super().__init__(
             label=action.label,
             h_expand=True,
             on_clicked=self.on_clicked,
             style_classes="notification-action",
         )
+
+
+        self.action = action
+
+        print(self.action)
+
         if action_number == 0:
             self.add_style_class("start-action")
         elif action_number == total_actions - 1:
