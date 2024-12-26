@@ -131,6 +131,7 @@ DEFAULT_CONFIG = {
         "icon_size": "14px",
         "silent": True,  # Whether to show a notification when the theme is changed
     },
+    "notification": {"ignored": ["t2"], "timeout": 5000},
 }
 
 
@@ -247,7 +248,7 @@ Brightness = TypedDict("Brightness", {**BaseConfig.__annotations__, "step_size":
 
 
 # Notification configuration
-Notification = TypedDict("Notification", {"ignored": List[str]})
+Notification = TypedDict("Notification", {"ignored": List[str], "timeout": int})
 
 
 class BarConfig(TypedDict):

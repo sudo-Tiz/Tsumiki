@@ -22,7 +22,7 @@ import utils.functions as helpers
 import utils.icons as icons
 from services import notification_service, notify_cache_service
 from shared import AnimatedCircularProgressBar, CustomImage
-from utils.widget_config import BarConfig
+from utils.widget_config import BarConfig, widget_config
 
 gi.require_version("GdkPixbuf", "2.0")
 
@@ -251,7 +251,7 @@ class NotificationWidget(EventBox):
         return (
             self._notification.timeout
             if self._notification.timeout != -1
-            else config.NOTIFICATION_TIMEOUT * 1000
+            else widget_config["notification"]["timeout"]
         )
 
 

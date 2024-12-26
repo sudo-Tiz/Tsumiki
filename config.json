@@ -132,6 +132,7 @@
     "format": "%b %d %H:%M"
   },
   "notification": {
-    "ignored": ["t2"]
+    "ignored": ["t2"],
+    "timeout": 5000
   }
 }
