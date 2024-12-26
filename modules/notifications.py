@@ -43,10 +43,7 @@ class ActionButton(Button):
             style_classes="notification-action",
         )
 
-
         self.action = action
-
-        print(self.action)
 
         if action_number == 0:
             self.add_style_class("start-action")
@@ -177,7 +174,7 @@ class NotificationWidget(EventBox):
             name="notification-action-box",
             children=[
                 ActionButton(action, i, len(self._notification.actions))
-                for i, action in enumerate(self._notification.actions)
+                for i, action in enumerate(config.NOTIFICATION_ACTION_NUMBER)
             ],
             h_expand=True,
         )
