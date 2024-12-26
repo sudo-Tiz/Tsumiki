@@ -174,7 +174,7 @@ class NotificationWidget(EventBox):
             name="notification-action-box",
             children=[
                 ActionButton(action, i, len(self._notification.actions))
-                for i, action in enumerate(config.NOTIFICATION_ACTION_NUMBER)
+                for i, action in enumerate(self._notification.actions)
             ],
             h_expand=True,
         )
