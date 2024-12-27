@@ -19,14 +19,10 @@ class NotificationCacheService(Service):
 
     def read_notifications(self) -> List[Notification]:
         """Read the notifications from the notifications file."""
-        notifications = []
         try:
             with open(NOTIFICATION_CACHE_FILE, "r") as file:
-                for line in file:
-                    notification = json.loads(line)
-                    notifications.append(notification)
-                    self._count += 1
-                    return notifications
+                self._notifications = json.load(file)
+                self._count = len(self._notifications)
         except FileNotFoundError:
             return []
 
