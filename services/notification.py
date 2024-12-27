@@ -16,7 +16,7 @@ class NotificationCacheService(Service):
     def __init__(self):
         self._count = 0
         self._notifications = []
-        self.is_paused = False
+        self._dont_disturb = False
 
     def do_read_notifications(self) -> List[Notification]:
         """Read the notifications from the notifications file."""
@@ -29,9 +29,6 @@ class NotificationCacheService(Service):
 
     def cache_notification(self, data):
         """Cache the notification."""
-
-        if self.is_paused:
-            return
 
         # Append the new notification to the list
         self._notifications.append(data)
@@ -70,11 +67,11 @@ class NotificationCacheService(Service):
         return self._count
 
     @property
-    def is_paused(self) -> bool:
+    def dont_disturb(self) -> bool:
         """Return the pause status."""
-        return self._is_paused
+        return self._dont_disturb
 
-    @is_paused.setter
-    def is_paused(self, value: bool):
+    @dont_disturb.setter
+    def dont_disturb(self, value: bool):
         """Set the pause status."""
-        self._is_paused = value
+        self._dont_disturb = value

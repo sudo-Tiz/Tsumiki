@@ -156,9 +156,9 @@ class DateNotificationMenu(Box):
     def on_dnd_switch(self, switch, _):
         """Handle the do not disturb switch."""
         if switch.get_active():
-            notify_cache_service.is_paused = True
+            notify_cache_service.dont_disturb = True
         else:
-            notify_cache_service.is_paused = False
+            notify_cache_service.dont_disturb = False
 
 
 class DateTimeWidget(Box):
