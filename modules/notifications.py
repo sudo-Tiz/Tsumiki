@@ -317,7 +317,7 @@ class NotificationPopup(WaylandWindow):
         self._server.connect("notification-added", self.on_new_notification)
 
         super().__init__(
-            anchor="top right",
+            anchor=self.config["anchor"],
             layer="overlay",
             all_visible=True,
             visible=True,

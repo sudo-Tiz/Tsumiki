@@ -133,6 +133,7 @@
   },
   "notification": {
     "ignored": ["t2"],
+    "anchor": "top right",
     "timeout": 5000
   }
 }
