@@ -63,7 +63,7 @@ class DateNotificationMenu(Box):
         # Header for the notification column
         dnd_switch = Gtk.Switch(
             name="notification-switch",
-            active=True,
+            active=False,
             valign=Gtk.Align.CENTER,
             visible=True,
         )
