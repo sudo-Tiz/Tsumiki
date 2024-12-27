@@ -1,4 +1,5 @@
 import time
+from typing import Literal
 
 import gi
 from fabric.notifications import (
@@ -60,7 +61,12 @@ class ActionButton(Button):
 class NotificationWidget(EventBox):
     """A widget to display a notification."""
 
-    def __init__(self, notification: Notification, **kwargs):
+    def __init__(
+        self,
+        notification: Notification,
+        type: Literal["popup", "datemenu"] = "popup",
+        **kwargs,
+    ):
         super().__init__(
             size=(config.NOTIFICATION_WIDTH, -1),
             **kwargs,
@@ -93,6 +99,7 @@ class NotificationWidget(EventBox):
             max_value=1,
             radius_color=True,
             value=0,
+            visible=type == "popup",
         )
 
         header_container.children = (
@@ -196,14 +203,15 @@ class NotificationWidget(EventBox):
                 parent.remove(self) if (parent := self.get_parent()) else None,  # type: ignore
                 self.destroy(),
             ),
-            invoke_repeater(
+            type == "popup"
+            and invoke_repeater(
                 self.get_timeout(),
                 lambda: self._notification.close("expired"),
                 initial_call=False,
             ),
         )
 
-        self.start_timer()
+        type == "popup" and self.start_timer()
 
     def start_timer(self):
         self._timer = GObject.timeout_add(200, self.update_progress)
