@@ -16,8 +16,9 @@ class NotificationCacheService(Service):
     def __init__(self):
         self._count = 0
         self._notifications = []
+        self.is_paused = False
 
-    def read_notifications(self) -> List[Notification]:
+    def do_read_notifications(self) -> List[Notification]:
         """Read the notifications from the notifications file."""
         try:
             with open(NOTIFICATION_CACHE_FILE, "r") as file:
@@ -28,6 +29,9 @@ class NotificationCacheService(Service):
 
     def cache_notification(self, data):
         """Cache the notification."""
+
+        if self.is_paused:
+            return
 
         # Append the new notification to the list
         self._notifications.append(data)
@@ -54,3 +58,23 @@ class NotificationCacheService(Service):
             json.dump(existing_data, f, indent=2)
 
         logger.info(f"{Colors.INFO}[Notifocation] Notification cached successfully.")
+
+    @property
+    def notifications(self) -> List[Notification]:
+        """Return the notifications."""
+        return self._notifications
+
+    @property
+    def count(self) -> int:
+        """Return the count of notifications."""
+        return self._count
+
+    @property
+    def is_paused(self) -> bool:
+        """Return the pause status."""
+        return self._is_paused
+
+    @is_paused.setter
+    def is_paused(self, value: bool):
+        """Set the pause status."""
+        self._is_paused = value

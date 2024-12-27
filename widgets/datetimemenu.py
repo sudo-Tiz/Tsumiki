@@ -17,6 +17,7 @@ from shared.popover import PopOverWindow
 from utils.functions import uptime
 from utils.icons import icons
 from utils.widget_config import BarConfig
+from services import notify_cache_service
 
 gi.require_version("Gtk", "3.0")
 
@@ -143,12 +144,21 @@ class DateNotificationMenu(Box):
             date_column,
         )
 
+        dnd_switch.connect("notify::active", self.on_dnd_switch)
+
         invoke_repeater(1000, self.update_lables, initial_call=True)
 
     def update_lables(self):
         self.clock_label.set_text(time.strftime("%H:%M"))
         self.uptime.set_text(uptime())
         return True
+
+    def on_dnd_switch(self, switch, _):
+        """Handle the do not disturb switch."""
+        if switch.get_active():
+            notify_cache_service.is_paused = True
+        else:
+            notify_cache_service.is_paused = False
 
 
 class DateTimeWidget(Box):
