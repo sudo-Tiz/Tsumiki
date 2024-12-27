@@ -105,10 +105,12 @@ class NotificationWidget(EventBox):
         header_container.children = (
             self.get_icon(notification.app_icon, 25),
             Label(
-                markup=str(
-                    self._notification.summary
-                    if self._notification.summary
-                    else notification.app_name,
+                markup=GLib.markup_escape_text(
+                    str(
+                        self._notification.summary
+                        if self._notification.summary
+                        else notification.app_name,
+                    )
                 ),
                 h_align="start",
                 style_classes="summary",
@@ -166,7 +168,7 @@ class NotificationWidget(EventBox):
 
         body_container.add(
             Label(
-                markup=self._notification.body,
+                markup=GLib.markup_escape_text(self._notification.body),
                 line_wrap="word-char",
                 ellipsization="end",
                 v_align="start",
