@@ -71,7 +71,7 @@
     "hide_unoccupied": true,
     "reverse_scroll": false,
     "empty_scroll": false,
-    "ignored": []
+    "ignored": [-99]
   },
   "window_title": {
     "enable_icon": true,

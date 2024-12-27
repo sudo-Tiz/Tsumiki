@@ -13,11 +13,11 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import Gtk
 
 from modules.notifications import NotificationWidget
+from services import notify_cache_service
 from shared.popover import PopOverWindow
 from utils.functions import uptime
 from utils.icons import icons
 from utils.widget_config import BarConfig
-from services import notify_cache_service
 
 gi.require_version("Gtk", "3.0")
 

@@ -329,10 +329,10 @@ class NotificationPopup(WaylandWindow):
         notification: Notification = fabric_notif.get_notification_from_id(id)
 
         # Check if the notification is in the "do not disturb" mode, hacky way
-        if notify_cache_service.dont_disturb:
-            return
-
-        if notification.app_name in self.ignored_apps:
+        if (
+            notify_cache_service.dont_disturb
+            or notification.app_name in self.ignored_apps
+        ):
             return
 
         new_box = NotificationRevealer(notification)
