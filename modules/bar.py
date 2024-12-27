@@ -1,6 +1,6 @@
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
-from fabric.widgets.wayland import WaylandWindow as Window
+from fabric.widgets.wayland import WaylandWindow
 
 from utils.widget_config import widget_config
 from widgets import (
@@ -28,7 +28,7 @@ from widgets import (
 )
 
 
-class StatusBar(Window):
+class StatusBar(WaylandWindow):
     """A widget to display the status bar panel."""
 
     def __init__(
