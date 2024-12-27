@@ -1,17 +1,56 @@
-import dbus
+import gi
+from fabric import Service
+from gi.repository import Gio, GLib
 
-# Connect to the system bus
-bus = dbus.SystemBus()
+gi.require_version("Gio", "2.0")
+gi.require_version("GObject", "2.0")
 
-# Get the PowerProfiles object
-power_profiles = bus.get_object(
-    "org.freedesktop.UPower.PowerProfiles", "/org/freedesktop/UPower/PowerProfiles"
-)
 
-# Get the Properties interface for this object
-properties_interface = dbus.Interface(power_profiles, "org.freedesktop.DBus.Properties")
+class PowerProfiles(Service):
+    """Service to interact with the PowerProfiles service."""
 
-# Access the ActiveProfile property correctly using the 'Get' method
-active_profile = properties_interface.Get(
-    "org.freedesktop.UPower.PowerProfiles", "ActiveProfile"
-)
+    def __init__(self):
+        super().__init__()
+
+        self.power_profiles = {
+            "performance": {
+                "name": "Performance",
+                "icon_name": "power-profile-performance-symbolic",
+            },
+            "balanced": {
+                "name": "Balanced",
+                "icon_name": "power-profile-balanced-symbolic",
+            },
+            "power-saver": {
+                "name": "Power Saver",
+                "icon_name": "power-profile-power-saver-symbolic",
+            },
+        }
+
+        # Constants
+        bus_name = "net.hadess.PowerProfiles"
+        object_path = "/net/hadess/PowerProfiles"
+
+        self.proxy = Gio.DBusProxy.new_sync(
+            Gio.bus_get_sync(Gio.BusType.SYSTEM, None),
+            Gio.DBusProxyFlags.NONE,
+            None,
+            bus_name,
+            object_path,
+            "net.hadess.PowerProfiles",
+            None,
+        )
+        self.proxy.connect(
+            "g-properties-changed",
+            lambda proxy, changed, invalidated: print(
+                "Properties changed:", changed["ActiveProfile"]
+            ),
+        )
+
+    def get_active_profile(self):
+        return self.power_profiles[self.proxy.get_cached_property("ActiveProfile")]
+
+    def set_active_profile(self, profile):
+        self.proxy.call_sync(
+            "SetProfile", GLib.Variant("s", profile), Gio.DBusCallFlags.NONE, -1, None
+        )
