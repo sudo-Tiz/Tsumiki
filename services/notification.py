@@ -13,6 +13,26 @@ from utils.config import NOTIFICATION_CACHE_FILE
 class NotificationCacheService(Service):
     """A service to manage the notifications."""
 
+    @property
+    def notifications(self) -> List[Notification]:
+        """Return the notifications."""
+        return self._notifications
+
+    @property
+    def count(self) -> int:
+        """Return the count of notifications."""
+        return self._count
+
+    @property
+    def dont_disturb(self) -> bool:
+        """Return the pause status."""
+        return self._dont_disturb
+
+    @dont_disturb.setter
+    def dont_disturb(self, value: bool):
+        """Set the pause status."""
+        self._dont_disturb = value
+
     def __init__(self):
         self._count = 0
         self._notifications = []
@@ -56,22 +76,13 @@ class NotificationCacheService(Service):
 
         logger.info(f"{Colors.INFO}[Notifocation] Notification cached successfully.")
 
-    @property
-    def notifications(self) -> List[Notification]:
-        """Return the notifications."""
-        return self._notifications
+    def clear_notifications(self):
+        """Clear the notifications."""
+        self._notifications = []
+        self._count = 0
 
-    @property
-    def count(self) -> int:
-        """Return the count of notifications."""
-        return self._count
+        # Write the updated data back to the cache file
+        with open(NOTIFICATION_CACHE_FILE, "w") as f:
+            json.dump([], f, indent=2)
 
-    @property
-    def dont_disturb(self) -> bool:
-        """Return the pause status."""
-        return self._dont_disturb
-
-    @dont_disturb.setter
-    def dont_disturb(self, value: bool):
-        """Set the pause status."""
-        self._dont_disturb = value
+        logger.info(f"{Colors.INFO}[Notifocation] Notifications cleared successfully.")

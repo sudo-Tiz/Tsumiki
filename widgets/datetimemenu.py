@@ -90,6 +90,10 @@ class DateNotificationMenu(Box):
             ),
         )
 
+        clear_button.connect(
+            "clicked", lambda _: notify_cache_service.clear_notifications()
+        )
+
         notif_header.pack_end(
             clear_button,
             False,
