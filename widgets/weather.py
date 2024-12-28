@@ -1,4 +1,5 @@
 import json
+import threading
 import time
 from datetime import datetime
 
@@ -228,6 +229,8 @@ class WeatherWidget(ButtonWidget):
             **kwargs,
         )
 
+        thread = threading.Thread(target=self.fetch_weather, daemon=True)
+
         self.config = widget_config["weather"]
 
         self.bar = bar
@@ -253,15 +256,10 @@ class WeatherWidget(ButtonWidget):
         )
         self.box.children = (self.weather_icon, self.weather_label)
 
-        # Set up a repeater to call the update_label method at specified intervals
-        invoke_repeater(self.config["interval"], self.update_label, initial_call=True)
+        # Set up a repeater to call method at specified intervals
+        invoke_repeater(self.config["interval"], thread.start, initial_call=True)
 
-    def update_label(self):
-        # Create a background thread to fetch weather data
-        GLib.Thread.new("thread", self.fetch_weather, None)
-        return True
-
-    def fetch_weather(self, _data):
+    def fetch_weather(self):
         if self.config["detect_location"]:
             self.config["location"] = json.loads(
                 exec_shell_command("curl ipinfo.io").strip("\n")
