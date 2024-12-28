@@ -17,6 +17,17 @@ from shared import AnimatedScale
 from utils.widget_config import BarConfig
 
 
+def create_scale() -> AnimatedScale:
+    return AnimatedScale(
+        marks=(ScaleMark(value=i) for i in range(1, 100, 10)),
+        value=70,
+        min_value=0,
+        max_value=100,
+        increments=(1, 1),
+        orientation="h",
+    )
+
+
 class BrightnessOSDContainer(Box):
     """A widget to display the OSD for brightness."""
 
@@ -25,23 +36,13 @@ class BrightnessOSDContainer(Box):
         self.brightness_service = brightness_service
         self.level = Label(name="osd-level")
         self.icon = Image(icon_name=icons.icons["brightness"]["screen"], icon_size=28)
-        self.scale = self._create_brightness_scale()
+        self.scale = create_scale()
 
         self.children = (self.icon, self.scale, self.level)
         self.update_brightness()
 
         self.scale.connect("value-changed", lambda *_: self.update_brightness())
         self.brightness_service.connect("screen", self.on_brightness_changed)
-
-    def _create_brightness_scale(self) -> AnimatedScale:
-        return AnimatedScale(
-            marks=(ScaleMark(value=i) for i in range(1, 100, 10)),
-            value=70,
-            min_value=0,
-            max_value=100,
-            increments=(1, 1),
-            orientation="h",
-        )
 
     def update_brightness(self):
         normalized_brightness = helpers.convert_to_percent(
@@ -80,23 +81,13 @@ class AudioOSDContainer(Box):
             icon_name=icons.icons["audio"]["volume"]["medium"], icon_size=28
         )
         self.level = Label(name="osd-level")
-        self.scale = self._create_audio_scale()
+        self.scale = create_scale()
 
         self.children = (self.icon, self.scale, self.level)
         self.sync_with_audio()
 
         self.scale.connect("value-changed", self.on_volume_changed)
         self.audio.connect("notify::speaker", self.on_audio_speaker_changed)
-
-    def _create_audio_scale(self) -> AnimatedScale:
-        return AnimatedScale(
-            marks=(ScaleMark(value=i) for i in range(1, 100, 10)),
-            value=70,
-            min_value=0,
-            max_value=100,
-            increments=(1, 1),
-            orientation="h",
-        )
 
     def sync_with_audio(self):
         if self.audio.speaker:

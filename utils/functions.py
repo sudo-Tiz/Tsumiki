@@ -171,7 +171,10 @@ def get_audio_icon_name(
     volume: int, is_muted: bool
 ) -> dict[Literal["icon_text", "icon"], str]:
     if volume <= 0 or is_muted:
-        return
+        return {
+            "text_icon": icons.volume_text_icons["low"],
+            "icon": "audio-volume-muted-symbolic",
+        }
     if volume > 0 and volume < 32:
         return {
             "text_icon": icons.volume_text_icons["low"],
