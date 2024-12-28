@@ -1,12 +1,9 @@
-from fabric import Fabricator
 from fabric.widgets.label import Label
 
 import utils.functions as helpers
 from shared.widget_container import BoxWidget
 from utils.icons import common_text_icons
 from utils.widget_config import BarConfig
-
-psutil_fabricator = Fabricator(poll_from=helpers.psutil_poll, stream=True)
 
 
 class CpuWidget(BoxWidget):
@@ -39,7 +36,7 @@ class CpuWidget(BoxWidget):
         self.children = (self.text_icon, self.cpu_level_label)
 
         # Set up a fabricator to call the update_label method when the CPU usage changes
-        psutil_fabricator.connect("changed", self.update_ui)
+        helpers.psutil_fabricator.connect("changed", self.update_ui)
 
     def update_ui(self, fabricator, value):
         # Update the label with the current CPU usage if enabled
@@ -79,7 +76,7 @@ class MemoryWidget(BoxWidget):
         self.children = (self.icon, self.memory_level_label)
 
         # Set up a fabricator to call the update_label method  at specified intervals
-        psutil_fabricator.connect("changed", self.update_ui)
+        helpers.psutil_fabricator.connect("changed", self.update_ui)
 
     def update_ui(self, fabricator, value):
         # Get the current memory usage
@@ -137,7 +134,7 @@ class StorageWidget(BoxWidget):
         self.children = (self.icon, self.storage_level_label)
 
         # Set up a fabricator to call the update_label method at specified intervals
-        psutil_fabricator.connect("changed", self.update_ui)
+        helpers.psutil_fabricator.connect("changed", self.update_ui)
 
     def update_ui(self, fabricator, value):
         # Get the current disk usage

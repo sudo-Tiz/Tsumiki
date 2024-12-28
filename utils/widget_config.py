@@ -39,7 +39,6 @@ DEFAULT_CONFIG = {
     "battery": {
         "label": True,
         "tooltip": True,
-        "interval": 2000,
         "hide_label_when_full": True,
     },
     "date_time": {
@@ -48,20 +47,17 @@ DEFAULT_CONFIG = {
     "cpu": {
         "icon": "",
         "icon_size": "12px",
-        "interval": 2000,
         "label": True,
         "tooltip": True,
     },
     "memory": {
         "icon": "",
-        "interval": 2000,
         "icon_size": "12px",
         "label": True,
         "tooltip": True,
     },
     "storage": {
         "icon": "󰋊",
-        "interval": 2000,
         "icon_size": "14px",
         "label": True,
         "tooltip": True,
@@ -183,7 +179,11 @@ HyprIdle = TypedDict(
 # Battery configuration
 Battery = TypedDict(
     "Battery",
-    {"label": bool, "tooltip": bool, "hide_label_when_full": bool, "interval": int},
+    {
+        "label": bool,
+        "tooltip": bool,
+        "hide_label_when_full": bool,
+    },
 )
 
 # Theme configuration

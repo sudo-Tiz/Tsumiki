@@ -9,6 +9,7 @@ from typing import Literal
 
 import gi
 import psutil
+from fabric import Fabricator
 from fabric.utils import get_relative_path
 from fabric.widgets.label import Label
 from fabric.widgets.scale import ScaleMark
@@ -32,6 +33,7 @@ class ExecutableNotFoundError(ImportError):
         )
 
 
+# Function to get the system stats using psutil
 def psutil_poll(fabricator):
     while True:
         yield {
@@ -39,8 +41,9 @@ def psutil_poll(fabricator):
             "ram_usage": f"{round(psutil.virtual_memory().percent)}%",
             "memory": psutil.virtual_memory(),
             "disk": psutil.disk_usage("/"),
+            "battery": psutil.sensors_battery(),
         }
-        sleep(1)
+        sleep(2)
 
 
 # Function to get the system icon theme
@@ -304,3 +307,7 @@ def ensure_cache_dir_exists():
 
 def unique_list(lst) -> List:
     return list(set(lst))
+
+
+# Create a fabricator to poll the system stats
+psutil_fabricator = Fabricator(poll_from=psutil_poll, stream=True)

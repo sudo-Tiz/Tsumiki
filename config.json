@@ -42,8 +42,7 @@
   },
   "battery": {
     "label": true,
-    "tooltip": true,
-    "interval": 2000
+    "tooltip": true
   },
   "cpu": {
     "icon": "",

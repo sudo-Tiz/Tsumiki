@@ -1,12 +1,10 @@
 import math
 
-import psutil
-from fabric.utils import invoke_repeater
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
 from shared.widget_container import BoxWidget
-from utils.functions import format_time
+from utils.functions import format_time, psutil_fabricator
 from utils.widget_config import BarConfig
 
 
@@ -28,16 +26,14 @@ class Battery(BoxWidget):
         self.full_battery_level = 100
 
         # Set up a repeater to call the update_battery_status method
-        invoke_repeater(
-            self.config["interval"], self.update_battery_status, initial_call=True
-        )
+        psutil_fabricator.connect("changed", self.update_ui)
 
-    def update_battery_status(self):
+    def update_ui(self, fabricator, value):
         """Update the battery status by fetching the current battery information
         and updating the widget accordingly.
         """
         # Get the battery status
-        battery = psutil.sensors_battery()
+        battery = value.get("battery")
 
         if battery is None:
             self.hide()
