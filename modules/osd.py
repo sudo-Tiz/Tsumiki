@@ -14,6 +14,7 @@ import utils.functions as helpers
 import utils.icons as icons
 from services import audio_service, brightness_service
 from shared import AnimatedScale
+from utils.widget_config import BarConfig
 
 
 class BrightnessOSDContainer(Box):
@@ -135,8 +136,7 @@ class OSDContainer(Window):
 
     def __init__(
         self,
-        anchor: str = "bottom center",
-        timeout=1000,
+        widget_config: BarConfig,
         transition_duration=100,
         keyboard_mode: Literal["none", "exclusive", "on-demand"] = "on-demand",
         **kwargs,
@@ -144,7 +144,9 @@ class OSDContainer(Window):
         self.audio_container = AudioOSDContainer()
         self.brightness_container = BrightnessOSDContainer()
 
-        self.timeout = timeout
+        self.config = widget_config["osd"]
+
+        self.timeout = self.config["timeout"]
 
         self.revealer = Revealer(
             name="osd-revealer",
@@ -161,7 +163,7 @@ class OSDContainer(Window):
 
         super().__init__(
             layer="overlay",
-            anchor=anchor,
+            anchor=self.config["anchor"],
             child=self.main_box,
             visible=False,
             pass_through=True,

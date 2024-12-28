@@ -82,6 +82,11 @@
   "updates": {
     "os": "arch"
   },
+  "osd": {
+    "enabled": true,
+    "anchor": "bottom center",
+    "duration": 1500
+  },
   "keyboard": {
     "icon": "󰌌",
     "icon_size": "14px",

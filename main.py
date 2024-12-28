@@ -30,7 +30,7 @@ if __name__ == "__main__":
     # Create the status bar
     bar = StatusBar()
     notifications = NotificationPopup(widget_config)
-    system_overlay = OSDContainer()
+    system_overlay = OSDContainer(widget_config)
 
     # Initialize the application with the status bar
     app = Application(APPLICATION_NAME, bar, notifications, system_overlay)

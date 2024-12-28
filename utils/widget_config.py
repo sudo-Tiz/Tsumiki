@@ -136,6 +136,11 @@ DEFAULT_CONFIG = {
         "timeout": 5000,
         "anchor": "top right",
     },
+    "osd": {
+        "enabled": True,
+        "timeout": 1500,
+        "anchor": "bottom center",
+    },
 }
 
 
@@ -256,6 +261,9 @@ Notification = TypedDict(
     "Notification", {"ignored": List[str], "timeout": int, "anchor": str}
 )
 
+# OSD configuration
+OSD = TypedDict("Notification", {"enabled": bool, "timeout": int, "anchor": str})
+
 
 class BarConfig(TypedDict):
     """Main configuration that includes all other configurations"""
@@ -284,6 +292,7 @@ class BarConfig(TypedDict):
     workspaces: Workspaces
     window_title: WindowTitle
     weather: Weather
+    osd: OSD
 
 
 # Read the configuration from the JSON file
