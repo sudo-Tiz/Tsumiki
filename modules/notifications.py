@@ -36,12 +36,14 @@ class ActionButton(Button):
         action: NotificationAction,
         action_number: int,
         total_actions: int,
+        **kwargs,
     ):
         super().__init__(
             label=action.label,
             h_expand=True,
             on_clicked=self.on_clicked,
             style_classes="notification-action",
+            **kwargs,
         )
 
         self.action = action
@@ -302,7 +304,7 @@ class NotificationRevealer(Revealer):
 class NotificationPopup(WaylandWindow):
     """A widget to grab and display notifications."""
 
-    def __init__(self, widget_config: BarConfig):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         self._server = notification_service
 
         self.config = widget_config["notification"]
@@ -325,6 +327,7 @@ class NotificationPopup(WaylandWindow):
             visible=True,
             exclusive=False,
             child=self.notifications,
+            **kwargs,
         )
 
     def on_new_notification(self, fabric_notif, id):

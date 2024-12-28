@@ -20,7 +20,7 @@ class BrightnessOSDContainer(Box):
     """A widget to display the OSD for brightness."""
 
     def __init__(self, **kwargs):
-        super().__init__(**kwargs, orientation="h", spacing=12, name="osd-container")
+        super().__init__(orientation="h", spacing=12, name="osd-container", **kwargs)
         self.brightness_service = brightness_service
         self.level = Label(name="osd-level")
         self.icon = Image(icon_name=icons.icons["brightness"]["screen"], icon_size=28)
@@ -68,7 +68,12 @@ class AudioOSDContainer(Box):
     }
 
     def __init__(self, **kwargs):
-        super().__init__(**kwargs, orientation="h", spacing=13, name="osd-container")
+        super().__init__(
+            orientation="h",
+            spacing=13,
+            name="osd-container",
+            **kwargs,
+        )
         self.audio = audio_service
         self.icon = Image(
             icon_name=icons.icons["audio"]["volume"]["medium"], icon_size=28

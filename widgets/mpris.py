@@ -18,9 +18,13 @@ class Mpris(EventBox):
         self,
         widget_config: BarConfig,
         bar,
+        **kwargs,
     ):
         # Initialize the EventBox with specific name and style
-        super().__init__(name="mpris")
+        super().__init__(
+            name="mpris",
+            **kwargs,
+        )
         self.config = widget_config["mpris"]
 
         self.label = Label(label="Nothing playing", style_classes="panel-text")

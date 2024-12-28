@@ -9,6 +9,7 @@ gi.require_version("Gtk", "3.0")
 
 # TODO: Add a way to set revealer and outsside click to close the popover
 
+
 class PopOverWindow(WaylandWindow):
     """A popover window to show the content."""
 

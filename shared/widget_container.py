@@ -1,14 +1,24 @@
 from fabric.widgets.box import Box
+from fabric.widgets.button import Button
 
 
-class WidgetContainer(Box):
-    """A container for widgets."""
+class BoxWidget(Box):
+    """A container for box widgets."""
 
     def __init__(self, **kwargs):
         super().__init__(
-            name="widgets-container",
             spacing=4,
             orientation="h",
+            style_classes="panel-box",
+            **kwargs,
+        )
+
+
+class ButtonWidget(Button):
+    """A container for button widgets."""
+
+    def __init__(self, **kwargs):
+        super().__init__(
             style_classes="panel-box",
             **kwargs,
         )

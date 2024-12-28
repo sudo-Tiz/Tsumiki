@@ -53,10 +53,10 @@ except IndexError:
 class NoBrightnessError(ImportError):
     """Raised when brightness-related dependencies are missing."""
 
-    def __init__(self, *args):
+    def __init__(self, **kwargs):
         super().__init__(
             "Brightness control not available or missing dependencies",
-            *args,
+            **kwargs,
         )
 
 

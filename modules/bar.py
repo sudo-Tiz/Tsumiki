@@ -31,9 +31,7 @@ from widgets import (
 class StatusBar(WaylandWindow):
     """A widget to display the status bar panel."""
 
-    def __init__(
-        self,
-    ):
+    def __init__(self, **kwargs):
         super().__init__(
             name="panel",
             layer="top",
@@ -42,6 +40,7 @@ class StatusBar(WaylandWindow):
             exclusivity="auto",
             visible=False,
             all_visible=False,
+            **kwargs,
         )
 
         self.widgets_list = {

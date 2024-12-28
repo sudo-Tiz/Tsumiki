@@ -1,19 +1,19 @@
 import json
 
 from fabric.utils import exec_shell_command
-from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
+from shared.widget_container import BoxWidget
 from utils.config import KBLAYOUT_MAP
 from utils.functions import text_icon
 from utils.widget_config import BarConfig
 
 
-class KeyboardLayoutWidget(Box):
+class KeyboardLayoutWidget(BoxWidget):
     """A widget to display the current keyboard layout."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(name="keyboard", style_classes="panel-box", **kwargs)
+        super().__init__(name="keyboard", **kwargs)
 
         self.config = widget_config["keyboard"]
 

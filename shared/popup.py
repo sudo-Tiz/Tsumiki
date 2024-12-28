@@ -41,6 +41,7 @@ class PopupRevealer(Box):
             "slide-down",
         ] = "slide-down",
         transition_duration: int = 400,
+        **kwargs,
     ):
         self.revealer: Revealer = Revealer(
             name=name,
@@ -62,6 +63,7 @@ class PopupRevealer(Box):
         super().__init__(
             style=decorations,
             children=self.revealer,
+            **kwargs,
         )
 
 
@@ -262,6 +264,7 @@ class PopupWindow(WaylandWindow):
                 on_button_press_event=self.on_inhibit_click,
             ),
             on_key_release_event=self.on_key_release,
+            **kwargs,
         )
 
     def on_key_release(self, _, event_key):

@@ -4,12 +4,12 @@ from typing import TypedDict
 
 from fabric.hyprland.widgets import get_hyprland_connection
 from fabric.utils import exec_shell_command
-from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
 from gi.repository import GdkPixbuf, GLib, Gtk
 from loguru import logger
 
+from shared.widget_container import BoxWidget
 from utils.colors import Colors
 from utils.widget_config import BarConfig
 
@@ -24,12 +24,11 @@ class PagerClient(TypedDict):
     address: str
 
 
-class TaskBarWidget(Box):
+class TaskBarWidget(BoxWidget):
     """A widget to display the taskbar items."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(
-            orientation="h",
             spacing=7,
             name="taskbar",
             **kwargs,

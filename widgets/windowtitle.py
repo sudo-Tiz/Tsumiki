@@ -2,18 +2,18 @@ import re
 
 from fabric.hyprland.widgets import ActiveWindow
 from fabric.utils import FormattedString, truncate
-from fabric.widgets.box import Box
 
+from shared.widget_container import BoxWidget
 from utils.config import WINDOW_TITLE_MAP
 from utils.widget_config import BarConfig
 
 
 # TODO: replace with actual image
-class WindowTitleWidget(Box):
+class WindowTitleWidget(BoxWidget):
     """a widget that displays the title of the active window."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(style_classes="panel-box", name="window-box", **kwargs)
+        super().__init__(name="window-box", **kwargs)
 
         # Store the configuration for the window title
         self.config = widget_config["window_title"]

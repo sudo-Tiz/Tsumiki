@@ -1,10 +1,10 @@
 from fabric.utils import exec_shell_command, exec_shell_command_async, invoke_repeater
-from fabric.widgets.button import Button
 
 import utils.functions as helpers
+from shared.widget_container import ButtonWidget
 
 
-class CommandSwitcher(Button):
+class CommandSwitcher(ButtonWidget):
     """A button widget to toggle a command. Useful for making services with two states."""
 
     def __init__(
@@ -22,7 +22,6 @@ class CommandSwitcher(Button):
         self.command_without_args = self.command.split(" ")[0]  # command without args
 
         super().__init__(
-            style_classes="panel-button",
             name=name,
             **kwargs,
         )

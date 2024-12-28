@@ -1,11 +1,11 @@
-from fabric.widgets.button import Button
+from shared.widget_container import ButtonWidget
 
 
-class ClickCounter(Button):
+class ClickCounter(ButtonWidget):
     """A widget to count the number of clicks."""
 
     def __init__(self, **kwargs):
-        super().__init__(name="click-counter", style_classes="panel-button", **kwargs)
+        super().__init__(name="click-counter", **kwargs)
         self.count = 0
         self.set_label(f"{self.count}")
 

@@ -5,7 +5,6 @@ from datetime import datetime
 import gi
 from fabric.utils import exec_shell_command, get_relative_path, invoke_repeater
 from fabric.widgets.box import Box
-from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
@@ -13,6 +12,7 @@ from gi.repository import GLib, Gtk
 
 from services import weather_service
 from shared import LottieAnimation, LottieAnimationWidget, PopOverWindow
+from shared.widget_container import ButtonWidget
 from utils.functions import convert_seconds_to_miliseconds, text_icon
 from utils.icons import weather_text_icons, weather_text_icons_v2
 from utils.widget_config import BarConfig
@@ -23,9 +23,17 @@ gi.require_version("Gtk", "3.0")
 class WeatherMenu(Box):
     """A menu to display the weather information."""
 
-    def __init__(self, data):
+    def __init__(
+        self,
+        data,
+        **kwargs,
+    ):
         super().__init__(
-            style_classes="weather-box", orientation="v", h_expand=True, spacing=5
+            style_classes="weather-box",
+            orientation="v",
+            h_expand=True,
+            spacing=5,
+            **kwargs,
         )
 
         # Get the current weather
@@ -205,16 +213,20 @@ class WeatherMenu(Box):
             return "image-night"  # Night
 
 
-class WeatherWidget(Button):
+class WeatherWidget(ButtonWidget):
     """A widget to display the current weather."""
 
     def __init__(
         self,
         widget_config: BarConfig,
         bar,
+        **kwargs,
     ):
         # Initialize the Box with specific name and style
-        super().__init__()
+        super().__init__(
+            name="weather-button",
+            **kwargs,
+        )
 
         self.config = widget_config["weather"]
 

@@ -1,19 +1,26 @@
 import psutil
 from fabric.utils import invoke_repeater
-from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
 import utils.functions as helpers
+from shared.widget_container import BoxWidget
 from utils.icons import common_text_icons
 from utils.widget_config import BarConfig
 
 
-class CpuWidget(Box):
+class CpuWidget(BoxWidget):
     """A widget to display the current CPU usage."""
 
-    def __init__(self, widget_config: BarConfig):
+    def __init__(
+        self,
+        widget_config: BarConfig,
+        **kwargs,
+    ):
         # Initialize the Box with specific name and style
-        super().__init__(name="cpu", style_classes="panel-box")
+        super().__init__(
+            name="cpu",
+            **kwargs,
+        )
 
         self.config = widget_config["cpu"]
 
@@ -42,12 +49,19 @@ class CpuWidget(Box):
         return True
 
 
-class MemoryWidget(Box):
+class MemoryWidget(BoxWidget):
     """A widget to display the current memory usage."""
 
-    def __init__(self, widget_config: BarConfig):
+    def __init__(
+        self,
+        widget_config: BarConfig,
+        **kwargs,
+    ):
         # Initialize the Box with specific name and style
-        super().__init__(name="memory", style_classes="panel-box")
+        super().__init__(
+            name="memory",
+            **kwargs,
+        )
 
         self.config = widget_config["memory"]
 
@@ -92,12 +106,19 @@ class MemoryWidget(Box):
         return f"{format(helpers.convert_bytes(self.total_memory, 'gb'),'.1f')}"
 
 
-class StorageWidget(Box):
+class StorageWidget(BoxWidget):
     """A widget to display the current storage usage."""
 
-    def __init__(self, widget_config: BarConfig):
+    def __init__(
+        self,
+        widget_config: BarConfig,
+        **kwargs,
+    ):
         # Initialize the Box with specific name and style
-        super().__init__(name="storage", style_classes="panel-box")
+        super().__init__(
+            name="storage",
+            **kwargs,
+        )
         self.config = widget_config["storage"]
 
         # Create a TextIcon with the specified icon and size

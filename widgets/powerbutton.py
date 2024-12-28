@@ -8,6 +8,7 @@ from fabric.widgets.label import Label
 from fabric.widgets.widget import Widget
 
 from shared import PopupWindow
+from shared.widget_container import ButtonWidget
 from utils.functions import text_icon
 from utils.widget_config import BarConfig
 
@@ -24,7 +25,10 @@ POWER_BUTTONS = [
 class PowerMenuPopup(PopupWindow):
     """A popup window to show power options."""
 
-    def __init__(self):
+    def __init__(
+        self,
+        **kwargs,
+    ):
         self.icon_size = 100
 
         self.menu = Box(
@@ -61,6 +65,7 @@ class PowerMenuPopup(PopupWindow):
             child=self.menu,
             anchor="center",
             keyboard_mode="on-demand",
+            **kwargs,
         )
 
     def set_action_buttons_focus(self, can_focus: bool):
@@ -92,6 +97,7 @@ class PowerControlButtons(Button):
                         Label(label=label),
                     ],
                 ),
+                **kwargs,
             ),
         )
 
@@ -121,11 +127,11 @@ class PowerControlButtons(Button):
                 exec_shell_command_async("loginctl terminate-user $USER")
 
 
-class PowerButton(Button):
+class PowerButton(ButtonWidget):
     """A widget to power off the system."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(name="power", style_classes="panel-button", **kwargs)
+        super().__init__(name="power", **kwargs)
 
         self.config = widget_config["power"]
 

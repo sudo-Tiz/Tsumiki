@@ -7,16 +7,16 @@ from fabric.utils import (
     invoke_repeater,
 )
 from fabric.widgets.box import Box
-from fabric.widgets.button import Button
 from fabric.widgets.label import Label
 from loguru import logger
 
+from shared.widget_container import ButtonWidget
 from utils.colors import Colors
 from utils.functions import text_icon
 from utils.widget_config import BarConfig
 
 
-class UpdatesWidget(Button):
+class UpdatesWidget(ButtonWidget):
     """A widget to display the number of available updates."""
 
     def __init__(

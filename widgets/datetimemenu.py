@@ -15,6 +15,7 @@ from gi.repository import Gtk
 from modules.notifications import NotificationWidget
 from services import notify_cache_service
 from shared.popover import PopOverWindow
+from shared.widget_container import BoxWidget
 from utils.functions import uptime
 from utils.icons import icons
 from utils.widget_config import BarConfig
@@ -25,8 +26,15 @@ gi.require_version("Gtk", "3.0")
 class DateNotificationMenu(Box):
     """A menu to display the weather information."""
 
-    def __init__(self):
-        super().__init__(name="datemenu", orientation="h")
+    def __init__(
+        self,
+        **kwargs,
+    ):
+        super().__init__(
+            name="datemenu",
+            orientation="h",
+            **kwargs,
+        )
 
         self.clock_label = Label(
             label=time.strftime("%H:%M"),
@@ -165,12 +173,14 @@ class DateNotificationMenu(Box):
             notify_cache_service.dont_disturb = False
 
 
-class DateTimeWidget(Box):
+class DateTimeWidget(BoxWidget):
     """A widget to power off the system."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(name="date-time-button", style_classes="panel-box", **kwargs)
+        super().__init__(name="date-time-button", **kwargs)
+
         self.config = widget_config["date_time"]
+
         popup = PopOverWindow(
             parent=bar,
             name="popup",

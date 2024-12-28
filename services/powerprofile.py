@@ -9,8 +9,13 @@ gi.require_version("GObject", "2.0")
 class PowerProfiles(Service):
     """Service to interact with the PowerProfiles service."""
 
-    def __init__(self):
-        super().__init__()
+    def __init__(
+        self,
+        **kwargs,
+    ):
+        super().__init__(
+            **kwargs,
+        )
 
         self.power_profiles = {
             "performance": {

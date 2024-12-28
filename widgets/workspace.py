@@ -1,15 +1,15 @@
 from fabric.hyprland.widgets import WorkspaceButton
 from fabric.hyprland.widgets import Workspaces as HyperlandWorkspace
-from fabric.widgets.box import Box
 
+from shared.widget_container import BoxWidget
 from utils.widget_config import BarConfig
 
 
-class WorkSpacesWidget(Box):
+class WorkSpacesWidget(BoxWidget):
     """A widget to display the current workspaces."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(name="workspaces-box", style_classes="panel-box", **kwargs)
+        super().__init__(name="workspaces-box", **kwargs)
 
         self.config = widget_config["workspaces"]
 

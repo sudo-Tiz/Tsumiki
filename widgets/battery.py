@@ -2,24 +2,28 @@ import math
 
 import psutil
 from fabric.utils import invoke_repeater
-from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
+from shared.widget_container import BoxWidget
 from utils.functions import format_time
 from utils.widget_config import BarConfig
 
 
-class Battery(Box):
+class Battery(BoxWidget):
     """A widget to display the current battery status."""
 
     def __init__(
         self,
         widget_config: BarConfig,
         bar,
+        **kwargs,
     ):
         # Initialize the Box with specific name and style
-        super().__init__(name="battery", style_classes="panel-box")
+        super().__init__(
+            name="battery",
+            **kwargs,
+        )
         self.config = widget_config["battery"]
         self.full_battery_level = 100
 
