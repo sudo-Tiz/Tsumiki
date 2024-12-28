@@ -168,14 +168,30 @@ def get_brightness_icon_name(level: int) -> dict[Literal["icon_text", "icon"], s
         }
 
 
-def create_scale() -> AnimatedScale:
+def create_scale(
+    marks=None,
+    value=70,
+    min_value=0,
+    max_value=100,
+    increments=(1, 1),
+    orientation="h",
+    h_expand=True,
+    h_align="center",
+) -> AnimatedScale:
+    if marks is None:
+        marks = (
+            ScaleMark(value=i) for i in range(1, 100, 10)
+        )  # Default marks if none provided
+
     return AnimatedScale(
-        marks=(ScaleMark(value=i) for i in range(1, 100, 10)),
-        value=70,
-        min_value=0,
-        max_value=100,
-        increments=(1, 1),
-        orientation="h",
+        marks=marks,
+        value=value,
+        min_value=min_value,
+        max_value=max_value,
+        increments=increments,
+        orientation=orientation,
+        h_expand=h_expand,
+        h_align=h_align,
     )
 
 

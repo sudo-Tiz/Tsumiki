@@ -67,7 +67,7 @@ class AudioOSDContainer(Box):
         self.icon = Image(
             icon_name=icons.icons["audio"]["volume"]["medium"], icon_size=28
         )
-        self.level = Label(name="osd-level")
+        self.level = Label(name="osd-level", h_align="center", h_expand=True)
         self.scale = helpers.create_scale()
 
         self.children = (self.icon, self.scale, self.level)
