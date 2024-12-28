@@ -6,26 +6,13 @@ from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
-from fabric.widgets.scale import ScaleMark
 from fabric.widgets.wayland import WaylandWindow as Window
 from gi.repository import GObject
 
 import utils.functions as helpers
 import utils.icons as icons
 from services import audio_service, brightness_service
-from shared import AnimatedScale
 from utils.widget_config import BarConfig
-
-
-def create_scale() -> AnimatedScale:
-    return AnimatedScale(
-        marks=(ScaleMark(value=i) for i in range(1, 100, 10)),
-        value=70,
-        min_value=0,
-        max_value=100,
-        increments=(1, 1),
-        orientation="h",
-    )
 
 
 class BrightnessOSDContainer(Box):
@@ -36,7 +23,7 @@ class BrightnessOSDContainer(Box):
         self.brightness_service = brightness_service
         self.level = Label(name="osd-level")
         self.icon = Image(icon_name=icons.icons["brightness"]["screen"], icon_size=28)
-        self.scale = create_scale()
+        self.scale = helpers.create_scale()
 
         self.children = (self.icon, self.scale, self.level)
         self.update_brightness()
@@ -81,7 +68,7 @@ class AudioOSDContainer(Box):
             icon_name=icons.icons["audio"]["volume"]["medium"], icon_size=28
         )
         self.level = Label(name="osd-level")
-        self.scale = create_scale()
+        self.scale = helpers.create_scale()
 
         self.children = (self.icon, self.scale, self.level)
         self.sync_with_audio()

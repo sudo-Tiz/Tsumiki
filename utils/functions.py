@@ -10,10 +10,12 @@ import gi
 import psutil
 from fabric.utils import get_relative_path
 from fabric.widgets.label import Label
+from fabric.widgets.scale import ScaleMark
 from gi.repository import GLib, Gtk
 from loguru import logger
 
 import utils.icons as icons
+from shared.animated.scale import AnimatedScale
 from utils.colors import Colors
 from utils.config import APP_CACHE_DIRECTORY
 
@@ -164,6 +166,17 @@ def get_brightness_icon_name(level: int) -> dict[Literal["icon_text", "icon"], s
             "text_icon": icons.icons.brightness_text_icons["high"],
             "icon": "display-brightness-high-symbolic",
         }
+
+
+def create_scale() -> AnimatedScale:
+    return AnimatedScale(
+        marks=(ScaleMark(value=i) for i in range(1, 100, 10)),
+        value=70,
+        min_value=0,
+        max_value=100,
+        increments=(1, 1),
+        orientation="h",
+    )
 
 
 # Function to get the volume icons
