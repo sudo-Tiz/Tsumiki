@@ -4,7 +4,7 @@
   },
   "layout": {
     "left_section": ["workspaces", "window_title"],
-    "middle_section": ["date_time", "weather"],
+    "middle_section": ["date_time", "weather", "cpu", "memory"],
     "right_section": [
       "hypr_sunset",
       "updates",
@@ -49,22 +49,19 @@
     "icon": "",
     "icon_size": "12px",
     "label": true,
-    "tooltip": true,
-    "interval": 2000
+    "tooltip": true
   },
   "memory": {
     "icon": "",
     "icon_size": "12px",
     "label": true,
-    "tooltip": true,
-    "interval": 2000
+    "tooltip": true
   },
   "storage": {
     "icon": "󰋊",
     "icon_size": "14px",
     "label": true,
-    "tooltip": true,
-    "interval": 2000
+    "tooltip": true
   },
   "workspaces": {
     "count": 8,

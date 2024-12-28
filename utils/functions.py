@@ -4,6 +4,7 @@ import os
 import shutil
 import subprocess
 from ast import List
+from time import sleep
 from typing import Literal
 
 import gi
@@ -29,6 +30,17 @@ class ExecutableNotFoundError(ImportError):
         super().__init__(
             f"{Colors.ERROR}Executable {executable_name} not found. Please install it using your package manager."
         )
+
+
+def psutil_poll(fabricator):
+    while True:
+        yield {
+            "cpu_usage": f"{round(psutil.cpu_percent())}%",
+            "ram_usage": f"{round(psutil.virtual_memory().percent)}%",
+            "memory": psutil.virtual_memory(),
+            "disk": psutil.disk_usage("/"),
+        }
+        sleep(1)
 
 
 # Function to get the system icon theme
@@ -90,7 +102,7 @@ def format_time(secs: int):
 
 
 # Function to convert bytes to kilobytes, megabytes, or gigabytes
-def convert_bytes(bytes: int, to: Literal["kb", "mb", "gb"]):
+def convert_bytes(bytes: int, to: Literal["kb", "mb", "gb"], format_spec=".1f"):
     multiplier = 1
 
     if to == "mb":
@@ -98,7 +110,7 @@ def convert_bytes(bytes: int, to: Literal["kb", "mb", "gb"]):
     elif to == "gb":
         multiplier = 3
 
-    return f"{bytes / (1024**multiplier)}{to.upper()}"
+    return f"{format(bytes / (1024**multiplier), format_spec)}{to.upper()}"
 
 
 # Function to get the system uptime

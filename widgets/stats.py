@@ -1,11 +1,12 @@
-import psutil
-from fabric.utils import invoke_repeater
+from fabric import Fabricator
 from fabric.widgets.label import Label
 
 import utils.functions as helpers
 from shared.widget_container import BoxWidget
 from utils.icons import common_text_icons
 from utils.widget_config import BarConfig
+
+psutil_fabricator = Fabricator(poll_from=helpers.psutil_poll, stream=True)
 
 
 class CpuWidget(BoxWidget):
@@ -35,16 +36,16 @@ class CpuWidget(BoxWidget):
             label="0%", style_classes="panel-text", visible=False
         )
 
-        self.children = (self.text_icon, self.cpu_level)
+        self.children = (self.text_icon, self.cpu_level_label)
 
-        # Set up a repeater to call the update_label method at specified intervals
-        invoke_repeater(self.config["interval"], self.update_label, initial_call=True)
+        # Set up a fabricator to call the update_label method when the CPU usage changes
+        psutil_fabricator.connect("changed", self.update_ui)
 
-    def update_label(self):
+    def update_ui(self, fabricator, value):
         # Update the label with the current CPU usage if enabled
         if self.config["label"]:
             self.cpu_level_label.show()
-            self.cpu_level_label.set_label(f"{psutil.cpu_percent()}%")
+            self.cpu_level_label.set_label(value.get("cpu_usage"))
 
         return True
 
@@ -77,14 +78,15 @@ class MemoryWidget(BoxWidget):
 
         self.children = (self.icon, self.memory_level_label)
 
-        # Set up a repeater to call the update_values method at specified intervals
-        invoke_repeater(self.config["interval"], self.update_values, initial_call=True)
+        # Set up a fabricator to call the update_label method  at specified intervals
+        psutil_fabricator.connect("changed", self.update_ui)
 
-    def update_values(self):
+    def update_ui(self, fabricator, value):
         # Get the current memory usage
-        self.used_memory = psutil.virtual_memory().used
-        self.total_memory = psutil.virtual_memory().total
-        self.percent_used = psutil.virtual_memory().percent
+        memory = value.get("memory")
+        self.used_memory = memory.used
+        self.total_memory = memory.total
+        self.percent_used = memory.percent
 
         # Update the label with the used memory if enabled
         if self.config["label"]:
@@ -94,16 +96,16 @@ class MemoryWidget(BoxWidget):
         # Update the tooltip with the memory usage details if enabled
         if self.config["tooltip"]:
             self.set_tooltip_text(
-                f"󰾆 {psutil.virtual_memory().percent}%\n{common_text_icons['memory']} {self.get_used()}/{self.get_total()}",
+                f"󰾆 {self.percent_used}%\n{common_text_icons['memory']} {self.get_used()}/{self.get_total()}",
             )
 
         return True
 
     def get_used(self):
-        return f"{format(helpers.convert_bytes(self.used_memory, 'gb'),'.1f')}"
+        return helpers.convert_bytes(self.used_memory, "gb")
 
     def get_total(self):
-        return f"{format(helpers.convert_bytes(self.total_memory, 'gb'),'.1f')}"
+        return helpers.convert_bytes(self.total_memory, "gb")
 
 
 class StorageWidget(BoxWidget):
@@ -134,12 +136,12 @@ class StorageWidget(BoxWidget):
 
         self.children = (self.icon, self.storage_level_label)
 
-        # Set up a repeater to call the update_values method at specified intervals
-        invoke_repeater(self.config["interval"], self.update_values, initial_call=True)
+        # Set up a fabricator to call the update_label method at specified intervals
+        psutil_fabricator.connect("changed", self.update_ui)
 
-    def update_values(self):
+    def update_ui(self, fabricator, value):
         # Get the current disk usage
-        self.disk = psutil.disk_usage("/")
+        self.disk = value.get("disk")
 
         # Update the label with the used storage if enabled
         if self.config["label"]:
@@ -155,7 +157,7 @@ class StorageWidget(BoxWidget):
         return True
 
     def get_used(self):
-        return f"{format(helpers.convert_bytes(self.disk.used, 'gb'),'.1f')}"
+        return helpers.convert_bytes(self.disk.used, "gb")
 
     def get_total(self):
-        return f"{format(helpers.convert_bytes(self.disk.total, 'gb'),'.1f')}"
+        return helpers.convert_bytes(self.disk.total, "gb")
