@@ -74,6 +74,7 @@ tooltip {
 
   label {
     @include mixins.unset;
+    color: theme.$text-main;
     font-weight: normal;
   }
 }
