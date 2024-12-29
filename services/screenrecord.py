@@ -1,40 +1,29 @@
 import datetime
 import subprocess
 
-from fabric.core.service import Service
-from fabric.utils import exec_shell_command
+from fabric.core.service import Property, Service, Signal
+from fabric.utils import exec_shell_command, exec_shell_command_async
 from gi.repository import Gio, GLib
 from loguru import logger
 
-from utils.colors import Colors
-
-
-def exec_shell_command_async(cmd: str) -> bool:
-    if isinstance(cmd, str):
-        try:
-            GLib.spawn_command_line_async(cmd)
-            return True
-        except ValueError:
-            return False
-    else:
-        return False
+from utils.widget_config import BarConfig
 
 
 class ScreenRecorder(Service):
     """Service to handle screen recording and screenshots"""
 
-    # __gsignals__ = SignalContainer(
+    @Signal
+    def recording(self, value: bool) -> None: ...
 
-    # )
-    def __init__(self, **kwargs):
-        self.screenshot_path = GLib.get_home_dir() + "/Pictures/Screenshots/"
-        self.screenrecord_path = GLib.get_home_dir() + "/Videos/Screencasting/"
-        self.recording = False
+    def __init__(self, widget_config: BarConfig, **kwargs):
+        self.config = widget_config["recorder"]
+        self.screenshot_path = f"{GLib.get_home_dir()}/{self.config["photos"]}/"
+        self.screenrecord_path = f"{GLib.get_home_dir()}/{self.config["videos"]}/"
         super().__init__(**kwargs)
 
     def screenshot(self, fullscreen=False, save_copy=True):
         time = datetime.datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
-        file_path = self.screenshot_path + str(time) + ".png"
+        file_path = f"{self.screenshot_path}/{time}.png"
         command = (
             ["grimblast", "copysave", "screen", file_path]
             if save_copy
@@ -47,22 +36,66 @@ class ScreenRecorder(Service):
             self.send_screenshot_notification(
                 file_path=file_path if file_path else None,
             )
-        except Exception:
-            logger.error(f"{Colors.ERROR}[SCREENSHOT] Failed to run command: {command}")
+        except Exception as e:
+            logger.error(f"[SCREENSHOT] Failed to run command: {command}")
 
     def screencast_start(self, fullscreen=False):
+        if self.is_recording:
+            logger.error(
+                "[SCREENRECORD] Another instance of wf-recorder is already running"
+            )
+            return
         time = datetime.datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
-        file_path = self.screenrecord_path + str(time) + ".mp4"
-        area = ""
-        if fullscreen:
-            area = exec_shell_command("slurp")
-        command = f"wf-recorder -g {area} -f {file_path}"
-
+        file_path = f"{self.screenshot_path}/{time}.mp4"
+        self._current_screencast_path = file_path
+        area = "" if fullscreen else f"-g '{exec_shell_command('slurp')}'"
+        command = f"wf-recorder --file={file_path} --pixel-format yuv420p {area}"
         exec_shell_command_async(command)
+        self.emit("recording", True)
 
     def screencast_stop(self):
         exec_shell_command_async("killall -INT wf-recorder")
-        self.recording = False
+        self.emit("recording", False)
+        self.send_screencast_notification(self._current_screencast_path)
+
+    def send_screencast_notification(self, file_path):
+        # TODO: Generate a thumbnail
+        # exec_shell_command_async(f"totem-video-thumbnailer {file_path} {FABRIC_CACHE}")
+
+        cmd = ["notify-send"]
+        cmd.extend(
+            [
+                "-A",
+                "files=Show in Files",
+                "-A",
+                "view=View",
+                "-i",
+                "camera-video-symbolic",
+                "-a",
+                "Fabric Screenshot Utility",
+                "Screencast Saved",
+                f"Saved Screencast at {file_path}",
+            ]
+        )
+
+        proc: Gio.Subprocess = Gio.Subprocess.new(cmd, Gio.SubprocessFlags.STDOUT_PIPE)
+
+        def do_callback(process: Gio.Subprocess, task: Gio.Task):
+            try:
+                _, stdout, stderr = process.communicate_utf8_finish(task)
+            except Exception:
+                logger.error(
+                    f"[SCREENCAST] Failed read notification action with error {stderr}"
+                )
+                return
+
+            match stdout.strip("\n"):
+                case "files":
+                    exec_shell_command_async(f"xdg-open {self.screenrecord_path}")
+                case "view":
+                    exec_shell_command_async(f"xdg-open {file_path}")
+
+        proc.communicate_utf8_async(None, None, do_callback)
 
     def send_screenshot_notification(self, file_path=None):
         cmd = ["notify-send"]
@@ -94,7 +127,7 @@ class ScreenRecorder(Service):
                 _, stdout, stderr = process.communicate_utf8_finish(task)
             except Exception:
                 logger.error(
-                    f"{Colors.ERROR}[SCREENSHOT] Failed read notification action with error {stderr}"
+                    f"[SCREENSHOT] Failed read notification action with error {stderr}"
                 )
                 return
 
@@ -107,3 +140,7 @@ class ScreenRecorder(Service):
                     exec_shell_command_async(f"swappy -f {file_path}")
 
         proc.communicate_utf8_async(None, None, do_callback)
+
+    @Property(bool, "readable", default_value=False)
+    def is_recording(self):
+        return len(exec_shell_command("pidof wf-recorder")) != 0

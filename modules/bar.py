@@ -25,6 +25,7 @@ from widgets import (
     WeatherWidget,
     WindowTitleWidget,
     WorkSpacesWidget,
+    Recorder,
 )
 
 
@@ -56,6 +57,7 @@ class StatusBar(WaylandWindow):
             "memory": MemoryWidget,
             "mpris": Mpris,
             "power": PowerButton,
+            "recorder": Recorder,
             "storage": StorageWidget,
             "system_tray": SystemTray,
             "task_bar": TaskBarWidget,

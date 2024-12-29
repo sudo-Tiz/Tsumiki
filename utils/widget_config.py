@@ -137,6 +137,7 @@ DEFAULT_CONFIG = {
         "timeout": 1500,
         "anchor": "bottom center",
     },
+    "recorder": {"photos": "Pictures/Screenshots", "videos": "Videos/Screencasting"},
 }
 
 
@@ -261,6 +262,10 @@ Notification = TypedDict(
     "Notification", {"ignored": List[str], "timeout": int, "anchor": str}
 )
 
+# Recording configuration
+Recording = TypedDict("Recording", {"videos": str, "photos": str})
+
+
 # OSD configuration
 OSD = TypedDict("Notification", {"enabled": bool, "timeout": int, "anchor": str})
 
@@ -272,6 +277,7 @@ class BarConfig(TypedDict):
     notification: Notification
     bluetooth: BlueTooth
     cpu: Cpu
+    recorder: Recording
     hypr_sunset: HyprSunset
     hypr_idle: HyprIdle
     keyboard: Keyboard

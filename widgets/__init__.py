@@ -9,6 +9,7 @@ from .hypridle import *
 from .hyprsunset import *
 from .kblayout import *
 from .language import *
+from .recorder import *
 from .mpris import *
 from .powerbutton import *
 from .stats import *
