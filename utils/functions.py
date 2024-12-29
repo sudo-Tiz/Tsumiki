@@ -10,7 +10,7 @@ from typing import Literal
 import gi
 import psutil
 from fabric import Fabricator
-from fabric.utils import get_relative_path
+from fabric.utils import exec_shell_command_async, get_relative_path
 from fabric.widgets.label import Label
 from fabric.widgets.scale import ScaleMark
 from gi.repository import GLib, Gtk
@@ -141,6 +141,10 @@ def check_icon_exists(icon_name: str, fallback_icon: str) -> str:
         return icon_name
     return fallback_icon
 
+# Function to execute a shell command asynchronously
+def play_sound(file: str):
+    print(file)
+    exec_shell_command_async(f"play {file}", None)
 
 # Function to get the distro icon
 def get_distro_icon():

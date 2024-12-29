@@ -12,7 +12,7 @@ from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import Gtk
 
-from modules.notifications import NotificationWidget
+from modules.notifications.notificationwidget import NotificationWidget
 from services import notify_cache_service
 from shared.popover import PopOverWindow
 from shared.widget_container import BoxWidget

@@ -1,7 +1,6 @@
 import time
 from typing import Literal
 
-import gi
 from fabric.notifications import (
     Notification,
     NotificationAction,
@@ -15,49 +14,13 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
 from fabric.widgets.revealer import Revealer
-from fabric.widgets.wayland import WaylandWindow
 from gi.repository import GdkPixbuf, GLib, GObject
 
 import utils.config as config
 import utils.functions as helpers
 import utils.icons as icons
-from services import notification_service, notify_cache_service
 from shared import AnimatedCircularProgressBar, CustomImage
-from utils.widget_config import BarConfig, widget_config
-
-gi.require_version("GdkPixbuf", "2.0")
-
-
-class ActionButton(Button):
-    """A button widget to represent a notification action."""
-
-    def __init__(
-        self,
-        action: NotificationAction,
-        action_number: int,
-        total_actions: int,
-        **kwargs,
-    ):
-        super().__init__(
-            label=action.label,
-            h_expand=True,
-            on_clicked=self.on_clicked,
-            style_classes="notification-action",
-            **kwargs,
-        )
-
-        self.action = action
-
-        if action_number == 0:
-            self.add_style_class("start-action")
-        elif action_number == total_actions - 1:
-            self.add_style_class("end-action")
-        else:
-            self.add_style_class("middle-action")
-
-    def on_clicked(self, *_):
-        self.action.invoke()
-        self.action.parent.close("dismissed-by-user")
+from utils.widget_config import widget_config
 
 
 class NotificationWidget(EventBox):
@@ -269,6 +232,7 @@ class NotificationWidget(EventBox):
         )
 
 
+
 class NotificationRevealer(Revealer):
     """A widget to reveal a notification."""
 
@@ -301,46 +265,33 @@ class NotificationRevealer(Revealer):
         self.set_reveal_child(False)
 
 
-class NotificationPopup(WaylandWindow):
-    """A widget to grab and display notifications."""
+class ActionButton(Button):
+    """A button widget to represent a notification action."""
 
-    def __init__(self, widget_config: BarConfig, **kwargs):
-        self._server = notification_service
-
-        self.config = widget_config["notification"]
-
-        self.ignored_apps = helpers.unique_list(self.config["ignored"])
-
-        self.notifications = Box(
-            v_expand=True,
-            h_expand=True,
-            style="margin: 1px 0px 1px 1px;",
-            orientation="v",
-            spacing=5,
-        )
-        self._server.connect("notification-added", self.on_new_notification)
-
+    def __init__(
+        self,
+        action: NotificationAction,
+        action_number: int,
+        total_actions: int,
+        **kwargs,
+    ):
         super().__init__(
-            anchor=self.config["anchor"],
-            layer="overlay",
-            all_visible=True,
-            visible=True,
-            exclusive=False,
-            child=self.notifications,
+            label=action.label,
+            h_expand=True,
+            on_clicked=self.on_clicked,
+            style_classes="notification-action",
             **kwargs,
         )
 
-    def on_new_notification(self, fabric_notif, id):
-        notification: Notification = fabric_notif.get_notification_from_id(id)
+        self.action = action
 
-        # Check if the notification is in the "do not disturb" mode, hacky way
-        if (
-            notify_cache_service.dont_disturb
-            or notification.app_name in self.ignored_apps
-        ):
-            return
+        if action_number == 0:
+            self.add_style_class("start-action")
+        elif action_number == total_actions - 1:
+            self.add_style_class("end-action")
+        else:
+            self.add_style_class("middle-action")
 
-        new_box = NotificationRevealer(notification)
-        self.notifications.add(new_box)
-        new_box.set_reveal_child(True)
-        notify_cache_service.cache_notification(notification)
+    def on_clicked(self, *_):
+        self.action.invoke()
+        self.action.parent.close("dismissed-by-user")
