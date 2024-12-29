@@ -19,7 +19,6 @@ from loguru import logger
 import utils.icons as icons
 from shared.animated.scale import AnimatedScale
 from utils.colors import Colors
-from utils.config import APP_CACHE_DIRECTORY
 
 gi.require_version("Gtk", "3.0")
 
@@ -305,10 +304,10 @@ def convert_to_percent(
         return (current / max) * 100
 
 
-# Function to ensure the cache directory exists
-def ensure_cache_dir_exists():
-    if not os.path.exists(APP_CACHE_DIRECTORY):
-        os.makedirs(APP_CACHE_DIRECTORY)
+# Function to ensure the directory exists
+def ensure_dir_exists(path: str):
+    if not os.path.exists(path):
+        os.makedirs(path)
 
 
 def unique_list(lst) -> List:

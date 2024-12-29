@@ -8,7 +8,7 @@ from modules.bar import StatusBar
 from modules.notifications.notificationpopup import NotificationPopup
 from modules.osd import OSDContainer
 from utils.colors import Colors
-from utils.config import APPLICATION_NAME
+from utils.config import APP_CACHE_DIRECTORY, APPLICATION_NAME
 from utils.widget_config import widget_config
 
 
@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
     setproctitle.setproctitle(APPLICATION_NAME)
 
-    helpers.ensure_cache_dir_exists()
+    helpers.ensure_dir_exists(APP_CACHE_DIRECTORY)
 
     helpers.copy_theme(widget_config["theme"]["name"])
 

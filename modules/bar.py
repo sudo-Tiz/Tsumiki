@@ -16,6 +16,7 @@ from widgets import (
     MemoryWidget,
     Mpris,
     PowerButton,
+    Recorder,
     StorageWidget,
     SystemTray,
     TaskBarWidget,
@@ -25,7 +26,6 @@ from widgets import (
     WeatherWidget,
     WindowTitleWidget,
     WorkSpacesWidget,
-    Recorder,
 )
 
 

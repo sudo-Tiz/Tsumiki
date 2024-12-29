@@ -137,7 +137,11 @@ DEFAULT_CONFIG = {
         "timeout": 1500,
         "anchor": "bottom center",
     },
-    "recorder": {"photos": "Pictures/Screenshots", "videos": "Videos/Screencasting"},
+    "recorder": {
+        "photos": "Pictures/Screenshots",
+        "videos": "Videos/Screencasting",
+        "icon_size": 16,
+    },
 }
 
 
@@ -263,7 +267,7 @@ Notification = TypedDict(
 )
 
 # Recording configuration
-Recording = TypedDict("Recording", {"videos": str, "photos": str})
+Recording = TypedDict("Recording", {"videos": str, "photos": str, "icon_size": int})
 
 
 # OSD configuration

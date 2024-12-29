@@ -6,6 +6,7 @@ from fabric.utils import exec_shell_command, exec_shell_command_async
 from gi.repository import Gio, GLib
 from loguru import logger
 
+from utils.functions import ensure_dir_exists
 from utils.widget_config import BarConfig
 
 
@@ -17,8 +18,12 @@ class ScreenRecorder(Service):
 
     def __init__(self, widget_config: BarConfig, **kwargs):
         self.config = widget_config["recorder"]
-        self.screenshot_path = f"{GLib.get_home_dir()}/{self.config["photos"]}/"
-        self.screenrecord_path = f"{GLib.get_home_dir()}/{self.config["videos"]}/"
+        self.screenshot_path = f"{GLib.get_home_dir()}/{self.config["photos"]}"
+        self.screenrecord_path = f"{GLib.get_home_dir()}/{self.config["videos"]}"
+
+        ensure_dir_exists(self.screenshot_path)
+        ensure_dir_exists(self.screenrecord_path)
+
         super().__init__(**kwargs)
 
     def screenshot(self, fullscreen=False, save_copy=True):
@@ -36,7 +41,7 @@ class ScreenRecorder(Service):
             self.send_screenshot_notification(
                 file_path=file_path if file_path else None,
             )
-        except Exception as e:
+        except Exception:
             logger.error(f"[SCREENSHOT] Failed to run command: {command}")
 
     def screencast_start(self, fullscreen=False):
@@ -46,7 +51,8 @@ class ScreenRecorder(Service):
             )
             return
         time = datetime.datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
-        file_path = f"{self.screenshot_path}/{time}.mp4"
+        file_path = f"{self.screenrecord_path}/{time}.mp4"
+
         self._current_screencast_path = file_path
         area = "" if fullscreen else f"-g '{exec_shell_command('slurp')}'"
         command = f"wf-recorder --file={file_path} --pixel-format yuv420p {area}"
@@ -59,8 +65,6 @@ class ScreenRecorder(Service):
         self.send_screencast_notification(self._current_screencast_path)
 
     def send_screencast_notification(self, file_path):
-        # TODO: Generate a thumbnail
-        # exec_shell_command_async(f"totem-video-thumbnailer {file_path} {FABRIC_CACHE}")
 
         cmd = ["notify-send"]
         cmd.extend(

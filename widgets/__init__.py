@@ -9,9 +9,9 @@ from .hypridle import *
 from .hyprsunset import *
 from .kblayout import *
 from .language import *
-from .recorder import *
 from .mpris import *
 from .powerbutton import *
+from .recorder import *
 from .stats import *
 from .stopwatch import *
 from .systray import *
