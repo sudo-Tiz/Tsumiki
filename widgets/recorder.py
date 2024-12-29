@@ -20,7 +20,7 @@ class Recorder(ButtonWidget):
             icon_size=self.config["icon_size"],
         )
         self.recording_idle_image = Image(
-            icon_name="media-stop-symbolic",
+            icon_name=icons.icons["recorder"]["stopped"],
             icon_size=self.config["icon_size"],
         )
 
@@ -33,14 +33,17 @@ class Recorder(ButtonWidget):
             "clicked",
             lambda _: recorder_service.screencast_stop()
             if self.is_recording
-            else recorder_service.screencast_start(fullscreen=True),
+            else recorder_service.screencast_start(),
         )
 
     def update_ui(self, _, is_recording: bool):
-        print(is_recording)
         if is_recording:
             self.set_image(self.recording_ongoing_image)
             self.is_recording = True
+            if self.config["tooltip"]:
+                self.set_tooltip_text("Recording started")
         else:
-            self.set_image(self.recording_ongoing_image)
-            self.is_recording = True
+            self.set_image(self.recording_idle_image)
+            self.is_recording = False
+            if self.config["tooltip"]:
+                self.set_tooltip_text("Recording stopped")

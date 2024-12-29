@@ -139,6 +139,8 @@
   },
   "recorder": {
     "photos": "Pictures/Screenshots",
-    "videos": "Videos/Screencasting"
+    "videos": "Videos/Screencasting",
+    "tooltip": true,
+    "icon_size": 16
   }
 }

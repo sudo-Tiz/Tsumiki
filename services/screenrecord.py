@@ -65,7 +65,6 @@ class ScreenRecorder(Service):
         self.send_screencast_notification(self._current_screencast_path)
 
     def send_screencast_notification(self, file_path):
-
         cmd = ["notify-send"]
         cmd.extend(
             [
