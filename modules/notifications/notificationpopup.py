@@ -7,6 +7,7 @@ from fabric.widgets.wayland import WaylandWindow
 import utils.functions as helpers
 from modules.notifications.notificationwidget import NotificationRevealer
 from services import notification_service, notify_cache_service
+from utils.monitors import HyprlandWithMonitors
 from utils.widget_config import BarConfig
 
 
@@ -17,6 +18,9 @@ class NotificationPopup(WaylandWindow):
         self._server = notification_service
 
         self.config = widget_config["notification"]
+
+        # TODO: make this work with monitors
+        self.hyprland_monitor = HyprlandWithMonitors()
 
         self.ignored_apps = helpers.unique_list(self.config["ignored"])
 
