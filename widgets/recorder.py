@@ -25,6 +25,9 @@ class Recorder(ButtonWidget):
         )
 
         self.set_image(self.recording_idle_image)
+        if self.config["tooltip"]:
+            self.set_tooltip_text("Recording stopped")
+
         recorder_service = ScreenRecorder(widget_config)
 
         recorder_service.connect("recording", self.update_ui)
