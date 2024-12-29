@@ -71,8 +71,6 @@ class AudioOSDContainer(Box):
         self.level = Label(name="osd-level", h_align="center", h_expand=True)
         self.scale = helpers.create_scale()
 
-
-        # TODO: make this work with monitors
         self.hyprland_monitor = HyprlandWithMonitors()
 
         self.children = (self.icon, self.scale, self.level)

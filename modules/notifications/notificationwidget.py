@@ -232,7 +232,6 @@ class NotificationWidget(EventBox):
         )
 
 
-
 class NotificationRevealer(Revealer):
     """A widget to reveal a notification."""
 

@@ -58,11 +58,12 @@ class NotificationCacheService(Service):
 
         # Check if the cache file exists and read existing data
         if os.path.exists(NOTIFICATION_CACHE_FILE):
-            with open(NOTIFICATION_CACHE_FILE, "r") as f:
+            with open(NOTIFICATION_CACHE_FILE, "r") as file:
                 try:
                     # Load existing data if the file is not empty
-                    existing_data = json.load(f)
-                except json.JSONDecodeError:
+                    existing_data = json.load(file)
+                except (json.JSONDecodeError, KeyError, ValueError, IndexError) as e:
+                    logger.error(f"{Colors.INFO}[Notification]", e)
                     existing_data = []  # If the file is empty or malformed
         else:
             existing_data = []

@@ -1,5 +1,3 @@
-
-
 from fabric.notifications import Notification
 from fabric.widgets.box import Box
 from fabric.widgets.wayland import WaylandWindow
@@ -19,7 +17,6 @@ class NotificationPopup(WaylandWindow):
 
         self.config = widget_config["notification"]
 
-        # TODO: make this work with monitors
         self.hyprland_monitor = HyprlandWithMonitors()
 
         self.ignored_apps = helpers.unique_list(self.config["ignored"])

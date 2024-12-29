@@ -8,7 +8,6 @@ from utils.config import WINDOW_TITLE_MAP
 from utils.widget_config import BarConfig
 
 
-# TODO: replace with actual image
 class WindowTitleWidget(BoxWidget):
     """a widget that displays the title of the active window."""
 
