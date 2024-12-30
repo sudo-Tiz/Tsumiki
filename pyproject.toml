@@ -1,5 +1,5 @@
 [project]
-name = "FabricPanel"
+name = "HyDEPanel"
 dynamic = ["version"]
 description = "A semi-customizable bar written using the Fabric Widget System"
 readme = "README.md"
