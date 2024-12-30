@@ -5,7 +5,7 @@ from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
 
 import utils.functions as helpers
-from services.brightness import Brightness
+from services import brightness_service
 from utils.icons import brightness_text_icons
 from utils.widget_config import BarConfig
 
@@ -19,7 +19,7 @@ class BrightnessWidget(EventBox):
         self.config = widget_config["brightness"]
 
         # Initialize the audio service
-        self.brightness_service = Brightness()
+        self.brightness_service = brightness_service
 
         normalized_brightness = helpers.convert_to_percent(
             self.brightness_service.screen_brightness,
