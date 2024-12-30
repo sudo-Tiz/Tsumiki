@@ -1,8 +1,9 @@
-from fabric.widgets.image import Image
+from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
-from fabric.utils import exec_shell_command, get_relative_path, invoke_repeater
+from fabric.widgets.image import Image
+
 from services.screenrecord import ScreenRecorder
-from shared.lottie import LottieAnimationWidget, LottieAnimation
+from shared.lottie import LottieAnimation, LottieAnimationWidget
 from shared.widget_container import ButtonWidget
 from utils import icons
 from utils.widget_config import BarConfig
