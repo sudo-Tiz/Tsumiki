@@ -69,9 +69,7 @@ hypridle
 
 ```
 
-- ### ** Clone the Repository**
-
-Clone this repository:
+- Clone this repository:
 
 ```sh
 git clone https://github.com/rubiin/HyDePanel.git bar
@@ -80,13 +78,13 @@ cd bar
 
 - Run the following command to install the required packages for particular os:
 
-# Arch Linux
+#### Arch Linux
 
 ```sh
 sudo pacman -S pipewire playerctl gray-git python-fabric dart-sass networkmanager wl-clipboard brightnessctl python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python python-pip python-gobject python-psutil python-cairo python-loguru pkgconf wf-recorder
 ```
 
-# OpenSUSE
+#### OpenSUSE
 
 ```
 sudo zypper install pipewire playerctl networkmanager wl-clipboard brightnessctl python gtk3-devel cairo-devel gtk-layer-shell-devel libgirepository-1_0-1 libgirepository-2_0-0 gobject-introspection-devel python311 python311-pip python311-psutil python311-gobject python311-gobject-cairo python311-pycairo python311-loguru pkgconf
