@@ -188,6 +188,7 @@ def get_brightness_icon_name(level: int) -> dict[Literal["icon_text", "icon"], s
         }
 
 
+# Create a scale widget
 def create_scale(
     marks=None,
     value=70,
@@ -246,6 +247,7 @@ def get_audio_icon_name(
         }
 
 
+# Function to send a notification
 def send_notification(
     title, message, urgency="normal", timeout=0, icon=None, category=None, hint=None
 ):
