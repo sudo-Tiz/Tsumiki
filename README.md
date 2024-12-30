@@ -35,6 +35,7 @@ pipewire
 
 
 ## Bluetooth menu utilities
+gnome-bluetooth
 bluez
 bluez-utils
 
@@ -76,18 +77,18 @@ git clone https://github.com/rubiin/HyDePanel.git bar
 cd bar
 ```
 
-- Run the following command to install the required packages for particular os:
+- Run the following command to install the required packages for particular os, few of them are already installed if you have a working system:
 
 #### Arch Linux
 
 ```sh
-sudo pacman -S pipewire playerctl gray-git python-fabric dart-sass networkmanager wl-clipboard brightnessctl python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python python-pip python-gobject python-psutil python-cairo python-loguru pkgconf wf-recorder kitty
+sudo pacman -S pipewire playerctl gray-git python-fabric dart-sass networkmanager wl-clipboard brightnessctl python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python python-pip python-gobject python-psutil python-cairo python-loguru pkgconf wf-recorder kitty grimblast gnome-bluetooth
 ```
 
 #### OpenSUSE
 
 ```
-sudo zypper install pipewire playerctl networkmanager wl-clipboard brightnessctl python gtk3-devel cairo-devel gtk-layer-shell-devel libgirepository-1_0-1 libgirepository-2_0-0 gobject-introspection-devel python311 python311-pip python311-psutil python311-gobject python311-gobject-cairo python311-pycairo python311-loguru pkgconf kitty
+sudo zypper install pipewire playerctl networkmanager wl-clipboard brightnessctl python gtk3-devel cairo-devel gtk-layer-shell-devel libgirepository-1_0-1 libgirepository-2_0-0 gobject-introspection-devel python311 python311-pip python311-psutil python311-gobject python311-gobject-cairo python311-pycairo python311-loguru pkgconf kitty grimblast gnome-bluetooth
 ```
 
 - Install the requirements:
@@ -103,6 +104,7 @@ pip install -r requirements.txt
 ### **For Hyprland:**
 
 Add this to your `.config/hyprland.conf`
+
 ```sh
 exec = source "$HOME/bar/.venv/bin/activate" && python "$HOME/bar/main.py"
 
@@ -145,7 +147,6 @@ Use a similar configuration for your respective window manager's autostart setup
 - workspace
 - updates
 
-
 </details>
 
 # Screenshots
@@ -174,6 +175,7 @@ Use a similar configuration for your respective window manager's autostart setup
 Be sure to kill any bars that you may be running. You can kill other bar with `pkill bar-name`
 
 ### 2. **Cannot see bar? **
+
 Kill the app with `pkill hydepanel`. Cd to the folder , activate venv with `source .venv/bin/activate` and run `python main.py`.
 This should show some logs. If it shows like `ModuleNotFoundError`, run `pip install -r requirements.txt`.
 If this does not solve the issue, do report a bug
