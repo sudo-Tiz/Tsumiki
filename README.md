@@ -172,3 +172,8 @@ Use a similar configuration for your respective window manager's autostart setup
 ### 1. **Cannot see system tray?**
 
 Be sure to kill any bars that you may be running. You can kill other bar with `pkill bar-name`
+
+### 2. **Cannot see bar? **
+Kill the app with `pkill hydepanel`. Cd to the folder , activate venv with `source .venv/bin/activate` and run `python main.py`.
+This should show some logs. If it shows like `ModuleNotFoundError`, run `pip install -r requirements.txt`.
+If this does not solve the issue, do report a bug
