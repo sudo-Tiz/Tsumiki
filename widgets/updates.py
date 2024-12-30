@@ -41,7 +41,6 @@ class UpdatesWidget(ButtonWidget):
         )
 
         self.children = Box(
-            style_classes="panel-box",
             children=(self.text_icon, self.update_level_label),
         )
 

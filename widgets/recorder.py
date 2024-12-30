@@ -16,12 +16,16 @@ class Recorder(ButtonWidget):
         self.config = widget_config["recorder"]
 
         self.recording_ongoing_image = Image(
+            h_align="center",
+            v_align="center",
             icon_name=icons.icons["recorder"]["recording"],
             icon_size=self.config["icon_size"],
         )
         self.recording_idle_image = Image(
             icon_name=icons.icons["recorder"]["stopped"],
             icon_size=self.config["icon_size"],
+            h_align="center",
+            v_align="center",
         )
 
         self.set_image(self.recording_idle_image)

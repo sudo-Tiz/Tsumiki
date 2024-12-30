@@ -16,13 +16,11 @@ class BlueToothWidget(BoxWidget):
 
         self.icons = icons.icons["bluetooth"]
 
-        self.icon_size = 14
-
         self.config = widget_config["bluetooth"]
 
         self.bluetooth_icon = Image(
             icon_name=self.icons["enabled"],
-            icon_size=self.icon_size,
+            icon_size=self.config["icon_size"],
         )
 
         self.bt_label = Label(label="", visible=False, style_classes="panel-text")
@@ -39,7 +37,7 @@ class BlueToothWidget(BoxWidget):
         if self.bluetooth_icon:
             self.remove(self.bluetooth_icon)
 
-        self.bluetooth_icon.set_from_icon_name(icon, icon_size=self.icon_size)
+        self.bluetooth_icon.set_from_icon_name(icon, icon_size=self.config["icon_size"])
         self.children = (self.bluetooth_icon, self.bt_label)
 
         if self.config["label"]:

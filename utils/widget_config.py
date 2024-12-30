@@ -91,7 +91,7 @@ DEFAULT_CONFIG = {
         "tooltip": True,
     },
     "bluetooth": {
-        "icon_size": 22,
+        "icon_size": 14,
         "label": True,
         "tooltip": True,
     },
@@ -119,8 +119,8 @@ DEFAULT_CONFIG = {
         "tooltip": True,
     },
     "language": {"length": 3},
-    "task_bar": {"icon_size": 22},
-    "system_tray": {"icon_size": 22, "ignore": []},
+    "task_bar": {"icon_size": 16},
+    "system_tray": {"icon_size": 20, "ignore": []},
     "power": {"icon": "󰐥", "icon_size": "18px", "tooltip": True},
     "theme_switcher": {
         "icon": "",
@@ -140,7 +140,7 @@ DEFAULT_CONFIG = {
     "recorder": {
         "photos": "Pictures/Screenshots",
         "videos": "Videos/Screencasting",
-        "icon_size": 16,
+        "icon_size": 14,
         "tooltip": True,
     },
 }

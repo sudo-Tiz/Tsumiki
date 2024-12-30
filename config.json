@@ -90,7 +90,7 @@
     "tooltip": true
   },
   "task_bar": {
-    "icon_size": 22
+    "icon_size": 14
   },
   "language": {
     "length": 2
@@ -103,7 +103,7 @@
     "ignore": []
   },
   "bluetooth": {
-    "icon_size": 22,
+    "icon_size": 14,
     "label": true,
     "tooltip": true
   },
@@ -141,6 +141,6 @@
     "photos": "Pictures/Screenshots",
     "videos": "Videos/Screencasting",
     "tooltip": true,
-    "icon_size": 16
+    "icon_size": 14
   }
 }
