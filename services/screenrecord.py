@@ -6,7 +6,7 @@ from fabric.utils import exec_shell_command, exec_shell_command_async
 from gi.repository import Gio, GLib
 from loguru import logger
 
-from utils.functions import ensure_dir_exists
+import utils.functions as helpers
 from utils.widget_config import BarConfig
 
 
@@ -17,12 +17,15 @@ class ScreenRecorder(Service):
     def recording(self, value: bool) -> None: ...
 
     def __init__(self, widget_config: BarConfig, **kwargs):
+        if not helpers.executable_exists("wf-recorder"):
+            raise helpers.ExecutableNotFoundError("wf-recorder")
+
         self.config = widget_config["recorder"]
         self.screenshot_path = f"{GLib.get_home_dir()}/{self.config["photos"]}"
         self.screenrecord_path = f"{GLib.get_home_dir()}/{self.config["videos"]}"
 
-        ensure_dir_exists(self.screenshot_path)
-        ensure_dir_exists(self.screenrecord_path)
+        helpers.ensure_dir_exists(self.screenshot_path)
+        helpers.ensure_dir_exists(self.screenrecord_path)
 
         super().__init__(**kwargs)
 
