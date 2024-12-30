@@ -24,15 +24,6 @@ Many aspects of the bar including the look and functionalities are inspired from
 
 ## **Installation**
 
-### ** Clone the Repository**
-
-Clone this repository:
-
-```sh
-git clone https://github.com/rubiin/HyDePanel.git bar
-cd bar
-```
-
 ### Required
 
 Most of these are already installed on existing working machines
@@ -57,29 +48,6 @@ dart-sass
 brightnessctl
 ```
 
-Run the following command to install the required packages for particular os:
-
-# Arch Linux
-
-```sh
-sudo pacman -S pipewire playerctl gray-git python-fabric dart-sass networkmanager wl-clipboard brightnessctl python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python python-pip python-gobject python-psutil python-cairo python-loguru pkgconf wf-recorder
-```
-
-# OpenSUSE
-
-```
-sudo zypper install pipewire playerctl networkmanager wl-clipboard brightnessctl python gtk3-devel cairo-devel gtk-layer-shell-devel libgirepository-1_0-1 libgirepository-2_0-0 gobject-introspection-devel python311 python311-pip python311-psutil python311-gobject python311-gobject-cairo python311-pycairo python311-loguru pkgconf
-```
-
-Install the requirements:
-
-```sh
-cd bar
-python -m venv .venv    # creates a vitual env
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-
 ### Optional
 
 ```sh
@@ -99,6 +67,37 @@ hyprsunset
 ## To enable hyprland's very own idle inhibitor
 hypridle
 
+```
+
+- ### ** Clone the Repository**
+
+Clone this repository:
+
+```sh
+git clone https://github.com/rubiin/HyDePanel.git bar
+cd bar
+```
+
+- Run the following command to install the required packages for particular os:
+
+# Arch Linux
+
+```sh
+sudo pacman -S pipewire playerctl gray-git python-fabric dart-sass networkmanager wl-clipboard brightnessctl python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python python-pip python-gobject python-psutil python-cairo python-loguru pkgconf wf-recorder
+```
+
+# OpenSUSE
+
+```
+sudo zypper install pipewire playerctl networkmanager wl-clipboard brightnessctl python gtk3-devel cairo-devel gtk-layer-shell-devel libgirepository-1_0-1 libgirepository-2_0-0 gobject-introspection-devel python311 python311-pip python311-psutil python311-gobject python311-gobject-cairo python311-pycairo python311-loguru pkgconf
+```
+
+- Install the requirements:
+
+```sh
+python -m venv .venv    # creates a vitual env
+source .venv/bin/activate
+pip install -r requirements.txt
 ```
 
 ## **Usage**
@@ -165,3 +164,9 @@ Use a similar configuration for your respective window manager's autostart setup
 
 > [!WARNING]
 > This is still in early development and will include breaking changes
+
+## Frequently Asked Questions (FAQ)
+
+### 1. **Cannot see system tray?**
+
+Be sure to kill any bars that you may be running. You can kill other bar with `pkill bar-name`
