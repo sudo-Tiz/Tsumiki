@@ -80,12 +80,6 @@ class BrightnessWidget(EventBox):
             self.brightness_service.screen_brightness -= self.config["step_size"]
 
     def on_brightness_changed(self, *_):
-        if self.config["tooltip"]:
-            self.set_tooltip_text("")
-
-        self.update_brightness()
-
-    def update_brightness(self, *_):
         normalized_brightness = helpers.convert_to_percent(
             self.brightness_service.screen_brightness,
             self.brightness_service.max_screen,
@@ -97,3 +91,6 @@ class BrightnessWidget(EventBox):
         self.icon.set_text(
             helpers.get_brightness_icon_name(normalized_brightness)["text_icon"]
         )
+
+        if self.config["tooltip"]:
+            self.set_tooltip_text(f"{normalized_brightness}%")
