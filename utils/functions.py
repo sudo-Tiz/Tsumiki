@@ -3,9 +3,8 @@ import json
 import os
 import shutil
 import subprocess
-from ast import List
 from time import sleep
-from typing import Literal
+from typing import List, Literal
 
 import gi
 import psutil
