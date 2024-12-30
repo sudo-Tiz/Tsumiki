@@ -40,6 +40,7 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
     ):
         Gtk.DrawingArea.__init__(
             self,
+            visible=visible,
             # **(self.do_get_filtered_kwargs(kwargs)),
         )
         Widget.__init__(

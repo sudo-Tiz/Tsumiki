@@ -1,6 +1,8 @@
 from fabric.widgets.image import Image
-
+from fabric.widgets.box import Box
+from fabric.utils import exec_shell_command, get_relative_path, invoke_repeater
 from services.screenrecord import ScreenRecorder
+from shared.lottie import LottieAnimationWidget, LottieAnimation
 from shared.widget_container import ButtonWidget
 from utils import icons
 from utils.widget_config import BarConfig
@@ -15,20 +17,27 @@ class Recorder(ButtonWidget):
         self.is_recording = False
         self.config = widget_config["recorder"]
 
-        self.recording_ongoing_image = Image(
-            h_align="center",
-            v_align="center",
-            icon_name=icons.icons["recorder"]["recording"],
-            icon_size=self.config["icon_size"],
+        self.weather_lottie_dir = get_relative_path("../assets/icons/lottie")
+
+        self.recording_ongoing_lottie = LottieAnimationWidget(
+            LottieAnimation.from_file(
+                f"{self.weather_lottie_dir}/recording.json",
+            ),
+            scale=0.40,
+            do_loop=True,
+            h_align=True,
         )
+
         self.recording_idle_image = Image(
             icon_name=icons.icons["recorder"]["stopped"],
             icon_size=self.config["icon_size"],
-            h_align="center",
-            v_align="center",
+            h_align=True,
         )
 
-        self.set_image(self.recording_idle_image)
+        self.box = Box(children=(self.recording_idle_image,))
+
+        self.add(self.box)
+
         if self.config["tooltip"]:
             self.set_tooltip_text("Recording stopped")
 
@@ -45,12 +54,13 @@ class Recorder(ButtonWidget):
 
     def update_ui(self, _, is_recording: bool):
         if is_recording:
-            self.set_image(self.recording_ongoing_image)
             self.is_recording = True
+            self.box.children = (self.recording_ongoing_lottie,)
             if self.config["tooltip"]:
                 self.set_tooltip_text("Recording started")
         else:
-            self.set_image(self.recording_idle_image)
+            self.box.children = (self.recording_idle_image,)
+
             self.is_recording = False
             if self.config["tooltip"]:
                 self.set_tooltip_text("Recording stopped")
