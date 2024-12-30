@@ -182,7 +182,7 @@ def get_brightness_icon_name(level: int) -> dict[Literal["icon_text", "icon"], s
         }
     if level >= 66 and level <= 100:
         return {
-            "text_icon": icons.icons.brightness_text_icons["high"],
+            "text_icon": icons.brightness_text_icons["high"],
             "icon": "display-brightness-high-symbolic",
         }
 
