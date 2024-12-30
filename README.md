@@ -96,9 +96,7 @@ sudo zypper install pipewire playerctl networkmanager wl-clipboard brightnessctl
 - Install the requirements:
 
 ```sh
-python -m venv .venv    # creates a vitual env
-source .venv/bin/activate
-pip install -r requirements.txt
+./start.sh  # handles venv creation, sourcing and starting the bar
 ```
 
 ## **Usage**
@@ -108,7 +106,7 @@ pip install -r requirements.txt
 Add this to your `.config/hyprland.conf`
 
 ```sh
-exec = source "$HOME/bar/.venv/bin/activate" && python "$HOME/bar/main.py"
+exec = "$HOME/bar/start.sh"
 
 ```
 
