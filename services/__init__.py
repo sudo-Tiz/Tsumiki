@@ -9,9 +9,13 @@ from .powerprofile import *
 from .screenrecord import *
 from .weather import *
 
-brightness_service = Brightness()
+# Custom services
+brightness_service = Brightness().get_initial()
+notify_cache_service = NotificationCacheService().get_initial()
+weather_service = WeatherService().get_initial()
+power_profile_service = PowerProfiles().get_initial()
+
+
+# Fabric services
 audio_service = Audio()
-weather_service = WeatherService()
-power_profile_service = PowerProfiles()
-notify_cache_service = NotificationCacheService()
 notification_service = Notifications()

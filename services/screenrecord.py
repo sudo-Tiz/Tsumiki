@@ -13,6 +13,15 @@ from utils.widget_config import BarConfig
 class ScreenRecorder(Service):
     """Service to handle screen recording and screenshots"""
 
+    instance = None
+
+    @staticmethod
+    def get_initial():
+        if ScreenRecorder.instance is None:
+            ScreenRecorder.instance = ScreenRecorder()
+
+        return ScreenRecorder.instance
+
     @Signal
     def recording(self, value: bool) -> None: ...
 

@@ -43,7 +43,7 @@ def exec_brightnessctl_async(args: str):
 
 # Discover screen backlight device
 try:
-    screen_device = str(exec_shell_command("ls -w1 /sys/class/backlight2")).split("\n")[
+    screen_device = str(exec_shell_command("ls -w1 /sys/class/backlight")).split("\n")[
         0
     ]
 except IndexError:
@@ -62,6 +62,15 @@ class NoBrightnessError(ImportError):
 
 class Brightness(Service):
     """Service to manage screen brightness levels."""
+
+    instance = None
+
+    @staticmethod
+    def get_initial():
+        if Brightness.instance is None:
+            Brightness.instance = Brightness()
+
+        return Brightness.instance
 
     @Signal
     def screen(self, value: int) -> None:
@@ -82,6 +91,7 @@ class Brightness(Service):
 
         # Monitor screen brightness file
         self.screen_monitor = monitor_file(f"{self.screen_backlight_path}/brightness")
+
         self.screen_monitor.connect(
             "changed",
             lambda _, file, *args: self.emit(

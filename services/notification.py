@@ -13,6 +13,15 @@ from utils.config import NOTIFICATION_CACHE_FILE
 class NotificationCacheService(Service):
     """A service to manage the notifications."""
 
+    instance = None
+
+    @staticmethod
+    def get_initial():
+        if NotificationCacheService.instance is None:
+            NotificationCacheService.instance = NotificationCacheService()
+
+        return NotificationCacheService.instance
+
     @property
     def notifications(self) -> List[Notification]:
         """Return the notifications."""

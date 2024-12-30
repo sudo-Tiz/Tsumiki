@@ -14,6 +14,15 @@ context = ssl._create_unverified_context()
 class WeatherService:
     """This class provides weather information for a given city."""
 
+    instance = None
+
+    @staticmethod
+    def get_initial():
+        if WeatherService.instance is None:
+            WeatherService.instance = WeatherService()
+
+        return WeatherService.instance
+
     def simple_weather_info(self, location: str):
         try:
             # Construct the URL for fetching weather information

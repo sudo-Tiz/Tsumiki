@@ -9,6 +9,15 @@ gi.require_version("GObject", "2.0")
 class PowerProfiles(Service):
     """Service to interact with the PowerProfiles service."""
 
+    instance = None
+
+    @staticmethod
+    def get_initial():
+        if PowerProfiles.instance is None:
+            PowerProfiles.instance = PowerProfiles()
+
+        return PowerProfiles.instance
+
     def __init__(
         self,
         **kwargs,
