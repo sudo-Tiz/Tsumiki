@@ -79,7 +79,7 @@ class ScreenRecorder(Service):
                 "camera-video-symbolic",
                 "-a",
                 "HyDePanel Screenshot Utility",
-                "Screencast Saved",
+                "Screenrecord Saved",
                 f"Saved Screencast at {file_path}",
             ]
         )
@@ -91,7 +91,7 @@ class ScreenRecorder(Service):
                 _, stdout, stderr = process.communicate_utf8_finish(task)
             except Exception:
                 logger.error(
-                    f"[SCREENCAST] Failed read notification action with error {stderr}"
+                    f"[SCREENRECORD] Failed read notification action with error {stderr}"
                 )
                 return
 

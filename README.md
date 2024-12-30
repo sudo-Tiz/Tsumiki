@@ -116,6 +116,12 @@ exec = source "$HOME/bar/.venv/bin/activate" && python "$HOME/bar/main.py"
 
 Use a similar configuration for your respective window manager's autostart setup.
 
+## Updating
+
+Updating to latest commit is fairly simple, just git pull the latest changes.
+
+> **Note**: make sure to keep the config safe just in case
+
 ## Check wiki for configuring individual widgets
 
 ## **Available Modules**
