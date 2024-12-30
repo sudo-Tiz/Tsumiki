@@ -57,7 +57,7 @@ dart-sass
 brightnessctl
 ```
 
-Run the following command to install the required packages:
+Run the following command to install the required packages for particular os:
 
 # Arch Linux
 
@@ -71,11 +71,12 @@ sudo pacman -S pipewire playerctl gray-git python-fabric dart-sass networkmanage
 sudo zypper install pipewire playerctl networkmanager wl-clipboard brightnessctl python gtk3-devel cairo-devel gtk-layer-shell-devel libgirepository-1_0-1 libgirepository-2_0-0 gobject-introspection-devel python311 python311-pip python311-psutil python311-gobject python311-gobject-cairo python311-pycairo python311-loguru pkgconf
 ```
 
-# On venv (Recommended)
-
 Install the requirements:
 
 ```sh
+cd bar
+python -m venv .venv    # creates a vitual env
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -103,14 +104,6 @@ hypridle
 ## **Usage**
 
 ### **For Hyprland:**
-
-Add the following line to your `hypr.conf` to start HydePanel automatically:
-
-```sh
-exec = python "$HOME/bar/main.py"
-```
-
-or in virtual environment as
 
 ```sh
 exec = source "$HOME/bar/.venv/bin/activate" && python "$HOME/bar/main.py"
