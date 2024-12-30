@@ -78,7 +78,7 @@ class ScreenRecorder(Service):
                 "-i",
                 "camera-video-symbolic",
                 "-a",
-                "Fabric Screenshot Utility",
+                "HyDePanel Screenshot Utility",
                 "Screencast Saved",
                 f"Saved Screencast at {file_path}",
             ]
@@ -116,7 +116,7 @@ class ScreenRecorder(Service):
                 "-i",
                 "camera-photo-symbolic",
                 "-a",
-                "Fabric Screenshot Utility",
+                "HyDePanel Screenshot Utility",
                 "-h",
                 f"STRING:image-path:{file_path}",
                 "Screenshot Saved",
@@ -149,4 +149,4 @@ class ScreenRecorder(Service):
 
     @Property(bool, "readable", default_value=False)
     def is_recording(self):
-        return len(exec_shell_command("pidof wf-recorder")) != 0
+        return helpers.is_app_running("wf-recorder")

@@ -10,7 +10,7 @@ from typing import Literal
 import gi
 import psutil
 from fabric import Fabricator
-from fabric.utils import exec_shell_command_async, get_relative_path
+from fabric.utils import exec_shell_command, exec_shell_command_async, get_relative_path
 from fabric.widgets.label import Label
 from fabric.widgets.scale import ScaleMark
 from gi.repository import GLib, Gtk
@@ -310,8 +310,14 @@ def ensure_dir_exists(path: str):
         os.makedirs(path)
 
 
+# Function to unique list
 def unique_list(lst) -> List:
     return list(set(lst))
+
+
+# Function to check if an app is running
+def is_app_running(app_name: str) -> bool:
+    return len(exec_shell_command(f"pidof {app_name}")) != 0
 
 
 # Create a fabricator to poll the system stats
