@@ -102,6 +102,7 @@ pip install -r requirements.txt
 
 ### **For Hyprland:**
 
+Add this to your `.config/hyprland.conf`
 ```sh
 exec = source "$HOME/bar/.venv/bin/activate" && python "$HOME/bar/main.py"
 
