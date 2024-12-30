@@ -122,26 +122,29 @@ Use a similar configuration for your respective window manager's autostart setup
 <summary>Click to expand modules</summary>
 
 - battery
+- bluetooth
+- brightness
+- clickcounter
+- cpu
 - workspaces
-- window_title
+- date_menu
+- hypr_idle
+- hypr_sunset
+- keyboard
+- language
 - media
 - volume
-- brightness
-- bluetooth
-- weather
-- keyboard
-- clock
+- power
+- ram
+- recorder
+- storage
 - system_tray
 - taskbar
-- language
-- keyboard
-- ram
-- cpu
-- storage
-- cputemp
+- weather
+- window_title
+- workspace
 - updates
-- hypr_sunset
-- hypr_idle
+
 
 </details>
 
