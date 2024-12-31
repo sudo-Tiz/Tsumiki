@@ -163,7 +163,6 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 
 ![image](https://github.com/user-attachments/assets/6c66b11c-6a21-4dcb-ab7f-7ed586abbf65)
 
-
 ## Calendar with notification panel
 
 ![image](https://github.com/user-attachments/assets/6e3ef49a-64b3-4dbd-8ccd-53430ff6ecff)
@@ -175,9 +174,6 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 ## Logout
 
 ![image](https://github.com/user-attachments/assets/18b5c851-4d3a-4801-b4c3-dbb555cfbae9)
-
-
-
 
 > [!WARNING]
 > This is still in early development and will include breaking changes
@@ -192,4 +188,16 @@ Be sure to kill any bars that you may be running. You can kill other bar with `p
 
 Kill the app with `pkill hydepanel`. Cd to the folder , activate venv with `source .venv/bin/activate` and run `python main.py`.
 This should show some logs. If it shows like `ModuleNotFoundError`, run `pip install -r requirements.txt`.
-If this does not solve the issue, do report a bug
+If this does not solve the issue, do report a bug.
+
+# ⭐ Hit that Star Button!
+
+Like what you see? Think this project is cooler than your morning coffee? ☕✨
+
+Give it a star! It’s like giving a virtual high-five to the code—plus, and who doesn't love high-fives? ✋
+
+Your star helps the project get noticed, and it makes us do a little happy dance. 💃
+
+Just click the shiny "Star" button at the top right (it’s begging for your attention). 🥳
+
+Thanks for making this project a little bit more awesome! 🚀
