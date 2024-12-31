@@ -29,7 +29,6 @@ class TaskBarWidget(BoxWidget):
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(
-            spacing=7,
             name="taskbar",
             **kwargs,
         )
