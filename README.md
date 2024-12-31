@@ -161,7 +161,12 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 
 ## Notification
 
-![image](https://github.com/user-attachments/assets/07be6619-067d-4322-9e10-6d0a646e257f)
+![image](https://github.com/user-attachments/assets/6c66b11c-6a21-4dcb-ab7f-7ed586abbf65)
+
+
+## Calendar with notification panel
+
+![image](https://github.com/user-attachments/assets/6e3ef49a-64b3-4dbd-8ccd-53430ff6ecff)
 
 ## OSD
 
@@ -170,6 +175,9 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 ## Logout
 
 ![image](https://github.com/user-attachments/assets/18b5c851-4d3a-4801-b4c3-dbb555cfbae9)
+
+
+
 
 > [!WARNING]
 > This is still in early development and will include breaking changes
