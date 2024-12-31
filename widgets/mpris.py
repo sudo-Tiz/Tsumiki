@@ -82,6 +82,7 @@ class Mpris(EventBox):
         )
 
         self.label.set_label(trucated_info)
+
         self.cover.set_style(
             "background-image: url('" + metadata["mpris:artUrl"] + "')"
         )
@@ -93,10 +94,18 @@ class Mpris(EventBox):
         # Get the current playback status and change the icon accordingly
 
         status = self.player.playback_status.lower()
+
         if status == "playing":
+            self.cover.show()
+            self.revealer.set_reveal_child(True)
             self.text_icon.set_label(common_text_icons["paused"])
         elif status == "paused":
+            self.cover.show()
+            self.revealer.set_reveal_child(True)
             self.text_icon.set_label(common_text_icons["playing"])
+        else:
+            self.cover.hide()
+            self.revealer.set_reveal_child(False)
 
     def play_pause(self, *_):
         # Toggle play/pause using playerctl
