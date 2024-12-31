@@ -81,25 +81,62 @@ cd bar
 
 - Run the following command to install the required packages for particular os, few of them are already installed if you have a working system:
 
-#### Arch Linux
+
+## Installation
+
+You can choose one of two installation methods: **Automated Setup** or **Manual Setup**.
+
+### Option 1: Automated Setup Using `init.sh -install`
+
+1.  **Run the `init.sh -install` script** to automatically install all the required packages and dependencies (both `pacman` and AUR packages):
 
 ```sh
-sudo pacman -S pipewire playerctl gray-git python-fabric dart-sass networkmanager wl-clipboard brightnessctl python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python python-pip python-gobject python-psutil python-cairo python-loguru pkgconf wf-recorder kitty grimblast gnome-bluetooth
+./init.sh -install
+```
+    
+This script will:
+    
+-   Install all required `pacman` and AUR packages.
+-   Set up the virtual environment and any required configurations.
+
+1.  **Start the environment or bar** once the installation is complete:
+    
+ ```sh
+ ./init.sh -start
 ```
 
-#### OpenSUSE
+ This will launch the environment or bar as defined in your project.
 
-```
-sudo pacman -S pipewire playerctl dart-sass networkmanager wl-clipboard brightnessctl python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python python-pip python-gobject python-psutil python-cairo python-loguru pkgconf wf-recorder kitty grimblast gnome-bluetooth
 
- yay -S gray-git python-fabric rlottie
-```
+### Option 2: Manual Setup (Install Dependencies First)
 
-- Install the requirements:
+If you prefer to have more control over the installation process, you can install the required dependencies manually and then run the `init.sh -start` script.
+
+#### Step 1: Install `pacman` Packages
+
+Run the following command to install the required system packages:
 
 ```sh
-./start.sh  # handles venv creation, sourcing and starting the bar
+sudo pacman -S pipewire playerctl dart-sass networkmanager wl-clipboard brightnessctl python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python-pip python-gobject python-psutil python-cairo python-loguru pkgconf wf-recorder kitty grimblast gnome-bluetooth 
 ```
+
+#### Step 2: Install AUR Packages with `yay`
+
+Use `yay` to install the required AUR packages:
+
+```sh
+    yay -S gray-git python-fabric rlottie
+```
+
+#### Step 3: Run the `init.sh -start` Script
+
+Once the dependencies are installed, run the following command to start the bar or environment:
+ 
+ ```sh
+ ./init.sh -start
+```
+
+
 
 ## **Usage**
 
@@ -108,7 +145,7 @@ sudo pacman -S pipewire playerctl dart-sass networkmanager wl-clipboard brightne
 Add this to your `.config/hyprland.conf`
 
 ```sh
-exec = "$HOME/bar/start.sh"
+exec = "$HOME/bar/init.sh -start"
 
 ```
 
