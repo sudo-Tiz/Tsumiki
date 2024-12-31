@@ -21,9 +21,6 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
         visible: bool = True,
         all_visible: bool = False,
         style: str | None = None,
-        style_compiled: bool = True,
-        style_append: bool = False,
-        style_add_brackets: bool = True,
         tooltip_text: str | None = None,
         tooltip_markup: str | None = None,
         h_align: Literal["fill", "start", "end", "center", "baseline"]
@@ -35,7 +32,6 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
         h_expand: bool = False,
         v_expand: bool = False,
         name: str | None = None,
-        # size: tuple[int] | int | None = None,
         **kwargs,
     ):
         Gtk.DrawingArea.__init__(
@@ -58,6 +54,7 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
         )
 
         # State Management Things
+        self.timeout = None
         self.is_playing = False
         self.do_reverse = False
         self.curr_frame: int = 0 if draw_frame is None or do_loop else draw_frame
@@ -87,7 +84,11 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
             self.on_update()
 
         if self.do_loop:
-            GLib.timeout_add(self.timeout_delay, self.on_update)
+            self.play_loop()
+
+    def play_loop(self):
+        self.do_loop = True
+        self.timeout = GLib.timeout_add(self.timeout_delay, self.on_update)
 
     def draw(self, _: Gtk.DrawingArea, ctx: cairo.Context):
         if self.lottie_animation.async_buffer_c is not None:
@@ -121,6 +122,9 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
         self.curr_frame += -1 if self.do_reverse else 1
         return True
 
+    def stop_play(self):
+        GLib.source_remove(self.timeout)
+
     def play_animation(
         self,
         start_frame: int | None = None,
@@ -141,4 +145,4 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
             end_frame if end_frame else 0 if self.do_reverse else self.anim_total_frames
         )
         # self.curr_frame = self.anim_total_frames if self.is_reverse else 0
-        GLib.timeout_add(self.timeout_delay, self.on_update)
+        self.timeout = GLib.timeout_add(self.timeout_delay, self.on_update)
