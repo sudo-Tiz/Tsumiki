@@ -29,7 +29,8 @@ class Mpris(EventBox):
 
         self.label = Label(label="Nothing playing", style_classes="panel-text")
         self.text_icon = Label(
-            label=common_text_icons["playing"], style="padding: 0 5px;"
+            label=common_text_icons["playing"],
+            style_classes="panel-button",
         )
 
         # Services
@@ -53,9 +54,11 @@ class Mpris(EventBox):
 
         self.revealer.set_reveal_child(True)
 
+        self.cover = Box(style_classes="cover")
+
         self.box = Box(
             style_classes="panel-box",
-            children=[self.text_icon, self.revealer],
+            children=[self.cover, self.text_icon, self.revealer],
         )
 
         self.children = self.box
@@ -79,6 +82,9 @@ class Mpris(EventBox):
         )
 
         self.label.set_label(trucated_info)
+        self.cover.set_style(
+            "background-image: url('" + metadata["mpris:artUrl"] + "')"
+        )
 
         if self.config["tooltip"]:
             self.set_tooltip_text(bar_label)

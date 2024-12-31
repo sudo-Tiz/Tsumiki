@@ -17,3 +17,13 @@
   font-size: 16px;
   font-family: "JetBrainsMono Nerd Font";
 }
+
+.cover {
+  min-height: 0.8em;
+  min-width: 3em;
+  border-radius: 10px;
+  background-position: center;
+  background-size: contain;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
