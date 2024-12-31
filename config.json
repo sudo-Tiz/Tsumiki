@@ -4,7 +4,7 @@
   },
   "layout": {
     "left_section": ["workspaces", "window_title"],
-    "middle_section": ["date_time"],
+    "middle_section": ["date_time", "mpris"],
     "right_section": [
       "recorder",
       "hypr_sunset",
