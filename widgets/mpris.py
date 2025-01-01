@@ -57,7 +57,7 @@ class Mpris(EventBox):
 
         self.box = Box(
             style_classes="panel-box",
-            children=[self.revealer],
+            children=[self.text_icon],
         )
 
         self.children = self.box
