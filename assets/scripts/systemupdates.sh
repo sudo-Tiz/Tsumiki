@@ -11,8 +11,14 @@ check_arch_updates() {
     # Get the number of official updates using 'checkupdates'
     official_updates=$(checkupdates 2>/dev/null | wc -l)
 
+    if command -v paru &> /dev/null; then
+		aur_helper="paru"
+	else
+		aur_helper="yay"
+	fi
+
     # Get the number of AUR updates using 'yay'
-    aur_updates=$(yay -Qum 2>/dev/null | wc -l)
+    aur_updates=$($aur_helper -Qum 2>/dev/null | wc -l)
 
     # Calculate total updates
     total_updates=$((official_updates + aur_updates + flatpak_updates))
