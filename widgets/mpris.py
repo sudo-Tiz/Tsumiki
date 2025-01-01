@@ -46,7 +46,7 @@ class Mpris(EventBox):
         self.revealer = Revealer(
             name="mpris-revealer",
             transition_type="slide-right",
-            transition_duration=300,
+            transition_duration=400,
             child=self.label,
             reveal_child=False,
         )
@@ -71,10 +71,7 @@ class Mpris(EventBox):
         )
 
     def get_current(self, *_):
-        # Get the current player info and status
-        metadata = self.player.metadata
-
-        bar_label = metadata["xesam:title"]
+        bar_label = self.player.title
 
         trucated_info = (
             bar_label if len(bar_label) < self.config["length"] else bar_label[:30]
@@ -83,7 +80,7 @@ class Mpris(EventBox):
         self.label.set_label(trucated_info)
 
         self.cover.set_style(
-            "background-image: url('" + metadata["mpris:artUrl"] + "')"
+            "background-image: url('" + self.player.metadata["mpris:artUrl"] + "')"
         )
 
         if self.config["tooltip"]:
@@ -94,16 +91,18 @@ class Mpris(EventBox):
 
         status = self.player.playback_status.lower()
 
+        print(status)
+
         if status == "playing":
-            self.box.children = [self.cover,self.text_icon, self.revealer]
+            self.box.children = [self.cover, self.text_icon, self.revealer]
             self.revealer.set_reveal_child(True)
             self.text_icon.set_label(common_text_icons["paused"])
         elif status == "paused":
-            self.box.children = [self.cover,self.text_icon, self.revealer]
+            self.box.children = [self.cover, self.text_icon, self.revealer]
             self.revealer.set_reveal_child(True)
             self.text_icon.set_label(common_text_icons["playing"])
         else:
-            self.cover.hide()
+            self.box.children = [self.text_icon]
             self.revealer.set_reveal_child(False)
 
     def play_pause(self, *_):

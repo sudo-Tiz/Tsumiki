@@ -118,7 +118,7 @@ class OSDContainer(Window):
     def __init__(
         self,
         widget_config: BarConfig,
-        transition_duration=100,
+        transition_duration=200,
         keyboard_mode: Literal["none", "exclusive", "on-demand"] = "on-demand",
         **kwargs,
     ):
