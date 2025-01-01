@@ -9,9 +9,10 @@ from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow as Window
 from gi.repository import GObject
 
+from services.brightness import Brightness
 import utils.functions as helpers
 import utils.icons as icons
-from services import audio_service, brightness_service
+from services import audio_service
 from utils.monitors import HyprlandWithMonitors
 from utils.widget_config import BarConfig
 
@@ -21,7 +22,7 @@ class BrightnessOSDContainer(Box):
 
     def __init__(self, **kwargs):
         super().__init__(orientation="h", spacing=12, name="osd-container", **kwargs)
-        self.brightness_service = brightness_service
+        self.brightness_service = Brightness().get_initial()
         self.level = Label(name="osd-level")
         self.icon = Image(icon_name=icons.icons["brightness"]["screen"], icon_size=28)
         self.scale = helpers.create_scale()
