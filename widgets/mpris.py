@@ -107,4 +107,5 @@ class Mpris(EventBox):
 
     def play_pause(self, *_):
         # Toggle play/pause using playerctl
-        self.player.play_pause()
+        if self.player:
+            self.player.play_pause()
