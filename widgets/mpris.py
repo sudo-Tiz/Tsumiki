@@ -27,6 +27,8 @@ class Mpris(EventBox):
         )
         self.config = widget_config["mpris"]
 
+        self.player = None
+
         self.label = Label(label="Nothing playing", style_classes="panel-text")
         self.text_icon = Label(
             label=common_text_icons["playing"],
@@ -90,9 +92,6 @@ class Mpris(EventBox):
         # Get the current playback status and change the icon accordingly
 
         status = self.player.playback_status.lower()
-
-        print(status)
-
         if status == "playing":
             self.box.children = [self.cover, self.text_icon, self.revealer]
             self.revealer.set_reveal_child(True)
@@ -107,5 +106,5 @@ class Mpris(EventBox):
 
     def play_pause(self, *_):
         # Toggle play/pause using playerctl
-        if self.player:
+        if self.player is not None:
             self.player.play_pause()

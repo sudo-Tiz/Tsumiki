@@ -9,10 +9,10 @@ from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow as Window
 from gi.repository import GObject
 
-from services.brightness import Brightness
 import utils.functions as helpers
 import utils.icons as icons
 from services import audio_service
+from services.brightness import Brightness
 from utils.monitors import HyprlandWithMonitors
 from utils.widget_config import BarConfig
 
