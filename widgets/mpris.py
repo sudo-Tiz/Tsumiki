@@ -30,7 +30,6 @@ class Mpris(EventBox):
         self.label = Label(label="Nothing playing", style_classes="panel-text")
         self.text_icon = Label(
             label=common_text_icons["playing"],
-            style_classes="panel-button",
         )
 
         # Services
@@ -58,7 +57,7 @@ class Mpris(EventBox):
 
         self.box = Box(
             style_classes="panel-box",
-            children=[self.cover, self.text_icon, self.revealer],
+            children=[self.revealer],
         )
 
         self.children = self.box
@@ -96,11 +95,11 @@ class Mpris(EventBox):
         status = self.player.playback_status.lower()
 
         if status == "playing":
-            self.cover.show()
+            self.box.children = [self.cover,self.text_icon, self.revealer]
             self.revealer.set_reveal_child(True)
             self.text_icon.set_label(common_text_icons["paused"])
         elif status == "paused":
-            self.cover.show()
+            self.box.children = [self.cover,self.text_icon, self.revealer]
             self.revealer.set_reveal_child(True)
             self.text_icon.set_label(common_text_icons["playing"])
         else:
