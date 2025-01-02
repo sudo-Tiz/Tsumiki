@@ -95,6 +95,11 @@ def text_icon(icon: str, size: str = "16px", props=None):
     return Label(**label_props)
 
 
+# Merge the parsed data with the default configuration
+def merge_defaults(data: dict, defaults: dict):
+    return {**defaults, **data}
+
+
 # Function to format time in hours and minutes
 def format_time(secs: int):
     mm, _ = divmod(secs, 60)

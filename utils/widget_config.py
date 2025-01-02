@@ -1,7 +1,7 @@
 from typing import List, TypedDict
 
 from utils.config import HIGH_POLL_INTERVAL
-from utils.functions import read_config
+from utils.functions import merge_defaults, read_config
 
 # Default configuration values
 DEFAULT_CONFIG = {
@@ -312,22 +312,8 @@ class BarConfig(TypedDict):
 parsed_data = read_config()
 
 
-# Merge the parsed data with the default configuration
-def merge_defaults(data: dict, defaults: dict):
-    return {**defaults, **data}
-
-
-# Now, `parsed_data` is a Python dictionary
-# You can access individual items like this:
-layout = parsed_data["layout"]
-
-
-for key, value in parsed_data.items():
-    if key in DEFAULT_CONFIG:
-        parsed_data[key] = merge_defaults(value, DEFAULT_CONFIG[key])
-
-
-## TODO: validate the name of widget is within the dict
+for key in DEFAULT_CONFIG:
+    parsed_data[key] = merge_defaults(parsed_data.get(key, {}), DEFAULT_CONFIG[key])
 
 # Optionally, cast the parsed data to match our TypedDict using type hints
 widget_config: BarConfig = parsed_data
