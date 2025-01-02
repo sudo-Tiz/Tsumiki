@@ -27,9 +27,8 @@ class WorkSpacesWidget(BoxWidget):
             # Factory function to create buttons for each workspace
             buttons_factory=lambda ws_id: WorkspaceButton(
                 id=ws_id,
-                label=f"{self.config["icon_map"].get(str(ws_id), ws_id)}"
-                if ws_id not in self.config["ignored"]
-                else None,
+                label=f"{self.config["icon_map"].get(str(ws_id), ws_id)}",
+                visible=ws_id not in self.config["ignored"],
             ),
             invert_scroll=self.config["reverse_scroll"],
             empty_scroll=self.config["empty_scroll"],

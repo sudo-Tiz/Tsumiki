@@ -39,7 +39,7 @@ class StatusBar(WaylandWindow):
             anchor="left top right",
             pass_through=False,
             exclusivity="auto",
-            visible=False,
+            visible=True,
             all_visible=False,
             **kwargs,
         )
@@ -89,8 +89,6 @@ class StatusBar(WaylandWindow):
                 children=layout["right_section"],
             ),
         )
-
-        self.show_all()
 
     def make_layout(self):
         """assigns the three sections their respective widgets"""
