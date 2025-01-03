@@ -83,7 +83,7 @@ class Mpris(EventBox):
 
         art_url = self.player.metadata["mpris:artUrl"]
 
-        if art_url == "":
+        if art_url == "" or art_url is None:
             art_url = "https://ladydanville.wordpress.com/wp-content/uploads/2012/03/blankart.png?w=297&h=278"
 
         self.cover.set_style("background-image: url('" + art_url + "')")
