@@ -2,6 +2,7 @@ from fabric.hyprland.widgets import WorkspaceButton
 from fabric.hyprland.widgets import Workspaces as HyperlandWorkspace
 
 from shared.widget_container import BoxWidget
+from utils.functions import unique_list
 from utils.widget_config import BarConfig
 
 
@@ -12,6 +13,7 @@ class WorkSpacesWidget(BoxWidget):
         super().__init__(name="workspaces-box", **kwargs)
 
         self.config = widget_config["workspaces"]
+        ignored_ws = unique_list(self.config["ignored"])
 
         # Create a HyperlandWorkspace widget to manage workspace buttons
         self.workspace = HyperlandWorkspace(
@@ -28,7 +30,7 @@ class WorkSpacesWidget(BoxWidget):
             buttons_factory=lambda ws_id: WorkspaceButton(
                 id=ws_id,
                 label=f"{self.config["icon_map"].get(str(ws_id), ws_id)}",
-                visible=ws_id not in self.config["ignored"],
+                visible=ws_id not in ignored_ws,
             ),
             invert_scroll=self.config["reverse_scroll"],
             empty_scroll=self.config["empty_scroll"],
