@@ -54,4 +54,3 @@ class NotificationPopup(WaylandWindow):
         new_box = NotificationRevealer(notification)
         self.notifications.add(new_box)
         new_box.set_reveal_child(True)
-        notify_cache_service.cache_notification(notification)
