@@ -33,17 +33,6 @@ class StatusBar(WaylandWindow):
     """A widget to display the status bar panel."""
 
     def __init__(self, **kwargs):
-        super().__init__(
-            name="panel",
-            layer="top",
-            anchor="left top right",
-            pass_through=False,
-            exclusivity="auto",
-            visible=True,
-            all_visible=False,
-            **kwargs,
-        )
-
         self.widgets_list = {
             "battery": Battery,
             "bluetooth": BlueToothWidget,
@@ -71,7 +60,7 @@ class StatusBar(WaylandWindow):
 
         layout = self.make_layout()
 
-        self.children = CenterBox(
+        box = CenterBox(
             name="panel-inner",
             start_children=Box(
                 spacing=4,
@@ -88,6 +77,17 @@ class StatusBar(WaylandWindow):
                 orientation="h",
                 children=layout["right_section"],
             ),
+        )
+        super().__init__(
+            name="panel",
+            layer="top",
+            anchor="left top right",
+            pass_through=False,
+            exclusivity="auto",
+            visible=True,
+            all_visible=False,
+            child=box,
+            **kwargs,
         )
 
     def make_layout(self):

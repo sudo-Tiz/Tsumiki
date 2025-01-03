@@ -134,7 +134,7 @@
     "format": "%b %d %H:%M"
   },
   "notification": {
-    "ignored": ["t2"],
+    "ignored": [],
     "anchor": "top right",
     "timeout": 5000,
     "count": 100
