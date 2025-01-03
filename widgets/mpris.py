@@ -81,9 +81,12 @@ class Mpris(EventBox):
 
         self.label.set_label(trucated_info)
 
-        self.cover.set_style(
-            "background-image: url('" + self.player.metadata["mpris:artUrl"] + "')"
-        )
+        art_url = self.player.metadata["mpris:artUrl"]
+
+        if art_url == "":
+            art_url = "https://ladydanville.wordpress.com/wp-content/uploads/2012/03/blankart.png?w=297&h=278"
+
+        self.cover.set_style("background-image: url('" + art_url + "')")
 
         if self.config["tooltip"]:
             self.set_tooltip_text(bar_label)

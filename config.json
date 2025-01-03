@@ -96,7 +96,8 @@
     "length": 2
   },
   "mpris": {
-    "length": 20
+    "length": 20,
+    "format": "{artist} - {title}"
   },
   "system_tray": {
     "icon_size": 20,
@@ -135,7 +136,8 @@
   "notification": {
     "ignored": ["t2"],
     "anchor": "top right",
-    "timeout": 5000
+    "timeout": 5000,
+    "count": 100
   },
   "recorder": {
     "photos": "Pictures/Screenshots",
