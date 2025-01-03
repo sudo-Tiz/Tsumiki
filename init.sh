@@ -92,6 +92,13 @@ install_packages() {
 		exit 1
 	fi
 
+
+    if command -v paru &> /dev/null; then
+		aur_helper="paru"
+	else
+		aur_helper="yay"
+	fi
+
 	# Install packages using yay (AUR helper)
 	$aur_helper -S --noconfirm gray-git python-fabric gnome-bluetooth-3.0 python-rlottie-python
 }
