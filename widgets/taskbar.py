@@ -3,7 +3,7 @@ import os
 from typing import TypedDict
 
 from fabric.hyprland.widgets import get_hyprland_connection
-from fabric.utils import exec_shell_command
+from fabric.utils import exec_shell_command_async
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
 from gi.repository import GdkPixbuf, GLib, Gtk
@@ -94,7 +94,9 @@ class TaskBarWidget(BoxWidget):
         return active_window_info.get("address", "")
 
     def on_icon_click(self, widget, event, address):
-        exec_shell_command(f"hyprctl dispatch focuswindow address:{address}")
+        exec_shell_command_async(
+            f"hyprctl dispatch focuswindow address:{address}", lambda *_: None
+        )
 
     def fetch_clients(self) -> list[PagerClient]:
         return json.loads(self.connection.send_command("j/clients").reply.decode())

@@ -1,6 +1,6 @@
 import json
 
-from fabric.utils import exec_shell_command
+from fabric.utils import exec_shell_command_async
 from fabric.widgets.label import Label
 
 from shared.widget_container import BoxWidget
@@ -28,12 +28,13 @@ class KeyboardLayoutWidget(BoxWidget):
 
         self.children = (self.icon, self.kb_label)
 
-        self.data = json.loads(exec_shell_command("hyprctl devices -j"))
+        exec_shell_command_async(
+            "hyprctl devices -j", lambda output: self.get_keyboard(output)
+        )
 
-        self.get_keyboard()
-
-    def get_keyboard(self):
-        keyboards = self.data["keyboards"]
+    def get_keyboard(self, value: str):
+        data = json.loads(value)
+        keyboards = data["keyboards"]
         if len(keyboards) == 0:
             return "Unknown"
 
