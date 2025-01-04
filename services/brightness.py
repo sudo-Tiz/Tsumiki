@@ -42,12 +42,9 @@ def exec_brightnessctl_async(args: str):
 
 
 # Discover screen backlight device
-try:
-    screen_device = str(exec_shell_command("ls -w1 /sys/class/backlight")).split("\n")[
-        0
-    ]
-except IndexError:
-    screen_device = None
+screen_device = exec_shell_command(
+    "bash -c 'ls -w1 /sys/class/backlight | head -1'"
+).strip("\n")
 
 
 class NoBrightnessError(ImportError):
