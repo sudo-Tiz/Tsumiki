@@ -4,10 +4,8 @@
   },
   "layout": {
     "left_section": ["workspaces", "window_title"],
-    "middle_section": ["date_time", "mpris"],
+    "middle_section": ["date_time"],
     "right_section": [
-      "recorder",
-      "hypr_sunset",
       "updates",
       "bluetooth",
       "volume",

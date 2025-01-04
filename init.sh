@@ -55,7 +55,7 @@ install_packages() {
 	elif command -v paru &> /dev/null; then
 		aur_helper="paru"
 	else
-		echo "yay or paru not found. Install the deps `gray-git python-fabric` with the aur helper installed ."
+		echo "yay or paru not found. Install the aur packages `gray-git python-fabric` with the aur helper installed ."
 		exit 1
 	fi
 
