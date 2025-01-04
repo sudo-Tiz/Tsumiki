@@ -72,7 +72,7 @@ class TaskBarWidget(BoxWidget):
                 icon = self.bake_window_icon(window_class)
 
                 button = Button(image=icon, tooltip_text=client["title"])
-                if client["address"] == active_window_address:
+                if client["address"] != active_window_address:
                     button.connect(
                         "button-press-event",
                         self.on_icon_click,
