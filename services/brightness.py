@@ -1,8 +1,7 @@
 import os
-import subprocess
 
 from fabric.core.service import Property, Service, Signal
-from fabric.utils import exec_shell_command, monitor_file
+from fabric.utils import exec_shell_command_async, monitor_file
 from gi.repository import GLib
 from loguru import logger
 
@@ -10,42 +9,23 @@ import utils.functions as helpers
 from utils.colors import Colors
 
 
-# Helper function to execute brightnessctl asynchronously
 def exec_brightnessctl_async(args: str):
-    # Executes brightnessctl command asynchronously, ensuring no resource leaks.
-
     if not helpers.executable_exists("brightnessctl"):
         logger.error(f"{Colors.ERROR}Command brightnessctl not found")
 
-    try:
-        # Use subprocess.Popen to run the command without blocking
-        process = subprocess.Popen(
-            f"brightnessctl {args}",
-            shell=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        )
-
-        # Wait for the process to complete
-        stdout, stderr = process.communicate()
-
-        if process.returncode != 0:
-            logger.error(
-                f"{Colors.ERROR}Error executing brightnessctl: {stderr.decode().strip()}"
-            )
-        else:
-            logger.debug(
-                f"{Colors.INFO}brightnessctl output: {stdout.decode().strip()}",
-            )  # Optional: Log the output
-    except Exception as e:
-        logger.exception(f"Exception in exec_brightnessctl_async: {e}")
+    exec_shell_command_async(f"brightnessctl {args}", lambda _: None)
 
 
 # Discover screen backlight device
-screen_device = exec_shell_command(
-    "bash -c 'ls -w1 /sys/class/backlight | head -1'"
-).strip("\n")
+screen_device = ""
 
+try:
+    screen_device = os.listdir("/sys/class/backlight")
+    screen_device = screen_device[0]
+except FileNotFoundError:
+    logger.error(
+        f"{Colors.ERROR}No backlight devices found, brightness control disabled"
+    )
 
 
 class Brightness(Service):
@@ -68,14 +48,14 @@ class Brightness(Service):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        if not screen_device:
-            logger.error(f"{Colors.ERROR}No screen backlight device found")
-
         # Path for screen backlight control
         self.screen_backlight_path = f"/sys/class/backlight/{screen_device}"
 
         # Initialize maximum brightness level
-        self.max_screen = self._read_max_brightness(self.screen_backlight_path)
+        self.max_screen = -1
+
+        if screen_device == "":
+            return
 
         # Monitor screen brightness file
         self.screen_monitor = monitor_file(f"{self.screen_backlight_path}/brightness")
@@ -93,21 +73,13 @@ class Brightness(Service):
             f"{Colors.INFO}Brightness service initialized for device: {screen_device}"
         )
 
-    def _read_max_brightness(self, path: str) -> int:
-        # Reads the maximum brightness value from the specified path.
-        max_brightness_path = os.path.join(path, "max_brightness")
-        if os.path.exists(max_brightness_path):
-            with open(max_brightness_path) as f:
-                return int(f.read().strip())
-        return -1  # Return -1 if file doesn't exist, indicating an error.
-
     @Property(int, "read-write")
     def screen_brightness(self) -> int:
         # Property to get or set the screen brightness.
         brightness_path = os.path.join(self.screen_backlight_path, "brightness")
         if os.path.exists(brightness_path):
             with open(brightness_path) as f:
-                return int(f.read().strip())
+                return int(f.readline())
         logger.warning(
             f"{Colors.WARNING}Brightness file does not exist: {brightness_path}"
         )
