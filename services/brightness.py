@@ -47,15 +47,6 @@ screen_device = exec_shell_command(
 ).strip("\n")
 
 
-class NoBrightnessError(ImportError):
-    """Raised when brightness-related dependencies are missing."""
-
-    def __init__(self, **kwargs):
-        super().__init__(
-            "Brightness control not available or missing dependencies",
-            **kwargs,
-        )
-
 
 class Brightness(Service):
     """Service to manage screen brightness levels."""
@@ -78,7 +69,7 @@ class Brightness(Service):
         super().__init__(**kwargs)
 
         if not screen_device:
-            raise NoBrightnessError
+            logger.error(f"{Colors.ERROR}No screen backlight device found")
 
         # Path for screen backlight control
         self.screen_backlight_path = f"/sys/class/backlight/{screen_device}"
