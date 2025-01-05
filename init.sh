@@ -25,7 +25,6 @@ start_bar() {
 			exit 1
 		fi
 	fi
-	sleep 2 # let hyprland start
 	python3 main.py
 }
 

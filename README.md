@@ -221,9 +221,9 @@ Be sure to kill any bars that you may be running. You can kill other bar with `p
 
 ### 2. **Cannot see bar? **
 
-Kill the app with `pkill hydepanel`. Cd to the folder , activate venv with `source .venv/bin/activate` and run `python main.py`.
-This should show some logs. If it shows like `ModuleNotFoundError`, run `pip install -r requirements.txt`.
-If this does not solve the issue, do report a bug.
+Kill the app with `pkill hydepanel`. Run `init.sh -start`. This should show some logs. If it shows like `ModuleNotFoundError`, run `pip install -r requirements.txt`. If this does not solve the issue, do report a bug with screenshot of the log.
+
+### 3.
 
 # ⭐ Hit that Star Button!
 
