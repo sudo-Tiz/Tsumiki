@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/rubiin/HyDePanel/refs/heads/master/hydepanel.schema.json",
   "theme": {
     "name": "catpuccin-mocha"
   },
