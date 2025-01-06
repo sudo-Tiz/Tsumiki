@@ -100,6 +100,17 @@ def merge_defaults(data: dict, defaults: dict):
     return {**defaults, **data}
 
 
+# Validate the widgets
+def validate_widgets(parsed_data, default_config):
+    layout = parsed_data["layout"]
+    for section in layout:
+        for widget in layout[section]:
+            if widget not in default_config:
+                raise ValueError(
+                    f"Invalid widget {widget} found in section {section}. Please check the widget name."
+                )
+
+
 # Function to format time in hours and minutes
 def format_time(secs: int):
     mm, _ = divmod(secs, 60)
@@ -252,7 +263,12 @@ def get_audio_icon_name(
 
 
 def send_notification(
-    title: str, body: str, urgency: Literal["low","normal","critical"], icon=None, app_name="Application", timeout=None
+    title: str,
+    body: str,
+    urgency: Literal["low", "normal", "critical"],
+    icon=None,
+    app_name="Application",
+    timeout=None,
 ):
     """
     Sends a notification using the notify-send command.

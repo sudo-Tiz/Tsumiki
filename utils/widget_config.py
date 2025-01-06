@@ -1,7 +1,7 @@
 from typing import List, TypedDict
 
+import utils.functions as helpers
 from utils.config import HIGH_POLL_INTERVAL
-from utils.functions import merge_defaults, read_config
 
 # Default configuration values
 DEFAULT_CONFIG = {
@@ -309,11 +309,15 @@ class BarConfig(TypedDict):
 
 
 # Read the configuration from the JSON file
-parsed_data = read_config()
+parsed_data = helpers.read_config()
 
+# Validate the widgets
+helpers.validate_widgets(parsed_data=parsed_data, default_config=DEFAULT_CONFIG)
 
 for key in DEFAULT_CONFIG:
-    parsed_data[key] = merge_defaults(parsed_data.get(key, {}), DEFAULT_CONFIG[key])
+    parsed_data[key] = helpers.merge_defaults(
+        parsed_data.get(key, {}), DEFAULT_CONFIG[key]
+    )
 
 # Optionally, cast the parsed data to match our TypedDict using type hints
 widget_config: BarConfig = parsed_data
