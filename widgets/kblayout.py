@@ -46,7 +46,9 @@ class KeyboardLayoutWidget(BoxWidget):
         layout = main_kb["active_keymap"]
 
         if self.config["tooltip"]:
-            self.set_tooltip_text(layout)
+            self.set_tooltip_text(
+                f"Caps Lock 󰪛: {main_kb['caps_lock']} | Num Lock : {main_kb['num_lock']}"
+            )
 
         # Update the label with the used storage if enabled
         if self.config["label"]:
