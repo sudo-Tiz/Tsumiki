@@ -252,12 +252,12 @@ def get_audio_icon_name(
 
 
 def send_notification(
-    title, message, urgency="normal", icon=None, app_name="Application", timeout=None
+    title: str, body: str, urgency: Literal["low","normal","critical"], icon=None, app_name="Application", timeout=None
 ):
     """
     Sends a notification using the notify-send command.
     :param title: The title of the notification
-    :param message: The message body of the notification
+    :param body: The message body of the notification
     :param urgency: The urgency of the notification ('low', 'normal', 'critical')
     :param icon: Optional icon for the notification
     :param app_name: The application name that is sending the notification
@@ -271,7 +271,7 @@ def send_notification(
         "--app-name",
         app_name,
         title,
-        message,
+        body,
     ]
 
     # Add icon if provided
@@ -280,6 +280,8 @@ def send_notification(
 
     if timeout is not None:
         command.extend(["-t", str(timeout)])
+
+    print(command)
 
     try:
         subprocess.run(command, check=True)
