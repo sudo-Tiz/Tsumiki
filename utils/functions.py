@@ -251,53 +251,40 @@ def get_audio_icon_name(
         }
 
 
-# Function to send a notification
 def send_notification(
-    title, message, urgency="normal", timeout=0, icon=None, category=None, hint=None
+    title, message, urgency="normal", icon=None, app_name="Application", timeout=None
 ):
     """
-    Send a notification using the notify-send command with customizable parameters.
-
+    Sends a notification using the notify-send command.
     :param title: The title of the notification
-    :param message: The message content of the notification
-    :param urgency: The urgency level (low, normal, critical)
-    :param timeout: The timeout in milliseconds (0 means no timeout)
-    :param icon: The path to an icon image (optional)
-    :param category: The category of the notification (optional)
-    :param hint: Extra hints as a dictionary (optional)
+    :param message: The message body of the notification
+    :param urgency: The urgency of the notification ('low', 'normal', 'critical')
+    :param icon: Optional icon for the notification
+    :param app_name: The application name that is sending the notification
+    :param timeout: Optional timeout in milliseconds (e.g., 5000 for 5 seconds)
     """
-    command = ["notify-send"]
+    # Base command
+    command = [
+        "notify-send",
+        "--urgency",
+        urgency,
+        "--app-name",
+        app_name,
+        title,
+        message,
+    ]
 
-    # Add title and message
-    command.append(title)
-    command.append(message)
+    # Add icon if provided
+    if icon:
+        command.extend(["--icon", icon])
 
-    # Add urgency if specified
-    if urgency in ["low", "normal", "critical"]:
-        command.extend(["-u", urgency])
-
-    # Add timeout if specified
-    if timeout > 0:
+    if timeout is not None:
         command.extend(["-t", str(timeout)])
 
-    # Add icon if specified
-    if icon:
-        command.extend(["-i", icon])
-
-    # Add category if specified
-    if category:
-        command.extend(["--category", category])
-
-    # Add hints (if any)
-    if hint:
-        for key, value in hint.items():
-            command.extend([f"--hint={key}={value}"])
-
-    # Send the notification
     try:
         subprocess.run(command, check=True)
     except subprocess.CalledProcessError as e:
-        logger.error(f"{Colors.ERROR}Error sending notification: {e}")
+        print(f"Failed to send notification: {e}")
 
 
 # Function to get the percentage of a value
