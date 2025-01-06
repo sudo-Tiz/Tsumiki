@@ -17,15 +17,14 @@ def exec_brightnessctl_async(args: str):
 
 
 # Discover screen backlight device
-screen_device = ""
-
 try:
-    screen_device = os.listdir("/sys/class/backlight")
-    screen_device = screen_device[0]
+    screen_device = os.listdir("/sys/class/backlsight")
+    screen_device = screen_device[0] if screen_device else ""
 except FileNotFoundError:
     logger.error(
         f"{Colors.ERROR}No backlight devices found, brightness control disabled"
     )
+    screen_device = ""
 
 
 class Brightness(Service):
@@ -52,7 +51,7 @@ class Brightness(Service):
         self.screen_backlight_path = f"/sys/class/backlight/{screen_device}"
 
         # Initialize maximum brightness level
-        self.max_screen = -1
+        self.max_screen = self.do_read_max_brightness(self.screen_backlight_path)
 
         if screen_device == "":
             return
@@ -72,6 +71,14 @@ class Brightness(Service):
         logger.info(
             f"{Colors.INFO}Brightness service initialized for device: {screen_device}"
         )
+
+    def do_read_max_brightness(self, path: str) -> int:
+        # Reads the maximum brightness value from the specified path.
+        max_brightness_path = os.path.join(path, "max_brightness")
+        if os.path.exists(max_brightness_path):
+            with open(max_brightness_path) as f:
+                return int(f.read().strip())
+        return -1  # Return -1 if file doesn't exist, indicating an error.
 
     @Property(int, "read-write")
     def screen_brightness(self) -> int:
