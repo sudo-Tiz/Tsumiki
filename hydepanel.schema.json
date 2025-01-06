@@ -1,0 +1,411 @@
+{
+  "type": "object",
+  "properties": {
+    "theme": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "properties": {
+        "left_section": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "middle_section": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "right_section": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "weather": {
+      "type": "object",
+      "properties": {
+        "detect_location": {
+          "type": "boolean"
+        },
+        "location": {
+          "type": "string"
+        },
+        "label": {
+          "type": "boolean"
+        },
+        "tooltip": {
+          "type": "boolean"
+        },
+        "interval": {
+          "type": "integer"
+        }
+      }
+    },
+    "hypr_sunset": {
+      "type": "object",
+      "properties": {
+        "temperature": {
+          "type": "string"
+        },
+        "enabled_icon": {
+          "type": "string"
+        },
+        "disabled_icon": {
+          "type": "string"
+        },
+        "icon_size": {
+          "type": "string"
+        },
+        "label": {
+          "type": "boolean"
+        },
+        "tooltip": {
+          "type": "boolean"
+        },
+        "interval": {
+          "type": "integer"
+        }
+      }
+    },
+    "hypr_idle": {
+      "type": "object",
+      "properties": {
+        "enabled_icon": {
+          "type": "string"
+        },
+        "disabled_icon": {
+          "type": "string"
+        },
+        "icon_size": {
+          "type": "string"
+        },
+        "label": {
+          "type": "boolean"
+        },
+        "tooltip": {
+          "type": "boolean"
+        },
+        "interval": {
+          "type": "integer"
+        }
+      }
+    },
+    "battery": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "boolean"
+        },
+        "tooltip": {
+          "type": "boolean"
+        }
+      }
+    },
+    "cpu": {
+      "type": "object",
+      "properties": {
+        "icon": {
+          "type": "string"
+        },
+        "icon_size": {
+          "type": "string"
+        },
+        "label": {
+          "type": "boolean"
+        },
+        "tooltip": {
+          "type": "boolean"
+        }
+      }
+    },
+    "memory": {
+      "type": "object",
+      "properties": {
+        "icon": {
+          "type": "string"
+        },
+        "icon_size": {
+          "type": "string"
+        },
+        "label": {
+          "type": "boolean"
+        },
+        "tooltip": {
+          "type": "boolean"
+        }
+      }
+    },
+    "storage": {
+      "type": "object",
+      "properties": {
+        "icon": {
+          "type": "string"
+        },
+        "icon_size": {
+          "type": "string"
+        },
+        "label": {
+          "type": "boolean"
+        },
+        "tooltip": {
+          "type": "boolean"
+        }
+      }
+    },
+    "workspaces": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        },
+        "hide_unoccupied": {
+          "type": "boolean"
+        },
+        "reverse_scroll": {
+          "type": "boolean"
+        },
+        "empty_scroll": {
+          "type": "boolean"
+        },
+        "ignored": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "window_title": {
+      "type": "object",
+      "properties": {
+        "enable_icon": {
+          "type": "boolean"
+        },
+        "truncation": {
+          "type": "boolean"
+        },
+        "truncation_size": {
+          "type": "integer"
+        },
+        "title_map": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "updates": {
+      "type": "object",
+      "properties": {
+        "os": {
+          "type": "string"
+        }
+      }
+    },
+    "osd": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "anchor": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "integer"
+        }
+      }
+    },
+    "keyboard": {
+      "type": "object",
+      "properties": {
+        "icon": {
+          "type": "string"
+        },
+        "icon_size": {
+          "type": "string"
+        },
+        "label": {
+          "type": "boolean"
+        },
+        "tooltip": {
+          "type": "boolean"
+        }
+      }
+    },
+    "task_bar": {
+      "type": "object",
+      "properties": {
+        "icon_size": {
+          "type": "integer"
+        }
+      }
+    },
+    "language": {
+      "type": "object",
+      "properties": {
+        "length": {
+          "type": "integer"
+        }
+      }
+    },
+    "mpris": {
+      "type": "object",
+      "properties": {
+        "length": {
+          "type": "integer"
+        },
+        "format": {
+          "type": "string"
+        }
+      }
+    },
+    "system_tray": {
+      "type": "object",
+      "properties": {
+        "icon_size": {
+          "type": "integer"
+        },
+        "ignore": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "bluetooth": {
+      "type": "object",
+      "properties": {
+        "icon_size": {
+          "type": "integer"
+        },
+        "label": {
+          "type": "boolean"
+        },
+        "tooltip": {
+          "type": "boolean"
+        }
+      }
+    },
+    "volume": {
+      "type": "object",
+      "properties": {
+        "icon_size": {
+          "type": "string"
+        },
+        "label": {
+          "type": "boolean"
+        },
+        "tooltip": {
+          "type": "boolean"
+        },
+        "step_size": {
+          "type": "integer"
+        }
+      }
+    },
+    "brightness": {
+      "type": "object",
+      "properties": {
+        "icon_size": {
+          "type": "string"
+        },
+        "label": {
+          "type": "boolean"
+        },
+        "tooltip": {
+          "type": "boolean"
+        },
+        "step_size": {
+          "type": "integer"
+        }
+      }
+    },
+    "power": {
+      "type": "object",
+      "properties": {
+        "icon": {
+          "type": "string"
+        },
+        "icon_size": {
+          "type": "string"
+        },
+        "tooltip": {
+          "type": "boolean"
+        }
+      }
+    },
+    "theme_switcher": {
+      "type": "object",
+      "properties": {
+        "icon": {
+          "type": "string"
+        },
+        "icon_size": {
+          "type": "string"
+        },
+        "silent": {
+          "type": "boolean"
+        }
+      }
+    },
+    "date_time": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "type": "string"
+        }
+      }
+    },
+    "notification": {
+      "type": "object",
+      "properties": {
+        "ignored": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "anchor": {
+          "type": "string"
+        },
+        "timeout": {
+          "type": "integer"
+        },
+        "count": {
+          "type": "integer"
+        }
+      }
+    },
+    "recorder": {
+      "type": "object",
+      "properties": {
+        "photos": {
+          "type": "string"
+        },
+        "videos": {
+          "type": "string"
+        },
+        "tooltip": {
+          "type": "boolean"
+        },
+        "icon_size": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
