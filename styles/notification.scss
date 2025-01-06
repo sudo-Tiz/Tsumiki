@@ -5,10 +5,6 @@
 
 $hover-tranistion: background 0.15s ease-in-out;
 
-.critical {
-  box-shadow: inset 0 0 0.5em 0 red;
-}
-
 /* notification widget*/
 
 #notification {
@@ -92,6 +88,10 @@ $hover-tranistion: background 0.15s ease-in-out;
   color: transparent;
 }
 
+.critical {
+  box-shadow: inset 0 0 0.15em 0 theme.$accent-red;
+}
+
 /* .notification-header #notification-icon {
   Notification app icon (only visible when the primary image is set) */
 /* -gtk-icon-effect: highlight;              TODO: might use this on hover     */
@@ -99,14 +99,4 @@ $hover-tranistion: background 0.15s ease-in-out;
 
 } */
 /*
-.low{
-
-}
-
-.normal{
-
-}
-
-.critical{
-
-} */
+*/

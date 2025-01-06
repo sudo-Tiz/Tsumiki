@@ -18,7 +18,7 @@ def exec_brightnessctl_async(args: str):
 
 # Discover screen backlight device
 try:
-    screen_device = os.listdir("/sys/class/backlsight")
+    screen_device = os.listdir("/sys/class/backlight")
     screen_device = screen_device[0] if screen_device else ""
 except FileNotFoundError:
     logger.error(
@@ -77,7 +77,7 @@ class Brightness(Service):
         max_brightness_path = os.path.join(path, "max_brightness")
         if os.path.exists(max_brightness_path):
             with open(max_brightness_path) as f:
-                return int(f.read().strip())
+                return int(f.readline())
         return -1  # Return -1 if file doesn't exist, indicating an error.
 
     @Property(int, "read-write")

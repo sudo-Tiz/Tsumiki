@@ -45,6 +45,9 @@ class NotificationWidget(EventBox):
             orientation="v",
         )
 
+        if notification.urgency == 2:
+            self.notification_box.add_style_class("critical")
+
         bulk_connect(
             self,
             {
