@@ -138,8 +138,7 @@ DEFAULT_CONFIG = {
         "anchor": "bottom center",
     },
     "recorder": {
-        "photos": "Pictures/Screenshots",
-        "videos": "Videos/Screencasting",
+        "path": "Videos/Screencasting",
         "icon_size": 16,
         "tooltip": True,
     },
@@ -268,9 +267,7 @@ Notification = TypedDict(
 )
 
 # Recording configuration
-Recording = TypedDict(
-    "Recording", {"videos": str, "photos": str, "icon_size": int, "tooltip": bool}
-)
+Recording = TypedDict("Recording", {"path": str, "icon_size": int, "tooltip": bool})
 
 
 # OSD configuration
