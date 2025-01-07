@@ -219,11 +219,13 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 
 Be sure to kill any bars that you may be running. You can kill other bar with `pkill bar-name`
 
-### 2. **Cannot see bar? **
+### 2. **Cannot see notifications?**
+
+Be sure to kill other notifications daemon that you may be running. You can kill other daeemons with `pkill dunst; pkill mako;`
+
+### 3. **Cannot see bar? **
 
 Kill the app with `pkill hydepanel`. Run `init.sh -start`. This should show some logs. If it shows like `ModuleNotFoundError`, run `pip install -r requirements.txt`. If this does not solve the issue, do report a bug with screenshot of the log.
-
-### 3.
 
 # ⭐ Hit that Star Button!
 

@@ -25,7 +25,8 @@ start_bar() {
 			exit 1
 		fi
 	fi
-	python3 main.py
+	pkill dunst; pkill mako; # to use notifications, kill other notification daemons
+	python3 ./main.py
 }
 
 install_packages() {
