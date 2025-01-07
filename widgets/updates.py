@@ -1,11 +1,6 @@
 import json
 
-from fabric.utils import (
-    exec_shell_command,
-    exec_shell_command_async,
-    get_relative_path,
-    invoke_repeater,
-)
+from fabric.utils import exec_shell_command_async, get_relative_path, invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 from loguru import logger
@@ -68,7 +63,7 @@ class UpdatesWidget(ButtonWidget):
 
     def on_button_press(self, _, event):
         if event.button == 1:
-            exec_shell_command(f"{self.script_file} -{self.config['os']} -up")
+            exec_shell_command_async(f"{self.script_file} -{self.config['os']} -up",  lambda _: None,)
             return True
         else:
             self.update()
