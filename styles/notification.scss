@@ -8,6 +8,7 @@ $hover-tranistion: background 0.15s ease-in-out;
 /* notification widget*/
 
 #notification-eventbox {
+
   #notification {
     padding: 0.8rem;
     border-radius: 1rem;
@@ -21,6 +22,14 @@ $hover-tranistion: background 0.15s ease-in-out;
   }
 
   .notification-header {
+
+    .app-icon {
+      /* Notification app icon (only visible when the primary image is set) */
+      -gtk-icon-effect: none;
+      -gtk-icon-shadow: 0 1px 4px black;
+      margin: 6px;
+    }
+
     .summary {
       font-size: 14px;
       font-weight: bold;
@@ -45,6 +54,7 @@ $hover-tranistion: background 0.15s ease-in-out;
     }
 
     .image {
+      -gtk-icon-effect: none;
       border-radius: 15px;
     }
   }
