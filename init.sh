@@ -10,18 +10,21 @@ start_bar() {
 
 	# Check if the virtual environment exists, if not, create it
 	if [ ! -d .venv ]; then
-		echo "venv does not exist. Creating venv..."
+		echo -e "\033[32mvenv does not exist. Creating venv...\033[0m"
 		python3 -m venv .venv
+
 		if [ $? -ne 0 ]; then
-			echo "Failed to create virtual environment. Exiting..."
+			echo -e "\033[31mFailed to create virtual environment. Exiting...\033[0m"
 			exit 1
 		fi
-		# Activate the virtual environment and run the main Python script
+
 		source .venv/bin/activate
+
 		# Install required Python packages
 		pip install -r requirements.txt
+
 		if [ $? -ne 0 ]; then
-			echo "Failed to install packages from requirements.txt. Exiting..."
+			echo -e "\033[31mFailed to install packages from requirements.txt. Exiting...\033[0m"
 			exit 1
 		fi
 	fi
@@ -72,7 +75,7 @@ install_packages() {
 	elif command -v paru &> /dev/null; then
 		aur_helper="paru"
 	else
-		echo "yay or paru not found. Install the aur packages `gray-git python-fabric` with the aur helper installed."
+		echo -e "\033[33myay or paru not found. Install the aur packages \033[36mgray-git \033[36mpython-fabric \033[33mwith the aur helper installed.\033[0m"
 		exit 1
 	fi
 
@@ -92,7 +95,7 @@ case "$1" in
 	install_packages # Call the install_packages function
 	;;
 *)
-	echo "Unknown command. Use '-start', '-update', or '-install'."
+	echo -e "\033[31mUnknown command. Use \033[32m'-start'\033[33m, \033[32m'-update'\033[33m, \033[32m'-install'\033[31m.\033[0m"
 	exit 1
 	;;
 esac
