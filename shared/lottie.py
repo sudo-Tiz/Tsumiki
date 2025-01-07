@@ -37,7 +37,6 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
         Gtk.DrawingArea.__init__(
             self,
             visible=visible,
-            # **(self.do_get_filtered_kwargs(kwargs)),
         )
         Widget.__init__(
             self,
@@ -53,7 +52,7 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
             v_expand=v_expand,
         )
 
-        # State Management Things
+        # State Management
         self.timeout = None
         self.is_playing = False
         self.do_reverse = False
