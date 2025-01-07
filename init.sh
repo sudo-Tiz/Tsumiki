@@ -4,7 +4,7 @@
 start_bar() {
 	# Navigate to the $HOME/bar directory
 	cd "$HOME/bar" || {
-		echo "Directory $HOME/bar does not exist."
+		echo -e "\033[31mDirectory $HOME/bar does not exist.\033[0m"
 		exit 1
 	}
 
@@ -35,6 +35,7 @@ start_bar() {
 		echo -e "\033[32m  All done, starting bar.\033[0m"
 	else
 		echo -e "\033[32m  Using existing venv.\033[0m"
+		source .venv/bin/activate
 	fi
 
 	cat <<EOF
@@ -49,9 +50,11 @@ start_bar() {
 
 
 EOF
+	echo -e "\e[32musing python:\e[0m \e[34m$(which python)\e[0m"
 
 	pkill dunst; pkill mako; # to use notifications, kill other notification daemons
 	python3 ./main.py
+	deactivate
 }
 
 install_packages() {
