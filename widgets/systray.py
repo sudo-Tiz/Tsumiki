@@ -1,7 +1,7 @@
 import gi
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
-from gi.repository import Gdk, GdkPixbuf, Gray, Gtk
+from gi.repository import Gdk, GdkPixbuf, GLib, Gray, Gtk
 
 from shared.widget_container import BoxWidget
 from utils.widget_config import BarConfig
@@ -55,18 +55,30 @@ class SystemTray(BoxWidget):
     def do_update_item_button(self, item: Gray.Item, item_button: Button):
         pixmap = Gray.get_pixmap_for_pixmaps(item.get_icon_pixmaps(), 24)
 
-        # convert the pixmap to a pixbuf
-        pixbuf: GdkPixbuf.Pixbuf = (
-            pixmap.as_pixbuf(self.config["icon_size"], GdkPixbuf.InterpType.HYPER)
-            if pixmap is not None
-            else Gtk.IconTheme()
-            .get_default()
-            .load_icon(
-                item.get_icon_name(),
-                self.config["icon_size"],
-                Gtk.IconLookupFlags.FORCE_SIZE,
+        try:
+            pixbuf: GdkPixbuf.Pixbuf = (
+                pixmap.as_pixbuf(self.config["icon_size"], GdkPixbuf.InterpType.HYPER)
+                if pixmap is not None
+                else Gtk.IconTheme()
+                .get_default()
+                .load_icon(
+                    item.get_icon_name(),
+                    self.config["icon_size"],
+                    Gtk.IconLookupFlags.FORCE_SIZE,
+                )
             )
-        )
+
+        except GLib.GError:
+            pixbuf = (
+                Gtk.IconTheme()
+                .get_default()
+                .load_icon(
+                    "dialog-error-symbolic",
+                    self.config["icon_size"],
+                    Gtk.IconLookupFlags.FORCE_SIZE,
+                )
+            )
+
         item_button.set_image(Image(pixbuf=pixbuf, pixel_size=self.config["icon_size"]))
 
     def on_button_click(self, button, item: Gray.Item, event):

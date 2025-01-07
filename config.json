@@ -99,7 +99,7 @@
     "format": "{artist} - {title}"
   },
   "system_tray": {
-    "icon_size": 20,
+    "icon_size": 16,
     "ignore": []
   },
   "bluetooth": {

@@ -120,7 +120,7 @@ DEFAULT_CONFIG = {
     },
     "language": {"length": 3},
     "task_bar": {"icon_size": 22},
-    "system_tray": {"icon_size": 20, "ignore": []},
+    "system_tray": {"icon_size": 16, "ignore": []},
     "power": {"icon": "󰐥", "icon_size": "18px", "tooltip": True},
     "theme_switcher": {
         "icon": "",
