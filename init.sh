@@ -25,23 +25,42 @@ start_bar() {
 			exit 1
 		fi
 	fi
+
+	cat <<EOF
+
+          ░▒▒▒░░░░░▓▓          ___________
+        ░░▒▒▒░░░░░▓▓        //___________/
+       ░░▒▒▒░░░░░▓▓     _   _ _    _ _____
+       ░░▒▒░░░░░▓▓▓▓▓▓ | | | | |  | |  __/
+        ░▒▒░░░░▓▓   ▓▓ | |_| | |_/ /| |___
+         ░▒▒░░▓▓   ▓▓   \__  |____/ |____/
+           ░▒▓▓   ▓▓  //____/
+
+
+EOF
+
 	pkill dunst; pkill mako; # to use notifications, kill other notification daemons
 	python3 ./main.py
 }
 
 install_packages() {
 	# Display an ASCII art (a small logo) in blue
-	echo -e "\e[1;34m
-     /\
-    /  \
-   /    \
-  /______\
- /\      /\
-/  \    /  \
-\   \/\/   /
- \        /
-  \______/
-\e[0m"
+#!/bin/bash
+
+	echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+	echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+	echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+	echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+	echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣷⣤⣙⢻⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+	echo "⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀"
+	echo "⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀"
+	echo "⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⡿⠛⠛⠿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀"
+	echo "⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⠙⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀"
+	echo "⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⠿⣆⠀⠀⠀⠀"
+	echo "⠀⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀"
+	echo "⠀⢀⣾⣿⣿⠿⠟⠛⠋⠉⠉⠀⠀⠀⠀⠀⠀⠉⠉⠙⠛⠻⠿⣿⣿⣷⡀⠀"
+	echo "⣠⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⣄"
+
 
 	# Notify user about the installation process
 	echo -e "\e[1;34mInstalling the pre-requisites, may take a while....\e[0m"
