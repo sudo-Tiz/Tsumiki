@@ -10,23 +10,31 @@ start_bar() {
 
 	# Check if the virtual environment exists, if not, create it
 	if [ ! -d .venv ]; then
-		echo -e "\033[32mvenv does not exist. Creating venv...\033[0m"
+		echo -e "\033[32m  venv does not exist. Creating venv...\033[0m"
 		python3 -m venv .venv
 
 		if [ $? -ne 0 ]; then
-			echo -e "\033[31mFailed to create virtual environment. Exiting...\033[0m"
+			echo -e "\033[31m  Failed to create virtual environment. Exiting...\033[0m"
 			exit 1
 		fi
 
 		source .venv/bin/activate
 
-		# Install required Python packages
+		if [ $? -ne 0 ]; then
+			echo -e "\033[31m  Failed to activate venv. Exiting...\033[0m"
+			exit 1
+		fi
+
+		echo -e "\033[32m  Installing python dependencies, brace yourself.\033[0m"
 		pip install -r requirements.txt
 
 		if [ $? -ne 0 ]; then
 			echo -e "\033[31mFailed to install packages from requirements.txt. Exiting...\033[0m"
 			exit 1
 		fi
+		echo -e "\033[32m  All done, starting bar.\033[0m"
+	else
+		echo -e "\033[32m  Using existing venv.\033[0m"
 	fi
 
 	cat <<EOF
