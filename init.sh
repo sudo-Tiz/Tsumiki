@@ -88,7 +88,7 @@ case "$1" in
 	start_bar # Call the start_bar function
 	;;
 -update)
-	git pull origin # Placeholder for the update functionality
+	git pull origin master # Placeholder for the update functionality
 	;;
 -install)
 	install_packages # Call the install_packages function
