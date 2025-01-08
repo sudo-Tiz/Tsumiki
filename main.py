@@ -10,6 +10,7 @@ from modules.osd import OSDContainer
 from utils.colors import Colors
 from utils.config import APP_CACHE_DIRECTORY, APPLICATION_NAME
 from utils.widget_config import widget_config
+from widgets.corners import ScreenCorners
 
 
 def process_and_apply_css(app: Application):
@@ -32,8 +33,17 @@ if __name__ == "__main__":
     notifications = NotificationPopup(widget_config)
     system_overlay = OSDContainer(widget_config)
 
+    windows = [bar, notifications, system_overlay]
+
+    if widget_config["options"]["screen_corners"]:
+        corners = ScreenCorners()
+        windows.append(corners)
+
     # Initialize the application with the status bar
-    app = Application(APPLICATION_NAME, bar, notifications, system_overlay)
+    app = Application(
+        APPLICATION_NAME,
+        windows=windows,
+    )
 
     setproctitle.setproctitle(APPLICATION_NAME)
 

@@ -9,6 +9,14 @@
         }
       }
     },
+    "options": {
+      "type": "object",
+      "properties": {
+        "screen_corners": {
+          "type": "boolean"
+        }
+      }
+    },
     "layout": {
       "type": "object",
       "properties": {

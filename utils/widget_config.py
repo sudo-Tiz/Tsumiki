@@ -8,6 +8,7 @@ DEFAULT_CONFIG = {
     "theme": {
         "name": "catpuccin-mocha",
     },
+    "options": {"screen_corners": False},
     "layout": {
         "left_section": ["workspaces", "window_title"],
         "middle_section": ["date_time"],
@@ -194,6 +195,9 @@ Battery = TypedDict(
 # Theme configuration
 Theme = TypedDict("Theme", {"name": str})
 
+# Bar configuration
+Options = TypedDict("Options", {"screen_corners": bool})
+
 # Cpu configuration
 Cpu = TypedDict("Cpu", {**BaseConfig.__annotations__, "icon": str})
 
@@ -278,6 +282,7 @@ class BarConfig(TypedDict):
     """Main configuration that includes all other configurations"""
 
     battery: Battery
+    options: Options
     notification: Notification
     bluetooth: BlueTooth
     cpu: Cpu

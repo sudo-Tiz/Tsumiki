@@ -3,6 +3,9 @@
   "theme": {
     "name": "catpuccin-mocha"
   },
+  "options": {
+    "screen_corners": false
+  },
   "layout": {
     "left_section": ["workspaces", "window_title"],
     "middle_section": ["date_time"],
