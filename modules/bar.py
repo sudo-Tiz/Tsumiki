@@ -1,7 +1,9 @@
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow
+from fabric.utils import exec_shell_command_async, get_relative_path, invoke_repeater
 
+from utils.functions import convert_seconds_to_miliseconds
 from utils.widget_config import widget_config
 from widgets import (
     Battery,
@@ -31,6 +33,13 @@ from widgets import (
 
 class StatusBar(WaylandWindow):
     """A widget to display the status bar panel."""
+
+    def check_for_bar_updates(self):
+        exec_shell_command_async(
+            get_relative_path("../assets/scripts/barupdate.sh"),
+            lambda _: None,
+        )
+        return True
 
     def __init__(self, **kwargs):
         self.widgets_list = {
@@ -88,6 +97,9 @@ class StatusBar(WaylandWindow):
             all_visible=False,
             child=box,
             **kwargs,
+        )
+        invoke_repeater(
+            convert_seconds_to_miliseconds(3600), self.check_for_bar_updates, initial_call=True
         )
 
     def make_layout(self):

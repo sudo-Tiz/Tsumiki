@@ -4,7 +4,8 @@
     "name": "catpuccin-mocha"
   },
   "options": {
-    "screen_corners": false
+    "screen_corners": false,
+    "check_updates": true
   },
   "layout": {
     "left_section": ["workspaces", "window_title"],
