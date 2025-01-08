@@ -1,4 +1,3 @@
-
 <h1 align="center">✨ HyDePanel</h1>
 <p align="center">
  <a href="https://github.com/rubiin/HyDePanel/blob/master/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/rubiin/HyDePanel"></a>
@@ -16,7 +15,6 @@ The panel focuses on providing an all-in-one, fully integrated panel experience,
 Many aspects of the bar including the look and functionalities are inspired from [waybar](https://github.com/Alexays/Waybar), [hyprpanel](https://hyprpanel.com) and [swayosd](https://github.com/ErikReider/SwayOSD).
 
 ![image](https://github.com/user-attachments/assets/9f5a0e67-9b98-4615-adcf-511a05527ec2)
-
 
 ---
 
