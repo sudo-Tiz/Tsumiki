@@ -1,19 +1,22 @@
-# HyDePanel
 
+<h1 align="center">✨ HyDePanel</h1>
 <p align="center">
  <a href="https://github.com/rubiin/HyDePanel/blob/master/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/rubiin/HyDePanel"></a>
   <a href='http://makeapullrequest.com'><img alt='PRs Welcome' src='https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields'/></a>
   <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/rubiin/HyDePanel"/>
   <img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed/rubiin/HyDePanel"/>
   <img alt="discord" src="https://img.shields.io/discord/1200448076620501063" />
-
 </p>
 
 A semi-customizable bar written using the [Fabric Widget System](https://github.com/Fabric-Development/fabric) taking inpirations from hyprpanel and waybar for some widgets
 More on [Fabric's Wiki](https://wiki.ffpy.org)
 
 The panel focuses on providing an all-in-one, fully integrated panel experience, where users don’t have to rely on separate, theme-less third-party tools to manage niche functions like buetooth, notifications,on screen display.
+
 Many aspects of the bar including the look and functionalities are inspired from [waybar](https://github.com/Alexays/Waybar), [hyprpanel](https://hyprpanel.com) and [swayosd](https://github.com/ErikReider/SwayOSD).
+
+![image](https://github.com/user-attachments/assets/9f5a0e67-9b98-4615-adcf-511a05527ec2)
+
 
 ---
 
@@ -191,7 +194,10 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 
 </details>
 
-# Screenshots
+## Screenshots
+
+<details>
+<summary>Click to see screenshots</summary>
 
 ![image](https://github.com/user-attachments/assets/4bd1fd6d-6c35-43e1-ae47-f0f76089f447)
 
@@ -210,6 +216,8 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 ## Logout
 
 ![image](https://github.com/user-attachments/assets/18b5c851-4d3a-4801-b4c3-dbb555cfbae9)
+
+</details>
 
 > [!WARNING]
 > This is still in early development and will include breaking changes
@@ -239,3 +247,13 @@ Your star helps the project get noticed, and it makes us do a little happy dance
 Just click the shiny "Star" button at the top right (it’s begging for your attention). 🥳
 
 Thanks for making this project a little bit more awesome! 🚀
+
+## Star History
+
+<a href="https://star-history.com/#rubiin/HyDePanel&Timeline">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=rubiin/HyDePanel&type=Timeline&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=rubiin/HyDePanel&type=Timeline" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=rubiin/HyDePanel&type=Timeline" />
+ </picture>
+</a>
