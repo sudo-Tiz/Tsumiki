@@ -5,7 +5,7 @@
   },
   "options": {
     "screen_corners": false,
-    "check_updates": true
+    "check_updates": false
   },
   "layout": {
     "left_section": ["workspaces", "window_title"],

@@ -8,7 +8,7 @@ DEFAULT_CONFIG = {
     "theme": {
         "name": "catpuccin-mocha",
     },
-    "options": {"screen_corners": False},
+    "options": {"screen_corners": False, "check_updates": False},
     "layout": {
         "left_section": ["workspaces", "window_title"],
         "middle_section": ["date_time"],
@@ -196,7 +196,7 @@ Battery = TypedDict(
 Theme = TypedDict("Theme", {"name": str})
 
 # Bar configuration
-Options = TypedDict("Options", {"screen_corners": bool})
+Options = TypedDict("Options", {"screen_corners": bool, "check_updates": bool})
 
 # Cpu configuration
 Cpu = TypedDict("Cpu", {**BaseConfig.__annotations__, "icon": str})

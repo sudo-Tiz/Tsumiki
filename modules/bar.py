@@ -98,11 +98,13 @@ class StatusBar(WaylandWindow):
             child=box,
             **kwargs,
         )
-        invoke_repeater(
-            convert_seconds_to_miliseconds(3600),
-            self.check_for_bar_updates,
-            initial_call=True,
-        )
+
+        if widget_config["options"]["check_updates"]:
+            invoke_repeater(
+                convert_seconds_to_miliseconds(3600),
+                self.check_for_bar_updates,
+                initial_call=True,
+            )
 
     def make_layout(self):
         """assigns the three sections their respective widgets"""
