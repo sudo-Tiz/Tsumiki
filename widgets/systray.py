@@ -73,7 +73,7 @@ class SystemTray(BoxWidget):
                 Gtk.IconTheme()
                 .get_default()
                 .load_icon(
-                    "dialog-error-symbolic",
+                    "image-missing",
                     self.config["icon_size"],
                     Gtk.IconLookupFlags.FORCE_SIZE,
                 )
