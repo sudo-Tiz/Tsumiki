@@ -1,5 +1,4 @@
 import datetime
-import subprocess
 
 from fabric.core.service import Property, Service, Signal
 from fabric.utils import exec_shell_command, exec_shell_command_async
@@ -30,31 +29,11 @@ class ScreenRecorder(Service):
             raise helpers.ExecutableNotFoundError("wf-recorder")
 
         self.config = widget_config["recorder"]
-        self.screenshot_path = f"{GLib.get_home_dir()}/{self.config["photos"]}"
-        self.screenrecord_path = f"{GLib.get_home_dir()}/{self.config["videos"]}"
+        self.screenrecord_path = f"{GLib.get_home_dir()}/{self.config['path']}"
 
-        helpers.ensure_dir_exists(self.screenshot_path)
         helpers.ensure_dir_exists(self.screenrecord_path)
 
         super().__init__(**kwargs)
-
-    def screenshot(self, fullscreen=False, save_copy=True):
-        time = datetime.datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
-        file_path = f"{self.screenshot_path}/{time}.png"
-        command = (
-            ["grimblast", "copysave", "screen", file_path]
-            if save_copy
-            else ["grimblast", "copy" "screen"]
-        )
-        if not fullscreen:
-            command[2] = "area"
-        try:
-            subprocess.run(command, check=True)
-            self.send_screenshot_notification(
-                file_path=file_path if file_path else None,
-            )
-        except Exception:
-            logger.error(f"[SCREENSHOT] Failed to run command: {command}")
 
     def screencast_start(self, fullscreen=False):
         if self.is_recording:

@@ -1,19 +1,20 @@
-# HyDePanel
-
+<h1 align="center">✨ HyDePanel</h1>
 <p align="center">
  <a href="https://github.com/rubiin/HyDePanel/blob/master/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/rubiin/HyDePanel"></a>
   <a href='http://makeapullrequest.com'><img alt='PRs Welcome' src='https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields'/></a>
   <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/rubiin/HyDePanel"/>
   <img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed/rubiin/HyDePanel"/>
   <img alt="discord" src="https://img.shields.io/discord/1200448076620501063" />
-
 </p>
 
 A semi-customizable bar written using the [Fabric Widget System](https://github.com/Fabric-Development/fabric) taking inpirations from hyprpanel and waybar for some widgets
 More on [Fabric's Wiki](https://wiki.ffpy.org)
 
 The panel focuses on providing an all-in-one, fully integrated panel experience, where users don’t have to rely on separate, theme-less third-party tools to manage niche functions like buetooth, notifications,on screen display.
+
 Many aspects of the bar including the look and functionalities are inspired from [waybar](https://github.com/Alexays/Waybar), [hyprpanel](https://hyprpanel.com) and [swayosd](https://github.com/ErikReider/SwayOSD).
+
+![image](https://github.com/user-attachments/assets/9f5a0e67-9b98-4615-adcf-511a05527ec2)
 
 ---
 
@@ -31,13 +32,14 @@ Many aspects of the bar including the look and functionalities are inspired from
 Most of these are already installed on existing working machines
 
 ```sh
+# newtwork
 networkmanager
 
 pipewire
 
 
 ## Bluetooth menu utilities
-gnome-bluetooth
+gnome-bluetooth-3.0 # aur
 bluez
 bluez-utils
 
@@ -81,22 +83,59 @@ cd bar
 
 - Run the following command to install the required packages for particular os, few of them are already installed if you have a working system:
 
-#### Arch Linux
+## Installation
+
+You can choose one of two installation methods: **Automated Setup** or **Manual Setup**.
+
+### Option 1: Automated Setup Using `init.sh -install`
+
+1.  **Run the `init.sh -install` script** to automatically install all the required packages and dependencies (both `pacman` and AUR packages):
 
 ```sh
-sudo pacman -S pipewire playerctl gray-git python-fabric dart-sass networkmanager wl-clipboard brightnessctl python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python python-pip python-gobject python-psutil python-cairo python-loguru pkgconf wf-recorder kitty grimblast gnome-bluetooth
+./init.sh -install
 ```
 
-#### OpenSUSE
+This script will:
 
-```
-sudo zypper install pipewire playerctl networkmanager wl-clipboard brightnessctl python gtk3-devel cairo-devel gtk-layer-shell-devel libgirepository-1_0-1 libgirepository-2_0-0 gobject-introspection-devel python311 python311-pip python311-psutil python311-gobject python311-gobject-cairo python311-pycairo python311-loguru pkgconf kitty grimblast gnome-bluetooth
-```
+- Install all required `pacman` and AUR packages.
+- Set up the virtual environment and any required configurations.
 
-- Install the requirements:
+1.  **Start the environment or bar** once the installation is complete:
 
 ```sh
-./start.sh  # handles venv creation, sourcing and starting the bar
+./init.sh -start
+```
+
+This will launch the environment or bar as defined in your project.
+
+### Option 2: Manual Setup (Install Dependencies First)
+
+If you prefer to have more control over the installation process, you can install the required dependencies manually and then run the `init.sh -start` script.
+
+#### Step 1: Install `pacman` Packages
+
+Run the following command to install the required system packages:
+
+```sh
+sudo pacman -S pipewire playerctl dart-sass networkmanager wl-clipboard brightnessctl python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python-pip python-gobject python-psutil python-cairo python-loguru python-setproctitle pkgconf wf-recorder kitty
+```
+
+#### Step 2: Install AUR Packages
+
+Using `yay` to install the required AUR packages:
+
+```sh
+yay -S gray-git python-fabric gnome-bluetooth-3.0 grimblast
+```
+
+If you have something else besides `yay`, install with the respective aur helper.
+
+#### Step 3: Run the `init.sh -start` Script
+
+Once the dependencies are installed, run the following command to start the bar or environment:
+
+```sh
+./init.sh -start
 ```
 
 ## **Usage**
@@ -106,7 +145,7 @@ sudo zypper install pipewire playerctl networkmanager wl-clipboard brightnessctl
 Add this to your `.config/hyprland.conf`
 
 ```sh
-exec = "$HOME/bar/start.sh"
+exec = `$HOME/bar/init.sh -start`
 
 ```
 
@@ -155,13 +194,20 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 
 </details>
 
-# Screenshots
+## Screenshots
+
+<details>
+<summary>Click to see screenshots</summary>
 
 ![image](https://github.com/user-attachments/assets/4bd1fd6d-6c35-43e1-ae47-f0f76089f447)
 
 ## Notification
 
-![image](https://github.com/user-attachments/assets/07be6619-067d-4322-9e10-6d0a646e257f)
+![image](https://github.com/user-attachments/assets/6c66b11c-6a21-4dcb-ab7f-7ed586abbf65)
+
+## Calendar with notification panel
+
+![image](https://github.com/user-attachments/assets/6e3ef49a-64b3-4dbd-8ccd-53430ff6ecff)
 
 ## OSD
 
@@ -170,6 +216,8 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 ## Logout
 
 ![image](https://github.com/user-attachments/assets/18b5c851-4d3a-4801-b4c3-dbb555cfbae9)
+
+</details>
 
 > [!WARNING]
 > This is still in early development and will include breaking changes
@@ -180,8 +228,32 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 
 Be sure to kill any bars that you may be running. You can kill other bar with `pkill bar-name`
 
-### 2. **Cannot see bar? **
+### 2. **Cannot see notifications?**
 
-Kill the app with `pkill hydepanel`. Cd to the folder , activate venv with `source .venv/bin/activate` and run `python main.py`.
-This should show some logs. If it shows like `ModuleNotFoundError`, run `pip install -r requirements.txt`.
-If this does not solve the issue, do report a bug
+Be sure to kill other notifications daemon that you may be running. You can kill other daeemons with `pkill dunst; pkill mako;`
+
+### 3. **Cannot see bar? **
+
+Kill the app with `pkill hydepanel`. Run `init.sh -start`. This should show some logs. If it shows like `ModuleNotFoundError`, run `pip install -r requirements.txt`. If this does not solve the issue, do report a bug with screenshot of the log.
+
+# ⭐ Hit that Star Button!
+
+Like what you see? Think this project is cooler than your morning coffee? ☕✨
+
+Give it a star! It’s like giving a virtual high-five to the code—plus, and who doesn't love high-fives? ✋
+
+Your star helps the project get noticed, and it makes us do a little happy dance. 💃
+
+Just click the shiny "Star" button at the top right (it’s begging for your attention). 🥳
+
+Thanks for making this project a little bit more awesome! 🚀
+
+## Star History
+
+<a href="https://star-history.com/#rubiin/HyDePanel&Timeline">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=rubiin/HyDePanel&type=Timeline&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=rubiin/HyDePanel&type=Timeline" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=rubiin/HyDePanel&type=Timeline" />
+ </picture>
+</a>

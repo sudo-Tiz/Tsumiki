@@ -25,7 +25,6 @@ class Recorder(ButtonWidget):
                 f"{self.weather_lottie_dir}/recording.json",
             ),
             scale=0.40,
-            do_loop=True,
             h_align=True,
         )
 
@@ -57,11 +56,12 @@ class Recorder(ButtonWidget):
         if is_recording:
             self.is_recording = True
             self.box.children = (self.recording_ongoing_lottie,)
+            self.recording_ongoing_lottie.play_loop()
             if self.config["tooltip"]:
                 self.set_tooltip_text("Recording started")
         else:
-            self.box.children = (self.recording_idle_image,)
+            self.box.children = self.recording_idle_image
+            self.recording_ongoing_lottie.stop_play()
 
-            self.is_recording = False
             if self.config["tooltip"]:
                 self.set_tooltip_text("Recording stopped")

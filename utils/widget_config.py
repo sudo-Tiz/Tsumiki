@@ -1,13 +1,14 @@
 from typing import List, TypedDict
 
+import utils.functions as helpers
 from utils.config import HIGH_POLL_INTERVAL
-from utils.functions import read_config
 
 # Default configuration values
 DEFAULT_CONFIG = {
     "theme": {
         "name": "catpuccin-mocha",
     },
+    "options": {"screen_corners": False, "check_updates": False},
     "layout": {
         "left_section": ["workspaces", "window_title"],
         "middle_section": ["date_time"],
@@ -119,8 +120,8 @@ DEFAULT_CONFIG = {
         "tooltip": True,
     },
     "language": {"length": 3},
-    "task_bar": {"icon_size": 16},
-    "system_tray": {"icon_size": 20, "ignore": []},
+    "task_bar": {"icon_size": 22},
+    "system_tray": {"icon_size": 16, "ignore": []},
     "power": {"icon": "󰐥", "icon_size": "18px", "tooltip": True},
     "theme_switcher": {
         "icon": "",
@@ -138,9 +139,8 @@ DEFAULT_CONFIG = {
         "anchor": "bottom center",
     },
     "recorder": {
-        "photos": "Pictures/Screenshots",
-        "videos": "Videos/Screencasting",
-        "icon_size": 14,
+        "path": "Videos/Screencasting",
+        "icon_size": 16,
         "tooltip": True,
     },
 }
@@ -194,6 +194,9 @@ Battery = TypedDict(
 
 # Theme configuration
 Theme = TypedDict("Theme", {"name": str})
+
+# Bar configuration
+Options = TypedDict("Options", {"screen_corners": bool, "check_updates": bool})
 
 # Cpu configuration
 Cpu = TypedDict("Cpu", {**BaseConfig.__annotations__, "icon": str})
@@ -268,9 +271,7 @@ Notification = TypedDict(
 )
 
 # Recording configuration
-Recording = TypedDict(
-    "Recording", {"videos": str, "photos": str, "icon_size": int, "tooltip": bool}
-)
+Recording = TypedDict("Recording", {"path": str, "icon_size": int, "tooltip": bool})
 
 
 # OSD configuration
@@ -281,6 +282,7 @@ class BarConfig(TypedDict):
     """Main configuration that includes all other configurations"""
 
     battery: Battery
+    options: Options
     notification: Notification
     bluetooth: BlueTooth
     cpu: Cpu
@@ -309,25 +311,15 @@ class BarConfig(TypedDict):
 
 
 # Read the configuration from the JSON file
-parsed_data = read_config()
+parsed_data = helpers.read_config()
 
+# Validate the widgets
+helpers.validate_widgets(parsed_data=parsed_data, default_config=DEFAULT_CONFIG)
 
-# Merge the parsed data with the default configuration
-def merge_defaults(data: dict, defaults: dict):
-    return {**defaults, **data}
-
-
-# Now, `parsed_data` is a Python dictionary
-# You can access individual items like this:
-layout = parsed_data["layout"]
-
-
-for key, value in parsed_data.items():
-    if key in DEFAULT_CONFIG:
-        parsed_data[key] = merge_defaults(value, DEFAULT_CONFIG[key])
-
-
-## TODO: validate the name of widget is within the dict
+for key in DEFAULT_CONFIG:
+    parsed_data[key] = helpers.merge_defaults(
+        parsed_data.get(key, {}), DEFAULT_CONFIG[key]
+    )
 
 # Optionally, cast the parsed data to match our TypedDict using type hints
 widget_config: BarConfig = parsed_data

@@ -95,6 +95,22 @@ def text_icon(icon: str, size: str = "16px", props=None):
     return Label(**label_props)
 
 
+# Merge the parsed data with the default configuration
+def merge_defaults(data: dict, defaults: dict):
+    return {**defaults, **data}
+
+
+# Validate the widgets
+def validate_widgets(parsed_data, default_config):
+    layout = parsed_data["layout"]
+    for section in layout:
+        for widget in layout[section]:
+            if widget not in default_config:
+                raise ValueError(
+                    f"Invalid widget {widget} found in section {section}. Please check the widget name."
+                )
+
+
 # Function to format time in hours and minutes
 def format_time(secs: int):
     mm, _ = divmod(secs, 60)
@@ -246,53 +262,47 @@ def get_audio_icon_name(
         }
 
 
-# Function to send a notification
 def send_notification(
-    title, message, urgency="normal", timeout=0, icon=None, category=None, hint=None
+    title: str,
+    body: str,
+    urgency: Literal["low", "normal", "critical"],
+    icon=None,
+    app_name="Application",
+    timeout=None,
 ):
     """
-    Send a notification using the notify-send command with customizable parameters.
-
+    Sends a notification using the notify-send command.
     :param title: The title of the notification
-    :param message: The message content of the notification
-    :param urgency: The urgency level (low, normal, critical)
-    :param timeout: The timeout in milliseconds (0 means no timeout)
-    :param icon: The path to an icon image (optional)
-    :param category: The category of the notification (optional)
-    :param hint: Extra hints as a dictionary (optional)
+    :param body: The message body of the notification
+    :param urgency: The urgency of the notification ('low', 'normal', 'critical')
+    :param icon: Optional icon for the notification
+    :param app_name: The application name that is sending the notification
+    :param timeout: Optional timeout in milliseconds (e.g., 5000 for 5 seconds)
     """
-    command = ["notify-send"]
+    # Base command
+    command = [
+        "notify-send",
+        "--urgency",
+        urgency,
+        "--app-name",
+        app_name,
+        title,
+        body,
+    ]
 
-    # Add title and message
-    command.append(title)
-    command.append(message)
+    # Add icon if provided
+    if icon:
+        command.extend(["--icon", icon])
 
-    # Add urgency if specified
-    if urgency in ["low", "normal", "critical"]:
-        command.extend(["-u", urgency])
-
-    # Add timeout if specified
-    if timeout > 0:
+    if timeout is not None:
         command.extend(["-t", str(timeout)])
 
-    # Add icon if specified
-    if icon:
-        command.extend(["-i", icon])
+    print(command)
 
-    # Add category if specified
-    if category:
-        command.extend(["--category", category])
-
-    # Add hints (if any)
-    if hint:
-        for key, value in hint.items():
-            command.extend([f"--hint={key}={value}"])
-
-    # Send the notification
     try:
         subprocess.run(command, check=True)
     except subprocess.CalledProcessError as e:
-        logger.error(f"{Colors.ERROR}Error sending notification: {e}")
+        print(f"Failed to send notification: {e}")
 
 
 # Function to get the percentage of a value

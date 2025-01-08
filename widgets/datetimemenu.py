@@ -70,7 +70,7 @@ class DateNotificationMenu(Box):
         )
 
         # Header for the notification column
-        dnd_switch = Gtk.Switch(
+        self.dnd_switch = Gtk.Switch(
             name="notification-switch",
             active=False,
             valign=Gtk.Align.CENTER,
@@ -80,7 +80,7 @@ class DateNotificationMenu(Box):
         notif_header = Box(
             style_classes="header",
             orientation="h",
-            children=(Label("Do Not Disturb"), dnd_switch),
+            children=(Label("Do Not Disturb"), self.dnd_switch),
         )
 
         clear_button = Button(
@@ -156,21 +156,12 @@ class DateNotificationMenu(Box):
             date_column,
         )
 
-        dnd_switch.connect("notify::active", self.on_dnd_switch)
-
         invoke_repeater(1000, self.update_lables, initial_call=True)
 
     def update_lables(self):
         self.clock_label.set_text(time.strftime("%H:%M"))
         self.uptime.set_text(uptime())
         return True
-
-    def on_dnd_switch(self, switch, _):
-        """Handle the do not disturb switch."""
-        if switch.get_active():
-            notify_cache_service.dont_disturb = True
-        else:
-            notify_cache_service.dont_disturb = False
 
 
 class DateTimeWidget(BoxWidget):
@@ -181,17 +172,46 @@ class DateTimeWidget(BoxWidget):
 
         self.config = widget_config["date_time"]
 
+        date_menu = DateNotificationMenu()
+
         popup = PopOverWindow(
             parent=bar,
-            name="popup",
-            child=(DateNotificationMenu()),
+            name="date-menu-popover",
+            child=date_menu,
             visible=False,
             all_visible=False,
         )
 
         popup.set_pointing_to(self)
 
-        self.children = DateTime(
-            self.config["format"],
-            on_clicked=lambda *_: popup.set_visible(not popup.get_visible()),
+        self.notof_indicator = Image(
+            icon_name=icons["notifications"]["noisy"],
+            icon_size=16,
         )
+
+        self.children = Box(
+            spacing=10,
+            v_align="center",
+            children=(
+                self.notof_indicator,
+                DateTime(
+                    self.config["format"],
+                    on_clicked=lambda *_: popup.set_visible(not popup.get_visible()),
+                ),
+            ),
+        )
+        date_menu.dnd_switch.connect("notify::active", self.on_dnd_switch)
+
+    def on_dnd_switch(self, switch, _):
+        """Handle the do not disturb switch."""
+        if switch.get_active():
+            self.notof_indicator.set_from_icon_name(
+                icons["notifications"]["silent"], icon_size=16
+            )
+            notify_cache_service.dont_disturb = True
+
+        else:
+            self.notof_indicator.set_from_icon_name(
+                icons["notifications"]["noisy"], icon_size=16
+            )
+            notify_cache_service.dont_disturb = False

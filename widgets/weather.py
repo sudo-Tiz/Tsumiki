@@ -1,15 +1,14 @@
-import json
-import threading
 import time
 from datetime import datetime
 
 import gi
-from fabric.utils import exec_shell_command, get_relative_path, invoke_repeater
+from fabric import Fabricator
+from fabric.utils import get_relative_path, invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
-from gi.repository import GLib, Gtk
+from gi.repository import Gtk
 
 from services import weather_service
 from shared import LottieAnimation, LottieAnimationWidget, PopOverWindow
@@ -229,8 +228,6 @@ class WeatherWidget(ButtonWidget):
             **kwargs,
         )
 
-        thread = threading.Thread(target=self.fetch_weather, daemon=True)
-
         self.config = widget_config["weather"]
 
         self.bar = bar
@@ -250,28 +247,27 @@ class WeatherWidget(ButtonWidget):
             },
         )
 
+        self.weather_fabricator = Fabricator(poll_from=self.weather_poll, stream=True)
+
         self.weather_label = Label(
             label="Fetching weather...",
             style_classes="panel-text",
         )
         self.box.children = (self.weather_icon, self.weather_label)
 
-        # Set up a repeater to call method at specified intervals
-        invoke_repeater(self.config["interval"], thread.start, initial_call=True)
+        # Set up a fabricator to call the update_label method at specified intervals
+        self.weather_fabricator.connect("changed", self.update_ui)
 
-    def fetch_weather(self):
-        if self.config["detect_location"]:
-            self.config["location"] = json.loads(
-                exec_shell_command("curl ipinfo.io").strip("\n")
-            )["city"]
+    def weather_poll(self, fabricator):
+        while True:
+            yield {
+                "weather": weather_service.simple_weather_info(self.config["location"])
+            }
+            time.sleep(self.config["interval"] / 1000)
 
-        res = weather_service.simple_weather_info(self.config["location"])
-
-        GLib.idle_add(self.update_ui, res)
-        return False
-
-    def update_ui(self, res):
+    def update_ui(self, fabricator, value):
         # Update the label with the weather icon and temperature in the main thread
+        res = value.get("weather")
         current_weather = res["current"]
         text_icon = weather_text_icons[current_weather["weatherCode"]]["icon"]
         self.weather_label.set_label(f"{current_weather["FeelsLikeC"]}°C")
@@ -285,7 +281,7 @@ class WeatherWidget(ButtonWidget):
 
         popup = PopOverWindow(
             parent=self.bar,
-            name="popup",
+            name="date-menu-popover",
             child=(WeatherMenu(data=res)),
             visible=False,
             all_visible=False,

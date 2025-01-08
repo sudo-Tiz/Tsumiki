@@ -1,4 +1,4 @@
-from fabric.utils import exec_shell_command, exec_shell_command_async, invoke_repeater
+from fabric.utils import exec_shell_command_async, invoke_repeater
 
 import utils.functions as helpers
 from shared.widget_container import ButtonWidget
@@ -42,7 +42,9 @@ class CommandSwitcher(ButtonWidget):
 
     def toggle(self, *_):
         if helpers.is_app_running(self.command_without_args):
-            exec_shell_command(f"pkill {self.command_without_args}")
+            exec_shell_command_async(
+                f"pkill {self.command_without_args}", lambda *_: None
+            )
         else:
             exec_shell_command_async(f"bash -c '{self.command}&'", lambda *_: None)
         return self.update()

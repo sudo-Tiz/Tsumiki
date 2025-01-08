@@ -1,13 +1,16 @@
 {
+  "$schema": "https://raw.githubusercontent.com/rubiin/HyDePanel/refs/heads/master/hydepanel.schema.json",
   "theme": {
     "name": "catpuccin-mocha"
+  },
+  "options": {
+    "screen_corners": false,
+    "check_updates": false
   },
   "layout": {
     "left_section": ["workspaces", "window_title"],
     "middle_section": ["date_time"],
     "right_section": [
-      "recorder",
-      "hypr_sunset",
       "updates",
       "bluetooth",
       "volume",
@@ -90,16 +93,17 @@
     "tooltip": true
   },
   "task_bar": {
-    "icon_size": 14
+    "icon_size": 22
   },
   "language": {
     "length": 2
   },
   "mpris": {
-    "length": 20
+    "length": 20,
+    "format": "{artist} - {title}"
   },
   "system_tray": {
-    "icon_size": 20,
+    "icon_size": 16,
     "ignore": []
   },
   "bluetooth": {
@@ -133,14 +137,14 @@
     "format": "%b %d %H:%M"
   },
   "notification": {
-    "ignored": ["t2"],
+    "ignored": [],
     "anchor": "top right",
-    "timeout": 5000
+    "timeout": 5000,
+    "count": 100
   },
   "recorder": {
-    "photos": "Pictures/Screenshots",
-    "videos": "Videos/Screencasting",
+    "path": "Videos/Screencasting",
     "tooltip": true,
-    "icon_size": 14
+    "icon_size": 16
   }
 }

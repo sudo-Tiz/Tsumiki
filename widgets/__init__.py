@@ -21,4 +21,4 @@ from .updates import *
 from .volume import *
 from .weather import *
 from .windowtitle import *
-from .workspace import *
+from .workspaces import *

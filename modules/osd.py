@@ -11,7 +11,8 @@ from gi.repository import GObject
 
 import utils.functions as helpers
 import utils.icons as icons
-from services import audio_service, brightness_service
+from services import audio_service
+from services.brightness import Brightness
 from utils.monitors import HyprlandWithMonitors
 from utils.widget_config import BarConfig
 
@@ -21,7 +22,7 @@ class BrightnessOSDContainer(Box):
 
     def __init__(self, **kwargs):
         super().__init__(orientation="h", spacing=12, name="osd-container", **kwargs)
-        self.brightness_service = brightness_service
+        self.brightness_service = Brightness().get_initial()
         self.level = Label(name="osd-level")
         self.icon = Image(icon_name=icons.icons["brightness"]["screen"], icon_size=28)
         self.scale = helpers.create_scale()
@@ -118,12 +119,14 @@ class OSDContainer(Window):
     def __init__(
         self,
         widget_config: BarConfig,
-        transition_duration=100,
+        transition_duration=200,
         keyboard_mode: Literal["none", "exclusive", "on-demand"] = "on-demand",
         **kwargs,
     ):
         self.audio_container = AudioOSDContainer()
         self.brightness_container = BrightnessOSDContainer()
+
+        self.hyprland_monitor = HyprlandWithMonitors()
 
         self.config = widget_config["osd"]
 
@@ -151,6 +154,8 @@ class OSDContainer(Window):
             keyboard_mode=keyboard_mode,
             **kwargs,
         )
+
+        self.monitor = self.hyprland_monitor.get_current_gdk_monitor_id()
 
         self.last_activity_time = time.time()
 

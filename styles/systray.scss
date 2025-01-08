@@ -2,10 +2,9 @@
 @use "variable.scss";
 
 /* system tray widget*/
-/* TODO: see other traybar styles from kde,gnome  */
-
 #system-tray {
   padding: 0.125em 0.25em;
+  color: theme.$text-main;
 
   & > button {
     margin: 0 0.1em;
@@ -17,7 +16,6 @@
 
     &:active {
       background-color: theme.$text-main;
-      color: theme.$background-dark;
     }
   }
 }

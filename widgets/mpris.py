@@ -27,9 +27,11 @@ class Mpris(EventBox):
         )
         self.config = widget_config["mpris"]
 
+        self.player = None
+
         self.label = Label(label="Nothing playing", style_classes="panel-text")
         self.text_icon = Label(
-            label=common_text_icons["playing"], style="padding: 0 5px;"
+            label=common_text_icons["playing"],
         )
 
         # Services
@@ -46,16 +48,18 @@ class Mpris(EventBox):
         self.revealer = Revealer(
             name="mpris-revealer",
             transition_type="slide-right",
-            transition_duration=300,
+            transition_duration=400,
             child=self.label,
             reveal_child=False,
         )
 
         self.revealer.set_reveal_child(True)
 
+        self.cover = Box(style_classes="cover")
+
         self.box = Box(
             style_classes="panel-box",
-            children=[self.text_icon, self.revealer],
+            children=[self.text_icon],
         )
 
         self.children = self.box
@@ -69,16 +73,22 @@ class Mpris(EventBox):
         )
 
     def get_current(self, *_):
-        # Get the current player info and status
-        metadata = self.player.metadata
-
-        bar_label = metadata["xesam:title"]
+        bar_label = self.player.title
 
         trucated_info = (
             bar_label if len(bar_label) < self.config["length"] else bar_label[:30]
         )
 
         self.label.set_label(trucated_info)
+
+        art_url = self.player.metadata["mpris:artUrl"]
+
+        if art_url == "" or art_url is None:
+            art_url = "https://ladydanville.wordpress.com/wp-content/uploads/2012/03/blankart.png?w=297&h=278"
+
+        self.cover.set_style(
+            "background-image: url('" + art_url + "');background-size: cover;"
+        )
 
         if self.config["tooltip"]:
             self.set_tooltip_text(bar_label)
@@ -88,10 +98,18 @@ class Mpris(EventBox):
 
         status = self.player.playback_status.lower()
         if status == "playing":
+            self.box.children = [self.cover, self.text_icon, self.revealer]
+            self.revealer.set_reveal_child(True)
             self.text_icon.set_label(common_text_icons["paused"])
         elif status == "paused":
+            self.box.children = [self.cover, self.text_icon, self.revealer]
+            self.revealer.set_reveal_child(True)
             self.text_icon.set_label(common_text_icons["playing"])
+        else:
+            self.box.children = [self.text_icon]
+            self.revealer.set_reveal_child(False)
 
     def play_pause(self, *_):
         # Toggle play/pause using playerctl
-        self.player.play_pause()
+        if self.player is not None:
+            self.player.play_pause()

@@ -1,4 +1,3 @@
-import time
 from typing import Literal
 
 from fabric.notifications import (
@@ -6,20 +5,19 @@ from fabric.notifications import (
     NotificationAction,
     NotificationCloseReason,
 )
-from fabric.utils import invoke_repeater
+from fabric.utils import bulk_connect
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
-from fabric.widgets.overlay import Overlay
 from fabric.widgets.revealer import Revealer
-from gi.repository import GdkPixbuf, GLib, GObject
+from gi.repository import Gdk, GdkPixbuf, GLib
 
 import utils.config as config
 import utils.functions as helpers
 import utils.icons as icons
-from shared import AnimatedCircularProgressBar, CustomImage
+from shared import CustomImage
 from utils.widget_config import widget_config
 
 
@@ -34,16 +32,13 @@ class NotificationWidget(EventBox):
     ):
         super().__init__(
             size=(config.NOTIFICATION_WIDTH, -1),
+            name="notification-eventbox",
             **kwargs,
         )
 
         self._notification = notification
-        self._timer = None
-        self.anim_parts = 20
-        self.anim_interval = self.get_timeout() / self.anim_parts
-        self.timeout_in_sec = self.get_timeout() / 1000
 
-        self.time = GLib.DateTime.new_from_unix_local(time.time()).format("%m/%d")
+        self._timeout_id = None
 
         self.notification_box = Box(
             spacing=8,
@@ -51,26 +46,26 @@ class NotificationWidget(EventBox):
             orientation="v",
         )
 
-        self.connect("button-press-event", self.on_button_press)
+        if notification.urgency == 2:
+            self.notification_box.add_style_class("critical")
+
+        bulk_connect(
+            self,
+            {
+                "button-press-event": self.on_button_press,
+                "enter-notify-event": lambda *_: self.on_hover(),
+                "leave-notify-event": lambda *_: self.on_unhover(),
+            },
+        )
 
         header_container = Box(
             spacing=8, orientation="h", style_classes="notification-header"
         )
 
-        self.progress_timeout = AnimatedCircularProgressBar(
-            name="notification-circular-progress-bar",
-            size=30,
-            min_value=0,
-            max_value=1,
-            radius_color=True,
-            value=0,
-            visible=type == "popup",
-        )
-
         header_container.children = (
             self.get_icon(notification.app_icon, 25),
             Label(
-                markup=GLib.markup_escape_text(
+                markup=self.escape_markup(
                     str(
                         self._notification.summary
                         if self._notification.summary
@@ -87,20 +82,17 @@ class NotificationWidget(EventBox):
             Box(
                 v_align="start",
                 children=(
-                    Overlay(
-                        child=self.progress_timeout,
-                        overlays=Button(
-                            image=Image(
-                                icon_name=helpers.check_icon_exists(
-                                    "close-symbolic",
-                                    icons.icons["ui"]["close"],
-                                ),
-                                icon_size=16,
+                    Button(
+                        image=Image(
+                            icon_name=helpers.check_icon_exists(
+                                "close-symbolic",
+                                icons.icons["ui"]["close"],
                             ),
-                            style_classes="close-button",
-                            on_clicked=lambda *_: self._notification.close(
-                                "dismissed-by-user"
-                            ),
+                            icon_size=16,
+                        ),
+                        style_classes="close-button",
+                        on_clicked=lambda *_: self._notification.close(
+                            "dismissed-by-user"
                         ),
                     ),
                 ),
@@ -133,7 +125,7 @@ class NotificationWidget(EventBox):
 
         body_container.add(
             Label(
-                markup=GLib.markup_escape_text(self._notification.body),
+                markup=self.escape_markup(self._notification.body),
                 line_wrap="word-char",
                 ellipsization="end",
                 v_align="start",
@@ -170,50 +162,44 @@ class NotificationWidget(EventBox):
                 parent.remove(self) if (parent := self.get_parent()) else None,  # type: ignore
                 self.destroy(),
             ),
-            type == "popup"
-            and invoke_repeater(
-                self.get_timeout(),
-                lambda: self._notification.close("expired"),
-                initial_call=False,
-            ),
         )
 
-        type == "popup" and self.start_timer()
+        (type == "popup" and self.start_timeout())
 
-    def start_timer(self):
-        self._timer = GObject.timeout_add(200, self.update_progress)
+    def start_timeout(self):
+        self.stop_timeout()
+        self._timeout_id = GLib.timeout_add(self.get_timeout(), self.close_notification)
 
-    def update_progress(self):
-        self.progress_timeout.animate_value(
-            self.progress_timeout.value + 1 / self.anim_parts
-        )
-        if self.progress_timeout.value >= self.timeout_in_sec:
-            self.progress_timeout.value = self.timeout_in_sec
-            self.stop_timer()
-        return True  # Continue the timer
+    def stop_timeout(self):
+        if self._timeout_id is not None:
+            GLib.source_remove(self._timeout_id)
+            self._timeout_id = None
 
-    def stop_timer(self):
-        if self._timer:
-            GObject.source_remove(self._timer)
-            self._timer = None
+    def escape_markup(self, text):
+        return GLib.markup_escape_text(text).replace("\n", " ")
+
+    def close_notification(self):
+        self._notification.close("expired")
+        self.stop_timeout()
+        return False
 
     def get_icon(self, app_icon, size) -> Image:
         match app_icon:
             case str(x) if "file://" in x:
                 return Image(
-                    name="notification-icon",
+                    name="app-icon",
                     image_file=app_icon[7:],
                     size=size,
                 )
             case str(x) if len(x) > 0 and x[0] == "/":
                 return Image(
-                    name="notification-icon",
+                    name="app-icon",
                     image_file=app_icon,
                     size=size,
                 )
             case _:
                 return Image(
-                    name="notification-icon",
+                    name="app-icon",
                     icon_name=app_icon
                     if app_icon
                     else icons.icons["fallback"]["notification"],
@@ -230,6 +216,27 @@ class NotificationWidget(EventBox):
             if self._notification.timeout != -1
             else widget_config["notification"]["timeout"]
         )
+
+    def pause_timeout(self):
+        self.stop_timeout()
+
+    def resume_timeout(self):
+        self.start_timeout()
+
+    def on_hover(self):
+        self.pause_timeout()
+        self.set_pointer_cursor(self, "hand2")
+
+    def on_unhover(self):
+        self.resume_timeout()
+        self.set_pointer_cursor(self, "arrow")
+
+    @staticmethod
+    def set_pointer_cursor(widget, cursor_name):
+        window = widget.get_window()
+        if window:
+            cursor = Gdk.Cursor.new_from_name(widget.get_display(), cursor_name)
+            window.set_cursor(cursor)
 
 
 class NotificationRevealer(Revealer):

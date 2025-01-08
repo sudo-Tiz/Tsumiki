@@ -175,6 +175,8 @@ pyrightconfig.json
 
 theme.scss
 
-config.json
+todo.md
+
+config.json.bak
 
 # End of https://www.toptal.com/developers/gitignore/api/python
