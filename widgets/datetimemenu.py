@@ -19,6 +19,7 @@ from shared.widget_container import BoxWidget
 from utils.functions import uptime
 from utils.icons import icons
 from utils.widget_config import BarConfig
+from widgets.player import Player
 
 gi.require_version("Gtk", "3.0")
 
@@ -174,10 +175,15 @@ class DateTimeWidget(BoxWidget):
 
         date_menu = DateNotificationMenu()
 
+        player = Box(
+            style_classes="widget-mpris",
+            children=Player(),
+        )
+
         popup = PopOverWindow(
             parent=bar,
             name="date-menu-popover",
-            child=date_menu,
+            child=player,
             visible=False,
             all_visible=False,
         )

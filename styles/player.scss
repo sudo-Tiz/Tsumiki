@@ -1,55 +1,50 @@
 @use "theme.scss";
+@use "variable.scss";
 
+$mpris-album-art-overlay : rgba(0, 0, 0, 0.55);
+$mpris-button-hover : rgba(0, 0, 0, 0.50);
 
-$fg-color: theme.$text-main;
-$bg-color: theme.$background-color;
+$mpris-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
 
-.player {
-    padding: 10px;
-    min-width: 350px;
-}
+.widget-mpris {
+    min-width: 10em;
+  /* The parent to all players */
+  .widget-player {
+    padding: 8px;
+    padding: 16px;
+    margin: 16px 20px;
+    background-color: $mpris-album-art-overlay;
+    border-radius: variable.$radius;
+    box-shadow: $mpris-shadow;
 
-.player .img {
-    min-width: 100px;
-    min-height: 100px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 13px;
-    margin-right: 1em;
-}
+    button:hover {
 
-.player .title {
-    font-size: 1.2em;
-}
+      background: theme.$background;
+    }
 
-.player .artist {
-    font-size: 1.1em;
-    color: $fg-color;
-}
+    .widget-player-album-art {
+      border-radius: variable.$radius;
+      box-shadow: $mpris-shadow;
+    }
+    .widget-player-title {
+      font-weight: bold;
+      font-size: 1.25rem;
+    }
+    .widget-player-subtitle {
+      font-size: 1.1rem;
+    }
 
-.player scale.position {
-    padding: 0;
-    margin-bottom: .3em;
-}
+    & > box > button {
+      &:hover {
+        background-color: $mpris-button-hover;
+      }
+    }
+  }
 
-.player scale.position trough {
-    min-height: 8px;
-}
-
-.player scale.position highlight {
-    background-color: $bg-color;
-}
-
-.player scale.position slider {
-    all: unset;
-}
-
-.player button {
-    min-height: 1em;
-    min-width: 1em;
-    padding: .3em;
-}
-
-.player button.play-pause {
-    margin: 0 .3em;
+  & > box > button {
+    /* Change player side buttons */
+  }
+  & > box > button:disabled {
+    /* Change player side buttons insensitive */
+  }
 }
