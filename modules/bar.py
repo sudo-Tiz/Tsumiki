@@ -99,7 +99,9 @@ class StatusBar(WaylandWindow):
             **kwargs,
         )
         invoke_repeater(
-            convert_seconds_to_miliseconds(3600), self.check_for_bar_updates, initial_call=True
+            convert_seconds_to_miliseconds(3600),
+            self.check_for_bar_updates,
+            initial_call=True,
         )
 
     def make_layout(self):

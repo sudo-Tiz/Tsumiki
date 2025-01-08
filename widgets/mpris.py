@@ -86,7 +86,9 @@ class Mpris(EventBox):
         if art_url == "" or art_url is None:
             art_url = "https://ladydanville.wordpress.com/wp-content/uploads/2012/03/blankart.png?w=297&h=278"
 
-        self.cover.set_style("background-image: url('" + art_url + "')")
+        self.cover.set_style(
+            "background-image: url('" + art_url + "'); background-repeat: no-repeat;"
+        )
 
         if self.config["tooltip"]:
             self.set_tooltip_text(bar_label)
