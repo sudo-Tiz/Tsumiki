@@ -1,7 +1,7 @@
+from fabric.utils import exec_shell_command_async, get_relative_path, invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow
-from fabric.utils import exec_shell_command_async, get_relative_path, invoke_repeater
 
 from utils.functions import convert_seconds_to_miliseconds
 from utils.widget_config import widget_config
