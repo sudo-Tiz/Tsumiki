@@ -1,4 +1,0 @@
--[] remove action and settings in browser
--[] Add a way to set revealer and outside click to close the popover
--[] Allow raising value above 100%
--[] Replace with actual image
