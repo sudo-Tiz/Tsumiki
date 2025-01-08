@@ -1,9 +1,9 @@
 [project]
 name = "HyDEPanel"
-dynamic = ["version"]
+version = "0.10.0"
 description = "A semi-customizable bar written using the Fabric Widget System"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.12"
 authors = [
     { name = "Rubin Bhandari", email = "roobin.bhandari@gmail.com" },
 ]

@@ -20,7 +20,7 @@ Many aspects of the bar including the look and functionalities are inspired from
 ## Prerequisites
 
 - [JetBrains Nerd Font](https://www.nerdfonts.com)
-- [python 3+](https://www.python.org/downloads/)
+- [python 3.12+](https://www.python.org/downloads/)
 
 ---
 
