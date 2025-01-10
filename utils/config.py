@@ -15,6 +15,151 @@ APP_CACHE_DIRECTORY = f"{SYSTEM_CACHE_DIR}/{APPLICATION_NAME}"
 NOTIFICATION_CACHE_FILE = f"{APP_CACHE_DIRECTORY}/notifications.json"
 WEATHER_CACHE_FILE = f"{APP_CACHE_DIRECTORY}/weather.json"
 
+
+# Default configuration values
+DEFAULT_CONFIG = {
+    "$schema": "https://raw.githubusercontent.com/rubiin/HyDePanel/refs/heads/master/hydepanel.schema.json",
+    "theme": {
+        "name": "catpuccin-mocha",
+    },
+    "options": {"screen_corners": False, "check_updates": False},
+    "layout": {
+        "left_section": ["workspaces", "window_title"],
+        "middle_section": ["date_time"],
+        "right_section": [
+            "updates",
+            "battery",
+            "bluetooth",
+            "system_tray",
+            "power",
+        ],
+    },
+    "hypr_sunset": {
+        "temperature": "2800k",
+        "enabled_icon": "󱩌",
+        "disabled_icon": "󰛨",
+        "icon_size": "12px",
+        "interval": 2000,
+        "label": True,
+        "tooltip": True,
+    },
+    "hypr_idle": {
+        "enabled_icon": "",
+        "disabled_icon": "",
+        "icon_size": "12px",
+        "interval": 2000,
+        "label": True,
+        "tooltip": True,
+    },
+    "battery": {
+        "label": True,
+        "tooltip": True,
+        "hide_label_when_full": True,
+    },
+    "date_time": {
+        "format": "%b %d %H:%M",
+    },
+    "cpu": {
+        "icon": "",
+        "icon_size": "12px",
+        "label": True,
+        "tooltip": True,
+    },
+    "memory": {
+        "icon": "",
+        "icon_size": "12px",
+        "label": True,
+        "tooltip": True,
+    },
+    "storage": {
+        "icon": "󰋊",
+        "icon_size": "14px",
+        "label": True,
+        "tooltip": True,
+    },
+    "workspaces": {
+        "count": 8,
+        "hide_unoccupied": True,
+        "ignored": [],
+        "reverse_scroll": False,
+        "empty_scroll": False,
+        "icon_map": {},
+    },
+    "window_title": {
+        "enable_icon": True,
+        "truncation": True,
+        "truncation_size": 50,
+        "title_map": [],
+    },
+    "updates": {
+        "os": "arch",
+        "icon": "󱧘",
+        "icon_size": "14px",
+        "interval": HIGH_POLL_INTERVAL,
+        "tooltip": True,
+        "label": True,
+    },
+    "keyboard": {
+        "icon": "󰌌",
+        "icon_size": "14px",
+        "label": True,
+        "tooltip": True,
+    },
+    "bluetooth": {
+        "icon_size": 14,
+        "label": True,
+        "tooltip": True,
+    },
+    "weather": {
+        "detect_location": True,
+        "location": "kathmandu",
+        "label": True,
+        "tooltip": True,
+        "interval": HIGH_POLL_INTERVAL,
+    },
+    "volume": {
+        "icon_size": "14px",
+        "label": True,
+        "tooltip": True,
+        "step_size": 5,
+    },
+    "brightness": {
+        "icon_size": "14px",
+        "label": True,
+        "tooltip": True,
+        "step_size": 5,
+    },
+    "mpris": {
+        "length": 30,
+        "tooltip": True,
+    },
+    "language": {"length": 3},
+    "task_bar": {"icon_size": 22},
+    "system_tray": {"icon_size": 16, "ignore": []},
+    "power": {"icon": "󰐥", "icon_size": "18px", "tooltip": True},
+    "theme_switcher": {
+        "icon": "",
+        "icon_size": "14px",
+        "silent": True,  # Whether to show a notification when the theme is changed
+    },
+    "notification": {
+        "ignored": ["t2"],
+        "timeout": 5000,
+        "anchor": "top right",
+    },
+    "osd": {
+        "enabled": True,
+        "timeout": 1500,
+        "anchor": "bottom center",
+    },
+    "recorder": {
+        "path": "Videos/Screencasting",
+        "icon_size": 16,
+        "tooltip": True,
+    },
+}
+
+
 # sourced from hyprpanel
 KBLAYOUT_MAP = {
     "Abkhazian (Russia)": "RU (Ab)",
