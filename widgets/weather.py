@@ -13,7 +13,7 @@ from gi.repository import Gtk
 from services import weather_service
 from shared import LottieAnimation, LottieAnimationWidget, PopOverWindow
 from shared.widget_container import ButtonWidget
-from utils.functions import convert_seconds_to_miliseconds, text_icon
+from utils.functions import convert_seconds_to_milliseconds, text_icon
 from utils.icons import weather_text_icons, weather_text_icons_v2
 from utils.widget_config import BarConfig
 
@@ -139,7 +139,7 @@ class WeatherMenu(Box):
         )
 
         invoke_repeater(
-            convert_seconds_to_miliseconds(3600),
+            convert_seconds_to_milliseconds(3600),
             self.update_widget,
             initial_call=True,
         )

@@ -694,5 +694,5 @@ WINDOW_TITLE_MAP = [
     # Desktop
     ["^$", "󰇄", "Desktop"],
     #    # Fallback icon
-    ["(.+)", "󰣆", "Deafult"],
+    ["(.+)", "󰣆", "Default"],
 ]

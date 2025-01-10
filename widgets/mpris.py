@@ -75,11 +75,11 @@ class Mpris(EventBox):
     def get_current(self, *_):
         bar_label = self.player.title
 
-        trucated_info = (
+        truncated_info = (
             bar_label if len(bar_label) < self.config["length"] else bar_label[:30]
         )
 
-        self.label.set_label(trucated_info)
+        self.label.set_label(truncated_info)
 
         art_url = self.player.metadata["mpris:artUrl"]
 

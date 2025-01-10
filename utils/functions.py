@@ -144,8 +144,8 @@ def uptime():
     return f"{int(hours):02}:{int(minutes):02}"
 
 
-# Function to convert seconds to miliseconds
-def convert_seconds_to_miliseconds(seconds: int):
+# Function to convert seconds to milliseconds
+def convert_seconds_to_milliseconds(seconds: int):
     return seconds * 1000
 
 

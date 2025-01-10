@@ -3,7 +3,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow
 
-from utils.functions import convert_seconds_to_miliseconds
+from utils.functions import convert_seconds_to_milliseconds
 from utils.widget_config import widget_config
 from widgets import (
     Battery,
@@ -101,7 +101,7 @@ class StatusBar(WaylandWindow):
 
         if widget_config["options"]["check_updates"]:
             invoke_repeater(
-                convert_seconds_to_miliseconds(3600),
+                convert_seconds_to_milliseconds(3600),
                 self.check_for_bar_updates,
                 initial_call=True,
             )

@@ -3,7 +3,7 @@
 @use "common/mixins.scss";
 @use "variable.scss";
 
-$hover-tranistion: background 0.15s ease-in-out;
+$hover-tranisition: background 0.15s ease-in-out;
 
 /* notification widget*/
 
@@ -64,7 +64,7 @@ $hover-tranistion: background 0.15s ease-in-out;
       box-shadow: none;
       border: none;
       background: color.mix(theme.$text-main, transparent, 20%);
-      transition: $hover-tranistion;
+      transition: $hover-tranisition;
     }
   }
 
@@ -76,7 +76,7 @@ $hover-tranistion: background 0.15s ease-in-out;
       border-radius: 3rem;
       box-shadow: none;
       background: transparent;
-      transition: $hover-tranistion;
+      transition: $hover-tranisition;
 
       &.start-action {
         margin-left: 0;

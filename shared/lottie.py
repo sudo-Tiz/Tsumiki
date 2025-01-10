@@ -92,7 +92,7 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
     def draw(self, _: Gtk.DrawingArea, ctx: cairo.Context):
         if self.lottie_animation.async_buffer_c is not None:
             image_surface = cairo.ImageSurface.create_for_data(
-                # Using this becuase the actual buffer is read only
+                # Using this because the actual buffer is read only
                 self.lottie_animation.async_buffer_c,
                 cairo.FORMAT_ARGB32,
                 self.width,

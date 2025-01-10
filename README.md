@@ -32,7 +32,7 @@ Many aspects of the bar including the look and functionalities are inspired from
 Most of these are already installed on existing working machines
 
 ```sh
-# newtwork
+# network
 networkmanager
 
 pipewire

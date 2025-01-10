@@ -110,7 +110,7 @@ class DateNotificationMenu(Box):
         )
 
         # Notification body column
-        notification_colum = Box(
+        notification_column = Box(
             name="notification-column",
             orientation="v",
             children=(
@@ -149,16 +149,16 @@ class DateNotificationMenu(Box):
         )
 
         self.children = (
-            notification_colum,
+            notification_column,
             Gtk.Separator(
                 visible=True,
             ),
             date_column,
         )
 
-        invoke_repeater(1000, self.update_lables, initial_call=True)
+        invoke_repeater(1000, self.update_labels, initial_call=True)
 
-    def update_lables(self):
+    def update_labels(self):
         self.clock_label.set_text(time.strftime("%H:%M"))
         self.uptime.set_text(uptime())
         return True
