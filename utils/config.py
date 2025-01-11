@@ -135,7 +135,7 @@ DEFAULT_CONFIG = {
     },
     "language": {"length": 3},
     "task_bar": {"icon_size": 22},
-    "system_tray": {"icon_size": 16, "ignore": []},
+    "system_tray": {"icon_size": 16, "ignored": []},
     "power": {"icon": "󰐥", "icon_size": "18px", "tooltip": True},
     "theme_switcher": {
         "icon": "",
@@ -143,7 +143,7 @@ DEFAULT_CONFIG = {
         "silent": True,  # Whether to show a notification when the theme is changed
     },
     "notification": {
-        "ignored": ["t2"],
+        "ignored": [],
         "timeout": 5000,
         "anchor": "top right",
     },

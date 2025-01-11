@@ -31,7 +31,7 @@ HyprSunset = TypedDict(
 TaskBar = TypedDict("TaskBar", {"icon_size": int})
 
 # SystemTray configuration
-SystemTray = TypedDict("SystemTray", {"icon_size": int, "ignore": List[str]})
+SystemTray = TypedDict("SystemTray", {"icon_size": int, "ignored": List[str]})
 
 # HyprIdle configuration
 HyprIdle = TypedDict(

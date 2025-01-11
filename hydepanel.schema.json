@@ -286,7 +286,7 @@
         "icon_size": {
           "type": "integer"
         },
-        "ignore": {
+        "ignored": {
           "type": "array",
           "items": {
             "type": "string"

@@ -25,8 +25,8 @@ class SystemTray(BoxWidget):
         item = self.watcher.get_item_for_identifier(identifier)
 
         if (
-            self.config["ignore"]
-            and item.get_property("title") in self.config["ignore"]
+            self.config["ignored"]
+            and item.get_property("title") in self.config["ignored"]
         ):
             return
 
