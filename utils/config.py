@@ -750,7 +750,6 @@ KBLAYOUT_MAP = {
 
 WINDOW_TITLE_MAP = [
     # Original Entries
-    ["kitty", "󰄛", "Kitty Terminal"],
     ["firefox", "󰈹", "Firefox"],
     ["microsoft-edge", "󰇩", "Edge"],
     ["discord", "", "Discord"],
@@ -768,11 +767,13 @@ WINDOW_TITLE_MAP = [
     ["opera", "", "Opera"],
     ["vivaldi", "󰖟", "Vivaldi"],
     ["waterfox", "󰖟", "Waterfox"],
-    ["thorium", "󰖟", "Waterfox"],
+    ["zen", "󰖟", "Zen Browser"],
+    ["thorium", "󰖟", "Thorium"],
     ["tor-browser", "", "Tor Browser"],
     ["floorp", "󰈹", "Floorp"],
     # Terminals
     ["gnome-terminal", "", "GNOME Terminal"],
+    ["kitty", "󰄛", "Kitty Terminal"],
     ["konsole", "", "Konsole"],
     ["alacritty", "", "Alacritty"],
     ["wezterm", "", "Wezterm"],
@@ -781,6 +782,7 @@ WINDOW_TITLE_MAP = [
     ["xterm", "", "XTerm"],
     ["urxvt", "", "URxvt"],
     ["st", "", "st Terminal"],
+    ["com.mitchellh.ghostty", "󰊠", "Ghostty"],
     # Development Tools
     ["code", "󰨞", "Visual Studio Code"],
     ["vscode", "󰨞", "VS Code"],
