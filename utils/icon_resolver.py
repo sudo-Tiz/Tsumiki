@@ -42,7 +42,7 @@ class IconResolver:
     def _store_new_icon(self, app_id: str, icon: str):
         self._icon_dict[app_id] = icon
         with open(ICON_CACHE_FILE, "w") as f:
-            json.dump(self._icon_dict, f)
+            json.dump(self._icon_dict, f, indent=4, ensure_ascii=False)
             f.close()
 
     def _get_icon_from_desktop_file(self, desktop_file_path: str):

@@ -15,10 +15,10 @@ from fabric.widgets.scale import ScaleMark
 from gi.repository import GLib, Gtk
 from loguru import logger
 
-from utils.config import DEFAULT_CONFIG
 import utils.icons as icons
 from shared.animated.scale import AnimatedScale
 from utils.colors import Colors
+from utils.config import DEFAULT_CONFIG
 
 gi.require_version("Gtk", "3.0")
 
@@ -77,7 +77,7 @@ def read_config():
     config_file = get_relative_path("../config.json")
     if not os.path.exists(config_file):
         with open(config_file, "w") as destination_file:
-            json.dump(DEFAULT_CONFIG, destination_file, indent=4)
+            json.dump(DEFAULT_CONFIG, destination_file, indent=4, ensure_ascii=False)
         return DEFAULT_CONFIG
 
     with open(config_file) as file:

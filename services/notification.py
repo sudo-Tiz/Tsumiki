@@ -82,7 +82,7 @@ class NotificationCacheService(Service):
 
         # Write the updated data back to the cache file
         with open(NOTIFICATION_CACHE_FILE, "w") as f:
-            json.dump(existing_data, f, indent=2)
+            json.dump(existing_data, f, indent=4, ensure_ascii=False)
 
         logger.info(f"{Colors.INFO}[Notification] Notification cached successfully.")
 
@@ -93,6 +93,6 @@ class NotificationCacheService(Service):
 
         # Write the updated data back to the cache file
         with open(NOTIFICATION_CACHE_FILE, "w") as f:
-            json.dump([], f, indent=2)
+            json.dump([], f, indent=4, ensure_ascii=False)
 
         logger.info(f"{Colors.INFO}[Notification] Notifications cleared successfully.")
