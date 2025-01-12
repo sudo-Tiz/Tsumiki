@@ -17,7 +17,7 @@ class LanguageWidget(BoxWidget):
             formatter=FormattedString(
                 "{truncate(language,length,suffix)}",
                 truncate=truncate,
-                length=self.config["length"],
+                length=self.config["truncation_size"],
                 suffix="",
             ),
         )

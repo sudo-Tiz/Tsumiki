@@ -130,10 +130,10 @@ DEFAULT_CONFIG = {
         "step_size": 5,
     },
     "mpris": {
-        "length": 30,
+        "truncation_size": 30,
         "tooltip": True,
     },
-    "language": {"length": 3},
+    "language": {"truncation_size": 3},
     "task_bar": {"icon_size": 22},
     "system_tray": {"icon_size": 16, "ignored": []},
     "power": {"icon": "󰐥", "icon_size": "18px", "tooltip": True},

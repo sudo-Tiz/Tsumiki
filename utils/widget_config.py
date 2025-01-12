@@ -59,7 +59,7 @@ Options = TypedDict("Options", {"screen_corners": bool, "check_updates": bool})
 Cpu = TypedDict("Cpu", {**BaseConfig.__annotations__, "icon": str})
 
 # Mpris configuration
-Mpris = TypedDict("Mpris", {**BaseConfig.__annotations__, "length": int})
+Mpris = TypedDict("Mpris", {**BaseConfig.__annotations__, "truncation_size": int})
 
 # Memory configuration
 Memory = TypedDict("Memory", {**BaseConfig.__annotations__, "icon": str})
@@ -77,7 +77,6 @@ Workspaces = TypedDict(
 WindowTitle = TypedDict(
     "WindowTitle",
     {
-        "length": int,
         "enable_icon": bool,
         "truncation": bool,
         "truncation_size": int,
@@ -113,7 +112,7 @@ DateTimeMenu = TypedDict("DateTimeMenu", {"format": str})
 ThemeSwitcher = TypedDict("ThemeSwitcher", {**BaseConfig.__annotations__, "icon": str})
 
 # Language configuration
-Language = TypedDict("Language", {"length": int})
+Language = TypedDict("Language", {"truncation_size": int})
 
 # Volume configuration
 Volume = TypedDict("Volume", {**BaseConfig.__annotations__, "step_size": int})

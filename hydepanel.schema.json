@@ -264,7 +264,7 @@
     "language": {
       "type": "object",
       "properties": {
-        "length": {
+        "truncation_size": {
           "type": "integer"
         }
       }
@@ -272,7 +272,7 @@
     "mpris": {
       "type": "object",
       "properties": {
-        "length": {
+        "truncation_size": {
           "type": "integer"
         },
         "format": {

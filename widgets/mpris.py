@@ -76,7 +76,9 @@ class Mpris(EventBox):
         bar_label = self.player.title
 
         truncated_info = (
-            bar_label if len(bar_label) < self.config["length"] else bar_label[:30]
+            bar_label
+            if len(bar_label) < self.config["truncation_size"]
+            else bar_label[:30]
         )
 
         self.label.set_label(truncated_info)
