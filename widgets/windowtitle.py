@@ -21,7 +21,7 @@ class WindowTitleWidget(BoxWidget):
         self.window = ActiveWindow(
             name="window",
             formatter=FormattedString(
-                "{ '󰇄 Desktop' if not win_title else get_title(win_title, win_class)}",
+                "{ get_title(win_title, win_class) }",
                 get_title=self.get_title,
             ),
         )
@@ -44,10 +44,14 @@ class WindowTitleWidget(BoxWidget):
             (wt for wt in merged_titles if re.search(wt[0], win_class.lower())),
             None,
         )
+
+        # If no matching window class is found, return the window title
+        if matched_window is None:
+            return f"󰣆 {win_class.lower()}"
+
         # Return the formatted title with or without the icon
-        if matched_window:
-            return (
-                f"{matched_window[1]} {matched_window[2]}"
-                if self.config["enable_icon"]
-                else f"{matched_window[2]}"
-            )
+        return (
+            f"{matched_window[1]} {matched_window[2]}"
+            if self.config["enable_icon"]
+            else f"{matched_window[2]}"
+        )

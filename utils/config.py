@@ -840,6 +840,4 @@ WINDOW_TITLE_MAP = [
     ["dropbox", "󰇣", "Dropbox"],
     # Desktop
     ["^$", "󰇄", "Desktop"],
-    #    # Fallback icon
-    ["(.+)", "󰣆", "Default"],
 ]
