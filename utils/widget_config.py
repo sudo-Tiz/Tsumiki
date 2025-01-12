@@ -105,6 +105,9 @@ Weather = TypedDict(
 # Keyboard configuration
 Keyboard = TypedDict("Keyboard", {**BaseConfig.__annotations__, "icon": str})
 
+
+Cava = TypedDict("Cava", {"bars": int})
+
 # DateTimeMenu configuration
 DateTimeMenu = TypedDict("DateTimeMenu", {"format": str})
 
@@ -141,6 +144,7 @@ class BarConfig(TypedDict):
     options: Options
     notification: Notification
     bluetooth: BlueTooth
+    cava: Cava
     cpu: Cpu
     recorder: Recording
     hypr_sunset: HyprSunset
