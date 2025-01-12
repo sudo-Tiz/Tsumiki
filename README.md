@@ -236,6 +236,10 @@ Be sure to kill other notifications daemon that you may be running. You can kill
 
 Kill the app with `pkill hydepanel`. Run `init.sh -start`. This should show some logs. If it shows like `ModuleNotFoundError`, run `pip install -r requirements.txt`. If this does not solve the issue, do report a bug with screenshot of the log.
 
+## Contributing
+
+We welcome all sorts of contributions, no matter how small, to this project! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute.
+
 # ⭐ Hit that Star Button!
 
 Like what you see? Think this project is cooler than your morning coffee? ☕✨
