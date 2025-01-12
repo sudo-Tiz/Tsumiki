@@ -172,6 +172,7 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 - bluetooth
 - brightness
 - clickcounter
+- cava
 - cpu
 - workspaces
 - date_menu
