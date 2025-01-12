@@ -133,6 +133,7 @@ DEFAULT_CONFIG = {
         "truncation_size": 30,
         "tooltip": True,
     },
+    "cava": {},
     "language": {"truncation_size": 3},
     "task_bar": {"icon_size": 22},
     "system_tray": {"icon_size": 16, "ignored": []},

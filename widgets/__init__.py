@@ -2,6 +2,7 @@
 from .battery import *
 from .bluetooth import *
 from .brightness import *
+from .cava import *
 from .clickcounter import *
 from .dashboard import *
 from .datetimemenu import *
