@@ -30,13 +30,18 @@ class BatteryMenu(Box):
 
         self.profiles = power_profile_service.power_profiles
 
+        self.active = power_profile_service.get_current_profile()
+
+        print(self.active)
+
         power_profile = Box(
             orientation="v",
             spacing=10,
             style_classes="power-profile-box",
             children=[
                 Button(
-                    style_classes="power-profile-button",
+                    on_clicked=lambda *_: print(key),
+                    style_classes=f"power-profile-button  {'active' if key == self.active else ''}",
                     child=Box(
                         children=(
                             Image(
@@ -50,7 +55,7 @@ class BatteryMenu(Box):
                         ),
                     ),
                 )
-                for _, profile in self.profiles.items()
+                for key, profile in self.profiles.items()
             ],
         )
 

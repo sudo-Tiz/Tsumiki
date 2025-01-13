@@ -58,11 +58,11 @@ class PowerProfiles(Service):
 
     def get_current_profile(self):
         try:
-            profile = self.iface.Get("net.hadess.PowerProfiles", "ActiveProfile")
-            return self.power_profiles.get(profile, self.power_profiles["balanced"])
+            return self.iface.Get("net.hadess.PowerProfiles", "ActiveProfile")
+
         except dbus.DBusException as e:
             logger.error(f"[PowerProfile] Error retrieving current power profile: {e}")
-            return self.power_profiles["balanced"]
+            return "balanced"
 
     def set_power_profile(self, profile):
         try:
