@@ -34,15 +34,15 @@ if __name__ == "__main__":
     notifications = NotificationPopup(widget_config)
     system_overlay = OSDContainer(widget_config)
 
-    windows = [bar, notifications, system_overlay]
-
     if widget_config["options"]["screen_corners"]:
         corners = ScreenCorners()
 
     # Initialize the application with the status bar
     app = Application(
         APPLICATION_NAME,
-        windows=windows,
+        bar,  # The status bar
+        notifications,  # The notification popup
+        system_overlay,  # The system overlay
     )
 
     setproctitle.setproctitle(APPLICATION_NAME)
