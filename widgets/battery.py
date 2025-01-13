@@ -41,7 +41,7 @@ class BatteryMenu(Box):
                         children=(
                             Image(
                                 icon_name=profile["icon_name"],
-                                icon_size=14,
+                                icon_size=15,
                             ),
                             Label(
                                 label=profile["name"],
@@ -72,7 +72,7 @@ class Battery(EventBox):
             **kwargs,
         )
         self.config = widget_config["battery"]
-        self.full_battery_level = 100
+        self.full_battery_level = self.config["full_battery_level"]
 
         bulk_connect(
             self,

@@ -55,6 +55,7 @@ DEFAULT_CONFIG = {
     "battery": {
         "label": True,
         "tooltip": True,
+        "full_battery_level": 100,
         "hide_label_when_full": True,
     },
     "date_time": {
