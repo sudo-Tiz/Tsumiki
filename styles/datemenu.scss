@@ -1,6 +1,7 @@
 @use "sass:color";
 @use "theme.scss";
 @use "common/mixins.scss";
+@use "common/functions.scss";
 @use "variable.scss";
 
 /************** DATE MENU **************/
@@ -8,7 +9,8 @@
 #datemenu {
   @include mixins.floating-widget;
   @include mixins.spacing;
-  padding: 10px;
+  padding: functions.toEm(10);
+
 
   #notification-column {
     min-width: 350px;

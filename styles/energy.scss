@@ -9,7 +9,8 @@
 #batterymenu {
   @include mixins.floating-widget(10px);
   @include mixins.spacing;
-  padding: 10px;
+  min-width: 12em;
+
 
   .power-profile-box {
     padding-left: functions.toEm(10);
