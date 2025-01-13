@@ -32,8 +32,6 @@ class BatteryMenu(Box):
 
         self.active = power_profile_service.get_current_profile()
 
-        print(self.active)
-
         power_profile = Box(
             orientation="v",
             spacing=10,
