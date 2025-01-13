@@ -30,6 +30,7 @@ DEFAULT_CONFIG = {
             "updates",
             "battery",
             "bluetooth",
+            "volume",
             "system_tray",
             "power",
         ],
