@@ -222,9 +222,7 @@ def create_scale(
     h_align="center",
 ) -> AnimatedScale:
     if marks is None:
-        marks = (
-            ScaleMark(value=i) for i in range(1, 100, 10)
-        )
+        marks = (ScaleMark(value=i) for i in range(1, 100, 10))
 
     return AnimatedScale(
         marks=marks,

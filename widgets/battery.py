@@ -2,10 +2,48 @@ import math
 
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
+from fabric.widgets.centerbox import CenterBox
+from fabric.widgets.box import Box
+from services import power_profile_service
 
+from shared.popover import PopOverWindow
 from shared.widget_container import BoxWidget
 from utils.functions import format_time, psutil_fabricator
 from utils.widget_config import BarConfig
+
+
+class BatteryMenu(Box):
+    """A menu to display the battery status."""
+
+    def __init__(
+        self,
+        **kwargs,
+    ):
+        super().__init__(
+            name="batterymenu",
+            orientation="h",
+            **kwargs,
+        )
+
+        self.profiles = power_profile_service.power_profiles
+
+        power_profile = [
+            Box(
+                children=(
+                    Image(
+                        icon_name=profile["icon_name"],
+                        icon_size=14,
+                    ),
+                    Label(
+                        label=profile["name"],
+                        style_classes="panel-text",
+                    ),
+                ),
+            )
+            for profile in self.profiles
+        ]
+
+        self.children = power_profile
 
 
 class Battery(BoxWidget):
@@ -24,6 +62,16 @@ class Battery(BoxWidget):
         )
         self.config = widget_config["battery"]
         self.full_battery_level = 100
+
+        popup = PopOverWindow(
+            parent=bar,
+            name="battery-menu-popover",
+            child=BatteryMenu(),
+            visible=False,
+            all_visible=False,
+        )
+
+        popup.set_pointing_to(self)
 
         # Set up a repeater to call the update_battery_status method
         psutil_fabricator.connect("changed", self.update_ui)

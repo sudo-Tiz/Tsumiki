@@ -47,10 +47,10 @@ class PowerProfiles(Service):
 
         self.bus = dbus.SystemBus()
 
-        self.power_profiles = self.bus.get_object(self.bus_name, self.object_path)
+        self.power_profiles_obj = self.bus.get_object(self.bus_name, self.object_path)
 
         self.iface = dbus.Interface(
-            self.power_profiles, "org.freedesktop.DBus.Properties"
+            self.power_profiles_obj, "org.freedesktop.DBus.Properties"
         )
 
         # Connect the 'g-properties-changed' signal to the handler

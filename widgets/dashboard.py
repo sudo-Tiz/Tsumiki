@@ -11,32 +11,34 @@ class DashBoardMenu(Box):
     """A menu to display the weather information."""
 
     def __init__(self, **kwargs):
-        super().__init__(name="dashboard-menu", orientation="v", all_visible=True, **kwargs)
+        super().__init__(
+            name="dashboard-menu", orientation="v", all_visible=True, **kwargs
+        )
 
         box1 = CenterBox(
             orientation="v",
             start_children=Box(
                 children=(
                     text_icon(
-                    "󰃠",
-                    props={
-                        "style_classes": "panel-text-icon overlay-icon",
-                    },
-                ),
-                create_scale()
+                        "󰃠",
+                        props={
+                            "style_classes": "panel-text-icon overlay-icon",
+                        },
+                    ),
+                    create_scale(),
                 )
             ),
-             center_children=Box(
+            center_children=Box(
                 children=(
                     text_icon(
-                    "󰃠",
-                    props={
-                        "style_classes": "panel-text-icon overlay-icon",
-                    },
-                ),
-                create_scale()
+                        "󰃠",
+                        props={
+                            "style_classes": "panel-text-icon overlay-icon",
+                        },
+                    ),
+                    create_scale(),
                 )
-            )
+            ),
         )
 
         self.add(box1)
