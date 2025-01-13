@@ -1,5 +1,4 @@
-from fabric.hyprland.widgets import WorkspaceButton
-from fabric.hyprland.widgets import Workspaces
+from fabric.hyprland.widgets import WorkspaceButton, Workspaces
 
 from shared.widget_container import BoxWidget
 from utils.functions import unique_list
