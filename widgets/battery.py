@@ -57,7 +57,16 @@ class BatteryMenu(Box):
             ],
         )
 
-        self.children = CenterBox(start_children=power_profile)
+        self.children = CenterBox(
+            start_children=Box(
+                orientation="v",
+                spacing=10,
+                children=(
+                    Label("Power Profiles", style_classes="power-profile-title"),
+                    power_profile,
+                ),
+            )
+        )
 
 
 class Battery(EventBox):

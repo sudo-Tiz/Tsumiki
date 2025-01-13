@@ -7,6 +7,52 @@
   box-shadow: none;
 }
 
+/* General Typography */
+%large_title {
+  font-weight: 300;
+  font-size: 32px;
+}
+
+%title_1 {
+  font-weight: 800;
+  font-size: 27px;
+}
+
+%title_2 {
+  font-weight: 800;
+  font-size: 20px;
+}
+
+%title_3 {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+%title_4 {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+%heading {
+  font-weight: 700;
+  font-size: 14.6px;
+}
+
+%caption_heading {
+  font-weight: 700;
+  font-size: 12px;
+}
+
+%caption {
+  font-weight: 400;
+  font-size: 12px;
+}
+
+%smaller {
+  font-weight: 400;
+  font-size: 12px;
+}
+
 %widget {
   transition: 200ms;
   border-radius: variable.$radius;

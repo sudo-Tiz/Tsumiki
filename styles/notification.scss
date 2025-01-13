@@ -29,8 +29,7 @@ $hover-tranisition: background 0.15s ease-in-out;
     }
 
     .summary {
-      font-size: 14px;
-      font-weight: bold;
+      @extend %heading;
       text-shadow: none;
     }
 
@@ -44,8 +43,7 @@ $hover-tranisition: background 0.15s ease-in-out;
 
   .notification-body {
     .body {
-      font-size: 13px;
-      font-weight: 500;
+      @extend %caption;
       background: transparent;
       text-shadow: none;
       padding: 5px;

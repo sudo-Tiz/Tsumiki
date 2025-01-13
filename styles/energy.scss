@@ -11,7 +11,6 @@
   @include mixins.spacing;
   min-width: 12em;
 
-
   .power-profile-box {
     padding-left: functions.toEm(10);
     padding-right: functions.toEm(10);
@@ -27,5 +26,9 @@
     &:hover {
       color: theme.$accent-purple;
     }
+  }
+
+  .power-profile-title {
+    @extend %heading;
   }
 }

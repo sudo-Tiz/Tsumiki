@@ -11,7 +11,6 @@
   @include mixins.spacing;
   padding: functions.toEm(10);
 
-
   #notification-column {
     min-width: 350px;
 
@@ -24,9 +23,8 @@
       }
 
       label {
-        font-weight: 700;
         margin-right: 4px;
-        font-size: 12px;
+        @extend %smaller;
       }
 
       #clear-button {
