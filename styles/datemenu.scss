@@ -63,7 +63,10 @@
   }
 
   separator {
-    background-color: lighten(variable.$popover-border-color, 10%);
+    background-color: color.adjust(
+      variable.$popover-border-color,
+      $lightness: 10%
+    );
     border-radius: variable.$radius;
     margin-right: variable.$spacing;
   }

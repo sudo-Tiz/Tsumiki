@@ -76,6 +76,7 @@ tooltip {
   background-color: theme.$background-dark;
   border-radius: variable.$radius;
   box-shadow: 0 0 3px 0 theme.$shadow-color;
+  animation: tooltipShow 0.25s cubic-bezier(0.5, 0.25, 0, 1);
 
   label {
     @include mixins.unset;
@@ -224,6 +225,15 @@ switch {
   }
 }
 
+@keyframes tooltipShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes spin {
   to {
     -gtk-icon-transform: rotate(1turn);
@@ -266,8 +276,14 @@ separator {
   background-color: theme.$surface-disabled;
 }
 
-#panel-corner * {
+#corner {
   background-color: theme.$bar-background;
+  border-radius: 0;
+}
+
+#corner-container {
+  min-width: 20px;
+  min-height: 20px;
 }
 
 #cava {

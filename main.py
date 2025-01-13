@@ -36,9 +36,8 @@ if __name__ == "__main__":
 
     windows = [bar, notifications, system_overlay]
 
-    if widget_config["options"]["screen_corners"]:
-        corners = ScreenCorners()
-        windows.append(corners)
+    ## if widget_config["options"]["screen_corners"]:
+    corners = ScreenCorners()
 
     # Initialize the application with the status bar
     app = Application(
