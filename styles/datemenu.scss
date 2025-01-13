@@ -85,7 +85,7 @@
     }
 
     .calendar {
-      @include mixins.widget;
+      @extend %widget;
       background-color: theme.$background-alt;
 
       padding: variable.$padding * 2 variable.$padding * 2 0;

@@ -66,27 +66,21 @@ label {
   padding: 0.19em 0.625em;
 }
 
-#widgets-container {
-  background-color: theme.$background-dark;
-  padding: 0.125em;
-}
-
 tooltip {
-  @include mixins.unset;
+  @extend %unset;
   background-color: theme.$background-dark;
   border-radius: variable.$radius;
   box-shadow: 0 0 3px 0 theme.$shadow-color;
   animation: tooltipShow 0.25s cubic-bezier(0.5, 0.25, 0, 1);
 
-
   label {
-    @include mixins.unset;
+    @extend %unset;
     color: theme.$text-main;
     font-weight: normal;
   }
 }
 
-tooltip>* {
+tooltip > * {
   padding: 0.125em 0.25em;
 }
 
@@ -119,20 +113,20 @@ menuitem {
   }
 }
 
-menu>arrow {
+menu > arrow {
   min-height: 16px;
   min-width: 16px;
   padding: 4px;
   color: theme.$background-alt;
 }
 
-menu>arrow.top {
+menu > arrow.top {
   margin-top: 0;
   border-radius: 6px;
   -gtk-icon-source: -gtk-icontheme("pan-up-symbolic");
 }
 
-menu>arrow.bottom {
+menu > arrow.bottom {
   margin-top: 8px;
   margin-bottom: -12px;
   border-radius: 6px;

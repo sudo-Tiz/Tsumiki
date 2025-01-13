@@ -1,10 +1,18 @@
 @use "../theme.scss";
 @use "../variable.scss";
 
-@mixin unset() {
+%unset {
   outline: none;
   border: none;
   box-shadow: none;
+}
+
+%widget {
+  transition: 200ms;
+  border-radius: variable.$radius;
+  color: theme.$text-main;
+  background-color: theme.$background-alt;
+  border: variable.$border;
 }
 
 @mixin slider(
@@ -60,14 +68,6 @@
   image {
     color: transparent;
   }
-}
-
-@mixin widget {
-  transition: 200ms;
-  border-radius: variable.$radius;
-  color: theme.$text-main;
-  background-color: theme.$background-alt;
-  border: variable.$border;
 }
 
 @mixin spacing($multiplier: 1, $spacing: variable.$spacing, $rec: false) {
