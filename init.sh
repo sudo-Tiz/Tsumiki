@@ -80,7 +80,7 @@ install_packages() {
 	echo -e "\e[1;34mInstalling the pre-requisites, may take a while....\e[0m\n"
 
 	# Install packages using pacman
-	sudo pacman -S --noconfirm pipewire playerctl dart-sass networkmanager wl-clipboard brightnessctl pkgconf wf-recorder kitty python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python-pip python-gobject python-psutil python-cairo python-loguru python-setproctitle
+	sudo pacman -S --noconfirm pipewire playerctl dart-sass networkmanager wl-clipboard brightnessctl pkgconf wf-recorder kitty python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python-pip python-gobject python-psutil python-cairo python-dbus python-loguru python-setproctitle
 
 
 	if command -v yay &> /dev/null; then
