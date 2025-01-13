@@ -39,13 +39,13 @@
   }
 }
 
-@mixin floating-widget {
+@mixin floating-widget($radius: variable.$popover-radius) {
   box-shadow: 0 0 1px 0 theme.$shadow-color;
   margin: max(variable.$spacing, 8px);
   border: variable.$border-width solid variable.$popover-border-color;
   background-color: theme.$background-dark;
   color: theme.$text-main;
-  border-radius: variable.$popover-radius;
+  border-radius: $radius;
   padding: variable.$popover-padding;
 }
 

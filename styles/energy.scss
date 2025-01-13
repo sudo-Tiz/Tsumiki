@@ -1,0 +1,23 @@
+@use "sass:color";
+@use "theme.scss";
+@use "common/mixins.scss";
+@use "variable.scss";
+
+/************** Battery MENU **************/
+
+#batterymenu {
+  @include mixins.floating-widget(10px);
+  @include mixins.spacing;
+  padding: 10px;
+
+  .power-profile-box {
+    padding-left: 10px;
+    padding-right: 10px;
+    color: theme.$text-main;
+    font-weight: 500;
+  }
+
+  .power-profile-button:hover {
+    color: theme.$accent-purple;
+  }
+}

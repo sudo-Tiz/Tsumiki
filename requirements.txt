@@ -1,4 +1,5 @@
 click==8.1.7
+dbus_python==1.3.2
 git+https://github.com/Fabric-Development/fabric.git
 loguru==0.7.2
 psutil==6.1.0
@@ -7,4 +8,3 @@ PyGObject==3.50.0
 PyGObject-stubs==2.10.0
 rlottie-python==1.3.6
 setproctitle==1.3.4
-dbus_python==1.3.2

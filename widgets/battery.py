@@ -1,11 +1,14 @@
 import math
 
+from fabric.utils import bulk_connect
+from fabric.widgets.box import Box
+from fabric.widgets.button import Button
+from fabric.widgets.centerbox import CenterBox
+from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
-from fabric.widgets.centerbox import CenterBox
-from fabric.widgets.box import Box
-from services import power_profile_service
 
+from services import power_profile_service
 from shared.popover import PopOverWindow
 from shared.widget_container import BoxWidget
 from utils.functions import format_time, psutil_fabricator
@@ -27,26 +30,34 @@ class BatteryMenu(Box):
 
         self.profiles = power_profile_service.power_profiles
 
-        power_profile = [
-            Box(
-                children=(
-                    Image(
-                        icon_name=profile["icon_name"],
-                        icon_size=14,
+        power_profile = Box(
+            orientation="v",
+            spacing=10,
+            style_classes="power-profile-box",
+            children=[
+                Button(
+                    style_classes="power-profile-button",
+                    child=Box(
+                        children=(
+                            Image(
+                                icon_name=profile["icon_name"],
+                                icon_size=14,
+                            ),
+                            Label(
+                                label=profile["name"],
+                                style_classes="panel-text",
+                            ),
+                        ),
                     ),
-                    Label(
-                        label=profile["name"],
-                        style_classes="panel-text",
-                    ),
-                ),
-            )
-            for profile in self.profiles
-        ]
+                )
+                for _, profile in self.profiles.items()
+            ],
+        )
 
-        self.children = power_profile
+        self.children = CenterBox(start_children=power_profile)
 
 
-class Battery(BoxWidget):
+class Battery(EventBox):
     """A widget to display the current battery status."""
 
     def __init__(
@@ -62,6 +73,19 @@ class Battery(BoxWidget):
         )
         self.config = widget_config["battery"]
         self.full_battery_level = 100
+
+        bulk_connect(
+            self,
+            {
+                "button-press-event": lambda *_: popup.set_visible(
+                    not popup.get_visible()
+                ),
+            },
+        )
+
+        self.box = BoxWidget()
+
+        self.children = (self.box,)
 
         popup = PopOverWindow(
             parent=bar,
@@ -103,7 +127,7 @@ class Battery(BoxWidget):
             icon_size=14,
         )
 
-        self.children = (self.battery_icon, self.battery_label)
+        self.box.children = (self.battery_icon, self.battery_label)
 
         # Update the label with the battery percentage if enabled
         if self.config["label"]:

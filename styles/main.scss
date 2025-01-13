@@ -6,6 +6,7 @@
 @use "overview.scss";
 @use "datemenu.scss";
 @use "systray.scss";
+@use "energy.scss";
 @use "taskbar.scss";
 @use "weather.scss";
 @use "workspace.scss";
@@ -25,14 +26,4 @@
   background-position: center;
   background-size: contain;
   margin: 3px 10px 3px 0px;
-}
-
-#dashboard-menu {
-  @include mixins.floating-widget;
-  @include mixins.spacing;
-  padding: 10px;
-  min-height: 400px;
-  min-width: 400px;
-
-  @include mixins.slider($length: 200px, $slider-color: white);
 }

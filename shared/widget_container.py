@@ -8,7 +8,6 @@ class BoxWidget(Box):
     def __init__(self, **kwargs):
         super().__init__(
             spacing=4,
-            orientation="h",
             style_classes="panel-box",
             **kwargs,
         )
