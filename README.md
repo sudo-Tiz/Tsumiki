@@ -125,7 +125,7 @@ Run the following command to install the required system packages:
 Using `yay` to install the required AUR packages:
 
 ```sh
-yay -S gray-git python-fabric gnome-bluetooth-3.0 grimblast python-rlottie-python
+yay -S gray-git python-fabric gnome-bluetooth-3.0 python-rlottie-python
 ```
 
 If you have something else besides `yay`, install with the respective aur helper.
