@@ -78,6 +78,7 @@ tooltip {
   box-shadow: 0 0 3px 0 theme.$shadow-color;
   animation: tooltipShow 0.25s cubic-bezier(0.5, 0.25, 0, 1);
 
+
   label {
     @include mixins.unset;
     color: theme.$text-main;
@@ -85,7 +86,7 @@ tooltip {
   }
 }
 
-tooltip > * {
+tooltip>* {
   padding: 0.125em 0.25em;
 }
 
@@ -118,20 +119,20 @@ menuitem {
   }
 }
 
-menu > arrow {
+menu>arrow {
   min-height: 16px;
   min-width: 16px;
   padding: 4px;
   color: theme.$background-alt;
 }
 
-menu > arrow.top {
+menu>arrow.top {
   margin-top: 0;
   border-radius: 6px;
   -gtk-icon-source: -gtk-icontheme("pan-up-symbolic");
 }
 
-menu > arrow.bottom {
+menu>arrow.bottom {
   margin-top: 8px;
   margin-bottom: -12px;
   border-radius: 6px;
@@ -229,6 +230,7 @@ switch {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -250,9 +252,11 @@ expander {
     &:dir(rtl) {
       -gtk-icon-source: -gtk-icontheme("pan-end-symbolic-rtl");
     }
+
     &:hover {
-      color: color.adjust(variable.$border-color, $lightness: 60%);
+      color: lighten($color: variable.$border-color, $amount: 60);
     }
+
     &:checked {
       -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
     }
