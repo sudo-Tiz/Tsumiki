@@ -192,6 +192,8 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 - window_title
 - workspace
 - updates
+- spacer (utility)
+- divider (utility)
 
 </details>
 

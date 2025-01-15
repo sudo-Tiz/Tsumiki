@@ -1,6 +1,7 @@
 from shared.widget_container import ButtonWidget
 
 
+# TODO: add config
 class ClickCounter(ButtonWidget):
     """A widget to count the number of clicks."""
 
