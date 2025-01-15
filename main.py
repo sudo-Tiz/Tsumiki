@@ -5,7 +5,7 @@ from loguru import logger
 
 import utils.functions as helpers
 from modules.bar import StatusBar
-from modules.notifications.notificationpopup import NotificationPopup
+from modules.notifications.notification_pop_up import NotificationPopup
 from modules.osd import OSDContainer
 from utils.colors import Colors
 from utils.config import APP_CACHE_DIRECTORY, APPLICATION_NAME

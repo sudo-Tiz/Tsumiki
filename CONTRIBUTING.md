@@ -13,6 +13,7 @@ Thank you for your interest in contributing to [Project Name]! We welcome contri
     - [Submitting Code Changes](#submitting-code-changes)
     - [Commit Message Guidelines](#commit-message-guidelines)
     - [Pull Request Process](#pull-request-process)
+    - [Creating a new widget](#creating-a-new-widget)
   - [Getting Started](#getting-started)
   - [License](#license)
 
@@ -79,6 +80,16 @@ When creating a pull request:
 - Provide a clear description of what your pull request does.
 - Link to any relevant issues or discussions.
 - Follow the coding standards of the project.
+
+### Creating a new widget
+
+When creating a new widget:
+
+- Create a new file under widgets directory, and code on the file
+- The widget class name should have `Widget` label for sake of consistency. Ex. `XXXWidget`, `YYYWidget`
+- Export the widget in `__init__.py`
+- Create widget config options on `widget_config.py` and add default config on `config.py`
+- Also add the schema definitions on `hydepanel.schema.json` for autocompletions
 
 ## Getting Started
 

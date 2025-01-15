@@ -9,7 +9,7 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
 from services import power_profile_service
-from shared.popover import PopOverWindow
+from shared.pop_over import PopOverWindow
 from shared.widget_container import BoxWidget
 from utils.functions import format_time, psutil_fabricator
 from utils.widget_config import BarConfig

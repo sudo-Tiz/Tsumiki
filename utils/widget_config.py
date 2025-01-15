@@ -115,6 +115,12 @@ DateTimeMenu = TypedDict("DateTimeMenu", {"format": str})
 # ThemeSwitcher configuration
 ThemeSwitcher = TypedDict("ThemeSwitcher", {**BaseConfig.__annotations__, "icon": str})
 
+# Spacing configuration
+Spacing = TypedDict("Spacing", {"size": int})
+
+# Divider configuration
+Divider = TypedDict("Divider", {"size": int})
+
 # Language configuration
 Language = TypedDict("Language", {"truncation_size": int})
 
@@ -152,6 +158,8 @@ class BarConfig(TypedDict):
     hypr_idle: HyprIdle
     keyboard: Keyboard
     language: Language
+    spacing: Spacing
+    divider: Divider
     theme: Theme
     theme_switcher: ThemeSwitcher
     layout: Layout
@@ -174,14 +182,14 @@ class BarConfig(TypedDict):
 # Read the configuration from the JSON file
 parsed_data = helpers.read_config()
 
+
 # Validate the widgets
 helpers.validate_widgets(parsed_data=parsed_data, default_config=DEFAULT_CONFIG)
 
-for key in DEFAULT_CONFIG:
-    if key not in ["$schema"]:
-        parsed_data[key] = helpers.merge_defaults(
-            parsed_data.get(key, {}), DEFAULT_CONFIG[key]
-        )
+for key in helpers.exclude_keys(DEFAULT_CONFIG, ["$schema"]):
+    parsed_data[key] = helpers.merge_defaults(
+        parsed_data.get(key, {}), DEFAULT_CONFIG[key]
+    )
 
 # Optionally, cast the parsed data to match our TypedDict using type hints
 widget_config: BarConfig = parsed_data
