@@ -36,7 +36,7 @@ DEFAULT_CONFIG = {
         ],
     },
     "spacing": {"size": 20},
-    "divider": {"size": 20},
+    "divider": {"size": 2},
     "hypr_sunset": {
         "temperature": "2800k",
         "enabled_icon": "󱩌",

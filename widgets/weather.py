@@ -12,6 +12,7 @@ from gi.repository import Gtk
 
 from services import weather_service
 from shared import LottieAnimation, LottieAnimationWidget, PopOverWindow
+from shared.separator import Separator
 from shared.widget_container import ButtonWidget
 from utils.functions import convert_seconds_to_milliseconds, text_icon
 from utils.icons import weather_text_icons, weather_text_icons_v2
@@ -130,9 +131,8 @@ class WeatherMenu(Box):
 
         self.children = (
             self.title_box,
-            Gtk.Separator(
-                orientation=Gtk.Orientation.HORIZONTAL,
-                visible=True,
+            Separator(
+                orientation="vertical",
                 name="weather-separator",
             ),
             self.forecast_box,

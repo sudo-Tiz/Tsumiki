@@ -6,4 +6,5 @@ from .custom_image import *
 from .lottie import *
 from .pop_over import *
 from .pop_up import *
+from .separator import *
 from .widget_container import *

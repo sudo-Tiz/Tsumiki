@@ -1,20 +1,17 @@
-import gi
 from fabric.widgets.box import Box
-from gi.repository import Gtk
 
+from shared.separator import Separator
 from utils.widget_config import BarConfig
-
-gi.require_version("GtkLayerShell", "0.1")
-gi.require_version("Gtk", "3.0")
 
 
 class SpacingWidget(Box):
     """A simple widget to add spacing between widgets."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(name="spacing", **kwargs)
         self.config = widget_config["spacing"]
-        self.set_style(f"min-width: {self.config['size']}px;")
+        super().__init__(
+            name="spacing", style=f"min-width: {self.config['size']}px;", **kwargs
+        )
 
 
 class DividerWidget(Box):
@@ -23,8 +20,11 @@ class DividerWidget(Box):
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(name="divider", **kwargs)
 
+        self.config = widget_config["divider"]
         self.children = Box(
             children=(
-                Gtk.Separator(orientation=Gtk.Orientation.VERTICAL, visible=True),
+                Separator(
+                    orientation="vertical", style=f"min-width: {self.config['size']}px;"
+                ),
             )
         )
