@@ -4,7 +4,7 @@ import os
 import shutil
 import subprocess
 from time import sleep
-from typing import List, Literal
+from typing import Dict, List, Literal
 
 import gi
 import psutil
@@ -116,6 +116,11 @@ def validate_widgets(parsed_data, default_config):
                 raise ValueError(
                     f"Invalid widget {widget} found in section {section}. Please check the widget name."
                 )
+
+
+# Function to exclude keys from a dictionary        )
+def exclude_keys(d: Dict, keys_to_exclude: List[str]) -> Dict:
+    return {k: v for k, v in d.items() if k not in keys_to_exclude}
 
 
 # Function to format time in hours and minutes

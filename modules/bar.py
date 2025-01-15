@@ -12,6 +12,7 @@ from widgets import (
     CavaWidget,
     CpuWidget,
     DateTimeWidget,
+    DividerWidget,
     HyprIdleWidget,
     HyprSunsetWidget,
     KeyboardLayoutWidget,
@@ -20,6 +21,7 @@ from widgets import (
     Mpris,
     PowerButton,
     Recorder,
+    SpacingWidget,
     StorageWidget,
     SystemTray,
     TaskBarWidget,
@@ -69,6 +71,8 @@ class StatusBar(WaylandWindow):
             "weather": WeatherWidget,
             "window_title": WindowTitleWidget,
             "workspaces": WorkSpacesWidget,
+            "spacing": SpacingWidget,
+            "divider": DividerWidget,
         }
 
         layout = self.make_layout()

@@ -21,5 +21,6 @@ from .theme import *
 from .updates import *
 from .volume import *
 from .weather import *
+from .widgetutils import *
 from .windowtitle import *
 from .workspaces import *
