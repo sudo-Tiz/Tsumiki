@@ -118,6 +118,9 @@ ThemeSwitcher = TypedDict("ThemeSwitcher", {**BaseConfig.__annotations__, "icon"
 # Spacing configuration
 Spacing = TypedDict("Spacing", {"size": int})
 
+# Divider configuration
+Divider = TypedDict("Divider", {"size": int})
+
 # Language configuration
 Language = TypedDict("Language", {"truncation_size": int})
 
@@ -156,6 +159,7 @@ class BarConfig(TypedDict):
     keyboard: Keyboard
     language: Language
     spacing: Spacing
+    divider: Divider
     theme: Theme
     theme_switcher: ThemeSwitcher
     layout: Layout

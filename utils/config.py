@@ -35,8 +35,8 @@ DEFAULT_CONFIG = {
             "power",
         ],
     },
-    "divider": {},
     "spacing": {"size": 20},
+    "divider": {"size": 20},
     "hypr_sunset": {
         "temperature": "2800k",
         "enabled_icon": "󱩌",

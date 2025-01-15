@@ -214,6 +214,22 @@
         }
       }
     },
+    "spacing": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer"
+        }
+      }
+    },
+    "divider": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer"
+        }
+      }
+    },
     "updates": {
       "type": "object",
       "properties": {
