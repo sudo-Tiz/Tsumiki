@@ -12,9 +12,9 @@ from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import Gtk
 
-from modules.notifications.notificationwidget import NotificationWidget
+from modules.notifications.notification_widget import NotificationWidget
 from services import notify_cache_service
-from shared.popover import PopOverWindow
+from shared.pop_over import PopOverWindow
 from shared.widget_container import BoxWidget
 from utils.functions import uptime
 from utils.icons import icons
