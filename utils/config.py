@@ -36,6 +36,7 @@ DEFAULT_CONFIG = {
         ],
     },
     "spacing": {"size": 20},
+    "click_counter": {"count": 0},
     "divider": {"size": 2},
     "hypr_sunset": {
         "temperature": "2800k",

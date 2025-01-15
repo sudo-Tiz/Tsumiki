@@ -230,6 +230,14 @@
         }
       }
     },
+    "click_counter": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        }
+      }
+    },
     "updates": {
       "type": "object",
       "properties": {

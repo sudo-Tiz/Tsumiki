@@ -1,13 +1,13 @@
 from shared.widget_container import ButtonWidget
+from utils.widget_config import BarConfig
 
 
-# TODO: add config
-class ClickCounter(ButtonWidget):
+class ClickCounterWidget(ButtonWidget):
     """A widget to count the number of clicks."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(name="click-counter", **kwargs)
-        self.count = 0
+        self.count = self.config["count"]
         self.set_label(f"{self.count}")
 
         self.connect("button-press-event", self.on_button_press)

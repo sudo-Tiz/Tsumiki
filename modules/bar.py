@@ -10,7 +10,9 @@ from widgets import (
     BlueToothWidget,
     BrightnessWidget,
     CavaWidget,
+    ClickCounterWidget,
     CpuWidget,
+    DashBoardWidget,
     DateTimeWidget,
     DividerWidget,
     HyprIdleWidget,
@@ -32,7 +34,6 @@ from widgets import (
     WindowTitleWidget,
     WorkSpacesWidget,
 )
-from widgets.dashboard import DashBoardWidget
 
 
 class StatusBar(WaylandWindow):
@@ -51,6 +52,7 @@ class StatusBar(WaylandWindow):
             "bluetooth": BlueToothWidget,
             "brightness": BrightnessWidget,
             "cava": CavaWidget,
+            "click_counter": ClickCounterWidget,
             "cpu": CpuWidget,
             "date_time": DateTimeWidget,
             "hypr_idle": HyprIdleWidget,

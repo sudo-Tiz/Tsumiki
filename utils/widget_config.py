@@ -53,6 +53,10 @@ Battery = TypedDict(
 # Theme configuration
 Theme = TypedDict("Theme", {"name": str})
 
+# ClickCounter configuration
+ClickCounter = TypedDict("ClickCounter", {"count": int})
+
+
 # Bar configuration
 Options = TypedDict("Options", {"screen_corners": bool, "check_updates": bool})
 
@@ -152,6 +156,7 @@ class BarConfig(TypedDict):
     notification: Notification
     bluetooth: BlueTooth
     cava: Cava
+    click_counter: ClickCounter
     cpu: Cpu
     recorder: Recording
     hypr_sunset: HyprSunset
