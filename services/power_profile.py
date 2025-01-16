@@ -28,17 +28,17 @@ class PowerProfiles(Service):
         self.object_path = "/net/hadess/PowerProfiles"
 
         self.power_profiles = {
-            "performance": {
-                "name": "Performance",
-                "icon_name": "power-profile-performance-symbolic",
+            "power-saver": {
+                "name": "Power Saver",
+                "icon_name": "power-profile-power-saver-symbolic",
             },
             "balanced": {
                 "name": "Balanced",
                 "icon_name": "power-profile-balanced-symbolic",
             },
-            "power-saver": {
-                "name": "Power Saver",
-                "icon_name": "power-profile-power-saver-symbolic",
+            "performance": {
+                "name": "Performance",
+                "icon_name": "power-profile-performance-symbolic",
             },
         }
 
