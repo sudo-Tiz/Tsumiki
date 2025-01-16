@@ -38,11 +38,10 @@ label {
 }
 
 .popover {
-  min-width: 15em;
   color: theme.$text-main;
-  // background-color: theme.$background;
-  // padding: 0.2rem;
-  // border-radius: 10px;
+  background-color: theme.$background-dark;
+  border-radius: 20px;
+  border: variable.$border-width solid theme.$surface-disabled;
 }
 
 .panel-text {
