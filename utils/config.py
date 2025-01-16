@@ -22,7 +22,14 @@ DEFAULT_CONFIG = {
     "theme": {
         "name": "catpuccin-mocha",
     },
-    "options": {"screen_corners": False, "check_updates": False},
+    "options": {
+        "screen_corners": False,
+        "check_updates": False,
+        "layer": "top",
+        "auto_hide": False,
+        "floating": False,
+        "location": "left top right",
+    },
     "layout": {
         "left_section": ["workspaces", "window_title"],
         "middle_section": ["date_time"],
@@ -152,6 +159,7 @@ DEFAULT_CONFIG = {
         "ignored": [],
         "timeout": 5000,
         "anchor": "top right",
+        "auto_dismiss": True,
     },
     "osd": {
         "enabled": True,

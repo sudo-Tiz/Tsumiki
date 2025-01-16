@@ -164,7 +164,11 @@ class NotificationWidget(EventBox):
             ),
         )
 
-        (type == "popup" and self.start_timeout())
+        (
+            type == "popup"
+            and widget_config["notification"]["auto_dismiss"]
+            and self.start_timeout()
+        )
 
     def start_timeout(self):
         self.stop_timeout()

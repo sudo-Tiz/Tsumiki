@@ -14,6 +14,18 @@
       "properties": {
         "screen_corners": {
           "type": "boolean"
+        },
+        "location": {
+          "type": "string"
+        },
+        "layer": {
+          "type": "string"
+        },
+        "auto_hide": {
+          "type": "boolean"
+        },
+        "floating": {
+          "type": "boolean"
         }
       }
     },
@@ -413,6 +425,9 @@
         },
         "anchor": {
           "type": "string"
+        },
+        "auto_dismiss": {
+          "type": "boolean"
         },
         "timeout": {
           "type": "integer"

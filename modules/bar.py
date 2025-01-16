@@ -99,8 +99,8 @@ class StatusBar(WaylandWindow):
         )
         super().__init__(
             name="panel",
-            layer="top",
-            anchor="left top right",
+            layer=widget_config["options"]["layer"],
+            anchor=widget_config["options"]["location"],
             pass_through=False,
             exclusivity="auto",
             visible=True,

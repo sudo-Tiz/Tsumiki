@@ -1,7 +1,10 @@
-from typing import List, TypedDict
+from typing import List, Literal, TypedDict
 
 import utils.functions as helpers
 from utils.config import DEFAULT_CONFIG
+
+# Define the type
+Layer = Literal["background", "bottom", "top", "overlay"]
 
 # Common configuration fields that will be reused
 BaseConfig = TypedDict(
@@ -58,7 +61,17 @@ ClickCounter = TypedDict("ClickCounter", {"count": int})
 
 
 # Bar configuration
-Options = TypedDict("Options", {"screen_corners": bool, "check_updates": bool})
+Options = TypedDict(
+    "Options",
+    {
+        "screen_corners": bool,
+        "check_updates": bool,
+        "auto_hide": bool,
+        "floating": bool,
+        "location": str,
+        "layer": str,
+    },
+)
 
 # Cpu configuration
 Cpu = TypedDict("Cpu", {**BaseConfig.__annotations__, "icon": str})
@@ -137,7 +150,8 @@ Brightness = TypedDict("Brightness", {**BaseConfig.__annotations__, "step_size":
 
 # Notification configuration
 Notification = TypedDict(
-    "Notification", {"ignored": List[str], "timeout": int, "anchor": str}
+    "Notification",
+    {"ignored": List[str], "timeout": int, "anchor": str, "auto_dismiss": bool},
 )
 
 # Recording configuration
@@ -145,7 +159,7 @@ Recording = TypedDict("Recording", {"path": str, "icon_size": int, "tooltip": bo
 
 
 # OSD configuration
-OSD = TypedDict("Notification", {"enabled": bool, "timeout": int, "anchor": str})
+OSD = TypedDict("Osd", {"enabled": bool, "timeout": int, "anchor": str})
 
 
 class BarConfig(TypedDict):
