@@ -5,7 +5,7 @@ from .brightness import *
 from .cava import *
 from .click_counter import *
 from .dashboard import *
-from .datetimemenu import *
+from .datetime_menu import *
 from .hypr_idle import *
 from .hypr_sunset import *
 from .keyboard_layout import *
@@ -15,7 +15,7 @@ from .power_button import *
 from .recorder import *
 from .stats import *
 from .stop_watch import *
-from .sys_tray import *
+from .systray import *
 from .taskbar import *
 from .theme import *
 from .updates import *
