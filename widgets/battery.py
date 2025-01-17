@@ -4,13 +4,12 @@ from fabric.utils import bulk_connect
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
-from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
 from services import power_profile_service
 from shared.pop_over import PopOverWindow
-from shared.widget_container import BoxWidget
+from shared.widget_container import ButtonWidget
 from utils.functions import format_time, psutil_fabricator
 from utils.widget_config import BarConfig
 
@@ -69,7 +68,7 @@ class BatteryMenu(Box):
         )
 
 
-class Battery(EventBox):
+class Battery(ButtonWidget):
     """A widget to display the current battery status."""
 
     def __init__(
@@ -95,7 +94,7 @@ class Battery(EventBox):
             },
         )
 
-        self.box = BoxWidget()
+        self.box = Box()
 
         self.children = (self.box,)
 

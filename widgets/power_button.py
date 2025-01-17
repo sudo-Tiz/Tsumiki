@@ -2,7 +2,6 @@ from typing import Literal
 
 from fabric.utils import exec_shell_command_async, get_relative_path
 from fabric.widgets.box import Box
-from fabric.widgets.button import Button
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.widget import Widget
@@ -78,7 +77,7 @@ class PowerMenuPopup(PopupWindow):
         return super().toggle_popup()
 
 
-class PowerControlButtons(Button):
+class PowerControlButtons(ButtonWidget):
     """A widget to show power options."""
 
     def __init__(self, name, label, size, **kwargs):
