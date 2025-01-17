@@ -23,6 +23,10 @@ label {
   border-radius: 100px;
 }
 
+.flat{
+  border-radius: 0;
+}
+
 .panel-box {
   padding: 0.1em 0.9em;
   color: theme.$text-main;
@@ -41,9 +45,6 @@ label {
   }
 }
 
-.widget_hover {
-  @extend %widget_hover;
-}
 
 .wave1 {
   border-bottom-left-radius: 1.3em;

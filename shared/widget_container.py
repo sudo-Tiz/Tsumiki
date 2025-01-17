@@ -39,7 +39,4 @@ class ButtonWidget(Button):
 
         widget_style = widget_config["options"]["widget_style"]
 
-        if widget_style == "wave1":
-            self.add_style_class("wave1")
-        elif widget_style == "wave2":
-            self.add_style_class("wave2")
+        self.add_style_class(widget_style)

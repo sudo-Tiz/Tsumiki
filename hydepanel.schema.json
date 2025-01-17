@@ -31,7 +31,7 @@
         },
         "widget_style": {
           "type": "string",
-          "enum": ["default", "wave1", "wave2"]
+          "enum": ["default", "wave1", "wave2","flat"]
         }
       }
     },
