@@ -30,7 +30,7 @@ label {
 .panel-box {
   padding: 0.1em 0.9em;
   color: theme.$text-main;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .panel-button {
@@ -63,7 +63,7 @@ label {
 }
 
 .panel-text {
-  font-weight: bold;
+  font-weight: 700;
   margin-left: 10px;
 }
 
@@ -82,8 +82,9 @@ label {
 }
 
 #language,
-#window {
+#window ,#date-time{
   padding: 0.19em 0.625em;
+  font-weight: 600;
 }
 
 tooltip {

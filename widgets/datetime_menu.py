@@ -198,7 +198,7 @@ class DateTimeWidget(ButtonWidget):
             v_align="center",
             children=(
                 self.notof_indicator,
-                DateTime(self.config["format"]),
+                DateTime(self.config["format"], name="date-time"),
             ),
         )
         date_menu.dnd_switch.connect("notify::active", self.on_dnd_switch)
