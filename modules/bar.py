@@ -97,10 +97,12 @@ class StatusBar(WaylandWindow):
                 children=layout["right_section"],
             ),
         )
+
+        acnhor = f"left {widget_config['options']['location']} right"
         super().__init__(
             name="panel",
             layer=widget_config["options"]["layer"],
-            anchor=widget_config["options"]["location"],
+            anchor=acnhor,
             pass_through=False,
             exclusivity="auto",
             visible=True,

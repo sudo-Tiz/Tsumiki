@@ -16,10 +16,12 @@
           "type": "boolean"
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "enum": ["top", "bottom"]
         },
         "layer": {
-          "type": "string"
+          "type": "string",
+          "enum": ["background", "bottom", "top", "overlay"]
         },
         "auto_hide": {
           "type": "boolean"
@@ -254,7 +256,8 @@
       "type": "object",
       "properties": {
         "os": {
-          "type": "string"
+          "type": "string",
+          "enum": ["arch", "fedora", "opensuse", "ubuntu"]
         }
       }
     },
@@ -265,7 +268,19 @@
           "type": "boolean"
         },
         "anchor": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "center-left",
+            "center",
+            "center-right",
+            "top",
+            "top-right",
+            "top-center",
+            "top-left",
+            "bottom-left",
+            "bottom-center",
+            "bottom-right"
+          ]
         },
         "duration": {
           "type": "integer"
@@ -424,7 +439,19 @@
           }
         },
         "anchor": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "center-left",
+            "center",
+            "center-right",
+            "top",
+            "top-right",
+            "top-center",
+            "top-left",
+            "bottom-left",
+            "bottom-center",
+            "bottom-right"
+          ]
         },
         "auto_dismiss": {
           "type": "boolean"

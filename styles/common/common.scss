@@ -1,7 +1,7 @@
 @use "sass:color";
 
-@use "../theme.scss";
 @use "mixins.scss";
+@use "../theme.scss";
 @use "../variable.scss";
 
 label {
@@ -15,6 +15,16 @@ label {
     padding: 0.6em 1.8em 0.35em 1.8em;
     border-color: theme.$surface-disabled;
   }
+}
+
+.wave-2 {
+  border-bottom-left-radius: 1.3em;
+  border-top-right-radius: 1.3em;
+}
+
+.wave-3 {
+  border-bottom-right-radius: 1.3em;
+  border-top-left-radius: 1.3em;
 }
 
 .panel-box,

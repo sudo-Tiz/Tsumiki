@@ -16,6 +16,18 @@ NOTIFICATION_CACHE_FILE = f"{APP_CACHE_DIRECTORY}/notifications.json"
 WEATHER_CACHE_FILE = f"{APP_CACHE_DIRECTORY}/weather.json"
 
 
+VALID_ANCHORS = [
+    "top-left",
+    "top-right",
+    "top",
+    "bottom-left",
+    "bottom-right",
+    "bottom",
+    "left",
+    "right",
+    "center",
+]
+
 # Default configuration values
 DEFAULT_CONFIG = {
     "$schema": "https://raw.githubusercontent.com/rubiin/HyDePanel/refs/heads/master/hydepanel.schema.json",
@@ -28,7 +40,7 @@ DEFAULT_CONFIG = {
         "layer": "top",
         "auto_hide": False,
         "floating": False,
-        "location": "left top right",
+        "location": "top",
     },
     "layout": {
         "left_section": ["workspaces", "window_title"],
@@ -158,13 +170,13 @@ DEFAULT_CONFIG = {
     "notification": {
         "ignored": [],
         "timeout": 5000,
-        "anchor": "top right",
+        "anchor": "top-right",
         "auto_dismiss": True,
     },
     "osd": {
         "enabled": True,
         "timeout": 1500,
-        "anchor": "bottom center",
+        "anchor": "bottom-center",
     },
     "recorder": {
         "path": "Videos/Screencasting",
