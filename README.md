@@ -140,8 +140,6 @@ Once the dependencies are installed, run the following command to start the bar 
 
 ## **Usage**
 
-### **For Hyprland:**
-
 Add this to your `.config/hyprland.conf`
 
 ```sh
@@ -150,10 +148,6 @@ exec = `$HOME/bar/init.sh -start`
 ```
 
 > **Note**: modify the path accordingly
-
-### **For Other Window Managers:**
-
-Use a similar configuration for your respective window manager's autostart setup.
 
 ## Updating
 
