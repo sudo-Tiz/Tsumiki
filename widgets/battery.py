@@ -39,8 +39,7 @@ class BatteryMenu(Box):
                 Button(
                     on_clicked=lambda *_: print(key),
                     style_classes=(
-                        f"power-profile-button "
-                        f"{'active' if key == self.active else ''}"
+                        f"power-profile-button {'active' if key == self.active else ''}"
                     ),
                     child=Box(
                         children=(

@@ -17,19 +17,13 @@ class BoxWidget(Box):
 class EventBoxWidget(EventBox):
     """A container for box widgets."""
 
-    def __init__(self, children, **kwargs):
+    def __init__(self, **kwargs):
         super().__init__(
+            name="panel-eventbox",
             **kwargs,
         )
 
-        self.box = Box(
-            spacing=4,
-            style_classes="panel-box",
-            children=children,
-        )
-        self.children = (self.box,)
-
-
+    # self.connect("enter-notify-event", lambda *_: self.children[0].add_style_class("widget_hover"))
 
 
 class ButtonWidget(Button):

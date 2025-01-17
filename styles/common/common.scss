@@ -51,11 +51,9 @@ label {
   }
 }
 
-#volume-eventbox:hover,
-#brightness-eventbox:hover {
-  #volume {
-    @extend %widget_hover;
-  }
+
+.widget_hover{
+  @extend %widget_hover;
 }
 
 .popover {

@@ -1,16 +1,16 @@
 from fabric.widgets.box import Box
 from fabric.widgets.circularprogressbar import CircularProgressBar
-from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
 
 import utils.functions as helpers
 from services.brightness import Brightness
+from shared.widget_container import EventBoxWidget
 from utils.icons import brightness_text_icons
 from utils.widget_settings import BarConfig
 
 
-class BrightnessWidget(EventBox):
+class BrightnessWidget(EventBoxWidget):
     """a widget that displays and controls the brightness."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):

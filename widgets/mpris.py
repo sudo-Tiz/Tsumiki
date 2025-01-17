@@ -1,17 +1,17 @@
 from fabric.utils import bulk_connect
 from fabric.widgets.box import Box
-from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
 from loguru import logger
 
 from services import MprisPlayer, MprisPlayerManager
+from shared.widget_container import EventBoxWidget
 from utils.colors import Colors
 from utils.icons import common_text_icons
 from utils.widget_settings import BarConfig
 
 
-class Mpris(EventBox):
+class Mpris(EventBoxWidget):
     """A widget to control the MPRIS."""
 
     def __init__(
@@ -22,7 +22,6 @@ class Mpris(EventBox):
     ):
         # Initialize the EventBox with specific name and style
         super().__init__(
-            name="mpris",
             **kwargs,
         )
         self.config = widget_config["mpris"]

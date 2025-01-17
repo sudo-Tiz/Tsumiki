@@ -1,21 +1,21 @@
 from fabric.widgets.box import Box
 from fabric.widgets.circularprogressbar import CircularProgressBar
-from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
 
 import utils.functions as helpers
 from services import audio_service
+from shared.widget_container import EventBoxWidget
 from utils.icons import volume_text_icons
 from utils.widget_settings import BarConfig
 
 
-class VolumeWidget(EventBox):
+class VolumeWidget(EventBoxWidget):
     """a widget that displays and controls the volume."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(
-            name="volume-eventbox", events=["scroll", "smooth-scroll"], **kwargs
+            events=["scroll", "smooth-scroll", "enter-notify-event"], **kwargs
         )
 
         # Initialize the audio service
