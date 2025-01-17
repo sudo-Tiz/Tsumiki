@@ -14,7 +14,9 @@ class VolumeWidget(EventBox):
     """a widget that displays and controls the volume."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(events=["scroll", "smooth-scroll"], **kwargs)
+        super().__init__(
+            name="volume-eventbox", events=["scroll", "smooth-scroll"], **kwargs
+        )
 
         # Initialize the audio service
         self.audio = audio_service

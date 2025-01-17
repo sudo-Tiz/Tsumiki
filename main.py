@@ -51,8 +51,11 @@ if __name__ == "__main__":
     helpers.copy_theme(widget_config["theme"]["name"])
 
     # Monitor styles folder for changes
-    main_css_file = monitor_file(get_relative_path("styles"))
-    main_css_file.connect("changed", lambda *_: process_and_apply_css(app))
+    styles_folder = [get_relative_path("styles"), get_relative_path("styles/common")]
+
+    for folder in styles_folder:
+        folder = monitor_file(folder)
+        folder.connect("changed", lambda *_: process_and_apply_css(app))
 
     process_and_apply_css(app)
 

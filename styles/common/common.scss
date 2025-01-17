@@ -4,6 +4,11 @@
 @use "../theme.scss";
 @use "../variable.scss";
 
+%widget_hover{
+  background-color: theme.$background;
+  transition: border-color 400ms ease-in-out;
+}
+
 label {
   font-size: 1rem;
 }
@@ -44,6 +49,18 @@ label {
 
   label {
     color: theme.$text-main;
+  }
+
+  &:hover {
+    @extend %widget_hover;
+  }
+
+}
+
+#volume-eventbox:hover, #brightness-eventbox:hover {
+ 
+  #volume{
+    @extend %widget_hover;
   }
 }
 
