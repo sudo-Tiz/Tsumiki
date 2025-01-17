@@ -23,12 +23,6 @@
           "type": "string",
           "enum": ["background", "bottom", "top", "overlay"]
         },
-        "auto_hide": {
-          "type": "boolean"
-        },
-        "floating": {
-          "type": "boolean"
-        },
         "widget_style": {
           "type": "string",
           "enum": ["default", "wave1", "wave2", "flat"]

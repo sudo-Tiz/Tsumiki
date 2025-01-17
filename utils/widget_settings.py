@@ -68,8 +68,6 @@ Options = TypedDict(
     {
         "screen_corners": bool,
         "check_updates": bool,
-        "auto_hide": bool,
-        "floating": bool,
         "location": str,
         "layer": str,
         "widget_style": str,
@@ -169,34 +167,34 @@ class BarConfig(TypedDict):
     """Main configuration that includes all other configurations"""
 
     battery: Battery
-    options: Options
-    notification: Notification
     bluetooth: BlueTooth
+    brightness: Brightness
     cava: Cava
     click_counter: ClickCounter
     cpu: Cpu
-    recorder: Recording
-    hypr_sunset: HyprSunset
+    date_time: DateTimeMenu
+    divider: Divider
     hypr_idle: HyprIdle
+    hypr_sunset: HyprSunset
     keyboard: Keyboard
     language: Language
-    spacing: Spacing
-    stop_watch: StopWatch
-    divider: Divider
-    theme: Theme
-    theme_switcher: ThemeSwitcher
     layout: Layout
     memory: Memory
-    date_time: DateTimeMenu
     mpris: Mpris
+    notification: Notification
+    options: Options
+    osd: OSD
+    power: PowerButton
+    recorder: Recording
+    spacing: Spacing
+    stop_watch: StopWatch
     storage: Storage
     system_tray: SystemTray
     task_bar: TaskBar
+    theme: Theme
+    theme_switcher: ThemeSwitcher
     updates: Updates
-    power: PowerButton
     volume: Volume
-    brightness: Brightness
-    workspaces: Workspaces
-    window_title: WindowTitle
     weather: Weather
-    osd: OSD
+    window_title: WindowTitle
+    workspaces: Workspaces
