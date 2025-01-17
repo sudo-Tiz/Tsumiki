@@ -23,7 +23,7 @@ label {
   border-radius: 100px;
 }
 
-.flat{
+.flat {
   border-radius: 0;
 }
 
@@ -44,7 +44,6 @@ label {
     @extend %widget_hover;
   }
 }
-
 
 .wave1 {
   border-bottom-left-radius: 1.3em;

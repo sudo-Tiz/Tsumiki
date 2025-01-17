@@ -186,6 +186,7 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 - window_title
 - workspace
 - updates
+- stop_watch
 - spacer (utility)
 - divider (utility)
 
@@ -232,6 +233,18 @@ Be sure to kill other notifications daemon that you may be running. You can kill
 ### 3. **Cannot see bar?**
 
 Kill the app with `pkill hydepanel`. Run `init.sh -start`. This should show some logs. If it shows like `ModuleNotFoundError`, run `pip install -r requirements.txt`. If this does not solve the issue, do report a bug with screenshot of the log.
+
+### 4. **No Blur?**
+
+Add this to your `hyprland.conf`
+
+```conf
+layerrule = blur , fabric
+layerrule = ignorezero, fabric
+layerrule = blur ,gtk-layer-shell
+layerrule = ignorezero ,gtk-layer-shell
+
+```
 
 ## Contributing
 
