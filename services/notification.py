@@ -7,7 +7,7 @@ from fabric.notifications import Notification
 from loguru import logger
 
 from utils.colors import Colors
-from utils.config import NOTIFICATION_CACHE_FILE
+from utils.constants import NOTIFICATION_CACHE_FILE
 
 
 class NotificationCacheService(Service):

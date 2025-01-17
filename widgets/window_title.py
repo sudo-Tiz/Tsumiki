@@ -4,8 +4,8 @@ from fabric.hyprland.widgets import ActiveWindow
 from fabric.utils import FormattedString, truncate
 
 from shared.widget_container import BoxWidget
-from utils.config import WINDOW_TITLE_MAP
-from utils.widget_config import BarConfig
+from utils.constants import WINDOW_TITLE_MAP
+from utils.widget_settings import BarConfig
 
 
 class WindowTitleWidget(BoxWidget):

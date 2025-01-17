@@ -1,7 +1,8 @@
 from typing import List, Literal, TypedDict
 
 import utils.functions as helpers
-from utils.config import DEFAULT_CONFIG
+from utils.config import read_config
+from utils.constants import DEFAULT_CONFIG
 
 # Define the type
 Layer = Literal["background", "bottom", "top", "overlay"]
@@ -70,6 +71,7 @@ Options = TypedDict(
         "floating": bool,
         "location": str,
         "layer": str,
+        "style": str,
     },
 )
 
@@ -199,11 +201,8 @@ class BarConfig(TypedDict):
 
 
 # Read the configuration from the JSON file
-parsed_data = helpers.read_config()
+parsed_data = read_config()
 
-
-# Validate the widgets
-helpers.validate_widgets(parsed_data=parsed_data, default_config=DEFAULT_CONFIG)
 
 for key in helpers.exclude_keys(DEFAULT_CONFIG, ["$schema"]):
     parsed_data[key] = helpers.merge_defaults(

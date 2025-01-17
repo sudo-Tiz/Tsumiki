@@ -1,8 +1,8 @@
 from fabric.hyprland.widgets import Language
 from fabric.utils import FormattedString, truncate
 
-from shared.widget_container import BoxWidget, ButtonWidget
-from utils.widget_config import BarConfig
+from shared.widget_container import ButtonWidget
+from utils.widget_settings import BarConfig
 from fabric.widgets.box import Box
 
 

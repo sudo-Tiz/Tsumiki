@@ -5,9 +5,9 @@ from fabric.widgets.label import Label
 from fabric.widgets.box import Box
 
 from shared.widget_container import ButtonWidget
-from utils.config import KBLAYOUT_MAP
+from utils.constants import KBLAYOUT_MAP
 from utils.functions import text_icon
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
 class KeyboardLayoutWidget(ButtonWidget):

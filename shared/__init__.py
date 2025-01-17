@@ -7,4 +7,5 @@ from .lottie import *
 from .pop_over import *
 from .pop_up import *
 from .separator import *
+from .animator import *
 from .widget_container import *

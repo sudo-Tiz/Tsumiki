@@ -4,7 +4,7 @@ from fabric.widgets.eventbox import EventBox
 
 from shared.pop_over import PopOverWindow
 from utils.functions import create_scale, text_icon
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
 class DashBoardMenu(Box):

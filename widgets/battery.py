@@ -11,7 +11,7 @@ from services import power_profile_service
 from shared.pop_over import PopOverWindow
 from shared.widget_container import ButtonWidget
 from utils.functions import format_time, psutil_fabricator
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
 class BatteryMenu(Box):

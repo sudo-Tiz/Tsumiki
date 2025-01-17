@@ -1,5 +1,5 @@
 from shared.widget_container import ButtonWidget
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
 class ClickCounterWidget(ButtonWidget):

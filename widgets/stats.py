@@ -5,7 +5,7 @@ from fabric.widgets.box import Box
 
 from shared.widget_container import ButtonWidget
 from utils.icons import common_text_icons
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
 class CpuWidget(ButtonWidget):

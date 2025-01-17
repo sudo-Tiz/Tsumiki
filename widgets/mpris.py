@@ -8,7 +8,7 @@ from loguru import logger
 from services import MprisPlayer, MprisPlayerManager
 from utils.colors import Colors
 from utils.icons import common_text_icons
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
 class Mpris(EventBox):

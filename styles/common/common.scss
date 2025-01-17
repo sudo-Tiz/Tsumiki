@@ -4,11 +4,6 @@
 @use "../theme.scss";
 @use "../variable.scss";
 
-%widget_hover{
-  background-color: theme.$background;
-  transition: border-color 400ms ease-in-out;
-}
-
 label {
   font-size: 1rem;
 }

@@ -6,7 +6,7 @@ from gi.repository import Gio, GLib
 from loguru import logger
 
 import utils.functions as helpers
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
 class ScreenRecorder(Service):

@@ -1,7 +1,7 @@
 from fabric.widgets.box import Box
 
 from shared.separator import Separator
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
 class SpacingWidget(Box):

@@ -8,7 +8,7 @@ from loguru import logger
 from shared.widget_container import ButtonWidget
 from utils.colors import Colors
 from utils.functions import text_icon
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
 class UpdatesWidget(ButtonWidget):

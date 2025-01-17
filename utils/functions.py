@@ -1,5 +1,4 @@
 import datetime
-import json
 import os
 import shutil
 import subprocess
@@ -18,7 +17,7 @@ from loguru import logger
 import utils.icons as icons
 from shared.animated.scale import AnimatedScale
 from utils.colors import Colors
-from utils.config import DEFAULT_CONFIG
+
 
 gi.require_version("Gtk", "3.0")
 
@@ -72,18 +71,6 @@ def copy_theme(theme: str):
         exit(1)
 
 
-# Function to read the configuration file
-def read_config():
-    config_file = get_relative_path("../config.json")
-    if not os.path.exists(config_file):
-        with open(config_file, "w") as destination_file:
-            json.dump(DEFAULT_CONFIG, destination_file, indent=4, ensure_ascii=False)
-        return DEFAULT_CONFIG
-
-    with open(config_file) as file:
-        # Load JSON data into a Python dictionary
-        data = json.load(file)
-    return data
 
 
 # Function to create a text icon label
