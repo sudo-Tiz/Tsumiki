@@ -2,13 +2,14 @@ import re
 
 from fabric.hyprland.widgets import ActiveWindow
 from fabric.utils import FormattedString, truncate
+from fabric.widgets.box import Box
 
-from shared.widget_container import BoxWidget
+from shared.widget_container import ButtonWidget
 from utils.constants import WINDOW_TITLE_MAP
 from utils.widget_settings import BarConfig
 
 
-class WindowTitleWidget(BoxWidget):
+class WindowTitleWidget(ButtonWidget):
     """a widget that displays the title of the active window."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
@@ -16,6 +17,9 @@ class WindowTitleWidget(BoxWidget):
 
         # Store the configuration for the window title
         self.config = widget_config["window_title"]
+
+        self.box = Box()
+        self.children = (self.box,)
 
         # Create an ActiveWindow widget to track the active window
         self.window = ActiveWindow(
@@ -27,7 +31,7 @@ class WindowTitleWidget(BoxWidget):
         )
 
         # Add the ActiveWindow widget as a child
-        self.children = self.window
+        self.box.children = self.window
 
     def get_title(self, win_title, win_class):
         # Truncate the window title based on the configured length

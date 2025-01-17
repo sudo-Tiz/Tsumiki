@@ -1,5 +1,6 @@
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
+from fabric.widgets.eventbox import EventBox
 
 
 class BoxWidget(Box):
@@ -11,6 +12,24 @@ class BoxWidget(Box):
             style_classes="panel-box",
             **kwargs,
         )
+
+
+class EventBoxWidget(EventBox):
+    """A container for box widgets."""
+
+    def __init__(self, children, **kwargs):
+        super().__init__(
+            **kwargs,
+        )
+
+        self.box = Box(
+            spacing=4,
+            style_classes="panel-box",
+            children=children,
+        )
+        self.children = (self.box,)
+
+
 
 
 class ButtonWidget(Button):
