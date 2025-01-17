@@ -23,7 +23,8 @@ class EventBoxWidget(EventBox):
             **kwargs,
         )
 
-    # self.connect("enter-notify-event", lambda *_: self.children[0].add_style_class("widget_hover"))
+    # self.connect("enter-notify-event", lambda *_:
+    # self.children[0].add_style_class("widget_hover"))
 
 
 class ButtonWidget(Button):

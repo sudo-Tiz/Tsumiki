@@ -16,7 +16,7 @@ from modules.notifications.notification_widget import NotificationWidget
 from services import notify_cache_service
 from shared.pop_over import PopOverWindow
 from shared.separator import Separator
-from shared.widget_container import BoxWidget
+from shared.widget_container import ButtonWidget
 from utils.functions import uptime
 from utils.icons import icons
 from utils.widget_settings import BarConfig
@@ -163,7 +163,7 @@ class DateNotificationMenu(Box):
         return True
 
 
-class DateTimeWidget(BoxWidget):
+class DateTimeWidget(ButtonWidget):
     """A widget to power off the system."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
@@ -188,15 +188,17 @@ class DateTimeWidget(BoxWidget):
             icon_size=16,
         )
 
+        self.connect(
+            "clicked",
+            lambda *_: popup.set_visible(not popup.get_visible()),
+        )
+
         self.children = Box(
             spacing=10,
             v_align="center",
             children=(
                 self.notof_indicator,
-                DateTime(
-                    self.config["format"],
-                    on_clicked=lambda *_: popup.set_visible(not popup.get_visible()),
-                ),
+                DateTime(self.config["format"]),
             ),
         )
         date_menu.dnd_switch.connect("notify::active", self.on_dnd_switch)

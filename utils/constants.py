@@ -66,6 +66,7 @@ DEFAULT_CONFIG = {
         "label": True,
         "tooltip": True,
     },
+    "stop_watch": {"stopped_icon": "󱫞", "running_icon": "󱫠", "icon_size": "16px"},
     "hypr_idle": {
         "enabled_icon": "",
         "disabled_icon": "",

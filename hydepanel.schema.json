@@ -429,6 +429,20 @@
         }
       }
     },
+    "stop_watch": {
+      "type": "object",
+      "properties": {
+        "stopped_icon": {
+          "type": "string"
+        },
+        "running_icon": {
+          "type": "string"
+        },
+        "icon_size": {
+          "type": "string"
+        }
+      }
+    },
     "notification": {
       "type": "object",
       "properties": {

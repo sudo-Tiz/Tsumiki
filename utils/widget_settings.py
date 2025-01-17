@@ -60,6 +60,11 @@ Theme = TypedDict("Theme", {"name": str})
 # ClickCounter configuration
 ClickCounter = TypedDict("ClickCounter", {"count": int})
 
+# StopWatch configuration
+StopWatch = TypedDict(
+    "StopWatch", {"stopped_icon": str, "running_icon": str, "icon_size": str}
+)
+
 
 # Bar configuration
 Options = TypedDict(
@@ -180,6 +185,7 @@ class BarConfig(TypedDict):
     keyboard: Keyboard
     language: Language
     spacing: Spacing
+    stop_watch: StopWatch
     divider: Divider
     theme: Theme
     theme_switcher: ThemeSwitcher

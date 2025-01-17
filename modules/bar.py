@@ -24,6 +24,7 @@ from widgets import (
     PowerButton,
     Recorder,
     SpacingWidget,
+    StopWatchWidget,
     StorageWidget,
     SystemTray,
     TaskBarWidget,
@@ -74,6 +75,7 @@ class StatusBar(WaylandWindow):
             "window_title": WindowTitleWidget,
             "workspaces": WorkSpacesWidget,
             "spacing": SpacingWidget,
+            "stop_watch": StopWatchWidget,
             "divider": DividerWidget,
         }
 
