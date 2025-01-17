@@ -3,6 +3,13 @@ from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
 
 
+def get_style():
+    from utils.config import widget_config
+
+    widget_style = widget_config["options"]["widget_style"]
+    return widget_style
+
+
 class BoxWidget(Box):
     """A container for box widgets."""
 
@@ -12,6 +19,10 @@ class BoxWidget(Box):
             style_classes="panel-box",
             **kwargs,
         )
+
+        widget_style = get_style()
+
+        self.add_style_class(widget_style)
 
 
 class EventBoxWidget(EventBox):
@@ -35,8 +46,6 @@ class ButtonWidget(Button):
             style_classes="panel-button",
             **kwargs,
         )
-        from utils.config import widget_config
-
-        widget_style = widget_config["options"]["widget_style"]
+        widget_style = get_style()
 
         self.add_style_class(widget_style)

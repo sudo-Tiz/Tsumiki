@@ -5,13 +5,13 @@ from fabric.widgets.revealer import Revealer
 from loguru import logger
 
 from services import MprisPlayer, MprisPlayerManager
-from shared.widget_container import EventBoxWidget
+from shared.widget_container import ButtonWidget
 from utils.colors import Colors
 from utils.icons import common_text_icons
 from utils.widget_settings import BarConfig
 
 
-class Mpris(EventBoxWidget):
+class Mpris(ButtonWidget):
     """A widget to control the MPRIS."""
 
     def __init__(
@@ -58,7 +58,6 @@ class Mpris(EventBoxWidget):
         self.cover = Box(style_classes="cover")
 
         self.box = Box(
-            style_classes="panel-box",
             children=[self.text_icon],
         )
 
