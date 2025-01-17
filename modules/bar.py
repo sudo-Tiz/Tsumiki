@@ -3,8 +3,8 @@ from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow
 
+from utils.config import widget_config
 from utils.functions import convert_seconds_to_milliseconds
-from utils.widget_settings import widget_config
 from widgets import (
     Battery,
     BlueToothWidget,

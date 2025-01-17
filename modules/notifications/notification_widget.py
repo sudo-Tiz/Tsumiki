@@ -18,7 +18,7 @@ import utils.constants as constants
 import utils.functions as helpers
 import utils.icons as icons
 from shared import CustomImage
-from utils.widget_settings import widget_config
+from utils.config import widget_config
 
 
 class NotificationWidget(EventBox):

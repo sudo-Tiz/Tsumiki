@@ -14,9 +14,10 @@ from fabric.widgets.scale import ScaleMark
 from gi.repository import GLib, Gtk
 from loguru import logger
 
-import utils.icons as icons
 from shared.animated.scale import AnimatedScale
-from utils.colors import Colors
+
+from .colors import Colors
+from .icons import brightness_text_icons, distro_text_icons, volume_text_icons
 
 gi.require_version("Gtk", "3.0")
 
@@ -162,7 +163,7 @@ def play_sound(file: str):
 def get_distro_icon():
     distro_id = GLib.get_os_info("ID")
     # Search for the icon in the list
-    icon = next((icon for id, icon in icons.distro_text_icons if id == distro_id), None)
+    icon = next((icon for id, icon in distro_text_icons if id == distro_id), None)
 
     # Return the found icon or default to '' if not found
     return icon if icon else ""
@@ -178,23 +179,23 @@ def executable_exists(executable_name):
 def get_brightness_icon_name(level: int) -> dict[Literal["icon_text", "icon"], str]:
     if level <= 0:
         return {
-            "text_icon": icons.brightness_text_icons["off"],
+            "text_icon": brightness_text_icons["off"],
             "icon": "display-brightness-off-symbolic",
         }
 
     if level > 0 and level < 32:
         return {
-            "text_icon": icons.brightness_text_icons["low"],
+            "text_icon": brightness_text_icons["low"],
             "icon": "display-brightness-low-symbolic",
         }
     if level > 32 and level < 66:
         return {
-            "text_icon": icons.brightness_text_icons["medium"],
+            "text_icon": brightness_text_icons["medium"],
             "icon": "display-brightness-medium-symbolic",
         }
     if level >= 66 and level <= 100:
         return {
-            "text_icon": icons.brightness_text_icons["high"],
+            "text_icon": brightness_text_icons["high"],
             "icon": "display-brightness-high-symbolic",
         }
 
@@ -231,27 +232,27 @@ def get_audio_icon_name(
 ) -> dict[Literal["icon_text", "icon"], str]:
     if volume <= 0 or is_muted:
         return {
-            "text_icon": icons.volume_text_icons["low"],
+            "text_icon": volume_text_icons["low"],
             "icon": "audio-volume-muted-symbolic",
         }
     if volume > 0 and volume < 32:
         return {
-            "text_icon": icons.volume_text_icons["low"],
+            "text_icon": volume_text_icons["low"],
             "icon": "audio-volume-low-symbolic",
         }
     if volume > 32 and volume < 66:
         return {
-            "text_icon": icons.volume_text_icons["medium"],
+            "text_icon": volume_text_icons["medium"],
             "icon": "audio-volume-medium-symbolic",
         }
     if volume >= 66 and volume <= 100:
         return {
-            "text_icon": icons.volume_text_icons["high"],
+            "text_icon": volume_text_icons["high"],
             "icon": "audio-volume-high-symbolic",
         }
     else:
         return {
-            "text_icon": icons.volume_text_icons["overamplified"],
+            "text_icon": volume_text_icons["overamplified"],
             "icon": "audio-volume-overamplified-symbolic",
         }
 

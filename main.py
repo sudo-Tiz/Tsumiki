@@ -8,8 +8,8 @@ from modules.bar import StatusBar
 from modules.notifications.notification_pop_up import NotificationPopup
 from modules.osd import OSDContainer
 from utils.colors import Colors
+from utils.config import widget_config
 from utils.constants import APP_CACHE_DIRECTORY, APPLICATION_NAME
-from utils.widget_settings import widget_config
 from widgets.corners import ScreenCorners
 
 

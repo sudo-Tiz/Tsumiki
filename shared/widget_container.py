@@ -35,3 +35,11 @@ class ButtonWidget(Button):
             style_classes="panel-button",
             **kwargs,
         )
+        from utils.config import widget_config
+
+        widget_style = widget_config["options"]["widget_style"]
+
+        if widget_style == "wave1":
+            self.add_style_class("wave1")
+        elif widget_style == "wave2":
+            self.add_style_class("wave2")

@@ -6,8 +6,8 @@ import gi
 from gi.repository import GLib, Gtk
 from loguru import logger
 
-from utils.colors import Colors
-from utils.constants import APP_CACHE_DIRECTORY
+from .colors import Colors
+from .constants import APP_CACHE_DIRECTORY
 
 gi.require_version("Gtk", "3.0")
 

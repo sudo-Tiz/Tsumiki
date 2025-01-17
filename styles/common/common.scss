@@ -17,16 +17,6 @@ label {
   }
 }
 
-.wave-2 {
-  border-bottom-left-radius: 1.3em;
-  border-top-right-radius: 1.3em;
-}
-
-.wave-3 {
-  border-bottom-right-radius: 1.3em;
-  border-top-left-radius: 1.3em;
-}
-
 .panel-box,
 .panel-button {
   background: theme.$background-dark;
@@ -53,6 +43,16 @@ label {
 
 .widget_hover {
   @extend %widget_hover;
+}
+
+.wave1 {
+  border-bottom-left-radius: 1.3em;
+  border-top-right-radius: 1.3em;
+}
+
+.wave2 {
+  border-bottom-right-radius: 1.3em;
+  border-top-left-radius: 1.3em;
 }
 
 .popover {

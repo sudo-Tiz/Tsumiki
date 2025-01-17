@@ -65,6 +65,7 @@ DEFAULT_CONFIG = {
         "interval": 2000,
         "label": True,
         "tooltip": True,
+        "widget_style": "default",
     },
     "stop_watch": {"stopped_icon": "󱫞", "running_icon": "󱫠", "icon_size": "16px"},
     "hypr_idle": {
