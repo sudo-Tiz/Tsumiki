@@ -24,7 +24,7 @@ class IconResolver:
                     self._icon_dict = json.load(file)
                 except json.JSONDecodeError:
                     logger.info(
-                        f"{Colors.INFO}[ICONS] Cache file does not exist or is corrupted"
+                        f"{Colors.INFO}[ICONS] Cache file does not exist or corrupted"
                     )
         else:
             self._icon_dict = {}

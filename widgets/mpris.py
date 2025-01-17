@@ -39,7 +39,8 @@ class Mpris(EventBox):
 
         for player in self.mpris_manager.players:
             logger.info(
-                f"{Colors.INFO}[PLAYER MANAGER] player found: {player.get_property('player-name')}",
+                f"{Colors.INFO}[PLAYER MANAGER] player found: "
+                f"{player.get_property('player-name')}",
             )
             self.player = MprisPlayer(player)
             self.player.connect("notify::metadata", self.get_current)

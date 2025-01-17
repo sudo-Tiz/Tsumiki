@@ -18,7 +18,6 @@ import utils.icons as icons
 from shared.animated.scale import AnimatedScale
 from utils.colors import Colors
 
-
 gi.require_version("Gtk", "3.0")
 
 
@@ -27,7 +26,7 @@ class ExecutableNotFoundError(ImportError):
 
     def __init__(self, executable_name: str):
         super().__init__(
-            f"{Colors.ERROR}Executable {executable_name} not found. Please install it using your package manager."
+            f"{Colors.ERROR}Executable {executable_name} not found. Please install it using your package manager."  # noqa: E501
         )
 
 
@@ -51,7 +50,7 @@ def copy_theme(theme: str):
 
     if not os.path.exists(source_file):
         logger.warning(
-            f"{Colors.WARNING}Warning: The theme file '{theme}.scss' was not found. Using default theme."
+            f"{Colors.WARNING}Warning: The theme file '{theme}.scss' was not found. Using default theme."  # noqa: E501
         )
         source_file = get_relative_path("../styles/themes/catpuccin-mocha.scss")
 
@@ -69,8 +68,6 @@ def copy_theme(theme: str):
             f"{Colors.ERROR}Error: The theme file '{source_file}' was not found."
         )
         exit(1)
-
-
 
 
 # Function to create a text icon label
@@ -101,7 +98,7 @@ def validate_widgets(parsed_data, default_config):
         for widget in layout[section]:
             if widget not in default_config:
                 raise ValueError(
-                    f"Invalid widget {widget} found in section {section}. Please check the widget name."
+                    f"Invalid widget {widget} found in section {section}. Please check the widget name."  # noqa: E501
                 )
 
 

@@ -38,7 +38,10 @@ class BatteryMenu(Box):
             children=[
                 Button(
                     on_clicked=lambda *_: print(key),
-                    style_classes=f"power-profile-button  {'active' if key == self.active else ''}",
+                    style_classes=(
+                        f"power-profile-button "
+                        f"{'active' if key == self.active else ''}"
+                    ),
                     child=Box(
                         children=(
                             Image(
@@ -163,7 +166,7 @@ class Battery(ButtonWidget):
         return True
 
     def get_icon_name(self, battery_percent: int, is_charging: bool):
-        """Determine the icon name based on the battery percentage and charging status."""
+        """Determine the icon name based on the percentage and charging status."""
         # Determine the icon name based on the battery percentage and charging status
         if battery_percent == self.full_battery_level:
             return "battery-level-100-charged-symbolic"

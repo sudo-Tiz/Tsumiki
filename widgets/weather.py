@@ -178,7 +178,7 @@ class WeatherMenu(Box):
             self.forecast_box.attach(icon, col, 1, 1, 1)
             self.forecast_box.attach(temp, col, 2, 1, 1)
 
-    # wttr.in time are in 300,400...2100 format , we need to convert it to 3:00, 4:00...21:00
+    # wttr.in time are in 300,400...2100 format , we need to convert it to 4:00...21:00
     def convert_to_12hr_format(self, time: str) -> str:
         time = int(time)
         hour = time // 100  # Get the hour (e.g., 1200 -> 12)

@@ -5,6 +5,7 @@ from fabric.utils import get_relative_path
 
 from utils.constants import DEFAULT_CONFIG
 
+
 # Function to read the configuration file
 def read_config():
     config_file = get_relative_path("../config.json")
@@ -17,5 +18,3 @@ def read_config():
         # Load JSON data into a Python dictionary
         data = json.load(file)
     return data
-
-

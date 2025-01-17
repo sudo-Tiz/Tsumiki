@@ -1,8 +1,7 @@
+from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
 import utils.functions as helpers
-from fabric.widgets.box import Box
-
 from shared.widget_container import ButtonWidget
 from utils.icons import common_text_icons
 from utils.widget_settings import BarConfig
@@ -101,7 +100,8 @@ class MemoryWidget(ButtonWidget):
         # Update the tooltip with the memory usage details if enabled
         if self.config["tooltip"]:
             self.set_tooltip_text(
-                f"󰾆 {self.percent_used}%\n{common_text_icons['memory']} {self.get_used()}/{self.get_total()}",
+                f"""󰾆 {self.percent_used}%
+                {common_text_icons["memory"]} {self.get_used()}/{self.get_total()}""",
             )
 
         return True
@@ -159,7 +159,8 @@ class StorageWidget(ButtonWidget):
         # Update the tooltip with the storage usage details if enabled
         if self.config["tooltip"]:
             self.set_tooltip_text(
-                f"󰾆 {self.disk.percent}%\n{common_text_icons['storage']} {self.get_used()}/{self.get_total()}",
+                f"""󰾆 {self.disk.percent}%
+                {common_text_icons["storage"]} {self.get_used()}/{self.get_total()}""",
             )
 
         return True

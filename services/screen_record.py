@@ -79,7 +79,8 @@ class ScreenRecorder(Service):
                 _, stdout, stderr = process.communicate_utf8_finish(task)
             except Exception:
                 logger.error(
-                    f"[SCREENRECORD] Failed read notification action with error {stderr}"
+                    f"[SCREENRECORD] Failed read notification action with error "
+                    f"{stderr}"
                 )
                 return
 

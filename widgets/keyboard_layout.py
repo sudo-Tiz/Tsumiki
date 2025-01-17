@@ -1,8 +1,8 @@
 import json
 
 from fabric.utils import exec_shell_command_async
-from fabric.widgets.label import Label
 from fabric.widgets.box import Box
+from fabric.widgets.label import Label
 
 from shared.widget_container import ButtonWidget
 from utils.constants import KBLAYOUT_MAP

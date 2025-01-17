@@ -49,12 +49,11 @@ label {
   &:hover {
     @extend %widget_hover;
   }
-
 }
 
-#volume-eventbox:hover, #brightness-eventbox:hover {
- 
-  #volume{
+#volume-eventbox:hover,
+#brightness-eventbox:hover {
+  #volume {
     @extend %widget_hover;
   }
 }
