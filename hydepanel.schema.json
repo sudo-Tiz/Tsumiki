@@ -121,6 +121,20 @@
         }
       }
     },
+    "microphone": {
+      "type": "object",
+      "properties": {
+        "icon_size": {
+          "type": "string"
+        },
+        "label": {
+          "type": "boolean"
+        },
+        "tooltip": {
+          "type": "boolean"
+        }
+      }
+    },
     "battery": {
       "type": "object",
       "properties": {

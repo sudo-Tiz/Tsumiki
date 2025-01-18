@@ -10,6 +10,7 @@ from .hypr_idle import *
 from .hypr_sunset import *
 from .keyboard_layout import *
 from .language import *
+from .microphone import *
 from .mpris import *
 from .power_button import *
 from .recorder import *

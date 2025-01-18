@@ -161,34 +161,36 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 
 <details>
 <summary>Click to expand modules</summary>
+Here is the list arranged in ascending order alphabetically:
 
 - battery
 - bluetooth
 - brightness
-- clickcounter
 - cava
+- clickcounter
 - cpu
-- workspaces
 - date_menu
+- divider (utility)
 - hypr_idle
 - hypr_sunset
 - keyboard
 - language
 - media
-- volume
+- microphone
 - power
 - ram
 - recorder
+- spacer (utility)
 - storage
+- stop_watch
 - system_tray
 - taskbar
+- updates
+- volume
 - weather
 - window_title
 - workspace
-- updates
-- stop_watch
-- spacer (utility)
-- divider (utility)
+- workspaces
 
 </details>
 

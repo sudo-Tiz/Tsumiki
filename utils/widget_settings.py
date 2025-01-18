@@ -124,6 +124,9 @@ Weather = TypedDict(
 # Keyboard configuration
 Keyboard = TypedDict("Keyboard", {**BaseConfig.__annotations__, "icon": str})
 
+# MicroPhone configuration
+MicroPhone = TypedDict("MicroPhone", {**BaseConfig.__annotations__})
+
 
 Cava = TypedDict("Cava", {"bars": int})
 
@@ -180,6 +183,7 @@ class BarConfig(TypedDict):
     language: Language
     layout: Layout
     memory: Memory
+    microphone: MicroPhone
     mpris: Mpris
     notification: Notification
     options: Options

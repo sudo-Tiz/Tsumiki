@@ -103,6 +103,11 @@ DEFAULT_CONFIG = {
         "label": True,
         "tooltip": True,
     },
+    "microphone": {
+        "icon_size": "12px",
+        "label": False,
+        "tooltip": True,
+    },
     "mpris": {
         "truncation_size": 30,
         "tooltip": True,
