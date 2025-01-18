@@ -5,6 +5,8 @@ from loguru import logger
 
 from utils.colors import Colors
 
+import utils.functions as helpers
+
 
 class PowerProfiles(Service):
     """Service to interact with the PowerProfiles service."""
@@ -30,6 +32,12 @@ class PowerProfiles(Service):
         super().__init__(
             **kwargs,
         )
+
+        if not helpers.executable_exists("power-profiles-daemon"):
+            raise helpers.ExecutableNotFoundError(
+                "power-profiles-daemon,"
+            )  # Raise an error if power-profiles-daemon is not found
+
 
         self.bus_name = "net.hadess.PowerProfiles"
         self.object_path = "/net/hadess/PowerProfiles"
