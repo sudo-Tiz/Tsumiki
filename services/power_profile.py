@@ -3,6 +3,8 @@ from dbus.mainloop.glib import DBusGMainLoop
 from fabric import Service, Signal
 from loguru import logger
 
+from utils.colors import Colors
+
 
 class PowerProfiles(Service):
     """Service to interact with the PowerProfiles service."""
@@ -82,5 +84,5 @@ class PowerProfiles(Service):
     def handle_property_change(self, proxy, changed, invalidated):
         # Print the changed ActiveProfile
         if "ActiveProfile" in changed:
-            print("ActiveProfile changed:", changed["ActiveProfile"])
+            logger.info(f"{Colors.INFO}Profile changed: {changed['ActiveProfile']}")
             self.emit("profile", changed["ActiveProfile"])
