@@ -32,11 +32,10 @@ class PowerProfiles(Service):
             **kwargs,
         )
 
-        if not helpers.executable_exists("power-profiles-daemon"):
+        if not helpers.executable_exists("powerprofilesctl"):
             raise helpers.ExecutableNotFoundError(
                 "power-profiles-daemon,"
             )  # Raise an error if power-profiles-daemon is not found
-
 
         self.bus_name = "net.hadess.PowerProfiles"
         self.object_path = "/net/hadess/PowerProfiles"

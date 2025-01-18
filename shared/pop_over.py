@@ -16,7 +16,7 @@ class PopOverWindow(WaylandWindow):
         self,
         parent: WaylandWindow,
         pointing_to: Gtk.Widget | None = None,
-        margin: tuple[int, ...] | str = "0px 0px 0px 0px",
+        margin: tuple[int, ...] | str = "-2px 0px 0px 0px",
         keyboard_mode: Literal["none", "exclusive", "on-demand"] = "on-demand",
         **kwargs,
     ):
