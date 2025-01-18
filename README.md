@@ -7,12 +7,8 @@
   <img alt="discord" src="https://img.shields.io/discord/1200448076620501063" />
 </p>
 
-A semi-customizable bar written using the [Fabric Widget System](https://github.com/Fabric-Development/fabric) taking inpirations from hyprpanel and waybar for some widgets
-More on [Fabric's Wiki](https://wiki.ffpy.org)
-
+A semi-customizable bar written using the [Fabric Widget System](https://github.com/Fabric-Development/fabric)
 The panel focuses on providing an all-in-one, fully integrated panel experience, where users don’t have to rely on separate, theme-less third-party tools to manage niche functions like buetooth, notifications,on screen display.
-
-Many aspects of the bar including the look and functionalities are inspired from [waybar](https://github.com/Alexays/Waybar), [hyprpanel](https://hyprpanel.com) and [swayosd](https://github.com/ErikReider/SwayOSD).
 
 ![image](https://github.com/user-attachments/assets/9f5a0e67-9b98-4615-adcf-511a05527ec2)
 
@@ -59,6 +55,9 @@ brightnessctl
 
 ## To check for pacman updates in the default script used in the updates module
 pacman-contrib
+
+## To switch between power profiles in the battery module
+power-profiles-daemon
 
 ## To record screen through the dashboard record shortcut
 wf-recorder
@@ -117,7 +116,7 @@ If you prefer to have more control over the installation process, you can instal
 Run the following command to install the required system packages:
 
 ```sh
-	sudo pacman -S --noconfirm pipewire playerctl dart-sass networkmanager wl-clipboard brightnessctl pkgconf wf-recorder kitty python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python-pip python-gobject python-psutil python-dbus python-cairo python-loguru python-setproctitle
+	sudo pacman -S --noconfirm pipewire playerctl dart-sass power-profiles-daemon networkmanager wl-clipboard brightnessctl pkgconf wf-recorder kitty python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python-pip python-gobject python-psutil python-dbus python-cairo python-loguru python-setproctitle
 ```
 
 #### Step 2: Install AUR Packages
@@ -251,6 +250,14 @@ layerrule = ignorezero ,gtk-layer-shell
 ## Contributing
 
 We welcome all sorts of contributions, no matter how small, to this project! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute.
+
+## Acknowledgements
+
+- **Waybar** - A lot of the initial inspiration, and a pretty great bar.
+  [Waybar GitHub Repository](https://github.com/Alexays/Waybar)
+
+- **Hyprpanel** - Served as inspiration for some of the panel's features and design choices, with its focus on dynamic and customizable Hyprland panels.
+  [Hyprpanel GitHub Repository](https://github.com/Jas-SinghFSU/HyprPanel)
 
 # ⭐ Hit that Star Button!
 
