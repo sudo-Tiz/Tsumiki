@@ -20,11 +20,6 @@ label {
 .panel-box,
 .panel-button {
   background: theme.$background-dark;
-  border-radius: 100px;
-}
-
-.flat {
-  border-radius: 0;
 }
 
 .panel-box {
@@ -43,6 +38,19 @@ label {
   &:hover {
     @extend %widget_hover;
   }
+}
+
+.default {
+  border-radius: 100px;
+}
+
+.flat {
+  border-radius: 4px;
+}
+
+.shadow {
+  border-radius: 4px;
+  box-shadow: darken($color: theme.$background-dark, $amount: 15%) 0px 4px;
 }
 
 .wave1 {
