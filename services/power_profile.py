@@ -3,9 +3,8 @@ from dbus.mainloop.glib import DBusGMainLoop
 from fabric import Service, Signal
 from loguru import logger
 
-from utils.colors import Colors
-
 import utils.functions as helpers
+from utils.colors import Colors
 
 
 class PowerProfiles(Service):
