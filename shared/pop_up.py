@@ -263,7 +263,7 @@ class PopupWindow(WaylandWindow):
                 popup=self.reveal_child,
                 on_button_press_event=self.on_inhibit_click,
             ),
-            on_key_release_event=self.on_key_release,
+            on_key_press_event=self.on_key_release,
             **kwargs,
         )
 

@@ -23,7 +23,7 @@ class PopOverWindow(WaylandWindow):
         super().__init__(
             style_classes="popover",
             keyboard_mode=keyboard_mode,
-            on_key_release_event=self.on_key_release,
+            on_key_press_event=self.on_key_release,
             **kwargs,
         )
         self.exclusivity = "none"
