@@ -27,7 +27,7 @@ class ExecutableNotFoundError(ImportError):
 
     def __init__(self, executable_name: str):
         super().__init__(
-            f"{Colors.ERROR}Executable {executable_name} not found. Please install it using your package manager."  # noqa: E501
+            f"{Colors.ERROR}Executable {Colors.UNDERLINE}{executable_name}{Colors.RESET} not found. Please install it using your package manager."  # noqa: E501
         )
 
 
