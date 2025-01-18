@@ -19,7 +19,7 @@
   }
 
   .active {
-    color: theme.$accent-purple;
+    color: darken($color: theme.$accent-purple, $amount: 12%);
   }
 
   .power-profile-button {

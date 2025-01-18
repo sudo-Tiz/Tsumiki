@@ -1,11 +1,16 @@
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
-from fabric import Service
+from fabric import Service, Signal
 from loguru import logger
 
 
 class PowerProfiles(Service):
     """Service to interact with the PowerProfiles service."""
+
+    @Signal
+    def profile(self, value: str) -> None:
+        """Signal emitted when screen brightness changes."""
+        # Implement as needed for your application
 
     instance = None
 
@@ -78,3 +83,4 @@ class PowerProfiles(Service):
         # Print the changed ActiveProfile
         if "ActiveProfile" in changed:
             print("ActiveProfile changed:", changed["ActiveProfile"])
+            self.emit("profile", changed["ActiveProfile"])

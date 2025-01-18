@@ -14,6 +14,45 @@ from utils.functions import format_time, psutil_fabricator
 from utils.widget_settings import BarConfig
 
 
+class PowerProfileItem(Button):
+    """A button to display the power profile."""
+
+    def __init__(
+        self,
+        key,
+        profile,
+        active,
+        **kwargs,
+    ):
+        super().__init__(
+            **kwargs,
+        )
+        self.profile = profile
+        self.children = (
+            Box(
+                children=(
+                    Image(
+                        icon_name=profile["icon_name"],
+                        icon_size=15,
+                    ),
+                    Label(
+                        label=profile["name"],
+                        style_classes="panel-text",
+                    ),
+                ),
+            ),
+        )
+
+        self.connect(
+            "button-press-event",
+            lambda *_: power_profile_service.set_power_profile(key),
+        )
+
+        self.add_style_class(
+            f"power-profile-button {'active' if key == active else ''}"
+        )
+
+
 class BatteryMenu(Box):
     """A menu to display the battery status."""
 
@@ -31,32 +70,10 @@ class BatteryMenu(Box):
 
         self.active = power_profile_service.get_current_profile()
 
-        power_profile = Box(
-            orientation="v",
-            spacing=10,
-            style_classes="power-profile-box",
-            children=[
-                Button(
-                    on_clicked=lambda *_: print(key),
-                    style_classes=(
-                        f"power-profile-button {'active' if key == self.active else ''}"
-                    ),
-                    child=Box(
-                        children=(
-                            Image(
-                                icon_name=profile["icon_name"],
-                                icon_size=15,
-                            ),
-                            Label(
-                                label=profile["name"],
-                                style_classes="panel-text",
-                            ),
-                        ),
-                    ),
-                )
-                for key, profile in self.profiles.items()
-            ],
-        )
+        self.power_profiles = [
+            PowerProfileItem(key=key, profile=profile, active=self.active)
+            for key, profile in self.profiles.items()
+        ]
 
         self.children = CenterBox(
             start_children=Box(
@@ -64,10 +81,30 @@ class BatteryMenu(Box):
                 spacing=10,
                 children=(
                     Label("Power Profiles", style_classes="power-profile-title"),
-                    power_profile,
+                    Box(
+                        orientation="v",
+                        spacing=10,
+                        style_classes="power-profile-box",
+                        children=self.power_profiles,
+                    ),
                 ),
             )
         )
+
+        power_profile_service.connect(
+            "profile",
+            self.on_profile_changed,
+        )
+
+    def on_profile_changed(self, sender, value, *args):
+        self.active = value
+
+        for profile in self.power_profiles:
+            # Remove the active class from all profiles, before adding to active profile
+            profile.get_style_context().remove_class("active")
+            profile.add_style_class(
+                "active" if profile.profile == self.profiles[self.active] else ""
+            )
 
 
 class Battery(ButtonWidget):
