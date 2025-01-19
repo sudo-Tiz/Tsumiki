@@ -19,6 +19,7 @@ label {
 
 .panel-box,
 .panel-button {
+  border-radius: 100px;
   background: theme.$background-dark;
 }
 
@@ -38,10 +39,6 @@ label {
   &:hover {
     @extend %widget_hover;
   }
-}
-
-.default {
-  border-radius: 100px;
 }
 
 .flat {
