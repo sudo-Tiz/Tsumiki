@@ -34,8 +34,12 @@ class EventBoxWidget(EventBox):
             **kwargs,
         )
 
-    # self.connect("enter-notify-event", lambda *_:
-    # self.children[0].add_style_class("widget_hover"))
+        widget_style = get_style()
+
+        # hacky way to add style class to the child widget. but honest work
+        self.connect(
+            "child-notify", lambda *_: self.children[0].add_style_class(widget_style)
+        )
 
 
 class ButtonWidget(Button):
