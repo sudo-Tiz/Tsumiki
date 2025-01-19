@@ -3,7 +3,6 @@ from dbus.mainloop.glib import DBusGMainLoop
 from fabric import Service, Signal
 from loguru import logger
 
-import utils.functions as helpers
 from utils.colors import Colors
 
 
@@ -31,11 +30,6 @@ class PowerProfiles(Service):
         super().__init__(
             **kwargs,
         )
-
-        if not helpers.executable_exists("powerprofilesctl"):
-            raise helpers.ExecutableNotFoundError(
-                "power-profiles-daemon,"
-            )  # Raise an error if power-profiles-daemon is not found
 
         self.bus_name = "net.hadess.PowerProfiles"
         self.object_path = "/net/hadess/PowerProfiles"
