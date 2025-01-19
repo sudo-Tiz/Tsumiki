@@ -1,4 +1,5 @@
 import contextlib
+from typing import Literal
 
 import gi
 from fabric.widgets.wayland import WaylandWindow
@@ -15,10 +16,16 @@ class PopOverWindow(WaylandWindow):
         self,
         parent: WaylandWindow,
         pointing_to: Gtk.Widget | None = None,
-        margin: tuple[int, ...] | str = "0px 0px 0px 0px",
+        margin: tuple[int, ...] | str = "-2px 0px 0px 0px",
+        keyboard_mode: Literal["none", "exclusive", "on-demand"] = "on-demand",
         **kwargs,
     ):
-        super().__init__(style_classes="popover", **kwargs)
+        super().__init__(
+            style_classes="popover",
+            keyboard_mode=keyboard_mode,
+            on_key_press_event=self.on_key_release,
+            **kwargs,
+        )
         self.exclusivity = "none"
         self._parent = parent
         self._pointing_widget = pointing_to
@@ -36,6 +43,10 @@ class PopOverWindow(WaylandWindow):
             0,
         )
         return round(x / 2), round(y / 2)
+
+    def on_key_release(self, _, event_key):
+        if event_key.get_keycode()[1] == 9:
+            self.hide()
 
     def set_pointing_to(self, widget: Gtk.Widget | None):
         if self._pointing_widget:

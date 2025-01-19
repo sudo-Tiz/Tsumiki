@@ -1,17 +1,17 @@
 from fabric.utils import bulk_connect
 from fabric.widgets.box import Box
-from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
 from loguru import logger
 
 from services import MprisPlayer, MprisPlayerManager
+from shared.widget_container import ButtonWidget
 from utils.colors import Colors
 from utils.icons import common_text_icons
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
-class Mpris(EventBox):
+class Mpris(ButtonWidget):
     """A widget to control the MPRIS."""
 
     def __init__(
@@ -22,7 +22,6 @@ class Mpris(EventBox):
     ):
         # Initialize the EventBox with specific name and style
         super().__init__(
-            name="mpris",
             **kwargs,
         )
         self.config = widget_config["mpris"]
@@ -39,7 +38,8 @@ class Mpris(EventBox):
 
         for player in self.mpris_manager.players:
             logger.info(
-                f"{Colors.INFO}[PLAYER MANAGER] player found: {player.get_property('player-name')}",
+                f"{Colors.INFO}[PLAYER MANAGER] player found: "
+                f"{player.get_property('player-name')}",
             )
             self.player = MprisPlayer(player)
             self.player.connect("notify::metadata", self.get_current)
@@ -58,7 +58,6 @@ class Mpris(EventBox):
         self.cover = Box(style_classes="cover")
 
         self.box = Box(
-            style_classes="panel-box",
             children=[self.text_icon],
         )
 
@@ -75,11 +74,13 @@ class Mpris(EventBox):
     def get_current(self, *_):
         bar_label = self.player.title
 
-        trucated_info = (
-            bar_label if len(bar_label) < self.config["length"] else bar_label[:30]
+        truncated_info = (
+            bar_label
+            if len(bar_label) < self.config["truncation_size"]
+            else bar_label[:30]
         )
 
-        self.label.set_label(trucated_info)
+        self.label.set_label(truncated_info)
 
         art_url = self.player.metadata["mpris:artUrl"]
 

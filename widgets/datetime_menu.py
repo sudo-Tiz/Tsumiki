@@ -12,14 +12,14 @@ from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import Gtk
 
-from modules.notifications.notificationwidget import NotificationWidget
+from modules.notifications.notification_widget import NotificationWidget
 from services import notify_cache_service
-from shared.popover import PopOverWindow
-from shared.widget_container import BoxWidget
+from shared.pop_over import PopOverWindow
+from shared.separator import Separator
+from shared.widget_container import ButtonWidget
 from utils.functions import uptime
 from utils.icons import icons
-from utils.widget_config import BarConfig
-from widgets.player import Player
+from utils.widget_settings import BarConfig
 
 gi.require_version("Gtk", "3.0")
 
@@ -111,7 +111,7 @@ class DateNotificationMenu(Box):
         )
 
         # Notification body column
-        notification_colum = Box(
+        notification_column = Box(
             name="notification-column",
             orientation="v",
             children=(
@@ -150,22 +150,20 @@ class DateNotificationMenu(Box):
         )
 
         self.children = (
-            notification_colum,
-            Gtk.Separator(
-                visible=True,
-            ),
+            notification_column,
+            Separator(),
             date_column,
         )
 
-        invoke_repeater(1000, self.update_lables, initial_call=True)
+        invoke_repeater(1000, self.update_labels, initial_call=True)
 
-    def update_lables(self):
+    def update_labels(self):
         self.clock_label.set_text(time.strftime("%H:%M"))
         self.uptime.set_text(uptime())
         return True
 
 
-class DateTimeWidget(BoxWidget):
+class DateTimeWidget(ButtonWidget):
     """A widget to power off the system."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
@@ -195,15 +193,17 @@ class DateTimeWidget(BoxWidget):
             icon_size=16,
         )
 
+        self.connect(
+            "clicked",
+            lambda *_: popup.set_visible(not popup.get_visible()),
+        )
+
         self.children = Box(
             spacing=10,
             v_align="center",
             children=(
                 self.notof_indicator,
-                DateTime(
-                    self.config["format"],
-                    on_clicked=lambda *_: popup.set_visible(not popup.get_visible()),
-                ),
+                DateTime(self.config["format"], name="date-time"),
             ),
         )
         date_menu.dnd_switch.connect("notify::active", self.on_dnd_switch)

@@ -5,7 +5,48 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "abyssgreen",
+            "catpuccin-frappe",
+            "catpuccin-latte",
+            "catpuccin-macchiato",
+            "catpuccin-mocha",
+            "cobalt2",
+            "cyberdream",
+            "cyberpunk",
+            "decay-green",
+            "dracula",
+            "earthy",
+            "everforest",
+            "gotham-dark",
+            "graphite-mono",
+            "green-lush",
+            "greenify",
+            "gruvbox-material",
+            "gruvbox",
+            "kanagawa",
+            "mojave",
+            "monochrome",
+            "neon",
+            "nightfox",
+            "nightowl",
+            "nord",
+            "nordic",
+            "oceanic-next",
+            "onedark",
+            "poimandres",
+            "popcode",
+            "rain-dark",
+            "rosepine",
+            "shades-of-purple",
+            "solarized-dark",
+            "sonokai",
+            "synthwave",
+            "tokyonight",
+            "verminal",
+            "zenburn"
+          ]
         }
       }
     },
@@ -14,6 +55,18 @@
       "properties": {
         "screen_corners": {
           "type": "boolean"
+        },
+        "location": {
+          "type": "string",
+          "enum": ["top", "bottom"]
+        },
+        "layer": {
+          "type": "string",
+          "enum": ["background", "bottom", "top", "overlay"]
+        },
+        "widget_style": {
+          "type": "string",
+          "enum": ["default", "wave1", "wave2", "flat", "shadow"]
         }
       }
     },
@@ -23,19 +76,109 @@
         "left_section": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "battery",
+              "bluetooth",
+              "brightness",
+              "cava",
+              "clickcounter",
+              "cpu",
+              "date_time",
+              "divider",
+              "hypr_idle",
+              "hypr_sunset",
+              "keyboard",
+              "language",
+              "media",
+              "microphone",
+              "power",
+              "ram",
+              "recorder",
+              "spacer",
+              "storage",
+              "stop_watch",
+              "system_tray",
+              "taskbar",
+              "updates",
+              "volume",
+              "weather",
+              "window_title",
+              "workspace",
+              "workspaces"
+            ]
           }
         },
         "middle_section": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "battery",
+              "bluetooth",
+              "brightness",
+              "cava",
+              "clickcounter",
+              "cpu",
+              "date_time",
+              "divider",
+              "hypr_idle",
+              "hypr_sunset",
+              "keyboard",
+              "language",
+              "media",
+              "microphone",
+              "power",
+              "ram",
+              "recorder",
+              "spacer",
+              "storage",
+              "stop_watch",
+              "system_tray",
+              "taskbar",
+              "updates",
+              "volume",
+              "weather",
+              "window_title",
+              "workspace",
+              "workspaces"
+            ]
           }
         },
         "right_section": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "battery",
+              "bluetooth",
+              "brightness",
+              "cava",
+              "clickcounter",
+              "cpu",
+              "date_time",
+              "divider",
+              "hypr_idle",
+              "hypr_sunset",
+              "keyboard",
+              "language",
+              "media",
+              "microphone",
+              "power",
+              "ram",
+              "recorder",
+              "spacer",
+              "storage",
+              "stop_watch",
+              "system_tray",
+              "taskbar",
+              "updates",
+              "volume",
+              "weather",
+              "window_title",
+              "workspace",
+              "workspaces"
+            ]
           }
         }
       }
@@ -106,6 +249,20 @@
         },
         "interval": {
           "type": "integer"
+        }
+      }
+    },
+    "microphone": {
+      "type": "object",
+      "properties": {
+        "icon_size": {
+          "type": "string"
+        },
+        "label": {
+          "type": "boolean"
+        },
+        "tooltip": {
+          "type": "boolean"
         }
       }
     },
@@ -214,11 +371,36 @@
         }
       }
     },
+    "spacing": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer"
+        }
+      }
+    },
+    "divider": {
+      "type": "object",
+      "properties": {
+        "size": {
+          "type": "integer"
+        }
+      }
+    },
+    "click_counter": {
+      "type": "object",
+      "properties": {
+        "count": {
+          "type": "integer"
+        }
+      }
+    },
     "updates": {
       "type": "object",
       "properties": {
         "os": {
-          "type": "string"
+          "type": "string",
+          "enum": ["arch", "fedora", "opensuse", "ubuntu"]
         }
       }
     },
@@ -229,7 +411,19 @@
           "type": "boolean"
         },
         "anchor": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "center-left",
+            "center",
+            "center-right",
+            "top",
+            "top-right",
+            "top-center",
+            "top-left",
+            "bottom-left",
+            "bottom-center",
+            "bottom-right"
+          ]
         },
         "duration": {
           "type": "integer"
@@ -264,7 +458,7 @@
     "language": {
       "type": "object",
       "properties": {
-        "length": {
+        "truncation_size": {
           "type": "integer"
         }
       }
@@ -272,7 +466,7 @@
     "mpris": {
       "type": "object",
       "properties": {
-        "length": {
+        "truncation_size": {
           "type": "integer"
         },
         "format": {
@@ -286,7 +480,7 @@
         "icon_size": {
           "type": "integer"
         },
-        "ignore": {
+        "ignored": {
           "type": "array",
           "items": {
             "type": "string"
@@ -378,6 +572,20 @@
         }
       }
     },
+    "stop_watch": {
+      "type": "object",
+      "properties": {
+        "stopped_icon": {
+          "type": "string"
+        },
+        "running_icon": {
+          "type": "string"
+        },
+        "icon_size": {
+          "type": "string"
+        }
+      }
+    },
     "notification": {
       "type": "object",
       "properties": {
@@ -388,7 +596,22 @@
           }
         },
         "anchor": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "center-left",
+            "center",
+            "center-right",
+            "top",
+            "top-right",
+            "top-center",
+            "top-left",
+            "bottom-left",
+            "bottom-center",
+            "bottom-right"
+          ]
+        },
+        "auto_dismiss": {
+          "type": "boolean"
         },
         "timeout": {
           "type": "integer"

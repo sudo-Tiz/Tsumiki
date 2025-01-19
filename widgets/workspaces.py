@@ -1,9 +1,8 @@
-from fabric.hyprland.widgets import WorkspaceButton
-from fabric.hyprland.widgets import Workspaces as HyperlandWorkspace
+from fabric.hyprland.widgets import WorkspaceButton, Workspaces
 
 from shared.widget_container import BoxWidget
 from utils.functions import unique_list
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
 class WorkSpacesWidget(BoxWidget):
@@ -16,11 +15,11 @@ class WorkSpacesWidget(BoxWidget):
         ignored_ws = unique_list(self.config["ignored"])
 
         # Create a HyperlandWorkspace widget to manage workspace buttons
-        self.workspace = HyperlandWorkspace(
+        self.workspace = Workspaces(
             name="workspaces",
             spacing=4,
             # Create buttons for each workspace if occupied
-            buttons=None  # sending None to the buttons parameter will create only the occupied workspaces
+            buttons=None  # sending None to buttons will create occupied workspaces only
             if self.config["hide_unoccupied"]
             else [
                 WorkspaceButton(id=i, label=str(i))

@@ -4,7 +4,7 @@ from fabric.widgets.image import Image
 from gi.repository import Gdk, GdkPixbuf, GLib, Gray, Gtk
 
 from shared.widget_container import BoxWidget
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 gi.require_version("Gray", "0.1")
 gi.require_version("Gtk", "3.0")
@@ -25,8 +25,8 @@ class SystemTray(BoxWidget):
         item = self.watcher.get_item_for_identifier(identifier)
 
         if (
-            self.config["ignore"]
-            and item.get_property("title") in self.config["ignore"]
+            self.config["ignored"]
+            and item.get_property("title") in self.config["ignored"]
         ):
             return
 

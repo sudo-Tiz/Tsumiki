@@ -3,10 +3,10 @@ from fabric.widgets.box import Box
 from fabric.widgets.wayland import WaylandWindow
 
 import utils.functions as helpers
-from modules.notifications.notificationwidget import NotificationRevealer
+from modules.notifications.notification_widget import NotificationRevealer
 from services import notification_service, notify_cache_service
 from utils.monitors import HyprlandWithMonitors
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
 class NotificationPopup(WaylandWindow):

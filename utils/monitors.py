@@ -13,7 +13,7 @@ gi.require_version("Gdk", "3.0")
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 # Another idea is to use Gdk.Monitor.get_model() however,
-#       there is no garuntee that this will be unique
+#       there is no  guarantee that this will be unique
 #       Example: both monitors have the same model number
 #       (quite common in multi monitor setups)
 

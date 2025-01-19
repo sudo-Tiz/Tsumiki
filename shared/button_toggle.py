@@ -1,11 +1,13 @@
 from fabric.utils import exec_shell_command_async, invoke_repeater
 
 import utils.functions as helpers
-from shared.widget_container import ButtonWidget
+
+from .widget_container import ButtonWidget
 
 
 class CommandSwitcher(ButtonWidget):
-    """A button widget to toggle a command. Useful for making services with two states."""
+    """A button widget to toggle a command.
+    Useful for making services with two states."""
 
     def __init__(
         self,

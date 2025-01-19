@@ -6,8 +6,8 @@ import gi
 from gi.repository import GLib, Gtk
 from loguru import logger
 
-from utils.colors import Colors
-from utils.config import APP_CACHE_DIRECTORY
+from .colors import Colors
+from .constants import APP_CACHE_DIRECTORY
 
 gi.require_version("Gtk", "3.0")
 
@@ -24,7 +24,7 @@ class IconResolver:
                     self._icon_dict = json.load(file)
                 except json.JSONDecodeError:
                     logger.info(
-                        f"{Colors.INFO}[ICONS] Cache file does not exist or is corrupted"
+                        f"{Colors.INFO}[ICONS] Cache file does not exist or corrupted"
                     )
         else:
             self._icon_dict = {}
@@ -42,7 +42,7 @@ class IconResolver:
     def _store_new_icon(self, app_id: str, icon: str):
         self._icon_dict[app_id] = icon
         with open(ICON_CACHE_FILE, "w") as f:
-            json.dump(self._icon_dict, f)
+            json.dump(self._icon_dict, f, indent=4, ensure_ascii=False)
             f.close()
 
     def _get_icon_from_desktop_file(self, desktop_file_path: str):

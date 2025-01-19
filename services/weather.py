@@ -45,7 +45,7 @@ class WeatherService:
             return {
                 "location": location.capitalize(),
                 "current": current_weather,  # the current weather information
-                "hourly": hourly_weather,  # the data for the next 24 hours in tri-hourly intervals,
+                "hourly": hourly_weather,  # tri-hourly data for the next 24 hours
                 "astronomy": weather["astronomy"][0],  # the sunrise and sunset times
             }
 

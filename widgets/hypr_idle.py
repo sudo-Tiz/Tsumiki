@@ -1,5 +1,5 @@
 from shared import CommandSwitcher
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
 class HyprIdleWidget(CommandSwitcher):

@@ -1,6 +1,7 @@
 @use "sass:color";
 @use "theme.scss";
 @use "common/mixins.scss";
+@use "common/functions.scss";
 @use "variable.scss";
 
 /************** DATE MENU **************/
@@ -8,7 +9,7 @@
 #datemenu {
   @include mixins.floating-widget;
   @include mixins.spacing;
-  padding: 10px;
+  padding: functions.toEm(10);
 
   #notification-column {
     min-width: 350px;
@@ -22,9 +23,8 @@
       }
 
       label {
-        font-weight: 700;
         margin-right: 4px;
-        font-size: 12px;
+        @extend %smaller;
       }
 
       #clear-button {
@@ -63,7 +63,10 @@
   }
 
   separator {
-    background-color: lighten(variable.$popover-border-color, 10%);
+    background-color: color.adjust(
+      variable.$popover-border-color,
+      $lightness: 10%
+    );
     border-radius: variable.$radius;
     margin-right: variable.$spacing;
   }
@@ -82,7 +85,7 @@
     }
 
     .calendar {
-      @include mixins.widget;
+      @extend %widget;
       background-color: theme.$background-alt;
 
       padding: variable.$padding * 2 variable.$padding * 2 0;

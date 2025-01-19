@@ -41,12 +41,13 @@ start_bar() {
 	cat <<EOF
 
 
-██╗  ██╗██╗   ██╗██████╗ ███████╗██████╗  █████╗ ███╗   ██╗███████╗██╗
-██║  ██║╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗██╔══██╗████╗  ██║██╔════╝██║
-███████║ ╚████╔╝ ██║  ██║█████╗  ██████╔╝███████║██╔██╗ ██║█████╗  ██║
-██╔══██║  ╚██╔╝  ██║  ██║██╔══╝  ██╔═══╝ ██╔══██║██║╚██╗██║██╔══╝  ██║
-██║  ██║   ██║   ██████╔╝███████╗██║     ██║  ██║██║ ╚████║███████╗███████╗
-╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚══════╝
+ __ __  __ __  ___      ___  ____   ____  ____     ___  _
+|  |  ||  |  ||   \    /  _]|    \ /    ||    \   /  _]| |
+|  |  ||  |  ||    \  /  [_ |  o  )  o  ||  _  | /  [_ | |
+|  _  ||  ~  ||  D  ||    _]|   _/|     ||  |  ||    _]| |___
+|  |  ||___, ||     ||   [_ |  |  |  _  ||  |  ||   [_ |     |
+|  |  ||     ||     ||     ||  |  |  |  ||  |  ||     ||     |
+|__|__||____/ |_____||_____||__|  |__|__||__|__||_____||_____|
 
 
 EOF
@@ -79,7 +80,7 @@ install_packages() {
 	echo -e "\e[1;34mInstalling the pre-requisites, may take a while....\e[0m\n"
 
 	# Install packages using pacman
-	sudo pacman -S --noconfirm pipewire playerctl dart-sass networkmanager wl-clipboard brightnessctl python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python-pip python-gobject python-psutil python-cairo python-loguru python-setproctitle pkgconf wf-recorder kitty
+	sudo pacman -S --noconfirm pipewire playerctl dart-sass networkmanager power-profiles-daemon wl-clipboard brightnessctl pkgconf wf-recorder kitty python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python-pip python-gobject python-psutil python-cairo python-dbus python-loguru python-setproctitle
 
 
 	if command -v yay &> /dev/null; then
@@ -91,8 +92,15 @@ install_packages() {
 		exit 1
 	fi
 
+
+    if command -v paru &> /dev/null; then
+		aur_helper="paru"
+	else
+		aur_helper="yay"
+	fi
+
 	# Install packages using yay (AUR helper)
-	$aur_helper -S --noconfirm gray-git python-fabric gnome-bluetooth-3.0 grimblast
+	$aur_helper -S --noconfirm gray-git python-fabric gnome-bluetooth-3.0 python-rlottie-python
 }
 
 # Check the argument passed to the script and call the appropriate function

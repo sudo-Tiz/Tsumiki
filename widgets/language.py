@@ -1,11 +1,12 @@
 from fabric.hyprland.widgets import Language
 from fabric.utils import FormattedString, truncate
+from fabric.widgets.box import Box
 
-from shared.widget_container import BoxWidget
-from utils.widget_config import BarConfig
+from shared.widget_container import ButtonWidget
+from utils.widget_settings import BarConfig
 
 
-class LanguageWidget(BoxWidget):
+class LanguageWidget(ButtonWidget):
     """A widget to display the current language."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
@@ -13,14 +14,15 @@ class LanguageWidget(BoxWidget):
 
         self.config = widget_config["language"]
 
+        self.box = Box()
+        self.children = (self.box,)
+
         self.lang = Language(
             formatter=FormattedString(
                 "{truncate(language,length,suffix)}",
                 truncate=truncate,
-                length=self.config["length"],
+                length=self.config["truncation_size"],
                 suffix="",
             ),
         )
-        ## TODO: add tool tip
-
-        self.children = self.lang
+        self.box.children = (self.lang,)

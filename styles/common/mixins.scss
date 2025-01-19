@@ -1,16 +1,76 @@
 @use "../theme.scss";
 @use "../variable.scss";
 
-@mixin unset() {
+%unset {
   outline: none;
   border: none;
   box-shadow: none;
 }
 
+%widget_hover {
+  background-color: theme.$background;
+  transition: border-color 400ms ease-in-out;
+}
+
+/* General Typography */
+%large_title {
+  font-weight: 300;
+  font-size: 32px;
+}
+
+%title_1 {
+  font-weight: 800;
+  font-size: 27px;
+}
+
+%title_2 {
+  font-weight: 800;
+  font-size: 20px;
+}
+
+%title_3 {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+%title_4 {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+%heading {
+  font-weight: 700;
+  font-size: 14.6px;
+}
+
+%caption_heading {
+  font-weight: 700;
+  font-size: 12px;
+}
+
+%caption {
+  font-weight: 400;
+  font-size: 12px;
+}
+
+%smaller {
+  font-weight: 400;
+  font-size: 12px;
+}
+
+%widget {
+  transition: 200ms;
+  border-radius: variable.$radius;
+  color: theme.$text-main;
+  background-color: theme.$background-alt;
+  border: variable.$border;
+}
+
 @mixin slider(
   $radius: variable.$radius,
   $highlight-color: white,
-  $length: 145px
+  $length: 145px,
+  $slider-color: theme.$background-dark
 ) {
   slider {
     min-height: 8px;
@@ -28,7 +88,7 @@
     min-height: inherit;
     border-radius: $radius;
     border: none;
-    background: theme.$background-alt;
+    background: $slider-color;
   }
 
   highlight,
@@ -38,13 +98,13 @@
   }
 }
 
-@mixin floating-widget {
+@mixin floating-widget($radius: variable.$popover-radius) {
   box-shadow: 0 0 1px 0 theme.$shadow-color;
   margin: max(variable.$spacing, 8px);
   border: variable.$border-width solid variable.$popover-border-color;
   background-color: theme.$background-dark;
   color: theme.$text-main;
-  border-radius: variable.$popover-radius;
+  border-radius: $radius;
   padding: variable.$popover-padding;
 }
 
@@ -59,14 +119,6 @@
   image {
     color: transparent;
   }
-}
-
-@mixin widget {
-  transition: 200ms;
-  border-radius: variable.$radius;
-  color: theme.$text-main;
-  background-color: theme.$background-alt;
-  border: variable.$border;
 }
 
 @mixin spacing($multiplier: 1, $spacing: variable.$spacing, $rec: false) {

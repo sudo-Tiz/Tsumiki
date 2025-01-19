@@ -7,12 +7,8 @@
   <img alt="discord" src="https://img.shields.io/discord/1200448076620501063" />
 </p>
 
-A semi-customizable bar written using the [Fabric Widget System](https://github.com/Fabric-Development/fabric) taking inpirations from hyprpanel and waybar for some widgets
-More on [Fabric's Wiki](https://wiki.ffpy.org)
-
+A semi-customizable bar written using the [Fabric Widget System](https://github.com/Fabric-Development/fabric)
 The panel focuses on providing an all-in-one, fully integrated panel experience, where users don’t have to rely on separate, theme-less third-party tools to manage niche functions like buetooth, notifications,on screen display.
-
-Many aspects of the bar including the look and functionalities are inspired from [waybar](https://github.com/Alexays/Waybar), [hyprpanel](https://hyprpanel.com) and [swayosd](https://github.com/ErikReider/SwayOSD).
 
 ![image](https://github.com/user-attachments/assets/9f5a0e67-9b98-4615-adcf-511a05527ec2)
 
@@ -32,7 +28,7 @@ Many aspects of the bar including the look and functionalities are inspired from
 Most of these are already installed on existing working machines
 
 ```sh
-# newtwork
+# network
 networkmanager
 
 pipewire
@@ -59,6 +55,9 @@ brightnessctl
 
 ## To check for pacman updates in the default script used in the updates module
 pacman-contrib
+
+## To switch between power profiles in the battery module
+power-profiles-daemon
 
 ## To record screen through the dashboard record shortcut
 wf-recorder
@@ -117,7 +116,7 @@ If you prefer to have more control over the installation process, you can instal
 Run the following command to install the required system packages:
 
 ```sh
-sudo pacman -S pipewire playerctl dart-sass networkmanager wl-clipboard brightnessctl python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python-pip python-gobject python-psutil python-cairo python-loguru python-setproctitle pkgconf wf-recorder kitty
+	sudo pacman -S --noconfirm pipewire playerctl dart-sass power-profiles-daemon networkmanager wl-clipboard brightnessctl pkgconf wf-recorder kitty python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python-pip python-gobject python-psutil python-dbus python-cairo python-loguru python-setproctitle
 ```
 
 #### Step 2: Install AUR Packages
@@ -125,7 +124,7 @@ sudo pacman -S pipewire playerctl dart-sass networkmanager wl-clipboard brightne
 Using `yay` to install the required AUR packages:
 
 ```sh
-yay -S gray-git python-fabric gnome-bluetooth-3.0 grimblast
+yay -S gray-git python-fabric gnome-bluetooth-3.0 python-rlottie-python
 ```
 
 If you have something else besides `yay`, install with the respective aur helper.
@@ -140,8 +139,6 @@ Once the dependencies are installed, run the following command to start the bar 
 
 ## **Usage**
 
-### **For Hyprland:**
-
 Add this to your `.config/hyprland.conf`
 
 ```sh
@@ -150,10 +147,6 @@ exec = `$HOME/bar/init.sh -start`
 ```
 
 > **Note**: modify the path accordingly
-
-### **For Other Window Managers:**
-
-Use a similar configuration for your respective window manager's autostart setup.
 
 ## Updating
 
@@ -167,30 +160,36 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 
 <details>
 <summary>Click to expand modules</summary>
+Here is the list arranged in ascending order alphabetically:
 
 - battery
 - bluetooth
 - brightness
+- cava
 - clickcounter
 - cpu
-- workspaces
 - date_menu
+- divider (utility)
 - hypr_idle
 - hypr_sunset
 - keyboard
 - language
 - media
-- volume
+- microphone
 - power
 - ram
 - recorder
+- spacer (utility)
 - storage
+- stop_watch
 - system_tray
 - taskbar
+- updates
+- volume
 - weather
 - window_title
 - workspace
-- updates
+- workspaces
 
 </details>
 
@@ -232,9 +231,33 @@ Be sure to kill any bars that you may be running. You can kill other bar with `p
 
 Be sure to kill other notifications daemon that you may be running. You can kill other daeemons with `pkill dunst; pkill mako;`
 
-### 3. **Cannot see bar? **
+### 3. **Cannot see bar?**
 
 Kill the app with `pkill hydepanel`. Run `init.sh -start`. This should show some logs. If it shows like `ModuleNotFoundError`, run `pip install -r requirements.txt`. If this does not solve the issue, do report a bug with screenshot of the log.
+
+### 4. **No Blur?**
+
+Add this to your `hyprland.conf`
+
+```conf
+layerrule = blur , fabric
+layerrule = ignorezero, fabric
+layerrule = blur ,gtk-layer-shell
+layerrule = ignorezero ,gtk-layer-shell
+
+```
+
+## Contributing
+
+We welcome all sorts of contributions, no matter how small, to this project! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute.
+
+## Acknowledgements
+
+- **Waybar** - A lot of the initial inspiration, and a pretty great bar.
+  [Waybar GitHub Repository](https://github.com/Alexays/Waybar)
+
+- **Hyprpanel** - Served as inspiration for some of the panel's features and design choices, with its focus on dynamic and customizable Hyprland panels.
+  [Hyprpanel GitHub Repository](https://github.com/Jas-SinghFSU/HyprPanel)
 
 # ⭐ Hit that Star Button!
 

@@ -1,4 +1,5 @@
 @use "theme.scss";
+@use "common/functions.scss";
 
 $workspace-transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 
@@ -6,7 +7,7 @@ $workspace-transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 
 #workspaces {
   padding: 0.19em 1em;
-  font-weight: bold;
+  font-weight: 700;
 
   & > button {
     padding: 2px 0.5em;
@@ -24,8 +25,8 @@ $workspace-transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 
     &.active {
       font-weight: 600;
-      padding-left: 14px;
-      padding-right: 14px;
+      padding-left: functions.toEm(14);
+      padding-right: functions.toEm(14);
       background-color: theme.$ws-active;
       min-width: 1.4rem;
       transition: $workspace-transition;

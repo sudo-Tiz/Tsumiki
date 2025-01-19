@@ -3,22 +3,29 @@ from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow
 
-from utils.functions import convert_seconds_to_miliseconds
-from utils.widget_config import widget_config
+from utils.config import widget_config
+from utils.functions import convert_seconds_to_milliseconds
 from widgets import (
     Battery,
     BlueToothWidget,
     BrightnessWidget,
+    CavaWidget,
+    ClickCounterWidget,
     CpuWidget,
+    DashBoardWidget,
     DateTimeWidget,
+    DividerWidget,
     HyprIdleWidget,
     HyprSunsetWidget,
     KeyboardLayoutWidget,
     LanguageWidget,
     MemoryWidget,
+    MicrophoneIndicatorWidget,
     Mpris,
     PowerButton,
     Recorder,
+    SpacingWidget,
+    StopWatchWidget,
     StorageWidget,
     SystemTray,
     TaskBarWidget,
@@ -46,13 +53,17 @@ class StatusBar(WaylandWindow):
             "battery": Battery,
             "bluetooth": BlueToothWidget,
             "brightness": BrightnessWidget,
+            "cava": CavaWidget,
+            "click_counter": ClickCounterWidget,
             "cpu": CpuWidget,
             "date_time": DateTimeWidget,
             "hypr_idle": HyprIdleWidget,
             "hypr_sunset": HyprSunsetWidget,
             "keyboard": KeyboardLayoutWidget,
             "language": LanguageWidget,
+            "dashboard": DashBoardWidget,
             "memory": MemoryWidget,
+            "microphone": MicrophoneIndicatorWidget,
             "mpris": Mpris,
             "power": PowerButton,
             "recorder": Recorder,
@@ -65,6 +76,9 @@ class StatusBar(WaylandWindow):
             "weather": WeatherWidget,
             "window_title": WindowTitleWidget,
             "workspaces": WorkSpacesWidget,
+            "spacing": SpacingWidget,
+            "stop_watch": StopWatchWidget,
+            "divider": DividerWidget,
         }
 
         layout = self.make_layout()
@@ -87,10 +101,12 @@ class StatusBar(WaylandWindow):
                 children=layout["right_section"],
             ),
         )
+
+        acnhor = f"left {widget_config['options']['location']} right"
         super().__init__(
             name="panel",
-            layer="top",
-            anchor="left top right",
+            layer=widget_config["options"]["layer"],
+            anchor=acnhor,
             pass_through=False,
             exclusivity="auto",
             visible=True,
@@ -101,7 +117,7 @@ class StatusBar(WaylandWindow):
 
         if widget_config["options"]["check_updates"]:
             invoke_repeater(
-                convert_seconds_to_miliseconds(3600),
+                convert_seconds_to_milliseconds(3600),
                 self.check_for_bar_updates,
                 initial_call=True,
             )

@@ -1,18 +1,23 @@
 from fabric.bluetooth import BluetoothClient
+from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
 import utils.icons as icons
-from shared.widget_container import BoxWidget
-from utils.widget_config import BarConfig
+from shared.widget_container import ButtonWidget
+from utils.widget_settings import BarConfig
 
 
-class BlueToothWidget(BoxWidget):
+class BlueToothWidget(ButtonWidget):
     """A widget to display the Bluetooth status."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(**kwargs)
         self.bluetooth_client = BluetoothClient()
+
+        self.box = Box()
+
+        self.children = self.box
 
         self.icons = icons.icons["bluetooth"]
 
@@ -34,11 +39,8 @@ class BlueToothWidget(BoxWidget):
 
         icon = self.icons["enabled"] if bt_status == "on" else self.icons["disabled"]
 
-        if self.bluetooth_icon:
-            self.remove(self.bluetooth_icon)
-
         self.bluetooth_icon.set_from_icon_name(icon, icon_size=self.config["icon_size"])
-        self.children = (self.bluetooth_icon, self.bt_label)
+        self.box.children = (self.bluetooth_icon, self.bt_label)
 
         if self.config["label"]:
             self.bt_label.set_text(bt_status.capitalize())

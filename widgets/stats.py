@@ -1,12 +1,13 @@
+from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
 import utils.functions as helpers
-from shared.widget_container import BoxWidget
+from shared.widget_container import ButtonWidget
 from utils.icons import common_text_icons
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
-class CpuWidget(BoxWidget):
+class CpuWidget(ButtonWidget):
     """A widget to display the current CPU usage."""
 
     def __init__(
@@ -19,6 +20,9 @@ class CpuWidget(BoxWidget):
             name="cpu",
             **kwargs,
         )
+
+        self.box = Box()
+        self.children = (self.box,)
 
         self.config = widget_config["cpu"]
 
@@ -33,7 +37,7 @@ class CpuWidget(BoxWidget):
             label="0%", style_classes="panel-text", visible=False
         )
 
-        self.children = (self.text_icon, self.cpu_level_label)
+        self.box.children = (self.text_icon, self.cpu_level_label)
 
         # Set up a fabricator to call the update_label method when the CPU usage changes
         helpers.psutil_fabricator.connect("changed", self.update_ui)
@@ -47,7 +51,7 @@ class CpuWidget(BoxWidget):
         return True
 
 
-class MemoryWidget(BoxWidget):
+class MemoryWidget(ButtonWidget):
     """A widget to display the current memory usage."""
 
     def __init__(
@@ -63,6 +67,9 @@ class MemoryWidget(BoxWidget):
 
         self.config = widget_config["memory"]
 
+        self.box = Box()
+        self.children = (self.box,)
+
         # Create a TextIcon with the specified icon and size
         self.icon = helpers.text_icon(
             icon=self.config["icon"],
@@ -73,7 +80,7 @@ class MemoryWidget(BoxWidget):
             label="0%", style_classes="panel-text", visible=False
         )
 
-        self.children = (self.icon, self.memory_level_label)
+        self.box.children = (self.icon, self.memory_level_label)
 
         # Set up a fabricator to call the update_label method  at specified intervals
         helpers.psutil_fabricator.connect("changed", self.update_ui)
@@ -93,7 +100,8 @@ class MemoryWidget(BoxWidget):
         # Update the tooltip with the memory usage details if enabled
         if self.config["tooltip"]:
             self.set_tooltip_text(
-                f"󰾆 {self.percent_used}%\n{common_text_icons['memory']} {self.get_used()}/{self.get_total()}",
+                f"""󰾆 {self.percent_used}%
+                {common_text_icons["memory"]} {self.get_used()}/{self.get_total()}""",
             )
 
         return True
@@ -105,7 +113,7 @@ class MemoryWidget(BoxWidget):
         return helpers.convert_bytes(self.total_memory, "gb")
 
 
-class StorageWidget(BoxWidget):
+class StorageWidget(ButtonWidget):
     """A widget to display the current storage usage."""
 
     def __init__(
@@ -120,6 +128,9 @@ class StorageWidget(BoxWidget):
         )
         self.config = widget_config["storage"]
 
+        self.box = Box()
+        self.children = (self.box,)
+
         # Create a TextIcon with the specified icon and size
         self.icon = helpers.text_icon(
             icon=self.config["icon"],
@@ -131,7 +142,7 @@ class StorageWidget(BoxWidget):
             label="0", style_classes="panel-text", visible=False
         )
 
-        self.children = (self.icon, self.storage_level_label)
+        self.box.children = (self.icon, self.storage_level_label)
 
         # Set up a fabricator to call the update_label method at specified intervals
         helpers.psutil_fabricator.connect("changed", self.update_ui)
@@ -148,7 +159,8 @@ class StorageWidget(BoxWidget):
         # Update the tooltip with the storage usage details if enabled
         if self.config["tooltip"]:
             self.set_tooltip_text(
-                f"󰾆 {self.disk.percent}%\n{common_text_icons['storage']} {self.get_used()}/{self.get_total()}",
+                f"""󰾆 {self.disk.percent}%
+                {common_text_icons["storage"]} {self.get_used()}/{self.get_total()}""",
             )
 
         return True

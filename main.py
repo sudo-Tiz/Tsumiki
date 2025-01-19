@@ -5,11 +5,11 @@ from loguru import logger
 
 import utils.functions as helpers
 from modules.bar import StatusBar
-from modules.notifications.notificationpopup import NotificationPopup
+from modules.notifications.notification_pop_up import NotificationPopup
 from modules.osd import OSDContainer
 from utils.colors import Colors
-from utils.config import APP_CACHE_DIRECTORY, APPLICATION_NAME
-from utils.widget_config import widget_config
+from utils.config import widget_config
+from utils.constants import APP_CACHE_DIRECTORY, APPLICATION_NAME
 from widgets.corners import ScreenCorners
 
 
@@ -32,19 +32,17 @@ if __name__ == "__main__":
     # Create the status bar
     bar = StatusBar()
     notifications = NotificationPopup(widget_config)
-    system_overlay = OSDContainer(widget_config)
 
-    windows = [bar, notifications, system_overlay]
+    windows = [notifications, bar]
 
     if widget_config["options"]["screen_corners"]:
-        corners = ScreenCorners()
-        windows.append(corners)
+        windows.append(ScreenCorners())
+
+    if widget_config["osd"]["enabled"]:
+        windows.append(OSDContainer(widget_config))
 
     # Initialize the application with the status bar
-    app = Application(
-        APPLICATION_NAME,
-        windows=windows,
-    )
+    app = Application(APPLICATION_NAME, windows=windows)
 
     setproctitle.setproctitle(APPLICATION_NAME)
 

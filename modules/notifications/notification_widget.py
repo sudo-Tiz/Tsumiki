@@ -14,11 +14,11 @@ from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
 from gi.repository import Gdk, GdkPixbuf, GLib
 
-import utils.config as config
+import utils.constants as constants
 import utils.functions as helpers
 import utils.icons as icons
 from shared import CustomImage
-from utils.widget_config import widget_config
+from utils.config import widget_config
 
 
 class NotificationWidget(EventBox):
@@ -31,7 +31,7 @@ class NotificationWidget(EventBox):
         **kwargs,
     ):
         super().__init__(
-            size=(config.NOTIFICATION_WIDTH, -1),
+            size=(constants.NOTIFICATION_WIDTH, -1),
             name="notification-eventbox",
             **kwargs,
         )
@@ -114,8 +114,8 @@ class NotificationWidget(EventBox):
                     v_align="center",
                     children=CustomImage(
                         pixbuf=image_pixbuf.scale_simple(
-                            config.NOTIFICATION_IMAGE_SIZE,
-                            config.NOTIFICATION_IMAGE_SIZE,
+                            constants.NOTIFICATION_IMAGE_SIZE,
+                            constants.NOTIFICATION_IMAGE_SIZE,
                             GdkPixbuf.InterpType.BILINEAR,
                         ),
                         style_classes="image",
@@ -164,7 +164,11 @@ class NotificationWidget(EventBox):
             ),
         )
 
-        (type == "popup" and self.start_timeout())
+        (
+            type == "popup"
+            and widget_config["notification"]["auto_dismiss"]
+            and self.start_timeout()
+        )
 
     def start_timeout(self):
         self.stop_timeout()

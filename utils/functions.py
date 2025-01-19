@@ -1,10 +1,9 @@
 import datetime
-import json
 import os
 import shutil
 import subprocess
 from time import sleep
-from typing import List, Literal
+from typing import Dict, List, Literal
 
 import gi
 import psutil
@@ -15,9 +14,10 @@ from fabric.widgets.scale import ScaleMark
 from gi.repository import GLib, Gtk
 from loguru import logger
 
-import utils.icons as icons
 from shared.animated.scale import AnimatedScale
-from utils.colors import Colors
+
+from .colors import Colors
+from .icons import brightness_text_icons, distro_text_icons, volume_text_icons
 
 gi.require_version("Gtk", "3.0")
 
@@ -27,7 +27,7 @@ class ExecutableNotFoundError(ImportError):
 
     def __init__(self, executable_name: str):
         super().__init__(
-            f"{Colors.ERROR}Executable {executable_name} not found. Please install it using your package manager."
+            f"{Colors.ERROR}Executable {Colors.UNDERLINE}{executable_name}{Colors.RESET} not found. Please install it using your package manager."  # noqa: E501
         )
 
 
@@ -51,7 +51,7 @@ def copy_theme(theme: str):
 
     if not os.path.exists(source_file):
         logger.warning(
-            f"{Colors.WARNING}Warning: The theme file '{theme}.scss' was not found. Using default theme."
+            f"{Colors.WARNING}Warning: The theme file '{theme}.scss' was not found. Using default theme."  # noqa: E501
         )
         source_file = get_relative_path("../styles/themes/catpuccin-mocha.scss")
 
@@ -69,14 +69,6 @@ def copy_theme(theme: str):
             f"{Colors.ERROR}Error: The theme file '{source_file}' was not found."
         )
         exit(1)
-
-
-# Function to read the configuration file
-def read_config():
-    with open(get_relative_path("../config.json")) as file:
-        # Load JSON data into a Python dictionary
-        data = json.load(file)
-    return data
 
 
 # Function to create a text icon label
@@ -107,8 +99,13 @@ def validate_widgets(parsed_data, default_config):
         for widget in layout[section]:
             if widget not in default_config:
                 raise ValueError(
-                    f"Invalid widget {widget} found in section {section}. Please check the widget name."
+                    f"Invalid widget {widget} found in section {section}. Please check the widget name."  # noqa: E501
                 )
+
+
+# Function to exclude keys from a dictionary        )
+def exclude_keys(d: Dict, keys_to_exclude: List[str]) -> Dict:
+    return {k: v for k, v in d.items() if k not in keys_to_exclude}
 
 
 # Function to format time in hours and minutes
@@ -144,8 +141,8 @@ def uptime():
     return f"{int(hours):02}:{int(minutes):02}"
 
 
-# Function to convert seconds to miliseconds
-def convert_seconds_to_miliseconds(seconds: int):
+# Function to convert seconds to milliseconds
+def convert_seconds_to_milliseconds(seconds: int):
     return seconds * 1000
 
 
@@ -166,7 +163,7 @@ def play_sound(file: str):
 def get_distro_icon():
     distro_id = GLib.get_os_info("ID")
     # Search for the icon in the list
-    icon = next((icon for id, icon in icons.distro_text_icons if id == distro_id), None)
+    icon = next((icon for id, icon in distro_text_icons if id == distro_id), None)
 
     # Return the found icon or default to '' if not found
     return icon if icon else ""
@@ -182,23 +179,23 @@ def executable_exists(executable_name):
 def get_brightness_icon_name(level: int) -> dict[Literal["icon_text", "icon"], str]:
     if level <= 0:
         return {
-            "text_icon": icons.brightness_text_icons["off"],
+            "text_icon": brightness_text_icons["off"],
             "icon": "display-brightness-off-symbolic",
         }
 
     if level > 0 and level < 32:
         return {
-            "text_icon": icons.brightness_text_icons["low"],
+            "text_icon": brightness_text_icons["low"],
             "icon": "display-brightness-low-symbolic",
         }
     if level > 32 and level < 66:
         return {
-            "text_icon": icons.brightness_text_icons["medium"],
+            "text_icon": brightness_text_icons["medium"],
             "icon": "display-brightness-medium-symbolic",
         }
     if level >= 66 and level <= 100:
         return {
-            "text_icon": icons.brightness_text_icons["high"],
+            "text_icon": brightness_text_icons["high"],
             "icon": "display-brightness-high-symbolic",
         }
 
@@ -215,9 +212,7 @@ def create_scale(
     h_align="center",
 ) -> AnimatedScale:
     if marks is None:
-        marks = (
-            ScaleMark(value=i) for i in range(1, 100, 10)
-        )  # Default marks if none provided
+        marks = (ScaleMark(value=i) for i in range(1, 100, 10))
 
     return AnimatedScale(
         marks=marks,
@@ -237,27 +232,27 @@ def get_audio_icon_name(
 ) -> dict[Literal["icon_text", "icon"], str]:
     if volume <= 0 or is_muted:
         return {
-            "text_icon": icons.volume_text_icons["low"],
+            "text_icon": volume_text_icons["low"],
             "icon": "audio-volume-muted-symbolic",
         }
     if volume > 0 and volume < 32:
         return {
-            "text_icon": icons.volume_text_icons["low"],
+            "text_icon": volume_text_icons["low"],
             "icon": "audio-volume-low-symbolic",
         }
     if volume > 32 and volume < 66:
         return {
-            "text_icon": icons.volume_text_icons["medium"],
+            "text_icon": volume_text_icons["medium"],
             "icon": "audio-volume-medium-symbolic",
         }
     if volume >= 66 and volume <= 100:
         return {
-            "text_icon": icons.volume_text_icons["high"],
+            "text_icon": volume_text_icons["high"],
             "icon": "audio-volume-high-symbolic",
         }
     else:
         return {
-            "text_icon": icons.volume_text_icons["overamplified"],
+            "text_icon": volume_text_icons["overamplified"],
             "icon": "audio-volume-overamplified-symbolic",
         }
 

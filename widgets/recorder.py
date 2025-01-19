@@ -2,11 +2,11 @@ from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 
-from services.screenrecord import ScreenRecorder
+from services.screen_record import ScreenRecorder
 from shared.lottie import LottieAnimation, LottieAnimationWidget
 from shared.widget_container import ButtonWidget
 from utils import icons
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
 class Recorder(ButtonWidget):

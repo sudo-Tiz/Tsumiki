@@ -6,7 +6,7 @@ from gi.repository import Gio, GLib
 from loguru import logger
 
 import utils.functions as helpers
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
 class ScreenRecorder(Service):
@@ -79,7 +79,8 @@ class ScreenRecorder(Service):
                 _, stdout, stderr = process.communicate_utf8_finish(task)
             except Exception:
                 logger.error(
-                    f"[SCREENRECORD] Failed read notification action with error {stderr}"
+                    f"[SCREENRECORD] Failed read notification action with error "
+                    f"{stderr}"
                 )
                 return
 

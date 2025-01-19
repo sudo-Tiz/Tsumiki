@@ -1,19 +1,23 @@
 import json
 
 from fabric.utils import exec_shell_command_async
+from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
-from shared.widget_container import BoxWidget
-from utils.config import KBLAYOUT_MAP
+from shared.widget_container import ButtonWidget
+from utils.constants import KBLAYOUT_MAP
 from utils.functions import text_icon
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
-class KeyboardLayoutWidget(BoxWidget):
+class KeyboardLayoutWidget(ButtonWidget):
     """A widget to display the current keyboard layout."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(name="keyboard", **kwargs)
+
+        self.box = Box()
+        self.children = (self.box,)
 
         self.config = widget_config["keyboard"]
 
@@ -26,7 +30,7 @@ class KeyboardLayoutWidget(BoxWidget):
 
         self.kb_label = Label(label="0", style_classes="panel-text", visible=False)
 
-        self.children = (self.icon, self.kb_label)
+        self.box.children = (self.icon, self.kb_label)
 
         exec_shell_command_async(
             "hyprctl devices -j", lambda output: self.get_keyboard(output)
@@ -47,7 +51,7 @@ class KeyboardLayoutWidget(BoxWidget):
 
         if self.config["tooltip"]:
             self.set_tooltip_text(
-                f"Caps Lock 󰪛: {main_kb["capsLock"]} | Num Lock : {main_kb["numLock"]}"
+                f"Caps Lock 󰪛: {main_kb['capsLock']} | Num Lock : {main_kb['numLock']}"
             )
 
         # Update the label with the used storage if enabled

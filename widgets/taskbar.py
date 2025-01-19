@@ -11,7 +11,7 @@ from loguru import logger
 
 from shared.widget_container import BoxWidget
 from utils.colors import Colors
-from utils.widget_config import BarConfig
+from utils.widget_settings import BarConfig
 
 
 class PagerClient(TypedDict):
