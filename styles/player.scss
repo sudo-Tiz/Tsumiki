@@ -24,7 +24,7 @@
   #player-button {
     min-width: 25px;
     min-height: 25px;
-    padding: 8px;
+    padding: 7px;
     border-radius: 100%;
   }
 
@@ -49,7 +49,8 @@
   scale trough {
     border-radius: 100px;
     min-height: 8px;
-    background-color: #d1cfcf;
+    background-color: rgba(theme.$background-dark, 0.7);
+    ;
   }
 
   scale trough highlight {
@@ -62,7 +63,7 @@
   }
 
   scale trough:hover {
-    background-color: #bebebe;
+    background-color: rgba(theme.$background-dark, 0.5);
   }
 }
 

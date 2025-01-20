@@ -25,7 +25,7 @@ ensure_dir_exists(f"{APP_CACHE_DIRECTORY}/media")
 
 icon_size = 20
 
-# TODO: fix spacing of buttons
+# TODO: add time remaining
 
 
 class PlayerBoxStack(Box):
@@ -318,10 +318,12 @@ class PlayerBox(Box):
         self.shuffle_button.connect("clicked", lambda _: player.toggle_shuffle())
         self.player.bind_property("can-shuffle", self.shuffle_button, "sensitive")
 
-        self.button_box.add(self.shuffle_button)
-        self.button_box.add(self.prev_button)
-        self.button_box.add(self.play_pause_button)
-        self.button_box.add(self.next_button)
+        self.button_box.children = (
+            self.shuffle_button,
+            self.prev_button,
+            self.play_pause_button,
+            self.next_button,
+        )
 
         # Seek Bar
         self.seek_bar = Scale(
@@ -396,13 +398,13 @@ class PlayerBox(Box):
     def on_player_next(self, _):
         self.angle_direction = 1
         self.art_animator.pause()
-        # self.art_animator.play()
+        self.art_animator.play()
         self.player.next()
 
     def on_player_prev(self, _):
         self.angle_direction = -1
         self.art_animator.pause()
-        # self.art_animator.play()
+        self.art_animator.play()
         self.player.previous()
 
     def shuffle_update(self, _, __):
