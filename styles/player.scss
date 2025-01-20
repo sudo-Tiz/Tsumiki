@@ -20,6 +20,11 @@ scale trough highlight {
   border-radius: 400px;
 }
 
+highlight,
+progress {
+  background: theme.$text-muted;
+}
+
 scale trough:hover {
   background-color: #bebebe;
 }
@@ -64,4 +69,8 @@ scale trough:hover {
 
 #player-button:active {
   box-shadow: 0 0 4px -1px black;
+}
+
+#player-button:disabled {
+  color: #5f5f5f;
 }

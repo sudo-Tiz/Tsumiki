@@ -18,13 +18,14 @@ from loguru import logger
 from services.mpris import MprisPlayer, MprisPlayerManager
 from shared.animator import Animator
 from shared.cicrle_image import CircleImage
-from utils.colorthief import grab_accent_color_threaded
 from utils.constants import APP_CACHE_DIRECTORY
 from utils.functions import ensure_dir_exists
 
 ensure_dir_exists(f"{APP_CACHE_DIRECTORY}/media")
 
 icon_size = 20
+
+# TODO: fix spacing of buttons
 
 
 class PlayerBoxStack(Box):
@@ -228,7 +229,6 @@ class PlayerBox(Box):
             tick_widget=self,
             custom_curve=True,
             notify_value=do_anim,
-            on_finished=lambda *_: self.update_colors(),
         )
 
         # Track Info
@@ -240,7 +240,6 @@ class PlayerBox(Box):
             ellipsization="end",
             h_align="start",
         )
-        # self.track_title.set_ellipsize(3)
 
         self.track_artist = Label(
             label="No Artist",
@@ -267,7 +266,7 @@ class PlayerBox(Box):
 
         self.track_info = Box(
             name="player-info",
-            spacing=0,
+            spacing=5,
             orientation="v",
             v_align="start",
             h_align="start",
@@ -320,23 +319,23 @@ class PlayerBox(Box):
             child=self.play_pause_stack,
         )
         self.play_pause_button.connect("clicked", lambda _: self.player.play_pause())
-        self.player.bind_property("can-pause", self.play_pause_button, "visible")
+        self.player.bind_property("can-pause", self.play_pause_button, "sensitive")
 
         self.next_button = Button(name="player-button", child=self.skip_next_icon)
         self.next_button.connect("clicked", self.on_player_next)
-        self.player.bind_property("can-go-next", self.next_button, "visible")
+        self.player.bind_property("can-go-next", self.next_button, "sensitive")
 
         self.prev_button = Button(name="player-button", child=self.skip_prev_icon)
         self.prev_button.connect("clicked", self.on_player_prev)
-        self.player.bind_property("can-go-previous", self.prev_button, "visible")
+        self.player.bind_property("can-go-previous", self.prev_button, "sensitive")
 
         self.shuffle_button = Button(name="player-button", child=self.shuffle_icon)
         self.shuffle_button.connect("clicked", lambda _: player.toggle_shuffle())
-        self.player.bind_property("can-shuffle", self.shuffle_button, "visible")
+        self.player.bind_property("can-shuffle", self.shuffle_button, "sensitive")
 
-        self.button_box.add_center(self.play_pause_button)
-        self.button_box.add_start(self.prev_button)
         self.button_box.add_start(self.shuffle_button)
+        self.button_box.add_start(self.prev_button)
+        self.button_box.add_center(self.play_pause_button)
         self.button_box.add_end(self.next_button)
 
         # Seek Bar
@@ -356,7 +355,7 @@ class PlayerBox(Box):
             if self.player.length
             else None,
         )
-        self.player.bind_property("can-seek", self.seek_bar, "visible")
+        self.player.bind_property("can-seek", self.seek_bar, "sensitive")
 
         self.player_info_box = Box(
             style=f"margin-left: {self.image_size + 10}px;"
@@ -387,7 +386,7 @@ class PlayerBox(Box):
                 self.player_info_box,
                 self.image_stack,
                 Box(
-                    children=Image(icon_name=self.player.player_name, size=21),
+                    children=Image(icon_name=self.player.player_name, icon_size=20),
                     h_align="end",
                     v_align="start",
                     style="margin-top: 20px; margin-right: 10px;",
@@ -448,21 +447,7 @@ class PlayerBox(Box):
 
     def update_image(self):
         self.image_box.set_image_from_file(self.cover_path)
-        # self.update_colors()
         self.art_animator.play()
-
-    def update_colors(self):
-        colors = (255, 255, 255)
-
-        def on_accent_color(color):
-            color = f"mix(rgb{color if color else colors}, #F7EFD1, 0.5)"
-            bg = f"background-color: {color};"
-            border = f"border-color: {color};"
-            self.seek_bar.set_style(
-                f" trough highlight{{ {bg} {border} }} slider {{ {bg} }}"
-            )
-
-        grab_accent_color_threaded(image_path=self.cover_path, callback=on_accent_color)
 
     def set_image(self, *args):
         url = self.player.arturl
