@@ -1,10 +1,16 @@
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
-from fabric.widgets.eventbox import EventBox
 
+from services.mpris import MprisPlayerManager
 from shared.pop_over import PopOverWindow
-from utils.functions import create_scale, text_icon
+from shared.separator import Separator
+from shared.widget_container import ButtonWidget
+from utils.functions import text_icon
 from utils.widget_settings import BarConfig
+from widgets.player import PlayerBoxStack
+
+from .sliders.audio import AudioSlider
+from .sliders.brightness import BrightnessSlider
 
 
 class DashBoardMenu(Box):
@@ -15,36 +21,25 @@ class DashBoardMenu(Box):
             name="dashboard-menu", orientation="v", all_visible=True, **kwargs
         )
 
-        box1 = CenterBox(
+        box = CenterBox(
             orientation="v",
             start_children=Box(
+                orientation="v",
+                spacing=10,
+                style_classes="slider-box",
                 children=(
-                    text_icon(
-                        "󰃠",
-                        props={
-                            "style_classes": "panel-text-icon overlay-icon",
-                        },
-                    ),
-                    create_scale(),
-                )
+                    AudioSlider(),
+                    BrightnessSlider(),
+                    Separator(),
+                ),
             ),
-            center_children=Box(
-                children=(
-                    text_icon(
-                        "󰃠",
-                        props={
-                            "style_classes": "panel-text-icon overlay-icon",
-                        },
-                    ),
-                    create_scale(),
-                )
-            ),
+            center_children=PlayerBoxStack(mpris_manager=MprisPlayerManager()),
         )
 
-        self.add(box1)
+        self.add(box)
 
 
-class DashBoardWidget(EventBox):
+class DashBoardWidget(ButtonWidget):
     """A button to display the date and time."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):

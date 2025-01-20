@@ -175,9 +175,9 @@ class PlayerBox(Box):
         self.player: MprisPlayer = player
         self.cover_path = get_relative_path("../assets/images/no_image.jpg")
 
-        self.player_width = 450
-        self.image_size = 140
-        self.player_height = 140
+        self.player_width = 440
+        self.image_size = 120
+        self.player_height = 120
 
         # State
         self.exit = False
@@ -260,7 +260,7 @@ class PlayerBox(Box):
         self.player.connect("notify::shuffle", self.shuffle_update)
 
         # Buttons
-        self.button_box = CenterBox(
+        self.button_box = Box(
             name="button-box",
             h_align="center",
         )
@@ -318,10 +318,10 @@ class PlayerBox(Box):
         self.shuffle_button.connect("clicked", lambda _: player.toggle_shuffle())
         self.player.bind_property("can-shuffle", self.shuffle_button, "sensitive")
 
-        self.button_box.add_start(self.shuffle_button)
-        self.button_box.add_start(self.prev_button)
-        self.button_box.add_center(self.play_pause_button)
-        self.button_box.add_end(self.next_button)
+        self.button_box.add(self.shuffle_button)
+        self.button_box.add(self.prev_button)
+        self.button_box.add(self.play_pause_button)
+        self.button_box.add(self.next_button)
 
         # Seek Bar
         self.seek_bar = Scale(
@@ -374,7 +374,7 @@ class PlayerBox(Box):
                     children=Image(icon_name=self.player.player_name, icon_size=20),
                     h_align="end",
                     v_align="start",
-                    style="margin-top: 20px; margin-right: 10px;",
+                    style="margin-top: 10px; margin-right: 10px;",
                     tooltip_text=self.player.player_name,  # type: ignore
                 ),
             ],
