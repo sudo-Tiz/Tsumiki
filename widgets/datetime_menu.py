@@ -14,12 +14,14 @@ from gi.repository import Gtk
 
 from modules.notifications.notification_widget import NotificationWidget
 from services import notify_cache_service
+from services.mpris import MprisPlayerManager
 from shared.pop_over import PopOverWindow
 from shared.separator import Separator
 from shared.widget_container import ButtonWidget
 from utils.functions import uptime
 from utils.icons import icons
 from utils.widget_settings import BarConfig
+from widgets.player import PlayerBoxStack
 
 gi.require_version("Gtk", "3.0")
 
@@ -173,10 +175,7 @@ class DateTimeWidget(ButtonWidget):
 
         date_menu = DateNotificationMenu()
 
-        player = Box(
-            style_classes="widget-mpris",
-            children=Player(),
-        )
+        player = PlayerBoxStack(mpris_manager=MprisPlayerManager())
 
         popup = PopOverWindow(
             parent=bar,

@@ -1,3 +1,4 @@
+import math
 from typing import cast
 
 from fabric import Property, Service, Signal
@@ -5,8 +6,7 @@ from gi.repository import GLib, Gtk
 
 
 class Animator(Service):
-    """A service to animate transitions between values."""
-
+    """A service to animate a value."""
     @Signal
     def finished(self) -> None: ...
 
@@ -17,6 +17,7 @@ class Animator(Service):
     @bezier_curve.setter
     def bezier_curve(self, value: tuple[float, float, float, float]):
         self._bezier_curve = value
+        return
 
     @Property(float, "read-write")
     def value(self):
@@ -25,6 +26,7 @@ class Animator(Service):
     @value.setter
     def value(self, value: float):
         self._value = value
+        return
 
     @Property(float, "read-write")
     def max_value(self):
@@ -33,6 +35,7 @@ class Animator(Service):
     @max_value.setter
     def max_value(self, value: float):
         self._max_value = value
+        return
 
     @Property(float, "read-write")
     def min_value(self):
@@ -41,6 +44,7 @@ class Animator(Service):
     @min_value.setter
     def min_value(self, value: float):
         self._min_value = value
+        return
 
     @Property(bool, "read-write", default_value=False)
     def playing(self):
@@ -49,6 +53,7 @@ class Animator(Service):
     @playing.setter
     def playing(self, value: bool):
         self._playing = value
+        return
 
     @Property(bool, "read-write", default_value=False)
     def repeat(self):
@@ -57,6 +62,7 @@ class Animator(Service):
     @repeat.setter
     def repeat(self, value: bool):
         self._repeat = value
+        return
 
     def __init__(
         self,
@@ -66,6 +72,7 @@ class Animator(Service):
         max_value: float = 1.0,
         repeat: bool = False,
         tick_widget: Gtk.Widget | None = None,
+        custom_curve: bool = False,
         **kwargs,
     ):
         super().__init__(**kwargs)
@@ -76,6 +83,7 @@ class Animator(Service):
         self._max_value = 1.0
         self._repeat = False
 
+        self.custom_curve = custom_curve
         self.bezier_curve = bezier_curve
         self.duration = duration
         self.value = min_value
@@ -104,11 +112,17 @@ class Animator(Service):
             + time**3 * y_points[3]
         )
 
+    def do_ease_out_elastic(self, t: float) -> float:
+        c4 = (2 * math.pi) / 3
+        return math.sin((t * 10 - 0.75) * c4) * math.pow(2, -10 * t) + 1
+
     def do_ease(self, time: float) -> float:
+        if self.custom_curve:
+            return self.do_lerp(
+                self.min_value, self.max_value, self.do_ease_out_elastic(time)
+            )
         return self.do_lerp(
-            self.min_value,
-            self.max_value,
-            self.do_interpolate_cubic_bezier(time),
+            self.min_value, self.max_value, self.do_interpolate_cubic_bezier(time)
         )
 
     def do_update_value(self, delta_time: float):
@@ -146,6 +160,7 @@ class Animator(Service):
             else:
                 GLib.source_remove(self._tick_handler)
         self._tick_handler = None
+        return
 
     def play(self):
         if self.playing:
@@ -156,7 +171,7 @@ class Animator(Service):
         if not self._tick_handler:
             if self._tick_widget:
                 self._tick_handler = self._tick_widget.add_tick_callback(
-                    self.do_handle_tick,
+                    self.do_handle_tick
                 )
             else:
                 self._tick_handler = GLib.timeout_add(16, self.do_handle_tick)
@@ -172,5 +187,5 @@ class Animator(Service):
         if not self._tick_handler:
             self._timeline_pos = 0
             self.playing = False
-            return None
+            return
         return self.do_remove_tick_handlers()

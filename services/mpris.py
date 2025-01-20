@@ -6,19 +6,28 @@ from fabric.utils import bulk_connect
 from gi.repository import GLib  # type: ignore
 from loguru import logger
 
-from utils.colors import Colors
+
+class PlayerctlImportError(ImportError):
+    """An error to raise when playerctl is not installed."""
+
+    def __init__(self, *args):
+        super().__init__(
+            "Playerctl is not installed, please install it first",
+            *args,
+        )
+
 
 try:
     gi.require_version("Playerctl", "2.0")
     from gi.repository import Playerctl
+
+    # from gi.repository import Playerctl  # type: ignore
 except ValueError:
-    raise ImportError(
-        f"{Colors.ERROR}Playerctl is not installed, please install it first"
-    )
+    raise PlayerctlImportError
 
 
 class MprisPlayer(Service):
-    """A service to manage the MPRIS player."""
+    """A service to manage a mpris player."""
 
     @Signal
     def exit(self, value: bool) -> bool: ...
@@ -82,6 +91,7 @@ class MprisPlayer(Service):
                 self._player.disconnect(id)
         del self._player
         self.emit("exit", True)  # type: ignore
+        # TODO check if this is needed
         del self
 
     def toggle_shuffle(self):
@@ -115,13 +125,13 @@ class MprisPlayer(Service):
 
     @Property(str or None, "readable")
     def arturl(self) -> str | None:
-        if "mpris:artUrl" in self.metadata:  # type: ignore
+        if "mpris:artUrl" in self.metadata.keys():  # type: ignore  # noqa: SIM118
             return self.metadata["mpris:artUrl"]  # type: ignore
         return None
 
     @Property(str or None, "readable")
     def length(self) -> str | None:
-        if "mpris:length" in self.metadata:  # type: ignore
+        if "mpris:length" in self.metadata.keys():  # type: ignore  # noqa: SIM118
             return self.metadata["mpris:length"]  # type: ignore
         return None
 
@@ -205,7 +215,7 @@ class MprisPlayer(Service):
 
 
 class MprisPlayerManager(Service):
-    """A service to manage the MPRIS players."""
+    """A service to manage mpris players."""
 
     @Signal
     def player_appeared(self, player: Playerctl.Player) -> Playerctl.Player: ...
@@ -221,14 +231,14 @@ class MprisPlayerManager(Service):
         bulk_connect(
             self._manager,
             {
-                "name-appeared": self.on_name_appeared,
+                "name-appeared": self.on_name_appeard,
                 "name-vanished": self.on_name_vanished,
             },
         )
         self.add_players()
         super().__init__(**kwargs)
 
-    def on_name_appeared(self, manager, player_name: Playerctl.PlayerName):
+    def on_name_appeard(self, manager, player_name: Playerctl.PlayerName):
         logger.info(f"[MprisPlayer] {player_name.name} appeared")
         new_player = Playerctl.Player.new_from_name(player_name)
         manager.manage_player(new_player)

@@ -1,50 +1,67 @@
 @use "theme.scss";
-@use "variable.scss";
 
-$mpris-album-art-overlay : rgba(0, 0, 0, 0.55);
-$mpris-button-hover : rgba(0, 0, 0, 0.50);
+#inner-player-box {
+  background-color: theme.$background;
+  border-radius: 15px;
+}
 
-$mpris-shadow: 0px 0px 10px rgba(0, 0, 0, 0.75);
+scale {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
 
-.widget-mpris {
-    min-width: 10em;
-  /* The parent to all players */
-  .widget-player {
-    padding: 8px;
-    padding: 16px;
-    margin: 16px 20px;
-    background-color: $mpris-album-art-overlay;
-    border-radius: variable.$radius;
-    box-shadow: $mpris-shadow;
+scale trough {
+  border-radius: 100px;
+  min-height: 8px;
+  background-color: #d1cfcf;
+}
 
-    button:hover {
+scale trough highlight {
+  border-radius: 400px;
+}
 
-      background: theme.$background;
-    }
+scale trough:hover {
+  background-color: #bebebe;
+}
 
-    .widget-player-album-art {
-      border-radius: variable.$radius;
-      box-shadow: $mpris-shadow;
-    }
-    .widget-player-title {
-      font-weight: bold;
-      font-size: 1.25rem;
-    }
-    .widget-player-subtitle {
-      font-size: 1.1rem;
-    }
+#player-box {
+  margin: 5px;
+}
 
-    & > box > button {
-      &:hover {
-        background-color: $mpris-button-hover;
-      }
-    }
-  }
+#player-title {
+  font-weight: 700;
+  color: #000000;
+  text-shadow:
+    -1px -1px 0 #d1cfcf,
+    1px -1px 0 #d1cfcf,
+    -1px 1px 0 #d1cfcf,
+    1px 1px 0 #d1cfcf;
+  font-size: 18px;
+}
 
-  & > box > button {
-    /* Change player side buttons */
-  }
-  & > box > button:disabled {
-    /* Change player side buttons insensitive */
-  }
+#player-artist {
+  font-weight: 500;
+  font-size: 12.5px;
+  color: #7d7178;
+}
+
+#button-box {
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+
+#player-button {
+  min-width: 25px;
+  min-height: 25px;
+  padding: 8px;
+  border-radius: 100%;
+}
+
+#player-button:hover {
+  background: theme.$background-alt;
+  box-shadow: 0 0 2px -3px black;
+}
+
+#player-button:active {
+  box-shadow: 0 0 4px -1px black;
 }
