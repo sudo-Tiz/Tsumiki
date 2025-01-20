@@ -9,25 +9,16 @@
   padding: 15px;
 
   #player-title {
+    margin-top: 5px;
     font-weight: 700;
-    color: #000000;
-    text-shadow:
-      -1px -1px 0 #d1cfcf,
-      1px -1px 0 #d1cfcf,
-      -1px 1px 0 #d1cfcf,
-      1px 1px 0 #d1cfcf;
-    font-size: 17px;
+    color: theme.$text-main;
+    font-size: 1.1rem;
   }
 
   #player-artist {
     font-weight: 500;
     font-size: 12px;
     color: #7d7178;
-  }
-
-  #button-box {
-    margin-top: 5px;
-    margin-right: 25px;
   }
 
   #player-button {
@@ -77,9 +68,9 @@
 
 #player-stack-button {
   border-radius: 5px;
-  min-width: 30px;
-  min-height: 10px;
-  margin: 10px 1px 10px 1px;
+  min-width: 20px;
+  min-height: 6px;
+  margin: 10px 3px;
   background-color: theme.$text-main;
 }
 
@@ -89,8 +80,6 @@
 
 #player-stack-button.active {
   border-radius: 5px;
-  min-width: 30px;
-  margin: 10px 1px 10px 1px;
   background-color: theme.$background;
 }
 

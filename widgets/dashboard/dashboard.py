@@ -7,7 +7,7 @@ from shared.separator import Separator
 from shared.widget_container import ButtonWidget
 from utils.functions import text_icon
 from utils.widget_settings import BarConfig
-from widgets.player import PlayerBoxStack
+from widgets.dashboard.player import PlayerBoxStack
 
 from .sliders.audio import AudioSlider
 from .sliders.brightness import BrightnessSlider
