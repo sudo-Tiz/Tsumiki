@@ -23,13 +23,13 @@ class DashboardSettingsScale(Box):
         self.scale = Scale(
             min_value=min,
             max_value=max,
-            name="quicksettings-slider",
+            name="dashboard-slider",
             value=start_value,
             h_expand=True,
         )
 
         super().__init__(
-            name="quicksettings-box",
+            name="dashboard-box",
             children=Box(
                 spacing=5, children=[self.icon_button, self.scale], h_expand=True
             ),

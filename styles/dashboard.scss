@@ -1,6 +1,6 @@
 @use "theme.scss";
 
-#quicksettings-slider {
+#dashboard-slider {
   margin-left: 10px;
   margin-right: 20px;
 }
@@ -9,7 +9,7 @@
   margin: 20px;
 }
 
-#quicksettings-slider trough {
+#dashboard-slider trough {
   margin-top: 5px;
   margin-bottom: 5px;
   padding-right: 12.5px;
@@ -18,21 +18,21 @@
   border-radius: 10px;
 }
 
-#quicksettings-slider trough:hover {
+#dashboard-slider trough:hover {
   background-color: rgba(theme.$background, 0.7);
 }
 
-#quicksettings-slider trough highlight {
+#dashboard-slider trough highlight {
   border-radius: 20px 0px 0px 20px;
   background-color: theme.$accent-blue;
   margin-right: -12.5px;
 }
 
-#quicksettings-slider trough highlight:disabled {
-  // background-color: alpha(var(--gray-dim), 0.7);
+#dashboard-slider trough highlight:disabled {
+  background-color: rgba(theme.$text-muted, 0.7);
 }
 
-#quicksettings-slider slider {
+#dashboard-slider slider {
   border-radius: 100%;
   min-width: 10px;
   min-height: 10px;
@@ -43,12 +43,10 @@
   transition: min-height 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-#quicksettings-slider slider:hover {
-  background-color: mix(theme.$accent-blue, white, 0.6);
-  min-height: 16px;
-  min-width: 16px;
+#dashboard-slider slider:hover {
+  background-color: theme.$accent-purple;
 }
 
-#quicksettings-slider slider:disabled {
-  //  background-color: alpha(var(--gray-dim), 1);
+#dashboard-slider slider:disabled {
+  background-color: rgba(theme.$text-muted, 1);
 }
