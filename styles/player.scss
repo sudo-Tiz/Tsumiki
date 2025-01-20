@@ -4,9 +4,28 @@
   background-color: theme.$background;
   border-radius: 15px;
 }
+#player-stack-button {
+  border-radius: 5px;
+  min-width: 20px;
+  min-height: 6px;
+  margin: 10px 3px;
+  background-color: theme.$text-main;
+  &:hover {
+    background-color: #646464;
+  }
+  &.active {
+    border-radius: 5px;
+    background-color: theme.$background;
+  }
+  &.empty {
+    min-width: 9px;
+    margin: 14px 2px 14px 2px;
+    background-color: theme.$text-main;
+  }
+}
 
 #player-box {
-  padding: 15px;
+  margin: 15px;
 
   #player-title {
     margin-top: 5px;
@@ -26,65 +45,35 @@
     min-height: 25px;
     padding: 7px;
     border-radius: 100%;
-  }
-
-  #player-button:hover {
-    background: theme.$background-alt;
-    box-shadow: 0 0 2px -3px black;
-  }
-
-  #player-button:active {
-    box-shadow: 0 0 4px -1px black;
-  }
-
-  #player-button:disabled {
-    color: #5f5f5f;
+    &:hover {
+      background: theme.$background-alt;
+      box-shadow: 0 0 2px -3px black;
+    }
+    &:active {
+      box-shadow: 0 0 4px -1px black;
+    }
+    &:disabled {
+      color: #5f5f5f;
+    }
   }
 
   scale {
     margin-top: 10px;
     margin-bottom: 5px;
+    trough {
+      border-radius: 100px;
+      min-height: 8px;
+      background-color: rgba(theme.$background-dark, 0.7);
+      highlight {
+        border-radius: 400px;
+      }
+      &:hover {
+        background-color: rgba(theme.$background-dark, 0.5);
+      }
+    }
   }
-
-  scale trough {
-    border-radius: 100px;
-    min-height: 8px;
-    background-color: rgba(theme.$background-dark, 0.7);
-  }
-
-  scale trough highlight {
-    border-radius: 400px;
-  }
-
   highlight,
   progress {
     background: theme.$text-muted;
   }
-
-  scale trough:hover {
-    background-color: rgba(theme.$background-dark, 0.5);
-  }
-}
-
-#player-stack-button {
-  border-radius: 5px;
-  min-width: 20px;
-  min-height: 6px;
-  margin: 10px 3px;
-  background-color: theme.$text-main;
-}
-
-#player-stack-button:hover {
-  background-color: #646464;
-}
-
-#player-stack-button.active {
-  border-radius: 5px;
-  background-color: theme.$background;
-}
-
-#player-stack-button.empty {
-  min-width: 9px;
-  margin: 14px 2px 14px 2px;
-  background-color: theme.$text-main;
 }

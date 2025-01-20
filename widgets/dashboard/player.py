@@ -23,7 +23,7 @@ from utils.functions import ensure_dir_exists
 
 ensure_dir_exists(f"{APP_CACHE_DIRECTORY}/media")
 
-icon_size = 20
+icon_size = 18
 
 # TODO: add time remaining
 
@@ -175,7 +175,7 @@ class PlayerBox(Box):
         self.player: MprisPlayer = player
         self.cover_path = get_relative_path("../../assets/images/no_image.jpg")
 
-        self.player_width = 440
+        self.player_width = 380
         self.image_size = 110
         self.player_height = 110
 

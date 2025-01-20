@@ -1,56 +1,56 @@
 @use "theme.scss";
 
 #dashboard-menu {
-  min-width: 440px;
-}
+  min-width: 380px;
 
-#dashboard-slider {
-  margin-left: 10px;
-  margin-right: 20px;
-}
+  .slider-box {
+    margin: 20px 30px;
+  }
 
-.slider-box {
-  margin: 20px;
-}
+  #dashboard-slider {
+    margin-left: 10px;
+    margin-right: 20px;
 
-#dashboard-slider trough {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  padding-right: 12.5px;
-  min-height: 10px;
-  background-color: rgba(theme.$background, 0.7);
-  border-radius: 10px;
-}
+    trough {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      padding-right: 12.5px;
+      min-height: 10px;
+      background-color: rgba(theme.$background, 0.7);
+      border-radius: 10px;
 
-#dashboard-slider trough:hover {
-  background-color: rgba(theme.$background, 0.7);
-}
+      &:hover {
+        background-color: rgba(theme.$background, 0.7);
+      }
 
-#dashboard-slider trough highlight {
-  border-radius: 20px 0px 0px 20px;
-  background-color: theme.$accent-blue;
-  margin-right: -12.5px;
-}
+      highlight {
+        border-radius: 20px 0px 0px 20px;
+        background-color: theme.$accent-blue;
+        margin-right: -12.5px;
 
-#dashboard-slider trough highlight:disabled {
-  background-color: rgba(theme.$text-muted, 0.7);
-}
+        &:disabled {
+          background-color: rgba(theme.$text-muted, 0.7);
+        }
+      }
+    }
 
-#dashboard-slider slider {
-  border-radius: 100%;
-  min-width: 10px;
-  min-height: 10px;
-  box-shadow: 0px 0px 5px 1px rgb(94, 94, 94);
-  margin-left: 25px;
-  background-color: mix(theme.$accent-blue, white, 0.3);
-  transition: min-width 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-  transition: min-height 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
+    slider {
+      border-radius: 100%;
+      min-width: 10px;
+      min-height: 10px;
+      box-shadow: 0px 0px 5px 1px rgb(94, 94, 94);
+      margin-left: 25px;
+      background-color: mix(theme.$accent-blue, white, 0.3);
+      transition: min-width 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+      transition: min-height 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 
-#dashboard-slider slider:hover {
-  background-color: theme.$accent-purple;
-}
+      &:hover {
+        background-color: theme.$accent-purple;
+      }
 
-#dashboard-slider slider:disabled {
-  background-color: rgba(theme.$text-muted, 1);
+      &:disabled {
+        background-color: rgba(theme.$text-muted, 1);
+      }
+    }
+  }
 }
