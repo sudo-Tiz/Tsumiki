@@ -74,3 +74,28 @@ scale trough:hover {
 #player-button:disabled {
   color: #5f5f5f;
 }
+
+#player-stack-button {
+  border-radius: 5px;
+  min-width: 30px;
+  min-height: 10px;
+  margin: 10px 1px 10px 1px;
+  background-color: theme.$text-main;
+}
+
+#player-stack-button:hover {
+  background-color: #646464;
+}
+
+#player-stack-button.active {
+  border-radius: 5px;
+  min-width: 30px;
+  margin: 10px 1px 10px 1px;
+  background-color: theme.$background;
+}
+
+#player-stack-button.empty {
+  min-width: 9px;
+  margin: 14px 2px 14px 2px;
+  background-color: theme.$text-main;
+}

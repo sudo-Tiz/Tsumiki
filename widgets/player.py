@@ -40,32 +40,11 @@ class PlayerBoxStack(Box):
         )
         self.current_stack_pos = 0
 
-        # Static buttons
-        self.next_player_button = Button(
-            name="panel-button",
-            image=Image(icon_name="go-next-symbolic", icon_size=icon_size),
-        )
-        self.prev_player_button = Button(
-            name="panel-button",
-            image=Image(icon_name="go-previous-symbolic", icon_size=icon_size),
-        )
-        self.next_player_button.connect(
-            "clicked",
-            lambda *args: self.on_player_clicked("next"),
-        )
-        self.prev_player_button.connect(
-            "clicked",
-            lambda *args: self.on_player_clicked("prev"),
-        )
-
         # List to store player buttons
         self.player_buttons: list[Button] = []
 
         # Box to contain all the buttons
-        self.buttons_box = CenterBox(
-            start_children=self.prev_player_button,
-            end_children=self.next_player_button,
-        )
+        self.buttons_box = CenterBox()
 
         super().__init__(
             orientation="v", children=[self.player_stack, self.buttons_box]
