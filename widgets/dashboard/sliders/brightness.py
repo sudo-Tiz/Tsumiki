@@ -14,6 +14,7 @@ class BrightnessSlider(DashboardSettingsScale):
             min=0,
             max=self.client.max_screen if self.client.max_screen != -1 else 0,
             start_value=self.client.screen_brightness,
+            pixel_size=24,
             icon_name="display-brightness-symbolic",
         )
 

@@ -13,7 +13,7 @@ class DashboardSettingsScale(Box):
         max: float = 100,
         start_value: float = 50,
         icon_name: str = "package-x-generic-symbolic",
-        pixel_size: int = 28,
+        pixel_size: int = 22,
         **kwargs,
     ):
         self.pixel_size = pixel_size
