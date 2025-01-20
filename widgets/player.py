@@ -262,6 +262,7 @@ class PlayerBox(Box):
         # Buttons
         self.button_box = CenterBox(
             name="button-box",
+            h_align="center",
         )
 
         self.skip_next_icon = Image(
@@ -270,6 +271,11 @@ class PlayerBox(Box):
             icon_size=icon_size,
         )
         self.skip_prev_icon = Image(
+            icon_name="media-skip-backward-symbolic",
+            name="player-icon",
+            icon_size=icon_size,
+        )
+        self.loop_icon = Image(
             icon_name="media-skip-backward-symbolic",
             name="player-icon",
             icon_size=icon_size,

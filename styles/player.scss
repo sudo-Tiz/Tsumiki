@@ -5,74 +5,74 @@
   border-radius: 15px;
 }
 
-scale {
-  margin-top: 10px;
-  margin-bottom: 5px;
-}
-
-scale trough {
-  border-radius: 100px;
-  min-height: 8px;
-  background-color: #d1cfcf;
-}
-
-scale trough highlight {
-  border-radius: 400px;
-}
-
-highlight,
-progress {
-  background: theme.$text-muted;
-}
-
-scale trough:hover {
-  background-color: #bebebe;
-}
-
 #player-box {
   margin: 5px;
-}
 
-#player-title {
-  font-weight: 700;
-  color: #000000;
-  text-shadow:
-    -1px -1px 0 #d1cfcf,
-    1px -1px 0 #d1cfcf,
-    -1px 1px 0 #d1cfcf,
-    1px 1px 0 #d1cfcf;
-  font-size: 18px;
-}
+  #player-title {
+    font-weight: 700;
+    color: #000000;
+    text-shadow:
+      -1px -1px 0 #d1cfcf,
+      1px -1px 0 #d1cfcf,
+      -1px 1px 0 #d1cfcf,
+      1px 1px 0 #d1cfcf;
+    font-size: 18px;
+  }
 
-#player-artist {
-  font-weight: 500;
-  font-size: 12.5px;
-  color: #7d7178;
-}
+  #player-artist {
+    font-weight: 500;
+    font-size: 12.5px;
+    color: #7d7178;
+  }
 
-#button-box {
-  margin-bottom: 5px;
-  margin-right: 5px;
-}
+  #button-box {
+    margin-top: 5px;
+    margin-right: 5px;
+  }
 
-#player-button {
-  min-width: 25px;
-  min-height: 25px;
-  padding: 8px;
-  border-radius: 100%;
-}
+  #player-button {
+    min-width: 25px;
+    min-height: 25px;
+    padding: 8px;
+    border-radius: 100%;
+  }
 
-#player-button:hover {
-  background: theme.$background-alt;
-  box-shadow: 0 0 2px -3px black;
-}
+  #player-button:hover {
+    background: theme.$background-alt;
+    box-shadow: 0 0 2px -3px black;
+  }
 
-#player-button:active {
-  box-shadow: 0 0 4px -1px black;
-}
+  #player-button:active {
+    box-shadow: 0 0 4px -1px black;
+  }
 
-#player-button:disabled {
-  color: #5f5f5f;
+  #player-button:disabled {
+    color: #5f5f5f;
+  }
+
+  scale {
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+
+  scale trough {
+    border-radius: 100px;
+    min-height: 8px;
+    background-color: #d1cfcf;
+  }
+
+  scale trough highlight {
+    border-radius: 400px;
+  }
+
+  highlight,
+  progress {
+    background: theme.$text-muted;
+  }
+
+  scale trough:hover {
+    background-color: #bebebe;
+  }
 }
 
 #player-stack-button {
