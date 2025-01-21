@@ -4,6 +4,7 @@
   background-color: theme.$background;
   border-radius: 15px;
 }
+
 #player-stack-button {
   border-radius: 5px;
   min-width: 20px;
@@ -25,10 +26,10 @@
 }
 
 #player-box {
-  margin: 15px;
+  margin: 20px 0;
 
   #player-title {
-    margin-top: 5px;
+    margin-top: 15px;
     font-weight: 700;
     color: theme.$text-main;
     font-size: 1.1rem;
@@ -40,26 +41,30 @@
     color: #7d7178;
   }
 
-  #player-button {
-    min-width: 25px;
-    min-height: 25px;
-    padding: 7px;
-    border-radius: 100%;
-    &:hover {
-      background: theme.$background-alt;
-      box-shadow: 0 0 2px -3px black;
+  #button-box{
+    margin-bottom: 10px;
+    #player-button {
+      min-width: 25px;
+      min-height: 25px;
+      padding: 7px;
+      border-radius: 100%;
+      &:hover {
+        background: theme.$background-alt;
+        box-shadow: 0 0 2px -3px black;
+      }
+      &:active {
+        box-shadow: 0 0 4px -1px black;
+      }
+      &:disabled {
+        color: #5f5f5f;
+      }
     }
-    &:active {
-      box-shadow: 0 0 4px -1px black;
-    }
-    &:disabled {
-      color: #5f5f5f;
-    }
+  
   }
+
 
   scale {
     margin-top: 10px;
-    margin-bottom: 5px;
     trough {
       border-radius: 100px;
       min-height: 8px;

@@ -176,8 +176,8 @@ class PlayerBox(Box):
         self.cover_path = get_relative_path("../../assets/images/no_image.jpg")
 
         self.player_width = 380
-        self.image_size = 110
-        self.player_height = 110
+        self.image_size = 100
+        self.player_height = 100
 
         # State
         self.exit = False

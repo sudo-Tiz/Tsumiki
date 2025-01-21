@@ -1,7 +1,16 @@
 @use "theme.scss";
 
 #dashboard-menu {
-  min-width: 380px;
+
+  .user-box{
+    margin: 1rem;
+   .user_name{
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: theme.$text-main;
+      margin-left: 1rem;
+   }
+  }
 
   .slider-box {
     margin: 20px 30px;
