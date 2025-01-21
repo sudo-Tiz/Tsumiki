@@ -1,14 +1,13 @@
-from fabric.widgets.label import Label
+from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
+from fabric.widgets.label import Label
 
 from services.mpris import MprisPlayerManager
 from shared.cicrle_image import CircleImage
-from shared.custom_image import CustomImage
 from shared.pop_over import PopOverWindow
-from fabric.utils import get_relative_path
 from shared.widget_container import ButtonWidget
-from utils.functions import text_icon
+from utils.functions import text_icon, psutil_fabricator
 from utils.widget_settings import BarConfig
 from widgets.dashboard.player import PlayerBoxStack
 
@@ -22,6 +21,11 @@ class DashBoardMenu(Box):
     def __init__(self, **kwargs):
         super().__init__(
             name="dashboard-menu", orientation="v", all_visible=True, **kwargs
+        )
+
+        user_label = Label(
+            "User",
+            style_classes="user_name",
         )
 
         box = CenterBox(
@@ -42,10 +46,7 @@ class DashBoardMenu(Box):
                                 ),
                                 size=70,
                             ),
-                            Label(
-                                "User",
-                                style_classes="user_name",
-                            ),
+                            user_label,
                         ),
                     ),
                     PlayerBoxStack(MprisPlayerManager()),
@@ -61,6 +62,11 @@ class DashBoardMenu(Box):
 
         self.add(box)
 
+        psutil_fabricator.connect(
+            "changed",
+            lambda _, value: user_label.set_label(value.get("user")[0]),
+        )
+
 
 class DashBoardWidget(ButtonWidget):
     """A button to display the date and time."""
@@ -69,7 +75,6 @@ class DashBoardWidget(ButtonWidget):
         super().__init__(name="date-time-button", **kwargs)
 
         self.config = widget_config["date_time"]
-
 
         popup = PopOverWindow(
             parent=bar,

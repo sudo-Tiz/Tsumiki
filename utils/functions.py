@@ -40,6 +40,7 @@ def psutil_poll(fabricator):
             "memory": psutil.virtual_memory(),
             "disk": psutil.disk_usage("/"),
             "battery": psutil.sensors_battery(),
+            "user": psutil.users()[0],
         }
         sleep(2)
 
