@@ -186,7 +186,7 @@ DEFAULT_CONFIG = {
     "workspaces": {
         "count": 8,
         "hide_unoccupied": True,
-        "ignored": [],
+        "ignored": [-99],
         "reverse_scroll": False,
         "empty_scroll": False,
         "icon_map": {},
