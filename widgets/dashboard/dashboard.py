@@ -7,7 +7,7 @@ from services.mpris import MprisPlayerManager
 from shared.cicrle_image import CircleImage
 from shared.pop_over import PopOverWindow
 from shared.widget_container import ButtonWidget
-from utils.functions import text_icon, psutil_fabricator
+from utils.functions import psutil_fabricator, text_icon
 from utils.widget_settings import BarConfig
 from widgets.dashboard.player import PlayerBoxStack
 

@@ -1,19 +1,24 @@
 @use "theme.scss";
 
-#dashboard-menu {
+$slider-height: 12px;
 
-  .user-box{
+#dashboard-menu {
+  .user-box {
     margin: 1rem;
-   .user_name{
+
+    .user_name {
       font-size: 1.25rem;
       font-weight: 700;
       color: theme.$text-main;
       margin-left: 1rem;
-   }
+    }
   }
 
   .slider-box {
-    margin: 20px 30px;
+    margin: 16px;
+    padding: 20px 10px 20px 10px;
+    border-radius: 10px;
+    background-color: theme.$background;
   }
 
   #dashboard-slider {
@@ -24,12 +29,12 @@
       margin-top: 5px;
       margin-bottom: 5px;
       padding-right: 12.5px;
-      min-height: 10px;
-      background-color: rgba(theme.$background, 0.7);
+      min-height: $slider-height;
+      background-color: darken(theme.$background, 5%);
       border-radius: 10px;
 
       &:hover {
-        background-color: rgba(theme.$background, 0.7);
+        background-color: darken(theme.$background, 7%);
       }
 
       highlight {
@@ -45,8 +50,8 @@
 
     slider {
       border-radius: 100%;
-      min-width: 10px;
-      min-height: 10px;
+      min-width: $slider-height;
+      min-height: $slider-height;
       box-shadow: 0px 0px 5px 1px rgb(94, 94, 94);
       margin-left: 25px;
       background-color: mix(theme.$accent-blue, white, 0.3);

@@ -41,7 +41,7 @@
     color: #7d7178;
   }
 
-  #button-box{
+  #button-box {
     margin-bottom: 10px;
     #player-button {
       min-width: 25px;
@@ -59,21 +59,19 @@
         color: #5f5f5f;
       }
     }
-  
   }
-
 
   scale {
     margin-top: 10px;
     trough {
       border-radius: 100px;
       min-height: 8px;
-      background-color: rgba(theme.$background-dark, 0.7);
+      background-color: darken(theme.$background, 5%);
       highlight {
         border-radius: 400px;
       }
       &:hover {
-        background-color: rgba(theme.$background-dark, 0.5);
+        background-color: darken(theme.$background, 7%);
       }
     }
   }
