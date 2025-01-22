@@ -4,7 +4,7 @@ from .bluetooth import *
 from .brightness import *
 from .cava import *
 from .click_counter import *
-from .dashboard.dashboard import *
+from .dashboard import *
 from .datetime_menu import *
 from .hypr_idle import *
 from .hypr_sunset import *
