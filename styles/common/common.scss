@@ -198,7 +198,7 @@ radio:indeterminate {
 }
 
 check:checked {
-  -gtk-icon-source: -gtk-icontheme("checkbox"); // TODO: find a better solution
+  -gtk-icon-source: -gtk-icontheme("checkbox");
 }
 
 check:checked:hover,
