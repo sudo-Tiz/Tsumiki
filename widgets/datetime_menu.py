@@ -7,7 +7,6 @@ from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.datetime import DateTime
-from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
@@ -27,7 +26,7 @@ from utils.widget_settings import BarConfig
 gi.require_version("Gtk", "3.0")
 
 
-class DateMenuNotification(EventBox):
+class DateMenuNotification(Button):
     """A widget to display a notification."""
 
     def __init__(
@@ -38,7 +37,7 @@ class DateMenuNotification(EventBox):
     ):
         super().__init__(
             size=(constants.NOTIFICATION_WIDTH, -1),
-            name="notification-eventbox",
+            name="notification-card",
             **kwargs,
         )
 

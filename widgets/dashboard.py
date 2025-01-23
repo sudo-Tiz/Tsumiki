@@ -1,8 +1,8 @@
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
-from fabric.widgets.eventbox import EventBox
 
 from shared.pop_over import PopOverWindow
+from shared.widget_container import ButtonWidget
 from utils.functions import create_scale, text_icon
 from utils.widget_settings import BarConfig
 
@@ -44,7 +44,7 @@ class DashBoardMenu(Box):
         self.add(box1)
 
 
-class DashBoardWidget(EventBox):
+class DashBoardWidget(ButtonWidget):
     """A button to display the date and time."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):

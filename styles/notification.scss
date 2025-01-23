@@ -7,7 +7,7 @@ $hover-tranisition: background 0.15s ease-in-out;
 
 /* notification widget*/
 
-#notification-eventbox {
+#notification-card {
   #notification {
     padding: 0.8rem;
     border-radius: 1rem;
@@ -17,6 +17,10 @@ $hover-tranisition: background 0.15s ease-in-out;
 
     .notification-body {
       padding: 0.25em;
+    }
+
+    &:hover {
+      border: 1px solid red;
     }
   }
 
