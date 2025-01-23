@@ -153,7 +153,7 @@ class DateNotificationMenu(Box):
         )
 
         self.notifications: List[Notification] = (
-            cache_notification_service.get_deserailized()
+            cache_notification_service.get_deserialized()
         )
 
         self.notifications_list = [
