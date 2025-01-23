@@ -72,11 +72,11 @@ class NotificationCacheService(Service):
 
         logger.info(f"{Colors.INFO}[Notification] Notification removed successfully.")
 
-    def cache_notification(self, data):
+    def cache_notification(self, data: Notification):
         """Cache the notification."""
 
         # Append the new notification to the list
-        self._notifications.append(data)
+        self._notifications.append(data.serialize())
 
         # Check if the cache file exists and read existing data
         if os.path.exists(NOTIFICATION_CACHE_FILE):

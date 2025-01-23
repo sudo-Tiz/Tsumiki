@@ -15,7 +15,7 @@ from gi.repository import GdkPixbuf, Gtk
 
 import utils.constants as constants
 import utils.functions as helpers
-from services import notify_cache_service
+from services import notification_cache_service, notification_service
 from shared.custom_image import CustomImage
 from shared.pop_over import PopOverWindow
 from shared.separator import Separator
@@ -83,7 +83,7 @@ class DateMenuNotification(EventBox):
                 icon_size=16,
             ),
             style_classes="close-button",
-            on_clicked=lambda _: notify_cache_service.remove_notification(index),
+            on_clicked=lambda _: notification_cache_service.remove_notification(index),
         )
 
         header_container.pack_end(
@@ -153,18 +153,22 @@ class DateNotificationMenu(Box):
             style_classes="clock",
         )
 
-        notifications: List[Notification] = notify_cache_service.get_deserailized()
+        notifications: List[Notification] = (
+            notification_cache_service.get_deserailized()
+        )
 
-        self.notification_list = Box(
+        notifications_list = [
+            DateMenuNotification(notification=val, index=index)
+            for index, val in enumerate(notifications)
+        ]
+
+        self.notification_list_box = Box(
             orientation="v",
             h_align="center",
             spacing=8,
             h_expand=True,
             visible=len(notifications) > 0,
-            children=[
-                DateMenuNotification(notification=val, index=index)
-                for index, val in enumerate(notifications)
-            ],
+            children=notifications_list,
         )
 
         self.uptime = Label(style_classes="uptime", label=uptime())
@@ -218,7 +222,7 @@ class DateNotificationMenu(Box):
         )
 
         clear_button.connect(
-            "clicked", lambda _: notify_cache_service.clear_notifications()
+            "clicked", lambda _: notification_cache_service.clear_notifications()
         )
 
         notif_header.pack_end(
@@ -238,7 +242,7 @@ class DateNotificationMenu(Box):
                     v_expand=True,
                     style_classes="notification-scrollable",
                     h_scrollbar_policy="never",
-                    child=Box(children=(placeholder, self.notification_list)),
+                    child=Box(children=(placeholder, self.notification_list_box)),
                 ),
             ),
         )
@@ -274,6 +278,16 @@ class DateNotificationMenu(Box):
         )
 
         invoke_repeater(1000, self.update_labels, initial_call=True)
+        notification_service.connect("notification-added", self.on_new_notification)
+
+    def on_new_notification(self, fabric_notif, id):
+        notification: Notification = fabric_notif.get_notification_from_id(id)
+        self.notification_list_box.add(
+            DateMenuNotification(
+                notification=notification,
+                index=len(self.notification_list_box.children) - 1,
+            )
+        )
 
     def update_labels(self):
         self.clock_label.set_text(time.strftime("%H:%M"))
@@ -327,10 +341,10 @@ class DateTimeWidget(ButtonWidget):
             self.notof_indicator.set_from_icon_name(
                 icons["notifications"]["silent"], icon_size=16
             )
-            notify_cache_service.dont_disturb = True
+            notification_cache_service.dont_disturb = True
 
         else:
             self.notof_indicator.set_from_icon_name(
                 icons["notifications"]["noisy"], icon_size=16
             )
-            notify_cache_service.dont_disturb = False
+            notification_cache_service.dont_disturb = False
