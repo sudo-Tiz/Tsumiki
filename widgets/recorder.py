@@ -62,6 +62,6 @@ class Recorder(ButtonWidget):
         else:
             self.box.children = self.recording_idle_image
             self.recording_ongoing_lottie.stop_play()
-
+            self.is_recording = False
             if self.config["tooltip"]:
                 self.set_tooltip_text("Recording stopped")
