@@ -1,9 +1,8 @@
 from services import audio_service
+from shared.setting_scale import SettingScale
 
-from .dashboard_scale import DashboardSettingsScale
 
-
-class AudioSlider(DashboardSettingsScale):
+class AudioSlider(SettingScale):
     """A widget to display a scale for audio settings."""
 
     def __init__(self):

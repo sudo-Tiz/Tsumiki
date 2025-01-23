@@ -4,7 +4,7 @@ from fabric.widgets.image import Image
 from fabric.widgets.scale import Scale
 
 
-class DashboardSettingsScale(Box):
+class SettingScale(Box):
     """A widget to display a scale for quick settings."""
 
     def __init__(
@@ -14,8 +14,14 @@ class DashboardSettingsScale(Box):
         start_value: float = 50,
         icon_name: str = "package-x-generic-symbolic",
         pixel_size: int = 22,
+        icon_button: bool = True,
         **kwargs,
     ):
+        super().__init__(
+            name="setting-scale",
+            children=Box(spacing=5, h_expand=True),
+            **kwargs,
+        )
         self.pixel_size = pixel_size
         self.icon = Image(icon_name=icon_name, icon_size=self.pixel_size)
         self.icon_button = Button(image=self.icon, name="panel-button")
@@ -28,10 +34,7 @@ class DashboardSettingsScale(Box):
             h_expand=True,
         )
 
-        super().__init__(
-            name="dashboard-box",
-            children=Box(
-                spacing=5, children=[self.icon_button, self.scale], h_expand=True
-            ),
-            **kwargs,
-        )
+        if icon_button:
+            self.add(self.icon_button)
+
+        self.add(self.scale)

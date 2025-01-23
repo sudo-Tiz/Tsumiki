@@ -1,9 +1,8 @@
 from services.brightness import Brightness
+from shared.setting_scale import SettingScale
 
-from .dashboard_scale import DashboardSettingsScale
 
-
-class BrightnessSlider(DashboardSettingsScale):
+class BrightnessSlider(SettingScale):
     """A widget to display a scale for brightness settings."""
 
     def __init__(

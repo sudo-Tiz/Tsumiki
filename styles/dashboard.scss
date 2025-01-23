@@ -1,6 +1,6 @@
 @use "theme.scss";
 
-$slider-height: 12px;
+
 
 #dashboard-menu {
   .user-box {
@@ -25,46 +25,6 @@ $slider-height: 12px;
     margin-left: 10px;
     margin-right: 20px;
 
-    trough {
-      margin-top: 5px;
-      margin-bottom: 5px;
-      padding-right: 12.5px;
-      min-height: $slider-height;
-      background-color: darken(theme.$background, 5%);
-      border-radius: 10px;
 
-      &:hover {
-        background-color: darken(theme.$background, 7%);
-      }
-
-      highlight {
-        border-radius: 20px 0px 0px 20px;
-        background-color: theme.$accent-blue;
-        margin-right: -12.5px;
-
-        &:disabled {
-          background-color: rgba(theme.$text-muted, 0.7);
-        }
-      }
-    }
-
-    slider {
-      border-radius: 100%;
-      min-width: $slider-height;
-      min-height: $slider-height;
-      box-shadow: 0px 0px 5px 1px rgb(94, 94, 94);
-      margin-left: 25px;
-      background-color: mix(theme.$accent-blue, white, 0.3);
-      transition: min-width 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-      transition: min-height 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-
-      &:hover {
-        background-color: theme.$accent-purple;
-      }
-
-      &:disabled {
-        background-color: rgba(theme.$text-muted, 1);
-      }
-    }
   }
 }
