@@ -63,7 +63,13 @@ class DateMenuNotification(EventBox):
         header_container.children = (
             helpers.get_icon(notification.app_icon, 25),
             Label(
-                markup=helpers.escape_markup(str(id)),
+                markup=helpers.escape_markup(
+                    str(
+                        self._notification.summary
+                        if self._notification.summary
+                        else notification.app_name,
+                    )
+                ),
                 h_align="start",
                 style_classes="summary",
                 ellipsization="end",
