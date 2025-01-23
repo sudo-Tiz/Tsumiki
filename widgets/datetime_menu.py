@@ -281,8 +281,7 @@ class DateNotificationMenu(Box):
         cache_notification_service.connect("clear_all", self.on_clear_all_notifications)
 
     def on_clear_all_notifications(self, *_):
-        for child in self.notification_list_box.children:
-            self.notification_list_box.remove(child)
+        self.notification_list_box.children = []
         self.notifications = []
         self.notification_list_box.set_visible(False)
         self.placeholder.set_visible(True)
@@ -298,6 +297,8 @@ class DateNotificationMenu(Box):
                 id=count + 1 if count > 0 else 1,
             )
         )
+        self.placeholder.set_visible(False)
+        self.notification_list_box.set_visible(True)
 
     def update_labels(self):
         self.clock_label.set_text(time.strftime("%H:%M"))
