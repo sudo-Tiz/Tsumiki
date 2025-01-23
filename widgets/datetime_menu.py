@@ -152,6 +152,7 @@ class DateNotificationMenu(Box):
             orientation="h",
             **kwargs,
         )
+        self.notification_cache_service = NotificationCacheService().get_initial()
 
         self.clock_label = Label(
             label=time.strftime("%H:%M"),
