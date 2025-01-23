@@ -148,6 +148,8 @@ exec = `$HOME/bar/init.sh -start`
 
 > **Note**: modify the path accordingly
 
+Check FAQs for common things you are likely to encounter
+
 ## Updating
 
 Updating to latest commit is fairly simple, just git pull the latest changes.
