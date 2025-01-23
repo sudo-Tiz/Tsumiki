@@ -1,5 +1,3 @@
-from typing import Literal
-
 from fabric.notifications import (
     Notification,
     NotificationAction,
@@ -12,13 +10,64 @@ from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
+from fabric.widgets.wayland import WaylandWindow
 from gi.repository import Gdk, GdkPixbuf, GLib
 
 import utils.constants as constants
 import utils.functions as helpers
 import utils.icons as icons
+from services import notification_service, notify_cache_service
 from shared import CustomImage
 from utils.config import widget_config
+from utils.monitors import HyprlandWithMonitors
+from utils.widget_settings import BarConfig
+
+
+class NotificationPopup(WaylandWindow):
+    """A widget to grab and display notifications."""
+
+    def __init__(self, widget_config: BarConfig, **kwargs):
+        self._server = notification_service
+
+        self.config = widget_config["notification"]
+
+        self.hyprland_monitor = HyprlandWithMonitors()
+
+        self.ignored_apps = helpers.unique_list(self.config["ignored"])
+
+        self.notifications = Box(
+            v_expand=True,
+            h_expand=True,
+            style="margin: 1px 0px 1px 1px;",
+            orientation="v",
+            spacing=5,
+        )
+        self._server.connect("notification-added", self.on_new_notification)
+
+        super().__init__(
+            anchor=self.config["anchor"],
+            layer="overlay",
+            all_visible=True,
+            monitor=HyprlandWithMonitors().get_current_gdk_monitor_id(),
+            visible=True,
+            exclusive=False,
+            child=self.notifications,
+            **kwargs,
+        )
+
+    def on_new_notification(self, fabric_notif, id):
+        notification: Notification = fabric_notif.get_notification_from_id(id)
+
+        # Check if the notification is in the "do not disturb" mode, hacky way
+        if (
+            notify_cache_service.dont_disturb
+            or notification.app_name in self.ignored_apps
+        ):
+            return
+
+        new_box = NotificationRevealer(notification)
+        self.notifications.add(new_box)
+        new_box.set_reveal_child(True)
 
 
 class NotificationWidget(EventBox):
@@ -27,7 +76,6 @@ class NotificationWidget(EventBox):
     def __init__(
         self,
         notification: Notification,
-        type: Literal["popup", "datemenu"] = "popup",
         **kwargs,
     ):
         super().__init__(
@@ -164,11 +212,8 @@ class NotificationWidget(EventBox):
             ),
         )
 
-        (
-            type == "popup"
-            and widget_config["notification"]["auto_dismiss"]
-            and self.start_timeout()
-        )
+        if widget_config["notification"]["auto_dismiss"]:
+            self.start_timeout()
 
     def start_timeout(self):
         self.stop_timeout()

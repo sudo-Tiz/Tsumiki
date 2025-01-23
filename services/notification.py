@@ -22,10 +22,13 @@ class NotificationCacheService(Service):
 
         return NotificationCacheService.instance
 
-    @property
-    def notifications(self) -> List[Notification]:
+    def get_deserailized(self) -> List[Notification]:
         """Return the notifications."""
-        return self._notifications
+        if len(self.notifications) <= 0:
+            self.notifications = [
+                Notification.deserialize(data) for data in self._notifications
+            ]
+        return self.notifications
 
     @property
     def count(self) -> int:
@@ -45,7 +48,9 @@ class NotificationCacheService(Service):
     def __init__(self):
         self._count = 0
         self._notifications = []
+        self.notifications = []  # this is deserialized data
         self._dont_disturb = False
+        self.do_read_notifications()
 
     def do_read_notifications(self) -> List[Notification]:
         """Read the notifications from the notifications file."""

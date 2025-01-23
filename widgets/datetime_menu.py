@@ -3,17 +3,21 @@ from typing import List
 
 import gi
 from fabric.notifications import Notification
-from fabric.utils import invoke_repeater
+from fabric.utils import bulk_connect, invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.datetime import DateTime
+from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
-from gi.repository import Gtk
+from gi.repository import Gdk, GdkPixbuf, GLib, Gtk
 
-from modules.notifications.notification_widget import NotificationWidget
+import utils.constants as constants
+import utils.functions as helpers
+from modules.notification_pop_up import ActionButton
 from services import notify_cache_service
+from shared.custom_image import CustomImage
 from shared.pop_over import PopOverWindow
 from shared.separator import Separator
 from shared.widget_container import ButtonWidget
@@ -23,6 +27,154 @@ from utils.widget_settings import BarConfig
 
 gi.require_version("Gtk", "3.0")
 
+
+class DateMenuNotification(EventBox):
+    """A widget to display a notification."""
+
+    def __init__(
+        self,
+        notification: Notification,
+        **kwargs,
+    ):
+        super().__init__(
+            size=(constants.NOTIFICATION_WIDTH, -1),
+            name="notification-eventbox",
+            **kwargs,
+        )
+
+        self._notification = notification
+
+        self._timeout_id = None
+
+        self.notification_box = Box(
+            spacing=8,
+            name="notification",
+            orientation="v",
+        )
+
+        if notification.urgency == 2:
+            self.notification_box.add_style_class("critical")
+
+
+        header_container = Box(
+            spacing=8, orientation="h", style_classes="notification-header"
+        )
+
+        header_container.children = (
+            self.get_icon(notification.app_icon, 25),
+            Label(
+                markup=self.escape_markup(
+                    str(
+                        self._notification.summary
+                        if self._notification.summary
+                        else notification.app_name,
+                    )
+                ),
+                h_align="start",
+                style_classes="summary",
+                ellipsization="end",
+            ),
+        )
+
+        header_container.pack_end(
+            Box(
+                v_align="start",
+                children=(
+                    Button(
+                        image=Image(
+                            icon_name=helpers.check_icon_exists(
+                                "close-symbolic",
+                                icons["ui"]["close"],
+                            ),
+                            icon_size=16,
+                        ),
+                        style_classes="close-button",
+                    ),
+                ),
+            ),
+            False,
+            False,
+            0,
+        )
+
+        body_container = Box(
+            spacing=4, orientation="h", style_classes="notification-body"
+        )
+
+        # Use provided image if available, otherwise use "notification-symbolic" icon
+        if image_pixbuf := self._notification.image_pixbuf:
+            body_container.add(
+                Box(
+                    v_expand=True,
+                    v_align="center",
+                    children=CustomImage(
+                        pixbuf=image_pixbuf.scale_simple(
+                            constants.NOTIFICATION_IMAGE_SIZE,
+                            constants.NOTIFICATION_IMAGE_SIZE,
+                            GdkPixbuf.InterpType.BILINEAR,
+                        ),
+                        style_classes="image",
+                    ),
+                )
+            )
+
+        body_container.add(
+            Label(
+                markup=self.escape_markup(self._notification.body),
+                line_wrap="word-char",
+                ellipsization="end",
+                v_align="start",
+                h_align="start",
+                style_classes="body",
+            ),
+        )
+
+        actions_container = Box(
+            spacing=4,
+            orientation="h",
+            name="notification-action-box",
+            children=[
+                ActionButton(action, i, len(self._notification.actions))
+                for i, action in enumerate(self._notification.actions)
+            ],
+            h_expand=True,
+        )
+
+        # Add the header, body, and actions to the notification box
+        self.notification_box.children = (
+            header_container,
+            body_container,
+            actions_container,
+        )
+
+        # Add the notification box to the EventBox
+        self.add(self.notification_box)
+
+    def escape_markup(self, text):
+        return GLib.markup_escape_text(text).replace("\n", " ")
+
+    def get_icon(self, app_icon, size) -> Image:
+        match app_icon:
+            case str(x) if "file://" in x:
+                return Image(
+                    name="app-icon",
+                    image_file=app_icon[7:],
+                    size=size,
+                )
+            case str(x) if len(x) > 0 and x[0] == "/":
+                return Image(
+                    name="app-icon",
+                    image_file=app_icon,
+                    size=size,
+                )
+            case _:
+                return Image(
+                    name="app-icon",
+                    icon_name=app_icon
+                    if app_icon
+                    else icons["fallback"]["notification"],
+                    icon_size=size,
+                )
 
 class DateNotificationMenu(Box):
     """A menu to display the weather information."""
@@ -42,11 +194,14 @@ class DateNotificationMenu(Box):
             style_classes="clock",
         )
 
-        notifications: List[Notification] = []
+        notifications: List[Notification] = notify_cache_service.get_deserailized()
 
         self.notification_list = Box(
             visible=len(notifications) > 0,
-            children=[NotificationWidget(val) for val in notifications],
+            children=[
+                DateMenuNotification(notification=val, type="datemenu")
+                for val in notifications
+            ],
         )
 
         self.uptime = Label(style_classes="uptime", label=uptime())
