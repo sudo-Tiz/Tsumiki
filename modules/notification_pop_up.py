@@ -6,6 +6,7 @@ from fabric.notifications import (
 from fabric.utils import bulk_connect
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
+from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
@@ -70,7 +71,7 @@ class NotificationPopup(WaylandWindow):
         cache_notification_service.cache_notification(notification)
 
 
-class NotificationWidget(Button):
+class NotificationWidget(EventBox):
     """A widget to display a notification."""
 
     def __init__(
@@ -80,7 +81,7 @@ class NotificationWidget(Button):
     ):
         super().__init__(
             size=(constants.NOTIFICATION_WIDTH, -1),
-            name="notification-card",
+            name="notification-eventbox",
             **kwargs,
         )
 
