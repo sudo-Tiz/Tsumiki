@@ -112,9 +112,9 @@ class NotificationWidget(EventBox):
         )
 
         header_container.children = (
-            self.get_icon(notification.app_icon, 25),
+            helpers.get_icon(notification.app_icon, 25),
             Label(
-                markup=self.escape_markup(
+                markup=helpers.escape_markup(
                     str(
                         self._notification.summary
                         if self._notification.summary
@@ -174,7 +174,7 @@ class NotificationWidget(EventBox):
 
         body_container.add(
             Label(
-                markup=self.escape_markup(self._notification.body),
+                markup=helpers.escape_markup(self._notification.body),
                 line_wrap="word-char",
                 ellipsization="end",
                 v_align="start",
@@ -225,36 +225,10 @@ class NotificationWidget(EventBox):
             GLib.source_remove(self._timeout_id)
             self._timeout_id = None
 
-    def escape_markup(self, text):
-        return GLib.markup_escape_text(text).replace("\n", " ")
-
     def close_notification(self):
         self._notification.close("expired")
         self.stop_timeout()
         return False
-
-    def get_icon(self, app_icon, size) -> Image:
-        match app_icon:
-            case str(x) if "file://" in x:
-                return Image(
-                    name="app-icon",
-                    image_file=app_icon[7:],
-                    size=size,
-                )
-            case str(x) if len(x) > 0 and x[0] == "/":
-                return Image(
-                    name="app-icon",
-                    image_file=app_icon,
-                    size=size,
-                )
-            case _:
-                return Image(
-                    name="app-icon",
-                    icon_name=app_icon
-                    if app_icon
-                    else icons.icons["fallback"]["notification"],
-                    icon_size=size,
-                )
 
     def on_button_press(self, _, event):
         if event.button != 1:

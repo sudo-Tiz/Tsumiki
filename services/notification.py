@@ -61,6 +61,17 @@ class NotificationCacheService(Service):
         except FileNotFoundError:
             return []
 
+    def remove_notification(self, index: int):
+        """Remove the notification at the given index."""
+        self._notifications.pop(index)
+        self._count -= 1
+
+        # Write the updated data back to the cache file
+        with open(NOTIFICATION_CACHE_FILE, "w") as f:
+            json.dump(self._notifications, f, indent=4, ensure_ascii=False)
+
+        logger.info(f"{Colors.INFO}[Notification] Notification removed successfully.")
+
     def cache_notification(self, data):
         """Cache the notification."""
 
