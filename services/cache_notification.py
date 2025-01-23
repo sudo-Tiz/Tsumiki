@@ -65,8 +65,11 @@ class NotificationCacheService(Service):
         except FileNotFoundError:
             return []
 
-    def remove_notification(self, index: int):
-        """Remove the notification at the given index."""
+    def remove_notification(self, id: int):
+        """Remove the notification of goven id."""
+        item = next((p for p in self._notifications if p["id"] == id), None)
+        index = self._notifications.index(item)
+
         self._notifications.pop(index)
         self._count -= 1
 
@@ -78,9 +81,6 @@ class NotificationCacheService(Service):
 
     def cache_notification(self, data: Notification):
         """Cache the notification."""
-
-        # Append the new notification to the list
-        self._notifications.append(data.serialize())
 
         # Check if the cache file exists and read existing data
         if os.path.exists(NOTIFICATION_CACHE_FILE):
@@ -94,8 +94,8 @@ class NotificationCacheService(Service):
         else:
             existing_data = []
 
-        # Combine existing and new notifications
-        existing_data.extend(self._notifications)
+        # Append the new notification to the existing data
+        existing_data.append(data.serialize())
 
         # Write the updated data back to the cache file
         with open(NOTIFICATION_CACHE_FILE, "w") as f:
@@ -103,8 +103,8 @@ class NotificationCacheService(Service):
 
         logger.info(f"{Colors.INFO}[Notification] Notification cached successfully.")
 
-    def clear_notifications(self):
-        """Clear the notifications."""
+    def clear_all_notifications(self):
+        """Empty the notifications."""
         self._notifications = []
         self._count = 0
 
@@ -113,9 +113,9 @@ class NotificationCacheService(Service):
             json.dump([], f, indent=4, ensure_ascii=False)
 
         logger.info(f"{Colors.INFO}[Notification] Notifications cleared successfully.")
-        self.emit("cleared", True)
+        self.emit("clear_all", True)
 
     @Signal
-    def cleared(self, value: bool) -> None:
-        """Signal emitted when screen brightness changes."""
+    def clear_all(self, value: bool) -> None:
+        """Signal emitted when notifications are emptied."""
         # Implement as needed for your application

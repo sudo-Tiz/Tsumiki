@@ -32,7 +32,7 @@ class DateMenuNotification(EventBox):
 
     def __init__(
         self,
-        index: int,
+        id: int,
         notification: Notification,
         **kwargs,
     ):
@@ -63,13 +63,7 @@ class DateMenuNotification(EventBox):
         header_container.children = (
             helpers.get_icon(notification.app_icon, 25),
             Label(
-                markup=helpers.escape_markup(
-                    str(
-                        self._notification.summary
-                        if self._notification.summary
-                        else notification.app_name,
-                    )
-                ),
+                markup=helpers.escape_markup(str(id)),
                 h_align="start",
                 style_classes="summary",
                 ellipsization="end",
@@ -84,7 +78,7 @@ class DateMenuNotification(EventBox):
                 icon_size=16,
             ),
             style_classes="close-button",
-            on_clicked=lambda _: cache_notification_service.remove_notification(index),
+            on_clicked=lambda _: self.clear_notification(id),
         )
 
         header_container.pack_end(
@@ -135,6 +129,10 @@ class DateMenuNotification(EventBox):
         # Add the notification box to the EventBox
         self.add(self.notification_box)
 
+    def clear_notification(self, id):
+        cache_notification_service.remove_notification(id)
+        self.destroy()
+
 
 class DateNotificationMenu(Box):
     """A menu to display the weather information."""
@@ -159,8 +157,8 @@ class DateNotificationMenu(Box):
         )
 
         self.notifications_list = [
-            DateMenuNotification(notification=val, index=index)
-            for index, val in enumerate(self.notifications)
+            DateMenuNotification(notification=val, id=val["id"])
+            for val in self.notifications
         ]
 
         self.notification_list_box = Box(
@@ -223,7 +221,7 @@ class DateNotificationMenu(Box):
         )
 
         clear_button.connect(
-            "clicked", lambda _: cache_notification_service.clear_notifications()
+            "clicked", lambda _: cache_notification_service.clear_all_notifications()
         )
 
         notif_header.pack_end(
@@ -280,9 +278,9 @@ class DateNotificationMenu(Box):
 
         invoke_repeater(1000, self.update_labels, initial_call=True)
         notification_service.connect("notification-added", self.on_new_notification)
-        cache_notification_service.connect("cleared", self.on_clear_notifications)
+        cache_notification_service.connect("clear_all", self.on_clear_all_notifications)
 
-    def on_clear_notifications(self, *_):
+    def on_clear_all_notifications(self, *_):
         for child in self.notification_list_box.children:
             self.notification_list_box.remove(child)
         self.notifications = []
@@ -291,12 +289,19 @@ class DateNotificationMenu(Box):
 
     def on_new_notification(self, fabric_notif, id):
         notification: Notification = fabric_notif.get_notification_from_id(id)
-        self.notification_list_box.add(
-            DateMenuNotification(
+
+        if len(self.notification_list_box.children) == 0:
+            self.notification_list_box.children = DateMenuNotification(
                 notification=notification,
-                index=len(self.notification_list_box.children) - 1,
+                id=1,
             )
-        )
+        else:
+            self.notification_list_box.add(
+                DateMenuNotification(
+                    notification=notification,
+                    id=len(self.notification_list_box.children),
+                )
+            )
 
     def update_labels(self):
         self.clock_label.set_text(time.strftime("%H:%M"))
