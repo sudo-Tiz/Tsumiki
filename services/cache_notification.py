@@ -46,7 +46,10 @@ class NotificationCacheService(Service):
         """Set the pause status."""
         self._dont_disturb = value
 
-    def __init__(self):
+    def __init__(self, **kwargs):
+        super().__init__(
+            **kwargs,
+        )
         self._count = 0
         self._notifications = []
         self.notifications = []  # this is deserialized data
@@ -110,6 +113,7 @@ class NotificationCacheService(Service):
             json.dump([], f, indent=4, ensure_ascii=False)
 
         logger.info(f"{Colors.INFO}[Notification] Notifications cleared successfully.")
+        self.emit("cleared", True)
 
     @Signal
     def cleared(self, value: bool) -> None:

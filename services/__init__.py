@@ -9,6 +9,7 @@ from .power_profile import *
 from .screen_record import *
 from .weather import *
 
+cache_notification_service = NotificationCacheService().get_initial()
 weather_service = WeatherService().get_initial()
 power_profile_service = PowerProfiles().get_initial()
 

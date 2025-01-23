@@ -16,8 +16,7 @@ from gi.repository import Gdk, GdkPixbuf, GLib
 import utils.constants as constants
 import utils.functions as helpers
 import utils.icons as icons
-from services import notification_service
-from services.cache_notification import NotificationCacheService
+from services import cache_notification_service, notification_service
 from shared import CustomImage
 from utils.config import widget_config
 from utils.monitors import HyprlandWithMonitors
@@ -33,7 +32,6 @@ class NotificationPopup(WaylandWindow):
         self.config = widget_config["notification"]
 
         self.hyprland_monitor = HyprlandWithMonitors()
-        self.notification_cache_service = NotificationCacheService().get_initial()
 
         self.ignored_apps = helpers.unique_list(self.config["ignored"])
 
@@ -62,7 +60,7 @@ class NotificationPopup(WaylandWindow):
 
         # Check if the notification is in the "do not disturb" mode, hacky way
         if (
-            self.notification_cache_service.dont_disturb
+            cache_notification_service.dont_disturb
             or notification.app_name in self.ignored_apps
         ):
             return
@@ -70,7 +68,7 @@ class NotificationPopup(WaylandWindow):
         new_box = NotificationRevealer(notification)
         self.notifications.add(new_box)
         new_box.set_reveal_child(True)
-        self.notification_cache_service.cache_notification(notification)
+        cache_notification_service.cache_notification(notification)
 
 
 class NotificationWidget(EventBox):
