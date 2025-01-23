@@ -67,9 +67,6 @@ class NotificationCacheService(Service):
         # Append the new notification to the list
         self._notifications.append(data)
 
-        # Serialize the notifications
-        serialized_data = [Notification.serialize(data) for data in self._notifications]
-
         # Check if the cache file exists and read existing data
         if os.path.exists(NOTIFICATION_CACHE_FILE):
             with open(NOTIFICATION_CACHE_FILE, "r") as file:
@@ -83,7 +80,7 @@ class NotificationCacheService(Service):
             existing_data = []
 
         # Combine existing and new notifications
-        existing_data.extend(serialized_data)
+        existing_data.extend(self._notifications)
 
         # Write the updated data back to the cache file
         with open(NOTIFICATION_CACHE_FILE, "w") as f:

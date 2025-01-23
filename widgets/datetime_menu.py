@@ -197,6 +197,10 @@ class DateNotificationMenu(Box):
         notifications: List[Notification] = notify_cache_service.get_deserailized()
 
         self.notification_list = Box(
+            orientation="v",
+            h_align="center",
+            spacing=8,
+            h_expand=True,
             visible=len(notifications) > 0,
             children=[
                 DateMenuNotification(notification=val, type="datemenu")
