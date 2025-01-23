@@ -293,6 +293,9 @@ class DateNotificationMenu(Box):
         self.placeholder.set_visible(True)
 
     def on_new_notification(self, fabric_notif, id):
+        if cache_notification_service.dont_disturb:
+            return
+
         notification: Notification = fabric_notif.get_notification_from_id(id)
 
         count = len(self.notification_list_box.children)
