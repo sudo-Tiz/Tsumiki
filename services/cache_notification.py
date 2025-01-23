@@ -94,14 +94,20 @@ class NotificationCacheService(Service):
         else:
             existing_data = []
 
+        serialzed_data = data.serialize()
+        serialzed_data.update({"id": self._count + 1})
+
         # Append the new notification to the existing data
-        existing_data.append(data.serialize())
+        existing_data.append(serialzed_data)
 
         # Write the updated data back to the cache file
         with open(NOTIFICATION_CACHE_FILE, "w") as f:
             json.dump(existing_data, f, indent=4, ensure_ascii=False)
 
         logger.info(f"{Colors.INFO}[Notification] Notification cached successfully.")
+
+        self._count += 1
+        self._notifications = existing_data
 
     def clear_all_notifications(self):
         """Empty the notifications."""

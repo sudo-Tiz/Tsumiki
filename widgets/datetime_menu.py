@@ -290,18 +290,14 @@ class DateNotificationMenu(Box):
     def on_new_notification(self, fabric_notif, id):
         notification: Notification = fabric_notif.get_notification_from_id(id)
 
-        if len(self.notification_list_box.children) == 0:
-            self.notification_list_box.children = DateMenuNotification(
+        count = len(self.notification_list_box.children)
+
+        self.notification_list_box.add(
+            DateMenuNotification(
                 notification=notification,
-                id=1,
+                id=count + 1 if count > 0 else 1,
             )
-        else:
-            self.notification_list_box.add(
-                DateMenuNotification(
-                    notification=notification,
-                    id=len(self.notification_list_box.children),
-                )
-            )
+        )
 
     def update_labels(self):
         self.clock_label.set_text(time.strftime("%H:%M"))
