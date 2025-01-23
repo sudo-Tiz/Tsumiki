@@ -3,7 +3,7 @@ from typing import List
 
 import gi
 from fabric.notifications import Notification
-from fabric.utils import invoke_repeater
+from fabric.utils import bulk_connect, invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.datetime import DateTime
@@ -39,6 +39,7 @@ class DateMenuNotification(EventBox):
         super().__init__(
             size=(constants.NOTIFICATION_WIDTH, -1),
             name="notification-eventbox",
+            pass_through=True,
             **kwargs,
         )
 
@@ -51,6 +52,7 @@ class DateMenuNotification(EventBox):
             name="notification",
             h_expand=True,
             orientation="v",
+            style="border: none;",
         )
 
         header_container = Box(
@@ -72,8 +74,9 @@ class DateMenuNotification(EventBox):
                 ellipsization="end",
             ),
         )
-        close_button = Button(
+        self.close_button = Button(
             style_classes="close-button",
+            visible=True,
             image=Image(
                 name="close-icon",
                 icon_name=helpers.check_icon_exists(
@@ -86,7 +89,7 @@ class DateMenuNotification(EventBox):
         )
 
         header_container.pack_end(
-            Box(v_align="start", children=(close_button)),
+            Box(v_align="start", children=(self.close_button)),
             False,
             False,
             0,
@@ -132,6 +135,18 @@ class DateMenuNotification(EventBox):
 
         # Add the notification box to the EventBox
         self.add(self.notification_box)
+
+        bulk_connect(
+            self,
+            {
+                "enter-notify-event": lambda *_: self.notification_box.set_style(
+                    "box-shadow: 0 0 1px 0 #00000080"
+                ),
+                "leave-notify-event": lambda *_: self.notification_box.set_style(
+                    "border:none;"
+                ),
+            },
+        )
 
     def clear_notification(self, id):
         cache_notification_service.remove_notification(id)
