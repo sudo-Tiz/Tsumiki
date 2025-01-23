@@ -2,6 +2,7 @@ import json
 import os
 from typing import List
 
+from fabric import Signal
 from fabric.core.service import Service
 from fabric.notifications import Notification
 from loguru import logger
@@ -109,3 +110,8 @@ class NotificationCacheService(Service):
             json.dump([], f, indent=4, ensure_ascii=False)
 
         logger.info(f"{Colors.INFO}[Notification] Notifications cleared successfully.")
+
+    @Signal
+    def cleared(self, value: bool) -> None:
+        """Signal emitted when screen brightness changes."""
+        # Implement as needed for your application
