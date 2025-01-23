@@ -56,13 +56,17 @@ $hover-tranisition: background 0.15s ease-in-out;
   }
 
   .close-button {
-    border-radius: 100px;
+    border-radius: variable.$radius-large;
 
     &:hover {
       box-shadow: none;
       border: none;
       background: color.mix(theme.$text-main, transparent, 20%);
       transition: $hover-tranisition;
+
+      #close-icon {
+        @extend %clear_icon;
+      }
     }
   }
 

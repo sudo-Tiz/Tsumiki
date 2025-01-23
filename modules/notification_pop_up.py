@@ -112,7 +112,7 @@ class NotificationWidget(EventBox):
         )
 
         header_container.children = (
-            helpers.get_icon(notification.app_icon, 25),
+            helpers.get_icon(notification.app_icon),
             Label(
                 markup=helpers.escape_markup(
                     str(

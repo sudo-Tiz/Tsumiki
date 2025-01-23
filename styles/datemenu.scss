@@ -38,8 +38,7 @@
           background-color: theme.$background-alt;
 
           #clear-icon {
-            -gtk-icon-transform: scale(1.05);
-            -gtk-icon-effect: highlight;
+            @extend %clear_icon;
           }
         }
       }

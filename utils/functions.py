@@ -52,7 +52,8 @@ def escape_markup(text):
 
 
 # Function to get the system stats using
-def get_icon(app_icon, size) -> Image:
+def get_icon(app_icon, size=25) -> Image:
+    icon_size = size - 5
     match app_icon:
         case str(x) if "file://" in x:
             return Image(
@@ -70,7 +71,7 @@ def get_icon(app_icon, size) -> Image:
             return Image(
                 name="app-icon",
                 icon_name=app_icon if app_icon else icons["fallback"]["notification"],
-                icon_size=size,
+                icon_size=icon_size,
             )
 
 

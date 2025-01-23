@@ -53,15 +53,12 @@ class DateMenuNotification(EventBox):
             orientation="v",
         )
 
-        if notification.urgency == 2:
-            self.notification_box.add_style_class("critical")
-
         header_container = Box(
             spacing=8, orientation="h", style_classes="notification-header"
         )
 
         header_container.children = (
-            helpers.get_icon(notification.app_icon, 25),
+            helpers.get_icon(notification.app_icon),
             Label(
                 markup=helpers.escape_markup(
                     str(
@@ -76,14 +73,15 @@ class DateMenuNotification(EventBox):
             ),
         )
         close_button = Button(
+            style_classes="close-button",
             image=Image(
+                name="close-icon",
                 icon_name=helpers.check_icon_exists(
                     "close-symbolic",
                     icons["ui"]["close"],
                 ),
                 icon_size=16,
             ),
-            style_classes="close-button",
             on_clicked=lambda _: self.clear_notification(id),
         )
 
@@ -246,6 +244,7 @@ class DateNotificationMenu(Box):
                 ScrolledWindow(
                     v_expand=True,
                     style_classes="notification-scrollable",
+                    v_scrollbar_policy="automatic",
                     h_scrollbar_policy="never",
                     child=Box(children=(self.placeholder, self.notification_list_box)),
                 ),

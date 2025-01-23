@@ -1,13 +1,14 @@
 @use "sass:color";
 @use "theme.scss";
 @use "common/mixins.scss";
+@use "variable.scss";
 
 /* OSD widget*/
 
 #osd-container {
   background-color: theme.$shadow-color;
   padding: 12px 20px;
-  border-radius: 100px;
+  border-radius: variable.$radius-large;
   border: none;
   margin-bottom: 100px;
 
