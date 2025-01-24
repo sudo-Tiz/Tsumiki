@@ -1,4 +1,3 @@
-from os import name
 from fabric.widgets.box import Box
 from fabric.widgets.circularprogressbar import CircularProgressBar
 from fabric.widgets.label import Label
