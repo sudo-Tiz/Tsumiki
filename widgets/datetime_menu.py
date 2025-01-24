@@ -396,7 +396,6 @@ class DateTimeWidget(ButtonWidget):
                 "notification-added": lambda _, value, *args: count_label.set_text(
                     str(value)
                 ),
-                "clear_all": lambda *_: count_label.set_text("0"),
             },
         )
 

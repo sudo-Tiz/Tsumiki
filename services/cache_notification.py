@@ -37,6 +37,7 @@ class NotificationCacheService(Service):
     def dont_disturb(self, value: bool):
         """Set the pause status."""
         self._dont_disturb = value
+        self.emit("dnd", value)
 
     def __init__(self, **kwargs):
         super().__init__(
@@ -71,6 +72,7 @@ class NotificationCacheService(Service):
 
         self._notifications.pop(index)
         self._count -= 1
+        self.emit("notification_count", self._count)
 
     def cache_notification(self, data: Notification):
         """Cache the notification."""
@@ -88,7 +90,7 @@ class NotificationCacheService(Service):
 
         self._count += 1
         self._notifications = existing_data
-        self.emit("notification_added", self._count)
+        self.emit("notification_count", self._count)
 
     def clear_all_notifications(self):
         """Empty the notifications."""
@@ -98,6 +100,7 @@ class NotificationCacheService(Service):
         # Write the updated data back to the cache file
         self.write_notifications(self._notifications)
         self.emit("clear_all", True)
+        self.emit("notification_count", self._count)
 
     def write_notifications(self, data):
         """Write the notifications to the cache file."""
@@ -119,6 +122,11 @@ class NotificationCacheService(Service):
         # Implement as needed for your application
 
     @Signal
-    def notification_added(self, value: int) -> None:
+    def notification_count(self, value: int) -> None:
         """Signal emitted when a new notification is added."""
+        # Implement as needed for your application
+
+    @Signal
+    def dnd(self, value: bool) -> None:
+        """Signal emitted when dnd is toggled."""
         # Implement as needed for your application
