@@ -23,7 +23,7 @@ from utils.functions import ensure_dir_exists
 
 ensure_dir_exists(f"{APP_CACHE_DIRECTORY}/media")
 
-icon_size = 18
+icon_size = 15
 
 # TODO: add time remaining
 
@@ -263,6 +263,7 @@ class PlayerBox(Box):
         self.button_box = Box(
             name="button-box",
             h_align="center",
+            spacing=5,
         )
 
         self.skip_next_icon = Image(
