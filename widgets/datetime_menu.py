@@ -171,7 +171,7 @@ class DateNotificationMenu(Box):
         **kwargs,
     ):
         super().__init__(
-            name="datemenu",
+            name="date-menu",
             orientation="h",
             **kwargs,
         )
@@ -364,6 +364,17 @@ class DateTimeWidget(ButtonWidget):
             icon_size=16,
         )
 
+        count_label = Label(
+            label=str(cache_notification_service.count),
+            style_classes="notification-count",
+            v_align="start",
+            visible=self.config["notification_count"],
+        )
+
+        self.notification_indicator_box = Box(
+            children=(self.notof_indicator, count_label)
+        )
+
         self.connect(
             "clicked",
             lambda *_: popup.set_visible(not popup.get_visible()),
@@ -373,11 +384,21 @@ class DateTimeWidget(ButtonWidget):
             spacing=10,
             v_align="center",
             children=(
-                self.notof_indicator,
+                self.notification_indicator_box,
                 DateTime(self.config["format"], name="date-time"),
             ),
         )
         date_menu.dnd_switch.connect("notify::active", self.on_dnd_switch)
+
+        bulk_connect(
+            cache_notification_service,
+            {
+                "notification-added": lambda _, value, *args: count_label.set_text(
+                    str(value)
+                ),
+                "clear_all": lambda *_: count_label.set_text("0"),
+            },
+        )
 
     def on_dnd_switch(self, switch, _):
         """Handle the do not disturb switch."""

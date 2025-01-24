@@ -60,7 +60,6 @@ class NotificationCacheService(Service):
                     existing_data = []  # If the file is empty or malformed
         else:
             existing_data = []
-
         return existing_data
 
     def remove_notification(self, id: int):
@@ -89,6 +88,7 @@ class NotificationCacheService(Service):
 
         self._count += 1
         self._notifications = existing_data
+        self.emit("notification_added", self._count)
 
     def clear_all_notifications(self):
         """Empty the notifications."""
@@ -116,4 +116,9 @@ class NotificationCacheService(Service):
     @Signal
     def clear_all(self, value: bool) -> None:
         """Signal emitted when notifications are emptied."""
+        # Implement as needed for your application
+
+    @Signal
+    def notification_added(self, value: int) -> None:
+        """Signal emitted when a new notification is added."""
         # Implement as needed for your application
