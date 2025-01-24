@@ -10,8 +10,9 @@ from fabric.widgets.datetime import DateTime
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
+from fabric.widgets.revealer import Revealer
 from fabric.widgets.scrolledwindow import ScrolledWindow
-from gi.repository import GdkPixbuf, Gtk
+from gi.repository import GdkPixbuf, GLib, Gtk
 
 import utils.constants as constants
 import utils.functions as helpers
@@ -53,6 +54,14 @@ class DateMenuNotification(EventBox):
             h_expand=True,
             orientation="v",
             style="border: none;",
+        )
+
+        self.revealer = Revealer(
+            name="notification-revealer",
+            transition_type="slide-up",
+            transition_duration=400,
+            child=self.notification_box,
+            child_revealed=True,
         )
 
         header_container = Box(
@@ -134,7 +143,7 @@ class DateMenuNotification(EventBox):
         )
 
         # Add the notification box to the EventBox
-        self.add(self.notification_box)
+        self.add(self.revealer)
 
         bulk_connect(
             self,
@@ -150,7 +159,8 @@ class DateMenuNotification(EventBox):
 
     def clear_notification(self, id):
         cache_notification_service.remove_notification(id)
-        self.destroy()
+        self.revealer.set_reveal_child(False)
+        GLib.timeout_add(400, self.destroy)
 
 
 class DateNotificationMenu(Box):

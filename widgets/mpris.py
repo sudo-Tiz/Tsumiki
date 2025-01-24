@@ -50,10 +50,8 @@ class Mpris(ButtonWidget):
             transition_type="slide-right",
             transition_duration=400,
             child=self.label,
-            reveal_child=False,
+            child_revealed=True,
         )
-
-        self.revealer.set_reveal_child(True)
 
         self.cover = Box(style_classes="cover")
 
