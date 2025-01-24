@@ -9,7 +9,7 @@ from shared.pop_over import PopOverWindow
 from shared.widget_container import ButtonWidget
 from utils.functions import psutil_fabricator, text_icon
 from utils.widget_settings import BarConfig
-from widgets.dashboard.player import PlayerBoxStack
+from widgets.player import PlayerBoxStack
 
 from .sliders.audio import AudioSlider
 from .sliders.brightness import BrightnessSlider

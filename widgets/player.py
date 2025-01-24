@@ -173,7 +173,7 @@ class PlayerBox(Box):
         super().__init__(h_align="start", name="player-box", **kwargs)
         # Setup
         self.player: MprisPlayer = player
-        self.cover_path = get_relative_path("../../assets/images/no_image.jpg")
+        self.cover_path = get_relative_path("../assets/images/no_image.jpg")
 
         self.player_width = 380
         self.image_size = 115
