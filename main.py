@@ -52,7 +52,9 @@ if __name__ == "__main__":
 
     # Monitor styles folder for changes
     main_css_file = monitor_file(get_relative_path("styles"))
+    common_css_file = monitor_file(get_relative_path("styles/common"))
     main_css_file.connect("changed", lambda *_: process_and_apply_css(app))
+    common_css_file.connect("changed", lambda *_: process_and_apply_css(app))
 
     process_and_apply_css(app)
 

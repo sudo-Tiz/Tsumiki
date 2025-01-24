@@ -14,7 +14,6 @@ class SettingScale(Box):
         start_value: float = 50,
         icon_name: str = "package-x-generic-symbolic",
         pixel_size: int = 22,
-        icon_button: bool = True,
         **kwargs,
     ):
         super().__init__(
@@ -34,7 +33,4 @@ class SettingScale(Box):
             h_expand=True,
         )
 
-        if icon_button:
-            self.add(self.icon_button)
-
-        self.add(self.scale)
+        self.children = (self.icon_button, self.scale)

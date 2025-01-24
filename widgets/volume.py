@@ -5,27 +5,9 @@ from fabric.widgets.overlay import Overlay
 
 import utils.functions as helpers
 from services import audio_service
-from shared.pop_over import PopOverWindow
-from shared.setting_scale import SettingScale
 from shared.widget_container import EventBoxWidget
 from utils.icons import volume_text_icons
 from utils.widget_settings import BarConfig
-
-
-class VolumeMenu(Box):
-    """A menu to display the weather information."""
-
-    def __init__(
-        self,
-        **kwargs,
-    ):
-        super().__init__(
-            name="volumemenu",
-            orientation="h",
-            **kwargs,
-        )
-
-        self.children = [SettingScale()]
 
 
 class VolumeWidget(EventBoxWidget):
@@ -41,20 +23,6 @@ class VolumeWidget(EventBoxWidget):
 
         self.config = widget_config["volume"]
 
-        popup = PopOverWindow(
-            name="volume-popover",
-            parent=bar,
-            child=VolumeMenu(),
-            visible=False,
-            all_visible=False,
-        )
-
-        popup.set_pointing_to(self)
-
-        self.connect(
-            "button-press-event",
-            lambda *_: popup.set_visible(not popup.get_visible()),
-        )
 
         # Create a circular progress bar to display the volume level
         self.progress_bar = CircularProgressBar(
