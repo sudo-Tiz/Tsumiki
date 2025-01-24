@@ -393,7 +393,7 @@ class DateTimeWidget(ButtonWidget):
         bulk_connect(
             cache_notification_service,
             {
-                "notification-added": lambda _, value, *args: count_label.set_text(
+                "notification_count": lambda _, value, *args: count_label.set_text(
                     str(value)
                 ),
             },
