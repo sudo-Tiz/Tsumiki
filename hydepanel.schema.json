@@ -569,6 +569,9 @@
       "properties": {
         "format": {
           "type": "string"
+        },
+        "notification_count": {
+          "type": "boolean"
         }
       }
     },

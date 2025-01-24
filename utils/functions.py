@@ -9,12 +9,14 @@ import gi
 import psutil
 from fabric import Fabricator
 from fabric.utils import exec_shell_command, exec_shell_command_async, get_relative_path
+from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scale import ScaleMark
 from gi.repository import GLib, Gtk
 from loguru import logger
 
 from shared.animated.scale import AnimatedScale
+from utils.icons import icons
 
 from .colors import Colors
 from .icons import brightness_text_icons, distro_text_icons, volume_text_icons
@@ -43,6 +45,35 @@ def psutil_poll(fabricator):
             "user": psutil.users()[0],
         }
         sleep(2)
+
+
+# Function to escape the markup
+def escape_markup(text):
+    return GLib.markup_escape_text(text).replace("\n", " ")
+
+
+# Function to get the system stats using
+def get_icon(app_icon, size=25) -> Image:
+    icon_size = size - 5
+    match app_icon:
+        case str(x) if "file://" in x:
+            return Image(
+                name="app-icon",
+                image_file=app_icon[7:],
+                size=size,
+            )
+        case str(x) if len(x) > 0 and x[0] == "/":
+            return Image(
+                name="app-icon",
+                image_file=app_icon,
+                size=size,
+            )
+        case _:
+            return Image(
+                name="app-icon",
+                icon_name=app_icon if app_icon else icons["fallback"]["notification"],
+                icon_size=icon_size,
+            )
 
 
 # Function to get the system icon theme

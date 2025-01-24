@@ -1,5 +1,6 @@
 @use "theme.scss";
 @use "common/functions.scss";
+@use "variable.scss";
 
 $workspace-transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 
@@ -12,7 +13,7 @@ $workspace-transition: all 0.4s cubic-bezier(0.55, -0.68, 0.48, 1.682);
   & > button {
     padding: 2px 0.5em;
     transition: padding 0.05s steps(8);
-    border-radius: 100px;
+    border-radius: variable.$radius-large;
 
     &:hover {
       background-color: theme.$ws-hover;

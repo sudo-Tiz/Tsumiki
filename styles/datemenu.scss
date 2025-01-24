@@ -4,21 +4,30 @@
 @use "common/functions.scss";
 @use "variable.scss";
 
+
+#date-time-button {
+  .notification-count {
+    font-weight: 700;
+    font-size: 11px;
+  }
+
+}
+
 /************** DATE MENU **************/
 
-#datemenu {
+#date-menu {
   @include mixins.floating-widget;
   @include mixins.spacing;
   padding: functions.toEm(10);
 
   #notification-column {
-    min-width: 350px;
+    min-width: 410px;
 
     .header {
       margin-bottom: variable.$spacing;
       margin-right: variable.$spacing;
 
-      > label {
+      >label {
         margin-left: variable.$radius * 0.5;
       }
 
@@ -38,8 +47,7 @@
           background-color: theme.$background-alt;
 
           #clear-icon {
-            -gtk-icon-transform: scale(1.05);
-            -gtk-icon-effect: highlight;
+            @extend %clear_icon;
           }
         }
       }
@@ -63,10 +71,8 @@
   }
 
   separator {
-    background-color: color.adjust(
-      variable.$popover-border-color,
-      $lightness: 10%
-    );
+    background-color: color.adjust(variable.$popover-border-color,
+        $lightness: 10%);
     border-radius: variable.$radius;
     margin-right: variable.$spacing;
   }

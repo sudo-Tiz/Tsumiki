@@ -9,7 +9,7 @@
   & > button {
     margin: 0 0.1em;
     padding: 0 0.15em;
-    border-radius: 100px;
+    border-radius: variable.$radius-large;
     &:hover {
       background-color: theme.$surface-disabled;
     }

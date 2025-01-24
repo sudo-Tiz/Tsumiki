@@ -3,17 +3,21 @@ from typing import List
 
 import gi
 from fabric.notifications import Notification
-from fabric.utils import invoke_repeater
+from fabric.utils import bulk_connect, invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.datetime import DateTime
+from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
+from fabric.widgets.revealer import Revealer
 from fabric.widgets.scrolledwindow import ScrolledWindow
-from gi.repository import Gtk
+from gi.repository import GdkPixbuf, GLib, Gtk
 
-from modules.notifications.notification_widget import NotificationWidget
-from services import notify_cache_service
+import utils.constants as constants
+import utils.functions as helpers
+from services import cache_notification_service, notification_service
+from shared.custom_image import CustomImage
 from shared.pop_over import PopOverWindow
 from shared.separator import Separator
 from shared.widget_container import ButtonWidget
@@ -24,6 +28,141 @@ from utils.widget_settings import BarConfig
 gi.require_version("Gtk", "3.0")
 
 
+class DateMenuNotification(EventBox):
+    """A widget to display a notification."""
+
+    def __init__(
+        self,
+        id: int,
+        notification: Notification,
+        **kwargs,
+    ):
+        super().__init__(
+            size=(constants.NOTIFICATION_WIDTH, -1),
+            name="notification-eventbox",
+            pass_through=True,
+            **kwargs,
+        )
+
+        self._notification = notification
+
+        self._timeout_id = None
+
+        self.notification_box = Box(
+            spacing=8,
+            name="notification",
+            h_expand=True,
+            orientation="v",
+            style="border: none;",
+        )
+
+        self.revealer = Revealer(
+            name="notification-revealer",
+            transition_type="slide-up",
+            transition_duration=400,
+            child=self.notification_box,
+            child_revealed=True,
+        )
+
+        header_container = Box(
+            spacing=8, orientation="h", style_classes="notification-header"
+        )
+
+        header_container.children = (
+            helpers.get_icon(notification.app_icon),
+            Label(
+                markup=helpers.escape_markup(
+                    str(
+                        self._notification.summary
+                        if self._notification.summary
+                        else notification.app_name,
+                    )
+                ),
+                h_align="start",
+                style_classes="summary",
+                ellipsization="end",
+            ),
+        )
+        self.close_button = Button(
+            style_classes="close-button",
+            visible=True,
+            image=Image(
+                name="close-icon",
+                icon_name=helpers.check_icon_exists(
+                    "close-symbolic",
+                    icons["ui"]["close"],
+                ),
+                icon_size=16,
+            ),
+            on_clicked=lambda _: self.clear_notification(id),
+        )
+
+        header_container.pack_end(
+            Box(v_align="start", children=(self.close_button)),
+            False,
+            False,
+            0,
+        )
+
+        body_container = Box(
+            spacing=4, orientation="h", style_classes="notification-body"
+        )
+
+        # Use provided image if available, otherwise use "notification-symbolic" icon
+        if image_pixbuf := self._notification.image_pixbuf:
+            body_container.add(
+                Box(
+                    v_expand=True,
+                    v_align="center",
+                    children=CustomImage(
+                        pixbuf=image_pixbuf.scale_simple(
+                            constants.NOTIFICATION_IMAGE_SIZE,
+                            constants.NOTIFICATION_IMAGE_SIZE,
+                            GdkPixbuf.InterpType.BILINEAR,
+                        ),
+                        style_classes="image",
+                    ),
+                )
+            )
+
+        body_container.add(
+            Label(
+                markup=helpers.escape_markup(self._notification.body),
+                line_wrap="word-char",
+                ellipsization="end",
+                v_align="start",
+                h_align="start",
+                style_classes="body",
+            ),
+        )
+
+        # Add the header, body, and actions to the notification box
+        self.notification_box.children = (
+            header_container,
+            body_container,
+        )
+
+        # Add the notification box to the EventBox
+        self.add(self.revealer)
+
+        bulk_connect(
+            self,
+            {
+                "enter-notify-event": lambda *_: self.notification_box.set_style(
+                    "box-shadow: 0 0 1px 0 #00000080"
+                ),
+                "leave-notify-event": lambda *_: self.notification_box.set_style(
+                    "border:none;"
+                ),
+            },
+        )
+
+    def clear_notification(self, id):
+        cache_notification_service.remove_notification(id)
+        self.revealer.set_reveal_child(False)
+        GLib.timeout_add(400, self.destroy)
+
+
 class DateNotificationMenu(Box):
     """A menu to display the weather information."""
 
@@ -32,7 +171,7 @@ class DateNotificationMenu(Box):
         **kwargs,
     ):
         super().__init__(
-            name="datemenu",
+            name="date-menu",
             orientation="h",
             **kwargs,
         )
@@ -42,24 +181,35 @@ class DateNotificationMenu(Box):
             style_classes="clock",
         )
 
-        notifications: List[Notification] = []
+        self.notifications: List[Notification] = (
+            cache_notification_service.get_deserialized()
+        )
 
-        self.notification_list = Box(
-            visible=len(notifications) > 0,
-            children=[NotificationWidget(val) for val in notifications],
+        self.notifications_list = [
+            DateMenuNotification(notification=val, id=val["id"])
+            for val in self.notifications
+        ]
+
+        self.notification_list_box = Box(
+            orientation="v",
+            h_align="center",
+            spacing=8,
+            h_expand=True,
+            visible=len(self.notifications) > 0,
+            children=self.notifications_list,
         )
 
         self.uptime = Label(style_classes="uptime", label=uptime())
 
         # Placeholder for when there are no notifications
-        placeholder = Box(
+        self.placeholder = Box(
             style_classes="placeholder",
             orientation="v",
             h_align="center",
             v_align="center",
             v_expand=True,
             h_expand=True,
-            visible=len(notifications) == 0,  # visible if no notifications
+            visible=len(self.notifications) == 0,  # visible if no notifications
             children=(
                 Image(
                     icon_name=icons["notifications"]["silent"],
@@ -100,7 +250,7 @@ class DateNotificationMenu(Box):
         )
 
         clear_button.connect(
-            "clicked", lambda _: notify_cache_service.clear_notifications()
+            "clicked", lambda _: cache_notification_service.clear_all_notifications()
         )
 
         notif_header.pack_end(
@@ -119,8 +269,9 @@ class DateNotificationMenu(Box):
                 ScrolledWindow(
                     v_expand=True,
                     style_classes="notification-scrollable",
+                    v_scrollbar_policy="automatic",
                     h_scrollbar_policy="never",
-                    child=Box(children=(placeholder, self.notification_list)),
+                    child=Box(children=(self.placeholder, self.notification_list_box)),
                 ),
             ),
         )
@@ -156,6 +307,31 @@ class DateNotificationMenu(Box):
         )
 
         invoke_repeater(1000, self.update_labels, initial_call=True)
+        notification_service.connect("notification-added", self.on_new_notification)
+        cache_notification_service.connect("clear_all", self.on_clear_all_notifications)
+
+    def on_clear_all_notifications(self, *_):
+        self.notification_list_box.children = []
+        self.notifications = []
+        self.notification_list_box.set_visible(False)
+        self.placeholder.set_visible(True)
+
+    def on_new_notification(self, fabric_notif, id):
+        if cache_notification_service.dont_disturb:
+            return
+
+        notification: Notification = fabric_notif.get_notification_from_id(id)
+
+        count = len(self.notification_list_box.children)
+
+        self.notification_list_box.add(
+            DateMenuNotification(
+                notification=notification,
+                id=count + 1 if count > 0 else 1,
+            )
+        )
+        self.placeholder.set_visible(False)
+        self.notification_list_box.set_visible(True)
 
     def update_labels(self):
         self.clock_label.set_text(time.strftime("%H:%M"))
@@ -188,6 +364,17 @@ class DateTimeWidget(ButtonWidget):
             icon_size=16,
         )
 
+        count_label = Label(
+            label=str(cache_notification_service.count),
+            style_classes="notification-count",
+            v_align="start",
+            visible=self.config["notification_count"],
+        )
+
+        self.notification_indicator_box = Box(
+            children=(self.notof_indicator, count_label)
+        )
+
         self.connect(
             "clicked",
             lambda *_: popup.set_visible(not popup.get_visible()),
@@ -197,11 +384,20 @@ class DateTimeWidget(ButtonWidget):
             spacing=10,
             v_align="center",
             children=(
-                self.notof_indicator,
+                self.notification_indicator_box,
                 DateTime(self.config["format"], name="date-time"),
             ),
         )
         date_menu.dnd_switch.connect("notify::active", self.on_dnd_switch)
+
+        bulk_connect(
+            cache_notification_service,
+            {
+                "notification_count": lambda _, value, *args: count_label.set_text(
+                    str(value)
+                ),
+            },
+        )
 
     def on_dnd_switch(self, switch, _):
         """Handle the do not disturb switch."""
@@ -209,10 +405,10 @@ class DateTimeWidget(ButtonWidget):
             self.notof_indicator.set_from_icon_name(
                 icons["notifications"]["silent"], icon_size=16
             )
-            notify_cache_service.dont_disturb = True
+            cache_notification_service.dont_disturb = True
 
         else:
             self.notof_indicator.set_from_icon_name(
                 icons["notifications"]["noisy"], icon_size=16
             )
-            notify_cache_service.dont_disturb = False
+            cache_notification_service.dont_disturb = False

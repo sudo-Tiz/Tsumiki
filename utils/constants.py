@@ -59,6 +59,7 @@ DEFAULT_CONFIG = {
     },
     "date_time": {
         "format": "%b %d %H:%M",
+        "notification_count": True,
     },
     "divider": {"size": 2},
     "hypr_idle": {
@@ -187,7 +188,7 @@ DEFAULT_CONFIG = {
     "workspaces": {
         "count": 8,
         "hide_unoccupied": True,
-        "ignored": [],
+        "ignored": [-99],
         "reverse_scroll": False,
         "empty_scroll": False,
         "icon_map": {},

@@ -131,7 +131,7 @@ MicroPhone = TypedDict("MicroPhone", {**BaseConfig.__annotations__})
 Cava = TypedDict("Cava", {"bars": int})
 
 # DateTimeMenu configuration
-DateTimeMenu = TypedDict("DateTimeMenu", {"format": str})
+DateTimeMenu = TypedDict("DateTimeMenu", {"format": str, "notification_count": bool})
 
 # ThemeSwitcher configuration
 ThemeSwitcher = TypedDict("ThemeSwitcher", {**BaseConfig.__annotations__, "icon": str})

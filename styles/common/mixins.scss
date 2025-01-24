@@ -7,6 +7,11 @@
   box-shadow: none;
 }
 
+%clear_icon {
+  -gtk-icon-transform: scale(1.05);
+  -gtk-icon-effect: highlight;
+}
+
 %widget_hover {
   background-color: theme.$background;
   transition: border-color 400ms ease-in-out;
@@ -111,7 +116,7 @@
 @mixin switch {
   slider {
     background-color: theme.$background-dark;
-    border-radius: 100px;
+    border-radius: variable.$radius-large;
     min-width: 24px;
     min-height: 24px;
   }

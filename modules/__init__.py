@@ -1,4 +1,4 @@
 # ruff: noqa: F403
 from .bar import *
-from .notifications import *
+from .notification_pop_up import *
 from .osd import *
