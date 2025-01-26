@@ -17,8 +17,8 @@ from utils.monitors import HyprlandWithMonitors
 from utils.widget_settings import BarConfig
 
 
-class BrightnessOSDContainer(Box):
-    """A widget to display the OSD for brightness."""
+class GenericOSDContainer(Box):
+    """A generic OSD container to display the OSD for brightness and audio."""
 
     def __init__(self, config, **kwargs):
         super().__init__(
@@ -27,7 +27,6 @@ class BrightnessOSDContainer(Box):
             name="osd-container",
             **kwargs,
         )
-        self.brightness_service = Brightness().get_initial()
         self.level = Label(
             name="osd-level", h_align="center", h_expand=True, visible=False
         )
@@ -39,6 +38,16 @@ class BrightnessOSDContainer(Box):
         if config["show_percentage"]:
             self.level.set_visible(True)
 
+
+class BrightnessOSDContainer(GenericOSDContainer):
+    """A widget to display the OSD for brightness."""
+
+    def __init__(self, config, **kwargs):
+        super().__init__(
+            config=config,
+            **kwargs,
+        )
+        self.brightness_service = Brightness().get_initial()
         self.update_brightness()
 
         self.scale.connect("value-changed", lambda *_: self.update_brightness())
@@ -62,7 +71,7 @@ class BrightnessOSDContainer(Box):
         self.scale.animate_value(normalized_brightness)
 
 
-class AudioOSDContainer(Box):
+class AudioOSDContainer(GenericOSDContainer):
     """A widget to display the OSD for audio."""
 
     __gsignals__: ClassVar[dict] = {
@@ -71,26 +80,10 @@ class AudioOSDContainer(Box):
 
     def __init__(self, config, **kwargs):
         super().__init__(
-            orientation="h",
-            spacing=13,
-            name="osd-container",
+            config=config,
             **kwargs,
         )
         self.audio = audio_service
-        self.icon = Image(
-            icon_name=icons.icons["audio"]["volume"]["medium"], icon_size=28
-        )
-        self.level = Label(
-            name="osd-level", h_align="center", h_expand=True, visible=False
-        )
-        self.scale = helpers.create_scale()
-
-        self.hyprland_monitor = HyprlandWithMonitors()
-
-        self.children = (self.icon, self.scale, self.level)
-
-        if config["show_percentage"]:
-            self.level.set_visible(True)
 
         self.sync_with_audio()
 
@@ -145,8 +138,6 @@ class OSDContainer(Window):
         self.audio_container = AudioOSDContainer(config=self.config)
         self.brightness_container = BrightnessOSDContainer(config=self.config)
 
-        self.hyprland_monitor = HyprlandWithMonitors()
-
         self.timeout = self.config["timeout"]
 
         self.revealer = Revealer(
@@ -172,7 +163,7 @@ class OSDContainer(Window):
             **kwargs,
         )
 
-        self.monitor = self.hyprland_monitor.get_current_gdk_monitor_id()
+        self.monitor = HyprlandWithMonitors().get_current_gdk_monitor_id()
 
         self.last_activity_time = time.time()
 
