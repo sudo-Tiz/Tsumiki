@@ -36,7 +36,7 @@ class BrightnessOSDContainer(Box):
 
         self.children = (self.icon, self.scale, self.level)
 
-        if config["show_label"]:
+        if config["show_percentage"]:
             self.level.set_visible(True)
 
         self.update_brightness()
@@ -89,7 +89,7 @@ class AudioOSDContainer(Box):
 
         self.children = (self.icon, self.scale, self.level)
 
-        if config["show_label"]:
+        if config["show_percentage"]:
             self.level.set_visible(True)
 
         self.sync_with_audio()
