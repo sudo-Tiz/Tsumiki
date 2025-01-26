@@ -124,6 +124,7 @@ DEFAULT_CONFIG = {
         "enabled": True,
         "timeout": 1500,
         "anchor": "bottom-center",
+        "show_label": True,
     },
     "options": {
         "screen_corners": False,

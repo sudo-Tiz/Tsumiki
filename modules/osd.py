@@ -20,14 +20,25 @@ from utils.widget_settings import BarConfig
 class BrightnessOSDContainer(Box):
     """A widget to display the OSD for brightness."""
 
-    def __init__(self, **kwargs):
-        super().__init__(orientation="h", spacing=12, name="osd-container", **kwargs)
+    def __init__(self, config, **kwargs):
+        super().__init__(
+            orientation="h",
+            spacing=13,
+            name="osd-container",
+            **kwargs,
+        )
         self.brightness_service = Brightness().get_initial()
-        self.level = Label(name="osd-level")
+        self.level = Label(
+            name="osd-level", h_align="center", h_expand=True, visible=False
+        )
         self.icon = Image(icon_name=icons.icons["brightness"]["screen"], icon_size=28)
         self.scale = helpers.create_scale()
 
         self.children = (self.icon, self.scale, self.level)
+
+        if config["show_label"]:
+            self.level.set_visible(True)
+
         self.update_brightness()
 
         self.scale.connect("value-changed", lambda *_: self.update_brightness())
@@ -58,7 +69,7 @@ class AudioOSDContainer(Box):
         "volume-changed": (GObject.SIGNAL_RUN_FIRST, GObject.TYPE_NONE, ()),
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, config, **kwargs):
         super().__init__(
             orientation="h",
             spacing=13,
@@ -69,12 +80,18 @@ class AudioOSDContainer(Box):
         self.icon = Image(
             icon_name=icons.icons["audio"]["volume"]["medium"], icon_size=28
         )
-        self.level = Label(name="osd-level", h_align="center", h_expand=True)
+        self.level = Label(
+            name="osd-level", h_align="center", h_expand=True, visible=False
+        )
         self.scale = helpers.create_scale()
 
         self.hyprland_monitor = HyprlandWithMonitors()
 
         self.children = (self.icon, self.scale, self.level)
+
+        if config["show_label"]:
+            self.level.set_visible(True)
+
         self.sync_with_audio()
 
         self.scale.connect("value-changed", self.on_volume_changed)
@@ -123,12 +140,12 @@ class OSDContainer(Window):
         keyboard_mode: Literal["none", "exclusive", "on-demand"] = "on-demand",
         **kwargs,
     ):
-        self.audio_container = AudioOSDContainer()
-        self.brightness_container = BrightnessOSDContainer()
+        self.config = widget_config["osd"]
+
+        self.audio_container = AudioOSDContainer(config=self.config)
+        self.brightness_container = BrightnessOSDContainer(config=self.config)
 
         self.hyprland_monitor = HyprlandWithMonitors()
-
-        self.config = widget_config["osd"]
 
         self.timeout = self.config["timeout"]
 

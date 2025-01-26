@@ -163,7 +163,9 @@ Recording = TypedDict("Recording", {"path": str, "icon_size": int, "tooltip": bo
 
 
 # OSD configuration
-OSD = TypedDict("Osd", {"enabled": bool, "timeout": int, "anchor": str})
+OSD = TypedDict(
+    "Osd", {"enabled": bool, "timeout": int, "anchor": str, "show_label": bool}
+)
 
 
 class BarConfig(TypedDict):
