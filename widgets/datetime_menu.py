@@ -54,6 +54,7 @@ class DateMenuNotification(EventBox):
             name="notification",
             h_expand=True,
             orientation="v",
+            style="border: none;",
         )
 
         self.revealer = Revealer(
@@ -62,7 +63,6 @@ class DateMenuNotification(EventBox):
             transition_duration=400,
             child=self.notification_box,
             child_revealed=True,
-            style="border: none;",
         )
 
         header_container = Box(
@@ -81,6 +81,7 @@ class DateMenuNotification(EventBox):
                 ),
                 h_align="start",
                 style_classes="summary",
+                style="font-size: 13.5px;",
                 ellipsization="end",
             ),
         )
@@ -132,6 +133,7 @@ class DateMenuNotification(EventBox):
                 ellipsization="end",
                 v_align="start",
                 h_align="start",
+                style="font-size: 12px;",
             ),
         )
 
@@ -148,7 +150,7 @@ class DateMenuNotification(EventBox):
             self,
             {
                 "enter-notify-event": lambda *_: self.notification_box.set_style(
-                    "border: 0.5px solid #585b70;"
+                    "border: 1px solid #585b70;"
                 ),
                 "leave-notify-event": lambda *_: self.notification_box.set_style(
                     "border:none;"
@@ -230,7 +232,7 @@ class DateNotificationMenu(Box):
         notif_header = Box(
             style_classes="header",
             orientation="h",
-            children=(Label("Do Not Disturb"), self.dnd_switch),
+            children=(Label(label="Do Not Disturb", name="dnd-text"), self.dnd_switch),
         )
 
         clear_button = Button(
