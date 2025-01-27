@@ -53,7 +53,6 @@ class DateMenuNotification(EventBox):
             name="notification",
             h_expand=True,
             orientation="v",
-            style="border: none;",
         )
 
         self.revealer = Revealer(
@@ -62,6 +61,7 @@ class DateMenuNotification(EventBox):
             transition_duration=400,
             child=self.notification_box,
             child_revealed=True,
+            style="border: none;",
         )
 
         header_container = Box(
@@ -111,18 +111,14 @@ class DateMenuNotification(EventBox):
         # Use provided image if available, otherwise use "notification-symbolic" icon
         if image_pixbuf := self._notification.image_pixbuf:
             body_container.add(
-                Box(
-                    v_expand=True,
-                    v_align="center",
-                    children=CustomImage(
-                        pixbuf=image_pixbuf.scale_simple(
-                            constants.NOTIFICATION_IMAGE_SIZE,
-                            constants.NOTIFICATION_IMAGE_SIZE,
-                            GdkPixbuf.InterpType.BILINEAR,
-                        ),
-                        style_classes="image",
+                children=CustomImage(
+                    pixbuf=image_pixbuf.scale_simple(
+                        constants.NOTIFICATION_IMAGE_SIZE,
+                        constants.NOTIFICATION_IMAGE_SIZE,
+                        GdkPixbuf.InterpType.BILINEAR,
                     ),
-                )
+                    style_classes="image",
+                ),
             )
 
         body_container.add(
@@ -149,7 +145,7 @@ class DateMenuNotification(EventBox):
             self,
             {
                 "enter-notify-event": lambda *_: self.notification_box.set_style(
-                    "box-shadow: 0 0 1px 0 #00000080"
+                    "border: 0.5px solid #585b70;"
                 ),
                 "leave-notify-event": lambda *_: self.notification_box.set_style(
                     "border:none;"
@@ -195,6 +191,7 @@ class DateNotificationMenu(Box):
             h_align="center",
             spacing=8,
             h_expand=True,
+            style_classes="notification-list",
             visible=len(self.notifications) > 0,
             children=self.notifications_list,
         )
