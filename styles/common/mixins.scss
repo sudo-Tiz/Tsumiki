@@ -80,7 +80,7 @@
   slider {
     min-height: 8px;
     border-radius: $radius;
-    background: transparent;
+    background-color: transparent;
     border: none;
     box-shadow: 0 0 3px 0 theme.$shadow-color;
   }
@@ -93,12 +93,12 @@
     min-height: inherit;
     border-radius: $radius;
     border: none;
-    background: $slider-color;
+    background-color: $slider-color;
   }
 
   highlight,
   progress {
-    background: $highlight-color;
+    background-color: $highlight-color;
     border-radius: $radius;
   }
 }
