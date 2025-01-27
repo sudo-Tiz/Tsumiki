@@ -111,7 +111,7 @@ class DateMenuNotification(EventBox):
         # Use provided image if available, otherwise use "notification-symbolic" icon
         if image_pixbuf := self._notification.image_pixbuf:
             body_container.add(
-                children=CustomImage(
+                CustomImage(
                     pixbuf=image_pixbuf.scale_simple(
                         constants.NOTIFICATION_IMAGE_SIZE,
                         constants.NOTIFICATION_IMAGE_SIZE,

@@ -158,18 +158,14 @@ class NotificationWidget(EventBox):
         # Use provided image if available, otherwise use "notification-symbolic" icon
         if image_pixbuf := self._notification.image_pixbuf:
             body_container.add(
-                Box(
-                    v_expand=True,
-                    v_align="center",
-                    children=CustomImage(
-                        pixbuf=image_pixbuf.scale_simple(
-                            constants.NOTIFICATION_IMAGE_SIZE,
-                            constants.NOTIFICATION_IMAGE_SIZE,
-                            GdkPixbuf.InterpType.BILINEAR,
-                        ),
-                        style_classes="image",
+                CustomImage(
+                    pixbuf=image_pixbuf.scale_simple(
+                        constants.NOTIFICATION_IMAGE_SIZE,
+                        constants.NOTIFICATION_IMAGE_SIZE,
+                        GdkPixbuf.InterpType.BILINEAR,
                     ),
-                )
+                    style_classes="image",
+                ),
             )
 
         body_container.add(
