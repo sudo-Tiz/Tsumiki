@@ -55,25 +55,34 @@ def escape_markup(text):
 # Function to get the system stats using
 def get_icon(app_icon, size=25) -> Image:
     icon_size = size - 5
-    match app_icon:
-        case str(x) if "file://" in x:
-            return Image(
-                name="app-icon",
-                image_file=app_icon[7:],
-                size=size,
-            )
-        case str(x) if len(x) > 0 and x[0] == "/":
-            return Image(
-                name="app-icon",
-                image_file=app_icon,
-                size=size,
-            )
-        case _:
-            return Image(
-                name="app-icon",
-                icon_name=app_icon if app_icon else icons["fallback"]["notification"],
-                icon_size=icon_size,
-            )
+    try:
+        match app_icon:
+            case str(x) if "file://" in x:
+                return Image(
+                    name="app-icon",
+                    image_file=app_icon[7:],
+                    size=size,
+                )
+            case str(x) if len(x) > 0 and x[0] == "/":
+                return Image(
+                    name="app-icon",
+                    image_file=app_icon,
+                    size=size,
+                )
+            case _:
+                return Image(
+                    name="app-icon",
+                    icon_name=app_icon
+                    if app_icon
+                    else icons["fallback"]["notification"],
+                    icon_size=icon_size,
+                )
+    except GLib.GError:
+        return Image(
+            name="app-icon",
+            icon_name=icons["fallback"]["notification"],
+            icon_size=icon_size,
+        )
 
 
 # Function to get the system icon theme
