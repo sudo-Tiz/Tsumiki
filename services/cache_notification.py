@@ -74,6 +74,10 @@ class NotificationCacheService(Service):
         self._count -= 1
         self.emit("notification_count", self._count)
 
+        # Emit clear_all signal if there are no notifications left
+        if self._count == 0:
+            self.emit("clear_all", True)
+
     def cache_notification(self, data: Notification):
         """Cache the notification."""
 
