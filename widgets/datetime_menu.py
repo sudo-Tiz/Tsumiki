@@ -13,6 +13,7 @@ from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import GdkPixbuf, GLib, Gtk
+from loguru import logger
 
 import utils.constants as constants
 import utils.functions as helpers
@@ -109,17 +110,23 @@ class DateMenuNotification(EventBox):
         )
 
         # Use provided image if available, otherwise use "notification-symbolic" icon
-        if image_pixbuf := self._notification.image_pixbuf:
-            body_container.add(
-                CustomImage(
-                    pixbuf=image_pixbuf.scale_simple(
-                        constants.NOTIFICATION_IMAGE_SIZE,
-                        constants.NOTIFICATION_IMAGE_SIZE,
-                        GdkPixbuf.InterpType.BILINEAR,
+
+        try:
+
+            if image_pixbuf := self._notification.image_pixbuf:
+                body_container.add(
+                    CustomImage(
+                        pixbuf=image_pixbuf.scale_simple(
+                            constants.NOTIFICATION_IMAGE_SIZE,
+                            constants.NOTIFICATION_IMAGE_SIZE,
+                            GdkPixbuf.InterpType.BILINEAR,
+                        ),
+                        style_classes="image",
                     ),
-                    style_classes="image",
-                ),
-            )
+                )
+        except GLib.GError:
+            # If the image is not available, use the symbolic icon
+            logger.warning("Image not available")
 
         body_container.add(
             Label(
