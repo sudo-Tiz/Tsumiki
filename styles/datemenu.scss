@@ -16,7 +16,6 @@
 #date-menu {
   @include mixins.floating-widget;
   @include mixins.spacing;
-  padding: functions.toEm(10);
 
   #notification-column {
     min-width: 410px;
@@ -25,13 +24,10 @@
       margin-bottom: variable.$spacing;
       margin-right: variable.$spacing;
 
-      > label {
-        margin-left: variable.$radius * 0.5;
-      }
-
       label {
-        margin-right: 4px;
         @extend %smaller;
+        padding-left: 1.5 * variable.$padding;
+        padding-right: 1 * variable.$padding;
       }
 
       #clear-button {
