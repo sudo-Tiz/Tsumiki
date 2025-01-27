@@ -109,10 +109,7 @@ class DateMenuNotification(EventBox):
             spacing=4, orientation="h", style_classes="notification-body"
         )
 
-        # Use provided image if available, otherwise use "notification-symbolic" icon
-
         try:
-
             if image_pixbuf := self._notification.image_pixbuf:
                 body_container.add(
                     CustomImage(
@@ -135,7 +132,6 @@ class DateMenuNotification(EventBox):
                 ellipsization="end",
                 v_align="start",
                 h_align="start",
-                style_classes="body",
             ),
         )
 
@@ -218,7 +214,6 @@ class DateNotificationMenu(Box):
                 Image(
                     icon_name=icons["notifications"]["silent"],
                     icon_size=64,
-                    style="margin-bottom: 10px;",
                 ),
                 Label("Your inbox is empty"),
             ),
