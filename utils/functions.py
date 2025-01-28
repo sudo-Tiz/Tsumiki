@@ -48,8 +48,8 @@ def psutil_poll(fabricator):
 
 
 # Function to escape the markup
-def escape_markup(text):
-    return GLib.markup_escape_text(text).replace("\n", " ")
+def parse_markup(text):
+    return text
 
 
 # Function to get the system stats using

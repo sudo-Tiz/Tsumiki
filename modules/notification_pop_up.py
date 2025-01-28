@@ -114,7 +114,7 @@ class NotificationWidget(EventBox):
         header_container.children = (
             helpers.get_icon(notification.app_icon),
             Label(
-                markup=helpers.escape_markup(
+                markup=helpers.parse_markup(
                     str(
                         self._notification.summary
                         if self._notification.summary
@@ -170,7 +170,7 @@ class NotificationWidget(EventBox):
 
         body_container.add(
             Label(
-                markup=helpers.escape_markup(self._notification.body),
+                markup=helpers.parse_markup(self._notification.body),
                 line_wrap="word-char",
                 ellipsization="end",
                 v_align="start",
