@@ -1,3 +1,4 @@
+
 import math
 
 from fabric.utils import bulk_connect
@@ -80,7 +81,7 @@ class BatteryMenu(Box):
                 orientation="v",
                 spacing=10,
                 children=(
-                    Label("Power Profiles", style_classes="power-profile-title"),
+                    Label(label="Power Profiles", style_classes="power-profile-title"),
                     Box(
                         orientation="v",
                         spacing=10,

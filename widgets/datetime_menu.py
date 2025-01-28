@@ -1,3 +1,4 @@
+
 import time
 from typing import List
 
@@ -217,7 +218,7 @@ class DateNotificationMenu(Box):
                     icon_name=icons["notifications"]["silent"],
                     icon_size=64,
                 ),
-                Label("Your inbox is empty"),
+                Label(label="Your inbox is empty"),
             ),
         )
 
@@ -240,7 +241,7 @@ class DateNotificationMenu(Box):
             v_align="center",
             child=Box(
                 children=(
-                    Label("Clear"),
+                    Label(label="Clear"),
                     Image(
                         icon_name=icons["notifications"]["noisy"],
                         icon_size=13,
