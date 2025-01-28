@@ -15,6 +15,7 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import GdkPixbuf, GLib, Gtk
 from loguru import logger
 
+from utils.colors import Colors
 import utils.constants as constants
 import utils.functions as helpers
 from services import cache_notification_service, notification_service
@@ -22,7 +23,6 @@ from shared.custom_image import CustomImage
 from shared.pop_over import PopOverWindow
 from shared.separator import Separator
 from shared.widget_container import ButtonWidget
-from utils.colors import Colors
 from utils.functions import uptime
 from utils.icons import icons
 from utils.widget_settings import BarConfig
@@ -125,8 +125,7 @@ class DateMenuNotification(EventBox):
                 )
         except GLib.GError:
             # If the image is not available, use the symbolic icon
-            logger.warning(f"""{Colors.WARNING}[Notification] Image not available,
-                           so not loaded.""")
+            logger.warning(f"{Colors.WARNING}[Notification] Image not available.")
 
         body_container.add(
             Label(
