@@ -1,4 +1,3 @@
-
 import math
 
 from fabric.utils import bulk_connect
