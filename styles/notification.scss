@@ -2,6 +2,7 @@
 @use "theme.scss";
 @use "common/mixins.scss";
 @use "variable.scss";
+@use "common/functions.scss";
 
 $hover-tranisition: background 0.15s ease-in-out;
 
@@ -42,12 +43,12 @@ $hover-tranisition: background 0.15s ease-in-out;
         @extend %caption;
         background-color: transparent;
         text-shadow: none;
-        padding: 5px;
+        padding: functions.toEm(5);
       }
 
       .image {
         -gtk-icon-effect: none;
-        border-radius: 15px;
+        border-radius: functions.toEm(15);
       }
     }
 
@@ -68,7 +69,7 @@ $hover-tranisition: background 0.15s ease-in-out;
 
     #notification-action-box {
       button {
-        padding: 4px;
+        padding: functions.toEm(4);
         margin: 0;
         font-weight: 600;
         border-radius: 3rem;

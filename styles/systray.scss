@@ -1,5 +1,6 @@
 @use "theme.scss";
 @use "variable.scss";
+@use "common/functions.scss";
 
 /* system tray widget*/
 #system-tray {
@@ -24,7 +25,7 @@
 #system-tray-menu {
   background-color: theme.$surface-disabled;
   border-radius: 1em;
-  padding: 10px;
+  padding: functions.toEm(10);
   min-width: 100px;
 }
 

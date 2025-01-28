@@ -1,8 +1,9 @@
 @use "sass:color";
 @use "theme.scss";
+@use "common/functions.scss";
 
 #power-control-button {
-  padding: 40px 120px;
+  padding: functions.toEm(40) functions.toEm(120);
   border-radius: 0;
   border-color: theme.$surface-disabled;
   text-decoration-color: theme.$text-main;
