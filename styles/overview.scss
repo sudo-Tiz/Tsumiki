@@ -1,5 +1,6 @@
 @use "sass:color";
 @use "theme.scss";
+@use "common/functions.scss";
 @use "variable.scss";
 
 /* overview  widget */
@@ -7,7 +8,7 @@
 #overview-window {
   background-color: color.mix(black, transparent, 90%);
   border-radius: 50px;
-  padding: 10px;
+  padding: functions.toEm(10);
 }
 
 #overview-icon {
@@ -18,7 +19,7 @@
   border-radius: 15px;
   border-width: 2px;
   border-style: solid;
-  padding: 5px;
+  padding: functions.toEm(5);
 }
 
 #overview-client-box,
@@ -44,7 +45,7 @@
 }
 
 #overview-workspace-box {
-  padding: 15px;
+  padding: functions.toEm(15);
 
   label {
     margin-top: 15px;

@@ -1,6 +1,7 @@
 @use "sass:color";
 
 @use "mixins.scss";
+@use "functions.scss";
 @use "../theme.scss";
 @use "../variable.scss";
 
@@ -113,7 +114,7 @@ tooltip > * {
 
 menu {
   margin: 6px;
-  padding: 6px;
+  padding: functions.toEm(6);
   background-color: theme.$background-alt;
   background-clip: border-box;
   border-radius: 12px;
@@ -143,7 +144,7 @@ menuitem {
 menu > arrow {
   min-height: 16px;
   min-width: 16px;
-  padding: 4px;
+  padding: functions.toEm(4);
   color: theme.$background-alt;
 }
 
