@@ -23,7 +23,7 @@ class GenericOSDContainer(Box):
     def __init__(self, config, **kwargs):
         super().__init__(
             orientation="h",
-            spacing=13,
+            spacing=10,
             name="osd-container",
             **kwargs,
         )

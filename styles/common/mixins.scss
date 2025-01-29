@@ -79,7 +79,7 @@
 @mixin slider(
   $radius: variable.$radius,
   $highlight-color: white,
-  $length: 145px,
+  $length: 150px,
   $slider-color: theme.$background-dark
 ) {
   slider {
