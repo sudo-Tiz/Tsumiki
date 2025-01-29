@@ -81,9 +81,11 @@ class DateMenuNotification(EventBox):
                     )
                 ),
                 h_align="start",
+                h_expand=True,
+                line_wrap="word-char",
+                ellipsization="end",
                 style_classes="summary",
                 style="font-size: 13.5px;",
-                ellipsization="end",
             ),
         )
         self.close_button = Button(
@@ -133,6 +135,7 @@ class DateMenuNotification(EventBox):
                 line_wrap="word-char",
                 ellipsization="end",
                 v_align="start",
+                h_expand=True,
                 h_align="start",
                 style="font-size: 14px;",
             ),
@@ -244,7 +247,9 @@ class DateNotificationMenu(Box):
                 children=(
                     Label(label="Clear"),
                     Image(
-                        icon_name=icons["notifications"]["noisy"],
+                        icon_name=icons["trash"]["empty"]
+                        if len(self.notifications) == 0
+                        else icons["trash"]["full"],
                         icon_size=13,
                         name="clear-icon",
                     ),

@@ -123,7 +123,10 @@ class NotificationWidget(EventBox):
                 ),
                 h_align="start",
                 style_classes="summary",
+                line_wrap="word-char",
                 ellipsization="end",
+                v_align="start",
+                h_expand=True,
             ),
         )
 
@@ -174,6 +177,7 @@ class NotificationWidget(EventBox):
                 line_wrap="word-char",
                 ellipsization="end",
                 v_align="start",
+                h_expand=True,
                 h_align="start",
                 style_classes="body",
             ),
