@@ -147,16 +147,10 @@ class OSDContainer(Window):
             child_revealed=False,
         )
 
-        self.main_box = Box(
-            orientation="v",
-            spacing=13,
-            children=[self.revealer],
-        )
-
         super().__init__(
             layer="overlay",
             anchor=self.config["anchor"],
-            child=self.main_box,
+            child=self.revealer,
             visible=False,
             pass_through=True,
             keyboard_mode=keyboard_mode,
