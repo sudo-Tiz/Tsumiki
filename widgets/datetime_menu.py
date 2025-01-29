@@ -376,8 +376,6 @@ class DateTimeWidget(ButtonWidget):
             visible=self.config["notification"],
         )
 
-        print(self.config["notification_count"] and self.config["notification"])
-
         count_label = Label(
             label=str(cache_notification_service.count),
             style_classes="notification-count",
