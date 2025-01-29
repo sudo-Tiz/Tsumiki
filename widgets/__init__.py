@@ -4,7 +4,6 @@ from .bluetooth import *
 from .brightness import *
 from .cava import *
 from .click_counter import *
-from .dashboard.dashboard import *
 from .datetime_menu import *
 from .hypr_idle import *
 from .hypr_sunset import *
@@ -13,6 +12,7 @@ from .language import *
 from .microphone import *
 from .mpris import *
 from .power_button import *
+from .quick_settings import *
 from .recorder import *
 from .stats import *
 from .stop_watch import *

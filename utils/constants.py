@@ -37,7 +37,7 @@ DEFAULT_CONFIG = {
         "label": True,
         "tooltip": True,
     },
-    "dashboard": {},
+    "quick_settings": {},
     "bluetooth": {
         "icon_size": 14,
         "label": True,

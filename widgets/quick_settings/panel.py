@@ -3,6 +3,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.label import Label
 
+from services import bluetooth_service
 from services.mpris import MprisPlayerManager
 from shared.cicrle_image import CircleImage
 from shared.pop_over import PopOverWindow
@@ -10,17 +11,18 @@ from shared.widget_container import ButtonWidget
 from utils.functions import psutil_fabricator, text_icon
 from utils.widget_settings import BarConfig
 from widgets.player import PlayerBoxStack
+from widgets.quick_settings.submenu.bluetooth import BluetoothSubMenu, BluetoothToggle
 
 from .sliders.audio import AudioSlider
 from .sliders.brightness import BrightnessSlider
 
 
-class DashBoardMenu(Box):
+class QuickSettingsMenu(Box):
     """A menu to display the weather information."""
 
     def __init__(self, **kwargs):
         super().__init__(
-            name="dashboard-menu", orientation="v", all_visible=True, **kwargs
+            name="quicksettings-menu", orientation="v", all_visible=True, **kwargs
         )
 
         user_label = Label(
@@ -58,6 +60,17 @@ class DashBoardMenu(Box):
                 style_classes="slider-box",
                 children=(AudioSlider(), BrightnessSlider()),
             ),
+            end_children=Box(
+                orientation="v",
+                spacing=10,
+                v_align="center",
+                children=(
+                    BluetoothToggle(
+                        submenu=BluetoothSubMenu(bluetooth_service),
+                        client=bluetooth_service,
+                    )
+                ),
+            ),
         )
 
         self.add(box)
@@ -68,7 +81,7 @@ class DashBoardMenu(Box):
         )
 
 
-class DashBoardWidget(ButtonWidget):
+class QuickSettingsButtonWidget(ButtonWidget):
     """A button to display the date and time."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
@@ -79,7 +92,7 @@ class DashBoardWidget(ButtonWidget):
         popup = PopOverWindow(
             parent=bar,
             name="popup",
-            child=(DashBoardMenu()),
+            child=(QuickSettingsMenu()),
             visible=False,
             all_visible=False,
         )

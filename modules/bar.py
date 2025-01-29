@@ -12,7 +12,6 @@ from widgets import (
     CavaWidget,
     ClickCounterWidget,
     CpuWidget,
-    DashBoardWidget,
     DateTimeWidget,
     DividerWidget,
     HyprIdleWidget,
@@ -36,6 +35,7 @@ from widgets import (
     WindowTitleWidget,
     WorkSpacesWidget,
 )
+from widgets.quick_settings.panel import QuickSettingsButtonWidget
 
 
 class StatusBar(WaylandWindow):
@@ -61,7 +61,7 @@ class StatusBar(WaylandWindow):
             "hypr_sunset": HyprSunsetWidget,
             "keyboard": KeyboardLayoutWidget,
             "language": LanguageWidget,
-            "dashboard": DashBoardWidget,
+            "quick_settings": QuickSettingsButtonWidget,
             "memory": MemoryWidget,
             "microphone": MicrophoneIndicatorWidget,
             "mpris": Mpris,

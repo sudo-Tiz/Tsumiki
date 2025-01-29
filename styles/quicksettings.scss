@@ -1,0 +1,62 @@
+@use "theme.scss";
+@use "common/mixins.scss";
+
+
+#submenu-button:hover {
+  @extend %widget_hover;
+}
+
+#submenu-button:active {
+  background-color:theme.$text-main;
+}
+
+#submenu-button:active > * {
+  color: theme.$background-dark;
+}
+
+#submenu-title {
+  border-style: solid;
+  border-bottom-width: 2px;
+  border-color: theme.$background-alt;
+  margin-bottom: 5px;
+}
+
+#submenu-label {
+  margin-left: 5px;
+}
+
+#submenu-title-label {
+  font-size: 17px;
+}
+
+#submenu-item {
+  margin: 5px;
+}
+
+
+#quicksettings-menu {
+  .user-box {
+    margin: 1rem;
+
+    .user_name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: theme.$text-main;
+      margin-left: 1rem;
+    }
+  }
+
+  .slider-box {
+    margin: 16px;
+    padding: 20px 10px 20px 10px;
+    border-radius: 10px;
+    background-color: theme.$background;
+  }
+
+  #dashboard-slider {
+    margin-left: 10px;
+    margin-right: 20px;
+
+
+  }
+}
