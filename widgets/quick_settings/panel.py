@@ -110,7 +110,6 @@ class QuickSettingsMenu(Box):
                 style_classes="slider-box",
                 children=(AudioSlider(), BrightnessSlider()),
             ),
-            end_children=QuickSettingsButtonBox(),
         )
 
         self.add(box)
