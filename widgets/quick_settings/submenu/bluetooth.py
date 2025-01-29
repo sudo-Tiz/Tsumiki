@@ -14,7 +14,9 @@ class BluetoothDeviceBox(CenterBox):
 
     def __init__(self, device: BluetoothDevice, **kwargs):
         # TODO: FIX STYLING, make it look better
-        super().__init__(spacing=2, style_classes="submenu-button", h_expand=True, **kwargs)
+        super().__init__(
+            spacing=2, style_classes="submenu-button", h_expand=True, **kwargs
+        )
         self.device: BluetoothDevice = device
 
         self.connect_button = Button(style_classes="submenu-button")

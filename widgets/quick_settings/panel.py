@@ -3,7 +3,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.label import Label
 
-from services import bluetooth_service
+from services import bluetooth_service, network_service
 from services.mpris import MprisPlayerManager
 from shared.cicrle_image import CircleImage
 from shared.pop_over import PopOverWindow
@@ -13,6 +13,7 @@ from utils.functions import psutil_fabricator, text_icon
 from utils.widget_settings import BarConfig
 from widgets.player import PlayerBoxStack
 from widgets.quick_settings.submenu.bluetooth import BluetoothSubMenu, BluetoothToggle
+from widgets.quick_settings.submenu.wifi import WifiSubMenu, WifiToggle
 
 from .sliders.audio import AudioSlider
 from .sliders.brightness import BrightnessSlider
@@ -42,11 +43,20 @@ class QuickSettingsButtonBox(Box):
             client=bluetooth_service,
         )
 
+        # Wifi
+        self.wifi_toggle = WifiToggle(
+            submenu=WifiSubMenu(network_service),
+            client=network_service,
+        )
+
+        self.buttons.add(self.wifi_toggle)
         self.buttons.add(self.bluetooth_toggle)
 
+        self.wifi_toggle.connect("reveal-clicked", self.set_active_submenu)
         self.bluetooth_toggle.connect("reveal-clicked", self.set_active_submenu)
 
         self.add(self.buttons)
+        self.add(self.wifi_toggle.submenu)
         self.add(self.bluetooth_toggle.submenu)
 
     def set_active_submenu(self, btn: QuickSubToggle):

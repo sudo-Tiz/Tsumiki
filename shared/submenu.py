@@ -91,7 +91,9 @@ class QuickSubToggle(Box):
         self.button_image = Image(icon_name="pan-end-symbolic", size=20)
 
         self.reveal_button = Button(
-            name="quicksettings-toggle-revealer",style_classes="toggle-revealer", image=self.button_image
+            name="quicksettings-toggle-revealer",
+            style_classes="toggle-revealer",
+            image=self.button_image,
         )
 
         # Action button can hold an icon and a label NOTHING MORE
