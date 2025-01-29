@@ -14,10 +14,10 @@ class BluetoothDeviceBox(CenterBox):
 
     def __init__(self, device: BluetoothDevice, **kwargs):
         # TODO: FIX STYLING, make it look better
-        super().__init__(spacing=2, name="panel-button", h_expand=True, **kwargs)
+        super().__init__(spacing=2, style_classes="submenu-button", h_expand=True, **kwargs)
         self.device: BluetoothDevice = device
 
-        self.connect_button = Button(name="panel-button")
+        self.connect_button = Button(style_classes="submenu-button")
         self.connect_button.connect(
             "clicked",
             lambda _: self.device.set_property("connecting", not self.device.connected),
@@ -30,10 +30,10 @@ class BluetoothDeviceBox(CenterBox):
             Image(
                 icon_name=device.icon_name + "-symbolic",
                 icon_size=24,
-                name="submenu-icon",
+                style_classes="submenu-icon",
             )
         )
-        self.add_start(Label(label=device.name, name="submenu-label"))  # type: ignore
+        self.add_start(Label(label=device.name, style_classes="submenu-label1"))  # type: ignore
         self.add_end(self.connect_button)
 
         self.on_device_connect()
@@ -76,7 +76,7 @@ class BluetoothSubMenu(QuickSubMenu):
         )
 
         self.scan_image = Image(icon_name="view-refresh-symbolic", icon_size=24)
-        self.scan_button = Button(image=self.scan_image, name="panel-button")
+        self.scan_button = Button(image=self.scan_image, style_classes="submenu-button")
         self.scan_button.connect("clicked", self.on_scan_toggle)
 
         self.child = ScrolledWindow(
