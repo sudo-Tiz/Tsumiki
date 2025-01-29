@@ -575,6 +575,12 @@
         },
         "notification_count": {
           "type": "boolean"
+        },
+        "notification": {
+          "type": "boolean"
+        },
+        "calendar": {
+          "type": "boolean"
         }
       }
     },

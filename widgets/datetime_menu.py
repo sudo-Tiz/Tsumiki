@@ -170,6 +170,7 @@ class DateNotificationMenu(Box):
 
     def __init__(
         self,
+        config,
         **kwargs,
     ):
         super().__init__(
@@ -266,6 +267,7 @@ class DateNotificationMenu(Box):
         notification_column = Box(
             name="notification-column",
             orientation="v",
+            visible=False,
             children=(
                 notif_header,
                 ScrolledWindow(
@@ -283,6 +285,7 @@ class DateNotificationMenu(Box):
         date_column = Box(
             style_classes="date-column",
             orientation="v",
+            visible=False,
             children=(
                 Box(
                     style_classes="clock-box",
@@ -307,6 +310,12 @@ class DateNotificationMenu(Box):
             Separator(),
             date_column,
         )
+
+        if config["notification"]:
+            notification_column.set_visible(True)
+
+        if config["calendar"]:
+            date_column.set_visible(True)
 
         invoke_repeater(1000, self.update_labels, initial_call=True)
         notification_service.connect("notification-added", self.on_new_notification)
@@ -349,7 +358,7 @@ class DateTimeWidget(ButtonWidget):
 
         self.config = widget_config["date_time"]
 
-        date_menu = DateNotificationMenu()
+        date_menu = DateNotificationMenu(config=self.config)
 
         popup = PopOverWindow(
             parent=bar,
@@ -364,13 +373,16 @@ class DateTimeWidget(ButtonWidget):
         self.notof_indicator = Image(
             icon_name=icons["notifications"]["noisy"],
             icon_size=16,
+            visible=self.config["notification"],
         )
+
+        print(self.config["notification_count"] and self.config["notification"])
 
         count_label = Label(
             label=str(cache_notification_service.count),
             style_classes="notification-count",
             v_align="start",
-            visible=self.config["notification_count"],
+            visible=self.config["notification_count"] and self.config["notification"],
         )
 
         self.notification_indicator_box = Box(
