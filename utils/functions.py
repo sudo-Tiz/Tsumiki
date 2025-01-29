@@ -251,6 +251,7 @@ def create_scale(
     orientation="h",
     h_expand=True,
     h_align="center",
+    style_classes="",
 ) -> AnimatedScale:
     if marks is None:
         marks = (ScaleMark(value=i) for i in range(1, 100, 10))
@@ -264,6 +265,7 @@ def create_scale(
         orientation=orientation,
         h_expand=h_expand,
         h_align=h_align,
+        style_classes=style_classes,
     )
 
 
