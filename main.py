@@ -25,7 +25,12 @@ def process_and_apply_css(app: Application):
     app.set_stylesheet_from_file(get_relative_path("dist/main.css"))
 
 
-logger.disable("fabric.hyprland.widgets")
+for log in [
+    "fabric.hyprland.widgets",
+    "fabric.audio.service",
+    "fabric.bluetooth.service",
+]:
+    logger.disable(log)
 
 
 if __name__ == "__main__":
