@@ -371,7 +371,7 @@ scrollbar {
   }
 }
 
-#volumemenu{
+#volumemenu {
   min-width: 5rem;
 }
 
@@ -385,7 +385,7 @@ scrollbar {
 }
 
 .submenu-button.activated {
-  background-color:rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.15);
   border-style: solid;
   border-color: transparent;
   border-bottom-style: solid;
@@ -397,10 +397,10 @@ scrollbar {
 }
 
 .submenu-button:active {
-  background-color:theme.$text-main;
+  background-color: theme.$text-main;
 }
 
-.submenu-button:active > * {
+.submenu-button:active>* {
   color: theme.$background-dark;
 }
 
@@ -411,7 +411,7 @@ scrollbar {
   margin-bottom: 5px;
 }
 
-.submenu-label{
+.submenu-label {
   margin-left: 5px;
 }
 
@@ -431,7 +431,7 @@ scrollbar {
 
 #quicksettings-toggle-action {
   border-radius: 10px 0px 0px 10px;
-  min-width: 180px;
+  min-width: 120px;
   min-height: 35px;
 }
 
@@ -439,14 +439,18 @@ scrollbar {
 #quicksettings-togglebutton.active button image,
 #quicksettings-togglebutton.active button label,
 #quicksettings-togglebutton.active button {
-    background-color: darken(theme.$accent-blue, 10%);
-    color: theme.$text-main;
+  font-weight: bold;
+  background-color: darken(theme.$accent-blue, 10%);
+  color: black;
+  padding-left: 1px;
+  padding-right: 4px;
+
 }
 
 #quicksettings-togglebutton.active button:hover image,
 #quicksettings-togglebutton.active button:hover label,
 #quicksettings-togglebutton.active button:hover {
-    background-color: darken(theme.$accent-blue, 15%);
+  background-color: darken(theme.$accent-blue, 15%);
 }
 
 #quicksettings-togglebutton.active button:active image,
@@ -458,18 +462,18 @@ scrollbar {
 #quicksettings-togglebutton button image,
 #quicksettings-togglebutton button label,
 #quicksettings-togglebutton button {
-    background-color: theme.$background-dark;
-    color:theme.$text-main;
+  background-color: theme.$background-dark;
+  color: theme.$text-main;
 }
 
 #quicksettings-togglebutton button:hover image,
 #quicksettings-togglebutton button:hover label,
 #quicksettings-togglebutton button:hover {
-    background-color: theme.$background;
+  background-color: theme.$background;
 }
 
 #quicksettings-togglebutton button:active image,
 #quicksettings-togglebutton button:active label,
 #quicksettings-togglebutton button:active {
-    background-color: theme.$background-alt;
+  background-color: theme.$background-alt;
 }

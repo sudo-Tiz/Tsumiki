@@ -2,9 +2,12 @@
 @use "common/mixins.scss";
 
 
-
+.submenu-box{
+  margin-bottom: 10px;
+}
 
 #quicksettings-menu {
+  min-height: 50rem;
   .user-box {
     margin: 1rem;
 

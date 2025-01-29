@@ -7,6 +7,7 @@ from services import bluetooth_service
 from services.mpris import MprisPlayerManager
 from shared.cicrle_image import CircleImage
 from shared.pop_over import PopOverWindow
+from shared.submenu import QuickSubToggle
 from shared.widget_container import ButtonWidget
 from utils.functions import psutil_fabricator, text_icon
 from utils.widget_settings import BarConfig
@@ -15,6 +16,45 @@ from widgets.quick_settings.submenu.bluetooth import BluetoothSubMenu, Bluetooth
 
 from .sliders.audio import AudioSlider
 from .sliders.brightness import BrightnessSlider
+
+
+class QuickSettingsButtonBox(Box):
+    """A box to display the quick settings buttons."""
+
+    def __init__(self, **kwargs):
+        super().__init__(
+            orientation="v",
+            spacing=4,
+            h_align="start",
+            v_align="start",
+            h_expand=True,
+            v_expand=True,
+            **kwargs,
+        )
+        self.buttons = Box(
+            orientation="h", spacing=4, h_align="center", v_align="center"
+        )
+        self.active_submenu = None
+
+        # Bluetooth
+        self.bluetooth_toggle = BluetoothToggle(
+            submenu=BluetoothSubMenu(bluetooth_service),
+            client=bluetooth_service,
+        )
+
+        self.buttons.add(self.bluetooth_toggle)
+
+        self.bluetooth_toggle.connect("reveal-clicked", self.set_active_submenu)
+
+        self.add(self.buttons)
+        self.add(self.bluetooth_toggle.submenu)
+
+    def set_active_submenu(self, btn: QuickSubToggle):
+        if btn.submenu != self.active_submenu and self.active_submenu is not None:
+            self.active_submenu.do_reveal(False)
+
+        self.active_submenu = btn.submenu
+        self.active_submenu.toggle_reveal() if self.active_submenu else None
 
 
 class QuickSettingsMenu(Box):
@@ -60,17 +100,7 @@ class QuickSettingsMenu(Box):
                 style_classes="slider-box",
                 children=(AudioSlider(), BrightnessSlider()),
             ),
-            end_children=Box(
-                orientation="v",
-                spacing=10,
-                v_align="center",
-                children=(
-                    BluetoothToggle(
-                        submenu=BluetoothSubMenu(bluetooth_service),
-                        client=bluetooth_service,
-                    )
-                ),
-            ),
+            end_children=QuickSettingsButtonBox(),
         )
 
         self.add(box)
