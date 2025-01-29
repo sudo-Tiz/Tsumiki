@@ -60,6 +60,8 @@ DEFAULT_CONFIG = {
     "date_time": {
         "format": "%b %d %H:%M",
         "notification_count": True,
+        "calendar": True,
+        "notification": True,
     },
     "divider": {"size": 2},
     "hypr_idle": {
