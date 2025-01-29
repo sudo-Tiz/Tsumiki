@@ -340,6 +340,26 @@ def send_notification(
         print(f"Failed to send notification: {e}")
 
 
+# Function to get the relative time
+def get_relative_time(mins: int) -> str:
+    # Seconds
+    if mins == 0:
+        return "now"
+
+    # Minutes
+    if mins < 60:
+        return f"{mins} minute{'s' if mins > 1 else ''} ago"
+
+    # Hours
+    if mins < 1440:
+        hours = mins // 60
+        return f"{hours} hour{'s' if hours > 1 else ''} ago"
+
+    # Days
+    days = mins // 1440
+    return f"{days} day{'s' if days > 1 else ''} ago"
+
+
 # Function to get the percentage of a value
 def convert_to_percent(
     current: int | float, max: int | float, is_int=True
