@@ -196,7 +196,6 @@ def check_icon_exists(icon_name: str, fallback_icon: str) -> str:
 
 # Function to execute a shell command asynchronously
 def play_sound(file: str):
-    print(file)
     exec_shell_command_async(f"play {file}", None)
 
 
@@ -334,8 +333,6 @@ def send_notification(
 
     if timeout is not None:
         command.extend(["-t", str(timeout)])
-
-    print(command)
 
     try:
         subprocess.run(command, check=True)
