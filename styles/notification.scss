@@ -26,7 +26,7 @@ $hover-tranisition: background 0.15s ease-in-out;
       }
 
       .summary {
-        @extend %heading;
+        @extend %title_4;
         text-shadow: none;
       }
 
@@ -40,7 +40,7 @@ $hover-tranisition: background 0.15s ease-in-out;
 
     .notification-body {
       .body {
-        @extend %caption;
+        @extend %heading;
         background-color: transparent;
         text-shadow: none;
         padding: functions.toEm(5);

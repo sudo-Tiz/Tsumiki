@@ -134,7 +134,7 @@ class DateMenuNotification(EventBox):
                 ellipsization="end",
                 v_align="start",
                 h_align="start",
-                style="font-size: 12px;",
+                style="font-size: 14px;",
             ),
         )
 
