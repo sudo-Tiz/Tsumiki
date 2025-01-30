@@ -5,6 +5,7 @@ from fabric.widgets.wayland import WaylandWindow
 
 from utils.config import widget_config
 from utils.functions import convert_seconds_to_milliseconds
+from utils.monitors import HyprlandWithMonitors
 from widgets import (
     Battery,
     BlueToothWidget,
@@ -108,6 +109,7 @@ class StatusBar(WaylandWindow):
             layer=widget_config["options"]["layer"],
             anchor=acnhor,
             pass_through=False,
+            monitor=HyprlandWithMonitors().get_current_gdk_monitor_id(),
             exclusivity="auto",
             visible=True,
             all_visible=False,
