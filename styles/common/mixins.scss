@@ -79,8 +79,11 @@
 @mixin slider(
   $radius: variable.$radius,
   $highlight-color: white,
-  $length: 150px,
-  $slider-color: theme.$background-dark
+  $length: 140px,
+  $trough-color: theme.$background-dark,
+  $height: 5px,
+  $slider: false
+    // If true, the slider will be styled as a slider, otherwise as a progress bar
 ) {
   slider {
     min-height: 8px;
@@ -95,16 +98,45 @@
   }
 
   trough {
-    min-height: inherit;
+    min-height: $height;
     border-radius: $radius;
     border: none;
-    background-color: $slider-color;
+    background-color: $trough-color;
   }
 
   highlight,
   progress {
     background-color: $highlight-color;
     border-radius: $radius;
+  }
+
+  highlight {
+    margin-right: -12.5px;
+
+    &:disabled {
+      background-color: rgba(theme.$text-muted, 0.7);
+    }
+  }
+
+  @if $slider {
+    slider {
+      border-radius: 100%;
+      min-width: $height;
+      min-height: $height;
+      box-shadow: 0px 0px 5px 1px rgb(94, 94, 94);
+      margin-left: 25px;
+      background-color: mix($highlight-color, white, 0.3);
+      transition: min-width 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+      transition: min-height 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+      &:hover {
+        background-color: theme.$accent-purple;
+      }
+
+      &:disabled {
+        background-color: rgba(theme.$text-muted, 1);
+      }
+    }
   }
 }
 

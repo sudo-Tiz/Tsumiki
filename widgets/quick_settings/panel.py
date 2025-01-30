@@ -12,6 +12,7 @@ from shared.widget_container import ButtonWidget
 from utils.functions import psutil_fabricator, text_icon
 from utils.widget_settings import BarConfig
 from widgets.player import PlayerBoxStack
+from widgets.quick_settings.sliders.mic import MicrophoneSlider
 from widgets.quick_settings.submenu.bluetooth import BluetoothSubMenu, BluetoothToggle
 from widgets.quick_settings.submenu.wifi import WifiSubMenu, WifiToggle
 
@@ -108,7 +109,7 @@ class QuickSettingsMenu(Box):
                 orientation="v",
                 spacing=10,
                 style_classes="slider-box",
-                children=(AudioSlider(), BrightnessSlider()),
+                children=(BrightnessSlider(), AudioSlider(), MicrophoneSlider()),
             ),
         )
 

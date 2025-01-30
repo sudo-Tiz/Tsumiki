@@ -1,4 +1,3 @@
-from fabric.audio.service import Audio
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
@@ -15,7 +14,6 @@ class MicrophoneIndicatorWidget(ButtonWidget):
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(**kwargs)
-        self.audio_service = Audio()
 
         self.config = widget_config["microphone"]
 

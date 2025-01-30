@@ -1,5 +1,6 @@
 from services.brightness import Brightness
 from shared.setting_scale import SettingScale
+from utils.icons import icons
 
 
 class BrightnessSlider(SettingScale):
@@ -13,8 +14,8 @@ class BrightnessSlider(SettingScale):
             min=0,
             max=self.client.max_screen if self.client.max_screen != -1 else 0,
             start_value=self.client.screen_brightness,
-            pixel_size=24,
-            icon_name="display-brightness-symbolic",
+            pixel_size=20,
+            icon_name=icons["brightness"]["screen"],
         )
 
         if self.client.screen_brightness == -1:

@@ -13,7 +13,7 @@ class SettingScale(Box):
         max: float = 100,
         start_value: float = 50,
         icon_name: str = "package-x-generic-symbolic",
-        pixel_size: int = 22,
+        pixel_size: int = 20,
         **kwargs,
     ):
         super().__init__(

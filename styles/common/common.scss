@@ -5,7 +5,6 @@
 @use "../theme.scss";
 @use "../variable.scss";
 
-
 $slider-height: 12px;
 
 label {
@@ -44,7 +43,6 @@ label {
     @extend %widget_hover;
   }
 }
-
 
 .flat {
   border-radius: 4px;
@@ -112,7 +110,7 @@ tooltip {
   }
 }
 
-tooltip>* {
+tooltip > * {
   padding: 0.125em 0.25em;
 }
 
@@ -145,20 +143,20 @@ menuitem {
   }
 }
 
-menu>arrow {
+menu > arrow {
   min-height: 16px;
   min-width: 16px;
   padding: functions.toEm(4);
   color: theme.$background-alt;
 }
 
-menu>arrow.top {
+menu > arrow.top {
   margin-top: 0;
   border-radius: 6px;
   -gtk-icon-source: -gtk-icontheme("pan-up-symbolic");
 }
 
-menu>arrow.bottom {
+menu > arrow.bottom {
   margin-top: 8px;
   margin-bottom: -12px;
   border-radius: 6px;
@@ -327,48 +325,12 @@ scrollbar {
   color: theme.$text-main;
 }
 
-
 #setting-scale {
-  trough {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    min-height: $slider-height;
-    background-color: darken(theme.$background, 5%);
-    border-radius: 10px;
-
-    &:hover {
-      background-color: darken(theme.$background, 7%);
-    }
-
-    highlight {
-      border-radius: 20px 0px 0px 20px;
-      background-color: theme.$accent-blue;
-      margin-right: -12.5px;
-
-      &:disabled {
-        background-color: rgba(theme.$text-muted, 0.7);
-      }
-    }
-  }
-
-  slider {
-    border-radius: 100%;
-    min-width: $slider-height;
-    min-height: $slider-height;
-    box-shadow: 0px 0px 5px 1px rgb(94, 94, 94);
-    margin-left: 25px;
-    background-color: mix(theme.$accent-blue, white, 0.3);
-    transition: min-width 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-    transition: min-height 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-
-    &:hover {
-      background-color: theme.$accent-purple;
-    }
-
-    &:disabled {
-      background-color: rgba(theme.$text-muted, 1);
-    }
-  }
+  @include mixins.slider(
+    $height: $slider-height,
+    $highlight-color: theme.$accent-blue,
+    $slider: true
+  );
 }
 
 #volumemenu {
@@ -400,7 +362,7 @@ scrollbar {
   background-color: theme.$text-main;
 }
 
-.submenu-button:active>* {
+.submenu-button:active > * {
   color: theme.$background-dark;
 }
 
@@ -423,7 +385,6 @@ scrollbar {
   margin: 5px;
 }
 
-
 .toggle-revealer {
   border-radius: 0px 10px 10px 0px;
   padding: 5px;
@@ -435,7 +396,6 @@ scrollbar {
   min-height: 35px;
 }
 
-
 #quicksettings-togglebutton.active button image,
 #quicksettings-togglebutton.active button label,
 #quicksettings-togglebutton.active button {
@@ -444,7 +404,6 @@ scrollbar {
   color: black;
   padding-left: 1px;
   padding-right: 4px;
-
 }
 
 #quicksettings-togglebutton.active button:hover image,
