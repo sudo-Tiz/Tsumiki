@@ -12,7 +12,7 @@ from fabric.utils import exec_shell_command, exec_shell_command_async, get_relat
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scale import ScaleMark
-from gi.repository import GLib, Gtk
+from gi.repository import Gdk, GLib, Gtk
 from loguru import logger
 
 from shared.animated.scale import AnimatedScale
@@ -49,6 +49,12 @@ def psutil_poll(fabricator):
 # Function to escape the markup
 def parse_markup(text):
     return text
+
+
+# support for multiple monitors
+def for_monitors(widget):
+    n = Gdk.Display.get_default().get_n_monitors() if Gdk.Display.get_default() else 1
+    return [widget for i in range(n)]
 
 
 # Function to get the system stats using
