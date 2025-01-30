@@ -18,6 +18,7 @@ $hover-tranisition: background 0.15s ease-in-out;
     transition: border 100ms ease-in-out;
 
     .notification-header {
+      padding: functions.toEm(5);
       .app-icon {
         /* Notification app icon (only visible when the primary image is set) */
         -gtk-icon-effect: none;
@@ -26,7 +27,7 @@ $hover-tranisition: background 0.15s ease-in-out;
       }
 
       .summary {
-        @extend %title_4;
+        @extend %heading;
         text-shadow: none;
       }
 
@@ -40,7 +41,7 @@ $hover-tranisition: background 0.15s ease-in-out;
 
     .notification-body {
       .body {
-        @extend %heading;
+        @extend %caption_heading;
         background-color: transparent;
         text-shadow: none;
         padding: functions.toEm(5);
