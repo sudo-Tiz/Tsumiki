@@ -194,6 +194,8 @@ class Wifi(Service):
 
 
 class Ethernet(Service):
+    """A service to manage ethernet devices"""
+
     @Signal
     def changed(self) -> None: ...
 
@@ -292,7 +294,7 @@ class NetworkClient(Service):
                 x
                 for x in devices
                 if x.get_device_type() == device_type
-                and x.get_active_connection() != None
+                and x.get_active_connection() is not None
             ),
             None,
         )

@@ -8,7 +8,12 @@ class MicrophoneSlider(SettingScale):
 
     def __init__(self):
         self.client = audio_service
+
         super().__init__(min=0, max=100, icon_name=icons["audio"]["mic"]["medium"])
+
+        if self.client.microphone is None:
+            self.set_visible(False)
+
         self.scale.connect("change-value", self.on_scale_move)
         self.client.connect("microphone-changed", self.on_microphone_change)
         self.icon_button.connect("clicked", self.on_button_click)
