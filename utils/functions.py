@@ -54,8 +54,7 @@ def parse_markup(text):
 # support for multiple monitors
 def for_monitors(widget):
     n = Gdk.Display.get_default().get_n_monitors() if Gdk.Display.get_default() else 1
-    return [widget for i in range(n)]
-
+    return [widget(i) for i in range(n)]
 
 # Function to get the system stats using
 def get_icon(app_icon, size=25) -> Image:
