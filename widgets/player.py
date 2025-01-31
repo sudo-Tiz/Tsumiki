@@ -269,8 +269,10 @@ class PlayerBox(Box):
             spacing=2,
         )
 
-        self.position_label = Label("00:00", v_align="center", style_classes="time-label")
-        self.length_label = Label("00:00", v_align="center",style_classes="time-label")
+        self.position_label = Label("00:00", v_align="center",
+                                    style_classes="time-label")
+        self.length_label = Label("00:00", v_align="center",
+                                  style_classes="time-label")
 
 
         self.controls_box = CenterBox(

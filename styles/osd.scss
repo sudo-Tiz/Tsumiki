@@ -16,6 +16,7 @@
   #osd-level {
     font-weight: 600;
     min-width: 35px;
+    padding-left: 5px;
   }
 
   @include mixins.slider;

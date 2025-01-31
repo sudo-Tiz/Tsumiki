@@ -45,17 +45,15 @@
     color: #7d7178;
   }
 
-
   .player-controls {
-
-    .time-label{
+    .time-label {
       @extend %caption_heading;
       color: #7d7178;
     }
 
     #button-box {
       margin: 8px 5px 10px 10px;
- 
+
       #player-button {
         min-width: 20px;
         min-height: 20px;
@@ -77,8 +75,6 @@
       }
     }
   }
-
-
 
   scale {
     margin-top: 10px;
