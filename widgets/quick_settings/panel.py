@@ -9,7 +9,7 @@ from shared.cicrle_image import CircleImage
 from shared.pop_over import PopOverWindow
 from shared.submenu import QuickSubToggle
 from shared.widget_container import ButtonWidget
-from utils.functions import psutil_fabricator, text_icon
+from utils.functions import psutil_fabricator, text_icon, uptime
 from utils.widget_settings import BarConfig
 from widgets.player import PlayerBoxStack
 from widgets.quick_settings.sliders.mic import MicrophoneSlider
@@ -76,9 +76,17 @@ class QuickSettingsMenu(Box):
             name="quicksettings-menu", orientation="v", all_visible=True, **kwargs
         )
 
-        user_label = Label(
-            "User",
-            style_classes="user_name",
+        user_label = Label(label="User", v_align="center", h_align="start")
+
+        uptime_label = Label(
+            label=uptime(), style_classes="uptime", v_align="center", h_align="start"
+        )
+
+        info_box = Box(
+            orientation="v",
+            children=(user_label, uptime_label),
+            spacing=8,
+            style_classes="info-box",
         )
 
         box = CenterBox(
@@ -87,11 +95,11 @@ class QuickSettingsMenu(Box):
                 orientation="v",
                 spacing=10,
                 v_align="center",
-                style_classes="user-box",
                 children=(
                     Box(
+                        style_classes="user-box",
                         orientation="h",
-                        spacing=10,
+                        spacing=8,
                         children=(
                             CircleImage(
                                 image_file=get_relative_path(
@@ -99,7 +107,7 @@ class QuickSettingsMenu(Box):
                                 ),
                                 size=70,
                             ),
-                            user_label,
+                            info_box,
                         ),
                     ),
                     PlayerBoxStack(MprisPlayerManager()),

@@ -7,16 +7,21 @@
 
 #quicksettings-menu {
   min-width: 400px;
+
   .user-box {
+
     margin: 1rem;
 
-    .user_name {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: theme.$text-main;
-      margin-left: 1rem;
+    .info-box {
+      padding: 8px 0;
+      label {
+        @extend %heading;
+        margin-left: 1rem;
+
+      }
     }
   }
+
 
   .slider-box {
     margin: 0 12px 14px;
