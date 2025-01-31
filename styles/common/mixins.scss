@@ -38,6 +38,11 @@
   font-size: 20px;
 }
 
+%title_5 {
+  font-weight: 700;
+  font-size: 16px;
+}
+
 %title_4 {
   font-weight: 700;
   font-size: 16px;
@@ -55,7 +60,7 @@
 
 %caption_heading {
   font-weight: 700;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 %caption {
@@ -79,11 +84,8 @@
 @mixin slider(
   $radius: variable.$radius,
   $highlight-color: white,
-  $length: 140px,
-  $trough-color: theme.$background-dark,
-  $height: 5px,
-  $slider: false
-    // If true, the slider will be styled as a slider, otherwise as a progress bar
+  $length: 150px,
+  $slider-color: theme.$background-dark
 ) {
   slider {
     min-height: 8px;
@@ -101,7 +103,7 @@
     min-height: $height;
     border-radius: $radius;
     border: none;
-    background-color: $trough-color;
+    background-color: $slider-color;
   }
 
   highlight,

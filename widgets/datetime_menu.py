@@ -110,7 +110,7 @@ class DateMenuNotification(EventBox):
         )
 
         body_container = Box(
-            spacing=4, orientation="h", style_classes="notification-body"
+            spacing=15, orientation="h", style_classes="notification-body"
         )
 
         try:
@@ -137,7 +137,7 @@ class DateMenuNotification(EventBox):
                 v_align="start",
                 h_expand=True,
                 h_align="start",
-                style="font-size: 14px;",
+                style="font-size: 13.5px;",
             ),
         )
 
@@ -206,7 +206,7 @@ class DateNotificationMenu(Box):
             children=self.notifications_list,
         )
 
-        self.uptime = Label(style_classes="uptime", label=uptime())
+        self.uptime = Label(style_classes="uptime", label=f"uptime: {uptime()}")
 
         # Placeholder for when there are no notifications
         self.placeholder = Box(
