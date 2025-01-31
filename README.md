@@ -8,7 +8,7 @@
 </p>
 
 A semi-customizable bar written using the [Fabric Widget System](https://github.com/Fabric-Development/fabric).
-The panel focuses on providing an all-in-one, fully integrated panel experience, where users don’t have to rely on separate, theme-less third-party tools to manage niche functions like bluetooth, notifications,on screen display.
+The panel focuses on providing an all-in-one, fully integrated panel experience, where users don’t have to rely on separate, theme-less third-party tools to manage niche functions like bluetooth, notifications and notification panel,on screen display.
 
 ![image](https://github.com/user-attachments/assets/9f5a0e67-9b98-4615-adcf-511a05527ec2)
 
