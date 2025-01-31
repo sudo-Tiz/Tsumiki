@@ -25,6 +25,8 @@ ensure_dir_exists(f"{APP_CACHE_DIRECTORY}/media")
 
 icon_size = 15
 
+micro_to_seconds = 1000000  # player position is in microseconds
+
 # TODO: add time remaining
 
 
@@ -260,10 +262,22 @@ class PlayerBox(Box):
         self.player.connect("notify::shuffle", self.shuffle_update)
 
         # Buttons
+
         self.button_box = Box(
             name="button-box",
             h_align="center",
-            spacing=5,
+            spacing=2,
+        )
+
+        self.position_label = Label("00:00", v_align="center", style_classes="time-label")
+        self.length_label = Label("00:00", v_align="center",style_classes="time-label")
+
+
+        self.controls_box = CenterBox(
+            style_classes="player-controls",
+            start_children=self.position_label,
+            center_children=self.button_box,
+            end_children=self.length_label,
         )
 
         self.skip_next_icon = Image(
@@ -339,7 +353,12 @@ class PlayerBox(Box):
         # self.seek_bar.connect("button-release-event", self.on_button_scale_release)
         self.player.connect(
             "notify::length",
-            lambda _, x: self.seek_bar.set_range(0, self.player.length)  # type: ignore
+            lambda _, x: (
+                self.seek_bar.set_range(0, self.player.length),
+                self.length_label.set_label(
+                    self.length_str(self.player.length),
+                ),
+            )  # type: ignore
             if self.player.length
             else None,
         )
@@ -351,7 +370,7 @@ class PlayerBox(Box):
             v_align="center",
             h_align="start",
             orientation="v",
-            children=[self.track_info, self.seek_bar, self.button_box],
+            children=[self.track_info, self.seek_bar, self.controls_box],
         )
 
         self.inner_box = Box(
@@ -416,6 +435,12 @@ class PlayerBox(Box):
             self.shuffle_icon.style_classes = []
             self.shuffle_icon.add_style_class("shuffle-off")
 
+    def length_str(self, micro_seconds: int) -> str:
+        seconds = int(micro_seconds / micro_to_seconds)
+        minutes = seconds // 60
+        remaining_seconds = seconds % 60
+        return f"{minutes:02}:{remaining_seconds:02}"
+
     def on_playback_change(self, player, status):
         status = self.player.playback_status
         if status == "paused":
@@ -472,6 +497,7 @@ class PlayerBox(Box):
         )
 
     def move_seekbar(self):
+        self.position_label.set_label(self.length_str(self.player.position))
         if self.exit or not self.player.can_seek:
             return False
         self.seek_bar.set_value(self.player.get_property("position"))
