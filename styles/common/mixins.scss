@@ -85,7 +85,9 @@
   $radius: variable.$radius,
   $highlight-color: white,
   $length: 150px,
-  $slider-color: theme.$background-dark
+  $slider-color: theme.$background-dark,
+  $height: 8px,
+  $slider: false
 ) {
   slider {
     min-height: 8px;

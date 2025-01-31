@@ -125,7 +125,10 @@ class QuickSettingsMenu(Box):
 
         psutil_fabricator.connect(
             "changed",
-            lambda _, value: user_label.set_label(value.get("user")[0]),
+            lambda _, value: (
+                user_label.set_label(value.get("user")[0]),
+                uptime_label.set_label(value.get("uptime")),
+            ),
         )
 
 

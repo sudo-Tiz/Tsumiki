@@ -43,6 +43,7 @@ def psutil_poll(fabricator):
             "disk": psutil.disk_usage("/"),
             "battery": psutil.sensors_battery(),
             "user": psutil.users()[0],
+            "uptime": uptime(),
         }
         sleep(2)
 
