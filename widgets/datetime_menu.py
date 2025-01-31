@@ -206,7 +206,7 @@ class DateNotificationMenu(Box):
             children=self.notifications_list,
         )
 
-        self.uptime = Label(style_classes="uptime", label=uptime())
+        self.uptime = Label(style_classes="uptime", label=f"uptime: {uptime()}")
 
         # Placeholder for when there are no notifications
         self.placeholder = Box(
