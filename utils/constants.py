@@ -119,7 +119,7 @@ DEFAULT_CONFIG = {
         "anchor": "top-right",
         "auto_dismiss": True,
         "ignored": [],
-        "timeout": 5000,
+        "timeout": 3000,
     },
     "osd": {
         "enabled": True,
