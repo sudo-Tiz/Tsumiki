@@ -23,7 +23,7 @@ from shared.pop_over import PopOverWindow
 from shared.separator import Separator
 from shared.widget_container import ButtonWidget
 from utils.colors import Colors
-from utils.functions import uptime
+from utils.functions import setup_cursor_hover, uptime
 from utils.icons import icons
 from utils.widget_settings import BarConfig
 
@@ -260,6 +260,8 @@ class DateNotificationMenu(Box):
         clear_button.connect(
             "clicked", lambda _: cache_notification_service.clear_all_notifications()
         )
+
+        setup_cursor_hover(clear_button)
 
         notif_header.pack_end(
             clear_button,
