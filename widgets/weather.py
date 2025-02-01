@@ -14,9 +14,10 @@ from services import weather_service
 from shared import LottieAnimation, LottieAnimationWidget, PopOverWindow
 from shared.separator import Separator
 from shared.widget_container import ButtonWidget
-from utils.functions import convert_seconds_to_milliseconds, text_icon
+from utils.functions import convert_seconds_to_milliseconds
 from utils.icons import weather_text_icons, weather_text_icons_v2
 from utils.widget_settings import BarConfig
+from utils.widget_utils import text_icon
 
 gi.require_version("Gtk", "3.0")
 

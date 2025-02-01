@@ -21,6 +21,7 @@ from shared import CustomImage
 from utils.config import widget_config
 from utils.monitors import HyprlandWithMonitors
 from utils.widget_settings import BarConfig
+from utils.widget_utils import get_icon
 
 
 class NotificationPopup(WaylandWindow):
@@ -112,7 +113,7 @@ class NotificationWidget(EventBox):
         )
 
         header_container.children = (
-            helpers.get_icon(notification.app_icon),
+            get_icon(notification.app_icon),
             Label(
                 markup=helpers.parse_markup(
                     str(

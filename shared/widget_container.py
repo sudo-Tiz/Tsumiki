@@ -2,10 +2,11 @@ from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
 
+from utils.config import widget_config
+from utils.widget_utils import setup_cursor_hover
+
 
 def get_style():
-    from utils.config import widget_config
-
     widget_style = widget_config["options"]["widget_style"]
     return widget_style
 
@@ -50,6 +51,9 @@ class ButtonWidget(Button):
             style_classes="panel-button",
             **kwargs,
         )
+
         widget_style = get_style()
+
+        setup_cursor_hover(self)
 
         self.add_style_class(widget_style)

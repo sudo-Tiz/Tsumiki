@@ -3,8 +3,9 @@ import os
 from fabric.utils import get_relative_path
 
 from shared.widget_container import ButtonWidget
-from utils.functions import copy_theme, text_icon
+from utils.functions import copy_theme
 from utils.widget_settings import BarConfig
+from utils.widget_utils import text_icon
 
 
 class ThemeSwitcherWidget(ButtonWidget):
