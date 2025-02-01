@@ -151,6 +151,24 @@ def validate_widgets(parsed_data, default_config):
                 )
 
 
+# Function to setup cursor hover
+def setup_cursor_hover(
+    button, cursor_name: Literal["pointer", "crosshair", "grab"] = "pointer"
+):
+    display = Gdk.Display.get_default()
+
+    def on_enter_notify_event(widget, _):
+        cursor = Gdk.Cursor.new_from_name(display, cursor_name)
+        widget.get_window().set_cursor(cursor)
+
+    def on_leave_notify_event(widget, _):
+        cursor = Gdk.Cursor.new_from_name(display, "default")
+        widget.get_window().set_cursor(cursor)
+
+    button.connect("enter-notify-event", on_enter_notify_event)
+    button.connect("leave-notify-event", on_leave_notify_event)
+
+
 # Function to exclude keys from a dictionary        )
 def exclude_keys(d: Dict, keys_to_exclude: List[str]) -> Dict:
     return {k: v for k, v in d.items() if k not in keys_to_exclude}
