@@ -84,6 +84,8 @@ class PlayerBoxStack(Box):
         )
 
     def on_new_player(self, mpris_manager, player):
+        player_name = player.props.player_name
+
         self.show()
         if len(self.player_stack.get_children()) == 0:
             self.buttons_box.hide()
