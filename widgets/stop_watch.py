@@ -5,8 +5,8 @@ from fabric.widgets.label import Label
 from gi.repository import GLib
 
 from shared.widget_container import ButtonWidget
-from utils.functions import text_icon
 from utils.widget_settings import BarConfig
+from utils.widget_utils import text_icon
 
 
 class StopWatchWidget(ButtonWidget):

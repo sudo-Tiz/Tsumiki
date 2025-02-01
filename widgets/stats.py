@@ -5,6 +5,7 @@ import utils.functions as helpers
 from shared.widget_container import ButtonWidget
 from utils.icons import common_text_icons
 from utils.widget_settings import BarConfig
+from utils.widget_utils import text_icon
 
 
 class CpuWidget(ButtonWidget):
@@ -27,7 +28,7 @@ class CpuWidget(ButtonWidget):
         self.config = widget_config["cpu"]
 
         # Create a TextIcon with the specified icon and size
-        self.text_icon = helpers.text_icon(
+        self.text_icon = text_icon(
             icon=self.config["icon"],
             size=self.config["icon_size"],
             props={"style_classes": "panel-text-icon"},
@@ -71,7 +72,7 @@ class MemoryWidget(ButtonWidget):
         self.children = (self.box,)
 
         # Create a TextIcon with the specified icon and size
-        self.icon = helpers.text_icon(
+        self.icon = text_icon(
             icon=self.config["icon"],
             size=self.config["icon_size"],
             props={"style_classes": "panel-text-icon"},
@@ -132,7 +133,7 @@ class StorageWidget(ButtonWidget):
         self.children = (self.box,)
 
         # Create a TextIcon with the specified icon and size
-        self.icon = helpers.text_icon(
+        self.icon = text_icon(
             icon=self.config["icon"],
             size=self.config["icon_size"],
             props={"style_classes": "panel-text-icon"},

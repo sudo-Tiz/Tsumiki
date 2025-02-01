@@ -3,8 +3,8 @@ from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
 from shared.widget_container import ButtonWidget
-from utils.functions import text_icon
 from utils.widget_settings import BarConfig
+from utils.widget_utils import text_icon
 
 MIC_ON_ICON = "󰍬"
 MIC_OFF_ICON = "󰍭"

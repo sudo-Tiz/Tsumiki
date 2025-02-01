@@ -15,6 +15,11 @@ from services import audio_service
 from services.brightness import Brightness
 from utils.monitors import HyprlandWithMonitors
 from utils.widget_settings import BarConfig
+from utils.widget_utils import (
+    create_scale,
+    get_audio_icon_name,
+    get_brightness_icon_name,
+)
 
 
 class GenericOSDContainer(Box):
@@ -31,7 +36,7 @@ class GenericOSDContainer(Box):
             name="osd-level", h_align="center", h_expand=True, visible=False
         )
         self.icon = Image(icon_name=icons.icons["brightness"]["screen"], icon_size=28)
-        self.scale = helpers.create_scale()
+        self.scale = create_scale()
 
         self.children = (self.icon, self.scale, self.level)
 
@@ -62,7 +67,7 @@ class BrightnessOSDContainer(GenericOSDContainer):
         self.update_icon(int(normalized_brightness))
 
     def update_icon(self, current_brightness):
-        icon_name = helpers.get_brightness_icon_name(current_brightness)["icon"]
+        icon_name = get_brightness_icon_name(current_brightness)["icon"]
         self.level.set_label(f"{current_brightness}%")
         self.icon.set_from_icon_name(icon_name)
 
@@ -116,9 +121,7 @@ class AudioOSDContainer(GenericOSDContainer):
             self.update_icon(volume)
 
     def update_icon(self, volume):
-        icon_name = helpers.get_audio_icon_name(volume, self.audio.speaker.muted)[
-            "icon"
-        ]
+        icon_name = get_audio_icon_name(volume, self.audio.speaker.muted)["icon"]
         self.level.set_label(f"{volume}%")
         self.icon.set_from_icon_name(icon_name)
 

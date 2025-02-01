@@ -3,11 +3,11 @@ from fabric.widgets.circularprogressbar import CircularProgressBar
 from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
 
-import utils.functions as helpers
 from services import audio_service
 from shared.widget_container import EventBoxWidget
 from utils.icons import volume_text_icons
 from utils.widget_settings import BarConfig
+from utils.widget_utils import get_audio_icon_name, text_icon
 
 
 class VolumeWidget(EventBoxWidget):
@@ -34,7 +34,7 @@ class VolumeWidget(EventBoxWidget):
 
         self.volume_label = Label(visible=False)
 
-        self.icon = helpers.text_icon(
+        self.icon = text_icon(
             icon=volume_text_icons["medium"],
             size=self.config["icon_size"],
             props={
@@ -101,5 +101,5 @@ class VolumeWidget(EventBoxWidget):
             self.volume_label.set_text(f"{volume}%")
 
         self.icon.set_text(
-            helpers.get_audio_icon_name(volume, self.audio.speaker.muted)["text_icon"]
+            get_audio_icon_name(volume, self.audio.speaker.muted)["text_icon"]
         )

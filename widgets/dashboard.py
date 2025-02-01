@@ -3,8 +3,8 @@ from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.eventbox import EventBox
 
 from shared.pop_over import PopOverWindow
-from utils.functions import create_scale, text_icon
 from utils.widget_settings import BarConfig
+from utils.widget_utils import create_scale, text_icon
 
 
 class DashBoardMenu(Box):

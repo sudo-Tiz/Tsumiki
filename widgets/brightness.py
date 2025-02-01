@@ -8,6 +8,7 @@ from services.brightness import Brightness
 from shared.widget_container import EventBoxWidget
 from utils.icons import brightness_text_icons
 from utils.widget_settings import BarConfig
+from utils.widget_utils import get_brightness_icon_name
 
 
 class BrightnessWidget(EventBoxWidget):
@@ -88,9 +89,7 @@ class BrightnessWidget(EventBoxWidget):
 
         self.brightness_label.set_text(f"{normalized_brightness}%")
 
-        self.icon.set_text(
-            helpers.get_brightness_icon_name(normalized_brightness)["text_icon"]
-        )
+        self.icon.set_text(get_brightness_icon_name(normalized_brightness)["text_icon"])
 
         if self.config["tooltip"]:
             self.set_tooltip_text(f"{normalized_brightness}%")

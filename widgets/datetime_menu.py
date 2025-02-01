@@ -23,9 +23,10 @@ from shared.pop_over import PopOverWindow
 from shared.separator import Separator
 from shared.widget_container import ButtonWidget
 from utils.colors import Colors
-from utils.functions import setup_cursor_hover, uptime
+from utils.functions import uptime
 from utils.icons import icons
 from utils.widget_settings import BarConfig
+from utils.widget_utils import get_icon, setup_cursor_hover
 
 gi.require_version("Gtk", "3.0")
 
@@ -71,7 +72,7 @@ class DateMenuNotification(EventBox):
         )
 
         header_container.children = (
-            helpers.get_icon(notification.app_icon),
+            get_icon(notification.app_icon),
             Label(
                 markup=helpers.parse_markup(
                     str(
