@@ -114,10 +114,6 @@ class QuickSettingsMenu(Box):
                                 info_box,
                             ),
                         ),
-                        Box(
-                            style_classes="toggle-settings-box",
-                            children=(),
-                        ),
                     )
                 ),
             ),
