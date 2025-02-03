@@ -204,18 +204,18 @@ class PlayerBox(Box):
 
         self.player.connect("notify::arturl", self.set_image)
 
-        def do_anim(p: Animator, *_):
-            self.image_box.angle = self.angle_direction * p.value
 
         self.art_animator = Animator(
             bezier_curve=(0, 0, 1, 1),
-            duration=2,
+            duration=12,
             min_value=0,
             max_value=360,
             tick_widget=self,
-            custom_curve=True,
-            notify_value=do_anim,
+            repeat=True,
+            notify_value=lambda p, *_: self.image_box.set_angle(p.value),
         )
+
+
 
         # Track Info
         self.track_title = Label(
@@ -364,6 +364,7 @@ class PlayerBox(Box):
                 self.length_label.set_label(
                     self.length_str(self.player.length),
                 ),
+                self.art_animator.play()
             )  # type: ignore
             if self.player.length
             else None,
@@ -424,13 +425,11 @@ class PlayerBox(Box):
     def on_player_next(self, _):
         self.angle_direction = 1
         self.art_animator.pause()
-        self.art_animator.play()
         self.player.next()
 
     def on_player_prev(self, _):
         self.angle_direction = -1
         self.art_animator.pause()
-        self.art_animator.play()
         self.player.previous()
 
     def shuffle_update(self, _, __):
@@ -466,7 +465,6 @@ class PlayerBox(Box):
 
     def update_image(self):
         self.image_box.set_image_from_file(self.cover_path)
-        self.art_animator.play()
 
     def set_image(self, *args):
         url = self.player.arturl
