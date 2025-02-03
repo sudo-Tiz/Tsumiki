@@ -3,6 +3,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.label import Label
 
+import utils.functions as helpers
 from services import audio_service, bluetooth_service, network_service
 from services.brightness import Brightness
 from services.mpris import MprisPlayerManager
@@ -10,7 +11,6 @@ from shared.cicrle_image import CircleImage
 from shared.pop_over import PopOverWindow
 from shared.submenu import QuickSubToggle
 from shared.widget_container import ButtonWidget
-from utils.functions import convert_to_percent, uptime
 from utils.widget_settings import BarConfig
 from utils.widget_utils import (
     get_audio_icon_name,
@@ -88,7 +88,10 @@ class QuickSettingsMenu(Box):
         user_label = Label(label="User", v_align="center", h_align="start")
 
         uptime_label = Label(
-            label=uptime(), style_classes="uptime", v_align="center", h_align="start"
+            label=helpers.uptime(),
+            style_classes="uptime",
+            v_align="center",
+            h_align="start",
         )
 
         info_box = Box(
@@ -106,19 +109,17 @@ class QuickSettingsMenu(Box):
                 v_align="center",
                 children=(
                     Box(
-                        Box(
-                            style_classes="user-box",
-                            orientation="h",
-                            spacing=8,
-                            children=(
-                                CircleImage(
-                                    image_file=get_relative_path(
-                                        "../../assets/images/no_image.jpg"
-                                    ),
-                                    size=70,
+                        style_classes="user-box",
+                        orientation="h",
+                        spacing=8,
+                        children=(
+                            CircleImage(
+                                image_file=get_relative_path(
+                                    "../../assets/images/no_image.jpg"
                                 ),
-                                info_box,
+                                size=70,
                             ),
+                            info_box,
                         ),
                     )
                 ),
@@ -139,8 +140,10 @@ class QuickSettingsMenu(Box):
         psutil_fabricator.connect(
             "changed",
             lambda _, value: (
-                user_label.set_label(value.get("user")),
-                uptime_label.set_label(value.get("uptime")),
+                user_label.set_label(
+                    f"{helpers.get_distro_icon()} {value.get('user')}"
+                ),
+                uptime_label.set_label(f" {value.get('uptime')}"),
             ),
         )
 
@@ -220,7 +223,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
             )
 
     def on_brightness_changed(self, *_):
-        normalized_brightness = convert_to_percent(
+        normalized_brightness = helpers.convert_to_percent(
             self.brightness_service.screen_brightness,
             self.brightness_service.max_screen,
         )

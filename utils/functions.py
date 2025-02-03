@@ -137,11 +137,9 @@ def play_sound(file: str):
 # Function to get the distro icon
 def get_distro_icon():
     distro_id = GLib.get_os_info("ID")
-    # Search for the icon in the list
-    icon = next((icon for id, icon in distro_text_icons if id == distro_id), None)
 
-    # Return the found icon or default to '' if not found
-    return icon if icon else ""
+    # Search for the icon in the list
+    return distro_text_icons.get(distro_id, "")
 
 
 # Function to check if an executable exists

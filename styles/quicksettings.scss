@@ -1,5 +1,6 @@
 @use "theme.scss";
 @use "common/mixins.scss";
+@use "variable.scss";
 
 .submenu-box {
   margin-bottom: 10px;
@@ -13,9 +14,18 @@
 
     .info-box {
       padding: 8px 0;
+
       label {
         @extend %heading;
         margin-left: 1rem;
+      }
+
+      .uptime {
+        font-size: 0.92rem;
+        border: variable.$border-width solid
+          lighten($color: theme.$surface-disabled, $amount: 10%);
+        padding: 3px 9px;
+        border-radius: 1rem;
       }
     }
   }
