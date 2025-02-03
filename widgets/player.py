@@ -194,6 +194,7 @@ class PlayerBox(Box):
         # Exit Logic
         self.player.connect("exit", self.on_player_exit)
 
+
         self.image_box = CircleImage(size=self.image_size, image_file=self.cover_path)
         self.image_stack = Box(
             h_align="start",
@@ -203,8 +204,6 @@ class PlayerBox(Box):
         self.image_stack.children = [*self.image_stack.children, self.image_box]
 
         self.player.connect("notify::arturl", self.set_image)
-
-        self.player.connect
 
         self.art_animator = Animator(
             bezier_curve=(0, 0, 1, 1),
@@ -359,6 +358,8 @@ class PlayerBox(Box):
         self.player.connect(
             "notify::length",
             lambda _, x: (
+                print("length changed",self.player.get_property("position")),
+                self.seek_bar.set_value(self.player.get_property("position")),
                 self.seek_bar.set_range(0, self.player.length),
                 self.length_label.set_label(
                     self.length_str(self.player.length),
@@ -415,6 +416,7 @@ class PlayerBox(Box):
     def on_scale_move(self, scale: Scale, event, moved_pos: int):
         scale.set_value(moved_pos)
         self.player.position = moved_pos
+        self.position_label.set_label(self.length_str(moved_pos))
         # self.player.set_position(moved_pos)
 
     def on_player_exit(self, _, value):
@@ -502,6 +504,7 @@ class PlayerBox(Box):
         )
 
     def move_seekbar(self):
+        print("moving seekbar", self.player.position)
         self.position_label.set_label(self.length_str(self.player.position))
         if self.exit or not self.player.can_seek:
             return False
