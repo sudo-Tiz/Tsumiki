@@ -1,9 +1,11 @@
 # ruff: noqa: N802
 import math
 import os
+from time import sleep
 from typing import List
 
-from fabric.utils import get_relative_path, invoke_repeater
+from fabric import Fabricator
+from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
@@ -194,7 +196,6 @@ class PlayerBox(Box):
         # Exit Logic
         self.player.connect("exit", self.on_player_exit)
 
-
         self.image_box = CircleImage(size=self.image_size, image_file=self.cover_path)
         self.image_stack = Box(
             h_align="start",
@@ -263,6 +264,16 @@ class PlayerBox(Box):
         # Player Signals
         self.player.connect("notify::playback-status", self.on_playback_change)
         self.player.connect("notify::shuffle", self.shuffle_update)
+
+        def position_poll(fabricator):
+            while True:
+                yield self.player.get_property("position")
+                sleep(1)
+
+        # Create a fabricator to poll the system stats
+        player_fabricator = Fabricator(poll_from=position_poll, stream=True)
+
+        player_fabricator.connect("changed", lambda *_: self.move_seekbar())
 
         # Buttons
 
@@ -358,7 +369,7 @@ class PlayerBox(Box):
         self.player.connect(
             "notify::length",
             lambda _, x: (
-                print("length changed",self.player.get_property("position")),
+                print("length changed", self.player.get_property("position")),
                 self.seek_bar.set_value(self.player.get_property("position")),
                 self.seek_bar.set_range(0, self.player.length),
                 self.length_label.set_label(
@@ -410,8 +421,6 @@ class PlayerBox(Box):
         )
         self.children = [*self.children, self.overlay_box]
         self.set_style(f"min-height:{self.image_size + 4}px")
-
-        invoke_repeater(1000, self.move_seekbar)
 
     def on_scale_move(self, scale: Scale, event, moved_pos: int):
         scale.set_value(moved_pos)
@@ -504,7 +513,6 @@ class PlayerBox(Box):
         )
 
     def move_seekbar(self):
-        print("moving seekbar", self.player.position)
         self.position_label.set_label(self.length_str(self.player.position))
         if self.exit or not self.player.can_seek:
             return False
