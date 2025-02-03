@@ -45,9 +45,19 @@ class CpuWidget(ButtonWidget):
 
     def update_ui(self, fabricator, value):
         # Update the label with the current CPU usage if enabled
+        avg_usage = value.get("cpu_freq")
         if self.config["label"]:
             self.cpu_level_label.show()
             self.cpu_level_label.set_label(value.get("cpu_usage"))
+
+        # Update the tooltip with the memory usage details if enabled
+        if self.config["tooltip"]:
+            tooltip_text = ""
+
+            for key, value in enumerate(avg_usage):
+                tooltip_text += f"core{key}: {round(value.current)} Mhz\n"
+
+            self.set_tooltip_text(tooltip_text)
 
         return True
 

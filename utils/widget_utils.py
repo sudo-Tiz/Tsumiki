@@ -23,6 +23,7 @@ def psutil_poll(fabricator):
     while True:
         yield {
             "cpu_usage": f"{round(psutil.cpu_percent())}%",
+            "cpu_freq": psutil.cpu_freq(percpu=True),
             "ram_usage": f"{round(psutil.virtual_memory().percent)}%",
             "memory": psutil.virtual_memory(),
             "disk": psutil.disk_usage(storage_config["path"]),
