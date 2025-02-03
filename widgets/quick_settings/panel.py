@@ -72,10 +72,12 @@ class QuickSettingsButtonBox(Box):
 class QuickSettingsMenu(Box):
     """A menu to display the weather information."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, config, **kwargs):
         super().__init__(
             name="quicksettings-menu", orientation="v", all_visible=True, **kwargs
         )
+
+        self.config = config
 
         user_label = Label(label="User", v_align="center", h_align="start")
 
@@ -111,7 +113,7 @@ class QuickSettingsMenu(Box):
                             info_box,
                         ),
                     ),
-                    PlayerBoxStack(MprisPlayerManager()),
+                    PlayerBoxStack(MprisPlayerManager(), config=self.config["media"]),
                 ),
             ),
             center_children=Box(
@@ -139,12 +141,13 @@ class QuickSettingsButtonWidget(ButtonWidget):
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(name="date-time-button", **kwargs)
 
-        self.config = widget_config["date_time"]
+        self.config = widget_config["quick_settings"]
+
 
         popup = PopOverWindow(
             parent=bar,
             name="popup",
-            child=(QuickSettingsMenu()),
+            child=(QuickSettingsMenu(config=self.config),),
             visible=False,
             all_visible=False,
         )

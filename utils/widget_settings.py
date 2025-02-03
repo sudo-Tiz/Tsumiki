@@ -139,6 +139,11 @@ DateTimeMenu = TypedDict(
 # ThemeSwitcher configuration
 ThemeSwitcher = TypedDict("ThemeSwitcher", {**BaseConfig.__annotations__, "icon": str})
 
+media = TypedDict("media", {"ignore": List[str]})
+
+# QuickSettings configuration
+QuickSettings = TypedDict("QuickSettings", {"media": media})
+
 # Spacing configuration
 Spacing = TypedDict("Spacing", {"size": int})
 
@@ -194,6 +199,7 @@ class BarConfig(TypedDict):
     options: Options
     osd: OSD
     power: PowerButton
+    quick_settings: QuickSettings
     recorder: Recording
     spacing: Spacing
     stop_watch: StopWatch

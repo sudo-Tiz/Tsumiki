@@ -33,7 +33,9 @@ micro_to_seconds = 1000000  # player position is in microseconds
 class PlayerBoxStack(Box):
     """A widget that displays the current player information."""
 
-    def __init__(self, mpris_manager: MprisPlayerManager, **kwargs):
+    def __init__(self, mpris_manager: MprisPlayerManager, config, **kwargs):
+        self.config = config
+
         # The player stack
         self.player_stack = Stack(
             transition_type="slide-left-right",
@@ -85,6 +87,9 @@ class PlayerBoxStack(Box):
 
     def on_new_player(self, mpris_manager, player):
         player_name = player.props.player_name
+
+        if player_name in self.config["ignore"]:
+            return
 
         self.show()
         if len(self.player_stack.get_children()) == 0:
@@ -271,11 +276,10 @@ class PlayerBox(Box):
             spacing=2,
         )
 
-        self.position_label = Label("00:00", v_align="center",
-                                    style_classes="time-label")
-        self.length_label = Label("00:00", v_align="center",
-                                  style_classes="time-label")
-
+        self.position_label = Label(
+            "00:00", v_align="center", style_classes="time-label"
+        )
+        self.length_label = Label("00:00", v_align="center", style_classes="time-label")
 
         self.controls_box = CenterBox(
             style_classes="player-controls",
