@@ -37,11 +37,7 @@ DEFAULT_CONFIG = {
         "label": True,
         "tooltip": True,
     },
-    "quick_settings": {
-        "media": {
-            "ignore": []
-        }
-    },
+    "quick_settings": {"media": {"ignore": []}},
     "bluetooth": {
         "icon_size": 14,
         "label": True,

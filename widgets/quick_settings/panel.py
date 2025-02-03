@@ -9,9 +9,9 @@ from shared.cicrle_image import CircleImage
 from shared.pop_over import PopOverWindow
 from shared.submenu import QuickSubToggle
 from shared.widget_container import ButtonWidget
-from utils.functions import psutil_fabricator, uptime
+from utils.functions import uptime
 from utils.widget_settings import BarConfig
-from utils.widget_utils import text_icon
+from utils.widget_utils import psutil_fabricator, text_icon
 from widgets.player import PlayerBoxStack
 from widgets.quick_settings.sliders.mic import MicrophoneSlider
 from widgets.quick_settings.submenu.bluetooth import BluetoothSubMenu, BluetoothToggle
@@ -100,20 +100,25 @@ class QuickSettingsMenu(Box):
                 v_align="center",
                 children=(
                     Box(
-                        style_classes="user-box",
-                        orientation="h",
-                        spacing=8,
-                        children=(
-                            CircleImage(
-                                image_file=get_relative_path(
-                                    "../../assets/images/no_image.jpg"
+                        Box(
+                            style_classes="user-box",
+                            orientation="h",
+                            spacing=8,
+                            children=(
+                                CircleImage(
+                                    image_file=get_relative_path(
+                                        "../../assets/images/no_image.jpg"
+                                    ),
+                                    size=70,
                                 ),
-                                size=70,
+                                info_box,
                             ),
-                            info_box,
                         ),
-                    ),
-                    PlayerBoxStack(MprisPlayerManager(), config=self.config["media"]),
+                        Box(
+                            style_classes="toggle-settings-box",
+                            children=(),
+                        ),
+                    )
                 ),
             ),
             center_children=Box(
@@ -122,6 +127,9 @@ class QuickSettingsMenu(Box):
                 style_classes="slider-box",
                 children=(BrightnessSlider(), AudioSlider(), MicrophoneSlider()),
             ),
+            end_children=(
+                PlayerBoxStack(MprisPlayerManager(), config=self.config["media"])
+            ),
         )
 
         self.add(box)
@@ -129,7 +137,7 @@ class QuickSettingsMenu(Box):
         psutil_fabricator.connect(
             "changed",
             lambda _, value: (
-                user_label.set_label(value.get("user")[0]),
+                user_label.set_label(value.get("user")),
                 uptime_label.set_label(value.get("uptime")),
             ),
         )
@@ -139,10 +147,9 @@ class QuickSettingsButtonWidget(ButtonWidget):
     """A button to display the date and time."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(name="date-time-button", **kwargs)
+        super().__init__(name="quick-settings-button", **kwargs)
 
         self.config = widget_config["quick_settings"]
-
 
         popup = PopOverWindow(
             parent=bar,

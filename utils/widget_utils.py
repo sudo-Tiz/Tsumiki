@@ -10,6 +10,7 @@ from fabric.widgets.scale import ScaleMark
 from gi.repository import Gdk, GLib
 
 from shared.animated.scale import AnimatedScale
+from utils.functions import uptime
 
 from .config import widget_config
 from .icons import brightness_text_icons, icons, volume_text_icons
@@ -28,6 +29,8 @@ def psutil_poll(fabricator):
             "memory": psutil.virtual_memory(),
             "disk": psutil.disk_usage(storage_config["path"]),
             "battery": psutil.sensors_battery(),
+            "user": psutil.users()[0][0],
+            "uptime": uptime(),
         }
         sleep(2)
 

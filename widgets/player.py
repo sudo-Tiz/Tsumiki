@@ -27,6 +27,7 @@ icon_size = 15
 
 micro_to_seconds = 1000000  # player position is in microseconds
 
+
 class PlayerBoxStack(Box):
     """A widget that displays the current player information."""
 
