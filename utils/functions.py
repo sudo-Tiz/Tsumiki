@@ -2,12 +2,10 @@ import datetime
 import os
 import shutil
 import subprocess
-from time import sleep
 from typing import Dict, List, Literal
 
 import gi
 import psutil
-from fabric import Fabricator
 from fabric.utils import exec_shell_command, exec_shell_command_async, get_relative_path
 from gi.repository import Gdk, GLib, Gtk
 from loguru import logger
@@ -25,19 +23,6 @@ class ExecutableNotFoundError(ImportError):
         super().__init__(
             f"{Colors.ERROR}Executable {Colors.UNDERLINE}{executable_name}{Colors.RESET} not found. Please install it using your package manager."  # noqa: E501
         )
-
-
-# Function to get the system stats using psutil
-def psutil_poll(fabricator):
-    while True:
-        yield {
-            "cpu_usage": f"{round(psutil.cpu_percent())}%",
-            "ram_usage": f"{round(psutil.virtual_memory().percent)}%",
-            "memory": psutil.virtual_memory(),
-            "disk": psutil.disk_usage("/"),
-            "battery": psutil.sensors_battery(),
-        }
-        sleep(2)
 
 
 # Function to escape the markup
@@ -250,7 +235,3 @@ def unique_list(lst) -> List:
 # Function to check if an app is running
 def is_app_running(app_name: str) -> bool:
     return len(exec_shell_command(f"pidof {app_name}")) != 0
-
-
-# Create a fabricator to poll the system stats
-psutil_fabricator = Fabricator(poll_from=psutil_poll, stream=True)

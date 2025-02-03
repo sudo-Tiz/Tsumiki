@@ -1,17 +1,34 @@
+from time import sleep
 from typing import Literal
 
 import gi
+import psutil
+from fabric import Fabricator
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scale import ScaleMark
 from gi.repository import Gdk, GLib
 
 from shared.animated.scale import AnimatedScale
-from utils.icons import icons
 
-from .icons import brightness_text_icons, volume_text_icons
+from .config import widget_config
+from .icons import brightness_text_icons, icons, volume_text_icons
 
 gi.require_version("Gtk", "3.0")
+
+
+# Function to get the system stats using psutil
+def psutil_poll(fabricator):
+    storage_config = widget_config["storage"]
+    while True:
+        yield {
+            "cpu_usage": f"{round(psutil.cpu_percent())}%",
+            "ram_usage": f"{round(psutil.virtual_memory().percent)}%",
+            "memory": psutil.virtual_memory(),
+            "disk": psutil.disk_usage(storage_config["path"]),
+            "battery": psutil.sensors_battery(),
+        }
+        sleep(2)
 
 
 # Function to setup cursor hover
@@ -163,3 +180,7 @@ def get_audio_icon_name(
             "text_icon": volume_text_icons["overamplified"],
             "icon": "audio-volume-overamplified-symbolic",
         }
+
+
+# Create a fabricator to poll the system stats
+psutil_fabricator = Fabricator(poll_from=psutil_poll, stream=True)

@@ -5,7 +5,7 @@ import utils.functions as helpers
 from shared.widget_container import ButtonWidget
 from utils.icons import common_text_icons
 from utils.widget_settings import BarConfig
-from utils.widget_utils import text_icon
+from utils.widget_utils import psutil_fabricator, text_icon
 
 
 class CpuWidget(ButtonWidget):
@@ -41,7 +41,7 @@ class CpuWidget(ButtonWidget):
         self.box.children = (self.text_icon, self.cpu_level_label)
 
         # Set up a fabricator to call the update_label method when the CPU usage changes
-        helpers.psutil_fabricator.connect("changed", self.update_ui)
+        psutil_fabricator.connect("changed", self.update_ui)
 
     def update_ui(self, fabricator, value):
         # Update the label with the current CPU usage if enabled
@@ -84,7 +84,7 @@ class MemoryWidget(ButtonWidget):
         self.box.children = (self.icon, self.memory_level_label)
 
         # Set up a fabricator to call the update_label method  at specified intervals
-        helpers.psutil_fabricator.connect("changed", self.update_ui)
+        psutil_fabricator.connect("changed", self.update_ui)
 
     def update_ui(self, fabricator, value):
         # Get the current memory usage
@@ -146,7 +146,7 @@ class StorageWidget(ButtonWidget):
         self.box.children = (self.icon, self.storage_level_label)
 
         # Set up a fabricator to call the update_label method at specified intervals
-        helpers.psutil_fabricator.connect("changed", self.update_ui)
+        psutil_fabricator.connect("changed", self.update_ui)
 
     def update_ui(self, fabricator, value):
         # Get the current disk usage
