@@ -204,6 +204,7 @@ class PlayerBox(Box):
 
         self.player.connect("notify::arturl", self.set_image)
 
+        self.player.connect
 
         self.art_animator = Animator(
             bezier_curve=(0, 0, 1, 1),
@@ -214,8 +215,6 @@ class PlayerBox(Box):
             repeat=True,
             notify_value=lambda p, *_: self.image_box.set_angle(p.value),
         )
-
-
 
         # Track Info
         self.track_title = Label(
@@ -364,7 +363,7 @@ class PlayerBox(Box):
                 self.length_label.set_label(
                     self.length_str(self.player.length),
                 ),
-                self.art_animator.play()
+                self.art_animator.play(),
             )  # type: ignore
             if self.player.length
             else None,
@@ -450,8 +449,10 @@ class PlayerBox(Box):
         status = self.player.playback_status
         if status == "paused":
             self.play_pause_button.get_child().set_visible_child_name("play")  # type: ignore
+            self.art_animator.pause()
         if status == "playing":
             self.play_pause_button.get_child().set_visible_child_name("pause")  # type: ignore
+            self.art_animator.play()
 
     def img_callback(self, source: Gio.File, result: Gio.AsyncResult):
         try:
