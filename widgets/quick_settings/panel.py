@@ -3,7 +3,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.label import Label
 
-from services import bluetooth_service, network_service
+from services import bluetooth_service, network_service, wifi
 from services.mpris import MprisPlayerManager
 from shared.cicrle_image import CircleImage
 from shared.pop_over import PopOverWindow
@@ -155,28 +155,34 @@ class QuickSettingsButtonWidget(ButtonWidget):
             all_visible=False,
         )
 
+        audio_icon = text_icon(
+            "",
+            props={
+                "style_classes": "panel-text-icon overlay-icon",
+            },
+        )
+
+        wifi_icon = text_icon(
+            "󰤨",
+            props={
+                "style_classes": "panel-text-icon overlay-icon",
+            },
+        )
+
+        brightness_icon = text_icon(
+            "󰃠",
+            props={
+                "style_classes": "panel-text-icon overlay-icon",
+            },
+        )
+
         popup.set_pointing_to(self)
 
         self.children = Box(
             children=(
-                text_icon(
-                    "󰤨",
-                    props={
-                        "style_classes": "panel-text-icon overlay-icon",
-                    },
-                ),
-                text_icon(
-                    "󰃠",
-                    props={
-                        "style_classes": "panel-text-icon overlay-icon",
-                    },
-                ),
-                text_icon(
-                    "",
-                    props={
-                        "style_classes": "panel-text-icon overlay-icon",
-                    },
-                ),
+                wifi_icon,
+                audio_icon,
+                brightness_icon,
             )
         )
         self.connect(
