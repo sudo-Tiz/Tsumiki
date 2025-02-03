@@ -9,8 +9,9 @@ from shared.cicrle_image import CircleImage
 from shared.pop_over import PopOverWindow
 from shared.submenu import QuickSubToggle
 from shared.widget_container import ButtonWidget
-from utils.functions import psutil_fabricator, text_icon, uptime
+from utils.functions import psutil_fabricator, uptime
 from utils.widget_settings import BarConfig
+from utils.widget_utils import text_icon
 from widgets.player import PlayerBoxStack
 from widgets.quick_settings.sliders.mic import MicrophoneSlider
 from widgets.quick_settings.submenu.bluetooth import BluetoothSubMenu, BluetoothToggle
