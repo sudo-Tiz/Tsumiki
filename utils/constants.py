@@ -155,6 +155,7 @@ DEFAULT_CONFIG = {
         "icon_size": "14px",
         "label": True,
         "tooltip": True,
+        "path": "/",
     },
     "system_tray": {"icon_size": 16, "ignored": []},
     "task_bar": {"icon_size": 22},

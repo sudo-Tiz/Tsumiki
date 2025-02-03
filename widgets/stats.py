@@ -5,7 +5,7 @@ import utils.functions as helpers
 from shared.widget_container import ButtonWidget
 from utils.icons import common_text_icons
 from utils.widget_settings import BarConfig
-from utils.widget_utils import text_icon
+from utils.widget_utils import psutil_fabricator, text_icon
 
 
 class CpuWidget(ButtonWidget):
@@ -41,13 +41,23 @@ class CpuWidget(ButtonWidget):
         self.box.children = (self.text_icon, self.cpu_level_label)
 
         # Set up a fabricator to call the update_label method when the CPU usage changes
-        helpers.psutil_fabricator.connect("changed", self.update_ui)
+        psutil_fabricator.connect("changed", self.update_ui)
 
     def update_ui(self, fabricator, value):
         # Update the label with the current CPU usage if enabled
+        avg_usage = value.get("cpu_freq")
         if self.config["label"]:
             self.cpu_level_label.show()
             self.cpu_level_label.set_label(value.get("cpu_usage"))
+
+        # Update the tooltip with the memory usage details if enabled
+        if self.config["tooltip"]:
+            tooltip_text = ""
+
+            for key, value in enumerate(avg_usage):
+                tooltip_text += f"core{key}: {round(value.current)} Mhz\n"
+
+            self.set_tooltip_text(tooltip_text)
 
         return True
 
@@ -84,7 +94,7 @@ class MemoryWidget(ButtonWidget):
         self.box.children = (self.icon, self.memory_level_label)
 
         # Set up a fabricator to call the update_label method  at specified intervals
-        helpers.psutil_fabricator.connect("changed", self.update_ui)
+        psutil_fabricator.connect("changed", self.update_ui)
 
     def update_ui(self, fabricator, value):
         # Get the current memory usage
@@ -101,8 +111,7 @@ class MemoryWidget(ButtonWidget):
         # Update the tooltip with the memory usage details if enabled
         if self.config["tooltip"]:
             self.set_tooltip_text(
-                f"""󰾆 {self.percent_used}%
-                {common_text_icons["memory"]} {self.get_used()}/{self.get_total()}""",
+                f"󰾆 {self.percent_used}%\n{common_text_icons['memory']} {self.ratio()}",
             )
 
         return True
@@ -112,6 +121,9 @@ class MemoryWidget(ButtonWidget):
 
     def get_total(self):
         return helpers.convert_bytes(self.total_memory, "gb")
+
+    def ratio(self):
+        return f"{self.get_used()}/{self.get_total()}"
 
 
 class StorageWidget(ButtonWidget):
@@ -146,7 +158,7 @@ class StorageWidget(ButtonWidget):
         self.box.children = (self.icon, self.storage_level_label)
 
         # Set up a fabricator to call the update_label method at specified intervals
-        helpers.psutil_fabricator.connect("changed", self.update_ui)
+        psutil_fabricator.connect("changed", self.update_ui)
 
     def update_ui(self, fabricator, value):
         # Get the current disk usage
@@ -160,8 +172,7 @@ class StorageWidget(ButtonWidget):
         # Update the tooltip with the storage usage details if enabled
         if self.config["tooltip"]:
             self.set_tooltip_text(
-                f"""󰾆 {self.disk.percent}%
-                {common_text_icons["storage"]} {self.get_used()}/{self.get_total()}""",
+                f"󰾆 {self.disk.percent}%\n{common_text_icons['storage']} {self.ratio()}"
             )
 
         return True
@@ -171,3 +182,6 @@ class StorageWidget(ButtonWidget):
 
     def get_total(self):
         return helpers.convert_bytes(self.disk.total, "gb")
+
+    def ratio(self):
+        return f"{self.get_used()}/{self.get_total()}"

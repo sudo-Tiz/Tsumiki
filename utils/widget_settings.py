@@ -84,7 +84,7 @@ Mpris = TypedDict("Mpris", {**BaseConfig.__annotations__, "truncation_size": int
 Memory = TypedDict("Memory", {**BaseConfig.__annotations__, "icon": str})
 
 # Storage configuration
-Storage = TypedDict("Storage", {**BaseConfig.__annotations__, "icon": str})
+Storage = TypedDict("Storage", {**BaseConfig.__annotations__, "icon": str, "path": str})
 
 # Workspaces configuration
 Workspaces = TypedDict(
