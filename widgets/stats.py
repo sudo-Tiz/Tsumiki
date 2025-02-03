@@ -101,8 +101,7 @@ class MemoryWidget(ButtonWidget):
         # Update the tooltip with the memory usage details if enabled
         if self.config["tooltip"]:
             self.set_tooltip_text(
-                f"""󰾆 {self.percent_used}%
-                {common_text_icons["memory"]} {self.get_used()}/{self.get_total()}""",
+                f"󰾆 {self.percent_used}%\n{common_text_icons['memory']} {self.ratio()}",
             )
 
         return True
@@ -112,6 +111,9 @@ class MemoryWidget(ButtonWidget):
 
     def get_total(self):
         return helpers.convert_bytes(self.total_memory, "gb")
+
+    def ratio(self):
+        return f"{self.get_used()}/{self.get_total()}"
 
 
 class StorageWidget(ButtonWidget):
@@ -160,8 +162,7 @@ class StorageWidget(ButtonWidget):
         # Update the tooltip with the storage usage details if enabled
         if self.config["tooltip"]:
             self.set_tooltip_text(
-                f"""󰾆 {self.disk.percent}%
-                {common_text_icons["storage"]} {self.get_used()}/{self.get_total()}""",
+                f"󰾆 {self.disk.percent}%\n{common_text_icons['storage']} {self.ratio()}"
             )
 
         return True
@@ -171,3 +172,6 @@ class StorageWidget(ButtonWidget):
 
     def get_total(self):
         return helpers.convert_bytes(self.disk.total, "gb")
+
+    def ratio(self):
+        return f"{self.get_used()}/{self.get_total()}"
