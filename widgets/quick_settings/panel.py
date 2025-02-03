@@ -3,15 +3,21 @@ from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.label import Label
 
-from services import bluetooth_service, network_service, wifi
+from services import audio_service, bluetooth_service, network_service
+from services.brightness import Brightness
 from services.mpris import MprisPlayerManager
 from shared.cicrle_image import CircleImage
 from shared.pop_over import PopOverWindow
 from shared.submenu import QuickSubToggle
 from shared.widget_container import ButtonWidget
-from utils.functions import uptime
+from utils.functions import convert_to_percent, uptime
 from utils.widget_settings import BarConfig
-from utils.widget_utils import psutil_fabricator, text_icon
+from utils.widget_utils import (
+    get_audio_icon_name,
+    get_brightness_icon_name,
+    psutil_fabricator,
+    text_icon,
+)
 from widgets.player import PlayerBoxStack
 from widgets.quick_settings.sliders.mic import MicrophoneSlider
 from widgets.quick_settings.submenu.bluetooth import BluetoothSubMenu, BluetoothToggle
@@ -147,6 +153,13 @@ class QuickSettingsButtonWidget(ButtonWidget):
 
         self.config = widget_config["quick_settings"]
 
+        self.audio = audio_service
+        # Initialize the audio service
+        self.brightness_service = Brightness().get_initial()
+
+        self.audio.connect("notify::speaker", self.on_speaker_changed)
+        self.brightness_service.connect("screen", self.on_brightness_changed)
+
         popup = PopOverWindow(
             parent=bar,
             name="popup",
@@ -155,7 +168,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
             all_visible=False,
         )
 
-        audio_icon = text_icon(
+        self.audio_icon = text_icon(
             "",
             props={
                 "style_classes": "panel-text-icon overlay-icon",
@@ -169,7 +182,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
             },
         )
 
-        brightness_icon = text_icon(
+        self.brightness_icon = text_icon(
             "󰃠",
             props={
                 "style_classes": "panel-text-icon overlay-icon",
@@ -181,11 +194,36 @@ class QuickSettingsButtonWidget(ButtonWidget):
         self.children = Box(
             children=(
                 wifi_icon,
-                audio_icon,
-                brightness_icon,
+                self.audio_icon,
+                self.brightness_icon,
             )
         )
         self.connect(
             "button-press-event",
             lambda *_: popup.set_visible(not popup.get_visible()),
+        )
+
+    def on_speaker_changed(self, *_):
+        # Update the progress bar value based on the speaker volume
+        if not self.audio.speaker:
+            return
+
+        self.audio.speaker.connect("notify::volume", self.update_volume)
+        self.update_volume()
+
+    def update_volume(self, *_):
+        if self.audio.speaker:
+            volume = round(self.audio.speaker.volume)
+
+            self.audio_icon.set_text(
+                get_audio_icon_name(volume, self.audio.speaker.muted)["text_icon"]
+            )
+
+    def on_brightness_changed(self, *_):
+        normalized_brightness = convert_to_percent(
+            self.brightness_service.screen_brightness,
+            self.brightness_service.max_screen,
+        )
+        self.brightness_icon.set_text(
+            get_brightness_icon_name(normalized_brightness)["text_icon"]
         )
