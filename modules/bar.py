@@ -1,4 +1,4 @@
-from fabric.utils import exec_shell_command_async, get_relative_path, invoke_repeater
+from fabric.utils import exec_shell_command_async, get_relative_path, invoke_repeater  # noqa: I001
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow
@@ -25,6 +25,7 @@ from widgets import (
     PowerButton,
     Recorder,
     SpacingWidget,
+    QuickSettingsButtonWidget,
     StopWatchWidget,
     StorageWidget,
     SystemTray,
@@ -36,7 +37,6 @@ from widgets import (
     WindowTitleWidget,
     WorkSpacesWidget,
 )
-from widgets.quick_settings.panel import QuickSettingsButtonWidget
 
 
 class StatusBar(WaylandWindow):
@@ -79,6 +79,7 @@ class StatusBar(WaylandWindow):
             "spacing": SpacingWidget,
             "stop_watch": StopWatchWidget,
             "divider": DividerWidget,
+            "quick_settings": QuickSettingsButtonWidget,
         }
 
         layout = self.make_layout()

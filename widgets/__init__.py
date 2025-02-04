@@ -12,7 +12,7 @@ from .language import *
 from .microphone import *
 from .mpris import *
 from .power_button import *
-from .quick_settings import *
+from .quick_settings.panel import *
 from .recorder import *
 from .stats import *
 from .stop_watch import *
