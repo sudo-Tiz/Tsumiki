@@ -131,7 +131,7 @@ class WorkspaceEventBox(EventBox):
                 name="overview-add-label",
                 h_expand=True,
                 v_expand=True,
-                markup=icons.circle_plus,
+                markup=icons["common_text_icons"]["power"],
             ),
             on_drag_data_received=lambda _w,
             _c,
