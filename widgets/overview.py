@@ -14,6 +14,7 @@ from loguru import logger
 
 import utils.icons as icons
 from utils.icon_resolver import IconResolver
+from utils.widget_settings import BarConfig
 
 gi.require_version("Gtk", "3.0")
 
@@ -131,7 +132,7 @@ class WorkspaceEventBox(EventBox):
                 name="overview-add-label",
                 h_expand=True,
                 v_expand=True,
-                markup=icons["common_text_icons"]["power"],
+                markup=icons.common_text_icons["power"],
             ),
             on_drag_data_received=lambda _w,
             _c,
@@ -154,7 +155,7 @@ class WorkspaceEventBox(EventBox):
 class OverviewWidget(Box):
     """A widget to display an overview of all windows."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, widget_config: BarConfig, bar, **kwargs):
         # Initialize as a Box instead of a PopupWindow.
         super().__init__(name="overview", orientation="v", spacing=0)
         self.workspace_boxes: dict[int, Box] = {}
