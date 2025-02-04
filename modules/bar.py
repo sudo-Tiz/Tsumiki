@@ -62,7 +62,6 @@ class StatusBar(WaylandWindow):
             "hypr_sunset": HyprSunsetWidget,
             "keyboard": KeyboardLayoutWidget,
             "language": LanguageWidget,
-            "quick_settings": QuickSettingsButtonWidget,
             "memory": MemoryWidget,
             "microphone": MicrophoneIndicatorWidget,
             "mpris": Mpris,
