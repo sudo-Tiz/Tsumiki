@@ -139,7 +139,9 @@ DateTimeMenu = TypedDict(
 # ThemeSwitcher configuration
 ThemeSwitcher = TypedDict("ThemeSwitcher", {**BaseConfig.__annotations__, "icon": str})
 
-media = TypedDict("media", {"ignore": List[str]})
+media = TypedDict(
+    "media", {"ignore": List[str], "truncation_size": int, "show_active_only": bool}
+)
 
 # QuickSettings configuration
 QuickSettings = TypedDict("QuickSettings", {"media": media})

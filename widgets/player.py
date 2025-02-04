@@ -99,7 +99,7 @@ class PlayerBoxStack(Box):
 
         self.player_stack.children = [
             *self.player_stack.children,
-            PlayerBox(player=MprisPlayer(player)),
+            PlayerBox(player=MprisPlayer(player), config=self.config),
         ]
 
         self.make_new_player_button(self.player_stack.get_children()[-1])
@@ -178,7 +178,7 @@ def easeOutElastic(t: float) -> float:
 class PlayerBox(Box):
     """A widget that displays the current player information."""
 
-    def __init__(self, player: MprisPlayer, **kwargs):
+    def __init__(self, player: MprisPlayer, config, **kwargs):
         super().__init__(h_align="start", name="player-box", **kwargs)
         # Setup
         self.player: MprisPlayer = player
@@ -187,6 +187,8 @@ class PlayerBox(Box):
         self.player_width = 380
         self.image_size = 115
         self.player_height = 110
+
+        self.config = config
 
         # State
         self.exit = False
@@ -221,7 +223,7 @@ class PlayerBox(Box):
             label="No Title",
             name="player-title",
             justfication="left",
-            max_chars_width=24,
+            max_chars_width=self.config["truncation_size"],
             ellipsization="end",
             h_align="start",
         )
@@ -230,7 +232,7 @@ class PlayerBox(Box):
             label="No Artist",
             name="player-artist",
             justfication="left",
-            max_chars_width=24,
+            max_chars_width=self.config["truncation_size"],
             ellipsization="end",
             h_align="start",
         )
