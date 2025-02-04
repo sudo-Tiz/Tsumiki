@@ -371,7 +371,6 @@ class PlayerBox(Box):
         self.player.connect(
             "notify::length",
             lambda _, x: (
-                print("length changed", self.player.get_property("position")),
                 self.seek_bar.set_value(self.player.get_property("position")),
                 self.seek_bar.set_range(0, self.player.length),
                 self.length_label.set_label(
