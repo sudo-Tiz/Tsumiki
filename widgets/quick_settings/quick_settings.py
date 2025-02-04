@@ -1,3 +1,5 @@
+import os
+
 from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
@@ -85,6 +87,12 @@ class QuickSettingsMenu(Box):
 
         self.config = config
 
+        user_image = (
+            get_relative_path("../../assets/images/no_image.jpg")
+            if not os.path.exists(os.path.expandvars("$HOME/.face"))
+            else os.path.expandvars("$HOME/.face")
+        )
+
         user_label = Label(label="User", v_align="center", h_align="start")
 
         uptime_label = Label(
@@ -114,9 +122,7 @@ class QuickSettingsMenu(Box):
                         spacing=8,
                         children=(
                             CircleImage(
-                                image_file=get_relative_path(
-                                    "../../assets/images/no_image.jpg"
-                                ),
+                                image_file=user_image,
                                 size=70,
                             ),
                             info_box,
