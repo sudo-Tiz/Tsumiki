@@ -1,6 +1,7 @@
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
+from fabric.widgets.label import Label
 from fabric.widgets.scale import Scale
 
 
@@ -14,6 +15,7 @@ class SettingScale(Box):
         start_value: float = 50,
         icon_name: str = "package-x-generic-symbolic",
         pixel_size: int = 20,
+        label=True,
         **kwargs,
     ):
         super().__init__(
@@ -33,4 +35,13 @@ class SettingScale(Box):
             h_expand=True,
         )
 
-        self.children = (self.icon_button, self.scale)
+        self.label = Label(
+            label=f"{start_value}%", name="dashboard-label", visible=label
+        )
+
+        self.scale.connect(
+            "change-value",
+            lambda _, __, moved_pos: self.label.set_label(f"{round(moved_pos)}%"),
+        )
+
+        self.children = (self.icon_button, self.scale, self.label)
