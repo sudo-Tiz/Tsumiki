@@ -179,14 +179,14 @@ class PlayerBox(Box):
     """A widget that displays the current player information."""
 
     def __init__(self, player: MprisPlayer, config, **kwargs):
-        super().__init__(h_align="start", name="player-box", **kwargs)
+        super().__init__(h_align="center", name="player-box", **kwargs)
         # Setup
         self.player: MprisPlayer = player
         self.cover_path = get_relative_path("../assets/images/no_image.jpg")
 
         self.player_width = 380
         self.image_size = 115
-        self.player_height = 110
+        self.player_height = 120
 
         self.config = config
 
@@ -198,13 +198,9 @@ class PlayerBox(Box):
         # Exit Logic
         self.player.connect("exit", self.on_player_exit)
 
-        self.image_box = CircleImage(
-            size=self.image_size, image_file=self.cover_path
-        )
+        self.image_box = CircleImage(size=self.image_size, image_file=self.cover_path)
         self.image_stack = Box(
-            h_align="start",
-            v_align="start",
-            name="player-image-stack"
+            h_align="start", v_align="start", name="player-image-stack"
         )
         self.image_stack.children = [*self.image_stack.children, self.image_box]
 
@@ -237,7 +233,19 @@ class PlayerBox(Box):
             max_chars_width=self.config["truncation_size"],
             ellipsization="end",
             h_align="start",
+            visible=self.config["show_artist"],
         )
+
+        self.track_album = Label(
+            label="No Album",
+            name="player-album",
+            justfication="left",
+            max_chars_width=self.config["truncation_size"],
+            ellipsization="end",
+            h_align="start",
+            visible=self.config["show_album"],
+        )
+
         self.player.bind_property(
             "title",
             self.track_title,
@@ -253,6 +261,14 @@ class PlayerBox(Box):
             lambda _, x: x if x != "" else "No Artist",  # type: ignore
         )
 
+        self.player.bind_property(
+            "album",
+            self.track_album,
+            "label",
+            GObject.BindingFlags.DEFAULT,
+            lambda _, x: x if x != "" else "No Album",  # type: ignore
+        )
+
         self.track_info = Box(
             name="player-info",
             spacing=5,
@@ -263,6 +279,7 @@ class PlayerBox(Box):
             children=[
                 self.track_title,
                 self.track_artist,
+                self.track_album,
             ],
         )
         # Player Signals
@@ -288,9 +305,17 @@ class PlayerBox(Box):
         )
 
         self.position_label = Label(
-            "00:00", v_align="center", style_classes="time-label"
+            "00:00",
+            v_align="center",
+            style_classes="time-label",
+            visible=self.config["show_time"],
         )
-        self.length_label = Label("00:00", v_align="center", style_classes="time-label")
+        self.length_label = Label(
+            "00:00",
+            v_align="center",
+            style_classes="time-label",
+            visible=self.config["show_time"],
+        )
 
         self.controls_box = CenterBox(
             style_classes="player-controls",
@@ -417,7 +442,7 @@ class PlayerBox(Box):
                     children=Image(icon_name=self.player.player_name, icon_size=20),
                     h_align="end",
                     v_align="start",
-                    style="margin-top: 10px; margin-right: 10px;",
+                    style="margin-top: 5px; margin-right: 10px;",
                     tooltip_text=self.player.player_name,  # type: ignore
                 ),
             ],

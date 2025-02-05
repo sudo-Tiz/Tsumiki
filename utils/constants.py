@@ -37,7 +37,17 @@ DEFAULT_CONFIG = {
         "label": True,
         "tooltip": True,
     },
-    "quick_settings": {"media": {"ignore": [], "truncation_size": 24}},
+    "quick_settings": {
+        "media": {
+            "ignore": [],
+            "truncation_size": 26,
+            "show_album": True,
+            "show_artist": True,
+            "show_time": True,
+            "show_time_tooltip": True,
+            "no_media_text": "No media playing",
+        }
+    },
     "bluetooth": {
         "icon_size": 14,
         "label": True,

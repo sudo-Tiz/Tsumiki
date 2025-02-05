@@ -20,7 +20,7 @@ from utils.widget_utils import (
     psutil_fabricator,
     text_icon,
 )
-from widgets.player import PlayerBoxStack
+from widgets.media import PlayerBoxStack
 from widgets.quick_settings.sliders.mic import MicrophoneSlider
 from widgets.quick_settings.submenu.bluetooth import BluetoothSubMenu, BluetoothToggle
 from widgets.quick_settings.submenu.wifi import WifiSubMenu, WifiToggle
