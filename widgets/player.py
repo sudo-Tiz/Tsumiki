@@ -198,11 +198,13 @@ class PlayerBox(Box):
         # Exit Logic
         self.player.connect("exit", self.on_player_exit)
 
-        self.image_box = CircleImage(size=self.image_size, image_file=self.cover_path)
+        self.image_box = CircleImage(
+            size=self.image_size, image_file=self.cover_path
+        )
         self.image_stack = Box(
             h_align="start",
             v_align="start",
-            style="border-radius: 100%; box-shadow: 0px 0 4px 0px black;",
+            name="player-image-stack"
         )
         self.image_stack.children = [*self.image_stack.children, self.image_box]
 

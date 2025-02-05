@@ -32,6 +32,11 @@
 #player-box {
   margin: 10px 8px;
 
+  #player-image-stack{
+    border-radius: 100%; 
+    box-shadow: 0px 0 4px 0px black;
+  }
+
   #player-title {
     margin-top: 15px;
     font-weight: 700;
