@@ -1,10 +1,17 @@
 #!/bin/bash
 # shellcheck source=/dev/null
 
+set -e  # Exit immediately if a command exits with a non-zero status
+set -u  # Treat unset variables as an error
+set -o pipefail  # Prevent errors in a pipeline from being masked
+
+INSTALL_DIR="$HOME/.config/hydepanel"
+REPO_URL="https://github.com/rubiin/HyDePanel.git"
+
 start_bar() {
 	# Navigate to the $HOME/bar directory
-	cd "$HOME/bar" || {
-		echo -e "\033[31mDirectory $HOME/bar does not exist.\033[0m\n"
+	cd "$INSTALL_DIR" || {
+		echo -e "\033[31mDirectory $INSTALL_DIR does not exist.\033[0m\n"
 		exit 1
 	}
 
@@ -52,9 +59,7 @@ start_bar() {
 
 EOF
 	echo -e "\e[32mUsing python:\e[0m \e[34m$(which python)\e[0m\n"
-
-	pkill dunst; pkill mako; # to use notifications, kill other notification daemons
-	python3 ./main.py
+	python3 main.py
 	deactivate
 }
 
