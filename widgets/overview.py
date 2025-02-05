@@ -140,7 +140,9 @@ class WorkspaceEventBox(EventBox):
             _y,
             data,
             *_: connection.send_command(
-                f"/dispatch movetoworkspacesilent {workspace_id},address:{data.get_data().decode()}"
+                f"/dispatch movetoworkspacesilent {workspace_id},address:{
+                    data.get_data().decode()
+                }"
             ),
         )
         self.drag_dest_set(
@@ -209,10 +211,7 @@ class OverviewWidget(Box):
 
         # Lay out workspaces into two rows.
         for w_id in range(1, 11):
-            if w_id <= 5:
-                overview_row = self.children[0]
-            else:
-                overview_row = self.children[1]
+            overview_row = self.children[0] if w_id <= 5 else self.children[1]
             overview_row.add(
                 Box(
                     name="overview-workspace-box",
@@ -220,9 +219,7 @@ class OverviewWidget(Box):
                     children=[
                         WorkspaceEventBox(
                             w_id,
-                            self.workspace_boxes[w_id]
-                            if w_id in self.workspace_boxes
-                            else None,
+                            self.workspace_boxes.get(w_id, None),
                         ),
                     ],
                 )
