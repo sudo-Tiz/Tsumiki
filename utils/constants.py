@@ -45,7 +45,6 @@ DEFAULT_CONFIG = {
             "show_artist": True,
             "show_time": True,
             "show_time_tooltip": True,
-            "no_media_text": "No media playing",
         }
     },
     "bluetooth": {
