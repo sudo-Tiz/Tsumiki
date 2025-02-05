@@ -29,7 +29,7 @@ class IconResolver:
         else:
             self._icon_dict = {}
 
-    def get_icon(self, app_id: str):
+    def get_icon_name(self, app_id: str):
         if app_id in self._icon_dict:
             return self._icon_dict[app_id]
         new_icon = self._compositor_find_icon(app_id)
@@ -38,6 +38,13 @@ class IconResolver:
         )
         self._store_new_icon(app_id, new_icon)
         return new_icon
+
+    def get_icon_pixbuf(self, app_id: str, size: int = 16):
+        return Gtk.IconTheme.get_default().load_icon(
+            self.get_icon_name(app_id),
+            size,
+            Gtk.IconLookupFlags.FORCE_SIZE,
+        )
 
     def _store_new_icon(self, app_id: str, icon: str):
         self._icon_dict[app_id] = icon

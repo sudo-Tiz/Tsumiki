@@ -10,7 +10,33 @@
 A semi-customizable bar written using the [Fabric Widget System](https://github.com/Fabric-Development/fabric).
 The panel focuses on providing an all-in-one, fully integrated panel experience, where users don’t have to rely on separate, theme-less third-party tools to manage niche functions like bluetooth, notifications and notification panel,on screen display.
 
-![image](https://github.com/user-attachments/assets/9f5a0e67-9b98-4615-adcf-511a05527ec2)
+## 📸 Screenshots
+
+<table align="center">
+  <tr>
+    <td colspan="4"><img src="assets/screenshots/main.png"></td>
+  </tr>
+  <tr>
+    <td colspan="1"><img src="assets/screenshots/noti-panel.png"></td>
+    <td colspan="1"><img src="assets/screenshots/noti.png"></td>
+    <td colspan="1" align="center"><img src="assets/screenshots/lock.png"></td>
+  </tr>
+</table>
+
+<table align="center">
+  <tr>
+    <td align="center"><sup>✨ sᴜᴘᴘᴏʀᴛ ᴛʜᴇ ᴘʀᴏᴊᴇᴄᴛ ✨</sup></td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href='https://ko-fi.com/rubiin' target='_blank'>
+        <img style='border:0px;height:128px;'
+             src='https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExc3N4NzlvZWs2Z2tsaGx4aHgwa3UzMWVpcmNwZTNraTM2NW84ZDlqbiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/PaF9a1MpqDzovyqVKj/giphy.gif'
+             border='0' alt='Support me on Ko-fi!' />
+      </a>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -192,31 +218,6 @@ Here is the list arranged in ascending order alphabetically:
 - window_title
 - workspace
 - workspaces
-
-</details>
-
-## Screenshots
-
-<details>
-<summary>Click to see screenshots</summary>
-
-![image](https://github.com/user-attachments/assets/4bd1fd6d-6c35-43e1-ae47-f0f76089f447)
-
-## Notification
-
-![image](https://github.com/user-attachments/assets/6c66b11c-6a21-4dcb-ab7f-7ed586abbf65)
-
-## Calendar with notification panel
-
-![image](https://github.com/user-attachments/assets/6e3ef49a-64b3-4dbd-8ccd-53430ff6ecff)
-
-## OSD
-
-![image](https://github.com/user-attachments/assets/25e171ff-f85e-4b62-9ed3-8e3479c2e4b4)
-
-## Logout
-
-![image](https://github.com/user-attachments/assets/18b5c851-4d3a-4801-b4c3-dbb555cfbae9)
 
 </details>
 

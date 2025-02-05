@@ -127,8 +127,11 @@ Keyboard = TypedDict("Keyboard", {**BaseConfig.__annotations__, "icon": str})
 # MicroPhone configuration
 MicroPhone = TypedDict("MicroPhone", {**BaseConfig.__annotations__})
 
-
+# Cava configuration
 Cava = TypedDict("Cava", {"bars": int})
+
+# Overview configuration
+Overview = TypedDict("Overview", {})
 
 # DateTimeMenu configuration
 DateTimeMenu = TypedDict(
@@ -200,6 +203,7 @@ class BarConfig(TypedDict):
     notification: Notification
     options: Options
     osd: OSD
+    overview: Overview
     power: PowerButton
     quick_settings: QuickSettings
     recorder: Recording
