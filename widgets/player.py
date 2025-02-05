@@ -459,12 +459,18 @@ class PlayerBox(Box):
 
     def on_playback_change(self, player, status):
         status = self.player.playback_status
-        if status == "paused":
-            self.play_pause_button.get_child().set_visible_child_name("play")  # type: ignore
-            self.art_animator.pause()
-        if status == "playing":
-            self.play_pause_button.get_child().set_visible_child_name("pause")  # type: ignore
-            self.art_animator.play()
+
+        match status.lower():
+            case "playing":
+                self.play_pause_button.get_child().set_visible_child_name("pause")  # type: ignore
+                self.art_animator.play()
+
+            case "paused":
+                self.play_pause_button.get_child().set_visible_child_name("play")  # type: ignore
+                self.art_animator.pause()
+            case "stopped":
+                self.play_pause_button.get_child().set_visible_child_name("play")  # type: ignore
+                self.art_animator.stop()
 
     def img_callback(self, source: Gio.File, result: Gio.AsyncResult):
         try:
