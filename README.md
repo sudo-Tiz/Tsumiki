@@ -102,7 +102,7 @@ hypridle
 - Clone this repository:
 
 ```sh
-git clone https://github.com/rubiin/HyDePanel.git bar
+git clone https://github.com/rubiin/HyDePanel.git ~/.config/hydepanel
 cd bar
 ```
 
@@ -168,7 +168,7 @@ Once the dependencies are installed, run the following command to start the bar 
 Add this to your `.config/hyprland.conf`
 
 ```sh
-exec = `$HOME/bar/init.sh -start`
+exec = `~/.config/hydepanel/init.sh -start`
 
 ```
 
