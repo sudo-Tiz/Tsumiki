@@ -1,4 +1,8 @@
-from fabric.utils import exec_shell_command_async, get_relative_path, invoke_repeater  # noqa: I001
+from fabric.utils import (  # noqa: I001
+    exec_shell_command_async,
+    get_relative_path,
+    invoke_repeater,
+)
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow
@@ -24,9 +28,9 @@ from widgets import (
     Mpris,
     OverviewWidget,
     PowerButton,
+    QuickSettingsButtonWidget,
     Recorder,
     SpacingWidget,
-    QuickSettingsButtonWidget,
     StopWatchWidget,
     StorageWidget,
     SystemTray,
