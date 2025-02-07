@@ -70,6 +70,13 @@ label {
   border: variable.$border-width solid theme.$surface-disabled;
 }
 
+
+.panel-icon {
+  margin-left: 2px;
+  font-size: 25px;
+  margin-right: 2px;
+}
+
 .panel-text {
   font-weight: 700;
   margin-left: 10px;

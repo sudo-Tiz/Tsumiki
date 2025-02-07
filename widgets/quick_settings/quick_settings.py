@@ -3,6 +3,7 @@ import os
 from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
+from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
 import utils.functions as helpers
@@ -18,7 +19,6 @@ from utils.widget_utils import (
     get_audio_icon_name,
     get_brightness_icon_name,
     psutil_fabricator,
-    text_icon,
 )
 from widgets.media import PlayerBoxStack
 from widgets.quick_settings.sliders.mic import MicrophoneSlider
@@ -161,8 +161,11 @@ class QuickSettingsButtonWidget(ButtonWidget):
         super().__init__(name="quick-settings-button", **kwargs)
 
         self.config = widget_config["quick_settings"]
-
+        self.panel_icon_size = 16
         self.audio = audio_service
+
+        self.network = network_service
+
         # Initialize the audio service
         self.brightness_service = Brightness().get_initial()
 
@@ -177,32 +180,23 @@ class QuickSettingsButtonWidget(ButtonWidget):
             all_visible=False,
         )
 
-        self.audio_icon = text_icon(
-            "",
-            props={
-                "style_classes": "panel-text-icon overlay-icon",
-            },
+        self.audio_icon = Image(
+            style_classes="panel-icon",
         )
 
-        wifi_icon = text_icon(
-            "󰤨",
-            props={
-                "style_classes": "panel-text-icon overlay-icon",
-            },
+        self.network_icon = Image(
+            style_classes="panel-icon",
         )
 
-        self.brightness_icon = text_icon(
-            "󰃠",
-            props={
-                "style_classes": "panel-text-icon overlay-icon",
-            },
+        self.brightness_icon = Image(
+            style_classes="panel-icon",
         )
 
         popup.set_pointing_to(self)
 
         self.children = Box(
             children=(
-                wifi_icon,
+                self.network_icon,
                 self.audio_icon,
                 self.brightness_icon,
             )
@@ -211,6 +205,26 @@ class QuickSettingsButtonWidget(ButtonWidget):
             "button-press-event",
             lambda *_: popup.set_visible(not popup.get_visible()),
         )
+
+        def get_network_icon(*_):
+            if self.network.primary_device == "wifi":
+                wifi = self.network.wifi_device
+                if wifi:
+                    self.network_icon.set_from_icon_name(
+                        wifi.get_icon_name(),
+                        self.panel_icon_size,
+                    )
+                    # wifi.bind_property("icon-name", self.network_icon, "icon-name")
+
+            else:
+                ethernet = self.network.ethernet_device
+                if ethernet:
+                    self.network_icon.set_from_icon_name(
+                        ethernet.get_icon_name(),
+                        self.panel_icon_size,
+                    )
+
+        self.network.connect("notify::primary-device", get_network_icon)
 
     def on_speaker_changed(self, *_):
         # Update the progress bar value based on the speaker volume
@@ -224,8 +238,9 @@ class QuickSettingsButtonWidget(ButtonWidget):
         if self.audio.speaker:
             volume = round(self.audio.speaker.volume)
 
-            self.audio_icon.set_text(
-                get_audio_icon_name(volume, self.audio.speaker.muted)["text_icon"]
+            self.audio_icon.set_from_icon_name(
+                get_audio_icon_name(volume, self.audio.speaker.muted)["icon"],
+                self.panel_icon_size,
             )
 
     def on_brightness_changed(self, *_):
@@ -233,6 +248,8 @@ class QuickSettingsButtonWidget(ButtonWidget):
             self.brightness_service.screen_brightness,
             self.brightness_service.max_screen,
         )
-        self.brightness_icon.set_text(
-            get_brightness_icon_name(normalized_brightness)["text_icon"]
+
+        self.brightness_icon.set_from_icon_name(
+            get_brightness_icon_name(normalized_brightness)["icon"],
+            self.panel_icon_size,
         )

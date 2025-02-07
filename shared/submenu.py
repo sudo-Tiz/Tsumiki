@@ -98,7 +98,7 @@ class QuickSubToggle(Box):
 
         # Action button can hold an icon and a label NOTHING MORE
         self.action_icon = Image(
-            name="panel-icon",
+            style_classes="panel-icon",
             icon_name=action_icon,
             icon_size=pixel_size,
         )
