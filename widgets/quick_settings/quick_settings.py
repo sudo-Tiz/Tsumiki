@@ -180,9 +180,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
             all_visible=False,
         )
 
-        self.audio_icon = Image(
-            style_classes="panel-icon",
-        )
+        self.audio_icon = Image(style_classes="panel-icon")
 
         self.network_icon = Image(
             style_classes="panel-icon",
@@ -191,6 +189,8 @@ class QuickSettingsButtonWidget(ButtonWidget):
         self.brightness_icon = Image(
             style_classes="panel-icon",
         )
+
+        self.update_brightness()
 
         popup.set_pointing_to(self)
 
@@ -244,6 +244,9 @@ class QuickSettingsButtonWidget(ButtonWidget):
             )
 
     def on_brightness_changed(self, *_):
+        self.update_brightness()
+
+    def update_brightness(self, *_):
         normalized_brightness = helpers.convert_to_percent(
             self.brightness_service.screen_brightness,
             self.brightness_service.max_screen,

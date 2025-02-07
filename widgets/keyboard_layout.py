@@ -25,7 +25,7 @@ class KeyboardLayoutWidget(ButtonWidget):
         self.icon = text_icon(
             icon=self.config["icon"],
             size=self.config["icon_size"],
-            props={"style_classes": "panel-text-icon"},
+            props={"style_classes": "panel-icon"},
         )
 
         self.kb_label = Label(label="0", style_classes="panel-text", visible=False)

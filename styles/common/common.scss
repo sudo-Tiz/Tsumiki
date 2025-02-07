@@ -73,17 +73,13 @@ label {
 
 .panel-icon {
   margin-left: 2px;
-  font-size: 25px;
   margin-right: 2px;
+  color: theme.$text-main;
 }
 
 .panel-text {
   font-weight: 700;
   margin-left: 10px;
-}
-
-.panel-text-icon {
-  color: theme.$text-main;
 }
 
 .overlay-progress-bar {

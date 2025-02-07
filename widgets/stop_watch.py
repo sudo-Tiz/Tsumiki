@@ -32,7 +32,7 @@ class StopWatchWidget(ButtonWidget):
         self.icon = text_icon(
             icon=self.config["stopped_icon"],
             size=self.config["icon_size"],
-            props={"style_classes": "panel-text-icon"},
+            props={"style_classes": "panel-icon"},
         )
 
         self.time_label = Label(label="00:00", style_classes="panel-text")
