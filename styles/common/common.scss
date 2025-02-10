@@ -341,8 +341,9 @@ scrollbar {
 
 
 #submenu {
-  background-color: theme.$background-dark;
-  border-radius: 20px;
+  margin-top: 5px;
+  background-color: theme.$background-alt;
+  border-radius: 15px;
   border-width: 5px;
   padding: 10px;
 }
@@ -351,10 +352,7 @@ scrollbar {
 .submenu-button {
   margin: 0px 2px 0px 2px;
   padding: 0px 5px 0px 5px;
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 10px;
-  border-color: transparent;
+  border-radius: 100px;
 }
 
 .submenu-button.activated {
@@ -399,7 +397,7 @@ scrollbar {
 
 .toggle-revealer {
   border-radius: 0px 10px 10px 0px;
-  padding: 5px;
+  padding: 8px 5px;
 }
 
 #quicksettings-toggle-action {
@@ -427,7 +425,7 @@ scrollbar {
 #quicksettings-togglebutton.active button:active image,
 #quicksettings-togglebutton.active button:active label,
 #quicksettings-togglebutton.active button:active {
-  background-color: darken(theme.$accent-blue, 20%);
+  background-color: darken(theme.$background, 10%);
 }
 
 #quicksettings-togglebutton button image,

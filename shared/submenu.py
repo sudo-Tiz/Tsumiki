@@ -26,7 +26,7 @@ class QuickSubMenu(Box):
         super().__init__(visible=False, **kwargs)
         self.revealer_child = Box(orientation="v", name="submenu")
 
-        self.submenu_title_box = self.make_submenu_box()
+        self.submenu_title_box = self.make_submenu_title_box()
 
         self.scan_button = scan_button
 
@@ -47,8 +47,10 @@ class QuickSubMenu(Box):
 
         # self.revealer.set_reveal_child(True)
 
-    def make_submenu_box(self) -> Box | None:
-        submenu_box = Box(spacing=4, style="margin-bottom:15px;")
+    def make_submenu_title_box(self) -> Box | None:
+        submenu_container_box = Box(orientation="v", spacing=4)
+        submenu_box = Box(spacing=4, style_classes="submenu-title-box")
+
         if not self.title_icon and not self.title:
             return None
         if self.title_icon:
@@ -62,7 +64,9 @@ class QuickSubMenu(Box):
             False,
             0,
         )
-        return submenu_box
+        submenu_container_box.add(submenu_box)
+
+        return submenu_container_box
 
     def do_reveal(self, visible: bool):
         self.set_visible(True)
@@ -113,10 +117,17 @@ class QuickSubToggle(Box):
             icon_name=action_icon,
             icon_size=pixel_size,
         )
-        self.action_label = Label(name="panel-text", label=action_label)
+        self.action_label = Label(
+            name="panel-text",
+            label=action_label,
+            v_align="center",
+            line_wrap="word-char",
+            ellipsization="end",
+        )
         self.action_button = Button(name="quicksettings-toggle-action")
         self.action_button.add(
             Box(
+                style="margin: 0 5px;",
                 h_align="start",
                 v_align="center",
                 spacing=4,

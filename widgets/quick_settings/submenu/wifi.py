@@ -18,9 +18,10 @@ class WifiSubMenu(QuickSubMenu):
 
         self.available_networks_box = Box(orientation="v", spacing=4, h_expand=True)
 
+        self.scan_image = Image(icon_name="view-refresh-symbolic", icon_size=18)
         self.scan_button = Button(
-            image=Image(icon_name="view-refresh-symbolic", icon_size=18),
-            name="submenu-button",
+            style_classes="submenu-button",
+            image=self.scan_image,
         )
         self.scan_button.connect("clicked", self.start_new_scan)
 
@@ -44,6 +45,14 @@ class WifiSubMenu(QuickSubMenu):
         self.client.wifi_device.scan() if self.client.wifi_device else None
         self.build_wifi_options()
 
+    def rotate_icon(self):
+        # Rotate the button icon by 5 degrees
+        self.scan_image.set_style(
+            "-gtk-icon-transform: rotate(90deg);",
+        )
+
+        return self.client.wifi_device
+
     def on_device_ready(self, client: NetworkClient):
         self.wifi_device = client.wifi_device
         self.build_wifi_options()
@@ -58,16 +67,17 @@ class WifiSubMenu(QuickSubMenu):
                 self.available_networks_box.add(btn)
 
     def make_button_from_ap(self, ap) -> Button:
-        ap_button = Button(name="submenu-button")
+        ap_button = Button(style_classes="submenu-button")
         ap_button.add(
             Box(
+                style="padding: 5px;",
                 children=[
                     Image(
                         icon_name=ap.get("icon-name"),
                         icon_size=18,
                     ),
                     Label(label=ap.get("ssid"), style_classes="submenu-label"),
-                ]
+                ],
             )
         )
         ap_button.connect(

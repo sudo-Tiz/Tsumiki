@@ -13,7 +13,6 @@ class BluetoothDeviceBox(CenterBox):
     """A widget to display a Bluetooth device in a box."""
 
     def __init__(self, device: BluetoothDevice, **kwargs):
-        # TODO: FIX STYLING, make it look better
         super().__init__(
             spacing=2, style_classes="submenu-button", h_expand=True, **kwargs
         )
@@ -31,11 +30,10 @@ class BluetoothDeviceBox(CenterBox):
         self.add_start(
             Image(
                 icon_name=device.icon_name + "-symbolic",
-                icon_size=24,
-                style_classes="submenu-icon",
+                icon_size=18,
             )
         )
-        self.add_start(Label(label=device.name, style_classes="submenu-label1"))  # type: ignore
+        self.add_start(Label(label=device.name, style_classes="submenu-label"))  # type: ignore
         self.add_end(self.connect_button)
 
         self.on_device_connect()
@@ -61,9 +59,11 @@ class BluetoothSubMenu(QuickSubMenu):
 
         self.paired_devices = Box(
             orientation="v",
-            spacing=4,
+            spacing=10,
             h_expand=True,
-            children=Label("Paired Devices", h_align="start"),
+            children=Label(
+                "Paired Devices", h_align="start"
+            ),
         )
 
         for device in self.client.devices:
@@ -74,12 +74,15 @@ class BluetoothSubMenu(QuickSubMenu):
             orientation="v",
             spacing=4,
             h_expand=True,
-            children=Label("Available Devices", h_align="start"),
+            children=Label(
+                "Available Devices", h_align="start", style="margin:10px 0;"
+            ),
         )
 
+        self.scan_image = Image(icon_name="view-refresh-symbolic", icon_size=18)
         self.scan_button = Button(
-            image=Image(icon_name="view-refresh-symbolic", icon_size=18),
-            name="submenu-button",
+            style_classes="submenu-button",
+            image=self.scan_image,
         )
         self.scan_button.connect("clicked", self.on_scan_toggle)
 
@@ -103,10 +106,18 @@ class BluetoothSubMenu(QuickSubMenu):
             scan_button=self.scan_button,
             child=Box(
                 orientation="v",
-                children=[ self.child],
+                children=[self.child],
             ),
             **kwargs,
         )
+
+    def rotate_icon(self):
+        # Rotate the button icon by 5 degrees
+        self.scan_image.set_style(
+            "-gtk-icon-transform: rotate(90deg);",
+        )
+
+        return self.client.scanning
 
     def on_scan_toggle(self, btn: Button):
         self.client.toggle_scan()
