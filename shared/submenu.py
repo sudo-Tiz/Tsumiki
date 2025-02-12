@@ -7,6 +7,8 @@ from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.widget import Widget
 
+from shared.widget_container import HoverButton
+
 
 class QuickSubMenu(Box):
     """A widget to display a submenu for quick settings."""
@@ -48,7 +50,6 @@ class QuickSubMenu(Box):
         # self.revealer.set_reveal_child(True)
 
     def make_submenu_title_box(self) -> Box | None:
-        submenu_container_box = Box(orientation="v", spacing=4)
         submenu_box = Box(spacing=4, style_classes="submenu-title-box")
 
         if not self.title_icon and not self.title:
@@ -56,7 +57,9 @@ class QuickSubMenu(Box):
         if self.title_icon:
             submenu_box.add(Image(icon_name=self.title_icon, icon_size=18))
         if self.title:
-            submenu_box.add(Label(style_classes="submenu-label", label=self.title))
+            submenu_box.add(
+                Label(style_classes="submenu-title-label", label=self.title)
+            )
 
         submenu_box.pack_end(
             self.scan_button,
@@ -64,9 +67,8 @@ class QuickSubMenu(Box):
             False,
             0,
         )
-        submenu_container_box.add(submenu_box)
 
-        return submenu_container_box
+        return submenu_box
 
     def do_reveal(self, visible: bool):
         self.set_visible(True)
@@ -105,8 +107,7 @@ class QuickSubToggle(Box):
 
         self.button_image = Image(icon_name="pan-end-symbolic", icon_size=20)
 
-        self.reveal_button = Button(
-            name="quicksettings-toggle-revealer",
+        self.reveal_button = HoverButton(
             style_classes="toggle-revealer",
             image=self.button_image,
         )
@@ -118,19 +119,17 @@ class QuickSubToggle(Box):
             icon_size=pixel_size,
         )
         self.action_label = Label(
-            name="panel-text",
+            style_classes="panel-text",
             label=action_label,
-            v_align="center",
-            line_wrap="word-char",
             ellipsization="end",
+            max_chars_width=24,
         )
-        self.action_button = Button(name="quicksettings-toggle-action")
+        self.action_button = HoverButton(style_classes="quicksettings-toggle-action")
         self.action_button.add(
             Box(
-                style="margin: 0 5px;",
                 h_align="start",
                 v_align="center",
-                spacing=4,
+                name="quicksettings-toggle-action-box",
                 children=[self.action_icon, self.action_label],
             )
         )
@@ -169,17 +168,10 @@ class QuickSubToggle(Box):
         invoke_repeater(10, do_animate)
 
     def set_active_style(self, action: bool) -> None:
-        self.set_style_classes([""]) if not action else self.set_style_classes(
-            ["active"]
-        )
+        self.set_style_classes([""]) if not action else self.set_style_classes("active")
 
     def set_action_label(self, label: str):
         self.action_label.set_label(label)
 
     def set_action_icon(self, icon_name: str):
-        self.action_icon.set_from_icon_name(icon_name, 1)
-        self.action_icon.set_pixel_size(self.pixel_size)
-
-    def set_pixel_size(self, pixel_size):
-        self.pixel_size = pixel_size
-        self.action_icon.set_pixel_size(self.pixel_size)
+        self.action_icon.set_from_icon_name(icon_name, self.pixel_size)

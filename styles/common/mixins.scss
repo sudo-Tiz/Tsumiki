@@ -77,64 +77,63 @@
 }
 
 @mixin slider(
-  $radius: variable.$radius,
+  $width: 11px,
+  $slider-width: 0.5em,
   $highlight-color: white,
-  $length: 150px,
+  $slider: false,
+  $radius: variable.$radius,
   $slider-color: theme.$background-dark,
-  $height: 8px,
-  $slider: false
+
+  $min-length: false
 ) {
-  slider {
-    min-height: 8px;
-    border-radius: $radius;
-    background-color: transparent;
-    border: none;
-    box-shadow: 0 0 3px 0 theme.$shadow-color;
-  }
-
-  scale {
-    min-width: $length;
-  }
-
   trough {
-    min-height: $height;
+    //transition: $transition;
     border-radius: $radius;
-    border: none;
+    border: variable.$border-width solid variable.$border-color;
     background-color: $slider-color;
+    min-height: $width;
+    min-width: $width;
+
+    highlight,
+    progress {
+      border-radius: max($radius - variable.$border-width, 0);
+      background-color: $highlight-color;
+      min-height: $width;
+      min-width: $width;
+    }
   }
 
-  highlight,
-  progress {
-    background-color: $highlight-color;
-    border-radius: $radius;
-  }
-
-  highlight {
-    margin-right: -12.5px;
-
-    &:disabled {
-      background-color: rgba(theme.$text-muted, 0.7);
+  @if $min-length {
+    scale {
+      min-width: 150px;
     }
   }
 
   @if $slider {
     slider {
-      border-radius: 100%;
-      min-width: $height;
-      min-height: $height;
-      box-shadow: 0px 0px 5px 1px rgb(94, 94, 94);
-      margin-left: 25px;
-      background-color: mix($highlight-color, white, 0.3);
-      transition: min-width 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-      transition: min-height 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+      background-color: theme.$text-main;
+      border-color: variable.$border-color;
+      box-shadow: 0 0 3px 0 theme.$shadow-color;
+      border: variable.$border-width solid transparent;
+      //    transition: $transition;
+      border-radius: $radius;
+      min-height: $width;
+      min-width: $width;
+      margin: -$slider-width;
+    }
+  }
 
-      &:hover {
-        background-color: theme.$accent-purple;
-      }
+  &:hover {
+    trough {
+      background-color: theme.$accent-purple;
+    }
+  }
 
-      &:disabled {
-        background-color: rgba(theme.$text-muted, 1);
-      }
+  &:disabled {
+    highlight,
+    progress {
+      background-color: transparentize(theme.$text-main, 0.4);
+      background-image: none;
     }
   }
 }

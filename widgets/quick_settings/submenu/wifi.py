@@ -4,22 +4,24 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 
+from services import network_service
 from services.network import NetworkClient, Wifi
 from shared.submenu import QuickSubMenu, QuickSubToggle
+from shared.widget_container import HoverButton
 
 
 class WifiSubMenu(QuickSubMenu):
     """A submenu to display the Wifi settings."""
 
-    def __init__(self, client: NetworkClient, **kwargs):
-        self.client = client
+    def __init__(self, **kwargs):
+        self.client = network_service
         self.wifi_device = self.client.wifi_device
         self.client.connect("device-ready", self.on_device_ready)
 
         self.available_networks_box = Box(orientation="v", spacing=4, h_expand=True)
 
         self.scan_image = Image(icon_name="view-refresh-symbolic", icon_size=18)
-        self.scan_button = Button(
+        self.scan_button = HoverButton(
             style_classes="submenu-button",
             image=self.scan_image,
         )
@@ -76,7 +78,7 @@ class WifiSubMenu(QuickSubMenu):
                         icon_name=ap.get("icon-name"),
                         icon_size=18,
                     ),
-                    Label(label=ap.get("ssid"), style_classes="submenu-label"),
+                    Label(label=ap.get("ssid"), style_classes="submenu-item-label"),
                 ],
             )
         )
@@ -89,20 +91,21 @@ class WifiSubMenu(QuickSubMenu):
 class WifiToggle(QuickSubToggle):
     """A widget to display a toggle button for Wifi."""
 
-    def __init__(self, submenu: QuickSubMenu, client: NetworkClient, **kwargs):
+    def __init__(self, submenu: QuickSubMenu, **kwargs):
         super().__init__(
             action_icon="network-wireless-disabled-symbolic",
             action_label=" Wifi Disabled",
             submenu=submenu,
             **kwargs,
         )
-        self.client = client
+        self.client = network_service
         self.client.connect("device-ready", self.update_action_button)
 
         self.connect("action-clicked", self.on_action)
 
     def update_action_button(self, client: NetworkClient):
         wifi = client.wifi_device
+
         if wifi:
             wifi.connect(
                 "notify::enabled",

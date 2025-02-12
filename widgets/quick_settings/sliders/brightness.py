@@ -11,9 +11,6 @@ class BrightnessSlider(SettingScale):
     ):
         self.client = Brightness().get_initial()
         super().__init__(
-            min=0,
-            max=self.client.max_screen if self.client.max_screen != -1 else 0,
-            start_value=self.client.screen_brightness,
             pixel_size=20,
             icon_name=icons["brightness"]["screen"],
         )
@@ -24,10 +21,11 @@ class BrightnessSlider(SettingScale):
 
         if self.scale:
             self.scale.connect("change-value", self.on_scale_move)
-            self.client.connect("notify::screen-brightness", self.on_brightness_change)
+            self.client.connect("screen", self.on_brightness_change)
 
     def on_scale_move(self, _, __, moved_pos):
         self.client.screen_brightness = moved_pos
 
     def on_brightness_change(self, service: Brightness, _):
         self.scale.set_value(service.screen_brightness)
+        self.label.set_label(f"{round(service.screen_brightness)}%")

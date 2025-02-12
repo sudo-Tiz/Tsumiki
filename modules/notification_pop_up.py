@@ -12,12 +12,14 @@ from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow
 from gi.repository import Gdk, GdkPixbuf, GLib
+from loguru import logger
 
 import utils.constants as constants
 import utils.functions as helpers
 import utils.icons as icons
 from services import NotificationCacheService, notification_service
 from shared import CustomImage
+from utils.colors import Colors
 from utils.config import widget_config
 from utils.monitors import HyprlandWithMonitors
 from utils.widget_settings import BarConfig
@@ -162,17 +164,21 @@ class NotificationWidget(EventBox):
         )
 
         # Use provided image if available, otherwise use "notification-symbolic" icon
-        if image_pixbuf := self._notification.image_pixbuf:
-            body_container.add(
-                CustomImage(
-                    pixbuf=image_pixbuf.scale_simple(
-                        constants.NOTIFICATION_IMAGE_SIZE,
-                        constants.NOTIFICATION_IMAGE_SIZE,
-                        GdkPixbuf.InterpType.BILINEAR,
+        try:
+            if image_pixbuf := self._notification.image_pixbuf:
+                body_container.add(
+                    CustomImage(
+                        pixbuf=image_pixbuf.scale_simple(
+                            constants.NOTIFICATION_IMAGE_SIZE,
+                            constants.NOTIFICATION_IMAGE_SIZE,
+                            GdkPixbuf.InterpType.BILINEAR,
+                        ),
+                        style_classes="image",
                     ),
-                    style_classes="image",
-                ),
-            )
+                )
+        except GLib.GError:
+            # If the image is not available, use the symbolic icon
+            logger.warning(f"{Colors.WARNING}[Notification] Image not available.")
 
         body_container.add(
             Label(

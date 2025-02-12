@@ -1,36 +1,59 @@
 @use "theme.scss";
 @use "common/mixins.scss";
-
-#inner-player-box {
-  background-color: theme.$background;
-  border-radius: 15px;
-}
-
-#player-stack-button {
-  border-radius: 5px;
-  min-width: 20px;
-  min-height: 6px;
-  margin: 10px 3px;
-  background-color: theme.$text-main;
-
-  &:hover {
-    background-color: #646464;
-  }
-
-  &.active {
-    border-radius: 5px;
-    background-color: theme.$background;
-  }
-
-  &.empty {
-    min-width: 9px;
-    margin: 14px 2px 14px 2px;
-    background-color: theme.$text-main;
-  }
-}
+@use "variable.scss";
+@use "sass:math";
 
 #player-box {
-  margin: 10px 0;
+  $player_width: variable.$quicksettings-width + 40;
+
+  $player_height: 125px;
+  $image_size: 115px;
+  min-height: $image_size + 4;
+
+  #outer-player-box {
+    min-width: $player_width;
+    min-height: $image_size;
+  }
+
+  #inner-player-box {
+    background-color: theme.$background;
+    border-radius: 15px;
+    margin-left: math.floor($image_size / 2);
+    min-width: math.floor($player_width - $image_size / 2);
+    min-height: $player_height;
+  }
+
+  #player-info-box {
+    margin-left: $image_size + 10;
+    min-width: $player_width - $image_size - 20;
+  }
+
+  #player-stack-button {
+    border-radius: 5px;
+    min-width: 20px;
+    min-height: 6px;
+    margin: 10px 3px;
+    background-color: theme.$text-main;
+
+    &:hover {
+      background-color: #646464;
+    }
+
+    &.active {
+      border-radius: 5px;
+      background-color: theme.$background;
+    }
+
+    &.empty {
+      min-width: 9px;
+      margin: 14px 2px 14px 2px;
+      background-color: theme.$text-main;
+    }
+  }
+
+  #track-info {
+    min-width: $player_width - $image_size - 20;
+  }
 
   #player-image-stack {
     border-radius: 100%;
@@ -52,7 +75,9 @@
   }
 
   .player-controls {
-    margin: 10px 0;
+    margin-top: 5px;
+    margin-bottom: 15px;
+
     .time-label {
       @extend %caption_heading;
       color: #7d7178;
@@ -87,7 +112,7 @@
     margin-top: 10px;
 
     trough {
-      border-radius: 100px;
+      border-radius: variable.$radius-large;
       min-height: 8px;
       background-color: darken(theme.$background, 5%);
 

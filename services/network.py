@@ -302,6 +302,9 @@ class NetworkClient(Service):
     def _get_primary_device(self) -> Literal["wifi", "wired"] | None:
         if not self._client:
             return None
+
+        if self._client.get_primary_connection() is None:
+            return "wifi"
         return (
             "wifi"
             if "wireless"

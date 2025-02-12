@@ -5,7 +5,9 @@
 @use "../theme.scss";
 @use "../variable.scss";
 
-$slider-height: 12px;
+%debug {
+  border: 1px solid red;
+}
 
 label {
   font-size: 1rem;
@@ -327,122 +329,15 @@ scrollbar {
   color: theme.$text-main;
 }
 
-#setting-scale {
-  @include mixins.slider(
-    $height: $slider-height,
-    $highlight-color: theme.$accent-blue,
-    $slider: true
-  );
-}
-
 #volumemenu {
   min-width: 5rem;
 }
 
-
-#submenu {
-  margin-top: 5px;
-  background-color: theme.$background-alt;
-  border-radius: 15px;
-  border-width: 5px;
-  padding: 10px;
-}
-
-
-.submenu-button {
-  margin: 0px 2px 0px 2px;
-  padding: 0px 5px 0px 5px;
-  border-radius: 100px;
-}
-
-.submenu-button.activated {
-  background-color: rgba(255, 255, 255, 0.15);
-  border-style: solid;
-  border-color: transparent;
-  border-bottom-style: solid;
-  border-bottom-color: rgba(255, 255, 255, 0.5);
-}
-
-.submenu-button:hover {
-  @extend %widget_hover;
-}
-
-.submenu-button:active {
-  background-color: theme.$text-main;
-}
-
-.submenu-button:active > * {
-  color: theme.$background-dark;
-}
-
-.submenu-title {
-  border-style: solid;
-  border-bottom-width: 2px;
-  border-color: theme.$background-alt;
-  margin-bottom: 5px;
-}
-
-.submenu-label {
-  margin-left: 5px;
-}
-
-.submenu-title-label {
-  font-size: 17px;
-  margin-left: 10px;
-}
-
-.submenu-item {
-  margin: 5px;
-}
-
-.toggle-revealer {
-  border-radius: 0px 10px 10px 0px;
-  padding: 8px 5px;
-}
-
-#quicksettings-toggle-action {
-  border-radius: 10px 0px 0px 10px;
-  min-width: 150px;
-  min-height: 35px;
-}
-
-#quicksettings-togglebutton.active button image,
-#quicksettings-togglebutton.active button label,
-#quicksettings-togglebutton.active button {
-  font-weight: bold;
-  background-color: theme.$background;
-  color: theme.$text-main;
-  padding-left: 1px;
-  padding-right: 4px;
-}
-
-#quicksettings-togglebutton.active button:hover image,
-#quicksettings-togglebutton.active button:hover label,
-#quicksettings-togglebutton.active button:hover {
-  background-color: darken(theme.$background, 4%);
-}
-
-#quicksettings-togglebutton.active button:active image,
-#quicksettings-togglebutton.active button:active label,
-#quicksettings-togglebutton.active button:active {
-  background-color: darken(theme.$background, 10%);
-}
-
-#quicksettings-togglebutton button image,
-#quicksettings-togglebutton button label,
-#quicksettings-togglebutton button {
-  background-color: theme.$background-dark;
-  color: theme.$text-main;
-}
-
-#quicksettings-togglebutton button:hover image,
-#quicksettings-togglebutton button:hover label,
-#quicksettings-togglebutton button:hover {
-  background-color: theme.$background;
-}
-
-#quicksettings-togglebutton button:active image,
-#quicksettings-togglebutton button:active label,
-#quicksettings-togglebutton button:active {
-  background-color: theme.$background-alt;
+.cover {
+  min-height: 0.8em;
+  min-width: 3em;
+  border-radius: variable.$radius;
+  background-position: center;
+  background-size: contain;
+  margin: 3px 10px 3px 0px;
 }

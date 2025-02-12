@@ -57,3 +57,14 @@ class ButtonWidget(Button):
         setup_cursor_hover(self)
 
         self.add_style_class(widget_style)
+
+
+class HoverButton(Button):
+    """A container for button widgets."""
+
+    def __init__(self, **kwargs):
+        super().__init__(
+            **kwargs,
+        )
+
+        setup_cursor_hover(self)

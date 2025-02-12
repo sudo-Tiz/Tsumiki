@@ -65,7 +65,7 @@ class PowerProfiles(Service):
 
     def get_current_profile(self):
         try:
-            return self.iface.Get("net.hadess.PowerProfiles", "ActiveProfile")
+            return self.iface.Get("net.hadess.PowerProfiles", "ActiveProfile").strip()
 
         except dbus.DBusException as e:
             logger.error(f"[PowerProfile] Error retrieving current power profile: {e}")
@@ -86,3 +86,6 @@ class PowerProfiles(Service):
         if "ActiveProfile" in changed:
             logger.info(f"{Colors.INFO}Profile changed: {changed['ActiveProfile']}")
             self.emit("profile", changed["ActiveProfile"])
+
+    def get_profile_icon(self, profile):
+        return self.power_profiles.get(profile, "balanced").get("icon_name")

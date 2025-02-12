@@ -20,6 +20,7 @@ from loguru import logger
 from services.mpris import MprisPlayer, MprisPlayerManager
 from shared.animator import Animator
 from shared.circle_image import CircleImage
+from shared.widget_container import HoverButton
 from utils.constants import APP_CACHE_DIRECTORY
 from utils.functions import ensure_dir_exists
 
@@ -125,7 +126,7 @@ class PlayerBoxStack(Box):
         self.buttons_box.hide() if len(players) == 2 else self.buttons_box.show()
 
     def make_new_player_button(self, player_box):
-        new_button = Button(name="player-stack-button")
+        new_button = HoverButton(name="player-stack-button")
 
         def on_player_button_click(button: Button):
             self.player_buttons[self.current_stack_pos].remove_style_class("active")
@@ -179,14 +180,17 @@ class PlayerBox(Box):
     """A widget that displays the current player information."""
 
     def __init__(self, player: MprisPlayer, config, **kwargs):
-        super().__init__(h_align="center", name="player-box", **kwargs)
+        super().__init__(
+            h_align="center",
+            name="player-box",
+            **kwargs,
+            h_expand=True,
+        )
         # Setup
         self.player: MprisPlayer = player
         self.cover_path = get_relative_path("../assets/images/no_image.jpg")
 
-        self.player_width = 380
         self.image_size = 115
-        self.player_height = 120
 
         self.config = config
 
@@ -270,12 +274,11 @@ class PlayerBox(Box):
         )
 
         self.track_info = Box(
-            name="player-info",
+            name="track-info",
             spacing=5,
             orientation="v",
             v_align="start",
             h_align="start",
-            style=f"min-width: {self.player_width - self.image_size - 20}px;",
             children=[
                 self.track_title,
                 self.track_artist,
@@ -358,22 +361,22 @@ class PlayerBox(Box):
         self.play_pause_stack.add_named(self.play_icon, "play")
         self.play_pause_stack.add_named(self.pause_icon, "pause")
 
-        self.play_pause_button = Button(
+        self.play_pause_button = HoverButton(
             name="player-button",
             child=self.play_pause_stack,
         )
         self.play_pause_button.connect("clicked", lambda _: self.player.play_pause())
         self.player.bind_property("can-pause", self.play_pause_button, "sensitive")
 
-        self.next_button = Button(name="player-button", child=self.skip_next_icon)
+        self.next_button = HoverButton(name="player-button", child=self.skip_next_icon)
         self.next_button.connect("clicked", self.on_player_next)
         self.player.bind_property("can-go-next", self.next_button, "sensitive")
 
-        self.prev_button = Button(name="player-button", child=self.skip_prev_icon)
+        self.prev_button = HoverButton(name="player-button", child=self.skip_prev_icon)
         self.prev_button.connect("clicked", self.on_player_prev)
         self.player.bind_property("can-go-previous", self.prev_button, "sensitive")
 
-        self.shuffle_button = Button(name="player-button", child=self.shuffle_icon)
+        self.shuffle_button = HoverButton(name="player-button", child=self.shuffle_icon)
         self.shuffle_button.connect("clicked", lambda _: player.toggle_shuffle())
         self.player.bind_property("can-shuffle", self.shuffle_button, "sensitive")
 
@@ -411,8 +414,7 @@ class PlayerBox(Box):
         self.player.bind_property("can-seek", self.seek_bar, "sensitive")
 
         self.player_info_box = Box(
-            style=f"margin-left: {self.image_size + 10}px;"
-            + f"min-width: {self.player_width - self.image_size - 20}px;",
+            name="player-info-box",
             v_align="center",
             h_align="start",
             orientation="v",
@@ -421,16 +423,13 @@ class PlayerBox(Box):
 
         self.inner_box = Box(
             name="inner-player-box",
-            style=f"margin-left: {self.image_size // 2}px;"
-            + f"min-width:{self.player_width - self.image_size // 2}px;"
-            + f"min-height:{self.player_height}px;",
             v_align="center",
             h_align="start",
         )
         # resize the inner box
         self.outer_box = Box(
+            name="outer-player-box",
             h_align="start",
-            style=f"min-width:{self.player_width}px; min-height:{self.image_size}px;",
         )
         self.overlay_box = Overlay(
             child=self.outer_box,
@@ -448,7 +447,6 @@ class PlayerBox(Box):
             ],
         )
         self.children = [*self.children, self.overlay_box]
-        self.set_style(f"min-height:{self.image_size + 4}px")
 
     def on_scale_move(self, scale: Scale, event, moved_pos: int):
         scale.set_value(moved_pos)

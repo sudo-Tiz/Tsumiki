@@ -5,9 +5,10 @@ from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
+from gi.repository import Gtk
 
 import utils.functions as helpers
-from services import audio_service, bluetooth_service, network_service
+from services import audio_service, network_service
 from services.brightness import Brightness
 from services.mpris import MprisPlayerManager
 from shared.circle_image import CircleImage
@@ -23,7 +24,9 @@ from utils.widget_utils import (
 from widgets.media import PlayerBoxStack
 from widgets.quick_settings.sliders.mic import MicrophoneSlider
 from widgets.quick_settings.submenu.bluetooth import BluetoothSubMenu, BluetoothToggle
+from widgets.quick_settings.submenu.power import PowerProfileSubMenu, PowerProfileToggle
 from widgets.quick_settings.submenu.wifi import WifiSubMenu, WifiToggle
+from widgets.quick_settings.togglers import HyprIdleQuickSetting, HyprSunsetQuickSetting
 
 from .sliders.audio import AudioSlider
 from .sliders.brightness import BrightnessSlider
@@ -41,32 +44,74 @@ class QuickSettingsButtonBox(Box):
             v_expand=True,
             **kwargs,
         )
-        self.buttons = Box(
-            orientation="h", spacing=10, h_align="center", v_align="center"
+        self.grid = Gtk.Grid(
+            visible=True,
+            row_spacing=10,
+            column_spacing=10,
         )
+
         self.active_submenu = None
 
         # Bluetooth
         self.bluetooth_toggle = BluetoothToggle(
-            submenu=BluetoothSubMenu(bluetooth_service),
-            client=bluetooth_service,
+            submenu=BluetoothSubMenu(),
         )
 
         # Wifi
         self.wifi_toggle = WifiToggle(
-            submenu=WifiSubMenu(network_service),
-            client=network_service,
+            submenu=WifiSubMenu(),
         )
 
-        self.buttons.add(self.wifi_toggle)
-        self.buttons.add(self.bluetooth_toggle)
+        self.power_pfl = PowerProfileToggle(submenu=PowerProfileSubMenu())
+
+        self.grid.attach(
+            self.wifi_toggle,
+            0,
+            0,
+            2,
+            2,
+        )
+
+        self.grid.attach(
+            self.bluetooth_toggle,
+            2,
+            0,
+            2,
+            2,
+        )
+
+        self.grid.attach(
+            self.power_pfl,
+            0,
+            2,
+            2,
+            2,
+        )
+
+        self.grid.attach(
+            HyprIdleQuickSetting(),
+            2,
+            2,
+            2,
+            2,
+        )
+
+        self.grid.attach(
+            HyprSunsetQuickSetting(),
+            0,
+            4,
+            2,
+            2,
+        )
 
         self.wifi_toggle.connect("reveal-clicked", self.set_active_submenu)
         self.bluetooth_toggle.connect("reveal-clicked", self.set_active_submenu)
+        self.power_pfl.connect("reveal-clicked", self.set_active_submenu)
 
-        self.add(self.buttons)
+        self.add(self.grid)
         self.add(self.wifi_toggle.submenu)
         self.add(self.bluetooth_toggle.submenu)
+        self.add(self.power_pfl.submenu)
 
     def set_active_submenu(self, btn: QuickSubToggle):
         if btn.submenu != self.active_submenu and self.active_submenu is not None:
@@ -92,7 +137,9 @@ class QuickSettingsMenu(Box):
             else os.path.expandvars("$HOME/.face")
         )
 
-        user_label = Label(label="User", v_align="center", h_align="start")
+        user_label = Label(
+            label="User", v_align="center", h_align="start", style_classes="user"
+        )
 
         uptime_label = Label(
             label=helpers.uptime(),
@@ -101,44 +148,67 @@ class QuickSettingsMenu(Box):
             h_align="start",
         )
 
-        info_box = Box(
-            orientation="v",
-            children=(user_label, uptime_label),
-            spacing=8,
-            style_classes="info-box",
+        self.user_box = Gtk.Grid(
+            row_spacing=5,
+            column_spacing=10,
+            name="user-box-grid",
+            visible=True,
+        )
+
+        self.user_box.attach(
+            CircleImage(
+                image_file=user_image,
+                size=70,
+            ),
+            0,
+            0,
+            2,
+            2,
+        )
+
+        self.user_box.attach(
+            user_label,
+            2,
+            0,
+            1,
+            1,
+        )
+
+        self.user_box.attach(
+            uptime_label,
+            2,
+            1,
+            1,
+            1,
         )
 
         box = CenterBox(
             orientation="v",
+            style_classes="quick-settings-box",
             start_children=Box(
                 orientation="v",
                 spacing=10,
                 v_align="center",
                 style_classes="section-box",
-                children=(
-                    Box(
-                        style_classes="user-box",
-                        orientation="h",
-                        spacing=8,
-                        children=(
-                            CircleImage(
-                                image_file=user_image,
-                                size=70,
-                            ),
-                            info_box,
-                        ),
-                    ),
-                    QuickSettingsButtonBox(),
-                ),
+                children=(self.user_box, QuickSettingsButtonBox()),
             ),
             center_children=Box(
                 orientation="v",
                 spacing=10,
-                style_classes="slider-box",
+                style_classes="section-box slider-box",
                 children=(BrightnessSlider(), AudioSlider(), MicrophoneSlider()),
             ),
             end_children=(
-                PlayerBoxStack(MprisPlayerManager(), config=self.config["media"]),
+                Box(
+                    orientation="v",
+                    spacing=10,
+                    style_classes="section-box",
+                    children=(
+                        PlayerBoxStack(
+                            MprisPlayerManager(), config=self.config["media"]
+                        ),
+                    ),
+                ),
             ),
         )
 
@@ -215,7 +285,6 @@ class QuickSettingsButtonWidget(ButtonWidget):
                         wifi.get_icon_name(),
                         self.panel_icon_size,
                     )
-                    # wifi.bind_property("icon-name", self.network_icon, "icon-name")
 
             else:
                 ethernet = self.network.ethernet_device

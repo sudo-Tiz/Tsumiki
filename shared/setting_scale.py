@@ -24,19 +24,23 @@ class SettingScale(Box):
             **kwargs,
         )
         self.pixel_size = pixel_size
-        self.icon = Image(icon_name=icon_name, icon_size=self.pixel_size)
-        self.icon_button = Button(image=self.icon, name="panel-button")
+        self.icon = Image(
+            icon_name=icon_name, icon_size=self.pixel_size, style_classes="panel-icon"
+        )
+        self.icon_button = Button(image=self.icon, style_classes="panel-button")
 
         self.scale = Scale(
+            marks=None,
             min_value=min,
             max_value=max,
             name="dashboard-slider",
             value=start_value,
             h_expand=True,
+            increments=(1, 1),
         )
 
         self.label = Label(
-            label=f"{start_value}%", name="dashboard-label", visible=label
+            label=f"{start_value}%", name="setting-scale-label", visible=label
         )
 
         self.scale.connect(

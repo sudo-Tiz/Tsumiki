@@ -1,65 +1,186 @@
 @use "theme.scss";
 @use "common/mixins.scss";
 @use "variable.scss";
+@use "sass:color";
 
-
-.submenu-title-box {
-  margin-bottom: 10px;
-  padding: 5px;
-}
-
-
-#quicksettings-box {
-  background-color: red;
-  border-radius: 20px;
-}
-
-#quicksettings-box>box>button {
-  margin: 10px -10px 10px 5px;
-}
-
+$slider-height: 12px;
 
 #quicksettings-menu {
-  min-width: 410px;
+  min-width: variable.$quicksettings-width;
 
-  .section-box {
+  .power-profile {
+    .active {
+      color: color.adjust($color: theme.$accent-purple, $lightness: -12%);
+    }
 
-    margin: 1rem;
-  }
-
-  .user-box {
-
-    .info-box {
-      padding: 8px 0;
-
-      label {
-        @extend %heading;
-        margin-left: 1rem;
-      }
-
-      .uptime {
-        font-size: 0.92rem;
-        border: variable.$border-width solid lighten($color: theme.$surface-disabled, $amount: 10%);
-        padding: 3px 9px;
-        border-radius: 1rem;
+    .power-profile-button {
+      &:hover {
+        color: theme.$accent-purple;
       }
     }
   }
 
-  .slider-box {
-    margin: 0 12px 14px;
-    padding: 20px 10px 20px 10px;
-    border-radius: 10px;
-    background-color: theme.$background;
-  }
+  .quick-settings-box {
+    .user {
+      font-weight: 600;
+    }
 
-  #dashboard-slider {
-    margin-left: 10px;
-    margin-right: 20px;
-  }
+    .uptime {
+      font-size: 0.92rem;
+      border: variable.$border-width solid
+        lighten($color: theme.$surface-disabled, $amount: 10%);
+      padding: 3px 9px;
+      font-weight: 600;
+      border-radius: 1rem;
+    }
 
-  #dashboard-label {
-    font-weight: 700;
-    font-size: 12.5px;
+    .section-box {
+      margin: 1rem;
+    }
+
+    #setting-scale {
+      #setting-scale-label {
+        font-weight: 700;
+        font-size: 12.5px;
+      }
+
+      .panel-button {
+        background-color: transparent;
+        padding: 0 10px;
+      }
+
+      @include mixins.slider(
+        $highlight-color: theme.$accent-blue,
+        $slider: true
+      );
+    }
+
+    .toggle-revealer {
+      border-radius: 0px variable.$radius variable.$radius 0px;
+      padding: 8px 5px;
+    }
+
+    .quicksettings-toggle-action {
+      border-radius: variable.$radius 0px 0px variable.$radius;
+
+      min-height: 35px;
+
+      #quicksettings-toggle-action-box {
+        margin: 0 5px;
+
+        .panel-text {
+          min-width: 120px; // this causes the text to center
+          @extend %caption_heading;
+        }
+      }
+    }
+
+    .slider-box {
+      padding: 20px 15px;
+      border-radius: variable.$radius;
+      background-color: theme.$background;
+    }
+
+    #dashboard-slider {
+      margin-left: 10px;
+      margin-right: 20px;
+    }
+
+    #submenu {
+      margin-top: 5px;
+      background-color: theme.$background-alt;
+      border-radius: variable.$radius;
+      border-width: 5px;
+      padding: 10px;
+
+      .submenu-title-box {
+        margin-bottom: 10px;
+        padding: 5px;
+
+        .submenu-title-label {
+          margin-left: 10px;
+          @extend %caption_heading;
+        }
+      }
+
+      .submenu-item-label {
+        font-size: 13px;
+        margin-left: 5px;
+      }
+
+      .submenu-button {
+        margin: 0px 2px 0px 2px;
+        padding: 0px 5px 0px 5px;
+        border-radius: variable.$radius;
+
+        &.activated {
+          background-color: rgba(255, 255, 255, 0.15);
+          border-style: solid;
+          border-color: transparent;
+          border-bottom-style: solid;
+          border-bottom-color: rgba(255, 255, 255, 0.5);
+        }
+
+        &:hover {
+          @extend %widget_hover;
+        }
+
+        &:active {
+          background-color: theme.$text-main;
+
+          & > * {
+            color: theme.$background-dark;
+          }
+        }
+      }
+    }
+
+    // this is for buttons like hypridle
+    #quicksettings-toggler-button {
+      background-color: theme.$background;
+      border-radius: variable.$radius;
+      font-size: 16px;
+      font-weight: 700;
+      padding-left: 10px;
+    }
+
+    #quicksettings-togglebutton.active button image,
+    #quicksettings-togglebutton.active button label,
+    #quicksettings-togglebutton.active button {
+      background-color: theme.$background;
+      padding-left: 1px;
+      padding-right: 4px;
+    }
+
+    #quicksettings-togglebutton.active button:hover image,
+    #quicksettings-togglebutton.active button:hover label,
+    #quicksettings-togglebutton.active button:hover {
+      background-color: darken(theme.$background, 4%);
+    }
+
+    #quicksettings-togglebutton.active button:active image,
+    #quicksettings-togglebutton.active button:active label,
+    #quicksettings-togglebutton.active button:active {
+      background-color: darken(theme.$background, 10%);
+    }
+
+    #quicksettings-togglebutton button image,
+    #quicksettings-togglebutton button label,
+    #quicksettings-togglebutton button {
+      background-color: theme.$background-dark;
+      color: theme.$text-main;
+    }
+
+    #quicksettings-togglebutton button:hover image,
+    #quicksettings-togglebutton button:hover label,
+    #quicksettings-togglebutton button:hover {
+      background-color: theme.$background;
+    }
+
+    #quicksettings-togglebutton button:active image,
+    #quicksettings-togglebutton button:active label,
+    #quicksettings-togglebutton button:active {
+      background-color: theme.$background-alt;
+    }
   }
 }

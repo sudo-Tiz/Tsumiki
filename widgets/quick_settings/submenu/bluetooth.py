@@ -6,7 +6,9 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 
+from services import bluetooth_service
 from shared.submenu import QuickSubMenu, QuickSubToggle
+from shared.widget_container import HoverButton
 
 
 class BluetoothDeviceBox(CenterBox):
@@ -33,7 +35,7 @@ class BluetoothDeviceBox(CenterBox):
                 icon_size=18,
             )
         )
-        self.add_start(Label(label=device.name, style_classes="submenu-label"))  # type: ignore
+        self.add_start(Label(label=device.name, style_classes="submenu-item-label"))  # type: ignore
         self.add_end(self.connect_button)
 
         self.on_device_connect()
@@ -53,8 +55,8 @@ class BluetoothDeviceBox(CenterBox):
 class BluetoothSubMenu(QuickSubMenu):
     """A submenu to display the Bluetooth settings."""
 
-    def __init__(self, client: BluetoothClient, **kwargs):
-        self.client = client
+    def __init__(self, **kwargs):
+        self.client = bluetooth_service
         self.client.connect("device-added", self.populate_new_device)
 
         self.paired_devices = Box(
@@ -62,7 +64,9 @@ class BluetoothSubMenu(QuickSubMenu):
             spacing=10,
             h_expand=True,
             children=Label(
-                "Paired Devices", h_align="start"
+                "Paired Devices",
+                h_align="start",
+                style_classes="panel-text",
             ),
         )
 
@@ -75,12 +79,15 @@ class BluetoothSubMenu(QuickSubMenu):
             spacing=4,
             h_expand=True,
             children=Label(
-                "Available Devices", h_align="start", style="margin:10px 0;"
+                "Available Devices",
+                h_align="start",
+                style="margin:10px 0;",
+                style_classes="panel-text",
             ),
         )
 
         self.scan_image = Image(icon_name="view-refresh-symbolic", icon_size=18)
-        self.scan_button = Button(
+        self.scan_button = HoverButton(
             style_classes="submenu-button",
             image=self.scan_image,
         )
@@ -136,22 +143,22 @@ class BluetoothSubMenu(QuickSubMenu):
 class BluetoothToggle(QuickSubToggle):
     """A widget to display the Bluetooth status."""
 
-    def __init__(self, submenu: QuickSubMenu, client: BluetoothClient, **kwargs):
+    def __init__(self, submenu: QuickSubMenu, **kwargs):
         super().__init__(
-            action_label="Not Connected",
+            action_label="Enabled",
             action_icon="bluetooth-active-symbolic",
             submenu=submenu,
             **kwargs,
         )
         # Client Signals
-        self.client = client
+        self.client = bluetooth_service
         self.client.connect("notify::enabled", self.toggle_bluetooth)
         self.client.connect("device-added", self.new_device)
 
-        self.toggle_bluetooth(client)
+        self.toggle_bluetooth(self.client)
 
         for device in self.client.devices:
-            self.new_device(client, device.address)
+            self.new_device(self.client, device.address)
         self.device_connected(
             self.client.connected_devices[0]
         ) if self.client.connected_devices else None
@@ -163,7 +170,7 @@ class BluetoothToggle(QuickSubToggle):
         if client.enabled:
             self.set_active_style(True)
             self.action_icon.set_from_icon_name("bluetooth-active-symbolic", 18)
-            self.action_label.set_label("Not Connected")
+            self.action_label.set_label("Enabled")
         else:
             self.set_active_style(False)
             self.action_icon.set_from_icon_name("bluetooth-disabled-symbolic", 18)
@@ -180,5 +187,5 @@ class BluetoothToggle(QuickSubToggle):
             self.action_label.set_label(
                 self.client.connected_devices[0].name
                 if self.client.connected_devices
-                else "Not Connected"
+                else "Enabled"
             )
