@@ -117,6 +117,7 @@ class PlayerBoxStack(Box):
             self.hide()
             self.current_stack_pos = 0
             return
+
         if players[self.current_stack_pos].player.player_name == player_name:
             self.current_stack_pos = max(0, self.current_stack_pos - 1)
             self.player_stack.set_visible_child(
@@ -289,18 +290,20 @@ class PlayerBox(Box):
         self.player.connect("notify::playback-status", self.on_playback_change)
         self.player.connect("notify::shuffle", self.shuffle_update)
 
-        def position_poll(fabricator):
+        def position_poll(_):
             while True:
-                yield self.player.get_property("position")
-                sleep(1)
+                try:
+                    yield self.player.position
+                    sleep(1)
+                except Exception:  # noqa: PERF203
+                    self.player_fabricator.stop()
 
         # Create a fabricator to poll the system stats
-        player_fabricator = Fabricator(poll_from=position_poll, stream=True)
+        self.player_fabricator = Fabricator(poll_from=position_poll, stream=True)
 
-        player_fabricator.connect("changed", lambda *_: self.move_seekbar())
+        self.player_fabricator.connect("changed", lambda *_: self.move_seekbar())
 
         # Buttons
-
         self.button_box = Box(
             name="button-box",
             h_align="center",
@@ -401,7 +404,7 @@ class PlayerBox(Box):
         self.player.connect(
             "notify::length",
             lambda _, x: (
-                self.seek_bar.set_value(self.player.get_property("position")),
+                self.seek_bar.set_value(self.player.position),
                 self.seek_bar.set_range(0, self.player.length),
                 self.length_label.set_label(
                     self.length_str(self.player.length),
@@ -542,5 +545,4 @@ class PlayerBox(Box):
         self.position_label.set_label(self.length_str(self.player.position))
         if self.exit or not self.player.can_seek:
             return False
-        self.seek_bar.set_value(self.player.get_property("position"))
-        return True
+        self.seek_bar.set_value(self.player.position)

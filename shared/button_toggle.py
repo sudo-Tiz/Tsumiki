@@ -42,6 +42,7 @@ class CommandSwitcher(ButtonWidget):
         self.disabled_icon = disabled_icon
         self.label = label
         self.tooltip = tooltip
+        self.is_active = False
 
         self.icon = text_icon(
             icon=enabled_icon,
@@ -69,29 +70,31 @@ class CommandSwitcher(ButtonWidget):
             exec_shell_command_async(
                 f"pkill {self.command_without_args}", lambda *_: None
             )
+            self.is_active = False
         else:
             exec_shell_command_async(f"bash -c '{self.command}&'", lambda *_: None)
-        return self.update()
+            self.is_active = True
+        self.update()
+        return True
 
     def update(self, *_):
+        is_app_running = helpers.is_app_running(self.command_without_args)
+
+        if is_app_running:
+            self.add_style_class("active")
+        else:
+            self.remove_style_class("active")
+
         if self.label:
             self.label_text.set_visible(True)
-            self.label_text.set_label(
-                "Enabled"
-                if helpers.is_app_running(self.command_without_args)
-                else "Disabled"
-            )
+            self.label_text.set_label("Enabled" if is_app_running else "Disabled")
 
-        self.icon.set_label(
-            self.enabled_icon
-            if helpers.is_app_running(self.command_without_args)
-            else self.disabled_icon
-        )
+        self.icon.set_label(self.enabled_icon if is_app_running else self.disabled_icon)
 
         if self.tooltip:
             self.set_tooltip_text(
                 f"{self.command_without_args} enabled"
-                if helpers.is_app_running(self.command_without_args)
+                if is_app_running
                 else f"{self.command_without_args} disabled",
             )
         return True

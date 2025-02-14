@@ -38,38 +38,17 @@ $slider-height: 12px;
       margin: 1rem;
     }
 
-    #setting-scale {
-      #setting-scale-label {
-        font-weight: 700;
-        font-size: 12.5px;
-      }
-
-      .panel-button {
-        background-color: transparent;
-        padding: 0 10px;
-      }
-
-      @include mixins.slider(
-        $highlight-color: theme.$accent-blue,
-        $slider: true
-      );
-    }
-
-    .toggle-revealer {
-      border-radius: 0px variable.$radius variable.$radius 0px;
-      padding: 8px 5px;
-    }
-
     .quicksettings-toggle-action {
       border-radius: variable.$radius 0px 0px variable.$radius;
 
       min-height: 35px;
 
-      #quicksettings-toggle-action-box {
+      &-box {
         margin: 0 5px;
 
         .panel-text {
           min-width: 120px; // this causes the text to center
+
           @extend %caption_heading;
         }
       }
@@ -79,11 +58,28 @@ $slider-height: 12px;
       padding: 20px 15px;
       border-radius: variable.$radius;
       background-color: theme.$background;
-    }
 
-    #dashboard-slider {
-      margin-left: 10px;
-      margin-right: 20px;
+      #setting-slider {
+        &-scale {
+          margin-left: 10px;
+          margin-right: 20px;
+        }
+
+        &-label {
+          font-weight: 700;
+          font-size: 12.5px;
+        }
+
+        &-button {
+          background-color: transparent;
+          padding: 0 2px;
+        }
+
+        @include mixins.slider(
+          $highlight-color: theme.$accent-blue,
+          $slider: true
+        );
+      }
     }
 
     #submenu {
@@ -139,15 +135,34 @@ $slider-height: 12px;
     #quicksettings-toggler-button {
       background-color: theme.$background;
       border-radius: variable.$radius;
-      font-size: 16px;
-      font-weight: 700;
+      @extend %caption_heading;
       padding-left: 10px;
+
+      &.active {
+        background-color: theme.$accent-blue;
+
+        &:hover {
+          background-color: darken(theme.$accent-blue, 4%);
+        }
+
+        label {
+          color: lighten($color: #000000, $amount: 8%);
+        }
+      }
+    }
+
+    #quicksettings-togglebutton {
+      .toggle-revealer {
+        border-radius: 0px variable.$radius variable.$radius 0px;
+        padding: 8px 5px;
+      }
     }
 
     #quicksettings-togglebutton.active button image,
     #quicksettings-togglebutton.active button label,
     #quicksettings-togglebutton.active button {
-      background-color: theme.$background;
+      background-color: theme.$accent-blue;
+      color: lighten($color: #000000, $amount: 8%);
       padding-left: 1px;
       padding-right: 4px;
     }
@@ -155,7 +170,7 @@ $slider-height: 12px;
     #quicksettings-togglebutton.active button:hover image,
     #quicksettings-togglebutton.active button:hover label,
     #quicksettings-togglebutton.active button:hover {
-      background-color: darken(theme.$background, 4%);
+      background-color: darken(theme.$accent-blue, 4%);
     }
 
     #quicksettings-togglebutton.active button:active image,
@@ -167,7 +182,7 @@ $slider-height: 12px;
     #quicksettings-togglebutton button image,
     #quicksettings-togglebutton button label,
     #quicksettings-togglebutton button {
-      background-color: theme.$background-dark;
+      background-color: theme.$background;
       color: theme.$text-main;
     }
 

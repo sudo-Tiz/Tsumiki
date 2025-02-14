@@ -123,13 +123,14 @@ class QuickSubToggle(Box):
             label=action_label,
             ellipsization="end",
             max_chars_width=24,
+            h_align="start",
         )
         self.action_button = HoverButton(style_classes="quicksettings-toggle-action")
         self.action_button.add(
             Box(
                 h_align="start",
                 v_align="center",
-                name="quicksettings-toggle-action-box",
+                style_classes="quicksettings-toggle-action-box",
                 children=[self.action_icon, self.action_label],
             )
         )
@@ -168,7 +169,7 @@ class QuickSubToggle(Box):
         invoke_repeater(10, do_animate)
 
     def set_active_style(self, action: bool) -> None:
-        self.set_style_classes([""]) if not action else self.set_style_classes("active")
+        self.set_style_classes("") if not action else self.set_style_classes("active")
 
     def set_action_label(self, label: str):
         self.action_label.set_label(label)

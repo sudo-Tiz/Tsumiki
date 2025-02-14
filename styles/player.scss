@@ -3,6 +3,30 @@
 @use "variable.scss";
 @use "sass:math";
 
+
+#player-stack-button {
+  border-radius: 5px;
+  min-width: 20px;
+  min-height: 6px;
+  margin: 10px 3px;
+  background-color: theme.$text-main;
+
+  &:hover {
+    background-color: #646464;
+  }
+
+  &.active {
+    border-radius: 5px;
+    background-color: theme.$background;
+  }
+
+  &.empty {
+    min-width: 9px;
+    margin: 14px 2px 14px 2px;
+    background-color: theme.$text-main;
+  }
+}
+
 #player-box {
   $player_width: variable.$quicksettings-width + 40;
 
@@ -28,28 +52,8 @@
     min-width: $player_width - $image_size - 20;
   }
 
-  #player-stack-button {
-    border-radius: 5px;
-    min-width: 20px;
-    min-height: 6px;
-    margin: 10px 3px;
-    background-color: theme.$text-main;
 
-    &:hover {
-      background-color: #646464;
-    }
 
-    &.active {
-      border-radius: 5px;
-      background-color: theme.$background;
-    }
-
-    &.empty {
-      min-width: 9px;
-      margin: 14px 2px 14px 2px;
-      background-color: theme.$text-main;
-    }
-  }
 
   #track-info {
     min-width: $player_width - $image_size - 20;

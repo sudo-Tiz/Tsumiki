@@ -1,9 +1,9 @@
 from services.brightness import Brightness
-from shared.setting_scale import SettingScale
+from shared.setting_scale import SettingSlider
 from utils.icons import icons
 
 
-class BrightnessSlider(SettingScale):
+class BrightnessSlider(SettingSlider):
     """A widget to display a scale for brightness settings."""
 
     def __init__(

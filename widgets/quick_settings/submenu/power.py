@@ -18,7 +18,7 @@ class PowerProfileItem(Button):
         **kwargs,
     ):
         super().__init__(
-            style_classes="submenu-button",
+            style_classes="submenu-button power-profile",
             **kwargs,
         )
         self.profile = profile
@@ -27,11 +27,12 @@ class PowerProfileItem(Button):
 
         self.children = (
             Box(
-                style="padding: 5px;",
+                orientation="h",
+                spacing=10,
                 children=(
                     Image(
                         icon_name=profile["icon_name"],
-                        icon_size=15,
+                        icon_size=18,
                     ),
                     Label(
                         label=profile["name"],
@@ -45,10 +46,10 @@ class PowerProfileItem(Button):
             "button-press-event",
             lambda *_: self.power_profile_service.set_power_profile(key),
         )
+        self.set_active(key, active)
 
-        self.add_style_class(
-            f"power-profile-button {'active' if key == active else ''}"
-        )
+    def set_active(self, key, active):
+        self.children.pop().add_style_class(f"{'active' if key == active else ''}")
 
 
 class PowerProfileSubMenu(QuickSubMenu):
@@ -58,7 +59,6 @@ class PowerProfileSubMenu(QuickSubMenu):
         self.client = PowerProfiles().get_initial()
 
         self.profiles = self.client.power_profiles
-        self.child = Box(orientation="v", spacing=4, h_expand=True)
         self.active = self.client.get_current_profile()
 
         self.child = [
@@ -71,10 +71,10 @@ class PowerProfileSubMenu(QuickSubMenu):
         )
 
         super().__init__(
-            title="Power profile",
-            title_icon="network-wireless-symbolic",
+            title="Power profiles",
+            title_icon="power-profile-power-saver-symbolic",
             scan_button=self.scan_button,
-            child=Box(orientation="v", children=self.child),
+            child=Box(orientation="v", children=self.child, spacing=8),
             **kwargs,
         )
 

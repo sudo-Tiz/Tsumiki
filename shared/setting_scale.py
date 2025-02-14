@@ -1,11 +1,12 @@
 from fabric.widgets.box import Box
-from fabric.widgets.button import Button
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scale import Scale
 
+from shared.widget_container import HoverButton
 
-class SettingScale(Box):
+
+class SettingSlider(Box):
     """A widget to display a scale for quick settings."""
 
     def __init__(
@@ -19,7 +20,7 @@ class SettingScale(Box):
         **kwargs,
     ):
         super().__init__(
-            name="setting-scale",
+            name="setting-slider",
             children=Box(spacing=5, h_expand=True),
             **kwargs,
         )
@@ -27,20 +28,20 @@ class SettingScale(Box):
         self.icon = Image(
             icon_name=icon_name, icon_size=self.pixel_size, style_classes="panel-icon"
         )
-        self.icon_button = Button(image=self.icon, style_classes="panel-button")
+        self.icon_button = HoverButton(image=self.icon, name="setting-slider-button")
 
         self.scale = Scale(
             marks=None,
             min_value=min,
             max_value=max,
-            name="dashboard-slider",
+            name="setting-slider-scale",
             value=start_value,
             h_expand=True,
             increments=(1, 1),
         )
 
         self.label = Label(
-            label=f"{start_value}%", name="setting-scale-label", visible=label
+            label=f"{start_value}%", name="setting-slider-label", visible=label
         )
 
         self.scale.connect(
