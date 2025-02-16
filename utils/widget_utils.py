@@ -37,7 +37,7 @@ def psutil_poll(fabricator):
 
 # Function to setup cursor hover
 def setup_cursor_hover(
-    button, cursor_name: Literal["pointer", "crosshair", "grab"] = "pointer"
+    widget, cursor_name: Literal["pointer", "crosshair", "grab"] = "pointer"
 ):
     display = Gdk.Display.get_default()
 
@@ -49,8 +49,8 @@ def setup_cursor_hover(
         cursor = Gdk.Cursor.new_from_name(display, "default")
         widget.get_window().set_cursor(cursor)
 
-    button.connect("enter-notify-event", on_enter_notify_event)
-    button.connect("leave-notify-event", on_leave_notify_event)
+    widget.connect("enter-notify-event", on_enter_notify_event)
+    widget.connect("leave-notify-event", on_leave_notify_event)
 
 
 # Function to get the system stats using

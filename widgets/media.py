@@ -23,6 +23,7 @@ from shared.circle_image import CircleImage
 from shared.widget_container import HoverButton
 from utils.constants import APP_CACHE_DIRECTORY
 from utils.functions import ensure_dir_exists
+from utils.widget_utils import setup_cursor_hover
 
 ensure_dir_exists(f"{APP_CACHE_DIRECTORY}/media")
 
@@ -399,6 +400,9 @@ class PlayerBox(Box):
             draw_value=False,
             name="seek-bar",
         )
+
+        setup_cursor_hover(self.seek_bar)
+
         self.seek_bar.connect("change-value", self.on_scale_move)
         # self.seek_bar.connect("button-release-event", self.on_button_scale_release)
         self.player.connect(
