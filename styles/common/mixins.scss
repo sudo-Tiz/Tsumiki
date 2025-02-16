@@ -96,7 +96,7 @@
     highlight,
     progress {
       border-radius: max($radius - variable.$border-width, 0);
-      background-color: theme.$accent-blue;
+      background-color: $highlight-color;
       min-height: $width;
       min-width: $width;
     }
