@@ -102,6 +102,12 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
             ctx.paint()
         return False
 
+    def do_realize(self):
+        Gtk.DrawingArea.do_realize(self)
+        if window := self.get_window():
+            window.set_pass_through(True)
+        return
+
     def on_update(self):
         self.is_playing = True
         self.lottie_animation.lottie_animation_render_async(
