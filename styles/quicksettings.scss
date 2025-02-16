@@ -7,6 +7,9 @@ $slider-height: 12px;
 
 #quicksettings-menu {
   min-width: variable.$quicksettings-width;
+  @include mixins.floating-widget;
+  @include mixins.spacing;
+  padding: 4pt 1pt;
 
   .power-profile {
     .active {
@@ -27,8 +30,7 @@ $slider-height: 12px;
 
     .uptime {
       font-size: 0.92rem;
-      border: variable.$border-width solid
-        lighten($color: theme.$surface-disabled, $amount: 10%);
+      border: variable.$border-width solid lighten($color: theme.$surface-disabled, $amount: 10%);
       padding: 3px 9px;
       font-weight: 600;
       border-radius: 1rem;
@@ -75,10 +77,8 @@ $slider-height: 12px;
           padding: 0 2px;
         }
 
-        @include mixins.slider(
-          $highlight-color: theme.$accent-blue,
-          $slider: true
-        );
+        @include mixins.slider($highlight-color: theme.$accent-blue,
+          $slider: true);
       }
     }
 
@@ -124,7 +124,7 @@ $slider-height: 12px;
         &:active {
           background-color: theme.$text-main;
 
-          & > * {
+          &>* {
             color: theme.$background-dark;
           }
         }

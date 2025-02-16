@@ -10,7 +10,7 @@
 A semi-customizable bar written using the [Fabric Widget System](https://github.com/Fabric-Development/fabric).
 The panel focuses on providing an all-in-one, fully integrated panel experience, where users don’t have to rely on separate, theme-less third-party tools to manage niche functions like bluetooth, notifications and notification panel,on screen display.
 
-## 📸 Screenshots
+<h2><sub><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Camera%20with%20Flash.png" alt="Camera with Flash" width="25" height="25" /></sub> Screenshots</h2>
 
 <table align="center">
   <tr>
