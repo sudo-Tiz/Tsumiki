@@ -91,7 +91,7 @@ class Wifi(Service):
         return
 
     @Property(bool, "read-write", default_value=False)
-    def enabled(self) -> bool:  # type: ignore
+    def enabled(self) -> bool:  # noqa: F811
         return bool(self._client.wireless_get_enabled())
 
     @enabled.setter
@@ -109,8 +109,9 @@ class Wifi(Service):
 
         if self.internet == "activated":
             return {
-                80: "network-wireless-signal-excellent-symbolic",
-                60: "network-wireless-signal-good-symbolic",
+                100: "network-wireless-signal-excellent-symbolic",
+                80: "network-wireless-signal-good-symbolic",
+                60: "network-wireless-signal-ok-symbolic",
                 40: "network-wireless-signal-ok-symbolic",
                 20: "network-wireless-signal-weak-symbolic",
                 00: "network-wireless-signal-none-symbolic",
@@ -155,8 +156,9 @@ class Wifi(Service):
                 "strength": ap.get_strength(),
                 "frequency": ap.get_frequency(),
                 "icon-name": {
-                    80: "network-wireless-signal-excellent-symbolic",
-                    60: "network-wireless-signal-good-symbolic",
+                    100: "network-wireless-signal-excellent-symbolic",
+                    80: "network-wireless-signal-good-symbolic",
+                    60: "network-wireless-signal-ok-symbolic",
                     40: "network-wireless-signal-ok-symbolic",
                     20: "network-wireless-signal-weak-symbolic",
                     00: "network-wireless-signal-none-symbolic",
