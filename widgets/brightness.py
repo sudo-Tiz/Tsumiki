@@ -37,8 +37,7 @@ class BrightnessWidget(EventBoxWidget):
         )
 
         self.brightness_label = Label(
-            visible=False,
-            label=f"{normalized_brightness}%",
+            visible=False, label=f"{normalized_brightness}%", style_classes="panel-text"
         )
 
         self.icon = helpers.text_icon(

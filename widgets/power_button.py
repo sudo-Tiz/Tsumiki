@@ -93,7 +93,7 @@ class PowerControlButtons(ButtonWidget):
                             image_file=get_relative_path(f"../assets/icons/{name}.png"),
                             size=size,
                         ),
-                        Label(label=label),
+                        Label(label=label, style_classes="panel-text"),
                     ],
                 ),
                 **kwargs,

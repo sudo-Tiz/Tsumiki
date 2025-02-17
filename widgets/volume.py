@@ -30,7 +30,7 @@ class VolumeWidget(EventBoxWidget):
             size=24,
         )
 
-        self.volume_label = Label(visible=False)
+        self.volume_label = Label(visible=False, style_classes="panel-text")
 
         self.icon = text_icon(
             icon=volume_text_icons["medium"],
