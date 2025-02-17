@@ -22,6 +22,18 @@ class Wifi(Service):
     @Signal
     def enabled(self) -> bool: ...
 
+    def signal_to_icon(self,ap: NM.AccessPoint):
+        return {
+            80: "network-wireless-signal-excellent-symbolic",
+            60: "network-wireless-signal-good-symbolic",
+            40: "network-wireless-signal-ok-symbolic",
+            20: "network-wireless-signal-weak-symbolic",
+            00: "network-wireless-signal-none-symbolic",
+        }.get(
+            min(80, 20 * round(ap.get_strength() / 20)),
+            "network-wireless-no-route-symbolic",
+        )
+
     def __init__(self, client: NM.Client, device: NM.DeviceWifi, **kwargs):
         self._client: NM.Client = client
         self._device: NM.DeviceWifi = device
@@ -91,7 +103,7 @@ class Wifi(Service):
         return
 
     @Property(bool, "read-write", default_value=False)
-    def enabled(self) -> bool:  # noqa: F811
+    def enabled(self) -> bool:  # type: ignore
         return bool(self._client.wireless_get_enabled())
 
     @enabled.setter
@@ -108,17 +120,7 @@ class Wifi(Service):
             return "network-wireless-disabled-symbolic"
 
         if self.internet == "activated":
-            return {
-                100: "network-wireless-signal-excellent-symbolic",
-                80: "network-wireless-signal-good-symbolic",
-                60: "network-wireless-signal-ok-symbolic",
-                40: "network-wireless-signal-ok-symbolic",
-                20: "network-wireless-signal-weak-symbolic",
-                00: "network-wireless-signal-none-symbolic",
-            }.get(
-                min(80, 20 * round(self._ap.get_strength() / 20)),
-                "network-wireless-no-route-symbolic",
-            )
+            self.signal_to_icon(self._ap)
         if self.internet == "activating":
             return "network-wireless-acquiring-symbolic"
 
@@ -155,17 +157,7 @@ class Wifi(Service):
                 "active-ap": self._ap,
                 "strength": ap.get_strength(),
                 "frequency": ap.get_frequency(),
-                "icon-name": {
-                    100: "network-wireless-signal-excellent-symbolic",
-                    80: "network-wireless-signal-good-symbolic",
-                    60: "network-wireless-signal-ok-symbolic",
-                    40: "network-wireless-signal-ok-symbolic",
-                    20: "network-wireless-signal-weak-symbolic",
-                    00: "network-wireless-signal-none-symbolic",
-                }.get(
-                    min(80, 20 * round(ap.get_strength() / 20)),
-                    "network-wireless-no-route-symbolic",
-                ),
+                "icon-name": self.signal_to_icon(ap),
             }
 
         return list(map(make_ap_dict, points))
