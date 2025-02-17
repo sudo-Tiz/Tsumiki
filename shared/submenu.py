@@ -47,8 +47,6 @@ class QuickSubMenu(Box):
 
         self.add(self.revealer)
 
-        # self.revealer.set_reveal_child(True)
-
     def make_submenu_title_box(self) -> Box | None:
         submenu_box = Box(spacing=4, style_classes="submenu-title-box")
 

@@ -1,3 +1,4 @@
+from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
@@ -6,6 +7,8 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 
 from services import network_service
 from services.network import NetworkClient, Wifi
+from shared.animator import Animator
+from shared.circle_image import CircleImage
 from shared.submenu import QuickSubMenu, QuickSubToggle
 from shared.widget_container import HoverButton
 
@@ -20,9 +23,24 @@ class WifiSubMenu(QuickSubMenu):
 
         self.available_networks_box = Box(orientation="v", spacing=4, h_expand=True)
 
-        self.scan_image = Image(icon_name="view-refresh-symbolic", icon_size=18)
+        self.scan_image = CircleImage(
+            image_file=get_relative_path("../../../assets/icons/refresh.png"),
+            size=24,
+        )
+
+        self.scan_animator = Animator(
+            bezier_curve=(0, 0, 1, 1),
+            duration=4,
+            min_value=0,
+            max_value=360,
+            tick_widget=self,
+            repeat=False,
+            notify_value=lambda p, *_: self.scan_image.set_angle(p.value),
+        )
+
         self.scan_button = HoverButton(
             style_classes="submenu-button",
+            name="scan-button",
             image=self.scan_image,
         )
         self.scan_button.connect("clicked", self.start_new_scan)
@@ -46,14 +64,7 @@ class WifiSubMenu(QuickSubMenu):
     def start_new_scan(self, _):
         self.client.wifi_device.scan() if self.client.wifi_device else None
         self.build_wifi_options()
-
-    def rotate_icon(self):
-        # Rotate the button icon by 5 degrees
-        self.scan_image.set_style(
-            "-gtk-icon-transform: rotate(90deg);",
-        )
-
-        return self.client.wifi_device
+        self.scan_animator.play()
 
     def on_device_ready(self, client: NetworkClient):
         self.wifi_device = client.wifi_device

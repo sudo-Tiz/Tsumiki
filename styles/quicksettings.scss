@@ -24,16 +24,21 @@ $slider-height: 12px;
   }
 
   .quick-settings-box {
-    .user {
-      font-weight: 600;
-    }
 
-    .uptime {
-      font-size: 0.92rem;
-      border: variable.$border-width solid lighten($color: theme.$surface-disabled, $amount: 10%);
-      padding: 3px 9px;
-      font-weight: 600;
-      border-radius: 1rem;
+    #user-box-grid {
+      margin-bottom: 10px;
+
+      .user {
+        font-weight: 600;
+      }
+
+      .uptime {
+        font-size: 0.92rem;
+        border: variable.$border-width solid lighten($color: theme.$surface-disabled, $amount: 10%);
+        padding: 3px 9px;
+        font-weight: 600;
+        border-radius: 1rem;
+      }
     }
 
     .section-box {
@@ -128,6 +133,10 @@ $slider-height: 12px;
             color: theme.$background-dark;
           }
         }
+      }
+
+      #scan-button {
+        &:active {}
       }
     }
 
