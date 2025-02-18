@@ -294,6 +294,7 @@ class PlayerBox(Box):
         def position_poll(_):
             while True:
                 try:
+                    print("can go next?",self.player.can_go_next)
                     yield self.player.position
                     sleep(1)
                 except Exception:  # noqa: PERF203
@@ -370,19 +371,18 @@ class PlayerBox(Box):
             child=self.play_pause_stack,
         )
         self.play_pause_button.connect("clicked", lambda _: self.player.play_pause())
-        self.player.bind_property("can-pause", self.play_pause_button, "sensitive")
+        self.player.bind_property("can_pause", self.play_pause_button, "sensitive")
 
         self.next_button = HoverButton(name="player-button", child=self.skip_next_icon)
         self.next_button.connect("clicked", self.on_player_next)
-        self.player.bind_property("can-go-next", self.next_button, "sensitive")
+        self.player.bind_property("can_go_next", self.next_button, "sensitive")
 
         self.prev_button = HoverButton(name="player-button", child=self.skip_prev_icon)
         self.prev_button.connect("clicked", self.on_player_prev)
-        self.player.bind_property("can-go-previous", self.prev_button, "sensitive")
 
         self.shuffle_button = HoverButton(name="player-button", child=self.shuffle_icon)
         self.shuffle_button.connect("clicked", lambda _: player.toggle_shuffle())
-        self.player.bind_property("can-shuffle", self.shuffle_button, "sensitive")
+        self.player.bind_property("can_shuffle", self.shuffle_button, "sensitive")
 
         self.button_box.children = (
             self.shuffle_button,
@@ -390,6 +390,7 @@ class PlayerBox(Box):
             self.play_pause_button,
             self.next_button,
         )
+
 
         # Seek Bar
         self.seek_bar = Scale(
