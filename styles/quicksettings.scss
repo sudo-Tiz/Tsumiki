@@ -136,7 +136,9 @@ $slider-height: 12px;
       }
 
       #scan-button {
-        &:active {}
+        &:active {
+            background-color: transparent;
+        }
       }
     }
 
