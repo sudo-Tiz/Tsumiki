@@ -132,6 +132,7 @@ DEFAULT_CONFIG = {
         "ignored": [],
         "timeout": 3000,
         "play_sound": False,
+        "sound_file": "notification1",
     },
     "osd": {
         "enabled": True,

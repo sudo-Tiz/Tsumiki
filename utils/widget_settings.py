@@ -184,6 +184,7 @@ Notification = TypedDict(
         "anchor": str,
         "auto_dismiss": bool,
         "play_sound": bool,
+        "sound_file": str,
     },
 )
 

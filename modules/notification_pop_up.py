@@ -76,7 +76,11 @@ class NotificationPopup(WaylandWindow):
         self.cache_notification_service.cache_notification(notification)
 
         if widget_config["notification"]["play_sound"]:
-            helpers.play_sound(get_relative_path("../assets/sounds/notification.mp3"))
+            helpers.play_sound(
+                get_relative_path(
+                    f"../assets/sounds/{widget_config['notification']['sound_file']}.mp3"
+                )
+            )
 
 
 class NotificationWidget(EventBox):
