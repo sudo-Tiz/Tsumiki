@@ -183,7 +183,7 @@ Notification = TypedDict(
         "timeout": int,
         "anchor": str,
         "auto_dismiss": bool,
-        "sound": bool,
+        "play_sound": bool,
     },
 )
 

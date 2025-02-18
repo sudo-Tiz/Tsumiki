@@ -390,7 +390,6 @@ class PlayerBox(Box):
             self.next_button,
         )
 
-
         # Seek Bar
         self.seek_bar = Scale(
             min_value=0,
