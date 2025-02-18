@@ -131,6 +131,7 @@ DEFAULT_CONFIG = {
         "auto_dismiss": True,
         "ignored": [],
         "timeout": 3000,
+        "sound": False,
     },
     "osd": {
         "enabled": True,

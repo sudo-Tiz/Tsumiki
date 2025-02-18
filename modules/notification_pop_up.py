@@ -3,7 +3,7 @@ from fabric.notifications import (
     NotificationAction,
     NotificationCloseReason,
 )
-from fabric.utils import bulk_connect
+from fabric.utils import bulk_connect, get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
@@ -74,6 +74,7 @@ class NotificationPopup(WaylandWindow):
         self.notifications.add(new_box)
         new_box.set_reveal_child(True)
         self.cache_notification_service.cache_notification(notification)
+        helpers.play_sound(get_relative_path("../assets/sounds/notification.mp3"))
 
 
 class NotificationWidget(EventBox):

@@ -178,7 +178,13 @@ Brightness = TypedDict("Brightness", {**BaseConfig.__annotations__, "step_size":
 # Notification configuration
 Notification = TypedDict(
     "Notification",
-    {"ignored": List[str], "timeout": int, "anchor": str, "auto_dismiss": bool},
+    {
+        "ignored": List[str],
+        "timeout": int,
+        "anchor": str,
+        "auto_dismiss": bool,
+        "sound": bool,
+    },
 )
 
 # Recording configuration

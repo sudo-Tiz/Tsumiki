@@ -131,7 +131,7 @@ def check_icon_exists(icon_name: str, fallback_icon: str) -> str:
 
 # Function to execute a shell command asynchronously
 def play_sound(file: str):
-    exec_shell_command_async(f"play {file}", None)
+    exec_shell_command_async(f"pw-play {file}", None)
 
 
 # Function to get the distro icon
