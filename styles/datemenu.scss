@@ -18,7 +18,7 @@
   @include mixins.spacing;
 
   #notification-column {
-    min-width: 410px;
+    min-width: 435px;
     min-height: 400px;
 
     .header {
@@ -72,10 +72,8 @@
   }
 
   separator {
-    background-color: color.adjust(
-      variable.$popover-border-color,
-      $lightness: 10%
-    );
+    background-color: color.adjust(variable.$popover-border-color,
+        $lightness: 10%);
     border-radius: variable.$radius;
     margin-right: variable.$spacing;
   }
