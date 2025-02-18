@@ -186,8 +186,6 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 
 ## **Available Modules**
 
-<details>
-<summary>Click to expand modules</summary>
 | **Item**            | **Description** |
 |---------------------|-----------------|
 | **battery**          | Displays battery status and usage information. |
@@ -218,7 +216,7 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 | **window_title**     | Shows the title of the current window or application. |
 | **workspaces**       | Refers to multiple virtual desktops or workspaces. |
 
-</details>
+
 
 > [!WARNING]
 > This is still in early development and will include breaking changes

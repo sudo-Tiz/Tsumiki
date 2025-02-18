@@ -24,6 +24,15 @@ POWER_BUTTONS = [
 class PowerMenuPopup(PopupWindow):
     """A popup window to show power options."""
 
+    instance = None
+
+    @staticmethod
+    def get_initial():
+        if PowerMenuPopup.instance is None:
+            PowerMenuPopup.instance = PowerMenuPopup()
+
+        return PowerMenuPopup.instance
+
     def __init__(
         self,
         **kwargs,
@@ -111,6 +120,7 @@ class PowerControlButtons(ButtonWidget):
             "reboot",
         ],
     ):
+        PowerMenuPopup().get_initial().toggle_popup()
         match pressed_button:
             case "shutdown":
                 exec_shell_command_async("systemctl poweroff")
@@ -143,4 +153,6 @@ class PowerButton(ButtonWidget):
         if self.config["tooltip"]:
             self.set_tooltip_text("Power")
 
-        self.connect("clicked", lambda *_: PowerMenuPopup().toggle_popup())
+        self.connect(
+            "clicked", lambda *_: PowerMenuPopup().get_initial().toggle_popup()
+        )
