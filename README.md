@@ -20,6 +20,7 @@ The panel focuses on providing an all-in-one, fully integrated panel experience,
     <td colspan="1"><img src="assets/screenshots/quick_settings.png"></td>
     <td colspan="1"><img src="assets/screenshots/noti.png"></td>
     <td colspan="1" align="center"><img src="assets/screenshots/logout.png"></td>
+    <td colspan="1" align="center"><img src="assets/screenshots/cava.png"></td>
   </tr>
 </table>
 
