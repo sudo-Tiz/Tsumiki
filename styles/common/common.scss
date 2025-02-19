@@ -52,7 +52,7 @@ label {
 
 .shadow {
   border-radius: 4px;
-  box-shadow: darken($color: theme.$background-dark, $amount: 15%) 0px 4px;
+  box-shadow: darken($color: theme.$background-dark, $amount: 15%) 0 4px;
 }
 
 .wave1 {
@@ -83,7 +83,7 @@ label {
 }
 
 .overlay-icon {
-  margin: 0px 6px 0px 0px;
+  margin: 0 6px 0 0;
 }
 
 #language,
@@ -332,5 +332,5 @@ scrollbar {
   border-radius: variable.$radius;
   background-position: center;
   background-size: contain;
-  margin: 3px 10px 3px 0px;
+  margin: 3px 10px 3px 0;
 }

@@ -38,6 +38,7 @@ class QuickSettingsButtonBox(Box):
     def __init__(self, **kwargs):
         super().__init__(
             orientation="v",
+            name="quick-settings-button-box",
             spacing=4,
             h_align="start",
             v_align="start",
@@ -195,7 +196,7 @@ class QuickSettingsMenu(Box):
             center_children=Box(
                 orientation="v",
                 spacing=10,
-                style_classes="section-box slider-box",
+                style_classes=["section-box", "slider-box"],
                 children=(BrightnessSlider(), AudioSlider(), MicrophoneSlider()),
             ),
             end_children=(

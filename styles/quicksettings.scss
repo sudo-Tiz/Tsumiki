@@ -43,10 +43,11 @@ $slider-height: 12px;
 
     .section-box {
       margin: 1rem;
+      margin-bottom: 0;
     }
 
     .quicksettings-toggle-action {
-      border-radius: variable.$radius-large 0px 0px variable.$radius-large;
+      border-radius: variable.$radius-large 0 0 variable.$radius-large;
 
       min-height: 35px;
 
@@ -95,8 +96,7 @@ $slider-height: 12px;
       min-height: 200px;
       background-color: theme.$background-alt;
       border-radius: variable.$radius;
-      border-width: 5px;
-      padding: 10px;
+      padding: 8px;
 
       .submenu-title-box {
         margin-bottom: 10px;
@@ -114,8 +114,8 @@ $slider-height: 12px;
       }
 
       .submenu-button {
-        margin: 0px 2px 0px 2px;
-        padding: 0px 5px 0px 5px;
+        margin: 0 2px 0 2px;
+        padding: 0 5px 0 5px;
         border-radius: variable.$radius;
 
         &.activated {
@@ -149,8 +149,17 @@ $slider-height: 12px;
 
       #bluetooth-device-box.submenu-button {
         .submenu-button {
-          padding: 7px;
-          font-weight: 700;
+          padding: 6px;
+          background-color: theme.$background-dark;
+
+          label {
+            font-size: 11px;
+            font-weight: 600;
+          }
+
+          &:hover {
+            color: theme.$accent-purple;
+          }
         }
       }
 
@@ -184,7 +193,7 @@ $slider-height: 12px;
 
     #quicksettings-togglebutton {
       .toggle-revealer {
-        border-radius: 0px variable.$radius-large variable.$radius-large 0px;
+        border-radius: 0 variable.$radius-large variable.$radius-large 0;
         padding: 10px 5px;
       }
     }

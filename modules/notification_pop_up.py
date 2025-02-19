@@ -43,7 +43,7 @@ class NotificationPopup(WaylandWindow):
         self.notifications = Box(
             v_expand=True,
             h_expand=True,
-            style="margin: 1px 0px 1px 1px;",
+            style="margin: 1px 0 1px 1px;",
             orientation="v",
             spacing=5,
         )
