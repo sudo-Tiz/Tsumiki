@@ -239,13 +239,13 @@ class DateNotificationMenu(Box):
             visible=True,
         )
 
-        notif_header = Box(
+        notification_column_header = Box(
             style_classes="header",
             orientation="h",
             children=(Label(label="Do Not Disturb", name="dnd-text"), self.dnd_switch),
         )
 
-        clear_icon = Image(
+        self.clear_icon = Image(
             icon_name=icons["trash"]["empty"]
             if len(self.notifications) == 0
             else icons["trash"]["full"],
@@ -253,29 +253,29 @@ class DateNotificationMenu(Box):
             name="clear-icon",
         )
 
-        clear_button = Button(
+        self.clear_button = Button(
             name="clear-button",
             v_align="center",
             child=Box(
                 children=(
                     Label(label="Clear"),
-                    clear_icon,
+                    self.clear_icon,
                 )
             ),
         )
 
-        clear_button.connect(
+        self.clear_button.connect(
             "clicked",
             lambda _: (
                 self.cache_notification_service.clear_all_notifications(),
-                clear_icon.set_from_icon_name(icons["trash"]["empty"], 15),
+                self.clear_icon.set_from_icon_name(icons["trash"]["empty"], 15),
             ),
         )
 
-        setup_cursor_hover(clear_button)
+        setup_cursor_hover(self.clear_button)
 
-        notif_header.pack_end(
-            clear_button,
+        notification_column_header.pack_end(
+            self.clear_button,
             False,
             False,
             0,
@@ -287,7 +287,7 @@ class DateNotificationMenu(Box):
             orientation="v",
             visible=False,
             children=(
-                notif_header,
+                notification_column_header,
                 ScrolledWindow(
                     v_expand=True,
                     style_classes="notification-scrollable",
@@ -354,6 +354,8 @@ class DateNotificationMenu(Box):
         notification: Notification = fabric_notif.get_notification_from_id(id)
 
         count = len(self.notification_list_box.children)
+
+        self.clear_icon.set_from_icon_name(icons["trash"]["full"], 15)
 
         self.notification_list_box.add(
             DateMenuNotification(
