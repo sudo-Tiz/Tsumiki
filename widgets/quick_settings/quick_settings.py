@@ -280,9 +280,15 @@ class QuickSettingsButtonWidget(ButtonWidget):
         def get_network_icon(*_):
             if self.network.primary_device == "wifi":
                 wifi = self.network.wifi_device
+
                 if wifi:
                     self.network_icon.set_from_icon_name(
                         wifi.get_icon_name(),
+                        self.panel_icon_size,
+                    )
+                else:
+                    self.network_icon.set_from_icon_name(
+                        "network-offline-symbolic",
                         self.panel_icon_size,
                     )
 
@@ -291,6 +297,11 @@ class QuickSettingsButtonWidget(ButtonWidget):
                 if ethernet:
                     self.network_icon.set_from_icon_name(
                         ethernet.get_icon_name(),
+                        self.panel_icon_size,
+                    )
+                else:
+                    self.network_icon.set_from_icon_name(
+                        "network-offline-symbolic",
                         self.panel_icon_size,
                     )
 

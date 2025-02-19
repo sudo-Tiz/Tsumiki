@@ -324,3 +324,14 @@ class NetworkClient(Service):
     @Property(str, "readable")
     def primary_device(self) -> Literal["wifi", "wired"] | None:
         return self._get_primary_device()
+
+    @Property(str, "readable")
+    def state(self):
+        active_connections = self._client.get_active_connections()
+        for connection in active_connections:
+            # Get the connection details
+            print(f"Connection: {connection.get_id()}")
+            # Get the connection state (connected or disconnected)
+            state = connection.get_state()
+            print(f"Status: {state}")
+        return ""
