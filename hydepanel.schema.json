@@ -105,7 +105,8 @@
               "weather",
               "window_title",
               "workspace",
-              "workspaces"
+              "workspaces",
+              "quick_settings"
             ]
           }
         },
