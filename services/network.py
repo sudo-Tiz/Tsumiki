@@ -91,7 +91,7 @@ class Wifi(Service):
         return
 
     @Property(bool, "read-write", default_value=False)
-    def enabled(self) -> bool:  # type: ignore
+    def enabled(self) -> bool:  # type: ignore  # noqa: F811
         return bool(self._client.wireless_get_enabled())
 
     @enabled.setter
