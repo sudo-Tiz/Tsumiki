@@ -17,9 +17,9 @@ The panel focuses on providing an all-in-one, fully integrated panel experience,
     <td colspan="4"><img src="assets/screenshots/main.png"></td>
   </tr>
   <tr>
-    <td colspan="1"><img src="assets/screenshots/noti-panel.png"></td>
+    <td colspan="1"><img src="assets/screenshots/quick_settings.png"></td>
     <td colspan="1"><img src="assets/screenshots/noti.png"></td>
-    <td colspan="1" align="center"><img src="assets/screenshots/lock.png"></td>
+    <td colspan="1" align="center"><img src="assets/screenshots/logout.png"></td>
   </tr>
 </table>
 
