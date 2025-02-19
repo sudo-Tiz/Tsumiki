@@ -105,7 +105,7 @@ install_packages() {
 	fi
 
 	# Install packages using yay (AUR helper)
-	$aur_helper -S --noconfirm gray-git python-fabric gnome-bluetooth-3.0 python-rlottie-python
+	$aur_helper -S --noconfirm gray-git python-fabric gnome-bluetooth-3.0 python-rlottie-python fabric-cli-git
 }
 
 # Check the argument passed to the script and call the appropriate function
