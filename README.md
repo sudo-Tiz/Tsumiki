@@ -54,9 +54,10 @@ The panel focuses on providing an all-in-one, fully integrated panel experience,
 Most of these are already installed on existing working machines
 
 ```sh
-# network
+## network
 networkmanager
 
+## Sound
 pipewire
 
 
@@ -79,22 +80,20 @@ brightnessctl
 
 ```sh
 
-## To check for pacman updates in the default script used in the updates module
+## To check for updates using the default pacman script in the updates module
 pacman-contrib
 
 ## To switch between power profiles in the battery module
 power-profiles-daemon
 
-## To record screen through the dashboard record shortcut
+## To record screen through recorder module
 wf-recorder
 
-## To enable the eyedropper color picker with the default snapshot shortcut in the dashboard
-hyprpicker
 
-## To enable hyprland's very own blue light filter
+## To activate Hyprland’s native blue light filter
 hyprsunset
 
-## To enable hyprland's very own idle inhibitor
+## To activate Hyprland’s native idle inhibitor
 hypridle
 
 ```
