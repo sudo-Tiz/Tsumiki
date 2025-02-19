@@ -617,6 +617,37 @@
         }
       }
     },
+    "quick_settings": {
+      "type": "object",
+      "properties": {
+        "media": {
+          "type": "object",
+          "properties": {
+            "ignore": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "truncation_size": {
+              "type": "integer"
+            },
+            "show_album": {
+              "type": "boolean"
+            },
+            "show_artist": {
+              "type": "boolean"
+            },
+            "show_time": {
+              "type": "boolean"
+            },
+            "show_time_tooltip": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
     "notification": {
       "type": "object",
       "properties": {
