@@ -11,9 +11,6 @@ class MicrophoneSlider(SettingSlider):
 
         super().__init__(icon_name=icons["audio"]["mic"]["medium"])
 
-        if self.client.microphone is None:
-            self.set_visible(False)
-
         self.scale.connect("change-value", self.on_scale_move)
         self.client.connect("microphone-changed", self.on_microphone_change)
         self.icon_button.connect("clicked", self.on_button_click)
@@ -28,3 +25,8 @@ class MicrophoneSlider(SettingSlider):
 
     def on_button_click(self, *_):
         self.client.microphone.muted = not self.client.microphone.muted
+        self.icon.set_from_icon_name(
+            icons["audio"]["mic"]["muted"], 20
+        ) if self.client.microphone.muted else self.icon.set_from_icon_name(
+            icons["audio"]["mic"]["medium"], 20
+        )

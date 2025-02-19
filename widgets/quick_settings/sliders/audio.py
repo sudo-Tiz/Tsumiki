@@ -23,3 +23,8 @@ class AudioSlider(SettingSlider):
 
     def on_button_click(self, *_):
         self.client.speaker.muted = not self.client.speaker.muted
+        self.icon.set_from_icon_name(
+            icons["audio"]["volume"]["muted"], 20
+        ) if self.client.speaker.muted else self.icon.set_from_icon_name(
+            icons["audio"]["volume"]["high"], 20
+        )
