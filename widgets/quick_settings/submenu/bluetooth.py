@@ -42,7 +42,13 @@ class BluetoothDeviceBox(CenterBox):
                 icon_size=18,
             )
         )
-        self.add_start(Label(label=device.name, style_classes="submenu-item-label"))  # type: ignore
+        self.add_start(
+            Label(
+                label=device.name,
+                style_classes="submenu-item-label",
+                ellipsization="end",
+            )
+        )  # type: ignore
         self.add_end(self.connect_button)
 
         self.on_device_connect()
