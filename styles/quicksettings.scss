@@ -84,7 +84,8 @@ $slider-height: 12px;
 
         @include mixins.slider(
           $highlight-color: theme.$accent-blue,
-          $slider: true
+          $slider: true,
+          $min-length: 320px
         );
       }
     }
