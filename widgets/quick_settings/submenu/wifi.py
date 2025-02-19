@@ -46,8 +46,8 @@ class WifiSubMenu(QuickSubMenu):
         self.scan_button.connect("clicked", self.start_new_scan)
 
         self.child = ScrolledWindow(
-            min_content_size=(-1, 100),
-            max_content_size=(-1, 100),
+            min_content_size=(-1, 190),
+            max_content_size=(-1, 190),
             propagate_width=True,
             propagate_height=True,
             child=self.available_networks_box,

@@ -38,7 +38,9 @@ class QuickSubMenu(Box):
         self.revealer_child.add(self.child) if child else None
 
         self.revealer = Revealer(
-            child=self.revealer_child, transition_type="slide-down", h_expand=True
+            child=self.revealer_child,
+            transition_type="slide-down",
+            h_expand=True,
         )
         self.revealer.connect(
             "notify::child-revealed",
@@ -124,6 +126,7 @@ class QuickSubToggle(Box):
             h_align="start",
         )
         self.action_button = HoverButton(style_classes="quicksettings-toggle-action")
+
         self.action_button.add(
             Box(
                 h_align="start",

@@ -33,7 +33,8 @@ $slider-height: 12px;
 
       .uptime {
         font-size: 0.92rem;
-        border: variable.$border-width solid lighten($color: theme.$surface-disabled, $amount: 10%);
+        border: variable.$border-width solid
+          lighten($color: theme.$surface-disabled, $amount: 10%);
         padding: 3px 9px;
         font-weight: 600;
         border-radius: 1rem;
@@ -81,14 +82,17 @@ $slider-height: 12px;
           padding: 0 2px;
         }
 
-        @include mixins.slider($highlight-color: theme.$accent-blue,
+        @include mixins.slider(
+          $highlight-color: theme.$accent-blue,
           $slider: true,
-          $min-length: 320px);
+          $min-length: 320px
+        );
       }
     }
 
     #submenu {
-      margin-top: 5px;
+      margin-top: 10px;
+      min-height: 200px;
       background-color: theme.$background-alt;
       border-radius: variable.$radius;
       border-width: 5px;
@@ -129,7 +133,7 @@ $slider-height: 12px;
         &:active {
           background-color: theme.$text-main;
 
-          &>* {
+          & > * {
             color: theme.$background-dark;
           }
         }
@@ -140,7 +144,13 @@ $slider-height: 12px;
 
         &:hover {
           color: theme.$accent-purple;
+        }
+      }
 
+      #bluetooth-device-box.submenu-button {
+        .submenu-button {
+          padding: 7px;
+          font-weight: 700;
         }
       }
 
@@ -158,7 +168,6 @@ $slider-height: 12px;
       @extend %caption_heading;
       padding: 3px 0;
       padding-left: 10px;
-
 
       &.active {
         background-color: theme.$accent-blue;

@@ -19,11 +19,15 @@ class BluetoothDeviceBox(CenterBox):
 
     def __init__(self, device: BluetoothDevice, **kwargs):
         super().__init__(
-            spacing=2, style_classes="submenu-button", h_expand=True, **kwargs
+            spacing=2,
+            style_classes="submenu-button",
+            h_expand=True,
+            name="bluetooth-device-box",
+            **kwargs,
         )
         self.device: BluetoothDevice = device
 
-        self.connect_button = Button(style_classes="submenu-button")
+        self.connect_button = HoverButton(style_classes="submenu-button")
         self.connect_button.connect(
             "clicked",
             lambda _: self.device.set_property("connecting", not self.device.connected),
@@ -45,14 +49,14 @@ class BluetoothDeviceBox(CenterBox):
 
     def on_device_connecting(self, device, _):
         if self.device.connecting:
-            self.connect_button.set_label("connecting...")
+            self.connect_button.set_label("Connecting...")
         elif self.device.connected is False:
-            self.connect_button.set_label("failed to connect")
+            self.connect_button.set_label("Failed to connect")
 
     def on_device_connect(self, *args):
         self.connect_button.set_label(
-            "connected",
-        ) if self.device.connected else self.connect_button.set_label("disconnected")
+            "Disconnect",
+        ) if self.device.connected else self.connect_button.set_label("Connect")
 
 
 class BluetoothSubMenu(QuickSubMenu):
@@ -84,7 +88,7 @@ class BluetoothSubMenu(QuickSubMenu):
             children=Label(
                 "Available Devices",
                 h_align="start",
-                style="margin:10px 0;",
+                style="margin:12px 0;",
                 style_classes="panel-text",
             ),
         )
@@ -110,8 +114,8 @@ class BluetoothSubMenu(QuickSubMenu):
         self.scan_button.connect("clicked", self.on_scan_toggle)
 
         self.child = ScrolledWindow(
-            min_content_size=(-1, 100),
-            max_content_size=(-1, 100),
+            min_content_size=(-1, 190),
+            max_content_size=(-1, 190),
             propagate_width=True,
             propagate_height=True,
             child=Box(

@@ -12,6 +12,7 @@ try:
 except ValueError:
     logger.error("Failed to start network manager")
 
+
 class Wifi(Service):
     """A service to manage wifi devices"""
 
