@@ -28,4 +28,4 @@ class BrightnessSlider(SettingSlider):
 
     def on_brightness_change(self, service: Brightness, _):
         self.scale.set_value(service.screen_brightness)
-        self.label.set_label(f"{round(service.screen_brightness)}%")
+        self.scale.set_tooltip_text(f"{round(service.screen_brightness)}%")

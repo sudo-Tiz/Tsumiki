@@ -24,7 +24,7 @@ class MicrophoneSlider(SettingSlider):
     def on_microphone_change(self, *args):
         self.scale.set_sensitive(not audio_service.microphone.muted)
         self.scale.set_value(audio_service.microphone.volume)
-        self.label.set_label(f"{round(audio_service.microphone.volume)}%")
+        self.scale.set_tooltip_text(f"{round(audio_service.microphone.volume)}%")
 
     def on_button_click(self, *_):
         self.client.microphone.muted = not self.client.microphone.muted

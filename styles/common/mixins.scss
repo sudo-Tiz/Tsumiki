@@ -105,7 +105,7 @@
     }
   }
 
-  @if $min-length !="" {
+  @if $min-length != "" {
     scale {
       min-width: $min-length;
     }
