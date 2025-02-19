@@ -12,6 +12,7 @@ class QuickSettingToggler(CommandSwitcher):
             name,
             label=True,
             tooltip=False,
+            interval=1000,
             **kwargs,
         )
 

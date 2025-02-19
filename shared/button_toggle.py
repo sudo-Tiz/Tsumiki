@@ -42,7 +42,6 @@ class CommandSwitcher(ButtonWidget):
         self.disabled_icon = disabled_icon
         self.label = label
         self.tooltip = tooltip
-        self.is_active = False
 
         self.icon = text_icon(
             icon=enabled_icon,
@@ -66,19 +65,19 @@ class CommandSwitcher(ButtonWidget):
         invoke_repeater(interval, self.update, initial_call=True)
 
     def toggle(self, *_):
-        if helpers.is_app_running(self.command_without_args):
+        is_app_running = helpers.is_app_running(self.command_without_args)
+        if is_app_running:
             exec_shell_command_async(
                 f"pkill {self.command_without_args}", lambda *_: None
             )
-            self.is_active = False
         else:
             exec_shell_command_async(f"bash -c '{self.command}&'", lambda *_: None)
-            self.is_active = True
-        self.update()
+        self.update(is_app_running)
         return True
 
-    def update(self, *_):
-        is_app_running = helpers.is_app_running(self.command_without_args)
+    def update(self, is_app_running: bool | None = None):
+        if is_app_running is None:
+            is_app_running = helpers.is_app_running(self.command_without_args)
 
         if is_app_running:
             self.add_style_class("active")
