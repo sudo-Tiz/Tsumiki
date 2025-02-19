@@ -245,26 +245,31 @@ class DateNotificationMenu(Box):
             children=(Label(label="Do Not Disturb", name="dnd-text"), self.dnd_switch),
         )
 
+        clear_icon = Image(
+            icon_name=icons["trash"]["empty"]
+            if len(self.notifications) == 0
+            else icons["trash"]["full"],
+            icon_size=13,
+            name="clear-icon",
+        )
+
         clear_button = Button(
             name="clear-button",
             v_align="center",
             child=Box(
                 children=(
                     Label(label="Clear"),
-                    Image(
-                        icon_name=icons["trash"]["empty"]
-                        if len(self.notifications) == 0
-                        else icons["trash"]["full"],
-                        icon_size=13,
-                        name="clear-icon",
-                    ),
+                    clear_icon,
                 )
             ),
         )
 
         clear_button.connect(
             "clicked",
-            lambda _: self.cache_notification_service.clear_all_notifications(),
+            lambda _: (
+                self.cache_notification_service.clear_all_notifications(),
+                clear_icon.set_from_icon_name(icons["trash"]["empty"], 15),
+            ),
         )
 
         setup_cursor_hover(clear_button)
@@ -387,7 +392,7 @@ class DateTimeWidget(ButtonWidget):
 
         popup.set_pointing_to(self)
 
-        self.notof_indicator = Image(
+        self.notif_status_indicator = Image(
             icon_name=icons["notifications"]["noisy"],
             icon_size=16,
             visible=self.config["notification"],
@@ -401,7 +406,7 @@ class DateTimeWidget(ButtonWidget):
         )
 
         self.notification_indicator_box = Box(
-            children=(self.notof_indicator, count_label)
+            children=(self.notif_status_indicator, count_label)
         )
 
         self.connect(
@@ -431,13 +436,13 @@ class DateTimeWidget(ButtonWidget):
     def on_dnd_switch(self, switch, _):
         """Handle the do not disturb switch."""
         if switch.get_active():
-            self.notof_indicator.set_from_icon_name(
+            self.notif_status_indicator.set_from_icon_name(
                 icons["notifications"]["silent"], icon_size=16
             )
             self.cache_notification_service.dont_disturb = True
 
         else:
-            self.notof_indicator.set_from_icon_name(
+            self.notif_status_indicator.set_from_icon_name(
                 icons["notifications"]["noisy"], icon_size=16
             )
             self.cache_notification_service.dont_disturb = False
