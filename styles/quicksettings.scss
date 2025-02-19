@@ -33,8 +33,7 @@ $slider-height: 12px;
 
       .uptime {
         font-size: 0.92rem;
-        border: variable.$border-width solid
-          lighten($color: theme.$surface-disabled, $amount: 10%);
+        border: variable.$border-width solid lighten($color: theme.$surface-disabled, $amount: 10%);
         padding: 3px 9px;
         font-weight: 600;
         border-radius: 1rem;
@@ -82,11 +81,9 @@ $slider-height: 12px;
           padding: 0 2px;
         }
 
-        @include mixins.slider(
-          $highlight-color: theme.$accent-blue,
+        @include mixins.slider($highlight-color: theme.$accent-blue,
           $slider: true,
-          $min-length: 320px
-        );
+          $min-length: 320px);
       }
     }
 
@@ -132,14 +129,19 @@ $slider-height: 12px;
         &:active {
           background-color: theme.$text-main;
 
-          & > * {
+          &>* {
             color: theme.$background-dark;
           }
         }
       }
 
-      #wifi-ap-button.submenu-button{
+      #wifi-ap-button.submenu-button {
         padding: 7px 0;
+
+        &:hover {
+          color: theme.$accent-purple;
+
+        }
       }
 
       #scan-button {

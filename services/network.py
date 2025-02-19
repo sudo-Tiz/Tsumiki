@@ -12,7 +12,6 @@ try:
 except ValueError:
     logger.error("Failed to start network manager")
 
-
 class Wifi(Service):
     """A service to manage wifi devices"""
 
@@ -146,8 +145,10 @@ class Wifi(Service):
         def make_ap_dict(ap: NM.AccessPoint):
             return {
                 "bssid": ap.get_bssid(),
-                # "address": ap.get_
                 "last_seen": ap.get_last_seen(),
+                "wpa_flags": ap.get_wpa_flags(),
+                "flags": ap.get_flags(),
+                "rsn_flags": ap.get_rsn_flags(),
                 "ssid": NM.utils_ssid_to_utf8(ap.get_ssid().get_data())
                 if ap.get_ssid()
                 else "Unknown",
