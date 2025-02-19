@@ -80,7 +80,7 @@ class WifiSubMenu(QuickSubMenu):
                 self.available_networks_box.add(btn)
 
     def make_button_from_ap(self, ap) -> Button:
-        ap_button = Button(style_classes="submenu-button")
+        ap_button = Button(style_classes="submenu-button", name="wifi-ap-button")
         ap_button.add(
             Box(
                 style="padding: 5px;",

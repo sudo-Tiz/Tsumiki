@@ -46,7 +46,7 @@ $slider-height: 12px;
     }
 
     .quicksettings-toggle-action {
-      border-radius: variable.$radius 0px 0px variable.$radius;
+      border-radius: variable.$radius-large 0px 0px variable.$radius-large;
 
       min-height: 35px;
 
@@ -138,6 +138,10 @@ $slider-height: 12px;
         }
       }
 
+      #wifi-ap-button.submenu-button{
+        padding: 7px 0;
+      }
+
       #scan-button {
         &:active {
           background-color: transparent;
@@ -148,9 +152,11 @@ $slider-height: 12px;
     // this is for buttons like hypridle
     #quicksettings-toggler-button {
       background-color: theme.$background;
-      border-radius: variable.$radius;
+      border-radius: variable.$radius-large;
       @extend %caption_heading;
+      padding: 3px 0;
       padding-left: 10px;
+
 
       &.active {
         background-color: theme.$accent-blue;
@@ -167,8 +173,8 @@ $slider-height: 12px;
 
     #quicksettings-togglebutton {
       .toggle-revealer {
-        border-radius: 0px variable.$radius variable.$radius 0px;
-        padding: 8px 5px;
+        border-radius: 0px variable.$radius-large variable.$radius-large 0px;
+        padding: 10px 5px;
       }
     }
 
@@ -190,7 +196,7 @@ $slider-height: 12px;
     #quicksettings-togglebutton.active button:active image,
     #quicksettings-togglebutton.active button:active label,
     #quicksettings-togglebutton.active button:active {
-      background-color: darken(theme.$background, 10%);
+      background-color: darken(theme.$accent-blue, 10%);
     }
 
     #quicksettings-togglebutton button image,
