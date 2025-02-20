@@ -9,7 +9,7 @@ from utils import icons
 from utils.widget_settings import BarConfig
 
 
-class Recorder(ButtonWidget):
+class RecorderWidget(ButtonWidget):
     """A widget to record the system"""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):

@@ -34,7 +34,8 @@ $slider-height: 12px;
 
       .uptime {
         font-size: 0.92rem;
-        border: variable.$border-width solid lighten($color: theme.$surface-disabled, $amount: 10%);
+        border: variable.$border-width solid
+          lighten($color: theme.$surface-disabled, $amount: 10%);
         padding: functions.toEm(3) functions.toEm(9);
         font-weight: 600;
         border-radius: 1rem;
@@ -83,9 +84,11 @@ $slider-height: 12px;
           padding: 0 functions.toEm(2);
         }
 
-        @include mixins.slider($highlight-color: theme.$accent-blue,
+        @include mixins.slider(
+          $highlight-color: theme.$accent-blue,
           $slider: true,
-          $min-length: 320px);
+          $min-length: 320px
+        );
       }
     }
 
@@ -112,7 +115,6 @@ $slider-height: 12px;
       }
 
       .submenu-button {
-
         margin: 0 functions.toEm(2);
         padding: 0 functions.toEm(5);
         border-radius: variable.$radius;
@@ -132,7 +134,7 @@ $slider-height: 12px;
         &:active {
           background-color: theme.$text-main;
 
-          &>* {
+          & > * {
             color: theme.$background-dark;
           }
         }

@@ -10,7 +10,7 @@ from utils.widget_settings import BarConfig
 from utils.widget_utils import psutil_fabricator
 
 
-class Battery(ButtonWidget):
+class BatteryWidget(ButtonWidget):
     """A widget to display the current battery status."""
 
     def __init__(

@@ -11,7 +11,7 @@ from utils.config import widget_config
 from utils.functions import convert_seconds_to_milliseconds
 from utils.monitors import HyprlandWithMonitors
 from widgets import (
-    Battery,
+    BatteryWidget,
     BlueToothWidget,
     BrightnessWidget,
     CavaWidget,
@@ -27,13 +27,13 @@ from widgets import (
     MicrophoneIndicatorWidget,
     Mpris,
     OverviewWidget,
-    PowerButton,
+    PowerWidget,
     QuickSettingsButtonWidget,
-    Recorder,
+    RecorderWidget,
     SpacingWidget,
     StopWatchWidget,
     StorageWidget,
-    SystemTray,
+    SystemTrayWidget,
     TaskBarWidget,
     ThemeSwitcherWidget,
     UpdatesWidget,
@@ -56,7 +56,7 @@ class StatusBar(WaylandWindow):
 
     def __init__(self, **kwargs):
         self.widgets_list = {
-            "battery": Battery,
+            "battery": BatteryWidget,
             "bluetooth": BlueToothWidget,
             "brightness": BrightnessWidget,
             "cava": CavaWidget,
@@ -71,10 +71,10 @@ class StatusBar(WaylandWindow):
             "microphone": MicrophoneIndicatorWidget,
             "mpris": Mpris,
             "overview": OverviewWidget,
-            "power": PowerButton,
-            "recorder": Recorder,
+            "power": PowerWidget,
+            "recorder": RecorderWidget,
             "storage": StorageWidget,
-            "system_tray": SystemTray,
+            "system_tray": SystemTrayWidget,
             "task_bar": TaskBarWidget,
             "theme_switcher": ThemeSwitcherWidget,
             "updates": UpdatesWidget,
@@ -124,8 +124,6 @@ class StatusBar(WaylandWindow):
             child=self.box,
             **kwargs,
         )
-
-        print("bar created", options["bar_style"])
 
         if options["bar_style"] and options["bar_style"] != "default":
             self.box.add_style_class("floating-bar")

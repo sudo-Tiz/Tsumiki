@@ -10,7 +10,7 @@ gi.require_version("Gray", "0.1")
 gi.require_version("Gtk", "3.0")
 
 
-class SystemTray(BoxWidget):
+class SystemTrayWidget(BoxWidget):
     """A widget to display the system tray items."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs) -> None:

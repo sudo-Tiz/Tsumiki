@@ -136,7 +136,7 @@ class PowerControlButtons(ButtonWidget):
                 exec_shell_command_async("loginctl terminate-user $USER")
 
 
-class PowerButton(ButtonWidget):
+class PowerWidget(ButtonWidget):
     """A widget to power off the system."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
