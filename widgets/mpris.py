@@ -42,8 +42,13 @@ class Mpris(ButtonWidget):
                 f"{player.get_property('player-name')}",
             )
             self.player = MprisPlayer(player)
-            self.player.connect("notify::metadata", self.get_current)
-            self.player.connect("notify::playback-status", self.get_playback_status)
+            bulk_connect(
+                self.player,
+                {
+                    "notify::metadata": self.get_current,
+                    "notify::playback-status": self.get_playback_status,
+                },
+            )
 
         self.revealer = Revealer(
             name="mpris-revealer",

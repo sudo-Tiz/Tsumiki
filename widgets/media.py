@@ -5,7 +5,7 @@ from time import sleep
 from typing import List
 
 from fabric import Fabricator
-from fabric.utils import get_relative_path
+from fabric.utils import bulk_connect, get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
@@ -58,8 +58,15 @@ class PlayerBoxStack(Box):
         self.hide()
 
         self.mpris_manager = mpris_manager
-        self.mpris_manager.connect("player-appeared", self.on_new_player)
-        self.mpris_manager.connect("player-vanished", self.on_lost_player)
+
+        bulk_connect(
+            self.mpris_manager,
+            {
+                "player-appeared": self.on_new_player,
+                "player-vanished": self.on_lost_player,
+            },
+        )
+
         for player in self.mpris_manager.players:  # type: ignore
             logger.info(
                 f"[PLAYER MANAGER] player found: {player.get_property('player-name')}",
@@ -201,16 +208,11 @@ class PlayerBox(Box):
         self.angle_direction = 1
         self.skipped = False
 
-        # Exit Logic
-        self.player.connect("exit", self.on_player_exit)
-
         self.image_box = CircleImage(size=self.image_size, image_file=self.cover_path)
         self.image_stack = Box(
             h_align="start", v_align="start", name="player-image-stack"
         )
         self.image_stack.children = [*self.image_stack.children, self.image_box]
-
-        self.player.connect("notify::arturl", self.set_image)
 
         self.art_animator = Animator(
             bezier_curve=(0, 0, 1, 1),
@@ -287,9 +289,19 @@ class PlayerBox(Box):
                 self.track_album,
             ],
         )
+
         # Player Signals
-        self.player.connect("notify::playback-status", self.on_playback_change)
-        self.player.connect("notify::shuffle", self.shuffle_update)
+        bulk_connect(
+            self.player,
+            {
+                "notify::title": lambda *_: self.track_title.set_label(
+                    self.player.title
+                ),
+                "exit": self.on_player_exit,
+                "notify::playback-status": self.on_playback_change,
+                "notify::shuffle": self.shuffle_update,
+            },
+        )
 
         def position_poll(_):
             while True:
@@ -402,8 +414,6 @@ class PlayerBox(Box):
 
         setup_cursor_hover(self.seek_bar)
 
-        self.seek_bar.connect("change-value", self.on_scale_move)
-        # self.seek_bar.connect("button-release-event", self.on_button_scale_release)
         self.player.connect(
             "notify::length",
             lambda _, x: (

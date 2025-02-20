@@ -4,6 +4,7 @@ from typing import Literal
 import gi
 import psutil
 from fabric import Fabricator
+from fabric.utils import bulk_connect
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scale import ScaleMark
@@ -49,8 +50,13 @@ def setup_cursor_hover(
         cursor = Gdk.Cursor.new_from_name(display, "default")
         widget.get_window().set_cursor(cursor)
 
-    widget.connect("enter-notify-event", on_enter_notify_event)
-    widget.connect("leave-notify-event", on_leave_notify_event)
+    bulk_connect(
+        widget,
+        {
+            "enter-notify-event": on_enter_notify_event,
+            "leave-notify-event": on_leave_notify_event,
+        },
+    )
 
 
 # Function to get the system stats using

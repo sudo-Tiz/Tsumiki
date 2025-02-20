@@ -65,6 +65,9 @@ class QuickSettingsButtonBox(Box):
 
         self.power_pfl = PowerProfileToggle(submenu=PowerProfileSubMenu())
 
+        self.hypr_idle = HyprIdleQuickSetting()
+        self.hypr_sunset = HyprSunsetQuickSetting()
+
         self.grid.attach(
             self.wifi_toggle,
             0,
@@ -90,7 +93,7 @@ class QuickSettingsButtonBox(Box):
         )
 
         self.grid.attach(
-            HyprIdleQuickSetting(),
+            self.hypr_idle,
             2,
             2,
             2,
@@ -98,7 +101,7 @@ class QuickSettingsButtonBox(Box):
         )
 
         self.grid.attach(
-            HyprSunsetQuickSetting(),
+            self.hypr_sunset,
             0,
             4,
             2,

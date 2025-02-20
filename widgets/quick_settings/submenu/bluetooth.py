@@ -1,5 +1,5 @@
 from fabric.bluetooth.service import BluetoothClient, BluetoothDevice
-from fabric.utils import get_relative_path
+from fabric.utils import bulk_connect, get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
@@ -33,8 +33,13 @@ class BluetoothDeviceBox(CenterBox):
             lambda _: self.device.set_property("connecting", not self.device.connected),
         )
 
-        self.device.connect("notify::connecting", self.on_device_connecting)
-        self.device.connect("notify::connected", self.on_device_connect)
+        bulk_connect(
+            self.device,
+            {
+                "notify::connecting": self.on_device_connecting,
+                "notify::connected": self.on_device_connect,
+            },
+        )
 
         self.add_start(
             Image(
@@ -169,10 +174,14 @@ class BluetoothToggle(QuickSubToggle):
             submenu=submenu,
             **kwargs,
         )
+
         # Client Signals
         self.client = bluetooth_service
-        self.client.connect("notify::enabled", self.toggle_bluetooth)
-        self.client.connect("device-added", self.new_device)
+
+        bulk_connect(
+            self.client,
+            {"device-added": self.new_device, "notify::enabled": self.toggle_bluetooth},
+        )
 
         self.toggle_bluetooth(self.client)
 
