@@ -12,7 +12,7 @@
 
   & > button {
     padding: 0 functions.toEm(2);
-    margin: 4px 0;
+    margin: functions.toEm(4) 0;
     border: 0;
 
     &:last-child {

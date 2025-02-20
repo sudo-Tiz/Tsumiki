@@ -2,12 +2,13 @@
 @use "common/mixins.scss";
 @use "variable.scss";
 @use "sass:math";
+@use "common/functions.scss";
 
 #player-stack-button {
   border-radius: 5px;
   min-width: 20px;
   min-height: 6px;
-  margin: 10px 3px;
+  margin: functions.toEm(10) functions.toEm(3);
   background-color: theme.$text-main;
 
   &:hover {
@@ -21,7 +22,7 @@
 
   &.empty {
     min-width: 9px;
-    margin: 14px 2px 14px 2px;
+    margin: functions.toEm(14) functions.toEm(2);
     background-color: theme.$text-main;
   }
 }
@@ -84,12 +85,12 @@
     }
 
     #button-box {
-      margin: 0 10px;
+      margin: 0 functions.toEm(10);
 
       #player-button {
         min-width: 20px;
         min-height: 20px;
-        padding: 5px;
+        padding: functions.toEm(5);
         border-radius: 100%;
 
         &:hover {

@@ -4,7 +4,7 @@
 @use "variable.scss";
 @use "common/functions.scss";
 
-$hover-tranisition: background 0.15s ease-in-out;
+$hover-transition: background 0.15s ease-in-out;
 
 /* notification widget*/
 
@@ -23,7 +23,7 @@ $hover-tranisition: background 0.15s ease-in-out;
         /* Notification app icon (only visible when the primary image is set) */
         -gtk-icon-effect: none;
         -gtk-icon-shadow: 0 1px 4px black;
-        margin: 6px;
+        margin: functions.toEm(6);
       }
 
       .summary {
@@ -60,7 +60,7 @@ $hover-tranisition: background 0.15s ease-in-out;
         box-shadow: none;
         border: none;
         background-color: color.mix(theme.$text-main, transparent, 20%);
-        transition: $hover-tranisition;
+        transition: $hover-transition;
 
         #close-icon {
           @extend %clear_icon;
@@ -76,7 +76,7 @@ $hover-tranisition: background 0.15s ease-in-out;
         border-radius: 3rem;
         box-shadow: none;
         background-color: transparent;
-        transition: $hover-tranisition;
+        transition: $hover-transition;
 
         &.start-action {
           margin-left: 0;

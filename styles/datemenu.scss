@@ -40,7 +40,7 @@
         border-width: 2px;
 
         label {
-          padding-left: 5px;
+          padding-left: functions.toEm(5);
         }
 
         &:hover {

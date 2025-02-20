@@ -13,7 +13,7 @@
 
 #overview-icon {
   border-style: none;
-  margin: 5px;
+  margin: functions.toEm(5);
   background-color: color.mix(black, transparent, 40%);
   border-color: black;
   border-radius: 15px;

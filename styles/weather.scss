@@ -1,8 +1,9 @@
 @use "theme.scss";
 @use "common/mixins.scss";
 @use "variable.scss";
+@use "common/functions.scss";
 
-$base_margin: 4px;
+$base_margin: functions.toEm(4);
 
 .weather-box {
   @include mixins.floating-widget;
@@ -29,7 +30,7 @@ $base_margin: 4px;
     }
 
     #weather-details {
-      margin: 8px 50px;
+      margin: functions.toEm(8) functions.toEm(50);
 
       .windspeed {
         font-size: 1.1em;

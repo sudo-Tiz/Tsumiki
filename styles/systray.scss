@@ -31,7 +31,7 @@
 
 #system-tray-menu > menuitem menu > menuitem,
 #system-tray-menu > menuitem {
-  margin: 5px 0;
+  margin: functions.toEm(5) 0;
   background-color: theme.$surface-disabled;
   padding: 0.3em 0.5em;
   border-radius: variable.$radius;
