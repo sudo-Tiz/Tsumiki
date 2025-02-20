@@ -60,6 +60,10 @@
           "type": "string",
           "enum": ["top", "bottom"]
         },
+        "bar_style": {
+          "type": "string",
+          "enum": ["default", "floating"]
+        },
         "layer": {
           "type": "string",
           "enum": ["background", "bottom", "top", "overlay"]

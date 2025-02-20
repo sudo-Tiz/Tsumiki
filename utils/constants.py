@@ -146,7 +146,7 @@ DEFAULT_CONFIG = {
         "check_updates": False,
         "layer": "top",
         "auto_hide": False,
-        "floating": False,
+        "bar_style": "default",
         "location": "top",
         "widget_style": "default",
     },

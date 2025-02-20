@@ -90,7 +90,9 @@ class StatusBar(WaylandWindow):
 
         layout = self.make_layout()
 
-        box = CenterBox(
+        options = widget_config["options"]
+
+        self.box = CenterBox(
             name="panel-inner",
             start_children=Box(
                 spacing=4,
@@ -109,21 +111,26 @@ class StatusBar(WaylandWindow):
             ),
         )
 
-        acnhor = f"left {widget_config['options']['location']} right"
+        anchor = f"left {options['location']} right"
         super().__init__(
             name="panel",
-            layer=widget_config["options"]["layer"],
-            anchor=acnhor,
+            layer=options["layer"],
+            anchor=anchor,
             pass_through=False,
             monitor=HyprlandWithMonitors().get_current_gdk_monitor_id(),
             exclusivity="auto",
             visible=True,
             all_visible=False,
-            child=box,
+            child=self.box,
             **kwargs,
         )
 
-        if widget_config["options"]["check_updates"]:
+        print("bar created", options["bar_style"])
+
+        if options["bar_style"]:
+            self.box.add_style_class("floating-bar")
+
+        if options["check_updates"]:
             invoke_repeater(
                 convert_seconds_to_milliseconds(3600),
                 self.check_for_bar_updates,

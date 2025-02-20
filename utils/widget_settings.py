@@ -71,6 +71,7 @@ Options = TypedDict(
         "location": str,
         "layer": str,
         "widget_style": str,
+        "bar_style": Literal["default", "floating"],
     },
 )
 

@@ -14,12 +14,16 @@ label {
 }
 
 #panel {
-  background-color: theme.$bar-background;
-
   &-inner {
-    padding: 0.6em 1.8em 0.35em 1.8em;
-    border-color: theme.$surface-disabled;
+    background-color: theme.$background;
+    padding: 0.6em 0.8em 0.35em 0.8em;
   }
+}
+
+.floating-bar {
+  margin: 1rem 2rem;
+  border-color: theme.$surface-disabled;
+  border-radius: variable.$radius;
 }
 
 .panel-box,
