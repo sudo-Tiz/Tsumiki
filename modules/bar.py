@@ -127,7 +127,7 @@ class StatusBar(WaylandWindow):
 
         print("bar created", options["bar_style"])
 
-        if options["bar_style"]:
+        if options["bar_style"] and options["bar_style"] != "default":
             self.box.add_style_class("floating-bar")
 
         if options["check_updates"]:
