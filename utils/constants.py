@@ -155,6 +155,7 @@ DEFAULT_CONFIG = {
         "path": "Videos/Screencasting",
         "icon_size": 16,
         "tooltip": True,
+        "audio": True,
     },
     "spacing": {"size": 20},
     "stop_watch": {"stopped_icon": "󱫞", "running_icon": "󱫠", "icon_size": "16px"},
