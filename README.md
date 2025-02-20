@@ -16,6 +16,9 @@ The panel focuses on providing an all-in-one, fully integrated panel experience,
   <tr>
     <td colspan="4"><img src="assets/screenshots/main.png"></td>
   </tr>
+    <tr>
+    <td colspan="4"><img src="assets/screenshots/main2.png"></td>
+  </tr>
   <tr>
     <td colspan="1"><img src="assets/screenshots/quick_settings.png"></td>
     <td colspan="1"><img src="assets/screenshots/noti.png"></td>
