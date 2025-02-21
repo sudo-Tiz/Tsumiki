@@ -6,6 +6,7 @@ from gi.repository import Gio, GLib
 from loguru import logger
 
 import utils.functions as helpers
+from utils.exceptions import ExecutableNotFoundError
 from utils.widget_settings import BarConfig
 
 
@@ -26,7 +27,7 @@ class ScreenRecorder(Service):
 
     def __init__(self, widget_config: BarConfig, **kwargs):
         if not helpers.executable_exists("wf-recorder"):
-            raise helpers.ExecutableNotFoundError("wf-recorder")
+            raise ExecutableNotFoundError("wf-recorder")
 
         self.config = widget_config["recorder"]
         self.screenrecord_path = f"{GLib.get_home_dir()}/{self.config['path']}"
@@ -38,7 +39,7 @@ class ScreenRecorder(Service):
     def screencast_start(self, fullscreen=False):
         if self.is_recording:
             logger.error(
-                "[SCREENRECORD] Another instance of wf-recorder is already running"
+                "[SCREENRECORD] Another instance of wf-recorder is already running."
             )
             return
         time = datetime.datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
@@ -82,7 +83,7 @@ class ScreenRecorder(Service):
                 _, stdout, stderr = process.communicate_utf8_finish(task)
             except Exception:
                 logger.error(
-                    f"[SCREENRECORD] Failed read notification action with error "
+                    f"[SCREENRECORD] Failed read notification action with error."
                     f"{stderr}"
                 )
                 return
@@ -115,7 +116,7 @@ class ScreenRecorder(Service):
                 f"Saved Screenshot at {file_path}",
             ]
             if file_path
-            else ["Screenshot Sent to Clipboard"]
+            else ["Screenshot Sent to Clipboard."]
         )
 
         proc: Gio.Subprocess = Gio.Subprocess.new(cmd, Gio.SubprocessFlags.STDOUT_PIPE)

@@ -10,12 +10,13 @@ from modules.osd import OSDContainer
 from utils.colors import Colors
 from utils.config import widget_config
 from utils.constants import APP_CACHE_DIRECTORY, APPLICATION_NAME
+from utils.exceptions import ExecutableNotFoundError
 from widgets.corners import ScreenCorners
 
 
 def process_and_apply_css(app: Application):
     if not helpers.executable_exists("sass"):
-        raise helpers.ExecutableNotFoundError(
+        raise ExecutableNotFoundError(
             "sass"
         )  # Raise an error if sass is not found and exit the application
 

@@ -3,6 +3,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
 import utils.functions as helpers
+from utils.exceptions import ExecutableNotFoundError
 from utils.widget_utils import text_icon
 
 from .widget_container import ButtonWidget
@@ -34,7 +35,7 @@ class CommandSwitcher(ButtonWidget):
         )
 
         if not helpers.executable_exists(self.command_without_args):
-            raise helpers.ExecutableNotFoundError(self.command_without_args)
+            raise ExecutableNotFoundError(self.command_without_args)
 
         self.add_style_class(style_classes)
 
