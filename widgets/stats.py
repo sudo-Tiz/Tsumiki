@@ -1,5 +1,10 @@
+import json
+
+from fabric import Fabricator
+from fabric.utils import exec_shell_command
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
+from loguru import logger
 
 import utils.functions as helpers
 from shared.widget_container import ButtonWidget
@@ -185,3 +190,122 @@ class StorageWidget(ButtonWidget):
 
     def ratio(self):
         return f"{self.get_used()}/{self.get_total()}"
+
+
+class NetworkUsageWidget(ButtonWidget):
+    """A widget to display the current network usage."""
+
+    def __init__(
+        self,
+        widget_config: BarConfig,
+        **kwargs,
+    ):
+        super().__init__(
+            name="network_usage",
+            **kwargs,
+        )
+        self.nmcli_command = "nmcli -c no -t"
+
+        self.config = widget_config["network_usage"]
+
+        self.nmcli_wifi_adapter_name = self.config["adapter_name"]
+        self.network_usage_upload_icon = self.config["upload_icon"]
+        self.network_usage_download_icon = self.config["download_icon"]
+        self.network_disconnected_icon = self.config["disconnected_icon"]
+
+        # Create a TextIcon with the specified icon and size
+        self.icon = text_icon(
+            icon=self.config["upload_icon"],
+            size=self.config["icon_size"],
+            props={"style_classes": "panel-icon"},
+        )
+
+        self.network_level_label = Label(
+            name="network_usage", label="0 KB", style_classes="panel-text"
+        ).build(
+            lambda label, _: Fabricator(
+                poll_from=f"vnstat -i {self.nmcli_wifi_adapter_name} -l --json",
+                stream=True,
+                on_changed=lambda _, value: self.update_usage(value),
+            )
+        )
+
+        self.box = Box()
+
+        self.children = (self.box,)
+
+        self.box.children = (self.icon, self.network_level_label)
+
+    def update_usage(self, value):
+        try:
+            data = json.loads(value)
+        except Exception as e:
+            logger.error(f"Error while deserializing network usage json: {e}")
+            return
+
+        if "jsonversion" in data or "index" not in data:
+            return
+
+        device_stats = exec_shell_command(
+            f"{self.nmcli_command} d show {self.nmcli_wifi_adapter_name}"
+        )
+
+        connection_state = None
+        connection_strength = None
+        connection_name = "unknown"
+
+        ip_address = None
+        for line in device_stats.splitlines():
+            if "STATE" in line:
+                state = line.split(":")[1]
+                connection_state = state.split(" ")[1][1:-1]
+                connection_strength = int(state.split(" ")[0])
+            elif "CONNECTION" in line:
+                connection_name = line.split(":")[1]
+            elif "IP4.ADDRESS" in line:
+                ip_address = line.split(":")[1].split("/")[0]
+
+        if not connection_state:
+            return
+
+        if connection_state != "connected":
+            self.icon.set_markup(self.network_disconnected_icon)
+            self.network_level_label.set_label("Disconnected")
+
+            self.set_tooltip_markup("Disconnected")
+            return
+
+        tx_rate = int(data["tx"]["bytespersecond"])
+        rx_rate = int(data["rx"]["bytespersecond"])
+
+        def get_size(bytes):
+            factor = 1024
+            bytes /= factor
+            for unit in ["KB", "MB"]:
+                if bytes < factor:
+                    return f"{
+                        int(bytes)
+                        if bytes < 1
+                        else (float(int(bytes * 10)) / 10)
+                        if bytes < 100
+                        else int(bytes)
+                    } {unit}"
+                bytes /= factor
+
+        if tx_rate >= rx_rate:
+            self.icon.set_markup(self.network_usage_upload_icon)
+            self.network_level_label.set_label(get_size(tx_rate))
+        else:
+            self.icon.set_markup(self.network_usage_download_icon)
+            self.network_level_label.set_label(get_size(rx_rate))
+
+        if self.config["tooltip"]:
+            self.set_tooltip_markup(
+                (
+                    f"Connected to {connection_name}\n"
+                    f"Connection strength: {connection_strength}\n"
+                    if connection_state
+                    else ""
+                )
+                + (f"IP Address: {ip_address}" if ip_address else "")
+            )

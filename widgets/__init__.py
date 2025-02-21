@@ -17,6 +17,7 @@ from .quick_settings.quick_settings import *
 from .recorder import *
 from .stats import *
 from .stop_watch import *
+from .submap import *
 from .systray import *
 from .taskbar import *
 from .theme import *

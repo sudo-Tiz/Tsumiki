@@ -61,12 +61,10 @@ class NotificationQuickSetting(HoverButton):
         self.cache_notification_service = NotificationCacheService().get_initial()
         self.notification_label = Label(
             label="Noisy",
-            style_classes="panel-text",
         )
         self.notification_icon = Image(
             icon_name=icons["notifications"]["noisy"],
             icon_size=16,
-            style_classes="panel-icon",
         )
 
         self.children = Box(

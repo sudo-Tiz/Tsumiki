@@ -117,6 +117,20 @@ DEFAULT_CONFIG = {
         "label": True,
         "tooltip": True,
     },
+    "submap": {
+        "icon": "󰌌",
+        "icon_size": "12px",
+        "label": True,
+        "tooltip": True,
+    },
+    "network_usage": {
+        "adapter_name": "wlan0",
+        "icon_size": "14px",
+        "upload_icon": "",
+        "download_icon": "",
+        "disconnected_icon": "󰤩",
+        "tooltip": True,
+    },
     "microphone": {
         "icon_size": "12px",
         "label": False,

@@ -100,6 +100,8 @@
               "ram",
               "recorder",
               "spacer",
+              "submap",
+              "network_usage",
               "storage",
               "stop_watch",
               "system_tray",
@@ -138,6 +140,8 @@
               "recorder",
               "spacer",
               "storage",
+              "submap",
+              "network_usage",
               "stop_watch",
               "system_tray",
               "task_bar",
@@ -175,6 +179,8 @@
               "recorder",
               "spacer",
               "storage",
+              "submap",
+              "network_usage",
               "stop_watch",
               "system_tray",
               "task_bar",
@@ -457,6 +463,23 @@
         }
       }
     },
+    "submap": {
+      "type": "object",
+      "properties": {
+        "icon": {
+          "type": "string"
+        },
+        "icon_size": {
+          "type": "string"
+        },
+        "label": {
+          "type": "boolean"
+        },
+        "tooltip": {
+          "type": "boolean"
+        }
+      }
+    },
     "task_bar": {
       "type": "object",
       "properties": {
@@ -686,6 +709,30 @@
             "notification9",
             "notification10"
           ]
+        }
+      }
+    },
+    "network_usage": {
+      "type": "object",
+      "properties": {
+        "adapter_name": {
+          "type": "string"
+        },
+        "icon_size": {
+          "type": "string",
+          "pattern": "^[0-9]+px$"
+        },
+        "upload_icon": {
+          "type": "string"
+        },
+        "download_icon": {
+          "type": "string"
+        },
+        "disconnected_icon": {
+          "type": "string"
+        },
+        "tooltip": {
+          "type": "boolean"
         }
       }
     },

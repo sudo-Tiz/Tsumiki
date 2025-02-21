@@ -84,6 +84,22 @@ Mpris = TypedDict("Mpris", {**BaseConfig.__annotations__, "truncation_size": int
 # Memory configuration
 Memory = TypedDict("Memory", {**BaseConfig.__annotations__, "icon": str})
 
+# Submap configuration
+Submap = TypedDict("Submap", {**BaseConfig.__annotations__, "icon": str})
+
+
+# Network configuration
+NetworkUsage = TypedDict(
+    "NetworkUsage",
+    {
+        **BaseConfig.__annotations__,
+        "adapter_name": str,
+        "upload_icon": str,
+        "download_icon": str,
+        "disconnected_icon": str,
+    },
+)
+
 # Storage configuration
 Storage = TypedDict("Storage", {**BaseConfig.__annotations__, "icon": str, "path": str})
 
@@ -218,6 +234,7 @@ class BarConfig(TypedDict):
     memory: Memory
     microphone: MicroPhone
     mpris: Mpris
+    network_usage: NetworkUsage
     notification: Notification
     options: Options
     osd: OSD
@@ -229,6 +246,7 @@ class BarConfig(TypedDict):
     stop_watch: StopWatch
     storage: Storage
     system_tray: SystemTray
+    submap: Submap
     task_bar: TaskBar
     theme: Theme
     theme_switcher: ThemeSwitcher
