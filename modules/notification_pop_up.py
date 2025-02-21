@@ -77,9 +77,7 @@ class NotificationPopup(WaylandWindow):
 
         if self.config["play_sound"]:
             helpers.play_sound(
-                get_relative_path(
-                    f"../assets/sounds/{self.config['sound_file']}.mp3"
-                )
+                get_relative_path(f"../assets/sounds/{self.config['sound_file']}.mp3")
             )
 
 

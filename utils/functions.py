@@ -134,7 +134,7 @@ def check_icon_exists(icon_name: str, fallback_icon: str) -> str:
     return fallback_icon
 
 
-# Function to execute a shell command asynchronously
+# Function to play sound
 @cooldown(1)
 def play_sound(file: str):
     exec_shell_command_async(f"pw-play {file}", None)

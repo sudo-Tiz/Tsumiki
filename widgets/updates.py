@@ -1,6 +1,11 @@
 import json
 
-from fabric.utils import exec_shell_command_async, get_relative_path, invoke_repeater
+from fabric.utils import (
+    cooldown,
+    exec_shell_command_async,
+    get_relative_path,
+    invoke_repeater,
+)
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 from loguru import logger
@@ -71,6 +76,7 @@ class UpdatesWidget(ButtonWidget):
         else:
             self.update()
 
+    @cooldown(1)
     def update(self):
         logger.info(f"{Colors.INFO}[Updates] Checking for updates...")
 

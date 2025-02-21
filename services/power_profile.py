@@ -11,8 +11,7 @@ class PowerProfiles(Service):
 
     @Signal
     def profile(self, value: str) -> None:
-        """Signal emitted when screen brightness changes."""
-        # Implement as needed for your application
+        """Signal emitted when profile changes."""
 
     instance = None
 
