@@ -5,6 +5,7 @@ from fabric.widgets.label import Label
 from services.cache_notification import NotificationCacheService
 from shared.button_toggle import CommandSwitcher
 from shared.widget_container import HoverButton
+from utils.icons import icons
 
 
 class QuickSettingToggler(CommandSwitcher):
@@ -63,7 +64,7 @@ class NotificationQuickSetting(HoverButton):
             style_classes="panel-text",
         )
         self.notification_icon = Image(
-            icon_name="notifications-symbolic",
+            icon_name=icons["notifications"]["noisy"],
             icon_size=16,
             style_classes="panel-icon",
         )
@@ -98,10 +99,12 @@ class NotificationQuickSetting(HoverButton):
         if value:
             self.notification_label.set_label("Quiet")
             self.notification_icon.set_from_icon_name(
-                "notifications-disabled-symbolic", 16
+                icons["notifications"]["silent"], 16
             )
             self.remove_style_class("active")
         else:
             self.notification_label.set_label("Noisy")
-            self.notification_icon.set_from_icon_name("notifications-symbolic", 16)
+            self.notification_icon.set_from_icon_name(
+                icons["notifications"]["noisy"], 16
+            )
             self.add_style_class("active")

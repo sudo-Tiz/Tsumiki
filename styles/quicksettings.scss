@@ -215,6 +215,10 @@ $slider-height: 12px;
         label {
           color: lighten($color: #000000, $amount: 8%);
         }
+
+        image {
+          color: lighten($color: #000000, $amount: 8%);
+        }
       }
     }
 
