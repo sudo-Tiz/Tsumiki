@@ -92,6 +92,7 @@ class PowerProfileToggle(QuickSubToggle):
         self.client = PowerProfiles().get_initial()
         self.update_action_button()
         self.set_active_style(True)
+        self.action_button.set_sensitive(False)
 
         self.client.connect(
             "profile",
