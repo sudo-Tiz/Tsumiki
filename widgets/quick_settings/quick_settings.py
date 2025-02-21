@@ -46,6 +46,7 @@ class QuickSettingsButtonBox(Box):
             v_expand=True,
             **kwargs,
         )
+
         self.grid = Gtk.Grid(
             visible=True,
             row_spacing=10,

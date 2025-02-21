@@ -5,11 +5,8 @@
 @use "common/functions.scss";
 
 #player-stack-button {
-  border-radius: 5px;
-  min-width: 7px;
-  min-height: 7px;
-  margin: functions.toEm(10) functions.toEm(3);
-  background-color: theme.$text-main;
+
+  @extend %dots_dots;
 
   &:hover {
     background-color: #646464;
