@@ -15,7 +15,7 @@ from services.mpris import MprisPlayerManager
 from shared.circle_image import CircleImage
 from shared.pop_over import PopOverWindow
 from shared.submenu import QuickSubToggle
-from shared.widget_container import ButtonWidget
+from shared.widget_container import ButtonWidget, HoverButton
 from utils.widget_settings import BarConfig
 from utils.widget_utils import (
     get_audio_icon_name,
@@ -127,7 +127,7 @@ class QuickSettingsMenu(Box):
             else os.path.expandvars("$HOME/.face")
         )
 
-        user_label = Label(
+        username_label = Label(
             label="User", v_align="center", h_align="start", style_classes="user"
         )
 
@@ -139,37 +139,69 @@ class QuickSettingsMenu(Box):
         )
 
         self.user_box = Gtk.Grid(
-            row_spacing=5,
             column_spacing=10,
             name="user-box-grid",
             visible=True,
+            hexpand=True,
+        )
+
+        avatar = CircleImage(
+            image_file=user_image,
+            size=70,
         )
 
         self.user_box.attach(
-            CircleImage(
-                image_file=user_image,
-                size=70,
+            avatar,
+            0,
+            0,
+            2,
+            2,
+        )
+
+        button_box = Box(
+            orientation="h",
+            h_align="start",
+            v_align="center",
+            name="button-box",
+            h_expand=True,
+            v_expand=True,
+        )
+
+        button_box.pack_end(
+            Box(
+                orientation="h",
+                children=(
+                    HoverButton(
+                        image=Image(icon_name="system-restart-symbolic", icon_size=16),
+                        v_align="center",
+                        on_clicked=lambda *_: helpers.handle_power_action("reboot"),
+                    ),
+                    HoverButton(
+                        image=Image(icon_name="system-shutdown-symbolic", icon_size=16),
+                        v_align="center",
+                        on_clicked=lambda *_: helpers.handle_power_action("shutdown"),
+                    ),
+                ),
             ),
+            False,
+            False,
             0,
-            0,
-            2,
-            2,
         )
 
-        self.user_box.attach(
-            user_label,
-            2,
-            0,
-            1,
-            1,
+        self.user_box.attach_next_to(
+            username_label, avatar, Gtk.PositionType.RIGHT, 1, 1
         )
 
-        self.user_box.attach(
-            uptime_label,
-            2,
-            1,
-            1,
-            1,
+        self.user_box.attach_next_to(
+            uptime_label, username_label, Gtk.PositionType.BOTTOM, 1, 1
+        )
+
+        self.user_box.attach_next_to(
+            button_box,
+            username_label,
+            Gtk.PositionType.RIGHT,
+            4,
+            4,
         )
 
         box = CenterBox(
@@ -207,7 +239,7 @@ class QuickSettingsMenu(Box):
         psutil_fabricator.connect(
             "changed",
             lambda _, value: (
-                user_label.set_label(
+                username_label.set_label(
                     f"{helpers.get_distro_icon()} {value.get('user')}"
                 ),
                 uptime_label.set_label(f" {value.get('uptime')}"),

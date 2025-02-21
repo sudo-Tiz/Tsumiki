@@ -140,6 +140,23 @@ def play_sound(file: str):
     exec_shell_command_async(f"pw-play {file}", None)
 
 
+def handle_power_action(operation: str):
+    match operation:
+        case "shutdown":
+            exec_shell_command_async("systemctl poweroff")
+        case "reboot":
+            exec_shell_command_async("systemctl reboot")
+        case "hibernate":
+            exec_shell_command_async("systemctl hibernate")
+        case "suspend":
+            exec_shell_command_async("systemctl suspend")
+        case "lock":
+            exec_shell_command_async("loginctl lock-session")
+        case "logout":
+            exec_shell_command_async("loginctl terminate-user $USER")
+    return True
+
+
 # Function to get the distro icon
 def get_distro_icon():
     distro_id = GLib.get_os_info("ID")

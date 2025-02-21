@@ -28,6 +28,22 @@ $slider-height: 12px;
     #user-box-grid {
       margin-bottom: 10px;
 
+      #button-box {
+        min-width: 230px;
+        min-height: 50px;
+
+        button {
+          margin: 0 5px;
+          background-color: lighten($color: theme.$background, $amount: 5%);
+          border-radius: variable.$radius-large;
+          padding: functions.toEm(4);
+
+          &:last-child {
+            margin-right: 20px;
+          }
+        }
+      }
+
       .user {
         font-weight: 600;
       }
@@ -36,7 +52,7 @@ $slider-height: 12px;
         font-size: 0.92rem;
         border: variable.$border-width solid
           lighten($color: theme.$surface-disabled, $amount: 10%);
-        padding: functions.toEm(3) functions.toEm(9);
+        padding: functions.toEm(3) functions.toEm(10);
         font-weight: 600;
         border-radius: 1rem;
       }
@@ -56,7 +72,6 @@ $slider-height: 12px;
         margin: 0 functions.toEm(5);
 
         .panel-text {
-
           @extend %caption_heading;
         }
       }
@@ -170,15 +185,11 @@ $slider-height: 12px;
       }
     }
 
-
     #quicksettings-togglebutton {
-
-
       .toggle-revealer {
         border-radius: 0 variable.$radius-large variable.$radius-large 0;
         padding: functions.toEm(10) functions.toEm(5);
       }
-
     }
 
     // this is for buttons like hypridle

@@ -1,6 +1,6 @@
 from typing import Literal
 
-from fabric.utils import exec_shell_command_async, get_relative_path
+from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
@@ -8,6 +8,7 @@ from fabric.widgets.widget import Widget
 
 from shared import PopupWindow
 from shared.widget_container import ButtonWidget
+from utils.functions import handle_power_action
 from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon
 
@@ -121,19 +122,7 @@ class PowerControlButtons(ButtonWidget):
         ],
     ):
         PowerMenuPopup().get_initial().toggle_popup()
-        match pressed_button:
-            case "shutdown":
-                exec_shell_command_async("systemctl poweroff")
-            case "reboot":
-                exec_shell_command_async("systemctl reboot")
-            case "hibernate":
-                exec_shell_command_async("systemctl hibernate")
-            case "suspend":
-                exec_shell_command_async("systemctl suspend")
-            case "lock":
-                exec_shell_command_async("loginctl lock-session")
-            case "logout":
-                exec_shell_command_async("loginctl terminate-user $USER")
+        return handle_power_action(pressed_button)
 
 
 class PowerWidget(ButtonWidget):

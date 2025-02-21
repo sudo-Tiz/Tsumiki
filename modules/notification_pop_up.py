@@ -252,7 +252,7 @@ class NotificationWidget(EventBox):
         return (
             self._notification.timeout
             if self._notification.timeout != -1
-            else self.config["timeout"]
+            else widget_config["notification"]["timeout"]
         )
 
     def pause_timeout(self):
