@@ -5,6 +5,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
+from fabric.widgets.button import Button
 from gi.repository import Gtk
 
 import utils.functions as helpers
@@ -68,45 +69,34 @@ class QuickSettingsButtonBox(Box):
         self.hypr_idle = HyprIdleQuickSetting()
         self.hypr_sunset = HyprSunsetQuickSetting()
 
-        self.grid.attach(
-            self.wifi_toggle,
-            0,
-            0,
-            2,
-            2,
+        self.notification_btn = Button(
+            image=Image(icon_name="notifications-symbolic", icon_size=16),
         )
 
-        self.grid.attach(
-            self.bluetooth_toggle,
-            2,
-            0,
-            2,
-            2,
+
+        self.grid.set_column_homogeneous(True)
+        self.grid.set_row_homogeneous(True)
+
+
+        self.grid.attach(self.wifi_toggle, 1, 1, 1, 1)
+
+        self.grid.attach_next_to(
+            self.bluetooth_toggle, self.wifi_toggle, Gtk.PositionType.RIGHT, 1, 1
         )
 
-        self.grid.attach(
-            self.power_pfl,
-            0,
-            2,
-            2,
-            2,
+        self.grid.attach_next_to(
+            self.power_pfl, self.wifi_toggle, Gtk.PositionType.BOTTOM, 1, 1
         )
 
-        self.grid.attach(
-            self.hypr_idle,
-            2,
-            2,
-            2,
-            2,
+        self.grid.attach_next_to(
+            self.hypr_sunset, self.bluetooth_toggle, Gtk.PositionType.BOTTOM, 1, 1
         )
 
-        self.grid.attach(
-            self.hypr_sunset,
-            0,
-            4,
-            2,
-            2,
+        self.grid.attach_next_to(
+            self.hypr_idle, self.power_pfl, Gtk.PositionType.BOTTOM, 1, 1
         )
+
+
 
         self.wifi_toggle.connect("reveal-clicked", self.set_active_submenu)
         self.bluetooth_toggle.connect("reveal-clicked", self.set_active_submenu)
