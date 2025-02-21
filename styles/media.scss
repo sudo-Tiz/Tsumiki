@@ -6,8 +6,8 @@
 
 #player-stack-button {
   border-radius: 5px;
-  min-width: 20px;
-  min-height: 6px;
+  min-width: 7px;
+  min-height: 7px;
   margin: functions.toEm(10) functions.toEm(3);
   background-color: theme.$text-main;
 
@@ -17,7 +17,7 @@
 
   &.active {
     border-radius: 5px;
-    background-color: theme.$background;
+    background-color: lighten($color: theme.$background, $amount: 15%)
   }
 
   &.empty {

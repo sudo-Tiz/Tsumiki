@@ -2,10 +2,10 @@ import os
 
 from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
+from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
-from fabric.widgets.button import Button
 from gi.repository import Gtk
 
 import utils.functions as helpers
@@ -73,10 +73,8 @@ class QuickSettingsButtonBox(Box):
             image=Image(icon_name="notifications-symbolic", icon_size=16),
         )
 
-
         self.grid.set_column_homogeneous(True)
         self.grid.set_row_homogeneous(True)
-
 
         self.grid.attach(self.wifi_toggle, 1, 1, 1, 1)
 
@@ -95,8 +93,6 @@ class QuickSettingsButtonBox(Box):
         self.grid.attach_next_to(
             self.hypr_idle, self.power_pfl, Gtk.PositionType.BOTTOM, 1, 1
         )
-
-
 
         self.wifi_toggle.connect("reveal-clicked", self.set_active_submenu)
         self.bluetooth_toggle.connect("reveal-clicked", self.set_active_submenu)

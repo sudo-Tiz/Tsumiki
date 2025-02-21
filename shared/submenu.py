@@ -185,7 +185,7 @@ class QuickSubToggle(Box):
         label = label.strip()
         self.action_label.set_style("padding-right: 60px;") if len(
             label
-        ) <= 10 else self.action_label.set_style(f"padding-right: {35-len(label)}px;")
+        ) <= 10 else self.action_label.set_style(f"padding-right: {35 - len(label)}px;")
         return True
 
     def set_action_icon(self, icon_name: str):
