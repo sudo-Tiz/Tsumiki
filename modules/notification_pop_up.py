@@ -75,10 +75,10 @@ class NotificationPopup(WaylandWindow):
         new_box.set_reveal_child(True)
         self.cache_notification_service.cache_notification(notification)
 
-        if widget_config["notification"]["play_sound"]:
+        if self.config["play_sound"]:
             helpers.play_sound(
                 get_relative_path(
-                    f"../assets/sounds/{widget_config['notification']['sound_file']}.mp3"
+                    f"../assets/sounds/{self.config['sound_file']}.mp3"
                 )
             )
 
@@ -254,7 +254,7 @@ class NotificationWidget(EventBox):
         return (
             self._notification.timeout
             if self._notification.timeout != -1
-            else widget_config["notification"]["timeout"]
+            else self.config["timeout"]
         )
 
     def pause_timeout(self):
@@ -283,13 +283,13 @@ class NotificationRevealer(Revealer):
     """A widget to reveal a notification."""
 
     def __init__(self, notification: Notification, **kwargs):
-        self.notif_box = NotificationWidget(notification)
+        self.notification_box = NotificationWidget(notification)
         self._notification = notification
 
         super().__init__(
             child=Box(
                 style="margin: 12px;",
-                children=[self.notif_box],
+                children=[self.notification_box],
             ),
             transition_duration=500,
             transition_type="crossfade",
