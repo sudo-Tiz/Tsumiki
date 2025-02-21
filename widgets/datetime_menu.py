@@ -341,6 +341,18 @@ class DateNotificationMenu(Box):
             "clear_all", self.on_clear_all_notifications
         )
 
+        self.dnd_switch.connect("notify::active", self.on_dnd_switch)
+        self.cache_notification_service.connect(
+            "dnd", lambda _, value, *args: self.dnd_switch.set_active(value)
+        )
+
+    def on_dnd_switch(self, switch, _):
+        """Handle the do not disturb switch."""
+        if switch.get_active():
+            self.cache_notification_service.dont_disturb = True
+        else:
+            self.cache_notification_service.dont_disturb = False
+
     def on_clear_all_notifications(self, *_):
         self.notification_list_box.children = []
         self.notifications = []
@@ -394,7 +406,7 @@ class DateTimeWidget(ButtonWidget):
 
         popup.set_pointing_to(self)
 
-        self.notif_status_indicator = Image(
+        self.notification_status_indicator = Image(
             icon_name=icons["notifications"]["noisy"],
             icon_size=16,
             visible=self.config["notification"],
@@ -407,10 +419,6 @@ class DateTimeWidget(ButtonWidget):
             visible=self.config["notification_count"] and self.config["notification"],
         )
 
-        self.notification_indicator_box = Box(
-            children=(self.notif_status_indicator, count_label)
-        )
-
         self.connect(
             "clicked",
             lambda *_: popup.set_visible(not popup.get_visible()),
@@ -419,12 +427,8 @@ class DateTimeWidget(ButtonWidget):
         self.children = Box(
             spacing=10,
             v_align="center",
-            children=(
-                self.notification_indicator_box,
-                DateTime(self.config["format"], name="date-time"),
-            ),
+            children=(DateTime(self.config["format"], name="date-time"),),
         )
-        date_menu.dnd_switch.connect("notify::active", self.on_dnd_switch)
 
         bulk_connect(
             self.cache_notification_service,
@@ -434,17 +438,3 @@ class DateTimeWidget(ButtonWidget):
                 ),
             },
         )
-
-    def on_dnd_switch(self, switch, _):
-        """Handle the do not disturb switch."""
-        if switch.get_active():
-            self.notif_status_indicator.set_from_icon_name(
-                icons["notifications"]["silent"], icon_size=16
-            )
-            self.cache_notification_service.dont_disturb = True
-
-        else:
-            self.notif_status_indicator.set_from_icon_name(
-                icons["notifications"]["noisy"], icon_size=16
-            )
-            self.cache_notification_service.dont_disturb = False

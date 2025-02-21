@@ -2,7 +2,6 @@ import os
 
 from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
-from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
@@ -27,7 +26,11 @@ from widgets.quick_settings.sliders.mic import MicrophoneSlider
 from widgets.quick_settings.submenu.bluetooth import BluetoothSubMenu, BluetoothToggle
 from widgets.quick_settings.submenu.power import PowerProfileSubMenu, PowerProfileToggle
 from widgets.quick_settings.submenu.wifi import WifiSubMenu, WifiToggle
-from widgets.quick_settings.togglers import HyprIdleQuickSetting, HyprSunsetQuickSetting
+from widgets.quick_settings.togglers import (
+    HyprIdleQuickSetting,
+    HyprSunsetQuickSetting,
+    NotificationQuickSetting,
+)
 
 from .sliders.audio import AudioSlider
 from .sliders.brightness import BrightnessSlider
@@ -69,10 +72,7 @@ class QuickSettingsButtonBox(Box):
 
         self.hypr_idle = HyprIdleQuickSetting()
         self.hypr_sunset = HyprSunsetQuickSetting()
-
-        self.notification_btn = Button(
-            image=Image(icon_name="notifications-symbolic", icon_size=16),
-        )
+        self.notification_btn = NotificationQuickSetting()
 
         self.grid.set_column_homogeneous(True)
         self.grid.set_row_homogeneous(True)
@@ -93,6 +93,10 @@ class QuickSettingsButtonBox(Box):
 
         self.grid.attach_next_to(
             self.hypr_idle, self.power_pfl, Gtk.PositionType.BOTTOM, 1, 1
+        )
+
+        self.grid.attach_next_to(
+            self.notification_btn, self.hypr_idle, Gtk.PositionType.RIGHT, 1, 1
         )
 
         self.wifi_toggle.connect("reveal-clicked", self.set_active_submenu)
