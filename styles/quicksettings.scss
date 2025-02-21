@@ -56,7 +56,6 @@ $slider-height: 12px;
         margin: 0 functions.toEm(5);
 
         .panel-text {
-          min-width: 120px; // this causes the text to center
 
           @extend %caption_heading;
         }
@@ -171,8 +170,20 @@ $slider-height: 12px;
       }
     }
 
+
+    #quicksettings-togglebutton {
+
+
+      .toggle-revealer {
+        border-radius: 0 variable.$radius-large variable.$radius-large 0;
+        padding: functions.toEm(10) functions.toEm(5);
+      }
+
+    }
+
     // this is for buttons like hypridle
-    #quicksettings-toggler-button {
+
+    #quicksettings-togglebutton.quicksettings-toggler {
       background-color: theme.$background;
       border-radius: variable.$radius-large;
       @extend %caption_heading;
@@ -189,13 +200,6 @@ $slider-height: 12px;
         label {
           color: lighten($color: #000000, $amount: 8%);
         }
-      }
-    }
-
-    #quicksettings-togglebutton {
-      .toggle-revealer {
-        border-radius: 0 variable.$radius-large variable.$radius-large 0;
-        padding: functions.toEm(10) functions.toEm(5);
       }
     }
 

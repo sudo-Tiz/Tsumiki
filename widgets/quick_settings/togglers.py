@@ -13,6 +13,7 @@ class QuickSettingToggler(CommandSwitcher):
             label=True,
             tooltip=False,
             interval=1000,
+            style_classes="quicksettings-toggler",
             **kwargs,
         )
 
@@ -25,8 +26,7 @@ class HyprIdleQuickSetting(QuickSettingToggler):
             command="hypridle",
             enabled_icon="",
             disabled_icon="",
-            name="quicksettings-toggler-button",
-            style_classes="quicksettings-toggle-action",
+            name="quicksettings-togglebutton",
         )
 
 
@@ -38,6 +38,5 @@ class HyprSunsetQuickSetting(QuickSettingToggler):
             command="hyprsunset -t 2800k",
             enabled_icon="󱩌",
             disabled_icon="󰛨",
-            name="quicksettings-toggler-button",
-            style_classes="quicksettings-toggle-action",
+            name="quicksettings-togglebutton",
         )

@@ -107,4 +107,4 @@ class PowerProfileToggle(QuickSubToggle):
         icon = self.client.get_profile_icon(self.active_pfl)
 
         self.action_icon.set_from_icon_name(icon, 18)
-        self.action_label.set_label(self.unslug(self.active_pfl))
+        self.set_action_label(self.unslug(self.active_pfl))

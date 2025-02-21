@@ -120,11 +120,15 @@ class QuickSubToggle(Box):
         )
         self.action_label = Label(
             style_classes="panel-text",
+            name="quicksettings-toggle-action-label",
             label=action_label,
             ellipsization="end",
-            max_chars_width=24,
             h_align="start",
+            h_expand=True,
         )
+
+        self.pad_action_label(action_label)
+
         self.action_button = HoverButton(style_classes="quicksettings-toggle-action")
 
         self.action_button.add(
@@ -173,7 +177,16 @@ class QuickSubToggle(Box):
         self.set_style_classes("") if not action else self.set_style_classes("active")
 
     def set_action_label(self, label: str):
-        self.action_label.set_label(label)
+        self.pad_action_label(label)
+        self.action_label.set_label(label.strip())
+
+    # hacky way to fix the size, works for now
+    def pad_action_label(self, label):
+        label = label.strip()
+        self.action_label.set_style("padding-right: 60px;") if len(
+            label
+        ) <= 10 else self.action_label.set_style(f"padding-right: {35-len(label)}px;")
+        return True
 
     def set_action_icon(self, icon_name: str):
         self.action_icon.set_from_icon_name(icon_name, self.pixel_size)
