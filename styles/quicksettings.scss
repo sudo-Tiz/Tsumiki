@@ -38,6 +38,10 @@ $slider-height: 12px;
           border-radius: variable.$radius-large;
           padding: functions.toEm(4);
 
+          &:hover {
+            @extend %widget_hover;
+          }
+
           &:last-child {
             margin-right: 20px;
           }

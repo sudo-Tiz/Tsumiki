@@ -85,14 +85,14 @@
   background-color: theme.$text-main;
 }
 
-@mixin slider($width: 11px,
+@mixin slider(
+  $width: 11px,
   $slider-width: 0.5em,
   $highlight-color: white,
   $slider: false,
   $radius: variable.$radius,
   $slider-color: theme.$background-dark,
   $min-length: ""
-
 ) {
   trough {
     transition: 200ms;
@@ -114,7 +114,7 @@
     }
   }
 
-  @if $min-length !="" {
+  @if $min-length != "" {
     scale {
       min-width: $min-length;
     }
@@ -139,7 +139,6 @@
   }
 
   &:disabled {
-
     highlight,
     progress {
       background-color: transparentize(theme.$text-main, 0.4);
@@ -172,7 +171,7 @@
 }
 
 @mixin spacing($multiplier: 1, $spacing: variable.$spacing, $rec: false) {
-  &.horizontal>* {
+  &.horizontal > * {
     margin: 0 calc($spacing * $multiplier / 2);
 
     &:first-child {
@@ -184,7 +183,7 @@
     }
   }
 
-  &.vertical>* {
+  &.vertical > * {
     margin: calc($spacing * $multiplier / 2) 0;
 
     &:first-child {
@@ -198,7 +197,7 @@
 
   @if $rec {
     box {
-      &.horizontal>* {
+      &.horizontal > * {
         margin: 0 $spacing * $multiplier / 2;
 
         &:first-child {
@@ -210,7 +209,7 @@
         }
       }
 
-      &.vertical>* {
+      &.vertical > * {
         margin: $spacing * $multiplier / 2 0;
 
         &:first-child {
