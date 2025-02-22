@@ -406,7 +406,7 @@ class DateTimeWidget(ButtonWidget):
 
         popup.set_pointing_to(self)
 
-        self.notification_status_indicator = Image(
+        self.notification_indicator = Image(
             icon_name=icons["notifications"]["noisy"],
             icon_size=16,
             visible=self.config["notification"],
@@ -419,6 +419,10 @@ class DateTimeWidget(ButtonWidget):
             visible=self.config["notification_count"] and self.config["notification"],
         )
 
+        self.notification_indicator_box = Box(
+            children=(self.notification_indicator, count_label)
+        )
+
         self.connect(
             "clicked",
             lambda *_: popup.set_visible(not popup.get_visible()),
@@ -427,8 +431,12 @@ class DateTimeWidget(ButtonWidget):
         self.children = Box(
             spacing=10,
             v_align="center",
-            children=(DateTime(self.config["format"], name="date-time"),),
+            children=(
+                self.notification_indicator_box,
+                DateTime(self.config["format"], name="date-time"),
+            ),
         )
+        date_menu.dnd_switch.connect("notify::active", self.on_dnd_switch)
 
         bulk_connect(
             self.cache_notification_service,
@@ -436,5 +444,17 @@ class DateTimeWidget(ButtonWidget):
                 "notification_count": lambda _, value, *args: count_label.set_text(
                     str(value)
                 ),
+                "dnd": lambda _, value, *args: self.on,
             },
         )
+
+    def on_dnd_switch(self, value):
+        if value:
+            self.notification_indicator.set_from_icon_name(
+                icons["notifications"]["silent"], icon_size=16
+            )
+
+        else:
+            self.notification_indicator.set_from_icon_name(
+                icons["notifications"]["noisy"], icon_size=16
+            )
