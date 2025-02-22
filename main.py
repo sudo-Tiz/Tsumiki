@@ -21,15 +21,22 @@ def process_and_apply_css(app: Application):
         )  # Raise an error if sass is not found and exit the application
 
     logger.info(f"{Colors.INFO}[Main] Compiling CSS")
-    exec_shell_command("sass styles/main.scss dist/main.css --no-source-map")
-    logger.info(f"{Colors.INFO}[Main] CSS applied")
-    app.set_stylesheet_from_file(get_relative_path("dist/main.css"))
+    output = exec_shell_command("sass styles/main.scss dist/main.css --no-source-map")
+
+    if output == "":
+        logger.info(f"{Colors.INFO}[Main] CSS applied")
+        app.set_stylesheet_from_file(get_relative_path("dist/main.css"))
+    else:
+        app.set_stylesheet_from_string("")
+        logger.error(f"{Colors.ERROR}[Main]Failed to compile sass!")
 
 
 for log in [
     "fabric.hyprland.widgets",
     "fabric.audio.service",
     "fabric.bluetooth.service",
+    "fabric.audio",
+    "fabric.widgets.wayland"
 ]:
     logger.disable(log)
 
