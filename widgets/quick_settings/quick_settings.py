@@ -6,6 +6,7 @@ from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from gi.repository import Gtk
+from sliders.mic import MicrophoneSlider
 
 import utils.functions as helpers
 from services import audio_service, network_service
@@ -22,18 +23,21 @@ from utils.widget_utils import (
     psutil_fabricator,
 )
 from widgets.media import PlayerBoxStack
-from widgets.quick_settings.sliders.mic import MicrophoneSlider
-from widgets.quick_settings.submenu.bluetooth import BluetoothSubMenu, BluetoothToggle
-from widgets.quick_settings.submenu.power import PowerProfileSubMenu, PowerProfileToggle
-from widgets.quick_settings.submenu.wifi import WifiSubMenu, WifiToggle
 from widgets.quick_settings.togglers import (
     HyprIdleQuickSetting,
     HyprSunsetQuickSetting,
     NotificationQuickSetting,
 )
 
-from .sliders.audio import AudioSlider
-from .sliders.brightness import BrightnessSlider
+from .sliders import AudioSlider, BrightnessSlider
+from .submenu import (
+    BluetoothSubMenu,
+    BluetoothToggle,
+    PowerProfileSubMenu,
+    PowerProfileToggle,
+    WifiSubMenu,
+    WifiToggle,
+)
 
 
 class QuickSettingsButtonBox(Box):
