@@ -436,7 +436,6 @@ class DateTimeWidget(ButtonWidget):
                 DateTime(self.config["format"], name="date-time"),
             ),
         )
-        date_menu.dnd_switch.connect("notify::active", self.on_dnd_switch)
 
         bulk_connect(
             self.cache_notification_service,
@@ -444,7 +443,7 @@ class DateTimeWidget(ButtonWidget):
                 "notification_count": lambda _, value, *args: count_label.set_text(
                     str(value)
                 ),
-                "dnd": lambda _, value, *args: self.on,
+                "dnd": lambda _, value, *args: self.on_dnd_switch(value),
             },
         )
 
