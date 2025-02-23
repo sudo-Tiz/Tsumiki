@@ -217,7 +217,8 @@
       "type": "object",
       "properties": {
         "temperature": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[0-9]+k$"
         },
         "enabled_icon": {
           "type": "string"
