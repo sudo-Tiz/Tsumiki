@@ -744,9 +744,6 @@
     "recorder": {
       "type": "object",
       "properties": {
-        "photos": {
-          "type": "string"
-        },
         "videos": {
           "type": "string"
         },
