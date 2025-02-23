@@ -88,7 +88,6 @@ DEFAULT_CONFIG = {
         "icon_size": "12px",
         "label": True,
         "tooltip": True,
-        "widget_style": "default",
     },
     "keyboard": {
         "icon": "󰌌",
