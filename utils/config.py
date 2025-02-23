@@ -12,6 +12,18 @@ from .widget_settings import BarConfig
 class HydeConfig:
     "A class to read the configuration file and return the default configuration"
 
+    instance = None
+
+    @staticmethod
+    def get_initial():
+        if HydeConfig.instance is None:
+            HydeConfig.instance = HydeConfig()
+
+        return HydeConfig.instance
+
+    def __init__(self):
+        self.default_config()
+
     # Function to read the configuration file
     def read_config(self) -> dict:
         config_file = get_relative_path("../config.json")
@@ -29,6 +41,7 @@ class HydeConfig:
 
     def default_config(self) -> BarConfig:
         # Read the configuration from the JSON file
+        logger.info("Applying new settings...")
         parsed_data = self.read_config()
 
         validate_widgets(parsed_data, DEFAULT_CONFIG)
@@ -38,7 +51,7 @@ class HydeConfig:
                 parsed_data.get(key, {}), DEFAULT_CONFIG[key]
             )
 
-        return parsed_data
+        self.config = parsed_data
 
     def set_css_settings(self):
         logger.info("Applying css settings...")
@@ -54,4 +67,5 @@ class HydeConfig:
             f.write(settings)
 
 
-widget_config = HydeConfig().default_config()
+configuration = HydeConfig().get_initial()
+widget_config = configuration.config
