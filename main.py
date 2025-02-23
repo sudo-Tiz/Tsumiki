@@ -71,7 +71,6 @@ if __name__ == "__main__":
 
 
     config_monitor = monitor_file(get_relative_path("config.json"))
-    # config_monitor = monitor_file(get_relative_path("default_config.toml"))
     config_monitor.connect("changed", lambda *_: configuration.default_config())
 
 
