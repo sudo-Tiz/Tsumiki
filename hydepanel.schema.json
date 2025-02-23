@@ -210,9 +210,6 @@
         },
         "tooltip": {
           "type": "boolean"
-        },
-        "interval": {
-          "type": "integer"
         }
       }
     },
@@ -229,16 +226,14 @@
           "type": "string"
         },
         "icon_size": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[0-9]+px$"
         },
         "label": {
           "type": "boolean"
         },
         "tooltip": {
           "type": "boolean"
-        },
-        "interval": {
-          "type": "integer"
         }
       }
     },
@@ -252,16 +247,14 @@
           "type": "string"
         },
         "icon_size": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[0-9]+px$"
         },
         "label": {
           "type": "boolean"
         },
         "tooltip": {
           "type": "boolean"
-        },
-        "interval": {
-          "type": "integer"
         }
       }
     },
@@ -269,7 +262,8 @@
       "type": "object",
       "properties": {
         "icon_size": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[0-9]+px$"
         },
         "label": {
           "type": "boolean"
@@ -297,7 +291,8 @@
           "type": "string"
         },
         "icon_size": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[0-9]+px$"
         },
         "label": {
           "type": "boolean"
@@ -314,7 +309,8 @@
           "type": "string"
         },
         "icon_size": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[0-9]+px$"
         },
         "label": {
           "type": "boolean"
@@ -331,7 +327,8 @@
           "type": "string"
         },
         "icon_size": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[0-9]+px$"
         },
         "label": {
           "type": "boolean"
@@ -453,7 +450,8 @@
           "type": "string"
         },
         "icon_size": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[0-9]+px$"
         },
         "label": {
           "type": "boolean"
@@ -470,7 +468,8 @@
           "type": "string"
         },
         "icon_size": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[0-9]+px$"
         },
         "label": {
           "type": "boolean"
@@ -539,7 +538,8 @@
       "type": "object",
       "properties": {
         "icon_size": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[0-9]+px$"
         },
         "label": {
           "type": "boolean"
@@ -556,7 +556,8 @@
       "type": "object",
       "properties": {
         "icon_size": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[0-9]+px$"
         },
         "label": {
           "type": "boolean"
@@ -576,7 +577,8 @@
           "type": "string"
         },
         "icon_size": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[0-9]+px$"
         },
         "tooltip": {
           "type": "boolean"
@@ -590,7 +592,8 @@
           "type": "string"
         },
         "icon_size": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[0-9]+px$"
         },
         "silent": {
           "type": "boolean"
@@ -624,7 +627,8 @@
           "type": "string"
         },
         "icon_size": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[0-9]+px$"
         }
       }
     },

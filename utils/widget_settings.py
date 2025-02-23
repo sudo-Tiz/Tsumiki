@@ -4,9 +4,7 @@ from typing import List, Literal, TypedDict
 Layer = Literal["background", "bottom", "top", "overlay"]
 
 # Common configuration fields that will be reused
-BaseConfig = TypedDict(
-    "BaseConfig", {"icon_size": str, "label": bool, "tooltip": bool, "interval": int}
-)
+BaseConfig = TypedDict("BaseConfig", {"icon_size": str, "label": bool, "tooltip": bool})
 
 # Layout configuration
 Layout = TypedDict(
@@ -121,7 +119,15 @@ WindowTitle = TypedDict(
 )
 
 # Updates configuration
-Updates = TypedDict("Updates", {**BaseConfig.__annotations__, "os": str, "icon": str})
+Updates = TypedDict(
+    "Updates",
+    {
+        **BaseConfig.__annotations__,
+        "os": str,
+        "icon": str,
+        "interval": int,
+    },
+)
 
 # Bluetooth configuration
 BlueTooth = TypedDict("BlueTooth", {"label": bool, "tooltip": bool, "icon_size": int})
