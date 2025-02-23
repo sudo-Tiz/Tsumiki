@@ -98,7 +98,12 @@ DEFAULT_CONFIG = {
         "label": True,
         "tooltip": True,
     },
-    "language": {"truncation_size": 2},
+    "language": {
+        "icon": "",
+        "icon_size": "14px",
+        "tooltip": True,
+        "truncation_size": 2,
+    },
     "layout": {
         "left_section": ["workspaces", "window_title"],
         "middle_section": ["date_time"],

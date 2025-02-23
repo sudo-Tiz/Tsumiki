@@ -183,7 +183,9 @@ Spacing = TypedDict("Spacing", {"size": int})
 Divider = TypedDict("Divider", {"size": int})
 
 # Language configuration
-Language = TypedDict("Language", {"truncation_size": int})
+Language = TypedDict(
+    "Language", {**BaseConfig.__annotations__, "icon": str, "truncation_size": int}
+)
 
 # Volume configuration
 Volume = TypedDict("Volume", {**BaseConfig.__annotations__, "step_size": int})

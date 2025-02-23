@@ -36,7 +36,7 @@ for log in [
     "fabric.audio.service",
     "fabric.bluetooth.service",
     "fabric.audio",
-    "fabric.widgets.wayland"
+    "fabric.widgets.wayland",
 ]:
     logger.disable(log)
 

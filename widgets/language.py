@@ -4,6 +4,7 @@ from fabric.widgets.box import Box
 
 from shared.widget_container import ButtonWidget
 from utils.widget_settings import BarConfig
+from utils.widget_utils import text_icon
 
 
 class LanguageWidget(ButtonWidget):
@@ -24,5 +25,18 @@ class LanguageWidget(ButtonWidget):
                 length=self.config["truncation_size"],
                 suffix="",
             ),
+            style_classes="panel-text",
         )
-        self.box.children = (self.lang,)
+
+        self.icon = text_icon(
+            icon=self.config["icon"],
+            size=self.config["icon_size"],
+            props={
+                "style_classes": "panel-icon",
+            },
+        )
+
+        self.box.children = (self.icon, self.lang)
+
+        if self.config["tooltip"]:
+            self.set_tooltip_text(f"Language: {self.lang.get_label()}")

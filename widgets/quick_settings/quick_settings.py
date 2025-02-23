@@ -6,7 +6,6 @@ from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from gi.repository import Gtk
-from sliders.mic import MicrophoneSlider
 
 import utils.functions as helpers
 from services import audio_service, network_service
@@ -29,7 +28,7 @@ from widgets.quick_settings.togglers import (
     NotificationQuickSetting,
 )
 
-from .sliders import AudioSlider, BrightnessSlider
+from .sliders import AudioSlider, BrightnessSlider, MicrophoneSlider
 from .submenu import (
     BluetoothSubMenu,
     BluetoothToggle,
