@@ -16,7 +16,7 @@ class ScreenRecorder(Service):
     instance = None
 
     @staticmethod
-    def get_initial():
+    def get_default():
         if ScreenRecorder.instance is None:
             ScreenRecorder.instance = ScreenRecorder()
 

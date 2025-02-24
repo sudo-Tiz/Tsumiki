@@ -23,7 +23,7 @@ class PowerProfileItem(Button):
         )
         self.profile = profile
 
-        self.power_profile_service = PowerProfiles().get_initial()
+        self.power_profile_service = PowerProfiles().get_default()
 
         self.children = (
             Box(
@@ -56,7 +56,7 @@ class PowerProfileSubMenu(QuickSubMenu):
     """A submenu to display the Wifi settings."""
 
     def __init__(self, **kwargs):
-        self.client = PowerProfiles().get_initial()
+        self.client = PowerProfiles().get_default()
 
         self.profiles = self.client.power_profiles
         self.active = self.client.get_current_profile()
@@ -89,7 +89,7 @@ class PowerProfileToggle(QuickSubToggle):
             submenu=submenu,
             **kwargs,
         )
-        self.client = PowerProfiles().get_initial()
+        self.client = PowerProfiles().get_default()
         self.update_action_button()
         self.set_active_style(True)
         self.action_button.set_sensitive(False)

@@ -28,7 +28,7 @@ class PowerMenuPopup(PopupWindow):
     instance = None
 
     @staticmethod
-    def get_initial():
+    def get_default():
         if PowerMenuPopup.instance is None:
             PowerMenuPopup.instance = PowerMenuPopup()
 
@@ -121,7 +121,7 @@ class PowerControlButtons(ButtonWidget):
             "reboot",
         ],
     ):
-        PowerMenuPopup().get_initial().toggle_popup()
+        PowerMenuPopup().get_default().toggle_popup()
         return handle_power_action(pressed_button)
 
 
@@ -143,5 +143,5 @@ class PowerWidget(ButtonWidget):
             self.set_tooltip_text("Power")
 
         self.connect(
-            "clicked", lambda *_: PowerMenuPopup().get_initial().toggle_popup()
+            "clicked", lambda *_: PowerMenuPopup().get_default().toggle_popup()
         )

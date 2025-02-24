@@ -33,7 +33,7 @@ class Brightness(Service):
     instance = None
 
     @staticmethod
-    def get_initial():
+    def get_default():
         if Brightness.instance is None:
             Brightness.instance = Brightness()
 

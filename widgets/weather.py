@@ -226,7 +226,7 @@ class WeatherWidget(ButtonWidget):
             **kwargs,
         )
 
-        self.weather_service = WeatherService().get_initial()
+        self.weather_service = WeatherService().get_default()
 
         self.config = widget_config["weather"]
 

@@ -52,7 +52,7 @@ class BrightnessOSDContainer(GenericOSDContainer):
             config=config,
             **kwargs,
         )
-        self.brightness_service = Brightness().get_initial()
+        self.brightness_service = Brightness().get_default()
         self.update_brightness()
 
         self.scale.connect("value-changed", lambda *_: self.update_brightness())

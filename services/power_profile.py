@@ -16,7 +16,7 @@ class PowerProfiles(Service):
     instance = None
 
     @staticmethod
-    def get_initial():
+    def get_default():
         if PowerProfiles.instance is None:
             PowerProfiles.instance = PowerProfiles()
 

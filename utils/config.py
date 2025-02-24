@@ -15,7 +15,7 @@ class HydeConfig:
     instance = None
 
     @staticmethod
-    def get_initial():
+    def get_default():
         if HydeConfig.instance is None:
             HydeConfig.instance = HydeConfig()
 
@@ -67,5 +67,5 @@ class HydeConfig:
             f.write(settings)
 
 
-configuration = HydeConfig().get_initial()
+configuration = HydeConfig().get_default()
 widget_config = configuration.config

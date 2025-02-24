@@ -17,7 +17,7 @@ class WeatherService:
     instance = None
 
     @staticmethod
-    def get_initial():
+    def get_default():
         if WeatherService.instance is None:
             WeatherService.instance = WeatherService()
 
