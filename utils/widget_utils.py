@@ -1,7 +1,6 @@
 from time import sleep
 from typing import Literal
 
-import gi
 import psutil
 from fabric import Fabricator
 from fabric.utils import bulk_connect
@@ -15,8 +14,6 @@ from utils.functions import uptime
 
 from .config import widget_config
 from .icons import brightness_text_icons, icons, volume_text_icons
-
-gi.require_version("Gtk", "3.0")
 
 
 # Function to get the system stats using psutil

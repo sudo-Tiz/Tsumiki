@@ -4,7 +4,6 @@ import shutil
 import subprocess
 from typing import Dict, List, Literal
 
-import gi
 import psutil
 from fabric.utils import (
     cooldown,
@@ -17,8 +16,6 @@ from loguru import logger
 
 from .colors import Colors
 from .icons import distro_text_icons
-
-gi.require_version("Gtk", "3.0")
 
 
 # Function to escape the markup

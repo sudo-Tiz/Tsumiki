@@ -43,7 +43,7 @@ class PopupRevealer(Box):
         transition_duration: int = 400,
         **kwargs,
     ):
-        self.revealer: Revealer = Revealer(
+        self.revealer = Revealer(
             name=name,
             child=child,
             transition_type=transition_type,
@@ -60,6 +60,7 @@ class PopupRevealer(Box):
             if revealer.child_revealed
             else None,
         )
+
         super().__init__(
             style=decorations,
             children=self.revealer,
@@ -233,7 +234,7 @@ class PopupWindow(WaylandWindow):
         **kwargs,
     ):
         self.timeout = timeout
-        self.currtimeout = 0
+        self.current_timeout = 0
         self.popup_running = False
 
         self.popup_visible = popup_visible
@@ -295,21 +296,23 @@ class PopupWindow(WaylandWindow):
     def popup_timeout(self):
         if not self.popup_visible:
             self.reveal_child.revealer.show()
+
         if self.popup_running:
-            self.currtimeout = 0
+            self.current_timeout = 0
             return
+
         self.popup_visible = True
-        self.reveal_child.revealer.set_reveal_child(self.popup_visible)
         self.popup_running = True
+        self.reveal_child.revealer.set_reveal_child(self.popup_visible)
 
         def popup_func():
-            if self.currtimeout >= self.timeout:
+            if self.current_timeout >= self.timeout:
                 self.popup_visible = False
                 self.reveal_child.revealer.set_reveal_child(self.popup_visible)
-                self.currtimeout = 0
+                self.current_timeout = 0
                 self.popup_running = False
                 return False
-            self.currtimeout += 500
+            self.current_timeout += 500
             return True
 
         invoke_repeater(500, popup_func, initial_call=True)

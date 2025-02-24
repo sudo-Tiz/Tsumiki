@@ -2,14 +2,11 @@ import json
 import os
 import re
 
-import gi
 from gi.repository import GLib, Gtk
 from loguru import logger
 
 from .colors import Colors
 from .constants import APP_CACHE_DIRECTORY
-
-gi.require_version("Gtk", "3.0")
 
 ICON_CACHE_FILE = APP_CACHE_DIRECTORY + "/icons.json"
 
@@ -24,7 +21,7 @@ class IconResolver:
                     self._icon_dict = json.load(file)
                 except json.JSONDecodeError:
                     logger.info(
-                        f"{Colors.INFO}[ICONS] Cache file does not exist or corrupted"
+                        f"{Colors.INFO}[ICONS] Cache file does not exist or corrupted."
                     )
         else:
             self._icon_dict = {}
@@ -53,7 +50,6 @@ class IconResolver:
             f.close()
 
     def _get_icon_from_desktop_file(self, desktop_file_path: str):
-        # TODO: get icon in the [Desktop Entry] section only
         with open(desktop_file_path) as f:
             for line in f.readlines():
                 if "Icon=" in line:

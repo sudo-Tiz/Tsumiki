@@ -1,7 +1,6 @@
 import time
 from datetime import datetime
 
-import gi
 from fabric import Fabricator
 from fabric.utils import get_relative_path, invoke_repeater
 from fabric.widgets.box import Box
@@ -18,8 +17,6 @@ from utils.functions import convert_seconds_to_milliseconds
 from utils.icons import weather_text_icons, weather_text_icons_v2
 from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon
-
-gi.require_version("Gtk", "3.0")
 
 
 class WeatherMenu(Box):
@@ -290,6 +287,7 @@ class WeatherWidget(ButtonWidget):
             child=(WeatherMenu(data=res)),
             visible=False,
             all_visible=False,
+            margin="-18px 0 0 0",
         )
 
         popup.set_pointing_to(self)

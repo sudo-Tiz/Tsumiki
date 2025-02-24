@@ -267,7 +267,6 @@ class QuickSettingsButtonWidget(ButtonWidget):
 
         self.network = network_service
 
-        # Initialize the audio service
         self.brightness_service = Brightness().get_initial()
 
         self.audio.connect("notify::speaker", self.on_speaker_changed)
@@ -279,6 +278,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
             child=(QuickSettingsMenu(config=self.config),),
             visible=False,
             all_visible=False,
+            margin="-18px 0 0 0",
         )
 
         self.audio_icon = Image(style_classes="panel-icon")

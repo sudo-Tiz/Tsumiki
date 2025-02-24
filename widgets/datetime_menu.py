@@ -1,7 +1,6 @@
 import time
 from typing import List
 
-import gi
 from fabric.notifications import Notification
 from fabric.utils import bulk_connect, invoke_repeater
 from fabric.widgets.box import Box
@@ -27,8 +26,6 @@ from utils.functions import uptime
 from utils.icons import icons
 from utils.widget_settings import BarConfig
 from utils.widget_utils import get_icon, setup_cursor_hover
-
-gi.require_version("Gtk", "3.0")
 
 
 class DateMenuNotification(EventBox):
@@ -402,6 +399,7 @@ class DateTimeWidget(ButtonWidget):
             child=date_menu,
             visible=False,
             all_visible=False,
+            margin="-18px 0 0 0",
         )
 
         popup.set_pointing_to(self)

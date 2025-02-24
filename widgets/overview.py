@@ -1,7 +1,6 @@
 import json
 
 import cairo
-import gi
 from fabric.hyprland.service import Hyprland
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
@@ -15,8 +14,6 @@ from loguru import logger
 import utils.icons as icons
 from utils.icon_resolver import IconResolver
 from utils.widget_settings import BarConfig
-
-gi.require_version("Gtk", "3.0")
 
 icon_resolver = IconResolver()
 connection = Hyprland()

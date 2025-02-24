@@ -1,12 +1,10 @@
 import contextlib
-from typing import Literal
 
 import gi
 from fabric.widgets.wayland import WaylandWindow
 from gi.repository import Gtk, GtkLayerShell
 
 gi.require_version("GtkLayerShell", "0.1")
-gi.require_version("Gtk", "3.0")
 
 
 class PopOverWindow(WaylandWindow):
@@ -16,14 +14,11 @@ class PopOverWindow(WaylandWindow):
         self,
         parent: WaylandWindow,
         pointing_to: Gtk.Widget | None = None,
-        margin: tuple[int, ...] | str = "-18px 0 0 0",
-        keyboard_mode: Literal["none", "exclusive", "on-demand"] = "on-demand",
+        margin: tuple[int, ...] | str = "0 0 0 0",
         **kwargs,
     ):
         super().__init__(
             style_classes="popover",
-            keyboard_mode=keyboard_mode,
-            on_key_press_event=self.on_key_release,
             **kwargs,
         )
         self.exclusivity = "none"
@@ -43,10 +38,6 @@ class PopOverWindow(WaylandWindow):
             0,
         )
         return round(x / 2), round(y / 2)
-
-    def on_key_release(self, _, event_key):
-        if event_key.get_keycode()[1] == 9:
-            self.hide()
 
     def set_pointing_to(self, widget: Gtk.Widget | None):
         if self._pointing_widget:
@@ -86,7 +77,7 @@ class PopOverWindow(WaylandWindow):
             GtkLayerShell.Edge.LEFT in parent_anchor
             and GtkLayerShell.Edge.RIGHT in parent_anchor
         ):
-            # horizontal -> move on x-axies
+            # horizontal -> move on x-axis
             move_axe = "x"
             if GtkLayerShell.Edge.TOP in parent_anchor:
                 self.anchor = "left top"
@@ -96,7 +87,7 @@ class PopOverWindow(WaylandWindow):
             GtkLayerShell.Edge.TOP in parent_anchor
             and GtkLayerShell.Edge.BOTTOM in parent_anchor
         ):
-            # vertical -> move on y-axies
+            # vertical -> move on y-axis
             move_axe = "y"
             if GtkLayerShell.Edge.RIGHT in parent_anchor:
                 self.anchor = "top right"

@@ -1,12 +1,9 @@
 from typing import Literal
 
 import cairo
-import gi
 from fabric.widgets.widget import Widget
 from gi.repository import GLib, Gtk
 from rlottie_python.rlottie_wrapper import LottieAnimation
-
-gi.require_version("Gtk", "3.0")
 
 
 class LottieAnimationWidget(Gtk.DrawingArea, Widget):
@@ -77,6 +74,7 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
         self.timeout_delay = int(
             (1 / self.lottie_animation.lottie_animation_get_framerate()) * 1000
         )
+
         self.set_size_request(self.width, self.height)
         self.connect("draw", self.draw)
         if draw_frame is not None:
@@ -116,6 +114,7 @@ class LottieAnimationWidget(Gtk.DrawingArea, Widget):
 
         self.lottie_animation.lottie_animation_render_flush()
         self.queue_draw()
+
         if self.do_reverse and self.curr_frame <= self.end_frame:
             self.is_playing = self.do_loop
             self.curr_frame = self.anim_total_frames
