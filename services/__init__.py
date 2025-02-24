@@ -1,10 +1,9 @@
 # ruff: noqa: F403,F405
 from fabric.audio import Audio
 from fabric.bluetooth import BluetoothClient
-from fabric.notifications import Notifications
 
 from .brightness import *
-from .cache_notification import *
+from .custom_notification import *
 from .mpris import *
 from .network import NetworkClient
 from .power_profile import *
@@ -13,6 +12,6 @@ from .weather import *
 
 # Fabric services
 audio_service = Audio()
-notification_service = Notifications()
+notification_service = CustomNotifications()
 bluetooth_service = BluetoothClient()
 network_service = NetworkClient()

@@ -17,7 +17,7 @@ from loguru import logger
 import utils.constants as constants
 import utils.functions as helpers
 import utils.icons as icons
-from services import NotificationCacheService, notification_service
+from services import notification_service
 from shared import CustomImage
 from utils.colors import Colors
 from utils.config import widget_config
@@ -32,7 +32,7 @@ class NotificationPopup(WaylandWindow):
     def __init__(self, widget_config: BarConfig, **kwargs):
         self._server = notification_service
 
-        self.cache_notification_service = NotificationCacheService().get_initial()
+        self.cache_notification_service = notification_service
 
         self.config = widget_config["notification"]
 

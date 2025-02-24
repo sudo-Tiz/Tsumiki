@@ -16,7 +16,7 @@ from loguru import logger
 
 import utils.constants as constants
 import utils.functions as helpers
-from services import NotificationCacheService, notification_service
+from services import notification_service
 from shared.custom_image import CustomImage
 from shared.pop_over import PopOverWindow
 from shared.separator import Separator
@@ -48,7 +48,7 @@ class DateMenuNotification(EventBox):
 
         self._timeout_id = None
 
-        self.cache_notification_service = NotificationCacheService().get_initial()
+        self.cache_notification_service = notification_service
 
         self.notification_box = Box(
             spacing=8,
@@ -182,7 +182,7 @@ class DateNotificationMenu(Box):
             **kwargs,
         )
 
-        self.cache_notification_service = NotificationCacheService().get_initial()
+        self.cache_notification_service = notification_service
 
         self.clock_label = Label(
             label=time.strftime("%H:%M"),
@@ -389,7 +389,7 @@ class DateTimeWidget(ButtonWidget):
 
         self.config = widget_config["date_time"]
 
-        self.cache_notification_service = NotificationCacheService().get_initial()
+        self.cache_notification_service = notification_service
 
         date_menu = DateNotificationMenu(config=self.config)
 

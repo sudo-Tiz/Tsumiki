@@ -2,7 +2,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
-from services.cache_notification import NotificationCacheService
+from services import notification_service
 from shared.button_toggle import CommandSwitcher
 from shared.widget_container import HoverButton
 from utils.icons import icons
@@ -58,7 +58,7 @@ class NotificationQuickSetting(HoverButton):
             style_classes="quicksettings-toggler",
         )
 
-        self.cache_notification_service = NotificationCacheService().get_initial()
+        self.cache_notification_service = notification_service
         self.notification_label = Label(
             label="Noisy",
         )
