@@ -67,7 +67,7 @@ Options = TypedDict(
         "screen_corners": bool,
         "check_updates": bool,
         "location": str,
-        "layer": str,
+        "layer": Layer,
         "widget_style": str,
         "bar_style": Literal["default", "floating"],
     },
