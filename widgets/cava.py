@@ -1,5 +1,5 @@
 from fabric import Fabricator
-from fabric.utils import get_relative_path
+from fabric.utils import get_relative_path,exec_shell_command
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
@@ -14,6 +14,10 @@ class CavaWidget(ButtonWidget):
         super().__init__(name="cava", **kwargs)
 
         self.config = widget_config["cava"]
+
+        cava_command = "cava"
+
+        command = f"kitty --title systemupdate sh -c '{cava_command}'"
 
         self.box = Box()
 
@@ -34,3 +38,5 @@ class CavaWidget(ButtonWidget):
                 on_changed=lambda f, line: cava_label.set_label(line),
             )
         )
+
+        self.connect("clicked", lambda _: exec_shell_command(command))
