@@ -65,14 +65,10 @@ networkmanager
 ## Sound
 pipewire
 
-
 ## Bluetooth menu utilities
 gnome-bluetooth-3.0 # aur
 bluez
 bluez-utils
-
-## Copy/Paste utilities
-wl-clipboard
 
 ## Compiler for sass/scss
 dart-sass
@@ -81,6 +77,10 @@ dart-sass
 brightnessctl
 ```
 
+## To open and execute commands in a terminal ex: updates, cava
+
+kitty
+
 ### Optional
 
 ```sh
@@ -88,18 +88,23 @@ brightnessctl
 ## To check for updates using the default pacman script in the updates module
 pacman-contrib
 
+## To display cava audio visualizer
+cava
+
 ## To switch between power profiles in the battery module
 power-profiles-daemon
 
 ## To record screen through recorder module
 wf-recorder
 
-
 ## To activate Hyprland’s native blue light filter
 hyprsunset
 
 ## To activate Hyprland’s native idle inhibitor
 hypridle
+
+## To use media module on quick settings
+playerctl
 
 ```
 
@@ -146,7 +151,7 @@ If you prefer to have more control over the installation process, you can instal
 Run the following command to install the required system packages:
 
 ```sh
-	sudo pacman -S --noconfirm pipewire vnstat playerctl dart-sass power-profiles-daemon networkmanager wl-clipboard brightnessctl pkgconf wf-recorder kitty python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python-pip python-gobject python-psutil python-dbus python-cairo python-loguru python-setproctitle
+	sudo pacman -S --noconfirm pipewire vnstat playerctl dart-sass power-profiles-daemon networkmanager brightnessctl pkgconf wf-recorder kitty python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python-pip python-gobject python-psutil python-dbus python-cairo python-loguru python-setproctitle
 ```
 
 #### Step 2: Install AUR Packages
