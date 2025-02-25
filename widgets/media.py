@@ -214,6 +214,8 @@ class PlayerBox(Box):
         )
         self.image_stack.children = [*self.image_stack.children, self.image_box]
 
+        self.player.connect("notify::arturl", self.set_image)
+
         self.art_animator = Animator(
             bezier_curve=(0, 0, 1, 1),
             duration=12,

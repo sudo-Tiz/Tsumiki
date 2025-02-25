@@ -1,5 +1,5 @@
 from fabric import Fabricator
-from fabric.utils import get_relative_path,exec_shell_command
+from fabric.utils import exec_shell_command, get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
