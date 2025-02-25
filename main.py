@@ -48,7 +48,7 @@ if __name__ == "__main__":
 
     windows = [notifications, bar]
 
-    if widget_config["options"]["screen_corners"]:
+    if widget_config["general"]["screen_corners"]:
         windows.append(ScreenCorners())
 
     if widget_config["osd"]["enabled"]:

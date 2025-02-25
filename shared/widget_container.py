@@ -7,7 +7,7 @@ from utils.widget_utils import setup_cursor_hover
 
 
 def get_style():
-    widget_style = widget_config["options"]["widget_style"]
+    widget_style = widget_config["general"]["widget_style"]
     return widget_style
 
 

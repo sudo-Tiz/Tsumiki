@@ -61,8 +61,8 @@ StopWatch = TypedDict(
 
 
 # Bar configuration
-Options = TypedDict(
-    "Options",
+General = TypedDict(
+    "General",
     {
         "screen_corners": bool,
         "check_updates": bool,
@@ -245,7 +245,7 @@ class BarConfig(TypedDict):
     mpris: Mpris
     network_usage: NetworkUsage
     notification: Notification
-    options: Options
+    general: General
     osd: OSD
     overview: Overview
     power: PowerButton

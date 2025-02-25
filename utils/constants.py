@@ -157,7 +157,7 @@ DEFAULT_CONFIG = {
         "show_label": True,
         "show_percentage": True,
     },
-    "options": {
+    "general": {
         "screen_corners": False,
         "check_updates": False,
         "layer": "top",

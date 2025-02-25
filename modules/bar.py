@@ -94,7 +94,7 @@ class StatusBar(WaylandWindow):
 
         layout = self.make_layout()
 
-        options = widget_config["options"]
+        options = widget_config["general"]
 
         self.box = CenterBox(
             name="panel-inner",

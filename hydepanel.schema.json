@@ -50,7 +50,7 @@
         }
       }
     },
-    "options": {
+    "general": {
       "type": "object",
       "properties": {
         "screen_corners": {
