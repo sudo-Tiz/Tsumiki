@@ -412,6 +412,19 @@
         "os": {
           "type": "string",
           "enum": ["arch", "fedora", "opensuse", "ubuntu"]
+        },
+        "icon_size": {
+          "type": "string",
+          "pattern": "^[0-9]+px$"
+        },
+        "label": {
+          "type": "boolean"
+        },
+        "tooltip": {
+          "type": "boolean"
+        },
+        "interval": {
+          "type": "integer"
         }
       }
     },
