@@ -8,6 +8,42 @@ This repository defines the configuration settings for a modular system, allowin
 
 The default configuration is stored in the `DEFAULT_CONFIG` dictionary. It includes default values for various sections, such as the layout of the bar, settings for battery, CPU, weather, and other system components.
 
+
+# General Configuration
+
+```json
+    "general": {
+        "screen_corners": false,
+        "check_updates": false,
+        "debug": false,
+        "layer": "top",
+        "auto_hide": false,
+        "bar_style": "default",
+        "location": "top",
+        "widget_style": "default"
+    }
+
+```
+
+- screen_corners (boolean):
+Enable or disable rounded screen corners for the panel.
+
+- debug (boolean):
+Enable or disable debug mode for the panel. When set to true, additional debugging output or features may be activated.
+
+- location (string; enum: "top", "bottom"):
+Determines where the panel is positioned on the screen. It can either be at the top or the bottom.
+
+- bar_style (string; enum: "default", "floating"):
+Selects the style of the panel bar. "default" provides a standard appearance, while "floating" gives it a floating look.
+
+- layer (string; enum: "background", "bottom", "top", "overlay"):
+Specifies the stacking order or z-index of the panel, determining which layer it should be rendered on.
+
+- widget_style (string; enum: "default", "wave1", "wave2", "flat", "shadow"):
+Sets a visual style for the widgets on the panel. Each option represents a predefined look.
+
+
 ## Layout Configuration
 
 The layout configuration defines the sections of the bar and the components displayed in each section:
