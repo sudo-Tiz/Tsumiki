@@ -131,6 +131,18 @@ Other components follow a similar structure, where each configuration defines th
 - icon: The icon used to display the module.
 - step_size: The brightness step size.
 
+## cava
+
+```json
+"cava": {
+    "bars": 10,
+    "color": "#89b4fa"
+}
+```
+
+- bars: Number of bars to display.
+- color: The color of the bars.
+
 ## CPU
 
 ```json
