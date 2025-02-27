@@ -56,6 +56,9 @@
         "screen_corners": {
           "type": "boolean"
         },
+        "debug": {
+          "type": "boolean"
+        },
         "location": {
           "type": "string",
           "enum": ["top", "bottom"]
@@ -201,7 +204,9 @@
             "properties": {
               "widgets": {
                 "type": "array",
-                "items": { "type": "string" }
+                "items": {
+                  "type": "string"
+                }
               },
               "spacing": {
                 "type": "integer",
@@ -210,7 +215,9 @@
               },
               "style_classes": {
                 "type": "array",
-                "items": { "type": "string" },
+                "items": {
+                  "type": "string"
+                },
                 "description": "Style classes to apply to the group (e.g. 'bordered', 'compact')"
               }
             },

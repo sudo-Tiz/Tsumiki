@@ -31,14 +31,15 @@ def process_and_apply_css(app: Application):
         logger.error(f"{Colors.ERROR}[Main]Failed to compile sass!")
 
 
-for log in [
-    "fabric.hyprland.widgets",
-    "fabric.audio.service",
-    "fabric.bluetooth.service",
-    "fabric.audio",
-    "fabric.widgets.wayland",
-]:
-    logger.disable(log)
+if not widget_config["general"]["debug"]:
+    for log in [
+        "fabric",
+        "widgets",
+        "utils",
+        "modules",
+        "services",
+    ]:
+        logger.disable(log)
 
 
 if __name__ == "__main__":

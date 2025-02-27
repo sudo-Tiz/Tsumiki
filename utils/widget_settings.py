@@ -66,6 +66,7 @@ General = TypedDict(
     {
         "screen_corners": bool,
         "check_updates": bool,
+        "debug": bool,
         "location": str,
         "layer": Layer,
         "widget_style": str,
