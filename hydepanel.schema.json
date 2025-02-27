@@ -1,4 +1,66 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "baseProperties": {
+      "icon_size": {
+        "type": "string",
+        "pattern": "^[0-9]+px$"
+      },
+      "label": {
+        "type": "boolean"
+      },
+      "tooltip": {
+        "type": "boolean"
+      }
+    },
+    "widgets": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string",
+            "enum": [
+              "battery",
+              "bluetooth",
+              "brightness",
+              "cava",
+              "clickcounter",
+              "cpu",
+              "date_time",
+              "divider",
+              "hypr_idle",
+              "hypr_sunset",
+              "keyboard",
+              "language",
+              "media",
+              "microphone",
+              "power",
+              "ram",
+              "recorder",
+              "spacer",
+              "storage",
+              "submap",
+              "network_usage",
+              "stop_watch",
+              "system_tray",
+              "task_bar",
+              "updates",
+              "volume",
+              "weather",
+              "window_title",
+              "workspace",
+              "workspaces",
+              "quick_settings"
+            ]
+          },
+          {
+            "type": "string",
+            "pattern": "^@group:\\d+$"
+          }
+        ]
+      }
+    }
+  },
   "type": "object",
   "properties": {
     "theme": {
@@ -61,19 +123,36 @@
         },
         "location": {
           "type": "string",
-          "enum": ["top", "bottom"]
+          "enum": [
+            "top",
+            "bottom"
+          ]
         },
         "bar_style": {
           "type": "string",
-          "enum": ["default", "floating"]
+          "enum": [
+            "default",
+            "floating"
+          ]
         },
         "layer": {
           "type": "string",
-          "enum": ["background", "bottom", "top", "overlay"]
+          "enum": [
+            "background",
+            "bottom",
+            "top",
+            "overlay"
+          ]
         },
         "widget_style": {
           "type": "string",
-          "enum": ["default", "wave1", "wave2", "flat", "shadow"]
+          "enum": [
+            "default",
+            "wave1",
+            "wave2",
+            "flat",
+            "shadow"
+          ]
         }
       }
     },
@@ -81,144 +160,15 @@
       "type": "object",
       "properties": {
         "left_section": {
-          "type": "array",
-          "items": {
-            "anyOf": [
-              {
-                "type": "string",
-                "enum": [
-                  "battery",
-                  "bluetooth",
-                  "brightness",
-                  "cava",
-                  "clickcounter",
-                  "cpu",
-                  "date_time",
-                  "divider",
-                  "hypr_idle",
-                  "hypr_sunset",
-                  "keyboard",
-                  "language",
-                  "media",
-                  "microphone",
-                  "power",
-                  "ram",
-                  "recorder",
-                  "spacer",
-                  "storage",
-                  "submap",
-                  "network_usage",
-                  "stop_watch",
-                  "system_tray",
-                  "task_bar",
-                  "updates",
-                  "volume",
-                  "weather",
-                  "window_title",
-                  "workspace",
-                  "workspaces",
-                  "quick_settings"
-                ]
-              },
-              {
-                "type": "string",
-                "pattern": "^@group:\\d+$"
-              }
-            ]
-          }
+          "$ref": "#/definitions/widgets"
         },
         "middle_section": {
-          "type": "array",
-          "items": {
-            "anyOf": [
-              {
-                "type": "string",
-                "enum": [
-                  "battery",
-                  "bluetooth",
-                  "brightness",
-                  "cava",
-                  "clickcounter",
-                  "cpu",
-                  "date_time",
-                  "divider",
-                  "hypr_idle",
-                  "hypr_sunset",
-                  "keyboard",
-                  "language",
-                  "media",
-                  "microphone",
-                  "power",
-                  "ram",
-                  "recorder",
-                  "spacer",
-                  "storage",
-                  "submap",
-                  "network_usage",
-                  "stop_watch",
-                  "system_tray",
-                  "task_bar",
-                  "updates",
-                  "volume",
-                  "weather",
-                  "window_title",
-                  "workspace",
-                  "workspaces",
-                  "quick_settings"
-                ]
-              },
-              {
-                "type": "string",
-                "pattern": "^@group:\\d+$"
-              }
-            ]
-          }
+          "$ref": "#/definitions/widgets"
         },
         "right_section": {
           "type": "array",
           "items": {
-            "anyOf": [
-              {
-                "type": "string",
-                "enum": [
-                  "battery",
-                  "bluetooth",
-                  "brightness",
-                  "cava",
-                  "clickcounter",
-                  "cpu",
-                  "date_time",
-                  "divider",
-                  "hypr_idle",
-                  "hypr_sunset",
-                  "keyboard",
-                  "language",
-                  "media",
-                  "microphone",
-                  "power",
-                  "ram",
-                  "recorder",
-                  "spacer",
-                  "storage",
-                  "submap",
-                  "network_usage",
-                  "stop_watch",
-                  "system_tray",
-                  "task_bar",
-                  "updates",
-                  "volume",
-                  "weather",
-                  "window_title",
-                  "workspace",
-                  "workspaces",
-                  "quick_settings"
-                ]
-              },
-              {
-                "type": "string",
-                "pattern": "^@group:\\d+$"
-              }
-            ]
+            "$ref": "#/definitions/widgets"
           }
         },
         "module_groups": {
@@ -229,40 +179,7 @@
               "widgets": {
                 "type": "array",
                 "items": {
-                  "type": "string",
-                  "enum": [
-                    "battery",
-                    "bluetooth",
-                    "brightness",
-                    "cava",
-                    "clickcounter",
-                    "cpu",
-                    "date_time",
-                    "divider",
-                    "hypr_idle",
-                    "hypr_sunset",
-                    "keyboard",
-                    "language",
-                    "media",
-                    "microphone",
-                    "power",
-                    "ram",
-                    "recorder",
-                    "spacer",
-                    "storage",
-                    "submap",
-                    "network_usage",
-                    "stop_watch",
-                    "system_tray",
-                    "task_bar",
-                    "updates",
-                    "volume",
-                    "weather",
-                    "window_title",
-                    "workspace",
-                    "workspaces",
-                    "quick_settings"
-                  ]
+                  "$ref": "#/definitions/widgets"
                 }
               },
               "spacing": {
@@ -278,7 +195,9 @@
                 "description": "Style classes to apply to the group (e.g. 'bordered', 'compact')"
               }
             },
-            "required": ["widgets"]
+            "required": [
+              "widgets"
+            ]
           }
         }
       }
@@ -314,6 +233,7 @@
     "hypr_sunset": {
       "type": "object",
       "properties": {
+        "$ref": "#/definitions/baseProperties",
         "temperature": {
           "type": "string",
           "pattern": "^[0-9]+k$"
@@ -323,16 +243,6 @@
         },
         "disabled_icon": {
           "type": "string"
-        },
-        "icon_size": {
-          "type": "string",
-          "pattern": "^[0-9]+px$"
-        },
-        "label": {
-          "type": "boolean"
-        },
-        "tooltip": {
-          "type": "boolean"
         }
       }
     },
@@ -509,7 +419,12 @@
       "properties": {
         "os": {
           "type": "string",
-          "enum": ["arch", "fedora", "opensuse", "ubuntu"]
+          "enum": [
+            "arch",
+            "fedora",
+            "opensuse",
+            "ubuntu"
+          ]
         },
         "icon_size": {
           "type": "string",
