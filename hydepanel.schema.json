@@ -164,9 +164,7 @@
           "$ref": "#/definitions/widgets"
         },
         "right_section": {
-          "items": {
             "$ref": "#/definitions/widgets"
-          }
         },
         "module_groups": {
           "type": "array",
@@ -174,10 +172,7 @@
             "type": "object",
             "properties": {
               "widgets": {
-                "type": "array",
-                "items": {
                   "$ref": "#/definitions/widgets"
-                }
               },
               "spacing": {
                 "type": "integer",
