@@ -43,13 +43,7 @@ def copy_theme(theme: str):
         source_file = get_relative_path("../styles/themes/catpuccin-mocha.scss")
 
     try:
-        with open(source_file, "r") as source_file:
-            content = source_file.read()
-
-        # Open the destination file in write mode
-        with open(destination_file, "w") as destination_file:
-            destination_file.write(content)
-            logger.info(f"{Colors.INFO}[THEME] '{theme}' applied successfully.")
+        shutil.copyfile(source_file, destination_file)
 
     except FileNotFoundError:
         logger.error(
