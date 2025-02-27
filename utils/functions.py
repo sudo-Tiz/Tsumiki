@@ -14,6 +14,8 @@ from fabric.utils import (
 from gi.repository import Gdk, GLib, Gtk
 from loguru import logger
 
+from utils.thread import run_in_thread
+
 from .colors import Colors
 from .icons import distro_text_icons
 
@@ -29,7 +31,7 @@ def for_monitors(widget):
     return [widget(i) for i in range(n)]
 
 
-# Function to get the system icon theme
+@run_in_thread
 def copy_theme(theme: str):
     destination_file = get_relative_path("../styles/theme.scss")
     source_file = get_relative_path(f"../styles/themes/{theme}.scss")
