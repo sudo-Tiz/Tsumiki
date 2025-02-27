@@ -163,15 +163,13 @@ class StatusBar(WaylandWindow):
                             group_config,
                             self.widgets_list,
                             bar=self,
-                            widget_config=widget_config
+                            widget_config=widget_config,
                         )
                         layout[key].append(group)
                 else:
                     # Handle regular widgets
                     if widget_name in self.widgets_list:
                         widget_class = self.widgets_list[widget_name]
-                        layout[key].append(
-                            widget_class(widget_config, bar=self)
-                        )
+                        layout[key].append(widget_class(widget_config, bar=self))
 
         return layout

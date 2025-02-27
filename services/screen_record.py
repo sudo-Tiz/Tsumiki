@@ -11,7 +11,7 @@ from utils.widget_settings import BarConfig
 
 
 class ScreenRecorder(Service):
-    """Service to handle screen recording and screenshots"""
+    """Service to handle screen recording"""
 
     instance = None
 
@@ -70,7 +70,7 @@ class ScreenRecorder(Service):
                 "-i",
                 "camera-video-symbolic",
                 "-a",
-                "HyDePanel Screenshot Utility",
+                "HyDePanel Recording Utility",
                 "Screenrecord Saved",
                 f"Saved Screencast at {file_path}",
             ]
@@ -93,50 +93,6 @@ class ScreenRecorder(Service):
                     exec_shell_command_async(f"xdg-open {self.screenrecord_path}")
                 case "view":
                     exec_shell_command_async(f"xdg-open {file_path}")
-
-        proc.communicate_utf8_async(None, None, do_callback)
-
-    def send_screenshot_notification(self, file_path=None):
-        cmd = ["notify-send"]
-        cmd.extend(
-            [
-                "-A",
-                "files=Show in Files",
-                "-A",
-                "view=View",
-                "-A",
-                "edit=Edit",
-                "-i",
-                "camera-photo-symbolic",
-                "-a",
-                "HyDePanel Screenshot Utility",
-                "-h",
-                f"STRING:image-path:{file_path}",
-                "Screenshot Saved",
-                f"Saved Screenshot at {file_path}",
-            ]
-            if file_path
-            else ["Screenshot Sent to Clipboard."]
-        )
-
-        proc: Gio.Subprocess = Gio.Subprocess.new(cmd, Gio.SubprocessFlags.STDOUT_PIPE)
-
-        def do_callback(process: Gio.Subprocess, task: Gio.Task):
-            try:
-                _, stdout, stderr = process.communicate_utf8_finish(task)
-            except Exception:
-                logger.error(
-                    f"[SCREENSHOT] Failed read notification action with error {stderr}"
-                )
-                return
-
-            match stdout.strip("\n"):
-                case "files":
-                    exec_shell_command_async(f"xdg-open {self.screenshot_path}")
-                case "view":
-                    exec_shell_command_async(f"xdg-open {file_path}")
-                case "edit":
-                    exec_shell_command_async(f"swappy -f {file_path}")
 
         proc.communicate_utf8_async(None, None, do_callback)
 

@@ -3,6 +3,7 @@ from .widget_container import BoxWidget
 
 class ModuleGroup(BoxWidget):
     """A group of widgets that can be managed and styled together."""
+
     def __init__(self, children=None, spacing=4, style_classes=None, **kwargs):
         # Build our list of CSS classes
         css_classes = ["panel-module-group"]
@@ -38,5 +39,5 @@ class ModuleGroup(BoxWidget):
         return cls(
             children=children,
             spacing=config.get("spacing", 4),
-            style_classes=config.get("style_classes", [])
+            style_classes=config.get("style_classes", []),
         )

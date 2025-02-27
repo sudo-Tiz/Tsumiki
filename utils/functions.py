@@ -92,7 +92,7 @@ def validate_widgets(parsed_data, default_config):
                 if not (0 <= idx < len(groups)):
                     raise ValueError(
                         "Module group index "
-                        f"{idx} is out of range. Available indices: 0-{len(groups)-1}"
+                        f"{idx} is out of range. Available indices: 0-{len(groups) - 1}"
                     )
                 # Validate widgets inside the group
                 group = groups[idx]

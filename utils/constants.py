@@ -105,28 +105,18 @@ DEFAULT_CONFIG = {
         {
             "widgets": ["updates", "battery"],
             "spacing": 4,
-            "style_classes": ["bordered"]
+            "style_classes": ["bordered"],
         },
         {
             "widgets": ["quick_settings", "theme_switcher"],
             "spacing": 0,
-            "style_classes": ["compact"]
-        }
+            "style_classes": ["compact"],
+        },
     ],
     "layout": {
-        "left_section": [
-            "workspaces",
-            "window_title"
-        ],
-        "middle_section": [
-            "date_time"
-        ],
-        "right_section": [
-            "@group:0",
-            "@group:1",
-            "system_tray",
-            "power"
-        ]
+        "left_section": ["workspaces", "window_title"],
+        "middle_section": ["date_time"],
+        "right_section": ["@group:0", "@group:1", "system_tray", "power"],
     },
     "memory": {
         "icon": "",
