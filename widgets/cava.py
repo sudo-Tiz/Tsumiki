@@ -3,8 +3,9 @@ from fabric.utils import exec_shell_command, get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
+import utils.functions as helpers
 from shared.widget_container import ButtonWidget
-from utils.functions import is_valid_gjs_color
+from utils.exceptions import ExecutableNotFoundError
 from utils.widget_settings import BarConfig
 
 
@@ -15,11 +16,13 @@ class CavaWidget(ButtonWidget):
         super().__init__(name="cava", **kwargs)
 
         self.config = widget_config["cava"]
-
-        if not is_valid_gjs_color(self.config["color"]):
-            raise ValueError("Invalid color supplied for cava widget")
-
         cava_command = "cava"
+
+        if not helpers.executable_exists(cava_command):
+            raise ExecutableNotFoundError(cava_command)
+
+        if not helpers.is_valid_gjs_color(self.config["color"]):
+            raise ValueError("Invalid color supplied for cava widget")
 
         command = f"kitty --title systemupdate sh -c '{cava_command}'"
 

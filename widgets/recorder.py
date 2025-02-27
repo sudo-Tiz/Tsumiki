@@ -6,6 +6,8 @@ from services.screen_record import ScreenRecorder
 from shared.lottie import LottieAnimation, LottieAnimationWidget
 from shared.widget_container import ButtonWidget
 from utils import icons
+from utils.exceptions import ExecutableNotFoundError
+from utils.functions import executable_exists
 from utils.widget_settings import BarConfig
 
 
@@ -17,6 +19,9 @@ class RecorderWidget(ButtonWidget):
 
         self.is_recording = False
         self.config = widget_config["recorder"]
+
+        if not executable_exists("wf-recorder"):
+            raise ExecutableNotFoundError("wf-recorder")
 
         self.weather_lottie_dir = get_relative_path("../assets/icons/lottie")
 

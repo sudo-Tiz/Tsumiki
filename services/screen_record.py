@@ -6,7 +6,6 @@ from gi.repository import Gio, GLib
 from loguru import logger
 
 import utils.functions as helpers
-from utils.exceptions import ExecutableNotFoundError
 from utils.widget_settings import BarConfig
 
 
@@ -26,9 +25,6 @@ class ScreenRecorder(Service):
     def recording(self, value: bool) -> None: ...
 
     def __init__(self, widget_config: BarConfig, **kwargs):
-        if not helpers.executable_exists("wf-recorder"):
-            raise ExecutableNotFoundError("wf-recorder")
-
         self.config = widget_config["recorder"]
         self.screenrecord_path = f"{GLib.get_home_dir()}/{self.config['path']}"
 
