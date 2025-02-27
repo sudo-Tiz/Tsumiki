@@ -41,7 +41,6 @@ class HydeConfig:
 
     def default_config(self) -> BarConfig:
         # Read the configuration from the JSON file
-        logger.info("Applying new settings...")
         parsed_data = self.read_config()
 
         validate_widgets(parsed_data, DEFAULT_CONFIG)

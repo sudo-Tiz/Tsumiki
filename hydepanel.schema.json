@@ -61,19 +61,36 @@
         },
         "location": {
           "type": "string",
-          "enum": ["top", "bottom"]
+          "enum": [
+            "top",
+            "bottom"
+          ]
         },
         "bar_style": {
           "type": "string",
-          "enum": ["default", "floating"]
+          "enum": [
+            "default",
+            "floating"
+          ]
         },
         "layer": {
           "type": "string",
-          "enum": ["background", "bottom", "top", "overlay"]
+          "enum": [
+            "background",
+            "bottom",
+            "top",
+            "overlay"
+          ]
         },
         "widget_style": {
           "type": "string",
-          "enum": ["default", "wave1", "wave2", "flat", "shadow"]
+          "enum": [
+            "default",
+            "wave1",
+            "wave2",
+            "flat",
+            "shadow"
+          ]
         }
       }
     },
@@ -83,117 +100,141 @@
         "left_section": {
           "type": "array",
           "items": {
-            "type": "string",
-            "enum": [
-              "battery",
-              "bluetooth",
-              "brightness",
-              "cava",
-              "clickcounter",
-              "cpu",
-              "date_time",
-              "divider",
-              "hypr_idle",
-              "hypr_sunset",
-              "keyboard",
-              "language",
-              "media",
-              "microphone",
-              "power",
-              "ram",
-              "recorder",
-              "spacer",
-              "submap",
-              "network_usage",
-              "storage",
-              "stop_watch",
-              "system_tray",
-              "task_bar",
-              "updates",
-              "volume",
-              "weather",
-              "window_title",
-              "workspace",
-              "workspaces",
-              "quick_settings"
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "battery",
+                  "bluetooth",
+                  "brightness",
+                  "cava",
+                  "clickcounter",
+                  "cpu",
+                  "date_time",
+                  "divider",
+                  "hypr_idle",
+                  "hypr_sunset",
+                  "keyboard",
+                  "language",
+                  "media",
+                  "microphone",
+                  "power",
+                  "ram",
+                  "recorder",
+                  "spacer",
+                  "storage",
+                  "submap",
+                  "network_usage",
+                  "stop_watch",
+                  "system_tray",
+                  "task_bar",
+                  "updates",
+                  "volume",
+                  "weather",
+                  "window_title",
+                  "workspace",
+                  "workspaces",
+                  "quick_settings"
+                ]
+              },
+              {
+                "type": "string",
+                "pattern": "^@group:\\d+$"
+              }
             ]
           }
         },
         "middle_section": {
           "type": "array",
           "items": {
-            "type": "string",
-            "enum": [
-              "battery",
-              "bluetooth",
-              "brightness",
-              "cava",
-              "clickcounter",
-              "cpu",
-              "date_time",
-              "divider",
-              "hypr_idle",
-              "hypr_sunset",
-              "keyboard",
-              "language",
-              "media",
-              "microphone",
-              "power",
-              "ram",
-              "recorder",
-              "spacer",
-              "storage",
-              "submap",
-              "network_usage",
-              "stop_watch",
-              "system_tray",
-              "task_bar",
-              "updates",
-              "volume",
-              "weather",
-              "window_title",
-              "workspace",
-              "workspaces",
-              "quick_settings"
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "battery",
+                  "bluetooth",
+                  "brightness",
+                  "cava",
+                  "clickcounter",
+                  "cpu",
+                  "date_time",
+                  "divider",
+                  "hypr_idle",
+                  "hypr_sunset",
+                  "keyboard",
+                  "language",
+                  "media",
+                  "microphone",
+                  "power",
+                  "ram",
+                  "recorder",
+                  "spacer",
+                  "storage",
+                  "submap",
+                  "network_usage",
+                  "stop_watch",
+                  "system_tray",
+                  "task_bar",
+                  "updates",
+                  "volume",
+                  "weather",
+                  "window_title",
+                  "workspace",
+                  "workspaces",
+                  "quick_settings"
+                ]
+              },
+              {
+                "type": "string",
+                "pattern": "^@group:\\d+$"
+              }
             ]
           }
         },
         "right_section": {
           "type": "array",
           "items": {
-            "type": "string",
-            "enum": [
-              "battery",
-              "bluetooth",
-              "brightness",
-              "cava",
-              "clickcounter",
-              "cpu",
-              "date_time",
-              "divider",
-              "hypr_idle",
-              "hypr_sunset",
-              "keyboard",
-              "language",
-              "media",
-              "microphone",
-              "power",
-              "ram",
-              "recorder",
-              "spacer",
-              "storage",
-              "submap",
-              "network_usage",
-              "stop_watch",
-              "system_tray",
-              "task_bar",
-              "updates",
-              "volume",
-              "weather",
-              "window_title",
-              "workspace",
-              "workspaces",
-              "quick_settings"
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "battery",
+                  "bluetooth",
+                  "brightness",
+                  "cava",
+                  "clickcounter",
+                  "cpu",
+                  "date_time",
+                  "divider",
+                  "hypr_idle",
+                  "hypr_sunset",
+                  "keyboard",
+                  "language",
+                  "media",
+                  "microphone",
+                  "power",
+                  "ram",
+                  "recorder",
+                  "spacer",
+                  "storage",
+                  "submap",
+                  "network_usage",
+                  "stop_watch",
+                  "system_tray",
+                  "task_bar",
+                  "updates",
+                  "volume",
+                  "weather",
+                  "window_title",
+                  "workspace",
+                  "workspaces",
+                  "quick_settings"
+                ]
+              },
+              {
+                "type": "string",
+                "pattern": "^@group:\\d+$"
+              }
             ]
           }
         },
@@ -205,7 +246,40 @@
               "widgets": {
                 "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "string",
+                  "enum": [
+                    "battery",
+                    "bluetooth",
+                    "brightness",
+                    "cava",
+                    "clickcounter",
+                    "cpu",
+                    "date_time",
+                    "divider",
+                    "hypr_idle",
+                    "hypr_sunset",
+                    "keyboard",
+                    "language",
+                    "media",
+                    "microphone",
+                    "power",
+                    "ram",
+                    "recorder",
+                    "spacer",
+                    "storage",
+                    "submap",
+                    "network_usage",
+                    "stop_watch",
+                    "system_tray",
+                    "task_bar",
+                    "updates",
+                    "volume",
+                    "weather",
+                    "window_title",
+                    "workspace",
+                    "workspaces",
+                    "quick_settings"
+                  ]
                 }
               },
               "spacing": {
@@ -221,7 +295,9 @@
                 "description": "Style classes to apply to the group (e.g. 'bordered', 'compact')"
               }
             },
-            "required": ["widgets"]
+            "required": [
+              "widgets"
+            ]
           }
         }
       }
@@ -441,7 +517,12 @@
       "properties": {
         "os": {
           "type": "string",
-          "enum": ["arch", "fedora", "opensuse", "ubuntu"]
+          "enum": [
+            "arch",
+            "fedora",
+            "opensuse",
+            "ubuntu"
+          ]
         },
         "icon_size": {
           "type": "string",
