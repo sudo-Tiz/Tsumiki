@@ -164,7 +164,6 @@
           "$ref": "#/definitions/widgets"
         },
         "right_section": {
-          "type": "array",
           "items": {
             "$ref": "#/definitions/widgets"
           }
