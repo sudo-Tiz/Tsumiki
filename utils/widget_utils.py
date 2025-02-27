@@ -17,7 +17,7 @@ from .icons import brightness_text_icons, icons, volume_text_icons
 
 
 # Function to get the system stats using psutil
-def psutil_poll(fabricator):
+def stats_poll(fabricator):
     storage_config = widget_config["storage"]
     while True:
         yield {
@@ -190,4 +190,4 @@ def get_audio_icon_name(
 
 
 # Create a fabricator to poll the system stats
-util_fabricator = Fabricator(poll_from=psutil_poll, stream=True)
+util_fabricator = Fabricator(poll_from=stats_poll, stream=True)

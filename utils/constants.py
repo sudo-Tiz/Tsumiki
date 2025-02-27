@@ -832,6 +832,7 @@ WINDOW_TITLE_MAP = [
     ["plex", "󰚺", "Plex"],
     ["steam", "", "Steam"],
     ["spotify", "󰓇", "Spotify"],
+    ["spotube", "󰓇", "Spotify"],
     ["ristretto", "󰋩", "Ristretto"],
     ["obsidian", "󱓧", "Obsidian"],
     # Browsers
