@@ -294,7 +294,6 @@ def is_app_running(app_name: str) -> bool:
 def is_valid_gjs_color(color: str) -> bool:
     color_lower = color.strip().lower()
 
-    print(color_lower)
     if color_lower in named_colors:
         return True
 

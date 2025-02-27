@@ -5,17 +5,9 @@ set -e  # Exit immediately if a command exits with a non-zero status
 set -u  # Treat unset variables as an error
 set -o pipefail  # Prevent errors in a pipeline from being masked
 
-INSTALL_DIR="$HOME/.config/hydepanel"
-REPO_URL="https://github.com/rubiin/HyDePanel.git"
-
 VERSION=$(git describe --tags --abbrev=0)
 
 start_bar() {
-	# Navigate to the $HOME/bar directory
-	cd "$INSTALL_DIR" || {
-		echo -e "\033[31mDirectory $INSTALL_DIR does not exist.\033[0m\n"
-		exit 1
-	}
 
 	# Check if the virtual environment exists, if not, create it
 	if [ ! -d .venv ]; then
