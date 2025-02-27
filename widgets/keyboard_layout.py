@@ -1,8 +1,9 @@
 import json
 
-from fabric.utils import exec_shell_command_async
+from fabric.hyprland.widgets import get_hyprland_connection
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
+from loguru import logger
 
 from shared.widget_container import ButtonWidget
 from utils.constants import KBLAYOUT_MAP
@@ -32,12 +33,21 @@ class KeyboardLayoutWidget(ButtonWidget):
 
         self.box.children = (self.icon, self.kb_label)
 
-        exec_shell_command_async(
-            "hyprctl devices -j", lambda output: self.get_keyboard(output)
+        self.connection = get_hyprland_connection()
+
+        # all aboard...
+        if self.connection.ready:
+            self.on_ready(None)
+        else:
+            self.connection.connect("event::ready", self.on_ready)
+
+    def on_ready(self, _):
+        return self.get_keyboard(), logger.info(
+            "[Keyboard] Connected to the hyprland socket"
         )
 
-    def get_keyboard(self, value: str):
-        data = json.loads(value)
+    def get_keyboard(self):
+        data = json.loads(str(self.connection.send_command("j/devices").reply.decode()))
         keyboards = data["keyboards"]
         if len(keyboards) == 0:
             return "Unknown"
@@ -56,5 +66,5 @@ class KeyboardLayoutWidget(ButtonWidget):
 
         # Update the label with the used storage if enabled
         if self.config["label"]:
-            self.kb_label.set_label(f"󰌌 {KBLAYOUT_MAP[layout]}")
+            self.kb_label.set_label(KBLAYOUT_MAP[layout])
             self.kb_label.show()
