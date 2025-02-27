@@ -1,5 +1,6 @@
 import datetime
 import os
+import re
 import shutil
 import subprocess
 from typing import Dict, List, Literal
@@ -17,6 +18,7 @@ from loguru import logger
 from utils.thread import run_in_thread
 
 from .colors import Colors
+from .constants import named_colors
 from .icons import distro_text_icons
 
 
@@ -286,3 +288,21 @@ def unique_list(lst) -> List:
 @run_in_thread
 def is_app_running(app_name: str) -> bool:
     return len(exec_shell_command(f"pidof {app_name}")) != 0
+
+
+# Function to check if a color is valid
+def is_valid_gjs_color(color: str) -> bool:
+    color_lower = color.strip().lower()
+
+    print(color_lower)
+    if color_lower in named_colors:
+        return True
+
+    hex_color_regex = r"^#(?:[a-fA-F0-9]{3,4}|[a-fA-F0-9]{6,8})$"
+    rgb_regex = r"^rgb\(\s*(\d{1,3}%?\s*,\s*){2}\d{1,3}%?\s*\)$"
+    rgba_regex = r"^rgba\(\s*(\d{1,3}%?\s*,\s*){3}(0|1|0?\.\d+)\s*\)$"
+
+    if re.match(hex_color_regex, color):
+        return True
+
+    return bool(re.match(rgb_regex, color_lower) or re.match(rgba_regex, color_lower))

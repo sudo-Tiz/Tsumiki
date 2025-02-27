@@ -4,6 +4,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
 from shared.widget_container import ButtonWidget
+from utils.functions import is_valid_gjs_color
 from utils.widget_settings import BarConfig
 
 
@@ -14,6 +15,9 @@ class CavaWidget(ButtonWidget):
         super().__init__(name="cava", **kwargs)
 
         self.config = widget_config["cava"]
+
+        if not is_valid_gjs_color(self.config["color"]):
+            raise ValueError("Invalid color supplied for cava widget")
 
         cava_command = "cava"
 
@@ -26,6 +30,7 @@ class CavaWidget(ButtonWidget):
         cava_label = Label(
             v_align="center",
             h_align="center",
+            style=f"color: {self.config['color']};",
         )
 
         script_path = get_relative_path("../assets/scripts/cava.sh")
