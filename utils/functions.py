@@ -168,6 +168,7 @@ def check_icon_exists(icon_name: str, fallback_icon: str) -> str:
 
 # Function to play sound
 @cooldown(1)
+@run_in_thread
 def play_sound(file: str):
     exec_shell_command_async(f"pw-play {file}", None)
 
@@ -198,6 +199,7 @@ def get_distro_icon():
 
 
 # Function to check if an executable exists
+@run_in_thread
 def executable_exists(executable_name):
     executable_path = shutil.which(executable_name)
     return bool(executable_path)
@@ -275,6 +277,7 @@ def convert_to_percent(
 
 
 # Function to ensure the directory exists
+@run_in_thread
 def ensure_dir_exists(path: str):
     if not os.path.exists(path):
         os.makedirs(path)
@@ -286,5 +289,6 @@ def unique_list(lst) -> List:
 
 
 # Function to check if an app is running
+@run_in_thread
 def is_app_running(app_name: str) -> bool:
     return len(exec_shell_command(f"pidof {app_name}")) != 0
