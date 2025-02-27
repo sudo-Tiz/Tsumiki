@@ -21,19 +21,20 @@ class ThemeSwitcherWidget(ButtonWidget):
         # Remove the '.scss' part from each string in the list
         self.themes_list = [style.replace(".scss", "") for style in theme_files]
 
-        self.current_theme = self.themes_list[0]
+        self.current_theme = widget_config["theme"]["name"]
 
         self.children = text_icon(
             self.config["icon"],
             self.config["icon_size"],
             props={"style_classes": "panel-icon"},
         )
-
+        self.set_tooltip_text(self.current_theme)
         self.connect("clicked", self.cycle_themes)
 
     def cycle_themes(self, *_):
         """Cycle through the themes."""
-        copy_theme(self.current_theme)
         self.current_theme = self.themes_list[
             (self.themes_list.index(self.current_theme) + 1) % len(self.themes_list)
         ]
+        copy_theme(self.current_theme)
+        self.set_tooltip_text(self.current_theme)
