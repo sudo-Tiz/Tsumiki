@@ -7,7 +7,7 @@ from fabric.widgets.label import Label
 from shared.widget_container import ButtonWidget
 from utils.functions import format_time
 from utils.widget_settings import BarConfig
-from utils.widget_utils import psutil_fabricator
+from utils.widget_utils import util_fabricator
 
 
 class BatteryWidget(ButtonWidget):
@@ -32,7 +32,7 @@ class BatteryWidget(ButtonWidget):
         self.children = (self.box,)
 
         # Set up a repeater to call the update_battery_status method
-        psutil_fabricator.connect("changed", self.update_ui)
+        util_fabricator.connect("changed", self.update_ui)
 
     def update_ui(self, fabricator, value):
         """Update the battery status by fetching the current battery information

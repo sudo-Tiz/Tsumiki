@@ -19,7 +19,7 @@ from utils.widget_settings import BarConfig
 from utils.widget_utils import (
     get_audio_icon_name,
     get_brightness_icon_name,
-    psutil_fabricator,
+    util_fabricator,
 )
 from widgets.media import PlayerBoxStack
 from widgets.quick_settings.togglers import (
@@ -244,7 +244,7 @@ class QuickSettingsMenu(Box):
 
         self.add(box)
 
-        psutil_fabricator.connect(
+        util_fabricator.connect(
             "changed",
             lambda _, value: (
                 username_label.set_label(

@@ -2,7 +2,7 @@ import time
 from typing import List
 
 from fabric.notifications import Notification
-from fabric.utils import bulk_connect, invoke_repeater
+from fabric.utils import bulk_connect
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.datetime import DateTime
@@ -25,7 +25,7 @@ from utils.colors import Colors
 from utils.functions import uptime
 from utils.icons import icons
 from utils.widget_settings import BarConfig
-from utils.widget_utils import get_icon, setup_cursor_hover
+from utils.widget_utils import get_icon, setup_cursor_hover, util_fabricator
 
 
 class DateMenuNotification(EventBox):
@@ -332,7 +332,6 @@ class DateNotificationMenu(Box):
         if config["calendar"]:
             date_column.set_visible(True)
 
-        invoke_repeater(1000, self.update_labels, initial_call=True)
         notification_service.connect("notification-added", self.on_new_notification)
         self.cache_notification_service.connect(
             "clear_all", self.on_clear_all_notifications
@@ -342,6 +341,9 @@ class DateNotificationMenu(Box):
         self.cache_notification_service.connect(
             "dnd", lambda _, value, *args: self.dnd_switch.set_active(value)
         )
+
+        # reusing the fabricator to call specified intervals
+        util_fabricator.connect("changed", self.update_ui)
 
     def on_dnd_switch(self, switch, _):
         """Handle the do not disturb switch."""
@@ -375,7 +377,7 @@ class DateNotificationMenu(Box):
         self.placeholder.set_visible(False)
         self.notification_list_box.set_visible(True)
 
-    def update_labels(self):
+    def update_ui(self, fabricator, value):
         self.clock_label.set_text(time.strftime("%H:%M"))
         self.uptime.set_text(f"uptime: {uptime()}")
         return True

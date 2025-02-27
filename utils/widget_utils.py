@@ -30,7 +30,7 @@ def psutil_poll(fabricator):
             "user": psutil.users()[0][0],
             "uptime": uptime(),
         }
-        sleep(2)
+        sleep(1)
 
 
 # Function to setup cursor hover
@@ -190,4 +190,4 @@ def get_audio_icon_name(
 
 
 # Create a fabricator to poll the system stats
-psutil_fabricator = Fabricator(poll_from=psutil_poll, stream=True)
+util_fabricator = Fabricator(poll_from=psutil_poll, stream=True)

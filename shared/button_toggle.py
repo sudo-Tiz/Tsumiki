@@ -1,10 +1,13 @@
-from fabric.utils import exec_shell_command_async, invoke_repeater
+from fabric.utils import exec_shell_command_async
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
 import utils.functions as helpers
 from utils.exceptions import ExecutableNotFoundError
-from utils.widget_utils import text_icon
+from utils.widget_utils import (
+    text_icon,
+    util_fabricator,
+)
 
 from .widget_container import ButtonWidget
 
@@ -63,7 +66,9 @@ class CommandSwitcher(ButtonWidget):
         self.add(self.box)
 
         self.connect("clicked", self.toggle)
-        invoke_repeater(interval, self.update, initial_call=True)
+
+        # reusing the fabricator to call specified intervals
+        util_fabricator.connect("changed", lambda *_: self.update_ui())
 
     def toggle(self, *_):
         is_app_running = helpers.is_app_running(self.command_without_args)
@@ -73,10 +78,10 @@ class CommandSwitcher(ButtonWidget):
             )
         else:
             exec_shell_command_async(f"bash -c '{self.command}&'", lambda *_: None)
-        self.update(is_app_running)
+        self.update_ui(is_app_running)
         return True
 
-    def update(self, is_app_running: bool | None = None):
+    def update_ui(self, is_app_running: bool | None = None):
         if is_app_running is None:
             is_app_running = helpers.is_app_running(self.command_without_args)
 
