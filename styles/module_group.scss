@@ -22,7 +22,7 @@
   &.bordered {
     border: variable.$border-width solid theme.$accent-light;
     background: transparent;
-    padding: 4px 5px;
+    padding: functions.toEm(4) functions.toEm(5);
 
     > * {
       //background: transparent;
