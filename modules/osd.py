@@ -107,22 +107,28 @@ class AudioOSDContainer(GenericOSDContainer):
             if 0 <= volume <= 100:
                 self.audio.speaker.set_volume(volume)
                 self.update_icon(volume)
-                self.emit("volume-changed")
+
+    def on_mute(self, *_):
+        self.update_volume()
+        if self.audio.speaker.muted:
+            self.update_icon(0)
+        self.emit("volume-changed")
+        return True
 
     def on_audio_speaker_changed(self, *_):
         if self.audio.speaker:
-            self.audio.speaker.connect("notify::volume", self.update_volume)
+            self.audio.speaker.connect("changed", self.on_mute)
             self.update_volume()
 
     def update_volume(self, *_):
         if self.audio.speaker and not self.is_hovered():
             volume = round(self.audio.speaker.volume)
             self.scale.set_value(volume)
+            self.level.set_label(f"{volume}%")
             self.update_icon(volume)
 
     def update_icon(self, volume):
         icon_name = get_audio_icon_name(volume, self.audio.speaker.muted)["icon"]
-        self.level.set_label(f"{volume}%")
         self.icon.set_from_icon_name(icon_name)
 
 
@@ -164,7 +170,6 @@ class OSDContainer(Window):
 
         self.last_activity_time = time.time()
 
-        self.audio_container.audio.connect("notify::speaker", self.show_audio)
         self.brightness_container.brightness_service.connect(
             "screen",
             self.show_brightness,

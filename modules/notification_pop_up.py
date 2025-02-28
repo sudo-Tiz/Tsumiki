@@ -73,6 +73,10 @@ class NotificationPopup(WaylandWindow):
         new_box = NotificationRevealer(notification)
         self.notifications.add(new_box)
         new_box.set_reveal_child(True)
+        logger.info(
+            f"{Colors.INFO}[Notification] New notification from "
+            f"{Colors.OKGREEN}{notification.app}"
+        )
         self.cache_notification_service.cache_notification(notification)
 
         if self.config["play_sound"]:
