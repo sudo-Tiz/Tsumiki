@@ -172,7 +172,7 @@
 
 @mixin spacing($multiplier: 1, $spacing: variable.$spacing, $rec: false) {
   &.horizontal > * {
-    margin: 0 calc($spacing * $multiplier / 2);
+    margin: 0 ($spacing * $multiplier / 2);
 
     &:first-child {
       margin-left: 0;
@@ -184,7 +184,7 @@
   }
 
   &.vertical > * {
-    margin: calc($spacing * $multiplier / 2) 0;
+    margin: ($spacing * $multiplier / 2) 0;
 
     &:first-child {
       margin-top: 0;

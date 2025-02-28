@@ -10,12 +10,12 @@
     margin: 0;
 
     > *:not(:first-child) {
-      padding-right: calc(variable.$padding * 1.5);
+      padding-right: variable.$padding * 1.5;
       padding-left: variable.$padding;
     }
     > *:not(:last-child) {
       padding-right: variable.$padding;
-      padding-left: calc(variable.$padding * 1.5);
+      padding-left: variable.$padding * 1.5;
     }
   }
 
