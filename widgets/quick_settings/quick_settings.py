@@ -231,17 +231,11 @@ class QuickSettingsMenu(Box):
 
         # Create center box with sliders and shortcuts if configured
         center_box = Box(
-            orientation="h",
-            spacing=10,
-            style_classes="section-box",
-            hexpand=True
+            orientation="h", spacing=10, style_classes="section-box", hexpand=True
         )
 
         main_grid = Gtk.Grid(
-            visible=True,
-            column_spacing=10,
-            hexpand=True,
-            column_homogeneous=False
+            visible=True, column_spacing=10, hexpand=True, column_homogeneous=False
         )
         center_box.add(main_grid)
 
@@ -264,7 +258,7 @@ class QuickSettingsMenu(Box):
             spacing=10,
             style_classes=[slider_class],
             children=(sliders_grid,),
-            hexpand=True
+            hexpand=True,
         )
 
         if self.config.get("shortcuts"):
@@ -277,10 +271,10 @@ class QuickSettingsMenu(Box):
                         shortcuts_config=self.config["shortcuts"],
                         style_classes="shortcuts-grid",
                         v_align="start",
-                        h_align="fill"
+                        h_align="fill",
                     ),
                 ),
-                hexpand=False
+                hexpand=False,
             )
 
             main_grid.attach(sliders_box, 0, 0, 2, 1)
@@ -434,8 +428,11 @@ class QuickSettingsButtonWidget(ButtonWidget):
         try:
             # Convert brightness to percentage (0-100)
             normalized_brightness = int(
-                (self.brightness_service.screen_brightness /
-                self.brightness_service.max_screen) * 100
+                (
+                    self.brightness_service.screen_brightness
+                    / self.brightness_service.max_screen
+                )
+                * 100
             )
             icon_info = get_brightness_icon_name(normalized_brightness)
             if icon_info:

@@ -21,9 +21,9 @@ class ShortcutButton(HoverButton):
         if "icon" in shortcut_config:
             icon = Image(
                 icon_name=shortcut_config["icon"],
-                icon_size=24,
+                icon_size=shortcut_config["icon_size"],
                 v_align="center",
-                h_align="center"
+                h_align="center",
             )
             box.add(icon)
 
@@ -32,7 +32,7 @@ class ShortcutButton(HoverButton):
                 label=shortcut_config["label"],
                 v_align="center",
                 h_align="center",
-                style_classes="shortcut-label"
+                style_classes="shortcut-label",
             )
             box.add(label)
 
@@ -55,11 +55,7 @@ class ShortcutsContainer(Box):
 
     def __init__(self, shortcuts_config, **kwargs):
         super().__init__(
-            orientation="v",
-            spacing=4,
-            h_expand=True,
-            v_expand=True,
-            **kwargs
+            orientation="v", spacing=4, h_expand=True, v_expand=True, **kwargs
         )
 
         if not shortcuts_config:
@@ -75,15 +71,14 @@ class ShortcutsContainer(Box):
             column_homogeneous=True,
             row_homogeneous=True,
             hexpand=True,
-            vexpand=True
+            vexpand=True,
         )
 
         # Use single column for 1-2 shortcuts, 2x2 grid for 3-4
         num_cols = 2 if num_shortcuts > 2 else 1
 
         for i, shortcut in enumerate(shortcuts_config):
-            button = ShortcutButton(shortcut)
-            button.set_hexpand(True)
+            button = ShortcutButton(shortcut, h_expand=True)
 
             if num_cols == 1:
                 # Single column - stack vertically

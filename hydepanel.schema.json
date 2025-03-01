@@ -485,7 +485,10 @@
               "tooltip": {
                 "type": "string",
                 "description": "Optional tooltip text"
-              }
+              },
+              "icon_size": {
+                "type": "integer",
+                "description": "Icon size in pixels"
             }
           }
         }
