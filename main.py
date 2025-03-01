@@ -65,7 +65,7 @@ if __name__ == "__main__":
     helpers.copy_theme(widget_config["theme"]["name"])
 
     # Monitor styles folder for changes
-    if not widget_config["general"]["debug"]:
+    if widget_config["general"]["debug"]:
         main_css_file = monitor_file(get_relative_path("styles"))
         common_css_file = monitor_file(get_relative_path("styles/common"))
         main_css_file.connect("changed", lambda *_: process_and_apply_css(app))

@@ -58,6 +58,8 @@ class QuickSettingsButtonBox(Box):
             visible=True,
             row_spacing=10,
             column_spacing=10,
+            column_homogeneous=True,
+            row_homogeneous=True,
         )
 
         self.active_submenu = None
@@ -77,9 +79,6 @@ class QuickSettingsButtonBox(Box):
         self.hypr_idle = HyprIdleQuickSetting()
         self.hypr_sunset = HyprSunsetQuickSetting()
         self.notification_btn = NotificationQuickSetting()
-
-        self.grid.set_column_homogeneous(True)
-        self.grid.set_row_homogeneous(True)
 
         self.grid.attach(self.wifi_toggle, 1, 1, 1, 1)
 
@@ -231,7 +230,7 @@ class QuickSettingsMenu(Box):
 
         # Create center box with sliders and shortcuts if configured
         center_box = Box(
-            orientation="h", spacing=10, style_classes="section-box", hexpand=True
+            orientation="h", spacing=10, style_classes="section-box", h_expand=True
         )
 
         main_grid = Gtk.Grid(
@@ -258,7 +257,7 @@ class QuickSettingsMenu(Box):
             spacing=10,
             style_classes=[slider_class],
             children=(sliders_grid,),
-            hexpand=True,
+            h_expand=True,
         )
 
         if self.config.get("shortcuts"):
@@ -274,7 +273,8 @@ class QuickSettingsMenu(Box):
                         h_align="fill",
                     ),
                 ),
-                hexpand=False,
+                h_expand=False,
+                v_expand=True,
             )
 
             main_grid.attach(sliders_box, 0, 0, 2, 1)

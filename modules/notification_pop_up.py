@@ -75,7 +75,7 @@ class NotificationPopup(WaylandWindow):
         new_box.set_reveal_child(True)
         logger.info(
             f"{Colors.INFO}[Notification] New notification from "
-            f"{Colors.OKGREEN}{notification.app}"
+            f"{Colors.OKGREEN}{notification.app_name}"
         )
         self.cache_notification_service.cache_notification(notification)
 

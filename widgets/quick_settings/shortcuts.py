@@ -12,11 +12,11 @@ class ShortcutButton(HoverButton):
     """A button that executes a custom command when clicked."""
 
     def __init__(self, shortcut_config, **kwargs):
-        super().__init__(name="shortcut-button", **kwargs)
+        super().__init__(name="shortcut-button", v_expand=True, **kwargs)
 
         self.command = shortcut_config["command"]
 
-        box = Box(orientation="v", spacing=4)
+        box = Box(orientation="v", spacing=4, v_expand=True)
 
         if "icon" in shortcut_config:
             icon = Image(
@@ -68,8 +68,6 @@ class ShortcutsContainer(Box):
             visible=True,
             row_spacing=10,
             column_spacing=10,
-            column_homogeneous=True,
-            row_homogeneous=True,
             hexpand=True,
             vexpand=True,
         )
