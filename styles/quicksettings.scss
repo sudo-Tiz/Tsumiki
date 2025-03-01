@@ -63,7 +63,7 @@ $slider-height: 12px;
     }
 
     .section-box {
-      margin: 1rem;
+      margin: 1.4rem 1rem;
       margin-bottom: 0;
     }
 
@@ -102,7 +102,7 @@ $slider-height: 12px;
 
     // Base slider box styles
     %slider-box-base {
-      padding: functions.toEm(20) functions.toEm(15);
+      padding: functions.toEm(15);
       border-radius: variable.$radius;
       background-color: theme.$background;
 
