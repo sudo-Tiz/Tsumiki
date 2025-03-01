@@ -201,7 +201,6 @@ def get_distro_icon():
 
 
 # Function to check if an executable exists
-@run_in_thread
 def executable_exists(executable_name):
     executable_path = shutil.which(executable_name)
     return bool(executable_path)
@@ -291,7 +290,6 @@ def unique_list(lst) -> List:
 
 
 # Function to check if an app is running
-@run_in_thread
 def is_app_running(app_name: str) -> bool:
     return len(exec_shell_command(f"pidof {app_name}")) != 0
 
