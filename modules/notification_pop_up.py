@@ -77,7 +77,9 @@ class NotificationPopup(WaylandWindow):
             f"{Colors.INFO}[Notification] New notification from "
             f"{Colors.OKGREEN}{notification.app_name}"
         )
-        self.cache_notification_service.cache_notification(notification)
+        self.cache_notification_service.cache_notification(
+            notification, self.config["max_count"]
+        )
 
         if self.config["play_sound"]:
             helpers.play_sound(

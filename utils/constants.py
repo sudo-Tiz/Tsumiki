@@ -163,6 +163,7 @@ DEFAULT_CONFIG = {
         "auto_dismiss": True,
         "ignored": [],
         "timeout": 3000,
+        "max_count": 200,
         "play_sound": False,
         "sound_file": "notification4",
     },

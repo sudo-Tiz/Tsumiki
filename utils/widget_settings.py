@@ -225,6 +225,7 @@ Notification = TypedDict(
         "auto_dismiss": bool,
         "play_sound": bool,
         "sound_file": str,
+        "max_count": int,
     },
 )
 
