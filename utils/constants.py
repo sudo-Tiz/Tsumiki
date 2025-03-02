@@ -67,6 +67,10 @@ DEFAULT_CONFIG = {
         "icon_size": "12px",
         "label": True,
         "tooltip": True,
+        "round": True,
+        "unit": "celsius",
+        "show_unit": True,
+        "sensor": "",
     },
     "date_time": {
         "format": "%b %d %H:%M",
@@ -95,16 +99,6 @@ DEFAULT_CONFIG = {
         "icon_size": "14px",
         "label": True,
         "tooltip": True,
-    },
-    "cpu_temp": {
-        "icon": "",
-        "icon_size": "12px",
-        "label": True,
-        "round": True,
-        "tooltip": True,
-        "unit": "celsius",
-        "show_unit": True,
-        "sensor": "",
     },
     "language": {
         "icon": "",

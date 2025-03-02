@@ -75,7 +75,17 @@ General = TypedDict(
 )
 
 # Cpu configuration
-Cpu = TypedDict("Cpu", {**BaseConfig.__annotations__, "icon": str})
+Cpu = TypedDict(
+    "Cpu",
+    {
+        **BaseConfig.__annotations__,
+        "icon": str,
+        "sensor": str,
+        "unit": Literal["celsius", "fahrenheit"],
+        "show_unit": bool,
+        "round": bool,
+    },
+)
 
 # Mpris configuration
 Mpris = TypedDict("Mpris", {**BaseConfig.__annotations__, "truncation_size": int})
@@ -130,18 +140,6 @@ Updates = TypedDict(
     },
 )
 
-# Cpu temp configuration
-CpuTemp = TypedDict(
-    "CpuTemp",
-    {
-        **BaseConfig.__annotations__,
-        "icon": str,
-        "sensor": str,
-        "unit": Literal["celsius", "fahrenheit"],
-        "show_unit": bool,
-        "round": bool,
-    },
-)
 
 # Bluetooth configuration
 BlueTooth = TypedDict("BlueTooth", {"label": bool, "tooltip": bool, "icon_size": int})

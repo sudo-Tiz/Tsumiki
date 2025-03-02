@@ -36,6 +36,6 @@ class ThemeSwitcherWidget(ButtonWidget):
         self.current_theme = self.themes_list[
             (self.themes_list.index(self.current_theme) + 1) % len(self.themes_list)
         ]
-        send_notification("hydepanel",f"Theme switched to {self.current_theme}")
+        send_notification("hydepanel", f"Theme switched to {self.current_theme}")
         copy_theme(self.current_theme)
         self.set_tooltip_text(self.current_theme)

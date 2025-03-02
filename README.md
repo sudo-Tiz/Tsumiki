@@ -203,7 +203,6 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 | **cava**              | An audio visualizer.                                                           |
 | **clickcounter**      | Tracks the number of mouse clicks.                                             |
 | **cpu**               | Displays CPU usage and performance statistics.                                 |
-| **cpu_temp**          | Displays CPU temperature for given sensor.                                     |
 | **date_menu**         | A menu displaying the current date and notifications.                          |
 | **divider (utility)** | Separates sections in a user interface for better organization.                |
 | **hypr_idle**         | Tracks idle time or status of the system.                                      |

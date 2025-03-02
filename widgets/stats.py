@@ -1,4 +1,5 @@
 import json
+import platform
 
 from fabric import Fabricator
 from fabric.utils import exec_shell_command
@@ -50,17 +51,39 @@ class CpuWidget(ButtonWidget):
 
     def update_ui(self, fabricator, value):
         # Update the label with the current CPU usage if enabled
-        avg_usage = value.get("cpu_freq")
+        cpu_freq = value.get("cpu_freq")
         if self.config["label"]:
             self.cpu_level_label.show()
             self.cpu_level_label.set_label(value.get("cpu_usage"))
 
         # Update the tooltip with the memory usage details if enabled
         if self.config["tooltip"]:
-            tooltip_text = ""
+            temp = value.get("temperature")
 
-            for key, value in enumerate(avg_usage):
-                tooltip_text += f"core{key}: {round(value.current)} Mhz\n"
+            temp = temp.get(self.config["sensor"])
+
+            if temp is None:
+                return "N/A"
+
+            # current temperature
+            temp = temp.pop()[1]
+
+            temp = round(temp) if self.config["round"] else temp
+
+            temp = (
+                temp
+                if self.config["unit"] == "celsius"
+                else helpers.celsius_to_fahrenheit(temp)
+            )
+
+            tooltip_text = platform.processor()
+            tooltip_text += (
+                f" Temperature: {temp}°C"
+                if self.config["unit"] == "celsius"
+                else f"{temp}°F"
+            )
+            tooltip_text += f"\n󰾆 Utilization: {value.get('cpu_usage')}"
+            tooltip_text += f"\n Clock Speed: {round(cpu_freq[0], 2)} MHz"
 
             self.set_tooltip_text(tooltip_text)
 
@@ -190,71 +213,6 @@ class StorageWidget(ButtonWidget):
 
     def ratio(self):
         return f"{self.get_used()}/{self.get_total()}"
-
-
-class CPUTemperatureWidget(ButtonWidget):
-    """A widget to display the current cpu temperature."""
-
-    def __init__(
-        self,
-        widget_config: BarConfig,
-        **kwargs,
-    ):
-        # Initialize the Box with specific name and style
-        super().__init__(
-            name="cpu_temperature",
-            **kwargs,
-        )
-        self.config = widget_config["cpu_temp"]
-
-        self.box = Box()
-        self.children = (self.box,)
-
-        # Create a TextIcon with the specified icon and size
-        self.icon = text_icon(
-            icon=self.config["icon"],
-            size=self.config["icon_size"],
-            props={"style_classes": "panel-icon"},
-        )
-
-        self.temp_level_label = Label(
-            label="0", style_classes="panel-text", visible=False
-        )
-
-        self.box.children = (self.icon, self.temp_level_label)
-
-        # Set up a fabricator to call the update_label method at specified intervals
-        util_fabricator.connect("changed", self.update_ui)
-
-    def update_ui(self, fabricator, value):
-        # Get the current disk usage
-        value = value.get("temperature")
-
-        temp = value.get(self.config["sensor"])
-
-        if temp is None:
-            return "N/A"
-
-        # current temperature
-        temp = temp.pop()[1]
-
-        temp = round(temp) if self.config["round"] else temp
-
-        temp = (
-            temp
-            if self.config["unit"] == "celsius"
-            else helpers.celsius_to_fahrenheit(temp)
-        )
-
-        label_text = f"{temp}°C" if self.config["unit"] == "celsius" else f"{temp}°F"
-        if self.config["label"]:
-            self.temp_level_label.set_label(label_text)
-            self.temp_level_label.show()
-
-        if self.config["tooltip"]:
-            self.set_tooltip_text(f"󰾆 {label_text}")
-
-        return True
 
 
 class NetworkUsageWidget(ButtonWidget):
