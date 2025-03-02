@@ -12,6 +12,7 @@ from services import audio_service, network_service
 from services.brightness import Brightness
 from services.mpris import MprisPlayerManager
 from shared.circle_image import CircleImage
+from shared.dialog import Dialog
 from shared.pop_over import PopOverWindow
 from shared.submenu import QuickSubToggle
 from shared.widget_container import ButtonWidget, HoverButton
@@ -38,6 +39,24 @@ from .submenu import (
     WifiSubMenu,
     WifiToggle,
 )
+
+
+class DialogBox(Gtk.Dialog):
+    """A dialog box to display additional information."""
+
+    def __init__(self, parent):
+        super().__init__(title="My Dialog", transient_for=parent, flags=0)
+        self.add_buttons(
+            Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OK, Gtk.ResponseType.OK
+        )
+
+        self.set_size_request(20, 20)
+
+        label = Gtk.Label(label="This is a dialog to display additional information")
+
+        box = self.get_content_area()
+        box.add(label)
+        self.show_all()
 
 
 class QuickSettingsButtonBox(Box):
@@ -182,12 +201,16 @@ class QuickSettingsMenu(Box):
                     HoverButton(
                         image=Image(icon_name="system-restart-symbolic", icon_size=16),
                         v_align="center",
-                        on_clicked=lambda *_: helpers.handle_power_action("reboot"),
+                        on_clicked=lambda *_: Dialog(
+                            "Restart", "Do you really want to restart?"
+                        ).toggle_popup(),
                     ),
                     HoverButton(
                         image=Image(icon_name="system-shutdown-symbolic", icon_size=16),
                         v_align="center",
-                        on_clicked=lambda *_: helpers.handle_power_action("shutdown"),
+                        on_clicked=lambda *_: Dialog(
+                            "Shutdown", "Do you really want to shutdown?"
+                        ).toggle_popup(),
                     ),
                 ),
             ),

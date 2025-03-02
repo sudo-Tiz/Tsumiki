@@ -175,7 +175,9 @@ def play_sound(file: str):
     exec_shell_command_async(f"pw-play {file}", None)
 
 
-def handle_power_action(operation: str):
+def handle_power_action(
+    operation: Literal["shutdown", "reboot", "hibernate", "suspend", "lock", "logout"],
+):
     match operation:
         case "shutdown":
             exec_shell_command_async("systemctl poweroff")
