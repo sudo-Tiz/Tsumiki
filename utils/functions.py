@@ -2,9 +2,9 @@ import datetime
 import os
 import re
 import shutil
-import subprocess
-from typing import Dict, List, Literal
+from typing import Dict, List, Literal, Optional
 
+import gi
 import psutil
 from fabric.utils import (
     cooldown,
@@ -12,7 +12,7 @@ from fabric.utils import (
     exec_shell_command_async,
     get_relative_path,
 )
-from gi.repository import Gdk, GLib, Gtk
+from gi.repository import Gdk, Gio, GLib, Gtk
 from loguru import logger
 
 from utils.thread import run_in_thread
@@ -20,6 +20,9 @@ from utils.thread import run_in_thread
 from .colors import Colors
 from .constants import named_colors
 from .icons import distro_text_icons
+
+gi.require_version("Gio", "2.0")
+gi.require_version("Gtk", "3.0")
 
 
 # Function to escape the markup
@@ -208,45 +211,34 @@ def executable_exists(executable_name):
     return bool(executable_path)
 
 
+# Function to send a notification
+@cooldown(1)
 def send_notification(
     title: str,
     body: str,
-    urgency: Literal["low", "normal", "critical"],
-    icon=None,
-    app_name="Application",
-    timeout=None,
+    urgency: Literal["low", "normal", "critical"] = "normal",
+    icon: Optional[str] = None,
+    app_name: str = "Application",
 ):
-    """
-    Sends a notification using the notify-send command.
-    :param title: The title of the notification
-    :param body: The message body of the notification
-    :param urgency: The urgency of the notification ('low', 'normal', 'critical')
-    :param icon: Optional icon for the notification
-    :param app_name: The application name that is sending the notification
-    :param timeout: Optional timeout in milliseconds (e.g., 5000 for 5 seconds)
-    """
-    # Base command
-    command = [
-        "notify-send",
-        "--urgency",
-        urgency,
-        "--app-name",
-        app_name,
-        title,
-        body,
-    ]
+    # Create a notification with the title
+    notification = Gio.Notification.new(title)
+    notification.set_body(body)
 
-    # Add icon if provided
+    # Set the urgency level if provided
+    if urgency in ["low", "normal", "critical"]:
+        notification.set_urgent(urgency)
+
+    # Set the icon if provided
     if icon:
-        command.extend(["--icon", icon])
+        notification.set_icon(icon)
 
-    if timeout is not None:
-        command.extend(["-t", str(timeout)])
+    # Optionally, set the application name
+    notification.set_title(app_name)
 
-    try:
-        subprocess.run(command, check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Failed to send notification: {e}")
+    application = Gio.Application.get_default()
+
+    # Send the notification to the application
+    application.send_notification(None, notification)
 
 
 # Function to get the relative time

@@ -6,15 +6,12 @@
 
 $slider-height: 12px;
 
-
 #dialog {
-
   &-wrapper {
     background-color: theme.$background-dark;
     border-radius: variable.$radius;
     padding: 1rem 2.5rem;
     border: 1px solid blue;
-
   }
 
   &-title {
@@ -26,7 +23,6 @@ $slider-height: 12px;
     margin: 1rem;
     @extend %caption_heading;
   }
-
 
   &-buttons-box {
     margin: 1rem;
@@ -42,17 +38,15 @@ $slider-height: 12px;
     margin: 0 1rem;
 
     &:nth-child(1):hover {
-      background-color: #4CAF50;
+      background-color: #4caf50;
       color: theme.$background;
     }
 
     &:nth-child(2):hover {
-      background-color: #E53935;
+      background-color: #e53935;
       color: theme.$background;
     }
   }
-
-
 }
 
 #quicksettings-menu {
@@ -103,7 +97,8 @@ $slider-height: 12px;
 
       .uptime {
         font-size: 0.92rem;
-        border: variable.$border-width solid lighten($color: theme.$surface-disabled, $amount: 10%);
+        border: variable.$border-width solid
+          lighten($color: theme.$surface-disabled, $amount: 10%);
         padding: functions.toEm(3) functions.toEm(10);
         font-weight: 600;
         border-radius: 1rem;
@@ -176,9 +171,11 @@ $slider-height: 12px;
       @extend %slider-box-base;
 
       #setting-slider {
-        @include mixins.slider($highlight-color: theme.$accent-blue,
+        @include mixins.slider(
+          $highlight-color: theme.$accent-blue,
           $slider: true,
-          $min-length: 320px);
+          $min-length: 320px
+        );
       }
     }
 
@@ -186,9 +183,11 @@ $slider-height: 12px;
       @extend %slider-box-base;
 
       #setting-slider {
-        @include mixins.slider($highlight-color: theme.$accent-blue,
+        @include mixins.slider(
+          $highlight-color: theme.$accent-blue,
           $slider: true,
-          $min-length: 230px);
+          $min-length: 230px
+        );
       }
     }
 
@@ -196,9 +195,11 @@ $slider-height: 12px;
       @extend %slider-box-base;
 
       #setting-slider {
-        @include mixins.slider($highlight-color: theme.$accent-blue,
+        @include mixins.slider(
+          $highlight-color: theme.$accent-blue,
           $slider: true,
-          $min-length: 140px);
+          $min-length: 140px
+        );
       }
     }
 
@@ -244,7 +245,7 @@ $slider-height: 12px;
         &:active {
           background-color: theme.$text-main;
 
-          &>* {
+          & > * {
             color: theme.$background-dark;
           }
         }

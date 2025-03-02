@@ -66,7 +66,8 @@
               "window_title",
               "workspace",
               "workspaces",
-              "quick_settings"
+              "quick_settings",
+              "theme_switcher"
             ]
           },
           {
@@ -139,19 +140,36 @@
         },
         "location": {
           "type": "string",
-          "enum": ["top", "bottom"]
+          "enum": [
+            "top",
+            "bottom"
+          ]
         },
         "bar_style": {
           "type": "string",
-          "enum": ["default", "floating"]
+          "enum": [
+            "default",
+            "floating"
+          ]
         },
         "layer": {
           "type": "string",
-          "enum": ["background", "bottom", "top", "overlay"]
+          "enum": [
+            "background",
+            "bottom",
+            "top",
+            "overlay"
+          ]
         },
         "widget_style": {
           "type": "string",
-          "enum": ["default", "wave1", "wave2", "flat", "shadow"]
+          "enum": [
+            "default",
+            "wave1",
+            "wave2",
+            "flat",
+            "shadow"
+          ]
         }
       }
     },
@@ -165,10 +183,7 @@
           "$ref": "#/definitions/widgets"
         },
         "right_section": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/widgets"
-          }
+          "$ref": "#/definitions/widgets"
         },
         "module_groups": {
           "type": "array",
@@ -194,7 +209,9 @@
                 "description": "Style classes to apply to the group (e.g. 'bordered', 'compact')"
               }
             },
-            "required": ["widgets"]
+            "required": [
+              "widgets"
+            ]
           }
         }
       }
@@ -236,7 +253,10 @@
         },
         "unit": {
           "type": "string",
-          "enum": ["celsius", "fahrenheit"]
+          "enum": [
+            "celsius",
+            "fahrenheit"
+          ]
         },
         "round": {
           "type": "boolean"
@@ -394,7 +414,12 @@
         "$ref": "#/definitions/baseProperties",
         "os": {
           "type": "string",
-          "enum": ["arch", "fedora", "opensuse", "ubuntu"]
+          "enum": [
+            "arch",
+            "fedora",
+            "opensuse",
+            "ubuntu"
+          ]
         },
         "interval": {
           "type": "integer"
@@ -468,7 +493,9 @@
           "maxItems": 4,
           "items": {
             "type": "object",
-            "required": ["command"],
+            "required": [
+              "command"
+            ],
             "properties": {
               "icon": {
                 "type": "string",
@@ -489,217 +516,217 @@
               "icon_size": {
                 "type": "integer",
                 "description": "Icon size in pixels"
+              }
             }
           }
         }
-      }
-    },
-    "task_bar": {
-      "type": "object",
-      "properties": {
-        "icon_size": {
-          "type": "integer"
+      },
+      "task_bar": {
+        "type": "object",
+        "properties": {
+          "icon_size": {
+            "type": "integer"
+          }
         }
-      }
-    },
-    "language": {
-      "type": "object",
-      "properties": {
-        "truncation_size": {
-          "type": "integer"
+      },
+      "language": {
+        "type": "object",
+        "properties": {
+          "truncation_size": {
+            "type": "integer"
+          }
         }
-      }
-    },
-    "mpris": {
-      "type": "object",
-      "properties": {
-        "truncation_size": {
-          "type": "integer"
-        },
-        "format": {
-          "type": "string"
-        }
-      }
-    },
-    "system_tray": {
-      "type": "object",
-      "properties": {
-        "icon_size": {
-          "type": "integer"
-        },
-        "ignored": {
-          "type": "array",
-          "items": {
+      },
+      "mpris": {
+        "type": "object",
+        "properties": {
+          "truncation_size": {
+            "type": "integer"
+          },
+          "format": {
             "type": "string"
           }
         }
-      }
-    },
-    "bluetooth": {
-      "type": "object",
-      "properties": {
-        "$ref": "#/definitions/baseProperties"
-      }
-    },
-    "volume": {
-      "type": "object",
-      "properties": {
-        "$ref": "#/definitions/baseProperties",
-        "step_size": {
-          "type": "integer"
-        }
-      }
-    },
-    "brightness": {
-      "type": "object",
-      "properties": {
-        "$ref": "#/definitions/baseProperties",
-        "step_size": {
-          "type": "integer"
-        }
-      }
-    },
-    "power": {
-      "type": "object",
-      "properties": {
-        "icon": {
-          "type": "string"
-        },
-        "icon_size": {
-          "type": "string",
-          "pattern": "^[0-9]+px$"
-        },
-        "tooltip": {
-          "type": "boolean"
-        }
-      }
-    },
-    "theme_switcher": {
-      "type": "object",
-      "properties": {
-        "icon": {
-          "type": "string"
-        },
-        "icon_size": {
-          "type": "string",
-          "pattern": "^[0-9]+px$"
-        },
-        "silent": {
-          "type": "boolean"
-        }
-      }
-    },
-    "date_time": {
-      "type": "object",
-      "properties": {
-        "format": {
-          "type": "string"
-        },
-        "notification_count": {
-          "type": "boolean"
-        },
-        "notification": {
-          "type": "boolean"
-        },
-        "calendar": {
-          "type": "boolean"
-        }
-      }
-    },
-    "stop_watch": {
-      "type": "object",
-      "properties": {
-        "stopped_icon": {
-          "type": "string"
-        },
-        "running_icon": {
-          "type": "string"
-        },
-        "icon_size": {
-          "type": "string",
-          "pattern": "^[0-9]+px$"
-        }
-      }
-    },
-    "notification": {
-      "type": "object",
-      "properties": {
-        "ignored": {
-          "type": "array",
-          "items": {
-            "type": "string"
+      },
+      "system_tray": {
+        "type": "object",
+        "properties": {
+          "icon_size": {
+            "type": "integer"
+          },
+          "ignored": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
-        },
-        "$ref": "#/definitions/anchor",
-        "auto_dismiss": {
-          "type": "boolean"
-        },
-        "timeout": {
-          "type": "integer"
-        },
-        "count": {
-          "type": "integer"
-        },
-        "play_sound": {
-          "type": "boolean"
-        },
-        "sound_fie": {
-          "type": "string",
-          "enum": [
-            "notification1",
-            "notification2",
-            "notification3",
-            "notification4",
-            "notification5",
-            "notification6",
-            "notification7",
-            "notification8",
-            "notification9",
-            "notification10"
-          ]
         }
-      }
-    },
-    "network_usage": {
-      "type": "object",
-      "properties": {
-        "adapter_name": {
-          "type": "string"
-        },
-        "icon_size": {
-          "type": "string",
-          "pattern": "^[0-9]+px$"
-        },
-        "upload_icon": {
-          "type": "string"
-        },
-        "download_icon": {
-          "type": "string"
-        },
-        "disconnected_icon": {
-          "type": "string"
-        },
-        "tooltip": {
-          "type": "boolean"
+      },
+      "bluetooth": {
+        "type": "object",
+        "properties": {
+          "$ref": "#/definitions/baseProperties"
         }
-      }
-    },
-    "recorder": {
-      "type": "object",
-      "properties": {
-        "videos": {
-          "type": "string"
-        },
-        "tooltip": {
-          "type": "boolean"
-        },
-        "audio": {
-          "type": "boolean"
-        },
-        "icon_size": {
-          "type": "integer"
+      },
+      "volume": {
+        "type": "object",
+        "properties": {
+          "$ref": "#/definitions/baseProperties",
+          "step_size": {
+            "type": "integer"
+          }
+        }
+      },
+      "brightness": {
+        "type": "object",
+        "properties": {
+          "$ref": "#/definitions/baseProperties",
+          "step_size": {
+            "type": "integer"
+          }
+        }
+      },
+      "power": {
+        "type": "object",
+        "properties": {
+          "icon": {
+            "type": "string"
+          },
+          "icon_size": {
+            "type": "string",
+            "pattern": "^[0-9]+px$"
+          },
+          "tooltip": {
+            "type": "boolean"
+          }
+        }
+      },
+      "theme_switcher": {
+        "type": "object",
+        "properties": {
+          "icon": {
+            "type": "string"
+          },
+          "icon_size": {
+            "type": "string",
+            "pattern": "^[0-9]+px$"
+          },
+          "silent": {
+            "type": "boolean"
+          }
+        }
+      },
+      "date_time": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string"
+          },
+          "notification_count": {
+            "type": "boolean"
+          },
+          "notification": {
+            "type": "boolean"
+          },
+          "calendar": {
+            "type": "boolean"
+          }
+        }
+      },
+      "stop_watch": {
+        "type": "object",
+        "properties": {
+          "stopped_icon": {
+            "type": "string"
+          },
+          "running_icon": {
+            "type": "string"
+          },
+          "icon_size": {
+            "type": "string",
+            "pattern": "^[0-9]+px$"
+          }
+        }
+      },
+      "notification": {
+        "type": "object",
+        "properties": {
+          "ignored": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "$ref": "#/definitions/anchor",
+          "auto_dismiss": {
+            "type": "boolean"
+          },
+          "timeout": {
+            "type": "integer"
+          },
+          "count": {
+            "type": "integer"
+          },
+          "play_sound": {
+            "type": "boolean"
+          },
+          "sound_fie": {
+            "type": "string",
+            "enum": [
+              "notification1",
+              "notification2",
+              "notification3",
+              "notification4",
+              "notification5",
+              "notification6",
+              "notification7",
+              "notification8",
+              "notification9",
+              "notification10"
+            ]
+          }
+        }
+      },
+      "network_usage": {
+        "type": "object",
+        "properties": {
+          "adapter_name": {
+            "type": "string"
+          },
+          "icon_size": {
+            "type": "string",
+            "pattern": "^[0-9]+px$"
+          },
+          "upload_icon": {
+            "type": "string"
+          },
+          "download_icon": {
+            "type": "string"
+          },
+          "disconnected_icon": {
+            "type": "string"
+          },
+          "tooltip": {
+            "type": "boolean"
+          }
+        }
+      },
+      "recorder": {
+        "type": "object",
+        "properties": {
+          "videos": {
+            "type": "string"
+          },
+          "tooltip": {
+            "type": "boolean"
+          },
+          "audio": {
+            "type": "boolean"
+          },
+          "icon_size": {
+            "type": "integer"
+          }
         }
       }
     }
   }
-}

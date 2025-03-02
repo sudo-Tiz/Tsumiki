@@ -3,7 +3,7 @@ import os
 from fabric.utils import get_relative_path
 
 from shared.widget_container import ButtonWidget
-from utils.functions import copy_theme
+from utils.functions import copy_theme, send_notification
 from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon
 
@@ -36,5 +36,6 @@ class ThemeSwitcherWidget(ButtonWidget):
         self.current_theme = self.themes_list[
             (self.themes_list.index(self.current_theme) + 1) % len(self.themes_list)
         ]
+        send_notification("hydepanel",f"Theme switched to {self.current_theme}")
         copy_theme(self.current_theme)
         self.set_tooltip_text(self.current_theme)
