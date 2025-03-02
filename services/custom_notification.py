@@ -79,12 +79,13 @@ class CustomNotifications(Notifications):
         serialized_data = data.serialize()
         serialized_data.update({"id": self._count + 1})
         self.all_notifications.append(serialized_data)
+        self._count += 1
 
         # Remove the oldest notification if the count exceeds the max count
         if self._count > max_count:
             self.all_notifications.pop(0)
+            self._count -=1
 
-        self._count += 1
         self._write_notifications(self.all_notifications)
         self.emit("notification_count", self._count)
 
