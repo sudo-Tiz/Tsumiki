@@ -17,13 +17,13 @@ label {
   &-inner {
     background-color: theme.$bar-background;
     padding: 0.6em 0.8em 0.6em 0.8em;
+    border-radius: variable.$radius;
   }
 }
 
 .floating-bar {
-  margin: 1rem 2rem 0rem 2rem;
+  margin: 1rem 1.5rem 0rem 1.5rem;
   border-color: theme.$surface-disabled;
-  border-radius: variable.$radius;
 }
 
 .panel-box,
