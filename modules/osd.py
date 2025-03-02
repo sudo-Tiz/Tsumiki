@@ -108,16 +108,14 @@ class AudioOSDContainer(GenericOSDContainer):
                 self.audio.speaker.set_volume(volume)
                 self.update_icon(volume)
 
-    def on_mute(self, *_):
+    def handle_change(self, *_):
         self.update_volume()
-        if self.audio.speaker.muted:
-            self.update_icon(0)
         self.emit("volume-changed")
         return True
 
     def on_audio_speaker_changed(self, *_):
         if self.audio.speaker:
-            self.audio.speaker.connect("changed", self.on_mute)
+            self.audio.speaker.connect("notify::volume", self.handle_change)
             self.update_volume()
 
     def update_volume(self, *_):
