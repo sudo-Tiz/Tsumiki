@@ -202,14 +202,14 @@ class QuickSettingsMenu(Box):
                         image=Image(icon_name="system-restart-symbolic", icon_size=16),
                         v_align="center",
                         on_clicked=lambda *_: Dialog(
-                            "Restart", "Do you really want to restart?"
+                            "restart", "Do you really want to restart?"
                         ).toggle_popup(),
                     ),
                     HoverButton(
                         image=Image(icon_name="system-shutdown-symbolic", icon_size=16),
                         v_align="center",
                         on_clicked=lambda *_: Dialog(
-                            "Shutdown", "Do you really want to shutdown?"
+                            "shutdown", "Do you really want to shutdown?"
                         ).toggle_popup(),
                     ),
                 ),

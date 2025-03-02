@@ -35,7 +35,7 @@ class Dialog(PopupWindow):
 
         self.buttons.children = (self.ok_btn, self.cancel_btn)
 
-        self.ok_btn.connect("clicked", lambda *_: handle_power_action())
+        self.ok_btn.connect("clicked", lambda *_: handle_power_action(operation=title))
         self.cancel_btn.connect("clicked", self.destroy)
 
         self.wrapper.children = (self.title, self.body, self.buttons)
