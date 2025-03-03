@@ -90,6 +90,7 @@ class BatteryService(Service):
             "TimeToFull",
             "IconName",
             "State",
+            "Capacity",
         ],
     ):
         try:
