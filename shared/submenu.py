@@ -151,10 +151,10 @@ class QuickSubToggle(Box):
         self.reveal_button.connect("clicked", self.do_reveal_toggle)
         self.action_button.connect("clicked", self.do_action)
 
-    def do_action(self, btn):
+    def do_action(self, _):
         self.emit("action-clicked")
 
-    def do_reveal_toggle(self, btn):
+    def do_reveal_toggle(self, _):
         self.emit("reveal-clicked")
 
     def animate_spin(self, open: bool):
@@ -177,12 +177,11 @@ class QuickSubToggle(Box):
         self.set_style_classes("") if not action else self.set_style_classes("active")
 
     def set_action_label(self, label: str):
-        self.pad_action_label(label)
+        self.pad_action_label(label.strip())
         self.action_label.set_label(label.strip())
 
     # hacky way to fix the size, works for now
     def pad_action_label(self, label):
-        label = label.strip()
         self.action_label.set_style("padding-right: 60px;") if len(
             label
         ) <= 10 else self.action_label.set_style(f"padding-right: {35 - len(label)}px;")
