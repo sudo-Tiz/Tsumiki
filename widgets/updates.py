@@ -66,6 +66,7 @@ class UpdatesWidget(ButtonWidget):
             self.set_tooltip_text(value["tooltip"])
         return True
 
+    @cooldown(1)
     def on_button_press(self, _, event):
         if event.button == 1:
             exec_shell_command_async(
@@ -76,7 +77,6 @@ class UpdatesWidget(ButtonWidget):
         else:
             self.update()
 
-    @cooldown(1)
     def update(self):
         logger.info(f"{Colors.INFO}[Updates] Checking for updates...")
 
