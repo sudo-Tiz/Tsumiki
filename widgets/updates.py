@@ -72,9 +72,9 @@ class UpdatesWidget(ButtonWidget):
                 f"{self.script_file} -{self.config['os']} -up",
                 lambda _: None,
             )
-            return True
         else:
             self.check_update()
+        return True
 
     @cooldown(1)
     def check_update(self):
