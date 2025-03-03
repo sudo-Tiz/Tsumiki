@@ -95,7 +95,7 @@ cava
 power-profiles-daemon
 
 ## To record screen through recorder module
-wf-recorder
+wf-recorder & slurp
 
 ## To activate Hyprland’s native blue light filter
 hyprsunset
@@ -159,7 +159,7 @@ Run the following command to install the required system packages:
 Using `yay` to install the required AUR packages:
 
 ```sh
-yay -S --needed gray-git python-fabric gnome-bluetooth-3.0 python-rlottie-python
+yay -S --needed gray-git python-fabric gnome-bluetooth-3.0 python-rlottie-python slurp
 ```
 
 If you have something else besides `yay`, install with the respective aur helper.
