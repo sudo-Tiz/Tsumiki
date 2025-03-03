@@ -51,7 +51,7 @@ class UpdatesWidget(ButtonWidget):
         self.connect("button-press-event", self.on_button_press)
 
         # Set up a repeater to call the update method at specified intervals
-        invoke_repeater(self.config["interval"], self.update, initial_call=True)
+        invoke_repeater(self.config["interval"], self.check_update, initial_call=True)
 
     def update_values(self, value: str):
         # Parse the JSON value
@@ -66,7 +66,6 @@ class UpdatesWidget(ButtonWidget):
             self.set_tooltip_text(value["tooltip"])
         return True
 
-    @cooldown(1)
     def on_button_press(self, _, event):
         if event.button == 1:
             exec_shell_command_async(
@@ -75,9 +74,10 @@ class UpdatesWidget(ButtonWidget):
             )
             return True
         else:
-            self.update()
+            self.check_update()
 
-    def update(self):
+    @cooldown(1)
+    def check_update(self):
         logger.info(f"{Colors.INFO}[Updates] Checking for updates...")
 
         # Execute the update script asynchronously and update values
