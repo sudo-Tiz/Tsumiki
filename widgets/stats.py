@@ -1,8 +1,7 @@
 import json
-import platform
 
 from fabric import Fabricator
-from fabric.utils import exec_shell_command
+from fabric.utils import exec_shell_command, exec_shell_command_async
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 from loguru import logger
@@ -44,6 +43,13 @@ class CpuWidget(ButtonWidget):
             label="0%", style_classes="panel-text", visible=False
         )
 
+        self.cpu_name = ""
+
+        exec_shell_command_async(
+            "bash -c \"lscpu | grep 'Model name' | awk -F: '{print $2}'\"",
+            lambda value: setattr(self, "cpu_name", value.strip()),
+        )
+
         self.box.children = (self.text_icon, self.cpu_level_label)
 
         # Set up a fabricator to call the update_label method when the CPU usage changes
@@ -76,7 +82,7 @@ class CpuWidget(ButtonWidget):
                 else helpers.celsius_to_fahrenheit(temp)
             )
 
-            tooltip_text = platform.processor()
+            tooltip_text = f"{self.cpu_name}\n"
             tooltip_text += (
                 f" Temperature: {temp}°C"
                 if self.config["unit"] == "celsius"

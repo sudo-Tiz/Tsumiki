@@ -183,17 +183,17 @@ def handle_power_action(
 ):
     match operation:
         case "shutdown":
-            exec_shell_command_async("systemctl poweroff")
+            exec_shell_command_async("systemctl poweroff", lambda *_: None)
         case "reboot":
-            exec_shell_command_async("systemctl reboot")
+            exec_shell_command_async("systemctl reboot", lambda *_: None)
         case "hibernate":
-            exec_shell_command_async("systemctl hibernate")
+            exec_shell_command_async("systemctl hibernate", lambda *_: None)
         case "suspend":
-            exec_shell_command_async("systemctl suspend")
+            exec_shell_command_async("systemctl suspend", lambda *_: None)
         case "lock":
-            exec_shell_command_async("loginctl lock-session")
+            exec_shell_command_async("loginctl lock-session", lambda *_: None)
         case "logout":
-            exec_shell_command_async("loginctl terminate-user $USER")
+            exec_shell_command_async("loginctl terminate-user $USER", lambda *_: None)
     return True
 
 
