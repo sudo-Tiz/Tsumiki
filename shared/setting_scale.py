@@ -19,7 +19,6 @@ class SettingSlider(Box):
     ):
         super().__init__(
             name="setting-slider",
-            children=Box(spacing=5, h_expand=True),
             **kwargs,
         )
         self.pixel_size = pixel_size
