@@ -1,3 +1,5 @@
+from typing import Literal
+
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop
 from fabric import Service, Signal
@@ -79,7 +81,17 @@ class BatteryService(Service):
         # Connect the 'g-properties-changed' signal to the handler
         self.iface.connect_to_signal("PropertiesChanged", self.handle_property_change)
 
-    def get(self, property: str):
+    def get_property(
+        self,
+        property: Literal[
+            "Percentage",
+            "Temperature",
+            "TimeToEmpty",
+            "TimeToFull",
+            "IconName",
+            "State",
+        ],
+    ):
         try:
             return self.iface.Get("org.freedesktop.UPower.Device", property)
 

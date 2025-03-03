@@ -39,28 +39,30 @@ class BatteryWidget(ButtonWidget):
         """Update the battery status by fetching the current battery information
         and updating the widget accordingly.
         """
-        is_present = self.client.get("IsPresent")
+        is_present = self.client.get_property("IsPresent")
 
-        battery_percent = round(self.client.get("Percentage")) if is_present else 0
+        battery_percent = (
+            round(self.client.get_property("Percentage")) if is_present else 0
+        )
 
         self.battery_label = Label(
             label=f"{battery_percent}%", style_classes="panel-text", visible=False
         )
 
-        battery_state = self.client.get("State")
+        battery_state = self.client.get_property("State")
 
         is_charging = battery_state == 1 if is_present else False
 
-        temperature = self.client.get("Temperature")
+        temperature = self.client.get_property("Temperature")
 
         time_remaining = (
-            self.client.get("TimeToFull")
+            self.client.get_property("TimeToFull")
             if is_charging
-            else self.client.get("TimeToEmpty")
+            else self.client.get_property("TimeToEmpty")
         )
 
         self.battery_icon = Image(
-            icon_name=self.client.get("IconName"),
+            icon_name=self.client.get_property("IconName"),
             icon_size=14,
         )
 
