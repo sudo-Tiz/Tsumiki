@@ -1,10 +1,9 @@
 import re
 
-from fabric.core.service import Service, Signal
-from fabric.utils import exec_shell_command, invoke_repeater
+from fabric.utils import exec_shell_command
 
 
-class NetworkSpeed(Service):
+class NetworkSpeed:
     """A service to monitor network speed."""
 
     instance = None
@@ -16,19 +15,10 @@ class NetworkSpeed(Service):
 
         return NetworkSpeed.instance
 
-    @Signal
-    def changed(self) -> None:
-        """Signal emitted when speed changes."""
-        # Implement as needed for your application
-
     def __init__(self):
-        super().__init__()
-        self.network_speed = {"download": 0, "upload": 0}
         self.interval = 1000
         self.last_total_down_bytes = 0
         self.last_total_up_bytes = 0
-
-        invoke_repeater(self.interval, self.get_network_speed, initial_call=True)
 
     def get_network_speed(self):
         lines = exec_shell_command("cat /proc/net/dev").split("\n")
@@ -77,6 +67,4 @@ class NetworkSpeed(Service):
         self.last_total_down_bytes = total_down_bytes
         self.last_total_up_bytes = total_up_bytes
 
-        self.network_speed = {"download": download_speed, "upload": upload_speed}
-
-        self.emit("changed")
+        return {"download": download_speed, "upload": upload_speed}

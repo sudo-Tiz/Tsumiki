@@ -1,4 +1,4 @@
-from fabric.utils import exec_shell_command_async
+from fabric.utils import exec_shell_command_async, invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
@@ -277,14 +277,16 @@ class NetworkUsageWidget(ButtonWidget):
 
         self.client = network_speed
 
-        self.client.connect("changed", self.update_ui)
+        invoke_repeater(1000, self.update_ui)
 
     def update_ui(self, *_):
         """Update the network usage label with the current network usage."""
         # Get the current network usage
 
-        download_speed = self.client.network_speed.get("download", "0")
-        upload_speed = self.client.network_speed.get("upload", "0")
+        network_speed = self.client.get_network_speed()
+
+        download_speed = network_speed.get("download", "0")
+        upload_speed = network_speed.get("upload", "0")
 
         self.upload_label.set_label(f"{round(upload_speed, 2)} MB/s")
 
