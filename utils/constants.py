@@ -160,7 +160,7 @@ DEFAULT_CONFIG = {
         "max_count": 200,
         "per_app_limits": {},
         "play_sound": False,
-        "sound_file": "notification4"
+        "sound_file": "notification4",
     },
     "osd": {
         "enabled": True,

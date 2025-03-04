@@ -343,16 +343,13 @@ class DateNotificationMenu(Box):
             date_column.set_visible(True)
 
         self.cache_notification_service.connect(
-            "notification-added",
-            self.on_new_notification
+            "notification-added", self.on_new_notification
         )
         self.cache_notification_service.connect(
-            "clear_all",
-            self.on_clear_all_notifications
+            "clear_all", self.on_clear_all_notifications
         )
         self.cache_notification_service.connect(
-            "notification-closed",
-            self.on_notification_closed
+            "notification-closed", self.on_notification_closed
         )
 
         self.dnd_switch.connect("notify::active", self.on_dnd_switch)
@@ -381,8 +378,8 @@ class DateNotificationMenu(Box):
 
         for child in self.notification_list_box.children:
             is_target = (
-                isinstance(child, DateMenuNotification) and
-                child._notification["id"] == id
+                isinstance(child, DateMenuNotification)
+                and child._notification["id"] == id
             )
             if is_target:
                 if reason in ["dismissed-by-user", "dismissed-by-limit"]:
@@ -415,7 +412,8 @@ class DateNotificationMenu(Box):
         # Clean up any destroyed widgets first
         try:
             active_children = [
-                child for child in self.notification_list_box.children
+                child
+                for child in self.notification_list_box.children
                 if child.get_parent() is not None
             ]
         except GLib.Error:

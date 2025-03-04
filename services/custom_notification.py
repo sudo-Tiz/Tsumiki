@@ -115,16 +115,14 @@ class CustomNotifications(Notifications):
         self._count += 1
         new_id = self._count
         serialized_data = data.serialize()
-        serialized_data.update({
-            "id": new_id,
-            "app_name": data.app_name
-        })
+        serialized_data.update({"id": new_id, "app_name": data.app_name})
 
         # Get current notifications for this app and enforce limit
-        app_notifications = list([  # Make copy to avoid modification issues
-            n for n in self.all_notifications
-            if n["app_name"] == data.app_name
-        ])
+        app_notifications = list(
+            [  # Make copy to avoid modification issues
+                n for n in self.all_notifications if n["app_name"] == data.app_name
+            ]
+        )
 
         # If we'll exceed the limit, remove oldest ones first
         if len(app_notifications) >= app_limit:
@@ -148,6 +146,7 @@ class CustomNotifications(Notifications):
 
     def _cleanup_invalid_notifications(self):
         """Remove any invalid notifications."""
+
         def validate_with_id(notif):
             """Helper to validate and return result with ID."""
             try:
@@ -200,6 +199,7 @@ class CustomNotifications(Notifications):
 
     def get_deserialized(self) -> List[Notification]:
         """Return the notifications."""
+
         def deserialize_with_id(notif):
             """Helper to deserialize and return result with ID."""
             try:
@@ -211,8 +211,7 @@ class CustomNotifications(Notifications):
 
         # Process all notifications at once
         results = [
-            deserialize_with_id(notification)
-            for notification in self.all_notifications
+            deserialize_with_id(notification) for notification in self.all_notifications
         ]
 
         # Split into successful and failed

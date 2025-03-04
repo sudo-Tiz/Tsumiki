@@ -8,12 +8,18 @@ set -o pipefail  # Prevent errors in a pipeline from being masked
 
 INSTALL_DIR=`dirname -- "$0"`
 
+if ! grep -q "arch" /etc/os-release; then
+	echo "This script is designed to run on Arch Linux."
+	exit 1
+fi
+
 start_bar() {
 	# Navigate to the $HOME/bar directory
 	cd "$INSTALL_DIR" || {
 		echo -e "\033[31mDirectory $INSTALL_DIR does not exist.\033[0m\n"
 		exit 1
 	}
+
 	VERSION=$(git describe --tags --abbrev=0)
 
 	# Check if the virtual environment exists, if not, create it
