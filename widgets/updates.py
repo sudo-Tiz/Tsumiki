@@ -12,6 +12,7 @@ from loguru import logger
 
 from shared.widget_container import ButtonWidget
 from utils.colors import Colors
+from utils.functions import convert_seconds_to_milliseconds
 from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon
 
@@ -51,7 +52,11 @@ class UpdatesWidget(ButtonWidget):
         self.connect("button-press-event", self.on_button_press)
 
         # Set up a repeater to call the update method at specified intervals
-        invoke_repeater(self.config["interval"], self.check_update, initial_call=True)
+        invoke_repeater(
+            convert_seconds_to_milliseconds(self.config["interval"]),
+            self.check_update,
+            initial_call=True,
+        )
 
     def update_values(self, value: str):
         # Parse the JSON value

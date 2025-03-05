@@ -5,7 +5,7 @@ from gi.repository import GLib
 NOTIFICATION_WIDTH = 400
 NOTIFICATION_IMAGE_SIZE = 64
 NOTIFICATION_ACTION_NUMBER = 3
-HIGH_POLL_INTERVAL = 1000 * 3600  # 1 hour
+HIGH_POLL_INTERVAL = 3600  # 1 hour in seconds
 
 APPLICATION_NAME = "hydepanel"
 SYSTEM_CACHE_DIR = GLib.get_user_cache_dir()
