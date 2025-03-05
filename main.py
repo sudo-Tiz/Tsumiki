@@ -14,6 +14,7 @@ from utils.exceptions import ExecutableNotFoundError
 from widgets.corners import ScreenCorners
 
 
+@helpers.run_in_thread
 def process_and_apply_css(app: Application):
     if not helpers.executable_exists("sass"):
         raise ExecutableNotFoundError(

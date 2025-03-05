@@ -9,6 +9,7 @@ import utils.functions as helpers
 from utils.colors import Colors
 
 
+@helpers.run_in_thread
 def exec_brightnessctl_async(args: str):
     if not helpers.executable_exists("brightnessctl"):
         logger.error(f"{Colors.ERROR}Command brightnessctl not found")

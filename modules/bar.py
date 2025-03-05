@@ -9,7 +9,7 @@ from fabric.widgets.wayland import WaylandWindow
 
 from shared.module_group import ModuleGroup
 from utils.config import widget_config
-from utils.functions import convert_seconds_to_milliseconds
+from utils.functions import convert_seconds_to_milliseconds, run_in_thread
 from utils.monitors import HyprlandWithMonitors
 from widgets import (
     BatteryWidget,
@@ -50,6 +50,7 @@ from widgets import (
 class StatusBar(WaylandWindow):
     """A widget to display the status bar panel."""
 
+    @run_in_thread
     def check_for_bar_updates(self):
         exec_shell_command_async(
             get_relative_path("../assets/scripts/barupdate.sh"),

@@ -13,6 +13,7 @@ from loguru import logger
 from shared.widget_container import ButtonWidget
 from utils.colors import Colors
 from utils.functions import convert_seconds_to_milliseconds
+from utils.thread import run_in_thread
 from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon
 
@@ -82,6 +83,7 @@ class UpdatesWidget(ButtonWidget):
         return True
 
     @cooldown(1)
+    @run_in_thread
     def check_update(self):
         logger.info(f"{Colors.INFO}[Updates] Checking for updates...")
 
