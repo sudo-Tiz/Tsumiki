@@ -73,6 +73,7 @@ class UpdatesWidget(ButtonWidget):
         return True
 
     def on_button_press(self, _, event):
+        # todo : merge this with the check_update method
         if event.button == 1:
             exec_shell_command_async(
                 f"{self.script_file} -{self.config['os']} -up",

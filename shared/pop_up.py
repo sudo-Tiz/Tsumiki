@@ -1,16 +1,17 @@
 from typing import Literal
 
-from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow
 from fabric.widgets.widget import Widget
+from gi.repository import Gdk, GLib
+
+from utils.monitors import HyprlandWithMonitors
 
 
 class Padding(EventBox):
-    """A padding box."""
-
+    """A widget to add padding around the child widget."""
     def __init__(self, name: str | None = None, style: str = "", **kwargs):
         super().__init__(
             name=name,
@@ -23,9 +24,8 @@ class Padding(EventBox):
         self.set_can_focus(False)
 
 
-class PopupRevealer(Box):
-    """A revealer that can be toggled on and off."""
-
+class PopupRevealer(EventBox):
+    """A widget to reveal a popup window."""
     def __init__(
         self,
         popup_window: WaylandWindow,
@@ -41,9 +41,8 @@ class PopupRevealer(Box):
             "slide-down",
         ] = "slide-down",
         transition_duration: int = 400,
-        **kwargs,
     ):
-        self.revealer = Revealer(
+        self.revealer: Revealer = Revealer(
             name=name,
             child=child,
             transition_type=transition_type,
@@ -60,11 +59,9 @@ class PopupRevealer(Box):
             if revealer.child_revealed
             else None,
         )
-
         super().__init__(
             style=decorations,
-            children=self.revealer,
-            **kwargs,
+            child=self.revealer,
         )
 
 
@@ -82,7 +79,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         ],
                     ),
                     Padding(name=name, **kwargs),
-                ],
+                ]
             )
 
         case "center":
@@ -98,7 +95,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         ],
                     ),
                     Padding(name=name, **kwargs),
-                ],
+                ]
             )
         case "center-right":
             return Box(
@@ -112,7 +109,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                             Padding(name=name, **kwargs),
                         ],
                     ),
-                ],
+                ]
             )
         case "top":
             return Box(
@@ -123,7 +120,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         children=[popup, Padding(name=name, **kwargs)],
                     ),
                     Padding(name=name, **kwargs),
-                ],
+                ]
             )
         case "top-right":
             return Box(
@@ -134,7 +131,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         orientation="vertical",
                         children=[popup, Padding(name=name, **kwargs)],
                     ),
-                ],
+                ]
             )
         case "top-center":
             return Box(
@@ -146,7 +143,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         children=[popup, Padding(name=name, **kwargs)],
                     ),
                     Padding(name=name, **kwargs),
-                ],
+                ]
             )
         case "top-left":
             return Box(
@@ -157,7 +154,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         children=[popup, Padding(name=name, **kwargs)],
                     ),
                     Padding(name=name, **kwargs),
-                ],
+                ]
             )
         case "bottom-left":
             return Box(
@@ -168,7 +165,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         children=[Padding(name=name, **kwargs), popup],
                     ),
                     Padding(name=name, **kwargs),
-                ],
+                ]
             )
         case "bottom-center":
             return Box(
@@ -180,7 +177,7 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         children=[Padding(name=name, **kwargs), popup],
                     ),
                     Padding(name=name, **kwargs),
-                ],
+                ]
             )
         case "bottom-right":
             return Box(
@@ -191,17 +188,17 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
                         orientation="vertical",
                         children=[Padding(name=name, **kwargs), popup],
                     ),
-                ],
+                ]
             )
         case _:
             return None
 
 
 class PopupWindow(WaylandWindow):
-    """A popup window that can be toggled on and off."""
-
+    """A popup window to display a message."""
     def __init__(
         self,
+        layer: Literal["background", "bottom", "top", "overlay"] = "top",
         name: str = "popup-window",
         decorations: str = "padding: 1px;",
         child: Widget | None = None,
@@ -231,10 +228,10 @@ class PopupWindow(WaylandWindow):
         enable_inhibitor: bool = False,
         keyboard_mode: Literal["none", "exclusive", "on-demand"] = "on-demand",
         timeout: int = 1000,
-        **kwargs,
     ):
+        self._layer = layer
         self.timeout = timeout
-        self.current_timeout = 0
+        self.currtimeout = 0
         self.popup_running = False
 
         self.popup_visible = popup_visible
@@ -242,6 +239,7 @@ class PopupWindow(WaylandWindow):
         self.enable_inhibitor = enable_inhibitor
 
         self.monitor_number: int | None = None
+        self.hyprland_monitor = HyprlandWithMonitors()
 
         self.reveal_child = PopupRevealer(
             name=name,
@@ -253,7 +251,7 @@ class PopupWindow(WaylandWindow):
         )
 
         super().__init__(
-            layer="top",
+            layer=self._layer,
             keyboard_mode=keyboard_mode,
             visible=False,
             exclusivity="normal",
@@ -264,12 +262,11 @@ class PopupWindow(WaylandWindow):
                 popup=self.reveal_child,
                 on_button_press_event=self.on_inhibit_click,
             ),
-            on_key_press_event=self.on_key_release,
-            **kwargs,
+            on_key_release_event=self.on_key_release,
         )
 
-    def on_key_release(self, _, event_key):
-        if event_key.get_keycode()[1] == 9:
+    def on_key_release(self, _, event_key: Gdk.EventKey):
+        if event_key.keyval == Gdk.KEY_Escape:
             self.popup_visible = False
             self.reveal_child.revealer.set_reveal_child(self.popup_visible)
 
@@ -290,29 +287,32 @@ class PopupWindow(WaylandWindow):
         if not self.popup_visible:
             self.reveal_child.revealer.show()
 
+        self.set_property("pass-through", not self.enable_inhibitor)
         self.popup_visible = not self.popup_visible
         self.reveal_child.revealer.set_reveal_child(self.popup_visible)
 
     def popup_timeout(self):
+        curr_monitor = self.hyprland_monitor.get_current_gdk_monitor_id()
+        self.monitor = curr_monitor
+
         if not self.popup_visible:
             self.reveal_child.revealer.show()
-
         if self.popup_running:
-            self.current_timeout = 0
+            self.currtimeout = 0
             return
-
         self.popup_visible = True
-        self.popup_running = True
         self.reveal_child.revealer.set_reveal_child(self.popup_visible)
+        self.popup_running = True
 
         def popup_func():
-            if self.current_timeout >= self.timeout:
+            if self.currtimeout >= self.timeout:
                 self.popup_visible = False
                 self.reveal_child.revealer.set_reveal_child(self.popup_visible)
-                self.current_timeout = 0
+                self.currtimeout = 0
                 self.popup_running = False
                 return False
-            self.current_timeout += 500
+            self.currtimeout += 500
             return True
 
-        invoke_repeater(500, popup_func, initial_call=True)
+        self.set_property("pass-through", not self.enable_inhibitor)
+        GLib.timeout_add(500, popup_func)
