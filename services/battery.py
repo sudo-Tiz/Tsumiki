@@ -20,30 +20,6 @@ class BatteryService(Service):
     """Service to interact with the PowerProfiles service."""
 
     @Signal
-    def temperature(self, value: float) -> None:
-        """Signal emitted when battery changes."""
-
-    @Signal
-    def percentage(self, value: float) -> None:
-        """Signal emitted when battery changes."""
-
-    @Signal
-    def time_to_empty(self, value: float) -> None:
-        """Signal emitted when battery changes."""
-
-    @Signal
-    def time_to_full(self, value: float) -> None:
-        """Signal emitted when battery changes."""
-
-    @Signal
-    def icon(self, value: str) -> None:
-        """Signal emitted when battery changes."""
-
-    @Signal
-    def state(self, value: str) -> None:
-        """Signal emitted when battery changes."""
-
-    @Signal
     def changed(self) -> None:
         """Signal emitted when battery changes."""
 
@@ -91,6 +67,7 @@ class BatteryService(Service):
             "IconName",
             "State",
             "Capacity",
+            "IsPresent",
         ],
     ):
         try:
@@ -100,19 +77,5 @@ class BatteryService(Service):
             logger.error(f"[Battery] Error retrieving info: {e}")
 
     # Function to handle properties change signals
-    def handle_property_change(self, proxy, changed, invalidated):
-        signal_mapping = {
-            "Percentage": "percentage",
-            "Temperature": "temperature",
-            "TimeToEmpty": "time_to_empty",
-            "TimeToFull": "time_to_full",
-            "IconName": "icon",
-            "State": "state",
-        }
-
-        # Loop through the mapping and emit signals if the key exists in 'changed'
-        for key, signal in signal_mapping.items():
-            if key in changed:
-                self.emit(signal, changed[key])
-
+    def handle_property_change(self, *_):
         self.emit("changed")

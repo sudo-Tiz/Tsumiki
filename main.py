@@ -32,6 +32,7 @@ def process_and_apply_css(app: Application):
         app.set_stylesheet_from_string("")
         logger.error(f"{Colors.ERROR}[Main]Failed to compile sass!")
 
+
 general_options = widget_config["general"]
 
 if not general_options["debug"]:
