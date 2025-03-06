@@ -28,6 +28,7 @@ def process_and_apply_css(app: Application):
         logger.info(f"{Colors.INFO}[Main] CSS applied")
         app.set_stylesheet_from_file(get_relative_path("dist/main.css"))
     else:
+        print(output)
         app.set_stylesheet_from_string("")
         logger.error(f"{Colors.ERROR}[Main]Failed to compile sass!")
 
@@ -73,7 +74,6 @@ if __name__ == "__main__":
     helpers.ensure_dir_exists(APP_CACHE_DIRECTORY)
 
     helpers.copy_theme(widget_config["theme"]["name"])
-
 
     # Run the application
     app.run()
