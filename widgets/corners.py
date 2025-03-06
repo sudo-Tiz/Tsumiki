@@ -6,13 +6,13 @@ from fabric.widgets.wayland import WaylandWindow as Window
 class MyCorner(Box):
     """A container for a corner shape."""
 
-    def __init__(self, corner):
+    def __init__(self, corner, size):
         super().__init__(
             name="corner-container",
             children=Corner(
                 name="corner",
                 orientation=corner,
-                size=20,
+                size=size,
             ),
         )
 
@@ -20,7 +20,10 @@ class MyCorner(Box):
 class ScreenCorners(Window):
     """A window that displays all four corners."""
 
-    def __init__(self):
+    def __init__(
+        self,
+        size=20,
+    ):
         super().__init__(
             name="corners",
             layer="top",
@@ -44,9 +47,9 @@ class ScreenCorners(Window):
                     orientation="h",
                     h_align="fill",
                     children=[
-                        MyCorner("top-left"),
+                        MyCorner("top-left", size),
                         Box(h_expand=True),
-                        MyCorner("top-right"),
+                        MyCorner("top-right", size),
                     ],
                 ),
                 Box(v_expand=True),
@@ -55,9 +58,9 @@ class ScreenCorners(Window):
                     orientation="h",
                     h_align="fill",
                     children=[
-                        MyCorner("bottom-left"),
+                        MyCorner("bottom-left", size),
                         Box(h_expand=True),
-                        MyCorner("bottom-right"),
+                        MyCorner("bottom-right", size),
                     ],
                 ),
             ],

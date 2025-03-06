@@ -178,6 +178,7 @@ DEFAULT_CONFIG = {
         "bar_style": "default",
         "location": "top",
         "widget_style": "default",
+        "corner_size": 20,
     },
     "power": {"icon": "󰐥", "icon_size": "18px", "tooltip": True},
     "recorder": {

@@ -32,8 +32,9 @@ def process_and_apply_css(app: Application):
         app.set_stylesheet_from_string("")
         logger.error(f"{Colors.ERROR}[Main]Failed to compile sass!")
 
+general_options = widget_config["general"]
 
-if not widget_config["general"]["debug"]:
+if not general_options["debug"]:
     for log in [
         "fabric",
         "widgets",
@@ -51,8 +52,8 @@ if __name__ == "__main__":
 
     windows = [notifications, bar]
 
-    if widget_config["general"]["screen_corners"]:
-        windows.append(ScreenCorners())
+    if general_options["screen_corners"]:
+        windows.append(ScreenCorners(general_options["corner_size"]))
 
     if widget_config["osd"]["enabled"]:
         windows.append(OSDContainer(widget_config))
@@ -61,7 +62,7 @@ if __name__ == "__main__":
     app = Application(APPLICATION_NAME, windows=windows)
 
     # Monitor styles folder for changes
-    if widget_config["general"]["debug"]:
+    if general_options["debug"]:
         main_css_file = monitor_file(get_relative_path("styles"))
         common_css_file = monitor_file(get_relative_path("styles/common"))
         main_css_file.connect("changed", lambda *_: process_and_apply_css(app))
