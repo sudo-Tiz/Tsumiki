@@ -63,7 +63,6 @@
               "volume",
               "weather",
               "window_title",
-              "workspace",
               "workspaces",
               "quick_settings",
               "theme_switcher"
@@ -133,6 +132,9 @@
       "properties": {
         "screen_corners": {
           "type": "boolean"
+        },
+        "corner_size": {
+          "type": "integer"
         },
         "debug": {
           "type": "boolean"
