@@ -73,7 +73,6 @@ class UpdatesWidget(ButtonWidget):
         return True
 
     def on_button_press(self, _, event):
-        # todo : merge this with the check_update method
         if event.button == 1:
             self.check_update(update=True)
         else:
