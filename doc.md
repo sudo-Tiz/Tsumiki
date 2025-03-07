@@ -201,7 +201,6 @@ Other components follow a similar structure, where each configuration defines th
 - label: Whether to show a label.
 - tooltip: Whether to show a tooltip.
 
-
 ## Hyprpicker
 
 ```json
