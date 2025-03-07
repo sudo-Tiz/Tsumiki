@@ -19,7 +19,8 @@ The default configuration is stored in the `DEFAULT_CONFIG` dictionary. It inclu
         "auto_hide": false,
         "bar_style": "default",
         "location": "top",
-        "widget_style": "default"
+        "widget_style": "default",
+        "corner_size": 10,
     }
 
 ```
@@ -41,6 +42,9 @@ The default configuration is stored in the `DEFAULT_CONFIG` dictionary. It inclu
 
 - widget_style (string; enum: "default", "wave1", "wave2", "flat", "shadow"):
   Sets a visual style for the widgets on the panel. Each option represents a predefined look.
+
+- corner_size (number):
+  Sets the size of the rounded corners for the panel.
 
 ## Layout Configuration
 
