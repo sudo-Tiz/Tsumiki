@@ -63,11 +63,7 @@ class OCRWidget(ButtonWidget):
         try:
             result = subprocess.check_output(["tesseract", "--list-langs"], text=True)
             # Skip first line (header) and filter empty lines
-            return [
-                lang.strip()
-                for lang in result.split("\n")[1:]
-                if lang.strip()
-            ]
+            return [lang.strip() for lang in result.split("\n")[1:] if lang.strip()]
         except subprocess.CalledProcessError:
             return ["eng"]  # fallback to English if command fails
 

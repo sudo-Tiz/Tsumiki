@@ -40,7 +40,6 @@ def for_monitors(widget):
 
 # Function to ttl lru cache
 def ttl_lru_cache(seconds_to_live: int, maxsize: int = 128):
-
     def wrapper(func):
         @lru_cache(maxsize)
         def inner(__ttl, *args, **kwargs):
