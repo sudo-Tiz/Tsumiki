@@ -341,10 +341,11 @@ scrollbar {
 
 // Menu styling
 menu#ocr-menu {
-  padding: 0.5em;
+  padding: 0.45em;
 
   menuitem {
-    padding: 0.5em 1em;
+    padding: 0.25em 1em;
+    border-radius: variable.$radius;
 
     &:hover {
       background-color: theme.$surface-neutral;
