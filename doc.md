@@ -201,6 +201,23 @@ Other components follow a similar structure, where each configuration defines th
 - label: Whether to show a label.
 - tooltip: Whether to show a tooltip.
 
+
+## Hyprpicker
+
+```json
+"hypr_picker": {
+    "icon": "",
+    "icon_size": "14px",
+    "label": true,
+    "tooltip": true,
+}
+```
+
+- icon: The icon used to display the module.
+- icon_size: Size of the icon in px.
+- label: Whether to show a label.
+- tooltip: Whether to show a tooltip
+
 ## Language
 
 ```json

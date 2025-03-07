@@ -24,6 +24,9 @@ class HyprPickerWidget(ButtonWidget):
         if not executable_exists("hyprpicker"):
             raise ExecutableNotFoundError("hyprpicker")
 
+        if self.config["tooltip"]:
+            self.set_tooltip_text("Pick a color")
+
     def on_button_press(self, button, event):
         # Mouse event handler
         if event.type == Gdk.EventType.BUTTON_PRESS:
