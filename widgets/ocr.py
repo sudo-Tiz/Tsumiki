@@ -4,6 +4,7 @@ from fabric.utils import exec_shell_command_async, get_relative_path
 from gi.repository import Gdk, Gtk
 
 from shared.widget_container import ButtonWidget
+from utils.functions import ttl_lru_cache
 from utils.widget_settings import BarConfig
 
 
@@ -56,12 +57,17 @@ class OCRWidget(ButtonWidget):
         menu.show_all()
         menu.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, None)
 
+    @ttl_lru_cache(600, 10)
     def get_available_languages(self):
         # Run the command synchronously to get output
         try:
             result = subprocess.check_output(["tesseract", "--list-langs"], text=True)
             # Skip first line (header) and filter empty lines
-            return [lang.strip() for lang in result.split("\n")[1:] if lang.strip()]
+            return [
+                lang.strip()
+                for lang in result.split("\n")[1:]
+                if lang.strip()
+            ]
         except subprocess.CalledProcessError:
             return ["eng"]  # fallback to English if command fails
 
