@@ -391,6 +391,15 @@
         }
       }
     },
+    "hypr_picker": {
+      "type": "object",
+      "properties": {
+        "$ref": "#/definitions/baseProperties",
+        "icon": {
+          "type": "string"
+        }
+      }
+    },
     "updates": {
       "type": "object",
       "properties": {

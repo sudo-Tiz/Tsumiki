@@ -6,6 +6,7 @@ from .cava import *
 from .click_counter import *
 from .datetime_menu import *
 from .hypr_idle import *
+from .hypr_picker import *
 from .hypr_sunset import *
 from .keyboard_layout import *
 from .language import *
