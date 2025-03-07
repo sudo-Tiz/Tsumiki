@@ -155,7 +155,7 @@
         },
         "widget_style": {
           "type": "string",
-          "enum": ["default", "wave1", "wave2", "flat", "shadow"]
+          "enum": ["default", "wave1", "wave2", "flat", "shadow", "bordered"]
         }
       }
     },
