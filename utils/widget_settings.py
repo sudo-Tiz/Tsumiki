@@ -180,6 +180,9 @@ ThemeSwitcher = TypedDict("ThemeSwitcher", {**BaseConfig.__annotations__, "icon"
 # Hyprpicker configuration
 HyprPicker = TypedDict("HyprPicker", {**BaseConfig.__annotations__, "icon": str})
 
+# OCR configuration
+OCR = TypedDict("OCR", {**BaseConfig.__annotations__, "icon": str})
+
 # Media configuration
 Media = TypedDict(
     "Media",
@@ -263,6 +266,7 @@ class BarConfig(TypedDict):
     network_usage: NetworkUsage
     notification: Notification
     general: General
+    ocr: OCR
     osd: OSD
     overview: Overview
     power: PowerButton

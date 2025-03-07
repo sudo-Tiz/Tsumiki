@@ -32,16 +32,10 @@ class HyprPickerWidget(ButtonWidget):
         if event.type == Gdk.EventType.BUTTON_PRESS:
             if event.button == 1:
                 # Left click: HEX
-                exec_shell_command_async(
-                    f"{self.script_file} -hex",
-                )
+                exec_shell_command_async(f"{self.script_file} -hex", lambda *_: None)
             elif event.button == 2:
                 # Middle click: HSV
-                exec_shell_command_async(
-                    f"{self.script_file} -hsv",
-                )
+                exec_shell_command_async(f"{self.script_file} -hsv", lambda *_: None)
             elif event.button == 3:
                 # Right click: RGB
-                exec_shell_command_async(
-                    f"{self.script_file} -rgb",
-                )
+                exec_shell_command_async(f"{self.script_file} -rgb", lambda *_: None)

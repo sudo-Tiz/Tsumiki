@@ -260,6 +260,22 @@ Configures the media player information system (MPRIS) display settings.
 - truncation_size: The length of the MPRIS display.
 - format: The format of the MPRIS display.
 
+## OCR
+
+```json
+"ocr": {
+    "icon": "󰐳",
+    "icon_size": "14px",
+    "label": true,
+    "tooltip": true,
+}
+```
+
+- icon: The icon used to display the module.
+- icon_size: Size of the icon in px.
+- label: Whether to show a label.
+- tooltip: Whether to show a tooltip
+
 ## Power Button
 
 ```json

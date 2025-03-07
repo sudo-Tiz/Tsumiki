@@ -50,6 +50,7 @@
               "language",
               "media",
               "microphone",
+              "ocr",
               "power",
               "ram",
               "recorder",
@@ -393,6 +394,15 @@
       }
     },
     "hypr_picker": {
+      "type": "object",
+      "properties": {
+        "$ref": "#/definitions/baseProperties",
+        "icon": {
+          "type": "string"
+        }
+      }
+    },
+    "ocr": {
       "type": "object",
       "properties": {
         "$ref": "#/definitions/baseProperties",

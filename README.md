@@ -159,7 +159,7 @@ Run the following command to install the required system packages:
 Using `yay` to install the required AUR packages:
 
 ```sh
-yay -S --needed gray-git python-fabric gnome-bluetooth-3.0 python-rlottie-python slurp imagemagick
+yay -S --needed gray-git python-fabric gnome-bluetooth-3.0 python-rlottie-python slurp imagemagick tesseract
 ```
 
 If you have something else besides `yay`, install with the respective aur helper.
@@ -201,28 +201,30 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 | **bluetooth**         | Manages Bluetooth connections and settings.                                    |
 | **brightness**        | Controls the screen brightness level.                                          |
 | **cava**              | An audio visualizer.                                                           |
-| **clickcounter**      | Tracks the number of mouse clicks.                                             |
+| **click_counter**     | Tracks the number of mouse clicks.                                             |
 | **cpu**               | Displays CPU usage and performance statistics.                                 |
 | **date_menu**         | A menu displaying the current date and notifications.                          |
 | **divider (utility)** | Separates sections in a user interface for better organization.                |
 | **hypr_idle**         | Tracks idle time or status of the system.                                      |
+| **hypr_picker**       | Picks color from images.                                                       |
 | **hypr_sunset**       | A utility that adjusts screen settings based on the time of sunset.            |
 | **keyboard**          | Displays and manages the keyboard layout or settings.                          |
 | **language**          | Allows selection of the system's language or locale settings.                  |
 | **media**             | Controls media playback, volume, or other media-related settings.              |
 | **microphone**        | Manages microphone settings and input levels.                                  |
+| **network_usage**     | Displays the upload/download speeds.                                           |
+| **ocr**               | Scans text from an image.                                                      |
 | **power**             | Controls power-related settings, including sleep and shutdown.                 |
 | **ram**               | Displays information about system RAM usage and performance.                   |
 | **recorder**          | A tool for recording audio or video on the system.                             |
 | **spacer (utility)**  | A simple utility for adding space in UI layouts.                               |
 | **storage**           | Displays storage usage and manages disk partitions or drives.                  |
 | **submap**            | Displays active submap for hyprland.                                           |
-| **network_usage**     | Displays the upload/download speeds.                                           |
 | **stop_watch**        | A utility for tracking elapsed time, like a timer or stopwatch.                |
 | **system_tray**       | Displays system tray icons and manages notifications.                          |
 | **taskbar**           | A bar at the bottom of the screen for quick access to apps and notifications.  |
 | **updates**           | Manages system updates, patches, and version upgrades.                         |
-| **quicksettings**     | Displays panel for quickly accessing some settings like brightness, sound etc. |
+| **quick_settings**    | Displays panel for quickly accessing some settings like brightness, sound etc. |
 | **volume**            | Controls the system’s audio volume.                                            |
 | **weather**           | Displays current weather information or forecasts.                             |
 | **window_title**      | Shows the title of the current window or application.                          |
