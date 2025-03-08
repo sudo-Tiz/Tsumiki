@@ -378,12 +378,12 @@ menu#ocr-menu {
 }
 
 #clock > label {
-  font-size: 100px;
+  font-size: 9rem;
   font-weight: 600;
   @extend %desktop-widget;
 }
 
 #date > label {
-  @extend %title_3;
+  @extend %title_1;
   @extend %desktop-widget;
 }

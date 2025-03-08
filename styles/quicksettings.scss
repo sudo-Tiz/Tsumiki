@@ -1,8 +1,8 @@
 @use "theme.scss";
+@use "common/functions.scss";
 @use "common/mixins.scss";
 @use "variable.scss";
 @use "sass:color";
-@use "common/functions.scss";
 
 $slider-height: 12px;
 
