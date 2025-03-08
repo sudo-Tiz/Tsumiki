@@ -28,8 +28,11 @@ label {
 
 .panel-box,
 .panel-button {
-  border-radius: variable.$radius-large;
   background-color: theme.$background-dark;
+}
+
+.default {
+  border-radius: variable.$radius-large;
 }
 
 .panel-box {
@@ -371,8 +374,6 @@ menu#ocr-menu {
 .desktop-clock-box {
   margin: 0 2rem 2rem 2rem;
 }
-
-
 
 #clock > label {
   font-size: 100px;
