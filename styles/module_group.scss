@@ -1,8 +1,7 @@
 @use "sass:color";
 @use "theme.scss";
-@use "common/mixins.scss";
 @use "variable.scss";
-@use "common/functions.scss";
+@use "common" as common;
 
 .panel-module-group {
   &.compact {
@@ -22,7 +21,7 @@
   &.bordered {
     border: variable.$border-width solid theme.$accent-light;
     background: transparent;
-    padding: functions.toEm(4) functions.toEm(5);
+    padding: common.toEm(4) common.toEm(5);
 
     > * {
       //background: transparent;

@@ -1,7 +1,8 @@
 @use "sass:color";
-@use "../theme.scss";
-@use "../variable.scss";
-@use "./functions.scss";
+@use "../theme";
+@use "../variable";
+
+
 
 %unset {
   outline: none;
@@ -88,7 +89,7 @@
   border-radius: 5px;
   min-width: 7px;
   min-height: 7px;
-  margin: functions.toEm(10) functions.toEm(3);
+  margin: 10px 3px;
   background-color: theme.$text-main;
 }
 

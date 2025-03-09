@@ -1,6 +1,5 @@
 @use "theme.scss";
-@use "common/functions.scss";
-@use "common/mixins.scss";
+@use "common" as common;
 @use "variable.scss";
 @use "sass:color";
 
@@ -51,8 +50,8 @@ $slider-height: 12px;
 
 #quicksettings-menu {
   min-width: variable.$quicksettings-width;
-  @include mixins.floating-widget;
-  @include mixins.spacing;
+  @include common.floating-widget;
+  @include common.spacing;
   padding: 4pt 1pt;
 
   .power-profile {
@@ -82,7 +81,7 @@ $slider-height: 12px;
             $lightness: 5%
           );
           border-radius: variable.$radius-large;
-          padding: functions.toEm(4);
+          padding: common.toEm(4);
 
           &:hover {
             @extend %widget_hover;
@@ -102,7 +101,7 @@ $slider-height: 12px;
         font-size: 0.92rem;
         border: variable.$border-width solid
           color.adjust($color: theme.$surface-disabled, $lightness: 10%);
-        padding: functions.toEm(3) functions.toEm(10);
+        padding: common.toEm(3) common.toEm(10);
         font-weight: 600;
         border-radius: 1rem;
       }
@@ -119,7 +118,7 @@ $slider-height: 12px;
       min-height: 35px;
 
       &-box {
-        margin: 0 functions.toEm(5);
+        margin: 0 common.toEm(5);
 
         .panel-text {
           @extend %caption_heading;
@@ -133,7 +132,7 @@ $slider-height: 12px;
       padding: 0;
 
       button {
-        padding: functions.toEm(5);
+        padding: common.toEm(5);
         border-radius: variable.$radius;
         background-color: theme.$background;
         color: theme.$text-main;
@@ -148,7 +147,7 @@ $slider-height: 12px;
 
     // Base slider box styles
     %slider-box-base {
-      padding: functions.toEm(15);
+      padding: common.toEm(15);
       border-radius: variable.$radius;
       background-color: theme.$background;
 
@@ -165,7 +164,7 @@ $slider-height: 12px;
 
         &-button {
           background-color: transparent;
-          padding: 0 functions.toEm(2);
+          padding: 0 common.toEm(2);
         }
       }
     }
@@ -174,7 +173,7 @@ $slider-height: 12px;
       @extend %slider-box-base;
 
       #setting-slider {
-        @include mixins.slider(
+        @include common.slider(
           $highlight-color: theme.$accent-blue,
           $slider: true,
           $min-length: 320px
@@ -186,7 +185,7 @@ $slider-height: 12px;
       @extend %slider-box-base;
 
       #setting-slider {
-        @include mixins.slider(
+        @include common.slider(
           $highlight-color: theme.$accent-blue,
           $slider: true,
           $min-length: 230px
@@ -198,7 +197,7 @@ $slider-height: 12px;
       @extend %slider-box-base;
 
       #setting-slider {
-        @include mixins.slider(
+        @include common.slider(
           $highlight-color: theme.$accent-blue,
           $slider: true,
           $min-length: 140px
@@ -211,11 +210,11 @@ $slider-height: 12px;
       min-height: 200px;
       background-color: theme.$background-alt;
       border-radius: variable.$radius;
-      padding: functions.toEm(8);
+      padding: common.toEm(8);
 
       .submenu-title-box {
         margin-bottom: 10px;
-        padding: functions.toEm(5);
+        padding: common.toEm(5);
 
         .submenu-title-label {
           margin-left: 10px;
@@ -229,8 +228,8 @@ $slider-height: 12px;
       }
 
       .submenu-button {
-        margin: 0 functions.toEm(2);
-        padding: 0 functions.toEm(5);
+        margin: 0 common.toEm(2);
+        padding: 0 common.toEm(5);
         border-radius: variable.$radius;
 
         &.activated {
@@ -255,7 +254,7 @@ $slider-height: 12px;
       }
 
       #wifi-ap-button.submenu-button {
-        padding: functions.toEm(7) 0;
+        padding: common.toEm(7) 0;
 
         &:hover {
           color: theme.$accent-purple;
@@ -264,7 +263,7 @@ $slider-height: 12px;
 
       #bluetooth-device-box.submenu-button {
         .submenu-button {
-          padding: functions.toEm(6);
+          padding: common.toEm(6);
           background-color: theme.$background-dark;
 
           label {
@@ -288,7 +287,7 @@ $slider-height: 12px;
     #quicksettings-togglebutton {
       .toggle-revealer {
         border-radius: 0 variable.$radius-large variable.$radius-large 0;
-        padding: functions.toEm(10) functions.toEm(5);
+        padding: common.toEm(10) common.toEm(5);
       }
     }
 
@@ -298,8 +297,8 @@ $slider-height: 12px;
       background-color: theme.$background;
       border-radius: variable.$radius-large;
       @extend %caption_heading;
-      padding: functions.toEm(3) 0;
-      padding-left: functions.toEm(10);
+      padding: common.toEm(3) 0;
+      padding-left: common.toEm(10);
 
       &.active {
         background-color: theme.$accent-blue;
@@ -323,8 +322,8 @@ $slider-height: 12px;
     #quicksettings-togglebutton.active button {
       background-color: theme.$accent-blue;
       color: color.adjust($color: #000000, $lightness: 8%);
-      padding-left: functions.toEm(1);
-      padding-right: functions.toEm(4);
+      padding-left: common.toEm(1);
+      padding-right: common.toEm(4);
     }
 
     #quicksettings-togglebutton.active button:hover image,

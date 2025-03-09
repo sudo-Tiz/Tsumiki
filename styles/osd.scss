@@ -1,21 +1,20 @@
 @use "sass:color";
 @use "theme.scss";
-@use "common/mixins.scss";
-@use "common/functions.scss";
+@use "common" as common;
 @use "variable.scss";
 
 /* OSD widget*/
 
 #osd-container {
   background-color: theme.$shadow-color;
-  padding: functions.toEm(12) functions.toEm(20);
+  padding: common.toEm(12) common.toEm(20);
   margin-bottom: 100px;
 
   #osd-level {
     font-weight: 600;
     min-width: 35px;
-    padding-left: functions.toEm(5);
+    padding-left: common.toEm(5);
   }
 
-  @include mixins.slider($slider: false, $min-length: 150px, $width: 9px);
+  @include common.slider($slider: false, $min-length: 150px, $width: 9px);
 }

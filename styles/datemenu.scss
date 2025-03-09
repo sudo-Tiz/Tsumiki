@@ -1,7 +1,6 @@
 @use "sass:color";
 @use "theme.scss";
-@use "common/mixins.scss";
-@use "common/functions.scss";
+@use "common" as common;
 @use "variable.scss";
 
 #date-time-button {
@@ -21,8 +20,8 @@
 /************** DATE MENU **************/
 
 #date-menu {
-  @include mixins.floating-widget;
-  @include mixins.spacing;
+  @include common.floating-widget;
+  @include common.spacing;
 
   #notification-column {
     min-width: 435px;
@@ -47,7 +46,7 @@
         border-width: 2px;
 
         label {
-          padding-left: functions.toEm(5);
+          padding-left: common.toEm(5);
         }
 
         &:hover {

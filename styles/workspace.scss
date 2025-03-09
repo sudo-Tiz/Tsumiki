@@ -1,5 +1,5 @@
 @use "theme.scss";
-@use "common/functions.scss";
+@use "common" as common;
 @use "variable.scss";
 
 $workspace-transition:
@@ -13,7 +13,7 @@ $workspace-transition:
   font-weight: 700;
 
   & > button {
-    padding: functions.toEm(2) 0.5em;
+    padding: common.toEm(2) 0.5em;
     transition: $workspace-transition;
     border-radius: variable.$radius-large;
     background-color: theme.$background;
@@ -33,8 +33,8 @@ $workspace-transition:
 
     &.active {
       font-weight: 600;
-      padding-left: functions.toEm(14);
-      padding-right: functions.toEm(14);
+      padding-left: common.toEm(14);
+      padding-right: common.toEm(14);
       background-color: theme.$ws-active;
       min-width: 1.4rem;
       transition: $workspace-transition;
