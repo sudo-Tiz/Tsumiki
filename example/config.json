@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/rubiin/HyDePanel/refs/heads/master/hydepanel.schema.json",
+  "$schema": "./hydepanel.schema.json",
   "battery": {
     "full_battery_level": 100,
     "hide_label_when_full": true,
@@ -37,7 +37,9 @@
     "format": "%b %d %H:%M",
     "notification_count": true,
     "notification": true,
-    "calendar": true
+    "calendar": true,
+    "clock_format": "12h",
+    "uptime": true
   },
   "divider": {
     "size": 2
@@ -72,8 +74,20 @@
   "layout": {
     "left_section": ["workspaces", "window_title"],
     "middle_section": ["date_time"],
-    "right_section": ["quick_settings", "recorder", "system_tray"]
+    "right_section": ["recorder", "@group:1", "@group:0", "system_tray"]
   },
+  "module_groups": [
+    {
+      "widgets": ["updates", "ocr", "battery"],
+      "spacing": 4,
+      "style_classes": ["compact"]
+    },
+    {
+      "widgets": ["quick_settings", "cpu", "network_usage"],
+      "spacing": 0,
+      "style_classes": ["compact"]
+    }
+  ],
   "memory": {
     "icon": "",
     "icon_size": "12px",
