@@ -192,12 +192,13 @@ class DateNotificationMenu(Box):
             **kwargs,
         )
 
+        self.config = config
         self.cache_notification_service = notification_service
 
         self.clock_label = Label(
             label=time.strftime("%H:%M")
-            if config["clock_format"] == "24h"
-            else time.strftime("%I:%M %p"),
+            if self.config["clock_format"] == "24h"
+            else time.strftime("%I:%M"),
             style_classes="clock",
         )
 
@@ -436,7 +437,11 @@ class DateNotificationMenu(Box):
         self.notification_list_box.set_visible(True)
 
     def update_ui(self, fabricator, value):
-        self.clock_label.set_text(time.strftime("%H:%M"))
+        self.clock_label.set_text(
+            time.strftime("%H:%M")
+            if self.config["clock_format"] == "24h"
+            else time.strftime("%I:%M"),
+        )
         self.uptime.set_text(f"uptime: {uptime()}")
         return True
 
