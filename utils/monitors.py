@@ -28,7 +28,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
 class HyprlandWithMonitors(Hyprland):
-    """A Hyprland class with additional monitor functions."""
+    """A Hyprland class with additional monitor common."""
 
     def __init__(self, commands_only: bool = False, **kwargs):
         self.display: Gdk.Display = Gdk.Display.get_default()

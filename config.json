@@ -37,7 +37,9 @@
     "format": "%b %d %H:%M",
     "notification_count": true,
     "notification": true,
-    "calendar": true
+    "calendar": true,
+    "clock_format": "24h",
+    "uptime": true
   },
   "divider": {
     "size": 2
@@ -81,7 +83,7 @@
       "style_classes": ["compact"]
     },
     {
-      "widgets": ["quick_settings", "cpu", "network_usage"],
+      "widgets": ["quick_settings", "cpu", "network_usage","power"],
       "spacing": 0,
       "style_classes": ["compact"]
     }

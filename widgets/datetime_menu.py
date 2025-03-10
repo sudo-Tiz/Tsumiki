@@ -195,7 +195,9 @@ class DateNotificationMenu(Box):
         self.cache_notification_service = notification_service
 
         self.clock_label = Label(
-            label=time.strftime("%H:%M"),
+            label=time.strftime("%H:%M")
+            if config["clock_format"] == "24h"
+            else time.strftime("%I:%M %p"),
             style_classes="clock",
         )
 
@@ -218,7 +220,7 @@ class DateNotificationMenu(Box):
             children=self.notifications_list,
         )
 
-        self.uptime = Label(style_classes="uptime")
+        self.uptime = Label(style_classes="uptime", visible=config["uptime"])
 
         # Placeholder for when there are no notifications
         self.placeholder = Box(

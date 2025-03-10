@@ -662,6 +662,13 @@
           },
           "calendar": {
             "type": "boolean"
+          },
+          "uptime": {
+            "type": "boolean"
+          },
+          "clock_format": {
+            "type": "string",
+            "enum": ["12h", "24h"]
           }
         }
       },

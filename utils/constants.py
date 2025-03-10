@@ -77,6 +77,8 @@ DEFAULT_CONFIG = {
         "notification_count": True,
         "calendar": True,
         "notification": True,
+        "clock_format": "12h",
+        "uptime": True,
     },
     "divider": {"size": 2},
     "hypr_idle": {
