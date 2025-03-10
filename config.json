@@ -37,9 +37,7 @@
     "format": "%b %d %H:%M",
     "notification_count": true,
     "notification": true,
-    "calendar": true,
-    "clock_format": "12h",
-    "uptime": true
+    "calendar": true
   },
   "divider": {
     "size": 2
