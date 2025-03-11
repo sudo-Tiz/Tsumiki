@@ -10,11 +10,11 @@ from fabric.widgets.label import Label
 from gi.repository import Gtk
 
 from services.weather import WeatherService
-from shared import LottieAnimation, LottieAnimationWidget, PopOverWindow
+from shared import PopOverWindow
 from shared.separator import Separator
 from shared.widget_container import ButtonWidget
 from utils.functions import convert_seconds_to_milliseconds
-from utils.icons import weather_text_icons, weather_text_icons_v2
+from utils.icons import weather_text_icons_v2
 from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon
 
@@ -48,14 +48,11 @@ class WeatherMenu(Box):
         ]
 
         self.weather_icons_dir = get_relative_path("../assets/icons/weather")
-        self.weather_lottie_dir = get_relative_path("../assets/icons/lottie")
 
-        self.weather_anim = LottieAnimationWidget(
-            LottieAnimation.from_file(
-                f"{self.weather_lottie_dir}/{weather_text_icons_v2[self.current_weather['weatherCode']]['image']}.json",
-            ),
-            scale=0.25,
-            do_loop=True,
+        self.current_weather_image = Image(
+            self.get_weather_asset(self.current_weather["weatherCode"]),
+            size=100,
+            style_classes="weather",
         )
 
         self.title_box = CenterBox(
@@ -63,7 +60,7 @@ class WeatherMenu(Box):
             start_children=(
                 Box(
                     children=(
-                        self.weather_anim,
+                        self.current_weather_image,
                         Box(
                             orientation="v",
                             v_align="center",
@@ -160,7 +157,7 @@ class WeatherMenu(Box):
                 h_align="center",
             )
             icon = Image(
-                image_file=f"{self.weather_icons_dir}/{weather_text_icons_v2[column_data['weatherCode']]['image']}.svg",
+                image_file=self.get_weather_asset(column_data["weatherCode"]),
                 size=70,
                 h_align="center",
                 h_expand=True,
@@ -194,7 +191,7 @@ class WeatherMenu(Box):
         # Format the time as a string
         return f"{hour}:{minute:02d} {period}"
 
-    def check_day_or_night(self, current_time: str | None = None) -> str:
+    def check_if_day(self, current_time: str | None = None) -> str:
         time_format = "%I:%M %p"
 
         if current_time is None:
@@ -205,10 +202,12 @@ class WeatherMenu(Box):
         sunset_time_obj = datetime.strptime(self.sunset_time, time_format)
 
         # Compare current time with sunrise and sunset
-        if sunrise_time_obj <= current_time_obj < sunset_time_obj:
-            return "image"  # Day
-        else:
-            return "image-night"  # Night
+        return sunrise_time_obj <= current_time_obj < sunset_time_obj
+
+    def get_weather_asset(self, weather_code: int) -> str:
+        is_day = self.check_if_day()
+        image_name = "image" if is_day else "image-night"
+        return f"{self.weather_icons_dir}/{weather_text_icons_v2[str(weather_code)][image_name]}.svg"
 
 
 class WeatherWidget(ButtonWidget):
@@ -271,7 +270,7 @@ class WeatherWidget(ButtonWidget):
         # Update the label with the weather icon and temperature in the main thread
         res = value.get("weather")
         current_weather = res["current"]
-        text_icon = weather_text_icons[current_weather["weatherCode"]]["icon"]
+        text_icon = weather_text_icons_v2[current_weather["weatherCode"]]["icon"]
         self.weather_label.set_label(f"{current_weather['FeelsLikeC']}°C")
         self.weather_icon.set_label(text_icon)
 
