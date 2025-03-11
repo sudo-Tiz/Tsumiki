@@ -121,7 +121,7 @@ DEFAULT_CONFIG = {
             "style_classes": ["bordered"],
         },
         {
-            "widgets": ["quick_settings", "theme_switcher"],
+            "widgets": ["quick_settings", "cpu"],
             "spacing": 0,
             "style_classes": ["compact"],
         },
@@ -129,7 +129,7 @@ DEFAULT_CONFIG = {
     "layout": {
         "left_section": ["workspaces", "window_title"],
         "middle_section": ["date_time"],
-        "right_section": ["@group:0", "@group:1", "system_tray", "power"],
+        "right_section": ["@group:0", "@group:1", "system_tray"],
     },
     "memory": {
         "icon": "",
