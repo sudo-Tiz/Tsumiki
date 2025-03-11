@@ -73,7 +73,7 @@
   },
   "layout": {
     "left_section": ["workspaces", "window_title"],
-    "middle_section": ["date_time"],
+    "middle_section": ["date_time","cava"],
     "right_section": ["recorder", "@group:1", "@group:0", "system_tray"]
   },
   "module_groups": [

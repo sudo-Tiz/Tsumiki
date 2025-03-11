@@ -149,7 +149,7 @@ class QuickSettingsMenu(Box):
         self.config = config
 
         user_image = (
-            get_relative_path("../../assets/images/no_image.jpg")
+            get_relative_path("../../assets/images/banner.jpg")
             if not os.path.exists(os.path.expandvars("$HOME/.face"))
             else os.path.expandvars("$HOME/.face")
         )

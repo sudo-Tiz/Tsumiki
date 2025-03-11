@@ -197,7 +197,7 @@ class PlayerBox(Box):
         )
         # Setup
         self.player: MprisPlayer = player
-        self.cover_path = get_relative_path("../assets/images/no_image.jpg")
+        self.cover_path = get_relative_path("../assets/images/disk.png")
 
         self.image_size = 115
 
