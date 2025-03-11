@@ -157,7 +157,10 @@ class WeatherMenu(Box):
                 h_align="center",
             )
             icon = Image(
-                image_file=self.get_weather_asset(column_data["weatherCode"]),
+                image_file=self.get_weather_asset(
+                    column_data["weatherCode"],
+                    self.convert_to_12hr_format(column_data["time"]),
+                ),
                 size=70,
                 h_align="center",
                 h_expand=True,
@@ -204,8 +207,8 @@ class WeatherMenu(Box):
         # Compare current time with sunrise and sunset
         return sunrise_time_obj <= current_time_obj < sunset_time_obj
 
-    def get_weather_asset(self, weather_code: int) -> str:
-        is_day = self.check_if_day()
+    def get_weather_asset(self, weather_code: int, time: str | None = None) -> str:
+        is_day = self.check_if_day(time)
         image_name = "image" if is_day else "image-night"
         return f"{self.weather_icons_dir}/{weather_text_icons_v2[str(weather_code)][image_name]}.svg"
 
