@@ -204,7 +204,7 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 | **bluetooth**         | Widget manages Bluetooth connections and settings.                             |
 | **brightness**        | Widget controls the screen brightness level.                                   |
 | **cava**              | An audio visualizer widget.                                                    |
-| **clickcounter**      | Widget tracks the number of mouse clicks.                                      |
+| **click_counter**     | Widget tracks the number of mouse clicks.                                      |
 | **cpu**               | Widget displays CPU usage and performance statistics.                          |
 | **date_time**         | A menu displaying the current date and notifications.                          |
 | **divider (utility)** | Widget separates sections in a user interface for better organization.         |
