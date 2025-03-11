@@ -14,7 +14,7 @@ from shared import PopOverWindow
 from shared.separator import Separator
 from shared.widget_container import ButtonWidget
 from utils.functions import convert_seconds_to_milliseconds
-from utils.icons import weather_text_icons_v2
+from utils.icons import weather_icons
 from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon
 
@@ -87,7 +87,7 @@ class WeatherMenu(Box):
                     children=(
                         Label(
                             style_classes="windspeed",
-                            label=f"0 {self.current_weather['windspeedKmph']} mph",
+                            label=f" {self.current_weather['windspeedKmph']} mph",
                         ),
                         Label(
                             style_classes="humidity",
@@ -207,10 +207,10 @@ class WeatherMenu(Box):
         # Compare current time with sunrise and sunset
         return sunrise_time_obj <= current_time_obj < sunset_time_obj
 
-    def get_weather_asset(self, weather_code: int, time: str | None = None) -> str:
+    def get_weather_asset(self, code: int, time: str | None = None) -> str:
         is_day = self.check_if_day(time)
         image_name = "image" if is_day else "image-night"
-        return f"{self.weather_icons_dir}/{weather_text_icons_v2[str(weather_code)][image_name]}.svg"
+        return f"{self.weather_icons_dir}/{weather_icons[str(code)][image_name]}.svg"
 
 
 class WeatherWidget(ButtonWidget):
@@ -273,7 +273,7 @@ class WeatherWidget(ButtonWidget):
         # Update the label with the weather icon and temperature in the main thread
         res = value.get("weather")
         current_weather = res["current"]
-        text_icon = weather_text_icons_v2[current_weather["weatherCode"]]["icon"]
+        text_icon = weather_icons[current_weather["weatherCode"]]["icon"]
         self.weather_label.set_label(f"{current_weather['FeelsLikeC']}°C")
         self.weather_icon.set_label(text_icon)
 

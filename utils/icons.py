@@ -42,7 +42,7 @@ distro_text_icons = {
 }
 
 # sourced from wttr.in
-weather_text_icons_v2 = {
+weather_icons = {
     "113": {
         "description": "Sunny",
         "icon": "󰖙",
