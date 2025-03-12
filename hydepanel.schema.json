@@ -643,7 +643,7 @@
             "type": "string",
             "pattern": "^[0-9]+px$"
           },
-          "silent": {
+          "notify": {
             "type": "boolean"
           }
         }

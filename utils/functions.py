@@ -96,6 +96,7 @@ def flatten_dict(d, parent_key="", sep="-"):
             items.append((new_key, v))
     return dict(items)
 
+
 # Validate the widgets
 def validate_widgets(parsed_data, default_config):
     """Validates the widgets defined in the layout configuration.

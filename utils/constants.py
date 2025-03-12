@@ -226,7 +226,7 @@ DEFAULT_CONFIG = {
     "theme_switcher": {
         "icon": "",
         "icon_size": "14px",
-        "silent": True,  # Whether to show a notification when the theme is changed
+        "notify": False,  # Whether to show a notification when the theme is changed
     },
     "updates": {
         "os": "arch",
