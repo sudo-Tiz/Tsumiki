@@ -196,7 +196,19 @@ DEFAULT_CONFIG = {
         "location": "top",
         "widget_style": "default",
     },
-    "power": {"icon": "󰐥", "icon_size": "18px", "tooltip": True},
+    "power": {
+        "icon": "󰐥",
+        "icon_size": "18px",
+        "tooltip": True,
+        "buttons": [
+            "lock",
+            "logout",
+            "suspend",
+            "hibernate",
+            "shutdown",
+            "reboot",
+        ],
+    },
     "recorder": {
         "path": "Videos/Screencasting",
         "icon_size": 16,

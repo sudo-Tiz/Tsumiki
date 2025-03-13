@@ -630,6 +630,20 @@
           },
           "tooltip": {
             "type": "boolean"
+          },
+          "buttons": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "logout",
+                "reboot",
+                "shutdown",
+                "suspend",
+                "lock",
+                "hibernate"
+              ]
+            }
           }
         }
       },

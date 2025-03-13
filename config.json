@@ -73,7 +73,7 @@
   },
   "layout": {
     "left_section": ["workspaces", "window_title"],
-    "middle_section": ["date_time"],
+    "middle_section": ["date_time", "power"],
     "right_section": ["recorder", "@group:1", "@group:0", "system_tray"]
   },
   "module_groups": [
@@ -152,7 +152,8 @@
   "power": {
     "icon": "󰐥",
     "icon_size": "18px",
-    "tooltip": true
+    "tooltip": true,
+    "buttons": ["suspend", "hibernate", "shutdown", "reboot", "logout", "lock"]
   },
   "recorder": {
     "path": "Videos/Screencasting",
