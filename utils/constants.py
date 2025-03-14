@@ -255,7 +255,7 @@ DEFAULT_CONFIG = {
         "step_size": 5,
     },
     "weather": {
-        "detect_location": True,
+        "detect_location": False,
         "location": "kathmandu",
         "label": True,
         "tooltip": True,

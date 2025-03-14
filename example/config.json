@@ -66,26 +66,49 @@
 		"tooltip": true
 	},
 	"language": {
-		"truncation_size": 2,
-		"icon_size": "14px",
+		"truncation_size": 2, // this is the number of characters to show in the language widget
+		"icon_size": "14px", // this is the size of the icon
 		"tooltip": true,
 		"icon": ""
 	},
 	"layout": {
-		"left_section": ["workspaces", "window_title"],
-		"middle_section": ["date_time"],
-		"right_section": ["recorder", "@group:1", "@group:0", "system_tray"]
+		"left_section": [
+			"workspaces",
+			"window_title"
+		], // this is the left section of the panel
+		"middle_section": [
+			"date_time",
+			"power"
+		], // this is the middle section of the panel
+		"right_section": [
+			"recorder",
+			"@group:1",
+			"@group:0",
+			"system_tray"
+		] // this is the right section of the panel
 	},
-	"module_groups": [
+	"module_groups": [ // module groups are used to group multiple modules together, you can create multiple groups and access as @group:0, @group:1, etc
 		{
-			"widgets": ["updates", "ocr", "battery"],
+			"widgets": [
+				"updates",
+				"ocr",
+				"battery"
+			],
 			"spacing": 4,
-			"style_classes": ["compact"]
+			"style_classes": [
+				"compact"
+			]
 		},
 		{
-			"widgets": ["quick_settings", "cpu", "network_usage"],
+			"widgets": [
+				"quick_settings",
+				"cpu",
+				"network_usage"
+			],
 			"spacing": 0,
-			"style_classes": ["compact"]
+			"style_classes": [
+				"compact"
+			]
 		}
 	],
 	"memory": {
@@ -127,7 +150,7 @@
 	"osd": {
 		"enabled": true,
 		"timeout": 1500,
-		"anchor": "bottom-center",
+		"anchor": "bottom-center", // this is the position of the OSD, you can use top-center, top-left, top-right, bottom-center, bottom-left, bottom-right
 		"show_percentage": true,
 		"widget_style": "wave2"
 	},
@@ -152,7 +175,15 @@
 	"power": {
 		"icon": "󰐥",
 		"icon_size": "18px",
-		"tooltip": true
+		"tooltip": true,
+		"buttons": [
+			"suspend",
+			"hibernate",
+			"shutdown",
+			"reboot",
+			"logout",
+			"lock"
+		]
 	},
 	"recorder": {
 		"path": "Videos/Screencasting",
@@ -238,23 +269,25 @@
 		"step_size": 5
 	},
 	"weather": {
-		"detect_location": true,
+		"detect_location": false,
 		"location": "kathmandu",
 		"label": true,
 		"tooltip": true,
-		"interval": 3600000
+		"interval": 3600000 // this is the interval in milliseconds to update the weather, 1 hour is 3600000 milliseconds
 	},
 	"window_title": {
-		"enable_icon": true,
+		"enable_icon": true, // this is to enable the icon in the window title widget
 		"truncation": true,
 		"truncation_size": 50,
 		"title_map": []
 	},
 	"workspaces": {
-		"count": 8,
+		"count": 8, // this is the number of workspaces to show
 		"hide_unoccupied": true,
 		"default_label_format": "{id}",
-		"ignored": [-99],
+		"ignored": [
+			-99
+		], // this is the list of workspaces to ignore, currently -99 is the scratchpad workspace
 		"reverse_scroll": false,
 		"empty_scroll": false,
 		"icon_map": {}
