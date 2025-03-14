@@ -1,7 +1,6 @@
 from fabric.utils import (
     exec_shell_command_async,
     get_relative_path,
-    invoke_repeater,
 )
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
@@ -9,7 +8,7 @@ from fabric.widgets.wayland import WaylandWindow
 
 from shared.module_group import ModuleGroup
 from utils.config import widget_config
-from utils.functions import convert_seconds_to_milliseconds, run_in_thread
+from utils.functions import run_in_thread
 from utils.monitors import HyprlandWithMonitors
 from utils.widget_utils import lazy_load_widget
 
@@ -104,11 +103,7 @@ class StatusBar(WaylandWindow):
             self.box.add_style_class(options["bar_style"])
 
         if options["check_updates"]:
-            invoke_repeater(
-                convert_seconds_to_milliseconds(3600),
-                self.check_for_bar_updates,
-                initial_call=True,
-            )
+            self.check_for_bar_updates()
 
     def make_layout(self):
         """assigns the three sections their respective widgets"""

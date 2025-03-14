@@ -204,7 +204,7 @@ def check_icon_exists(icon_name: str, fallback_icon: str) -> str:
 @cooldown(1)
 @run_in_thread
 def play_sound(file: str):
-    exec_shell_command_async(f"pw-play {file}", None)
+    exec_shell_command_async(f"pw-play {file}", lambda *_: None)
 
 
 def handle_power_action(
