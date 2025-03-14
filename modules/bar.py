@@ -11,42 +11,7 @@ from shared.module_group import ModuleGroup
 from utils.config import widget_config
 from utils.functions import convert_seconds_to_milliseconds, run_in_thread
 from utils.monitors import HyprlandWithMonitors
-from widgets import (
-    BatteryWidget,
-    BlueToothWidget,
-    BrightnessWidget,
-    CavaWidget,
-    ClickCounterWidget,
-    CpuWidget,
-    DateTimeWidget,
-    DividerWidget,
-    HyprIdleWidget,
-    HyprPickerWidget,
-    HyprSunsetWidget,
-    KeyboardLayoutWidget,
-    LanguageWidget,
-    MemoryWidget,
-    MicrophoneIndicatorWidget,
-    Mpris,
-    NetworkUsageWidget,
-    OCRWidget,
-    OverviewWidget,
-    PowerWidget,
-    QuickSettingsButtonWidget,
-    RecorderWidget,
-    SpacingWidget,
-    StopWatchWidget,
-    StorageWidget,
-    SubMapWidget,
-    SystemTrayWidget,
-    TaskBarWidget,
-    ThemeSwitcherWidget,
-    UpdatesWidget,
-    VolumeWidget,
-    WeatherWidget,
-    WindowTitleWidget,
-    WorkSpacesWidget,
-)
+from utils.widget_utils import lazy_load_widget
 
 
 class StatusBar(WaylandWindow):
@@ -62,40 +27,40 @@ class StatusBar(WaylandWindow):
 
     def __init__(self, **kwargs):
         self.widgets_list = {
-            "battery": BatteryWidget,
-            "bluetooth": BlueToothWidget,
-            "brightness": BrightnessWidget,
-            "cava": CavaWidget,
-            "click_counter": ClickCounterWidget,
-            "cpu": CpuWidget,
-            "date_time": DateTimeWidget,
-            "hypr_idle": HyprIdleWidget,
-            "hypr_picker": HyprPickerWidget,
-            "hypr_sunset": HyprSunsetWidget,
-            "keyboard": KeyboardLayoutWidget,
-            "language": LanguageWidget,
-            "memory": MemoryWidget,
-            "microphone": MicrophoneIndicatorWidget,
-            "mpris": Mpris,
-            "network_usage": NetworkUsageWidget,
-            "ocr": OCRWidget,
-            "overview": OverviewWidget,
-            "power": PowerWidget,
-            "recorder": RecorderWidget,
-            "storage": StorageWidget,
-            "system_tray": SystemTrayWidget,
-            "task_bar": TaskBarWidget,
-            "theme_switcher": ThemeSwitcherWidget,
-            "updates": UpdatesWidget,
-            "volume": VolumeWidget,
-            "submap": SubMapWidget,
-            "weather": WeatherWidget,
-            "window_title": WindowTitleWidget,
-            "workspaces": WorkSpacesWidget,
-            "spacing": SpacingWidget,
-            "stop_watch": StopWatchWidget,
-            "divider": DividerWidget,
-            "quick_settings": QuickSettingsButtonWidget,
+            "battery": "widgets.BatteryWidget",
+            "bluetooth": "widgets.BlueToothWidget",
+            "brightness": "widgets.BrightnessWidget",
+            "cava": "widgets.CavaWidget",
+            "click_counter": "widgets.ClickCounterWidget",
+            "cpu": "widgets.CpuWidget",
+            "date_time": "widgets.DateTimeWidget",
+            "hypr_idle": "widgets.HyprIdleWidget",
+            "hypr_picker": "widgets.HyprPickerWidget",
+            "hypr_sunset": "widgets.HyprSunsetWidget",
+            "keyboard": "widgets.KeyboardLayoutWidget",
+            "language": "widgets.LanguageWidget",
+            "memory": "widgets.MemoryWidget",
+            "microphone": "widgets.MicrophoneIndicatorWidget",
+            "mpris": "widgets.Mpris",
+            "network_usage": "widgets.NetworkUsageWidget",
+            "ocr": "widgets.OCRWidget",
+            "overview": "widgets.OverviewWidget",
+            "power": "widgets.PowerWidget",
+            "recorder": "widgets.RecorderWidget",
+            "storage": "widgets.StorageWidget",
+            "system_tray": "widgets.SystemTrayWidget",
+            "task_bar": "widgets.TaskBarWidget",
+            "theme_switcher": "widgets.ThemeSwitcherWidget",
+            "updates": "widgets.UpdatesWidget",
+            "volume": "widgets.VolumeWidget",
+            "submap": "widgets.SubMapWidget",
+            "weather": "widgets.WeatherWidget",
+            "window_title": "widgets.WindowTitleWidget",
+            "workspaces": "widgets.WorkSpacesWidget",
+            "spacing": "widgets.SpacingWidget",
+            "stop_watch": "widgets.StopWatchWidget",
+            "divider": "widgets.DividerWidget",
+            "quick_settings": "widgets.QuickSettingsButtonWidget",
         }
 
         layout = self.make_layout()
@@ -174,7 +139,7 @@ class StatusBar(WaylandWindow):
                 else:
                     # Handle regular widgets
                     if widget_name in self.widgets_list:
-                        widget_class = self.widgets_list[widget_name]
+                        widget_class = lazy_load_widget(widget_name, self.widgets_list)
                         layout[key].append(widget_class(widget_config, bar=self))
 
         return layout

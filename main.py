@@ -11,8 +11,6 @@ from utils.colors import Colors
 from utils.config import widget_config
 from utils.constants import APP_CACHE_DIRECTORY, APPLICATION_NAME
 from utils.exceptions import ExecutableNotFoundError
-from widgets.corners import ScreenCorners
-from widgets.desktop_clock import DesktopClock
 
 
 @helpers.run_in_thread
@@ -58,9 +56,13 @@ if __name__ == "__main__":
         general_options["screen_corners"]
         and general_options["screen_corners"]["enabled"]
     ):
+        from widgets.corners import ScreenCorners
+
         windows.append(ScreenCorners(general_options["screen_corners"]["size"]))
 
     if general_options["desktop_clock"] and general_options["desktop_clock"]["enabled"]:
+        from widgets.desktop_clock import DesktopClock
+
         windows.append(
             DesktopClock(
                 general_options["desktop_clock"]["date_format"],
