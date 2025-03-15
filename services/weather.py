@@ -25,10 +25,14 @@ class WeatherService:
 
     def simple_weather_info(self, location: str):
         try:
+            url = ""
             # Construct the URL for fetching weather information
+            if location != "":
+                encoded_location = urllib.parse.quote_plus(location.capitalize())
 
-            encoded_location = urllib.parse.quote_plus(location.capitalize())
-            url = f"https://wttr.in/{encoded_location}?format=j1"
+                url = f"http://wttr.in/{encoded_location}?format=j1"
+            else:
+                url = "http://wttr.in/?format=j1"
 
             logger.info(f"[Weather] Fetching weather information from {url}")
             contents = (
@@ -37,7 +41,6 @@ class WeatherService:
 
             # Parse the weather information
             data = json.loads(contents)
-
 
             current_weather = data["current_condition"][0]
             weather = data["weather"][0]

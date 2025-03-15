@@ -246,10 +246,6 @@
 		"weather": {
 			"type": "object",
 			"properties": {
-				"detect_location": {
-					"type": "boolean",
-					"description": "Determines whether to detect the location automatically."
-				},
 				"location": {
 					"type": "string",
 					"description": "Specifies the location for the weather widget."

@@ -20,7 +20,7 @@ class SystemTrayMenu(BoxWidget):
             name="system-tray-menu",
             orientation=Gtk.Orientation.VERTICAL,
             style_classes=["panel-menu"],
-            **kwargs
+            **kwargs,
         )
 
         self.config = config
@@ -44,8 +44,10 @@ class SystemTrayMenu(BoxWidget):
     def add_item(self, item):
         button = self.do_bake_item_button(item)
         item.connect("removed", lambda *args: button.destroy())
-        item.connect("icon-changed",
-        lambda icon_item: self.do_update_item_button(icon_item, button))
+        item.connect(
+            "icon-changed",
+            lambda icon_item: self.do_update_item_button(icon_item, button),
+        )
         button.show_all()
         self.grid.attach(button, self.column, self.row, 1, 1)
         self.column += 1
@@ -116,22 +118,19 @@ class SystemTrayWidget(ButtonWidget):
 
         # Create main tray box and toggle icon
         self.tray_box = Box(
-            name="system-tray-box",
-            orientation=Gtk.Orientation.HORIZONTAL,
-            spacing=8
+            name="system-tray-box", orientation=Gtk.Orientation.HORIZONTAL, spacing=8
         )
         self.toggle_icon = Image(
             icon_name="arrow-down-symbolic",
             icon_size=self.config["icon_size"],
-            style_classes=["panel-icon", "toggle-icon"]
+            style_classes=["panel-icon", "toggle-icon"],
         )
-
 
         # Set children directly in Box to avoid double styling
         self.children = Box(
             spacing=8,
             orientation=Gtk.Orientation.HORIZONTAL,
-            children=(self.tray_box, Separator(), self.toggle_icon)
+            children=(self.tray_box, Separator(), self.toggle_icon),
         )
 
         # Create popup menu for hidden items
@@ -163,15 +162,13 @@ class SystemTrayWidget(ButtonWidget):
         if visible:
             self.popup.hide()
             self.toggle_icon.set_from_icon_name(
-                "arrow-down-symbolic",
-            self.config["icon_size"]
+                "arrow-down-symbolic", self.config["icon_size"]
             )
             self.toggle_icon.get_style_context().remove_class("active")
         else:
             self.popup.show_all()
             self.toggle_icon.set_from_icon_name(
-                "arrow-up-symbolic",
-                self.config["icon_size"]
+                "arrow-up-symbolic", self.config["icon_size"]
             )
             self.toggle_icon.get_style_context().add_class("active")
 
@@ -199,8 +196,9 @@ class SystemTrayWidget(ButtonWidget):
             button = Button(style_classes="flat")
             button.connect(
                 "button-press-event",
-                lambda button,
-                event: self.popup_menu.on_button_click(button, item, event),
+                lambda button, event: self.popup_menu.on_button_click(
+                    button, item, event
+                ),
             )
             button.set_tooltip_text(title)
             button.set_margin_start(2)
@@ -210,8 +208,9 @@ class SystemTrayWidget(ButtonWidget):
             pixmap = Gray.get_pixmap_for_pixmaps(item.get_icon_pixmaps(), 24)
             try:
                 pixbuf = (
-                    pixmap.as_pixbuf(self.config["icon_size"],
-                    GdkPixbuf.InterpType.HYPER)
+                    pixmap.as_pixbuf(
+                        self.config["icon_size"], GdkPixbuf.InterpType.HYPER
+                    )
                     if pixmap is not None
                     else Gtk.IconTheme()
                     .get_default()
@@ -236,8 +235,12 @@ class SystemTrayWidget(ButtonWidget):
 
             # Connect signals
             item.connect("removed", lambda *args: button.destroy())
-            item.connect("icon-changed",
-            lambda icon_item: self.popup_menu.do_update_item_button(icon_item, button))
+            item.connect(
+                "icon-changed",
+                lambda icon_item: self.popup_menu.do_update_item_button(
+                    icon_item, button
+                ),
+            )
 
             button.show_all()
             self.tray_box.pack_start(button, False, False, 0)
