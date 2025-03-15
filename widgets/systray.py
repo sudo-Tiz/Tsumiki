@@ -136,6 +136,7 @@ class SystemTrayWidget(ButtonWidget):
 
         # Create popup menu for hidden items
         self.popup_menu = SystemTrayMenu(config=self.config)
+
         self.popup = PopOverWindow(
             name="popup",
             parent=bar,
@@ -143,9 +144,8 @@ class SystemTrayWidget(ButtonWidget):
             visible=False,
             all_visible=False,
             margin="0 0 0 0",
+            pointing_to=self,
         )
-
-        self.popup.set_pointing_to(self)
 
         # Initialize watcher
         self.watcher = Gray.Watcher()
