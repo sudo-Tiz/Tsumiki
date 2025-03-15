@@ -38,6 +38,7 @@ class WeatherService:
             # Parse the weather information
             data = json.loads(contents)
 
+
             current_weather = data["current_condition"][0]
             weather = data["weather"][0]
             hourly_weather = weather["hourly"]
