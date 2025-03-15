@@ -1,6 +1,6 @@
 import setproctitle
 from fabric import Application
-from fabric.utils import exec_shell_command, get_relative_path, monitor_file
+from fabric.utils import cooldown, exec_shell_command, get_relative_path, monitor_file
 from loguru import logger
 
 import utils.functions as helpers
@@ -13,6 +13,7 @@ from utils.constants import APP_CACHE_DIRECTORY, APPLICATION_NAME
 from utils.exceptions import ExecutableNotFoundError
 
 
+@cooldown(2)
 @helpers.run_in_thread
 def process_and_apply_css(app: Application):
     if not helpers.executable_exists("sass"):
