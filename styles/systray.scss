@@ -7,6 +7,8 @@
   padding: 0.5em 0.25em;
   color: theme.$text-main;
   border-radius: variable.$radius;
+  min-width: 200px;
+  min-height: 50px;
   background-color: theme.$background-dark;
 
   grid{
