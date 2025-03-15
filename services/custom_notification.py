@@ -7,7 +7,6 @@ from fabric.notifications import Notification, Notifications
 from loguru import logger
 
 from utils.colors import Colors
-from utils.config import widget_config
 from utils.constants import NOTIFICATION_CACHE_FILE
 
 
@@ -102,7 +101,7 @@ class CustomNotifications(Notifications):
             if len(self.all_notifications) == 0:
                 self.emit("clear_all", True)
 
-    def cache_notification(self, data: Notification, max_count: int):
+    def cache_notification(self, widget_config, data: Notification, max_count: int):
         """Cache the notification."""
         # First clean up any invalid notifications
         self._cleanup_invalid_notifications()

@@ -33,6 +33,8 @@ class NotificationPopup(WaylandWindow):
 
         self.cache_notification_service = notification_service
 
+        self.widget_config = widget_config
+
         self.config = widget_config["notification"]
 
         self.hyprland_monitor = HyprlandWithMonitors()
@@ -77,7 +79,7 @@ class NotificationPopup(WaylandWindow):
             f"{Colors.OKGREEN}{notification.app_name}"
         )
         self.cache_notification_service.cache_notification(
-            notification, self.config["max_count"]
+            self.widget_config, notification, self.config["max_count"]
         )
 
         if self.config["play_sound"]:

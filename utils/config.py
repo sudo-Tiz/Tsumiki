@@ -68,5 +68,5 @@ class HydeConfig:
         self.config = parsed_data
 
 
-configuration = HydeConfig().get_default()
+configuration = HydeConfig.get_default()
 widget_config = configuration.config

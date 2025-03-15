@@ -8,12 +8,9 @@ from fabric.widgets.widget import Widget
 
 from shared import PopupWindow
 from shared.widget_container import ButtonWidget
-from utils.config import widget_config
 from utils.functions import handle_power_action
 from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon
-
-POWER_BUTTONS = widget_config["power"]["buttons"]
 
 
 class PowerMenuPopup(PopupWindow):
@@ -22,17 +19,20 @@ class PowerMenuPopup(PopupWindow):
     instance = None
 
     @staticmethod
-    def get_default():
+    def get_default(widget_config):
         if PowerMenuPopup.instance is None:
-            PowerMenuPopup.instance = PowerMenuPopup()
+            PowerMenuPopup.instance = PowerMenuPopup(widget_config)
 
         return PowerMenuPopup.instance
 
     def __init__(
         self,
+        config,
         **kwargs,
     ):
         self.icon_size = 100
+
+        power_buttons_list = config["buttons"]
 
         self.menu = Box(
             name="power-button-menu",
@@ -45,7 +45,7 @@ class PowerMenuPopup(PopupWindow):
                             name=value,
                             size=self.icon_size,
                         )
-                        for value in POWER_BUTTONS[0:3]
+                        for value in power_buttons_list[0:3]
                     ],
                 ),
                 Box(
@@ -55,7 +55,7 @@ class PowerMenuPopup(PopupWindow):
                             name=value,
                             size=self.icon_size,
                         )
-                        for value in POWER_BUTTONS[3:]
+                        for value in power_buttons_list[3:]
                     ],
                 ),
             ],
@@ -117,7 +117,7 @@ class PowerControlButtons(ButtonWidget):
             "reboot",
         ],
     ):
-        PowerMenuPopup().get_default().toggle_popup()
+        PowerMenuPopup.get_default().toggle_popup()
         return handle_power_action(pressed_button)
 
 
@@ -140,5 +140,7 @@ class PowerWidget(ButtonWidget):
 
         self.connect(
             "clicked",
-            lambda *_: PowerMenuPopup().get_default().toggle_popup(),
+            lambda *_: PowerMenuPopup.get_default(
+                widget_config=self.config
+            ).toggle_popup(),
         )

@@ -362,7 +362,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
 
         self.network = network_service
 
-        self.brightness_service = Brightness().get_default()
+        self.brightness_service = Brightness.get_default()
 
         self.audio.connect("notify::speaker", self.on_speaker_changed)
         self.brightness_service.connect("screen", self.on_brightness_changed)
