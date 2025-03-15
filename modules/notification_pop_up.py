@@ -20,7 +20,6 @@ import utils.icons as icons
 from services import notification_service
 from shared import CustomImage
 from utils.colors import Colors
-from utils.config import widget_config
 from utils.monitors import HyprlandWithMonitors
 from utils.widget_settings import BarConfig
 from utils.widget_utils import get_icon
@@ -70,7 +69,7 @@ class NotificationPopup(WaylandWindow):
         ):
             return
 
-        new_box = NotificationRevealer(notification)
+        new_box = NotificationRevealer(self.config, notification)
         self.notifications.add(new_box)
         new_box.set_reveal_child(True)
         logger.info(
@@ -92,6 +91,7 @@ class NotificationWidget(EventBox):
 
     def __init__(
         self,
+        config,
         notification: Notification,
         **kwargs,
     ):
@@ -100,6 +100,8 @@ class NotificationWidget(EventBox):
             name="notification-eventbox",
             **kwargs,
         )
+
+        self.config = config
 
         self._notification = notification
 
@@ -233,7 +235,7 @@ class NotificationWidget(EventBox):
             ),
         )
 
-        if widget_config["notification"]["auto_dismiss"]:
+        if self.config["auto_dismiss"]:
             self.start_timeout()
 
     def start_timeout(self):
@@ -258,7 +260,7 @@ class NotificationWidget(EventBox):
         return (
             self._notification.timeout
             if self._notification.timeout != -1
-            else widget_config["notification"]["timeout"]
+            else self.config["timeout"]
         )
 
     def pause_timeout(self):
