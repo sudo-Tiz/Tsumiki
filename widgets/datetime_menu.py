@@ -464,10 +464,9 @@ class DateTimeWidget(ButtonWidget):
             child=date_menu,
             visible=False,
             all_visible=False,
+            pointing_to=self,
             margin="-18px 0 0 0",
         )
-
-        popup.set_pointing_to(self)
 
         self.notification_indicator = Image(
             icon_name=icons["notifications"]["noisy"],

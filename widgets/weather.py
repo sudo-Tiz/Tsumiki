@@ -290,9 +290,8 @@ class WeatherWidget(ButtonWidget):
             visible=False,
             all_visible=False,
             margin="-18px 0 0 0",
+            pointing_to=self,
         )
-
-        popup.set_pointing_to(self)
 
         self.connect(
             "clicked",

@@ -374,6 +374,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
             visible=False,
             all_visible=False,
             margin="-18px 0 0 0",
+            pointing_to=self,
         )
 
         self.audio_icon = Image(style_classes="panel-icon")
@@ -387,8 +388,6 @@ class QuickSettingsButtonWidget(ButtonWidget):
         )
 
         self.update_brightness()
-
-        popup.set_pointing_to(self)
 
         self.children = Box(
             children=(

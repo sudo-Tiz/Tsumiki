@@ -139,9 +139,8 @@ class SystemTrayWidget(ButtonWidget):
             child=(SystemTrayMenu(config=self.config)),
             visible=False,
             all_visible=False,
+            pointing_to=self,
         )
-
-        popup.set_pointing_to(self)
 
         self.connect(
             "clicked",
