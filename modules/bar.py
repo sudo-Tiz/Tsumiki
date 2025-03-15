@@ -7,7 +7,6 @@ from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow
 
 from shared.module_group import ModuleGroup
-from utils.config import widget_config
 from utils.functions import run_in_thread
 from utils.monitors import HyprlandWithMonitors
 from utils.widget_utils import lazy_load_widget
@@ -24,7 +23,7 @@ class StatusBar(WaylandWindow):
         )
         return True
 
-    def __init__(self, **kwargs):
+    def __init__(self, config, **kwargs):
         self.widgets_list = {
             "battery": "widgets.BatteryWidget",
             "bluetooth": "widgets.BlueToothWidget",
@@ -62,9 +61,8 @@ class StatusBar(WaylandWindow):
             "quick_settings": "widgets.QuickSettingsButtonWidget",
         }
 
-        layout = self.make_layout()
-
-        options = widget_config["general"]
+        options = config["general"]
+        layout = self.make_layout(config)
 
         self.box = CenterBox(
             name="panel-inner",
@@ -105,7 +103,7 @@ class StatusBar(WaylandWindow):
         if options["check_updates"]:
             self.check_for_bar_updates()
 
-    def make_layout(self):
+    def make_layout(self, widget_config):
         """assigns the three sections their respective widgets"""
 
         layout = {"left_section": [], "middle_section": [], "right_section": []}

@@ -48,7 +48,7 @@ if not general_options["debug"]:
 
 if __name__ == "__main__":
     # Create the status bar
-    bar = StatusBar()
+    bar = StatusBar(widget_config)
     notifications = NotificationPopup(widget_config)
 
     windows = [notifications, bar]
