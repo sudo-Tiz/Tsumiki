@@ -290,8 +290,8 @@ class NotificationWidget(EventBox):
 class NotificationRevealer(Revealer):
     """A widget to reveal a notification."""
 
-    def __init__(self, notification: Notification, **kwargs):
-        self.notification_box = NotificationWidget(notification)
+    def __init__(self, config,notification: Notification, **kwargs):
+        self.notification_box = NotificationWidget(config,notification)
         self._notification = notification
 
         super().__init__(
