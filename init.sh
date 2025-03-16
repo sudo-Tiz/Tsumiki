@@ -97,11 +97,12 @@ install_packages() {
 		playerctl
 		dart-sass
 		networkmanager
-		power-profiles-daemon
 		brightnessctl
+		power-profiles-daemon
 		pkgconf
 		wf-recorder
 		kitty
+		libnotify
 		python
 		pacman-contrib
 		gtk3
