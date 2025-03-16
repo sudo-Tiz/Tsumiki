@@ -6,6 +6,7 @@ from urllib.error import HTTPError
 from loguru import logger
 
 from utils.colors import Colors
+from utils.functions import ttl_lru_cache
 
 # Create an SSLContext that ignores certificate validation
 context = ssl._create_unverified_context()
@@ -23,6 +24,7 @@ class WeatherService:
 
         return WeatherService.instance
 
+    @ttl_lru_cache(600, 10)
     def simple_weather_info(self, location: str):
         try:
             url = ""

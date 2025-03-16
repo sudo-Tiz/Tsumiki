@@ -24,7 +24,6 @@ from .constants import named_colors
 from .icons import distro_text_icons
 
 gi.require_version("Gio", "2.0")
-gi.require_version("Gtk", "3.0")
 
 
 # Function to escape the markup
@@ -227,6 +226,7 @@ def handle_power_action(
 
 
 # Function to get the distro icon
+@ttl_lru_cache(600, 10)
 def get_distro_icon():
     distro_id = GLib.get_os_info("ID")
 
@@ -235,6 +235,7 @@ def get_distro_icon():
 
 
 # Function to check if an executable exists
+@ttl_lru_cache(600, 10)
 def executable_exists(executable_name):
     executable_path = shutil.which(executable_name)
     return bool(executable_path)
