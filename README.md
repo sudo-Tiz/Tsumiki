@@ -1,5 +1,5 @@
 <p align="center"><img src="./assets/hydepanel.png" align="centre" width="100" height="130"/></p>
-<h1 align="center"><img src="https://raw.githubusercontent.com/JaKooLit/Telegram-Animated-Emojis/refs/heads/main/Activity/Sparkles.webp"/ height=50> HyDePanel <img src="https://raw.githubusercontent.com/JaKooLit/Telegram-Animated-Emojis/refs/heads/main/Activity/Sparkles.webp"/ height=50></h1>
+<h1 align="center"><img src="https://raw.githubusercontent.com/JaKooLit/Telegram-Animated-Emojis/refs/heads/main/Activity/Sparkles.webp"/ height=35> HyDePanel <img src="https://raw.githubusercontent.com/JaKooLit/Telegram-Animated-Emojis/refs/heads/main/Activity/Sparkles.webp"/ height=35></h1>
 <p align="center">
  <a href="https://github.com/rubiin/HyDePanel/blob/master/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/rubiin/HyDePanel"></a>
   <a href='http://makeapullrequest.com'><img alt='PRs Welcome' src='https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields'/></a>
