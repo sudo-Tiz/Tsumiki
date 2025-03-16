@@ -136,7 +136,7 @@ install_packages() {
 	)
 
 
-	sudo pacman -S --noconfirm --needed "${pacman_deps[@]}"
+	sudo pacman -S --noconfirm --needed "${pacman_deps[@]}"  || true
 
 	if command -v yay &>/dev/null; then
 		aur_helper="yay"
@@ -155,7 +155,7 @@ install_packages() {
 
 	# Install packages using yay (AUR helper)
 
-	$aur_helper -S --noconfirm --needed "${aur_deps[@]}"
+	$aur_helper -S --noconfirm --needed "${aur_deps[@]}"  || true
 
 }
 
