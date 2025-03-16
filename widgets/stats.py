@@ -286,6 +286,13 @@ class NetworkUsageWidget(ButtonWidget):
 
         network_speed = self.client.get_network_speed()
 
+        if self.config["tooltip"]:
+            tooltip_text = (
+                f"Download: {round(network_speed.get('download', 0), 2)} MB/s\n"
+            )
+            tooltip_text += f"Upload: {round(network_speed.get('upload', 0), 2)} MB/s"
+            self.set_tooltip_text(tooltip_text)
+
         download_speed = network_speed.get("download", "0")
         upload_speed = network_speed.get("upload", "0")
 
