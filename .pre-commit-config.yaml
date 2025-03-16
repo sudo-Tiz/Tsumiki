@@ -42,5 +42,4 @@ repos:
                         example/config.json
                     )$
 
-
 default_stages: [pre-commit]
