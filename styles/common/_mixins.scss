@@ -136,7 +136,7 @@
       box-shadow: 0 0 3px 0 theme.$shadow-color;
       border: variable.$border-width solid transparent;
       transition: 200ms;
-      border-radius: $radius;
+      border-radius: 9999px;
       min-height: $width;
       min-width: $width;
       margin: -$slider-width;
@@ -172,7 +172,7 @@
 @mixin switch {
   slider {
     background-color: theme.$background-dark;
-    border-radius: variable.$radius-large;
+    border-radius: 9999px;
     min-width: 24px;
     min-height: 24px;
   }

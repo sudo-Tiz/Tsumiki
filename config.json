@@ -68,25 +68,47 @@
 	},
 	"language": {
 		"truncation_size": 2, // this is the number of characters to show in the language widget
-		"icon_size": "14px",  // this is the size of the icon
+		"icon_size": "14px", // this is the size of the icon
 		"tooltip": true,
 		"icon": ""
 	},
 	"layout": {
-		"left_section": ["workspaces", "window_title"], // this is the left section of the panel
-		"middle_section": ["date_time"], // this is the middle section of the panel
-		"right_section": ["recorder", "@group:1", "@group:0", "system_tray"] // this is the right section of the panel
+		"left_section": [
+			"workspaces",
+			"window_title"
+		], // this is the left section of the panel
+		"middle_section": [
+			"date_time"
+		], // this is the middle section of the panel
+		"right_section": [
+			"recorder",
+			"@group:1",
+			"@group:0",
+			"system_tray"
+		] // this is the right section of the panel
 	},
 	"module_groups": [ // module groups are used to group multiple modules together, you can create multiple groups and access as @group:0, @group:1, etc
 		{
-			"widgets": ["updates", "ocr", "battery"],
+			"widgets": [
+				"updates",
+				"ocr",
+				"battery"
+			],
 			"spacing": 4,
-			"style_classes": ["compact"]
+			"style_classes": [
+				"compact"
+			]
 		},
 		{
-			"widgets": ["quick_settings", "cpu", "network_usage"],
+			"widgets": [
+				"quick_settings",
+				"cpu",
+				"network_usage"
+			],
 			"spacing": 0,
-			"style_classes": ["compact"]
+			"style_classes": [
+				"compact"
+			]
 		}
 	],
 	"memory": {
@@ -154,7 +176,14 @@
 		"icon": "󰐥",
 		"icon_size": "18px",
 		"tooltip": true,
-		"buttons": ["suspend", "hibernate", "shutdown", "reboot", "logout", "lock"]
+		"buttons": [
+			"suspend",
+			"hibernate",
+			"shutdown",
+			"reboot",
+			"logout",
+			"lock"
+		]
 	},
 	"recorder": {
 		"path": "Videos/Screencasting",
@@ -219,12 +248,22 @@
 	},
 	"theme": {
 		"name": "catpuccin-mocha",
-		"font-family": "JetBrainsMono Nerd Font Propo",
-		"font-size": "16px",
+		"font": {
+			"name": "JetBrainsMono Nerd Font Propo",
+			"size": "1.05rem",
+			"weight": 600
+		},
 		"radius": "10px",
 		"padding": "7pt",
 		"spacing": "12pt",
-		"border-width": "1px"
+		"border-width": "1px",
+		"bar": {
+			"buttons": {
+				"radius": "1em",
+				"padding_x": "0",
+				"padding_y": " 1.25em"
+			}
+		}
 	},
 	"theme_switcher": {
 		"icon": "",
@@ -261,7 +300,9 @@
 		"count": 8, // this is the number of workspaces to show
 		"hide_unoccupied": true,
 		"default_label_format": "{id}",
-		"ignored": [-99], // this is the list of workspaces to ignore, currently -99 is the scratchpad workspace
+		"ignored": [
+			-99
+		], // this is the list of workspaces to ignore, currently -99 is the scratchpad workspace
 		"reverse_scroll": false,
 		"empty_scroll": false,
 		"icon_map": {}
