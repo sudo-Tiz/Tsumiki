@@ -20,7 +20,7 @@
 
 %desktop-widget {
   transition: color 0.5s ease;
-  color: lighten(theme.$text-main, 70%);
+  color: color.mix(theme.$text-main, transparent, 70%);
   font-family: "Jost*", sans-serif;
 }
 
@@ -115,9 +115,8 @@
       min-height: $width;
 
       &:hover {
-        background-color: color.adjust(
-          $color: $highlight-color,
-          $lightness: -5%
+        background-color: color.mix($highlight-color,
+          black, 5%
         );
       }
     }
@@ -142,9 +141,8 @@
       margin: -$slider-width;
 
       &:hover {
-        background-color: color.adjust(
-          $color: theme.$text-main,
-          $lightness: -10%
+        background-color: color.mix(theme.$text-main,
+          black, 10%
         );
       }
     }
@@ -153,7 +151,7 @@
   &:disabled {
     highlight,
     progress {
-      background-color: color.adjust(theme.$text-main, $alpha: -0.4);
+      background-color: color.mix(theme.$text-main, transparent, 60%);
       background-image: none;
     }
   }

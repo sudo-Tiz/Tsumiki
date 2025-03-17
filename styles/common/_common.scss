@@ -22,7 +22,9 @@ label {
 
 #panel {
   &-inner {
-    background-color: theme.$bar-background;
+    $bar-opacity-ratio: variable.$bar-opacity * 0.01;
+    $transparency-value:( 1 - $bar-opacity-ratio) * 100%;
+    background-color: color.mix(theme.$bar-background, transparent, $transparency-value);
     padding: 0.6em 0.8em 0.6em 0.8em;
     border-radius: variable.$radius;
   }
@@ -36,7 +38,7 @@ label {
 .panel-box,
 .panel-button {
   background-color: theme.$background-dark;
-  border-radius: variable.$bar-buttons-radius;
+  border-radius: variable.$bar-buttons-border-radius;
 }
 
 .default {
@@ -68,7 +70,7 @@ label {
 
 .shadow {
   border-radius: 4px;
-  box-shadow: darken($color: theme.$background-dark, $amount: 15%) 0 4px;
+  box-shadow: color.mix(theme.$background-dark,black, 15%) 0 4px;
 }
 
 .bordered {
@@ -114,7 +116,7 @@ label {
 tooltip {
   @extend %unset;
   background-color: theme.$background-dark;
-  border-radius: variable.$tooltip-radius;
+  border-radius: variable.$tooltip-border-radius;
   box-shadow: 0 0 3px 0 theme.$shadow-color;
   animation: tooltipShow 0.25s cubic-bezier(0.5, 0.25, 0, 1);
 
@@ -126,7 +128,6 @@ tooltip {
 }
 
 tooltip > * {
-  padding: 0.125em 0.25em;
   padding: variable.$tooltip-padding-y variable.$tooltip-padding-x;
 }
 
@@ -198,13 +199,13 @@ check {
 
 check:hover,
 radio:hover {
-  box-shadow: 0 0 0 4px color.adjust(theme.$background-dark, $alpha: -0.9);
+  box-shadow: 0 0 0 4px color.mix(theme.$background-dark,transparent, 10%);
   background-color: theme.$text-muted;
 }
 
 check:active,
 radio:active {
-  box-shadow: 0 0 0 4px color.adjust(theme.$background-dark, $alpha: -0.9);
+  box-shadow: 0 0 0 4px color.mix(theme.$background-dark, transparent, 10%);
   background-color: theme.$background-dark;
 }
 
@@ -224,7 +225,7 @@ check:checked:hover,
 check:indeterminate:hover,
 radio:checked:hover,
 radio:indeterminate:hover {
-  box-shadow: 0 0 0 4px color.adjust(theme.$text-main, $alpha: -0.9);
+  box-shadow: 0 0 0 4px color.mix(theme.$text-main, transparent, 10%);
   background-color: theme.$text-main;
 }
 
@@ -232,7 +233,7 @@ check:checked:active,
 check:indeterminate:active,
 radio:checked:active,
 radio:indeterminate:active {
-  box-shadow: 0 0 0 4px color.adjust(theme.$text-main, $alpha: -0.9);
+  box-shadow: 0 0 0 4px color.mix(theme.$text-main, transparent, 10%);
   background-color: theme.$text-main;
 }
 
@@ -240,7 +241,7 @@ switch {
   transition: all 75ms cubic-bezier(0, 0, 0.2, 1);
   margin: functions.toEm(4) 0;
   border-radius: 9999px;
-  background-color: color.adjust(theme.$background, $lightness: 10%);
+  background-color: color.mix(theme.$background, white, 10%);
   background-clip: padding-box;
   font-size: 0;
   color: transparent;

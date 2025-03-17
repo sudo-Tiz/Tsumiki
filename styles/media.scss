@@ -13,7 +13,7 @@
 
   &.active {
     border-radius: 5px;
-    background-color: color.adjust($color: theme.$background, $lightness: 15%);
+    background-color: color.mix(theme.$background, white, 15%);
   }
 
   &.empty {
@@ -111,14 +111,14 @@
     trough {
       border-radius: variable.$radius-large;
       min-height: 8px;
-      background-color: color.adjust(theme.$background, $lightness: -5%);
+      background-color: color.mix(theme.$background, black, 5%);
 
       highlight {
         border-radius: 400px;
       }
 
       &:hover {
-        background-color: color.adjust(theme.$background, $lightness: -7%);
+        background-color: color.mix(theme.$background, black, 7%);
       }
     }
   }

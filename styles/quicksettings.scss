@@ -56,7 +56,7 @@ $slider-height: 12px;
 
   .power-profile {
     .active {
-      color: color.adjust($color: theme.$accent-purple, $lightness: -12%);
+      color: color.mix( theme.$accent-purple, black, 12%);
     }
 
     .power-profile-button {
@@ -76,9 +76,9 @@ $slider-height: 12px;
 
         button {
           margin: 0 5px;
-          background-color: color.adjust(
-            $color: theme.$background,
-            $lightness: 5%
+          background-color: color.mix(
+            theme.$background,
+            white, 5%
           );
           border-radius: variable.$radius-large;
           padding: common.toEm(4);
@@ -100,7 +100,7 @@ $slider-height: 12px;
       .uptime {
         font-size: 0.92rem;
         border: variable.$border-width solid
-          color.adjust($color: theme.$surface-disabled, $lightness: 10%);
+          color.mix( theme.$surface-disabled, white, 10%);
         padding: common.toEm(3) common.toEm(10);
         font-weight: 600;
         border-radius: 1rem;
@@ -139,7 +139,7 @@ $slider-height: 12px;
         min-height: 32px;
 
         &:hover {
-          background-color: color.adjust(theme.$accent-blue, $lightness: -4%);
+          background-color: color.mix(theme.$accent-blue, black, 4%);
           color: theme.$background;
         }
       }
@@ -304,15 +304,15 @@ $slider-height: 12px;
         background-color: theme.$accent-blue;
 
         &:hover {
-          background-color: color.adjust(theme.$accent-blue, $lightness: -4%);
+          background-color: color.mix(theme.$accent-blue, black, 4%);
         }
 
         label {
-          color: color.adjust($color: #000000, $lightness: 8%);
+          color: color.mix(#000000, white, 8%);
         }
 
         image {
-          color: color.adjust($color: #000000, $lightness: 8%);
+          color: color.mix(#000000, white, 8%);
         }
       }
     }
@@ -321,7 +321,7 @@ $slider-height: 12px;
     #quicksettings-togglebutton.active button label,
     #quicksettings-togglebutton.active button {
       background-color: theme.$accent-blue;
-      color: color.adjust($color: #000000, $lightness: 8%);
+      color: color.mix( #000000, white, 8%);
       padding-left: common.toEm(1);
       padding-right: common.toEm(4);
     }
@@ -329,13 +329,13 @@ $slider-height: 12px;
     #quicksettings-togglebutton.active button:hover image,
     #quicksettings-togglebutton.active button:hover label,
     #quicksettings-togglebutton.active button:hover {
-      background-color: color.adjust(theme.$accent-blue, $lightness: -4%);
+      background-color: color.mix(theme.$accent-blue, black, 4%);
     }
 
     #quicksettings-togglebutton.active button:active image,
     #quicksettings-togglebutton.active button:active label,
     #quicksettings-togglebutton.active button:active {
-      background-color: color.adjust(theme.$accent-blue, $lightness: -10%);
+      background-color: color.mix(theme.$accent-blue, black, 10%);
     }
 
     #quicksettings-togglebutton button image,
