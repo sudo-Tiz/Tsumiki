@@ -20,6 +20,7 @@ class CpuWidget(ButtonWidget):
     ):
         # Initialize the Box with specific name and style
         super().__init__(
+            widget_config,
             name="cpu",
             **kwargs,
         )
@@ -103,6 +104,7 @@ class MemoryWidget(ButtonWidget):
     ):
         # Initialize the Box with specific name and style
         super().__init__(
+            widget_config,
             name="memory",
             **kwargs,
         )
@@ -167,6 +169,7 @@ class StorageWidget(ButtonWidget):
     ):
         # Initialize the Box with specific name and style
         super().__init__(
+            widget_config,
             name="storage",
             **kwargs,
         )
@@ -227,6 +230,7 @@ class NetworkUsageWidget(ButtonWidget):
         **kwargs,
     ):
         super().__init__(
+            widget_config,
             name="network_usage",
             **kwargs,
         )

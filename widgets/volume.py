@@ -16,7 +16,9 @@ class VolumeWidget(EventBoxWidget):
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(
-            events=["scroll", "smooth-scroll", "enter-notify-event"], **kwargs
+            widget_config,
+            events=["scroll", "smooth-scroll", "enter-notify-event"],
+            **kwargs,
         )
 
         # Initialize the audio service

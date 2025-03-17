@@ -12,7 +12,7 @@ class BlueToothWidget(ButtonWidget):
     """A widget to display the Bluetooth status."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(**kwargs)
+        super().__init__(widget_config, **kwargs)
         self.bluetooth_client = BluetoothClient()
 
         self.box = Box()

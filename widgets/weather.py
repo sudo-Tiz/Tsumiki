@@ -224,6 +224,7 @@ class WeatherWidget(ButtonWidget):
     ):
         # Initialize the Box with specific name and style
         super().__init__(
+            widget_config,
             name="weather-button",
             **kwargs,
         )

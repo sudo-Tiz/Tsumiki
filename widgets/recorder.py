@@ -15,7 +15,7 @@ class RecorderWidget(ButtonWidget):
     """A widget to record the system"""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(name="recorder", **kwargs)
+        super().__init__(widget_config, name="recorder", **kwargs)
 
         self.is_recording = False
         self.config = widget_config["recorder"]

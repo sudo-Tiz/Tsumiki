@@ -6,13 +6,13 @@ from gi.repository import Gdk, GdkPixbuf, GLib, Gray, Gtk
 
 from shared.pop_over import PopOverWindow
 from shared.separator import Separator
-from shared.widget_container import BoxWidget, ButtonWidget
+from shared.widget_container import ButtonWidget
 from utils.widget_settings import BarConfig
 
 gi.require_version("Gray", "0.1")
 
 
-class SystemTrayMenu(BoxWidget):
+class SystemTrayMenu(Box):
     """A widget to display additional system tray items in a grid."""
 
     def __init__(self, config, **kwargs) -> None:
@@ -111,7 +111,7 @@ class SystemTrayWidget(ButtonWidget):
     """A widget to display the system tray items."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs) -> None:
-        super().__init__(name="system-tray-widget", **kwargs)
+        super().__init__(widget_config, name="system-tray-widget", **kwargs)
 
         self.config = widget_config["system_tray"]
         self.set_tooltip_text("System Tray")

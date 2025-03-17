@@ -28,7 +28,7 @@ class UpdatesWidget(ButtonWidget):
         **kwargs,
     ):
         # Initialize the EventBox with specific name and style
-        super().__init__(name="updates", **kwargs)
+        super().__init__(widget_config, name="updates", **kwargs)
         self.config = widget_config["updates"]
 
         self.script_file = get_relative_path("../assets/scripts/systemupdates.sh")

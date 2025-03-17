@@ -29,6 +29,7 @@ class TaskBarWidget(BoxWidget):
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(
+            widget_config,
             name="taskbar",
             **kwargs,
         )

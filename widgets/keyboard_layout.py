@@ -15,7 +15,7 @@ class KeyboardLayoutWidget(ButtonWidget):
     """A widget to display the current keyboard layout."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(name="keyboard", **kwargs)
+        super().__init__(widget_config, name="keyboard", **kwargs)
 
         self.box = Box()
         self.children = (self.box,)

@@ -22,6 +22,7 @@ class Mpris(ButtonWidget):
     ):
         # Initialize the EventBox with specific name and style
         super().__init__(
+            widget_config,
             **kwargs,
         )
         self.config = widget_config["mpris"]

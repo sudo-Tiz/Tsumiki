@@ -19,6 +19,7 @@ class BatteryWidget(ButtonWidget):
     ):
         # Initialize the Box with specific name and style
         super().__init__(
+            widget_config,
             name="battery",
             **kwargs,
         )
