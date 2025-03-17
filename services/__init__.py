@@ -6,7 +6,7 @@ from .battery import *
 from .brightness import *
 from .custom_notification import *
 from .mpris import *
-from .network import NetworkClient
+from .network import *
 from .networkspeed import *
 from .power_profile import *
 from .screen_record import *

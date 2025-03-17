@@ -1,7 +1,7 @@
 from fabric.utils import exec_shell_command_async, get_relative_path
 from gi.repository import Gdk
 
-from shared.widget_container import ButtonWidget
+from shared import ButtonWidget
 from utils.exceptions import ExecutableNotFoundError
 from utils.functions import executable_exists
 from utils.widget_settings import BarConfig

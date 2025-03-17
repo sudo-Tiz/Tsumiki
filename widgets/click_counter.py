@@ -1,4 +1,4 @@
-from shared.widget_container import ButtonWidget
+from shared import ButtonWidget
 from utils.widget_settings import BarConfig
 
 

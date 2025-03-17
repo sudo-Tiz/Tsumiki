@@ -4,7 +4,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
 import utils.functions as helpers
-from shared.widget_container import ButtonWidget
+from shared import ButtonWidget
 from utils.exceptions import ExecutableNotFoundError
 from utils.widget_settings import BarConfig
 

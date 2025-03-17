@@ -9,10 +9,8 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from gi.repository import Gtk
 
-from services.weather import WeatherService
-from shared import PopOverWindow
-from shared.separator import Separator
-from shared.widget_container import ButtonWidget
+from services import WeatherService
+from shared import ButtonWidget, PopOverWindow, Separator
 from utils.functions import convert_seconds_to_milliseconds
 from utils.icons import weather_icons
 from utils.widget_settings import BarConfig

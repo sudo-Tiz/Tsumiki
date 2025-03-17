@@ -4,7 +4,7 @@ from fabric.widgets.label import Label
 
 import utils.functions as helpers
 from services import network_speed
-from shared.widget_container import ButtonWidget
+from shared import ButtonWidget
 from utils.icons import common_text_icons
 from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon, util_fabricator

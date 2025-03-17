@@ -10,7 +10,7 @@ from fabric.widgets.label import Label
 from fabric.widgets.scale import ScaleMark
 from gi.repository import Gdk, GLib
 
-from shared.animated.scale import AnimatedScale
+from shared import AnimatedScale
 from utils.functions import uptime
 
 from .config import widget_config

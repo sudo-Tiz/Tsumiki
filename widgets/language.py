@@ -2,7 +2,7 @@ from fabric.hyprland.widgets import Language
 from fabric.utils import FormattedString, truncate
 from fabric.widgets.box import Box
 
-from shared.widget_container import ButtonWidget
+from shared import ButtonWidget
 from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon
 

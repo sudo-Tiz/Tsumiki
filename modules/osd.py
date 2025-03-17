@@ -11,8 +11,7 @@ from gi.repository import GObject
 
 import utils.functions as helpers
 import utils.icons as icons
-from services import audio_service
-from services.brightness import Brightness
+from services import Brightness, audio_service
 from utils.monitors import HyprlandWithMonitors
 from utils.widget_settings import BarConfig
 from utils.widget_utils import (

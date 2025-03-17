@@ -6,8 +6,7 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.widget import Widget
 
-from shared import PopupWindow
-from shared.widget_container import ButtonWidget
+from shared import ButtonWidget, PopupWindow
 from utils.functions import handle_power_action
 from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon

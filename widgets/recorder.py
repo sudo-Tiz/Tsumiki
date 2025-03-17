@@ -2,9 +2,8 @@ from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 
-from services.screen_record import ScreenRecorder
-from shared.lottie import LottieAnimation, LottieAnimationWidget
-from shared.widget_container import ButtonWidget
+from services import ScreenRecorder
+from shared import ButtonWidget, LottieAnimation, LottieAnimationWidget
 from utils import icons
 from utils.exceptions import ExecutableNotFoundError
 from utils.functions import executable_exists

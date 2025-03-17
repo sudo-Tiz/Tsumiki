@@ -3,8 +3,8 @@ from fabric.widgets.button import Button
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
-from services.power_profile import PowerProfiles
-from shared.submenu import QuickSubMenu, QuickSubToggle
+from services import PowerProfiles
+from shared import QuickSubMenu, QuickSubToggle
 
 
 class PowerProfileItem(Button):

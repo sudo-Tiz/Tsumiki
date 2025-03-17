@@ -9,7 +9,7 @@ from fabric.widgets.image import Image
 from gi.repository import GdkPixbuf, GLib, Gtk
 from loguru import logger
 
-from shared.widget_container import BoxWidget
+from shared import BoxWidget
 from utils.colors import Colors
 from utils.widget_settings import BarConfig
 

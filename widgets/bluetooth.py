@@ -4,7 +4,7 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
 import utils.icons as icons
-from shared.widget_container import ButtonWidget
+from shared import ButtonWidget
 from utils.widget_settings import BarConfig
 
 

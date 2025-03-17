@@ -4,7 +4,7 @@ from fabric.hyprland.widgets import ActiveWindow
 from fabric.utils import FormattedString, truncate
 from fabric.widgets.box import Box
 
-from shared.widget_container import ButtonWidget
+from shared import ButtonWidget
 from utils.constants import WINDOW_TITLE_MAP
 from utils.widget_settings import BarConfig
 

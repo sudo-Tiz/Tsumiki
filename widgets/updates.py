@@ -10,7 +10,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 from loguru import logger
 
-from shared.widget_container import ButtonWidget
+from shared import ButtonWidget
 from utils.colors import Colors
 from utils.functions import convert_seconds_to_milliseconds
 from utils.thread import run_in_thread

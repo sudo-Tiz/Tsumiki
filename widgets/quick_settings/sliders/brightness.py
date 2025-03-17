@@ -1,5 +1,5 @@
-from services.brightness import Brightness
-from shared.setting_scale import SettingSlider
+from services import Brightness
+from shared import SettingSlider
 from utils.icons import icons
 
 

@@ -4,9 +4,7 @@ from fabric.utils import cooldown, exec_shell_command, get_relative_path, monito
 from loguru import logger
 
 import utils.functions as helpers
-from modules.bar import StatusBar
-from modules.notification_pop_up import NotificationPopup
-from modules.osd import OSDContainer
+from modules import NotificationPopup, OSDContainer, StatusBar
 from utils.colors import Colors
 from utils.config import widget_config
 from utils.constants import APP_CACHE_DIRECTORY, APPLICATION_NAME

@@ -3,7 +3,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 from loguru import logger
 
-from shared.widget_container import ButtonWidget
+from shared import ButtonWidget
 from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon
 

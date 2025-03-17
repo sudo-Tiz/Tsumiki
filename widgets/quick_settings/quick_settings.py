@@ -8,14 +8,15 @@ from fabric.widgets.label import Label
 from gi.repository import Gtk
 
 import utils.functions as helpers
-from services import audio_service, network_service
-from services.brightness import Brightness
-from services.mpris import MprisPlayerManager
-from shared.circle_image import CircleImage
-from shared.dialog import Dialog
-from shared.pop_over import PopOverWindow
-from shared.submenu import QuickSubToggle
-from shared.widget_container import ButtonWidget, HoverButton
+from services import Brightness, MprisPlayerManager, audio_service, network_service
+from shared import (
+    ButtonWidget,
+    CircleImage,
+    Dialog,
+    HoverButton,
+    PopOverWindow,
+    QuickSubToggle,
+)
 from utils.widget_settings import BarConfig
 from utils.widget_utils import (
     get_audio_icon_name,

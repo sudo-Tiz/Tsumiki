@@ -17,10 +17,7 @@ from loguru import logger
 import utils.constants as constants
 import utils.functions as helpers
 from services import notification_service
-from shared.custom_image import CustomImage
-from shared.pop_over import PopOverWindow
-from shared.separator import Separator
-from shared.widget_container import ButtonWidget
+from shared import ButtonWidget, CustomImage, PopOverWindow, Separator
 from utils.colors import Colors
 from utils.functions import uptime
 from utils.icons import icons
