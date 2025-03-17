@@ -6,7 +6,14 @@ from fabric.utils import get_relative_path
 from loguru import logger
 
 from .constants import DEFAULT_CONFIG
-from .functions import exclude_keys, merge_defaults, ttl_lru_cache, validate_widgets
+from .functions import (
+    exclude_keys,
+    flatten_dict,
+    merge_defaults,
+    run_in_thread,
+    ttl_lru_cache,
+    validate_widgets,
+)
 from .widget_settings import BarConfig
 
 
@@ -26,6 +33,7 @@ class HydeConfig:
         self.json_config = get_relative_path("../config.json")
         self.toml_config = get_relative_path("../config.toml")
         self.default_config()
+        self.set_css_settings()
 
     # Function to read the configuration file in json
     @ttl_lru_cache(600, 10)
@@ -68,6 +76,20 @@ class HydeConfig:
                 )
 
         self.config = parsed_data
+
+    @run_in_thread
+    def set_css_settings(self):
+        logger.info("Applying css settings...")
+
+        css_styles = flatten_dict(exclude_keys(self.config["theme"], ["name"]))
+
+        settings = ""
+        # for setting in self.config["css_settings"]:
+        for setting in css_styles:
+            settings += f"${setting}: {css_styles[setting]};\n"
+
+        with open(get_relative_path("../styles/_settings.scss"), "w") as f:
+            f.write(settings)
 
 
 configuration = HydeConfig.get_default()

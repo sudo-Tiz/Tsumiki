@@ -14,9 +14,3 @@
 @use "module_group.scss";
 
 /* unset so we can style everything from the ground up. */
-
-* {
-  all: unset;
-  font-size: 16px;
-  font-family: "JetBrainsMono Nerd Font Propo", monospace;
-}
