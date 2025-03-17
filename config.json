@@ -18,7 +18,8 @@
 		"step_size": 5
 	},
 	"cava": {
-		"bars": 10
+		"bars": 10,
+		"color": "#89b4fa"
 	},
 	"click_counter": {
 		"count": 0
