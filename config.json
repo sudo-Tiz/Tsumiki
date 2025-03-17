@@ -269,7 +269,6 @@
 			"scaling": 100,
 			"opacity": 80,
 			"border-radius": "10px",
-			"enable_border": true,
 			"border": {
 				"width": "1px"
 			},

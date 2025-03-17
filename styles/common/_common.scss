@@ -26,7 +26,7 @@ label {
     $transparency-value:( 1 - $bar-opacity-ratio) * 100%;
     background-color: color.mix(theme.$bar-background, transparent, $transparency-value);
     padding: 0.6em 0.8em 0.6em 0.8em;
-    border-radius: variable.$radius;
+    border-radius: variable.$bar-border-radius;
   }
 }
 
