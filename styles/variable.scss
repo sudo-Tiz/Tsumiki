@@ -8,13 +8,15 @@ $quicksettings-width: 370px;
 
 $radius-large: 16px;
 
+$radius: 10px;  // TODO: Change to settings.$radius
+
 $border-color: theme.$surface-disabled;
 $border: settings.$border-width solid $border-color;
 
 $active-gradient: linear-gradient(
   to right,
   theme.$background-dark,
-  color.adjust(theme.$background-dark, $lightness: -4%)
+  color.mix(theme.$background-dark, black, 4%)
 );
 
 $text-shadow: 2pt 2pt 2pt theme.$shadow-color;
@@ -23,8 +25,8 @@ $box-shadow: 2pt 2pt 2pt 0 theme.$shadow-color;
 $popover-padding: settings.$padding * 1.6;
 $popover-radius: 0;
 
-@if settings.$radius !=0 {
-  $popover-radius: settings.$radius + $popover-padding;
+@if $radius !=0 {
+  $popover-radius: $radius + $popover-padding;
 }
 
-$popover-border-color: color.adjust($border-color, $alpha: -0.95);
+$popover-border-color: color.mix($border-color, transparent, 5%);
