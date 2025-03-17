@@ -148,7 +148,7 @@
 		"debug": true,
 		"bar_style": "default",
 		"location": "top",
-		"widget_style": "wave2"
+		"widget_style": "default"
 	},
 	"power": {
 		"icon": "󰐥",
@@ -218,7 +218,13 @@
 		"icon_size": 22
 	},
 	"theme": {
-		"name": "catpuccin-mocha"
+		"name": "catpuccin-mocha",
+		"font-family": "JetBrainsMono Nerd Font Propo",
+		"font-size": "16px",
+		"radius": "10px",
+		"padding": "7pt",
+		"spacing": "12pt",
+		"border-width": "1px"
 	},
 	"theme_switcher": {
 		"icon": "",

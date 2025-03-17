@@ -1,16 +1,17 @@
 @use "sass:color";
+@use "settings";
+@forward "settings";
 @use "theme.scss";
 
-$radius: 10px;
-$radius-large: 100px;
-$padding: 7pt;
-$spacing: 12pt;
 
 $quicksettings-width: 370px;
 
-$border-width: 1px;
+
+$radius-large: 100px;
+
 $border-color: theme.$surface-disabled;
-$border: $border-width solid $border-color;
+$border: settings.$border-width solid $border-color;
+
 $active-gradient: linear-gradient(
   to right,
   theme.$background-dark,
@@ -20,11 +21,11 @@ $active-gradient: linear-gradient(
 $text-shadow: 2pt 2pt 2pt theme.$shadow-color;
 $box-shadow: 2pt 2pt 2pt 0 theme.$shadow-color;
 
-$popover-padding: $padding * 1.6;
+$popover-padding: settings.$padding * 1.6;
 $popover-radius: 0;
 
-@if $radius !=0 {
-  $popover-radius: $radius + $popover-padding;
+@if settings.$radius !=0 {
+  $popover-radius: settings.$radius + $popover-padding;
 }
 
 $popover-border-color: color.adjust($border-color, $alpha: -0.95);

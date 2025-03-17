@@ -5,6 +5,12 @@
 @use "../theme.scss";
 @use "../variable.scss";
 
+* {
+  all: unset;
+  font-size: variable.$font-size;
+  font-family: variable.$font-family;
+}
+
 %debug {
   border: 1px solid red;
 }
