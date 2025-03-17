@@ -114,19 +114,20 @@ label {
 tooltip {
   @extend %unset;
   background-color: theme.$background-dark;
-  border-radius: variable.$radius;
+  border-radius: variable.$tooltip-radius;
   box-shadow: 0 0 3px 0 theme.$shadow-color;
   animation: tooltipShow 0.25s cubic-bezier(0.5, 0.25, 0, 1);
 
   label {
     @extend %unset;
     color: theme.$text-main;
-    font-weight: normal;
+    font-weight: variable.$tooltip-font-weight;
   }
 }
 
 tooltip > * {
   padding: 0.125em 0.25em;
+  padding: variable.$tooltip-padding-y variable.$tooltip-padding-x;
 }
 
 menu {
