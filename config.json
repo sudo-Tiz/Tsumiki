@@ -262,13 +262,13 @@
 			"font-size": "0.9rem",
 			"font-weight": 700,
 			"padding_x": "0.25",
-			"padding_y": " 0.125em"
+			"padding_y": "0.125em"
 		},
 		"bar": {
 			"buttons": {
 				"radius": "1em",
 				"padding_x": "0",
-				"padding_y": " 1.25em"
+				"padding_y": "1.25em"
 			}
 		}
 	},
