@@ -122,13 +122,43 @@ check_opensuse_updates() {
 
 update_arch() {
     command="
-    fastfetch
     yay -Syu
-    flatpak update || true
+    flatpak update -y || true
     read -n 1 -p 'Press any key to continue...'
     "
     kitty --title systemupdate sh -c "${command}"
 }
+
+
+update_ubuntu() {
+    command="
+    sudo apt upgrade -y
+    flatpak update -y || true
+    read -n 1 -p 'Press any key to continue...'
+    "
+    kitty --title systemupdate sh -c "${command}"
+}
+
+
+update_fedora() {
+    command="
+    sudo dnf upgrade --assumeyes
+    flatpak update -y || true
+    read -n 1 -p 'Press any key to continue...'
+    "
+    kitty --title systemupdate sh -c "${command}"
+}
+
+update_opensuse() {
+    command="
+    sudo zypper update -y
+    flatpak update -y || true
+    read -n 1 -p 'Press any key to continue...'
+    "
+    kitty --title systemupdate sh -c "${command}"
+}
+
+
 
 
 case "$1" in
@@ -157,7 +187,7 @@ case "$1" in
     if [ -z "$2" ]; then  # If second argument is null (not provided)
         check_opensuse_updates
     else
-        update_arch
+        update_opensuse
     fi
     ;;
 *)
