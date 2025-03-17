@@ -8,7 +8,8 @@
 * {
   all: unset;
   font-size: variable.$font-size;
-  font-family: variable.$font-family;
+  font-family: variable.$font-name;
+  font-weight: variable.$font-weight;
 }
 
 %debug {
@@ -35,7 +36,7 @@ label {
 .panel-box,
 .panel-button {
   background-color: theme.$background-dark;
-  border-radius: variable.$radius-large;
+  border-radius: variable.$bar-buttons-radius;
 }
 
 .default {
@@ -50,7 +51,7 @@ label {
 }
 
 .panel-button {
-  padding: 0 1.25em;
+  padding: variable.$bar-buttons-padding-x variable.$bar-buttons-padding-y;
 
   label {
     color: theme.$text-main;
