@@ -5,8 +5,7 @@ from fabric.widgets.label import Label
 
 import utils.functions as helpers
 from shared import ButtonWidget
-from utils.exceptions import ExecutableNotFoundError
-from utils.widget_settings import BarConfig
+from utils import BarConfig, ExecutableNotFoundError
 
 
 class CavaWidget(ButtonWidget):

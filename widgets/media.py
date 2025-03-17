@@ -19,7 +19,7 @@ from loguru import logger
 
 from services import MprisPlayer, MprisPlayerManager
 from shared import Animator, CircleImage, HoverButton
-from utils.constants import APP_CACHE_DIRECTORY
+from utils import APP_CACHE_DIRECTORY
 from utils.functions import ensure_dir_exists
 from utils.widget_utils import setup_cursor_hover
 

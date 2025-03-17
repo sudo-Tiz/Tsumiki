@@ -6,8 +6,7 @@ from fabric import Signal
 from fabric.notifications import Notification, Notifications
 from loguru import logger
 
-from utils.colors import Colors
-from utils.constants import NOTIFICATION_CACHE_FILE
+from utils import NOTIFICATION_CACHE_FILE, Colors
 
 
 class CustomNotifications(Notifications):

@@ -11,9 +11,9 @@ from gi.repository import Gtk
 
 from services import WeatherService
 from shared import ButtonWidget, PopOverWindow, Separator
+from utils import BarConfig
 from utils.functions import convert_seconds_to_milliseconds
 from utils.icons import weather_icons
-from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon
 
 

@@ -17,7 +17,7 @@ from shared import (
     PopOverWindow,
     QuickSubToggle,
 )
-from utils.widget_settings import BarConfig
+from utils import BarConfig
 from utils.widget_utils import (
     get_audio_icon_name,
     get_brightness_icon_name,

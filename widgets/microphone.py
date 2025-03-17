@@ -2,7 +2,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
 from shared import ButtonWidget
-from utils.widget_settings import BarConfig
+from utils import BarConfig
 from utils.widget_utils import text_icon
 
 MIC_ON_ICON = "󰍬"

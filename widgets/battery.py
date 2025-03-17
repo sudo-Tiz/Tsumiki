@@ -4,8 +4,8 @@ from fabric.widgets.label import Label
 
 from services import battery_service
 from shared import ButtonWidget
+from utils import BarConfig
 from utils.functions import format_time
-from utils.widget_settings import BarConfig
 
 
 class BatteryWidget(ButtonWidget):

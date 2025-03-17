@@ -10,8 +10,7 @@ from gi.repository import GdkPixbuf, GLib, Gtk
 from loguru import logger
 
 from shared import BoxWidget
-from utils.colors import Colors
-from utils.widget_settings import BarConfig
+from utils import BarConfig, Colors
 
 
 class PagerClient(TypedDict):

@@ -18,10 +18,9 @@ import utils.constants as constants
 import utils.functions as helpers
 from services import notification_service
 from shared import ButtonWidget, CustomImage, PopOverWindow, Separator
-from utils.colors import Colors
+from utils import BarConfig, Colors
 from utils.functions import uptime
 from utils.icons import icons
-from utils.widget_settings import BarConfig
 from utils.widget_utils import get_icon, setup_cursor_hover, util_fabricator
 
 

@@ -2,9 +2,8 @@ from fabric.utils import exec_shell_command_async, get_relative_path
 from gi.repository import Gdk
 
 from shared import ButtonWidget
-from utils.exceptions import ExecutableNotFoundError
+from utils import BarConfig, ExecutableNotFoundError
 from utils.functions import executable_exists
-from utils.widget_settings import BarConfig
 
 
 class HyprPickerWidget(ButtonWidget):

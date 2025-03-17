@@ -5,7 +5,7 @@ from urllib.error import HTTPError
 
 from loguru import logger
 
-from utils.colors import Colors
+from utils import Colors
 from utils.functions import ttl_lru_cache
 
 # Create an SSLContext that ignores certificate validation

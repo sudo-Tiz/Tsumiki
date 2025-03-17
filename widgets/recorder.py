@@ -4,10 +4,8 @@ from fabric.widgets.image import Image
 
 from services import ScreenRecorder
 from shared import ButtonWidget, LottieAnimation, LottieAnimationWidget
-from utils import icons
-from utils.exceptions import ExecutableNotFoundError
+from utils import BarConfig, ExecutableNotFoundError, icons
 from utils.functions import executable_exists
-from utils.widget_settings import BarConfig
 
 
 class RecorderWidget(ButtonWidget):

@@ -4,7 +4,7 @@ from fabric.widgets.label import Label
 from loguru import logger
 
 from shared import ButtonWidget
-from utils.widget_settings import BarConfig
+from utils import BarConfig
 from utils.widget_utils import text_icon
 
 

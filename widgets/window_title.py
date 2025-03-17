@@ -5,8 +5,7 @@ from fabric.utils import FormattedString, truncate
 from fabric.widgets.box import Box
 
 from shared import ButtonWidget
-from utils.constants import WINDOW_TITLE_MAP
-from utils.widget_settings import BarConfig
+from utils import WINDOW_TITLE_MAP, BarConfig
 
 
 class WindowTitleWidget(ButtonWidget):

@@ -3,8 +3,8 @@ import os
 from fabric.utils import get_relative_path
 
 from shared import ButtonWidget
+from utils import BarConfig
 from utils.functions import copy_theme, send_notification
-from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon
 
 

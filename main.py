@@ -5,10 +5,13 @@ from loguru import logger
 
 import utils.functions as helpers
 from modules import NotificationPopup, OSDContainer, StatusBar
-from utils.colors import Colors
-from utils.config import widget_config
-from utils.constants import APP_CACHE_DIRECTORY, APPLICATION_NAME
-from utils.exceptions import ExecutableNotFoundError
+from utils import (
+    APP_CACHE_DIRECTORY,
+    APPLICATION_NAME,
+    Colors,
+    ExecutableNotFoundError,
+    widget_config,
+)
 
 
 @cooldown(2)

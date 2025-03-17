@@ -4,8 +4,8 @@ from fabric.utils import exec_shell_command_async, get_relative_path
 from gi.repository import Gdk, Gtk
 
 from shared import ButtonWidget
+from utils import BarConfig
 from utils.functions import ttl_lru_cache
-from utils.widget_settings import BarConfig
 
 
 class OCRWidget(ButtonWidget):

@@ -3,7 +3,7 @@ from fabric.utils import FormattedString, truncate
 from fabric.widgets.box import Box
 
 from shared import ButtonWidget
-from utils.widget_settings import BarConfig
+from utils import BarConfig
 from utils.widget_utils import text_icon
 
 

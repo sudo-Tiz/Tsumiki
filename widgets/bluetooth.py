@@ -5,7 +5,7 @@ from fabric.widgets.label import Label
 
 import utils.icons as icons
 from shared import ButtonWidget
-from utils.widget_settings import BarConfig
+from utils import BarConfig
 
 
 class BlueToothWidget(ButtonWidget):

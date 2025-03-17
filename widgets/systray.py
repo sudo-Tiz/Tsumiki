@@ -5,7 +5,7 @@ from fabric.widgets.image import Image
 from gi.repository import Gdk, GdkPixbuf, GLib, Gray, Gtk
 
 from shared import ButtonWidget, PopOverWindow, Separator
-from utils.widget_settings import BarConfig
+from utils import BarConfig
 
 gi.require_version("Gray", "0.1")
 

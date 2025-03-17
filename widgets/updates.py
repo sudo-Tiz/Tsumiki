@@ -11,10 +11,8 @@ from fabric.widgets.label import Label
 from loguru import logger
 
 from shared import ButtonWidget
-from utils.colors import Colors
+from utils import BarConfig, Colors, run_in_thread
 from utils.functions import convert_seconds_to_milliseconds
-from utils.thread import run_in_thread
-from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon
 
 

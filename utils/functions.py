@@ -17,11 +17,10 @@ from fabric.utils import (
 from gi.repository import Gdk, Gio, GLib, Gtk
 from loguru import logger
 
-from utils.thread import run_in_thread
-
 from .colors import Colors
 from .constants import named_colors
 from .icons import distro_text_icons
+from .thread import run_in_thread
 
 gi.require_version("Gio", "2.0")
 

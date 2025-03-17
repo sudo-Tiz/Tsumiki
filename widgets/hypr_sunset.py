@@ -1,5 +1,5 @@
 from shared import CommandSwitcher
-from utils.widget_settings import BarConfig
+from utils import BarConfig
 
 
 class HyprSunsetWidget(CommandSwitcher):
