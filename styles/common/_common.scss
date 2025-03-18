@@ -5,12 +5,7 @@
 @use "../theme.scss";
 @use "../variable.scss";
 
-* {
-  all: unset;
-  font-size: variable.$font-size;
-  font-family: variable.$font-name;
-  font-weight: variable.$font-weight;
-}
+
 
 %debug {
   border: 1px solid red;
@@ -115,20 +110,22 @@ label {
 
 tooltip {
   @extend %unset;
+  opacity: variable.$bar-menus-opacity * 0.01;
   background-color: theme.$background-dark;
-  border-radius: variable.$tooltip-border-radius;
+  border-radius: variable.$bar-menus-tooltip-border-radius;
   box-shadow: 0 0 3px 0 theme.$shadow-color;
   animation: tooltipShow 0.25s cubic-bezier(0.5, 0.25, 0, 1);
+
 
   label {
     @extend %unset;
     color: theme.$text-main;
-    font-weight: variable.$tooltip-font-weight;
+    font-weight: variable.$bar-menus-tooltip-font-weight;
   }
 }
 
 tooltip > * {
-  padding: variable.$tooltip-padding-y variable.$tooltip-padding-x;
+  padding: variable.$bar-menus-tooltip-padding-y variable.$bar-menus-tooltip-padding-x;
 }
 
 menu {
@@ -396,3 +393,6 @@ menu#ocr-menu {
   @extend %title_1;
   @extend %desktop-widget;
 }
+
+
+

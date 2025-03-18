@@ -135,13 +135,12 @@ class SystemTrayWidget(ButtonWidget):
         self.popup_menu = SystemTrayMenu(config=self.config)
 
         self.popup = PopOverWindow(
-            name="popup",
             parent=bar,
             child=self.popup_menu,
             visible=False,
             all_visible=False,
-            margin="0 0 0 0",
             pointing_to=self,
+            margin="0 0 0 0",
         )
 
         # Initialize watcher
