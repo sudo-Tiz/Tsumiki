@@ -13,7 +13,7 @@ $hover-transition: background 0.15s ease-in-out;
     border-radius: 1rem;
     background-color: theme.$background-alt;
     color: theme.$text-main;
-    border: variable.$border-width solid theme.$surface-disabled;
+    border: variable.$border;
     transition: border 100ms ease-in-out;
 
     .notification-header {

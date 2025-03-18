@@ -11,15 +11,13 @@ $radius-large: 9999px;
 $radius: 10px;  // TODO: Change to settings.$radius
 
 $border-color: theme.$surface-disabled;
-$border: settings.$border-width solid $border-color;
+$border: settings.$border;
 
 $active-gradient: linear-gradient(
   to right,
   theme.$background-dark,
   color.mix(theme.$background-dark, black, 4%)
 );
-
-$text-shadow: 2pt 2pt 2pt theme.$shadow-color;
 
 $popover-padding: settings.$padding * 1.6;
 $popover-radius: 0;

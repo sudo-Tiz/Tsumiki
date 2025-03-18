@@ -103,7 +103,7 @@
   trough {
     transition: 200ms;
     border-radius: $radius;
-    border: variable.$border-width solid variable.$border-color;
+    border: variable.$border;
     background-color: $slider-color;
     min-height: $width;
     min-width: $width;
