@@ -250,21 +250,15 @@
 		"name": "catpuccin-mocha",
 		"font": {
 			"name": "JetBrainsMono Nerd Font Propo",
-			"size": "1.05rem",
-			"weight": 600
+			"size": "1rem",
+			"weight": 600,
+			"style": "normal"
 		},
 		"border-radius": "10px",
 		"padding": "7pt",
 		"spacing": "12pt",
 		"border-opacity": 96,
 		"border-width": "1px",
-		"tooltip": {
-			"scaling": 100,
-			"border-radius": "10px",
-			"font-weight": 700,
-			"padding_x": "0.25",
-			"padding_y": "0.125em"
-		},
 		"bar": {
 			"scaling": 100,
 			"opacity": 80,
@@ -272,16 +266,25 @@
 			"border": {
 				"width": "1px"
 			},
-			"menus":{
-
+			"menus": {
+				"shadow": "0 0 0",
+				"opacity": 100,
+				"tooltip": {
+					"scaling": 100,
+					"border-radius": "10px",
+					"font-weight": 700,
+					"padding_x": "0.25",
+					"padding_y": "0.125em"
+				}
 			},
 			"buttons": {
 				"scaling": 100,
+				"opacity": 100, // TODO
 				"border-radius": "1em",
 				"border-width": "1em",
 				"padding_x": "0",
 				"padding_y": "1.25em"
-			}
+			},
 		}
 	},
 	"theme_switcher": {

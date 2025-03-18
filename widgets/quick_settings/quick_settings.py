@@ -370,12 +370,11 @@ class QuickSettingsButtonWidget(ButtonWidget):
 
         popup = PopOverWindow(
             parent=bar,
-            name="popup",
             child=(QuickSettingsMenu(config=self.config),),
             visible=False,
             all_visible=False,
-            margin="-18px 0 0 0",
             pointing_to=self,
+            margin="-18px 0 0 0",
         )
 
         self.audio_icon = Image(style_classes="panel-icon")
