@@ -91,14 +91,14 @@
   background-color: theme.$text-main;
 }
 
-@mixin slider(
-  $width: 11px,
+@mixin slider($width: 11px,
   $slider-width: 0.5em,
   $highlight-color: white,
   $slider: false,
   $radius: variable.$radius,
   $slider-color: theme.$background-dark,
   $min-length: ""
+
 ) {
   trough {
     transition: 200ms;
@@ -116,13 +116,12 @@
 
       &:hover {
         background-color: color.mix($highlight-color,
-          black, 5%
-        );
+            black, 5%);
       }
     }
   }
 
-  @if $min-length != "" {
+  @if $min-length !="" {
     scale {
       min-width: $min-length;
     }
@@ -135,20 +134,20 @@
       box-shadow: 0 0 3px 0 theme.$shadow-color;
       border: variable.$border-width solid transparent;
       transition: 200ms;
-      border-radius: 9999px;
+      border-radius: variable.$radius-large;
       min-height: $width;
       min-width: $width;
       margin: -$slider-width;
 
       &:hover {
         background-color: color.mix(theme.$text-main,
-          black, 10%
-        );
+            black, 10%);
       }
     }
   }
 
   &:disabled {
+
     highlight,
     progress {
       background-color: color.mix(theme.$text-main, transparent, 60%);
@@ -170,7 +169,7 @@
 @mixin switch {
   slider {
     background-color: theme.$background-dark;
-    border-radius: 9999px;
+    border-radius: variable.$radius-large;
     min-width: 24px;
     min-height: 24px;
   }
@@ -181,7 +180,7 @@
 }
 
 @mixin spacing($multiplier: 1, $spacing: variable.$spacing, $rec: false) {
-  &.horizontal > * {
+  &.horizontal>* {
     margin: 0 calc($spacing * $multiplier / 2);
 
     &:first-child {
@@ -193,7 +192,7 @@
     }
   }
 
-  &.vertical > * {
+  &.vertical>* {
     margin: calc($spacing * $multiplier / 2) 0;
 
     &:first-child {
@@ -207,7 +206,7 @@
 
   @if $rec {
     box {
-      &.horizontal > * {
+      &.horizontal>* {
         margin: 0 $spacing * $multiplier / 2;
 
         &:first-child {
@@ -219,7 +218,7 @@
         }
       }
 
-      &.vertical > * {
+      &.vertical>* {
         margin: $spacing * $multiplier / 2 0;
 
         &:first-child {
