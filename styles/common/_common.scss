@@ -112,7 +112,7 @@ label {
 
 tooltip {
   @extend %unset;
-  opacity: variable.$bar-menus-opacity * 0.01;
+  opacity: variable.$bar-menus-tooltip-opacity * 0.01;
   background-color: theme.$background-dark;
   border-radius: variable.$bar-menus-tooltip-border-radius;
   box-shadow: 0 0 3px 0 theme.$shadow-color;
