@@ -51,6 +51,7 @@ label {
 
 .panel-button {
   padding: variable.$bar-buttons-padding-x variable.$bar-buttons-padding-y;
+  opacity: variable.$bar-buttons-opacity * 0.01;
 
   label {
     color: theme.$text-main;
