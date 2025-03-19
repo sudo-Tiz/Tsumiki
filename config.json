@@ -267,7 +267,7 @@
 				"width": "1px"
 			},
 			"menus": {
-				"shadow": "0 0 0",
+				"scaling": 100,
 				"opacity": 100,
 				"tooltip": {
 					"scaling": 100,
