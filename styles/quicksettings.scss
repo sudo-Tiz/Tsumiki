@@ -76,7 +76,7 @@ $slider-height: 12px;
 
         button {
           margin: 0 5px;
-          background-color: lighten($color: theme.$background, $amount: 10%);
+          background-color: color.mix(theme.$background,white, 90%);
           border-radius: variable.$radius-large;
           padding: common.toEm(4);
 
