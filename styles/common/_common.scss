@@ -597,37 +597,3 @@ menu#ocr-menu {
   border: if(variable.$bar-widgets-workspaces-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-workspaces-border-width;
 }
-
-
-#dock-icon {
-  padding: 0px 2px 0px 2px;
-}
-
-#dock {
-  padding: 10px;
-  background-color: theme.$background-dark;
-  border:theme.$text-muted;
-  border-radius: 12px;
-  margin-bottom: 2px;
-}
-
-#dock-separator {
-  border-right: 1px solid theme.$text-muted;
-}
-
-#dock-app-button {
-  padding: 2px;
-  margin-left: 2px;
-  margin-right: 2px;
-  border-radius: 12px;
-}
-
-.show-dock {
-  opacity: 1;
-  margin: 0;
-}
-
-.hide-dock {
-  opacity: 1;
-  margin: -80px;
-}

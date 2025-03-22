@@ -186,7 +186,8 @@ DEFAULT_CONFIG = {
         "dock": {
             "enabled": False,
             "pinned_apps": [],
-            "icon_size": 14,
+            "icon_size": 30,
+            "vertical": False,
         },
         "desktop_clock": {
             "enabled": True,

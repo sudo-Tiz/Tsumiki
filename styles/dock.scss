@@ -1,0 +1,46 @@
+
+@use "theme.scss";
+
+#dock {
+  background-color: theme.$background-dark;
+  padding: 8px;
+  margin: 8px 8px 7px 8px;
+  border-radius: 20px;
+  transition: all 0.25s cubic-bezier(0.5, 0.25, 0, 1);
+}
+
+#dock.occluded {
+  margin: 10px;
+  opacity: 0;
+}
+
+#dock-separator {
+  padding: 1px;
+  margin: 8px 0;
+  border-radius: 16px;
+  background-color: theme.$background-alt;
+}
+
+#dock-app-button {
+  padding: 4px;
+  border-radius: 12px;
+}
+
+#dock-app-button:hover,
+#dock-app-button:hover.instance {
+  background-color: theme.$background-alt;
+  border-top: 1px solid theme.$background-dark;
+  padding-top: 3px;
+}
+
+#dock-app-button:active,
+#dock-app-button:active.instance {
+  background-color: theme.$background-dark;
+}
+
+#dock-app-button.instance {
+  background: linear-gradient(to top, transparent, theme.$accent-teal);
+  border-bottom: 1px solid theme.$text-muted;
+  border-top: 1px solid theme.$text-muted;
+  padding: 3px 4px;
+}

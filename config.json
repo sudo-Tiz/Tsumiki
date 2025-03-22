@@ -160,11 +160,13 @@
 		},
 		"dock": {
 			"enabled": true,
-			"icon_size": 12,
+			"icon_size": 30,
+			"vertical": false,
 			"pinned_apps": [
-				"firefox",
-				"kitty",
-				"vivaldi"
+				"vivaldi",
+				"wezterm",
+				"persepolis",
+				"code"
 			]
 		},
 
