@@ -50,7 +50,7 @@ class Dock(Window):
         super().__init__(
             name="dock-window",
             layer="top",
-            anchor="bottom center" if not self.config["vertical"] else "right center",
+            anchor="bottom center" if not self.config["vertical"] else "left center",
             margin="-8px 0 -4px 0" if not self.config["vertical"] else "0 -4px 0 -8px",
             exclusivity="none",
             **kwargs,
