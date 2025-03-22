@@ -52,7 +52,7 @@ class DateMenuNotification(EventBox):
             name="notification",
             h_expand=True,
             orientation="v",
-            style="border: none;",
+            style="border: 0;",
         )
 
         self.revealer = Revealer(

@@ -4,7 +4,7 @@
 
 %unset {
   outline: none;
-  border: none;
+  border: 0;
   box-shadow: none;
 }
 
@@ -19,7 +19,7 @@
 }
 
 %desktop-widget {
-  transition: color 0.5s ease;
+  transition: color .5s ease;
   color: color.mix(theme.$text-main, transparent, 70%);
   font-family: "Jost*", sans-serif;
 }
@@ -92,7 +92,7 @@
 }
 
 @mixin slider($width: 11px,
-  $slider-width: 0.5em,
+  $slider-width: .5em,
   $highlight-color: white,
   $slider: false,
   $radius: variable.$radius,

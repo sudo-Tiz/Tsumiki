@@ -12,13 +12,12 @@
 
 #panel {
   &-inner {
-    $bar-opacity-ratio: variable.$bar-opacity * 0.01;
+    $bar-opacity-ratio: variable.$bar-opacity * .01;
     $transparency-value: (
       1 - $bar-opacity-ratio) * 100%;
     background-color: color.mix(theme.$bar-background, transparent, $transparency-value
     );
   padding: variable.$bar-padding_y variable.$bar-padding_x;
-  border-radius: variable.$bar-border-radius;
 }
 }
 
@@ -39,14 +38,14 @@
 
 .panel-box {
   border-radius: variable.$radius-large;
-  padding: 0.1em 0.9em;
+  padding: .1em .9em;
   color: theme.$text-main;
   font-weight: 700;
 }
 
 .panel-button {
   padding: variable.$bar-buttons-padding-x variable.$bar-buttons-padding-y;
-  opacity: variable.$bar-buttons-opacity * 0.01;
+  opacity: variable.$bar-buttons-opacity * .01;
   border: if(variable.$bar-buttons-border-enabled, variable.$border, none);
   border-width: variable.$bar-buttons-border-width;
 
@@ -104,17 +103,17 @@
 #language,
 #window,
 #date-time {
-  padding: 0.19em 0.625em;
+  padding: .19em .625em;
   font-weight: 700;
 }
 
 tooltip {
   @extend %unset;
-  opacity: variable.$bar-menus-tooltip-opacity * 0.01;
+  opacity: variable.$bar-menus-tooltip-opacity * .01;
   background-color: theme.$background-dark;
   border-radius: variable.$bar-menus-tooltip-border-radius;
   box-shadow: if(variable.$bar-menus-tooltip-shadow-enabled, 0 0 3px 0 theme.$shadow-color, none);
-  animation: tooltipShow 0.25s cubic-bezier(0.5, 0.25, 0, 1);
+  animation: tooltipShow .25s cubic-bezier(.5, .25, 0, 1);
   border: if(variable.$bar-menus-tooltip-border-enabled, variable.$border, none);
 
 
@@ -139,10 +138,11 @@ menu {
 }
 
 menuitem {
-  transition: background-color 75ms cubic-bezier(0, 0, 0.2, 1);
-  min-height: 20px;
+  transition: background-color 75ms cubic-bezier(0, 0, .2, 1);
+  min-height: 30px;
   min-width: 40px;
   background-clip: border-box;
+
 
   arrow {
     min-height: 16px;
@@ -157,6 +157,12 @@ menuitem {
     background-color: theme.$background;
   }
 }
+
+menu>menuitem:hover {
+  background-color: theme.$surface-highlight;
+}
+
+
 
 menu>arrow {
   min-height: 16px;
@@ -187,8 +193,8 @@ radio {
   background-color: theme.$text-main;
   border-radius: variable.$radius-large;
   transition:
-    all 75ms cubic-bezier(0, 0, 0.2, 1),
-    box-shadow 150ms cubic-bezier(0, 0, 0.2, 1);
+    all 75ms cubic-bezier(0, 0, .2, 1),
+    box-shadow 150ms cubic-bezier(0, 0, .2, 1);
 }
 
 check {
@@ -236,7 +242,7 @@ radio:indeterminate:active {
 }
 
 switch {
-  transition: all 75ms cubic-bezier(0, 0, 0.2, 1);
+  transition: all 75ms cubic-bezier(0, 0, .2, 1);
   margin: functions.toEm(4) 0;
   border-radius: variable.$radius-large;
   background-color: color.mix(theme.$background, white, 90%);
@@ -245,14 +251,14 @@ switch {
   color: transparent;
 
   slider {
-    transition: all 75ms cubic-bezier(0, 0, 0.2, 1);
+    transition: all 75ms cubic-bezier(0, 0, .2, 1);
     min-width: 12px;
     min-height: 12px;
     margin: functions.toEm(4);
     border-radius: variable.$radius-large;
     outline: none;
     background-color: theme.$text-main;
-    border: none;
+    border: 0;
     color: transparent;
   }
 
@@ -261,7 +267,7 @@ switch {
   }
 
   &:disabled {
-    opacity: 0.5;
+    opacity: .5;
   }
 }
 
@@ -323,7 +329,7 @@ scrollbar {
   background-color: theme.$text-main;
   border-radius: variable.$radius;
   margin-left: 8px;
-  min-width: 0.3em;
+  min-width: .3em;
 }
 
 #corner {
@@ -347,7 +353,7 @@ scrollbar {
 }
 
 .cover {
-  min-height: 0.8em;
+  min-height: .8em;
   min-width: 3em;
   border-radius: variable.$radius;
   background-position: center;
@@ -357,10 +363,10 @@ scrollbar {
 
 // Menu styling
 menu#ocr-menu {
-  padding: 0.45em;
+  padding: .45em;
 
   menuitem {
-    padding: 0.25em 1em;
+    padding: .25em 1em;
     border-radius: variable.$radius;
 
     &:hover {

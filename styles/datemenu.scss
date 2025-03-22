@@ -38,7 +38,7 @@
       }
 
       #clear-button {
-        padding: variable.$padding * 0.5 variable.$padding;
+        padding: variable.$padding * .5 variable.$padding;
         border: variable.$border;
         border-radius: variable.$radius;
         background-color: theme.$background;
@@ -120,12 +120,12 @@
           box-shadow:
             inset 0 -5px 0 0 color.mix(theme.$ws-active, transparent, 50%),
             inset 0 0 0 1px theme.$ws-active;
-          border-radius: variable.$radius * 0.6;
+          border-radius: variable.$radius * .6;
         }
 
         &.header {
           background-color: transparent;
-          border: none;
+          border: 0;
           color: theme.$accent-blue;
         }
 
@@ -138,8 +138,8 @@
           color: color.mix(theme.$text-main, transparent, 10%);
         }
 
-        font-size: 0.98em;
-        padding: 0.28em;
+        font-size: .98em;
+        padding: .28em;
       }
     }
   }
