@@ -58,9 +58,14 @@ if __name__ == "__main__":
         general_options["screen_corners"]
         and general_options["screen_corners"]["enabled"]
     ):
-        from widgets.corners import ScreenCorners
+        from modules.corners import ScreenCorners
 
         windows.append(ScreenCorners(general_options["screen_corners"]["size"]))
+
+    if general_options["dock"] and general_options["dock"]["enabled"]:
+        from modules.dock import Dock
+
+        windows.append(Dock(general_options["dock"]))
 
     if general_options["desktop_clock"] and general_options["desktop_clock"]["enabled"]:
         from widgets.desktop_clock import DesktopClock

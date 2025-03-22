@@ -75,8 +75,14 @@ DesktopClock = TypedDict(
 
 
 ScreenCorners = TypedDict(
-    "DesktopClock",
+    "ScreenCorners",
     {"enabled": bool, "size": int},
+)
+
+
+Dock = TypedDict(
+    "Dock",
+    {"enabled": bool, "icon_size": int, "pinned_apps": List[str]},
 )
 
 
@@ -85,6 +91,7 @@ General = TypedDict(
     "General",
     {
         "screen_corners": ScreenCorners,
+        "dock": Dock,
         "desktop_clock": DesktopClock,
         "check_updates": bool,
         "debug": bool,

@@ -183,6 +183,11 @@ DEFAULT_CONFIG = {
             "enabled": False,
             "size": 20,
         },
+        "dock": {
+            "enabled": False,
+            "pinned_apps": [],
+            "icon_size": 14,
+        },
         "desktop_clock": {
             "enabled": True,
             "anchor": "center",

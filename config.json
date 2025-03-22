@@ -156,8 +156,18 @@
 	"general": {
 		"screen_corners": {
 			"enabled": false,
-			"size": 20
+			"size": 12
 		},
+		"dock": {
+			"enabled": true,
+			"icon_size": 12,
+			"pinned_apps": [
+				"firefox",
+				"kitty",
+				"vivaldi"
+			]
+		},
+
 		"desktop_clock": {
 			"enabled": true,
 			"anchor": "bottom-right",
