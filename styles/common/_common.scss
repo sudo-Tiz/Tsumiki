@@ -142,6 +142,7 @@ menuitem {
   min-height: 30px;
   min-width: 40px;
   background-clip: border-box;
+  border-radius: variable.$radius;
 
 
   arrow {
@@ -161,8 +162,6 @@ menuitem {
 menu>menuitem:hover {
   background-color: theme.$surface-highlight;
 }
-
-
 
 menu>arrow {
   min-height: 16px;

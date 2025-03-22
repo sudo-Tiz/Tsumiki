@@ -311,6 +311,7 @@
 			},
 			"widgets": {
 				"cpu": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -318,6 +319,7 @@
 					}
 				},
 				"memory": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -325,6 +327,7 @@
 					}
 				},
 				"storage": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -332,6 +335,7 @@
 					}
 				},
 				"network_usage": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -339,6 +343,7 @@
 					}
 				},
 				"battery": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -346,6 +351,7 @@
 					}
 				},
 				"bluetooth": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -353,6 +359,7 @@
 					}
 				},
 				"brightness": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -360,6 +367,7 @@
 					}
 				},
 				"cava": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -367,6 +375,7 @@
 					}
 				},
 				"click_counter": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -374,6 +383,7 @@
 					}
 				},
 				"datetime_menu": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -381,6 +391,7 @@
 					}
 				},
 				"desktop_clock": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -388,6 +399,7 @@
 					}
 				},
 				"hypr_idle": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -395,6 +407,7 @@
 					}
 				},
 				"hypr_picker": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -402,6 +415,7 @@
 					}
 				},
 				"hypr_sunset": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -409,6 +423,7 @@
 					}
 				},
 				"keyboard_layout": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -416,6 +431,7 @@
 					}
 				},
 				"language": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -423,6 +439,7 @@
 					}
 				},
 				"microphone": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -430,6 +447,7 @@
 					}
 				},
 				"mpris": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -437,6 +455,7 @@
 					}
 				},
 				"ocr": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -444,6 +463,7 @@
 					}
 				},
 				"overview": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -451,6 +471,7 @@
 					}
 				},
 				"power_button": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -458,6 +479,7 @@
 					}
 				},
 				"recorder": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -465,6 +487,7 @@
 					}
 				},
 				"stop_watch": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -472,6 +495,7 @@
 					}
 				},
 				"submap": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -479,6 +503,7 @@
 					}
 				},
 				"systray": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -486,6 +511,7 @@
 					}
 				},
 				"taskbar": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -493,6 +519,7 @@
 					}
 				},
 				"theme": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -500,6 +527,7 @@
 					}
 				},
 				"updates": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -507,6 +535,7 @@
 					}
 				},
 				"volume": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -514,6 +543,7 @@
 					}
 				},
 				"weather": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -521,6 +551,7 @@
 					}
 				},
 				"window_title": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -528,6 +559,7 @@
 					}
 				},
 				"workspaces": {
+					"spacing": ".9em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
