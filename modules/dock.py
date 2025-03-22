@@ -165,12 +165,6 @@ class Dock(Window):
         # Direct match after normalization
         return norm1 == norm2
 
-    def on_drag_begin(self, widget, drag_context):
-        """Handle drag begin event by setting the drag lock flag."""
-        self._drag_in_progress = True
-        # Set custom drag icon using the widget surface
-        Gtk.drag_set_icon_surface(drag_context, create_surface_from_widget(widget))
-
     def _on_hover_enter(self, *args):
         """Handle hover over bottom activation area"""
         self.toggle_dock(show=True)
