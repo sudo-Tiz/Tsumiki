@@ -50,8 +50,10 @@ class Dock(Window):
         super().__init__(
             name="dock-window",
             layer="top",
-            anchor="bottom center" if not self.config["vertical"] else "left center",
-            margin="-8px 0 -4px 0" if not self.config["vertical"] else "0 -4px 0 -8px",
+            anchor=self.config["anchor"],
+            margin="-8px 0 -4px 0"
+            if self.config["anchor"] == "bottom-center"
+            else "0 -4px 0 -8px",
             exclusivity="none",
             **kwargs,
         )
@@ -74,7 +76,7 @@ class Dock(Window):
         # Set up UI containers
         self.view = Box(
             name="viewport",
-            orientation="h" if not self.config["vertical"] else "v",
+            orientation="h" if self.config["anchor"] == "bottom-center" else "v",
             spacing=4,
         )
         self.wrapper = Box(name="dock", orientation="v", children=[self.view])
@@ -196,7 +198,7 @@ class Dock(Window):
 
         occlusion_region = (
             ("bottom", self.OCCLUSION)
-            if not self.config["vertical"]
+            if self.config["anchor"] == "bottom-center"
             else ("right", self.OCCLUSION)
         )
         # Only add occlusion style if not dragging an icon.
@@ -620,9 +622,11 @@ class Dock(Window):
         if pinned_buttons and open_buttons:
             children += [
                 Box(
-                    orientation="v" if not self.config["vertical"] else "h",
-                    v_expand=not self.config["vertical"],
-                    h_expand=self.config["vertical"],
+                    orientation="v"
+                    if self.config["anchor"] == "bottom-center"
+                    else "h",
+                    v_expand=self.config["anchor"] != "bottom-center",
+                    h_expand=self.config["anchor"] == "bottom-center",
                     name="dock-separator",
                 )
             ]
@@ -671,7 +675,7 @@ class Dock(Window):
             return True
         occlusion_region = (
             ("bottom", self.OCCLUSION)
-            if not self.config["vertical"]
+            if self.config["anchor"] == "bottom-center"
             else ("right", self.OCCLUSION)
         )
         if check_occlusion(occlusion_region) or not self.view.get_children():

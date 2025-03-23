@@ -187,7 +187,7 @@ DEFAULT_CONFIG = {
             "enabled": False,
             "pinned_apps": [],
             "icon_size": 30,
-            "vertical": False,
+            "anchor": "bottom-center",
         },
         "desktop_clock": {
             "enabled": True,

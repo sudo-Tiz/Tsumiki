@@ -161,7 +161,7 @@
 		"dock": {
 			"enabled": true,
 			"icon_size": 30,
-			"vertical": true,
+			"anchor": "bottom-center",
 			"pinned_apps": [
 				"vivaldi",
 				"wezterm",
