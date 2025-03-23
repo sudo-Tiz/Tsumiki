@@ -157,6 +157,31 @@
 						}
 					}
 				},
+				"dock": {
+					"type": "object",
+					"properties": {
+						"enabled": {
+							"type": "boolean",
+							"description": "Determines whether screen corners are enabled."
+						},
+						"icon_size": {
+							"type": "integer",
+							"description": "Specifies the size of the dock icons."
+						},
+						"anchor": {
+							"type": "string",
+							"enum": ["bottom-center", "left-center", "right-center"],
+							"description": "Specifies the anchor position of the dock."
+						},
+						"pinned_apps": {
+							"type": "array",
+							"items": {
+								"type": "string",
+								"description": "List of pinned applications."
+							}
+						}
+					}
+				},
 				"desktop_clock": {
 					"type": "object",
 					"properties": {
