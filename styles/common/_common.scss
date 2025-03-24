@@ -498,9 +498,9 @@ menu#ocr-menu {
   border: if(variable.$bar-widgets-hypr_idle-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-hypr_idle-border-width;
 
-      #nerd-icon.panel-icon {
-          font-size: variable.$bar-widgets-hypr_idle-icon_size;
-        }
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-hypr_idle-icon_size;
+  }
 }
 
 #hypr_picker {
@@ -508,9 +508,9 @@ menu#ocr-menu {
   border: if(variable.$bar-widgets-hypr_picker-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-hypr_picker-border-width;
 
-      #nerd-icon.panel-icon {
-          font-size: variable.$bar-widgets-hypr_picker-icon_size;
-        }
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-hypr_picker-icon_size;
+  }
 }
 
 #hypr_sunset {
@@ -518,9 +518,9 @@ menu#ocr-menu {
   border: if(variable.$bar-widgets-hypr_sunset-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-hypr_sunset-border-width;
 
-    #nerd-icon.panel-icon {
-        font-size: variable.$bar-widgets-hypr_sunset-icon_size;
-      }
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-hypr_sunset-icon_size;
+  }
 }
 
 #keyboard_layout {
@@ -563,6 +563,11 @@ menu#ocr-menu {
   border-radius: variable.$bar-widgets-ocr-border-radius;
   border: if(variable.$bar-widgets-ocr-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-ocr-border-width;
+
+  label{
+    font-size: variable.$bar-widgets-ocr-icon_size;
+  }
+
 }
 
 #overview {
@@ -576,9 +581,9 @@ menu#ocr-menu {
   border: if(variable.$bar-widgets-power_button-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-power_button-border-width;
 
-    #nerd-icon.panel-icon {
-        font-size: variable.$bar-widgets-power_button-icon_size;
-      }
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-power_button-icon_size;
+  }
 }
 
 
@@ -657,9 +662,9 @@ menu#ocr-menu {
   border: if(variable.$bar-widgets-weather-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-weather-border-width;
 
-    #nerd-icon.panel-icon {
-        font-size: variable.$bar-widgets-weather-icon_size;
-      }
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-weather-icon_size;
+  }
 }
 
 #window_title {
@@ -686,7 +691,7 @@ menu#ocr-menu {
 #dock {
   padding: 10px;
   background-color: theme.$background-dark;
-  border:theme.$text-muted;
+  border: theme.$text-muted;
   border-radius: 12px;
   margin-bottom: 2px;
 }
