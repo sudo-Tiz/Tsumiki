@@ -3,7 +3,6 @@
 @use "sass:color";
 
 :vars {
-  --surface: #1a1110;
   --surface-bright: #423735;
 }
 
@@ -53,7 +52,7 @@ transition: all .25s cubic-bezier(.5, .25, 0, 1);
 
 #dock-app-button.instance {
   background: linear-gradient(to top, transparent, var(--surface-bright));
-  border-bottom: variable.$dock-border-width solid var(--surface);
+  border-bottom: variable.$dock-border-width solid theme.$shadow-color;
   border-top: variable.$dock-border-width solid theme.$surface-neutral;
   padding: 3px 4px;
 }
