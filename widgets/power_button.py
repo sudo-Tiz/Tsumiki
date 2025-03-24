@@ -130,7 +130,6 @@ class PowerWidget(ButtonWidget):
 
         self.children = text_icon(
             self.config["icon"],
-            self.config["icon_size"],
             props={"style_classes": "panel-icon"},
         )
 

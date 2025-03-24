@@ -22,7 +22,6 @@ class SubMapWidget(ButtonWidget):
         # Create a TextIcon with the specified icon and size
         self.icon = text_icon(
             icon=self.config["icon"],
-            size=self.config["icon_size"],
             props={"style_classes": "panel-icon"},
         )
 

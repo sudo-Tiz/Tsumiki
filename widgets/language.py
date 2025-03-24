@@ -30,7 +30,6 @@ class LanguageWidget(ButtonWidget):
 
         self.icon = text_icon(
             icon=self.config["icon"],
-            size=self.config["icon_size"],
             props={
                 "style_classes": "panel-icon",
             },

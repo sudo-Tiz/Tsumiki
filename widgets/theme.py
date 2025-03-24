@@ -25,7 +25,6 @@ class ThemeSwitcherWidget(ButtonWidget):
 
         self.children = text_icon(
             self.config["icon"],
-            self.config["icon_size"],
             props={"style_classes": "panel-icon"},
         )
         self.set_tooltip_text(self.current_theme)

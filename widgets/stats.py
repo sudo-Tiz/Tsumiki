@@ -33,7 +33,6 @@ class CpuWidget(ButtonWidget):
         # Create a TextIcon with the specified icon and size
         self.text_icon = text_icon(
             icon=self.config["icon"],
-            size=self.config["icon_size"],
             props={"style_classes": "panel-icon"},
         )
 
@@ -117,7 +116,6 @@ class MemoryWidget(ButtonWidget):
         # Create a TextIcon with the specified icon and size
         self.icon = text_icon(
             icon=self.config["icon"],
-            size=self.config["icon_size"],
             props={"style_classes": "panel-icon"},
         )
         self.memory_level_label = Label(
@@ -181,7 +179,6 @@ class StorageWidget(ButtonWidget):
         # Create a TextIcon with the specified icon and size
         self.icon = text_icon(
             icon=self.config["icon"],
-            size=self.config["icon_size"],
             props={"style_classes": "panel-icon"},
         )
 
@@ -243,7 +240,6 @@ class NetworkUsageWidget(ButtonWidget):
         # Create a TextIcon with the specified icon and size
         self.upload_icon = text_icon(
             icon=self.config["upload_icon"],
-            size=self.config["icon_size"],
             props={"style_classes": "panel-icon", "visible": show_upload},
         )
 
@@ -257,7 +253,6 @@ class NetworkUsageWidget(ButtonWidget):
 
         self.download_icon = text_icon(
             icon=self.config["download_icon"],
-            size=self.config["icon_size"],
             props={"style_classes": "panel-icon", "visible": show_download},
         )
 

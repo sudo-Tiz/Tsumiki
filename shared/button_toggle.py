@@ -22,7 +22,6 @@ class CommandSwitcher(ButtonWidget):
         enabled_icon: str,
         disabled_icon: str,
         name: str,
-        icon_size: str = "16px",
         label=True,
         tooltip=True,
         config=None,
@@ -50,7 +49,6 @@ class CommandSwitcher(ButtonWidget):
 
         self.icon = text_icon(
             icon=enabled_icon,
-            size=icon_size,
             props={"style_classes": "panel-icon"},
         )
 

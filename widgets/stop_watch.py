@@ -31,7 +31,6 @@ class StopWatchWidget(ButtonWidget):
 
         self.icon = text_icon(
             icon=self.config["stopped_icon"],
-            size=self.config["icon_size"],
             props={"style_classes": "panel-icon"},
         )
 

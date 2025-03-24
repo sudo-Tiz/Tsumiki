@@ -23,11 +23,6 @@
 			"description": "Specifies the anchor position of the widget."
 		},
 		"baseProperties": {
-			"icon_size": {
-				"type": "string",
-				"pattern": "^[0-9]+px$",
-				"description": "Specifies the size of the widget icon."
-			},
 			"label": {
 				"type": "boolean",
 				"description": "Determines whether the widget has a label."
@@ -721,11 +716,6 @@
 						"type": "string",
 						"description": "Icon name from icon theme"
 					},
-					"icon_size": {
-						"type": "string",
-						"pattern": "^[0-9]+px$",
-						"description": "Size of the power widget icon"
-					},
 					"tooltip": {
 						"type": "boolean",
 						"description": "Determines whether the power widget has a tooltip"
@@ -753,11 +743,6 @@
 					"icon": {
 						"type": "string",
 						"description": "Icon name from icon theme"
-					},
-					"icon_size": {
-						"type": "string",
-						"pattern": "^[0-9]+px$",
-						"description": "Size of the theme switcher icon"
 					},
 					"notify": {
 						"type": "boolean",
@@ -805,11 +790,6 @@
 					"running_icon": {
 						"type": "string",
 						"description": "Icon to display when the stopwatch is running"
-					},
-					"icon_size": {
-						"type": "string",
-						"pattern": "^[0-9]+px$",
-						"description": "Size of the stopwatch icon"
 					}
 				}
 			},
@@ -873,11 +853,6 @@
 			"network_usage": {
 				"type": "object",
 				"properties": {
-					"icon_size": {
-						"type": "string",
-						"pattern": "^[0-9]+px$",
-						"description": "Size of the network usage icon"
-					},
 					"upload_icon": {
 						"type": "string",
 						"description": "Icon to display for upload"

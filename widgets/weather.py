@@ -241,7 +241,6 @@ class WeatherWidget(ButtonWidget):
 
         self.weather_icon = text_icon(
             icon="",
-            size="15px",
             props={
                 "style_classes": "weather-bar-icon",
             },

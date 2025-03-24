@@ -111,14 +111,13 @@ Each component, such as hypr_sunset, battery, cpu, memory, etc., has its own con
     "temperature": "2800k",
     "enabled_icon": "󱩌",
     "disabled_icon": "󰛨",
-    "icon_size": "12px",
     "interval": 2000,
     "label": true,
     "tooltip": true
 }
 ```
 
-Other components follow a similar structure, where each configuration defines things like icon_size, label, and tooltip.
+Other components follow a similar structure, where each configuration defines things like label, and tooltip.
 
 ## Battery
 
@@ -166,16 +165,12 @@ Other components follow a similar structure, where each configuration defines th
 
 ```json
 "brightness": {
-    "icon_size": "14px",
     "label": true,
     "tooltip": true,
     "icon": "󰏨",
     "step_size": 5,
 }
 ```
-
-- **icon_size** (string):
-  Specifies the size of the icons. The value is defined in CSS units (e.g., pixels), and in this case, the icon size is set to `"14px"`.
 
 - **label** (boolean):
   Determines whether a label should be displayed. When set to true, the label will be shown.
@@ -209,14 +204,12 @@ Other components follow a similar structure, where each configuration defines th
 ```json
 "cpu": {
     "icon": "",
-    "icon_size": "12px",
     "label": true,
     "tooltip": true,
 }
 ```
 
 - icon: The icon used to display the module.
-- icon_size: Size of the icon in px.
 - label: Whether to show a label.
 - tooltip: Whether to show a tooltip.
 - round: Whether to round the temperature.
@@ -230,7 +223,6 @@ Other components follow a similar structure, where each configuration defines th
 "hypr_idle": {
     "enabled_icon": "",
     "disabled_icon": "",
-    "icon_size": "12px",
     "label": true,
     "tooltip": true,
 }
@@ -241,9 +233,6 @@ Other components follow a similar structure, where each configuration defines th
 
 - **disabled_icon** (string):
   Specifies the icon to be displayed when the element is disabled. In this case, the disabled icon is represented by `""`.
-
-- **icon_size** (string):
-  Defines the size of the icon. In this case, the icon size is set to `"12px"`.
 
 - **label** (boolean):
   Specifies whether a label should be displayed. In this case, the value is `true`, meaning the label will be shown.
@@ -258,7 +247,6 @@ Other components follow a similar structure, where each configuration defines th
     "temperature": "2800k",
     "enabled_icon": "󱩌",
     "disabled_icon": "󰛨",
-    "icon_size": "12px",
     "label": true,
     "tooltip": true,
 }
@@ -273,9 +261,6 @@ Other components follow a similar structure, where each configuration defines th
 - **disabled_icon** (string):
   Specifies the icon to be displayed when the element is disabled. In this case, the disabled icon is represented by `"󰛨"`.
 
-- **icon_size** (string):
-  Defines the size of the icon. In this case, the icon size is set to `"12px"`.
-
 - **label** (boolean):
   Specifies whether a label should be displayed. In this case, the value is `true`, meaning the label will be shown.
 
@@ -287,7 +272,6 @@ Other components follow a similar structure, where each configuration defines th
 ```json
 "hypr_picker": {
     "icon": "",
-    "icon_size": "14px",
     "label": true,
     "tooltip": true,
 }
@@ -295,9 +279,6 @@ Other components follow a similar structure, where each configuration defines th
 
 - **icon** (string):
   Specifies the icon to be displayed. In this case, the icon is represented by `""`.
-
-- **icon_size** (string):
-  Defines the size of the icon. In this case, the icon size is set to `"14px"`.
 
 - **label** (boolean):
   Specifies whether a label should be displayed. In this case, the value is `true`, meaning the label will be shown.
@@ -319,7 +300,6 @@ Other components follow a similar structure, where each configuration defines th
 ```json
 "memory": {
     "icon": "",
-    "icon_size": "12px",
     "label": true,
     "tooltip": true,
 }
@@ -327,9 +307,6 @@ Other components follow a similar structure, where each configuration defines th
 
 - **icon** (string):
   Specifies the icon to be displayed. In this case, the icon is represented by `""`.
-
-- **icon_size** (string):
-  Defines the size of the icon. In this case, the icon size is set to `"12px"`.
 
 - **label** (boolean):
   Specifies whether a label should be displayed. In this case, the value is `true`, meaning the label will be shown.
@@ -357,7 +334,6 @@ Other components follow a similar structure, where each configuration defines th
 ```json
 "ocr": {
 "icon": "󰐳",
-"icon_size": "14px",
 "label": true,
 "tooltip": true,
 }
@@ -366,9 +342,6 @@ Other components follow a similar structure, where each configuration defines th
 
 - **icon** (string):
   The icon used to display the module. In this case, the icon is "󰐳".
-
-- **icon_size** (string):
-  The size of the icon in px. In this case, it is set to "14px".
 
 - **label** (boolean):
   Whether to show a label. In this case, it is set to true.
@@ -379,15 +352,12 @@ Other components follow a similar structure, where each configuration defines th
 ## Power Button
 
 ```json
-"power": {"icon": "󰐥", "icon_size": "12px", "tooltip": true, "buttons": ["power", "logout", "reboot", "shutdown"] }
+"power": {"icon": "󰐥","tooltip": true, "buttons": ["power", "logout", "reboot", "shutdown"] }
 
 ```
 
 - **icon** (string):
   The icon used to display the module. In this case, the icon is "󰐥".
-
-- **icon_size** (string):
-  The size of the icon in px. In this case, it is set to "12px".
 
 - **tooltip** (boolean):
   Whether to show a tooltip. In this case, it is set to true.
@@ -424,7 +394,6 @@ Other components follow a similar structure, where each configuration defines th
 ```json
 "submap": {
 "icon": "󰋊",
-"icon_size": "14px",
 "label": true,
 "tooltip": true,
 }
@@ -433,9 +402,6 @@ Other components follow a similar structure, where each configuration defines th
 
 - **icon** (string):
   The icon used to display the module. In this case, the icon is "󰋊".
-
-- **icon_size** (string):
-  The size of the icon in px. In this case, it is set to "14px".
 
 - **label** (boolean):
   Whether to show a label. In this case, it is set to true.
@@ -448,7 +414,6 @@ Other components follow a similar structure, where each configuration defines th
 ```json
 "storage": {
 "icon": "󰋊",
-"icon_size": "14px",
 "label": true,
 "tooltip": true,
 }
@@ -456,9 +421,6 @@ Other components follow a similar structure, where each configuration defines th
 
 - **icon** (string):
   The icon used to display the module. In this case, the icon is "󰋊".
-
-- **icon_size** (string):
-  The size of the icon in px. In this case, it is set to "14px".
 
 - **label** (boolean):
   Whether to show a label. In this case, it is set to true.
@@ -485,7 +447,6 @@ Other components follow a similar structure, where each configuration defines th
 "updates": {
 "os": "arch",
 "icon": "󱧘",
-"icon_size": "14px",
 "interval": 60000,
 "tooltip": true,
 "label": true,
@@ -497,9 +458,6 @@ Other components follow a similar structure, where each configuration defines th
 
 - **icon** (string):
   The icon used to display the module. In this case, the icon is "󱧘".
-
-- **icon_size** (string):
-  The size of the icon in px. In this case, it is set to "14px".
 
 - **interval** (integer):
   The update interval for updates. In this case, it is set to 60000 milliseconds.
@@ -514,15 +472,11 @@ Other components follow a similar structure, where each configuration defines th
 
 ```json
 "volume": {
-"icon_size": "14px",
 "label": true,
 "tooltip": true,
 "step_size": 5,
 }
 ```
-
-- **icon_size** (string):
-  The size of the icon in px. In this case, it is set to "14px".
 
 - **label** (boolean):
   Whether to show a label. In this case, it is set to true.

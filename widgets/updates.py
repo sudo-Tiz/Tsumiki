@@ -33,7 +33,6 @@ class UpdatesWidget(ButtonWidget):
 
         self.text_icon = text_icon(
             icon=self.config["icon"],
-            size=self.config["icon_size"],
             props={"style_classes": "panel-icon"},
         )
         self.update_level_label = Label(

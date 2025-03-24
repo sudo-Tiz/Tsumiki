@@ -54,7 +54,6 @@ DEFAULT_CONFIG = {
         "tooltip": True,
     },
     "brightness": {
-        "icon_size": "14px",
         "label": True,
         "tooltip": True,
         "step_size": 5,
@@ -64,7 +63,6 @@ DEFAULT_CONFIG = {
     "click_counter": {"count": 0},
     "cpu": {
         "icon": "",
-        "icon_size": "12px",
         "label": True,
         "tooltip": True,
         "round": True,
@@ -84,13 +82,11 @@ DEFAULT_CONFIG = {
     "hypr_idle": {
         "enabled_icon": "",
         "disabled_icon": "",
-        "icon_size": "12px",
         "label": True,
         "tooltip": True,
     },
     "hypr_picker": {
         "icon": "",
-        "icon_size": "14px",
         "tooltip": True,
         "label": True,
     },
@@ -98,19 +94,16 @@ DEFAULT_CONFIG = {
         "temperature": "2800k",
         "enabled_icon": "󱩌",
         "disabled_icon": "󰛨",
-        "icon_size": "12px",
         "label": True,
         "tooltip": True,
     },
     "keyboard": {
         "icon": "󰌌",
-        "icon_size": "14px",
         "label": True,
         "tooltip": True,
     },
     "language": {
         "icon": "",
-        "icon_size": "14px",
         "tooltip": True,
         "truncation_size": 2,
     },
@@ -133,12 +126,10 @@ DEFAULT_CONFIG = {
     },
     "memory": {
         "icon": "",
-        "icon_size": "12px",
         "label": True,
         "tooltip": True,
     },
     "network_usage": {
-        "icon_size": "14px",
         "upload_icon": "",
         "download_icon": "",
         "tooltip": True,
@@ -146,7 +137,6 @@ DEFAULT_CONFIG = {
         "upload": True,
     },
     "microphone": {
-        "icon_size": "12px",
         "label": False,
         "tooltip": True,
     },
@@ -174,7 +164,6 @@ DEFAULT_CONFIG = {
     },
     "ocr": {
         "icon": "󰐳",
-        "icon_size": "14px",
         "tooltip": True,
         "label": True,
     },
@@ -204,7 +193,6 @@ DEFAULT_CONFIG = {
     },
     "power": {
         "icon": "󰐥",
-        "icon_size": "18px",
         "tooltip": True,
         "buttons": [
             "lock",
@@ -222,17 +210,15 @@ DEFAULT_CONFIG = {
         "audio": True,
     },
     "spacing": {"size": 20},
-    "stop_watch": {"stopped_icon": "󱫞", "running_icon": "󱫠", "icon_size": "16px"},
+    "stop_watch": {"stopped_icon": "󱫞", "running_icon": "󱫠"},
     "storage": {
         "icon": "󰋊",
-        "icon_size": "14px",
         "label": True,
         "tooltip": True,
         "path": "/",
     },
     "submap": {
         "icon": "󰌌",
-        "icon_size": "12px",
         "label": True,
         "tooltip": True,
     },
@@ -243,19 +229,16 @@ DEFAULT_CONFIG = {
     },
     "theme_switcher": {
         "icon": "",
-        "icon_size": "14px",
         "notify": False,  # Whether to show a notification when the theme is changed
     },
     "updates": {
         "os": "arch",
         "icon": "󱧘",
-        "icon_size": "14px",
         "interval": HIGH_POLL_INTERVAL,
         "tooltip": True,
         "label": True,
     },
     "volume": {
-        "icon_size": "14px",
         "label": True,
         "tooltip": True,
         "step_size": 5,

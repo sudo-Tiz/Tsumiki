@@ -4,7 +4,7 @@ from typing import List, Literal, TypedDict
 Layer = Literal["background", "bottom", "top", "overlay"]
 
 # Common configuration fields that will be reused
-BaseConfig = TypedDict("BaseConfig", {"icon_size": str, "label": bool, "tooltip": bool})
+BaseConfig = TypedDict("BaseConfig", {"label": bool, "tooltip": bool})
 
 # Layout configuration
 Layout = TypedDict(
@@ -13,7 +13,7 @@ Layout = TypedDict(
 
 # Power button configuration
 PowerButton = TypedDict(
-    "PowerButton", {"icon": str, "icon_size": int, "tooltip": bool, "items": List[str]}
+    "PowerButton", {"icon": str, "tooltip": bool, "items": List[str]}
 )
 
 # HyprSunset configuration
@@ -60,7 +60,11 @@ ClickCounter = TypedDict("ClickCounter", {"count": int})
 
 # StopWatch configuration
 StopWatch = TypedDict(
-    "StopWatch", {"stopped_icon": str, "running_icon": str, "icon_size": str}
+    "StopWatch",
+    {
+        "stopped_icon": str,
+        "running_icon": str,
+    },
 )
 
 

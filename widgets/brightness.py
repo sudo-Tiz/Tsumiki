@@ -42,7 +42,6 @@ class BrightnessWidget(EventBoxWidget):
 
         self.icon = helpers.text_icon(
             icon=brightness_text_icons["medium"],
-            size=self.config["icon_size"],
             props={
                 "style_classes": "panel-icon overlay-icon",
             },
