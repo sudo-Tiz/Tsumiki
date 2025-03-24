@@ -268,6 +268,20 @@
 		"padding": "7pt",
 		"spacing": "12pt",
 		"border-width": "1px",
+		"dock": {
+					"scaling": 100,
+					"opacity": 50,
+					"shadow_enabled": true,
+					"padding_x": "8px",
+					"padding_y": "8px",
+					"margin_x": "8px",
+					"margin_y": "8px",
+					"border": {
+						"enabled": false,
+						"width": "1px",
+						"radius": "1.5rem"
+					}
+				},
 		"osd": {
 			"scaling": 100,
 			"opacity": 100,

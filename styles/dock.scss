@@ -1,12 +1,24 @@
-
 @use "theme.scss";
+@use "variable";
+@use "sass:color";
+
+:vars {
+  --surface: #1a1110;
+  --surface-bright: #423735;
+}
 
 #dock {
-  background-color: theme.$background-dark;
-  padding: 8px;
-  margin: 8px 8px 7px 8px;
-  border-radius: 20px;
-  transition: all 0.25s cubic-bezier(0.5, 0.25, 0, 1);
+  $dock-opacity-ratio: variable.$dock-opacity * .01;
+  $transparency-value: (
+    1 - $dock-opacity-ratio) * 100%;
+  background-color: color.mix(theme.$bar-background, transparent, $transparency-value
+  );
+padding: variable.$dock-padding_y variable.$dock-padding_x;
+margin: variable.$dock-margin_y variable.$dock-margin_x;
+border: if(variable.$dock-border-enabled, variable.$border, none);
+border-radius: variable.$dock-border-radius;
+border-width: variable.$bar-buttons-border-width;
+transition: all .25s cubic-bezier(.5, .25, 0, 1);
 }
 
 #dock.occluded {
@@ -17,30 +29,31 @@
 #dock-separator {
   padding: 1px;
   margin: 8px 0;
-  border-radius: 16px;
-  background-color: theme.$background-alt;
+  background-color: var(--surface-bright);
+  border-width: 1px;
+  border-radius: calc(variable.$dock-border-radius * 0.1);
 }
 
 #dock-app-button {
   padding: 4px;
-  border-radius: 12px;
+  border-radius: variable.$dock-border-radius;
 }
 
 #dock-app-button:hover,
 #dock-app-button:hover.instance {
-  background-color: theme.$background-alt;
-  border-top: 1px solid theme.$background-dark;
+  background-color: var(--surface-bright);
+  border-top: variable.$dock-border-width solid theme.$accent-blue;
   padding-top: 3px;
 }
 
 #dock-app-button:active,
 #dock-app-button:active.instance {
-  background-color: theme.$background-dark;
+  background-color: theme.$accent-blue;
 }
 
 #dock-app-button.instance {
-  background: linear-gradient(to top, transparent, theme.$accent-teal);
-  border-bottom: 1px solid theme.$accent-teal;
-  border-top: 1px solid theme.$text-muted;
+  background: linear-gradient(to top, transparent, var(--surface-bright));
+  border-bottom: variable.$dock-border-width solid var(--surface);
+  border-top: variable.$dock-border-width solid theme.$surface-neutral;
   padding: 3px 4px;
 }
