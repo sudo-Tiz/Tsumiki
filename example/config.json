@@ -322,7 +322,7 @@
 			},
 			"widgets": {
 				"cpu": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "12px",
 					"border": {
 						"enabled": false,
@@ -331,7 +331,7 @@
 					}
 				},
 				"memory": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -340,7 +340,7 @@
 					}
 				},
 				"storage": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -349,7 +349,7 @@
 					}
 				},
 				"network_usage": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -358,7 +358,7 @@
 					}
 				},
 				"battery": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -367,7 +367,7 @@
 					}
 				},
 				"bluetooth": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -376,7 +376,7 @@
 					}
 				},
 				"brightness": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -385,7 +385,7 @@
 					}
 				},
 				"cava": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -393,7 +393,7 @@
 					}
 				},
 				"click_counter": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -402,7 +402,7 @@
 					}
 				},
 				"datetime_menu": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -410,7 +410,7 @@
 					}
 				},
 				"desktop_clock": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -418,7 +418,7 @@
 					}
 				},
 				"hypr_idle": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -427,7 +427,7 @@
 					}
 				},
 				"hypr_picker": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -436,7 +436,7 @@
 					}
 				},
 				"hypr_sunset": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -445,7 +445,7 @@
 					}
 				},
 				"keyboard_layout": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -454,7 +454,7 @@
 					}
 				},
 				"language": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -463,7 +463,7 @@
 					}
 				},
 				"microphone": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -472,7 +472,7 @@
 					}
 				},
 				"mpris": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -480,7 +480,7 @@
 					}
 				},
 				"ocr": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -489,7 +489,7 @@
 					}
 				},
 				"overview": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -497,7 +497,7 @@
 					}
 				},
 				"power_button": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -506,7 +506,7 @@
 					}
 				},
 				"recorder": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -514,7 +514,7 @@
 					}
 				},
 				"stop_watch": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -523,7 +523,7 @@
 					}
 				},
 				"submap": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -532,7 +532,7 @@
 					}
 				},
 				"systray": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -540,7 +540,7 @@
 					}
 				},
 				"taskbar": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
@@ -548,7 +548,7 @@
 					}
 				},
 				"theme": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -557,7 +557,7 @@
 					}
 				},
 				"updates": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -566,7 +566,7 @@
 					}
 				},
 				"volume": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -575,7 +575,7 @@
 					}
 				},
 				"weather": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -584,7 +584,7 @@
 					}
 				},
 				"window_title": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"icon_size": "14px",
 					"border": {
 						"enabled": false,
@@ -593,7 +593,7 @@
 					}
 				},
 				"workspaces": {
-					"spacing": ".9em",
+					"spacing": ".125em",
 					"border": {
 						"enabled": false,
 						"width": "1px",
