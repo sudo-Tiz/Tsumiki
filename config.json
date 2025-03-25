@@ -152,6 +152,8 @@
 			"enabled": true,
 			"icon_size": 30,
 			"anchor": "bottom-center",
+			"ignored_apps": [],
+			"layer": "top",
 			"pinned_apps": [
 				"vivaldi",
 				"wezterm",

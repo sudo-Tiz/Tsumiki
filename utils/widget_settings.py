@@ -86,7 +86,14 @@ ScreenCorners = TypedDict(
 
 Dock = TypedDict(
     "Dock",
-    {"enabled": bool, "icon_size": int, "pinned_apps": List[str], "vertical": bool},
+    {
+        "enabled": bool,
+        "icon_size": int,
+        "pinned_apps": List[str],
+        "ignored_apps": List[str],
+        "layer": str,
+        "anchor": str,
+    },
 )
 
 

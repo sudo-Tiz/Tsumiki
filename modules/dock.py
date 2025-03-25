@@ -49,7 +49,7 @@ class Dock(Window):
 
         super().__init__(
             name="dock-window",
-            layer="top",
+            layer=self.config["layer"],
             anchor=self.config["anchor"],
             margin="-8px 0 -4px 0"
             if self.config["anchor"] == "bottom-center"
