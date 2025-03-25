@@ -1,4 +1,3 @@
-
 from services import audio_service
 from shared import SettingSlider
 from utils.icons import icons
@@ -21,12 +20,10 @@ class AudioSlider(SettingSlider):
         self.audio_stream = audio_stream
 
         # Initialize with default values first
-        super().__init__(
-            icon_name=icons["audio"]["volume"]["high"],
-            start_value=0
-        )
+        super().__init__(icon_name=icons["audio"]["volume"]["high"], start_value=0)
 
         if not audio_stream:
+
             def init_device_audio(*args):
                 if not self.client.speaker:
                     return

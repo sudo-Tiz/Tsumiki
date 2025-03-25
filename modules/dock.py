@@ -44,6 +44,14 @@ class Dock(Window):
 
     _instances: ClassVar[list] = []
 
+    def get_desktop_applications(self):
+        apps = get_desktop_applications()
+        # Filter out apps that are in the ignored_apps list
+        ignored_apps = self.config.get("ignored_apps", [])
+        filtered_apps = [app for app in apps if app.name not in ignored_apps]
+
+        return filtered_apps
+
     def __init__(self, config, **kwargs):
         self.config = config
 
@@ -64,7 +72,8 @@ class Dock(Window):
         self.pinned = self.config.get("pinned_apps", [])
         self.OCCLUSION = 36 + self.config["icon_size"]
         self.app_map = {}  # Initialize the app map
-        self._all_apps = get_desktop_applications()  # Get all apps for lookup
+        self._all_apps = self.get_desktop_applications()  # Get all apps for lookup
+
         # Create app identifiers mapping
         self.app_identifiers = self._build_app_identifiers_map()
         self.is_hidden = False
@@ -264,7 +273,7 @@ class Dock(Window):
     # Update the dock's app map using DesktopApp objects from the system.
     def update_app_map(self):
         """Updates the mapping of commands to DesktopApp objects."""
-        self._all_apps = get_desktop_applications()  # Refresh all apps
+        self._all_apps = self.get_desktop_applications()  # Refresh all apps
         self.app_map = {
             app.name: app for app in self._all_apps if app.name
         }  # Map app names to DesktopApp objects

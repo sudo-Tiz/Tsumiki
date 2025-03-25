@@ -21,17 +21,13 @@ class AudioSubMenu(QuickSubMenu):
         self.scan_button = HoverButton(
             style_classes="submenu-button",
             name="refresh-button",
-            image=Image(
-                icon_name=icons["audio"]["volume"]["high"],
-                icon_size=18
-            )
+            image=Image(icon_name=icons["audio"]["volume"]["high"], icon_size=18),
         )
         self.scan_button.connect("clicked", lambda _: self.update_apps())
 
         # Create app list container
         self.app_list = Gtk.ListBox(
-            selection_mode=Gtk.SelectionMode.NONE,
-            name="app-list"
+            selection_mode=Gtk.SelectionMode.NONE, name="app-list"
         )
         self.app_list.get_style_context().add_class("menu")
 
@@ -60,7 +56,7 @@ class AudioSubMenu(QuickSubMenu):
     def update_apps(self, *args):
         """Update the list of applications with volume controls."""
         # Clear existing rows
-        while (row := self.app_list.get_row_at_index(0)):
+        while row := self.app_list.get_row_at_index(0):
             self.app_list.remove(row)
 
         # Add applications
@@ -75,28 +71,21 @@ class AudioSubMenu(QuickSubMenu):
                 margin_start=6,
                 margin_end=6,
                 margin_top=3,
-                margin_bottom=3
+                margin_bottom=3,
             )
 
             # App name
-            name_box = Box(
-                orientation="h",
-                spacing=12,
-                h_expand=True
-            )
+            name_box = Box(orientation="h", spacing=12, h_expand=True)
 
             # App icon
             icon = Image(
                 icon_name=app.icon_name or icons["audio"]["volume"]["high"],
-                icon_size=18
+                icon_size=18,
             )
             name_box.pack_start(icon, False, True, 0)
 
             # App name label
-            name_label = Label(
-                label=app.name,
-                style_classes="submenu-item-label"
-            )
+            name_label = Label(label=app.name, style_classes="submenu-item-label")
             name_label.set_ellipsize(3)  # PANGO_ELLIPSIZE_END
             name_label.set_halign(Gtk.Align.START)
             name_label.set_tooltip_text(app.description or app.name)
@@ -108,7 +97,7 @@ class AudioSubMenu(QuickSubMenu):
             audio_box = Box(
                 orientation="h",
                 spacing=6,
-                margin_start=24  # Indent to align with app name
+                margin_start=24,  # Indent to align with app name
             )
 
             # Create audio slider for this app
