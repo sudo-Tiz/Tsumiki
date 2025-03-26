@@ -68,7 +68,7 @@ class Dock(Window):
         # Add this instance to the registry
         Dock._instances.append(self)
         self.conn = get_hyprland_connection()
-        self.icon = IconResolver()
+        self.icon = IconResolver.get_default()
         self.pinned = self.config.get("pinned_apps", [])
         self.OCCLUSION = 36 + self.config["icon_size"]
         self.app_map = {}  # Initialize the app map

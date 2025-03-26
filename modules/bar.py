@@ -84,12 +84,13 @@ class StatusBar(WaylandWindow):
         )
 
         anchor = f"left {options['location']} right"
+
         super().__init__(
             name="panel",
             layer=options["layer"],
             anchor=anchor,
             pass_through=False,
-            monitor=HyprlandWithMonitors().get_current_gdk_monitor_id(),
+            monitor=HyprlandWithMonitors.get_current_gdk_monitor_id(),
             exclusivity="auto",
             visible=True,
             all_visible=False,
@@ -97,7 +98,7 @@ class StatusBar(WaylandWindow):
             **kwargs,
         )
 
-        if options["bar_style"] and options["bar_style"] != "default":
+        if options["bar_style"]:
             self.box.add_style_class(options["bar_style"])
 
         if options["check_updates"]:

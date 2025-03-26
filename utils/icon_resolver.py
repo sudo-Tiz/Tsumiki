@@ -14,6 +14,15 @@ ICON_CACHE_FILE = APP_CACHE_DIRECTORY + "/icons.json"
 class IconResolver:
     """A class to resolve icons for applications."""
 
+    instance = None
+
+    @staticmethod
+    def get_default():
+        if IconResolver.instance is None:
+            IconResolver.instance = IconResolver()
+
+        return IconResolver.instance
+
     def __init__(self):
         if os.path.exists(ICON_CACHE_FILE):
             with open(ICON_CACHE_FILE) as file:
@@ -31,7 +40,7 @@ class IconResolver:
             return self._icon_dict[app_id]
         new_icon = self._compositor_find_icon(app_id)
         logger.info(
-            f"[ICONS] found new icon: '{new_icon}' for app id: '{app_id}', storing..."
+            f"[ICONS] found new icon: '{new_icon}' for app id: '{app_id}', storing."
         )
         self._store_new_icon(app_id, new_icon)
         return new_icon
