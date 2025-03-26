@@ -54,7 +54,7 @@ class IconResolver:
                 Gtk.IconLookupFlags.FORCE_SIZE,
             )
         except GLib.GError:
-            return None
+            return "application-x-symbolic"
 
     def _store_new_icon(self, app_id: str, icon: str):
         self._icon_dict[app_id] = icon
