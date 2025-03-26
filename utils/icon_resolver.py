@@ -74,7 +74,6 @@ class IconResolver:
         for data_dir in data_dirs:
             data_dir = data_dir + "/applications/"
             if os.path.exists(data_dir):
-
                 # Do name resolving here
                 files = os.listdir(data_dir)
                 matching = [

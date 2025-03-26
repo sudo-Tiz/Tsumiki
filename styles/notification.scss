@@ -103,3 +103,8 @@ $hover-transition: background .15s ease-in-out;
     }
   }
 }
+
+
+#datemenu-notification-eventbox{
+  @extend #notification-eventbox;
+}

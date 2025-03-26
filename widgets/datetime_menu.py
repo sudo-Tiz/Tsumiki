@@ -35,7 +35,7 @@ class DateMenuNotification(EventBox):
     ):
         super().__init__(
             size=(constants.NOTIFICATION_WIDTH, -1),
-            name="notification-eventbox",
+            name="datemenu-notification-eventbox",
             pass_through=True,
             **kwargs,
         )

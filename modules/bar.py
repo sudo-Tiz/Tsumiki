@@ -90,7 +90,7 @@ class StatusBar(WaylandWindow):
             layer=options["layer"],
             anchor=anchor,
             pass_through=False,
-            monitor=HyprlandWithMonitors.get_current_gdk_monitor_id(),
+            monitor=HyprlandWithMonitors().get_current_gdk_monitor_id(),
             exclusivity="auto",
             visible=True,
             all_visible=False,

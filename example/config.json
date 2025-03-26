@@ -149,7 +149,7 @@
 			"size": 12
 		},
 		"dock": {
-			"enabled": true,
+			"enabled": false,
 			"icon_size": 30,
 			"anchor": "bottom-center",
 			"ignored_apps": [],
