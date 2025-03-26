@@ -77,7 +77,7 @@ class QuickSubMenu(Box):
     def toggle_reveal(self) -> bool:
         self.set_visible(True)
         self.revealer.set_reveal_child(not self.revealer.get_reveal_child())
-        return self.get_visible()
+        return self.revealer.get_reveal_child()
 
 
 class QuickSubToggle(Box):
