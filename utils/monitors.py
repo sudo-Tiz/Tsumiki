@@ -32,11 +32,19 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 class HyprlandWithMonitors(Hyprland):
     """A Hyprland class with additional monitor common."""
 
+    instance = None
+
+    @staticmethod
+    def get_default():
+        if HyprlandWithMonitors.instance is None:
+            HyprlandWithMonitors.instance = HyprlandWithMonitors()
+
+        return HyprlandWithMonitors.instance
+
     def __init__(self, commands_only: bool = False, **kwargs):
         self.display: Gdk.Display = Gdk.Display.get_default()
         super().__init__(commands_only, **kwargs)
 
-    # Add new arguments
     @ttl_lru_cache(100, 5)
     def get_all_monitors(self) -> Dict:
         monitors = json.loads(self.send_command("j/monitors").reply)
