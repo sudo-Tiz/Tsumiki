@@ -1,3 +1,4 @@
+from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
@@ -5,6 +6,8 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import Gtk
 
 from services import audio_service
+from shared.animator import Animator
+from shared.circle_image import CircleImage
 from shared.submenu import QuickSubMenu
 from shared.widget_container import HoverButton
 from utils.icons import icons
@@ -17,11 +20,26 @@ class AudioSubMenu(QuickSubMenu):
     def __init__(self, **kwargs):
         self.client = audio_service
 
+        self.scan_image = CircleImage(
+            image_file=get_relative_path("../../../assets/icons/refresh.png"),
+            size=20,
+        )
+
         # Create refresh button first since parent needs it
         self.scan_button = HoverButton(
             style_classes="submenu-button",
-            name="refresh-button",
-            image=Image(icon_name=icons["audio"]["volume"]["high"], icon_size=18),
+            name="scan-button",
+            image=self.scan_image,
+        )
+
+        self.scan_animator = Animator(
+            bezier_curve=(0, 0, 1, 1),
+            duration=4,
+            min_value=0,
+            max_value=360,
+            tick_widget=self,
+            repeat=False,
+            notify_value=lambda p, *_: self.scan_image.set_angle(p.value),
         )
         self.scan_button.connect("clicked", lambda _: self.update_apps())
 
@@ -55,6 +73,8 @@ class AudioSubMenu(QuickSubMenu):
 
     def update_apps(self, *args):
         """Update the list of applications with volume controls."""
+
+        self.scan_animator.play()
         # Clear existing rows
         while row := self.app_list.get_row_at_index(0):
             self.app_list.remove(row)
@@ -67,7 +87,7 @@ class AudioSubMenu(QuickSubMenu):
             # Main container
             box = Box(
                 orientation="v",
-                spacing=6,
+                spacing=10,
                 margin_start=6,
                 margin_end=6,
                 margin_top=3,
@@ -80,7 +100,7 @@ class AudioSubMenu(QuickSubMenu):
             # App icon
             icon = Image(
                 icon_name=app.icon_name or icons["audio"]["volume"]["high"],
-                icon_size=18,
+                icon_size=16,
             )
             name_box.pack_start(icon, False, True, 0)
 
@@ -101,7 +121,7 @@ class AudioSubMenu(QuickSubMenu):
             )
 
             # Create audio slider for this app
-            slider = AudioSlider(app)
+            slider = AudioSlider(app, show_chevron=False)
             audio_box.pack_start(slider, True, True, 0)
 
             box.add(audio_box)

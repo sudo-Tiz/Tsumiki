@@ -1,5 +1,8 @@
+from fabric.widgets.image import Image
+
 from services import audio_service
 from shared import SettingSlider
+from shared.widget_container import HoverButton
 from utils.icons import icons
 
 
@@ -9,7 +12,7 @@ class AudioSlider(SettingSlider):
     Can be used for both device audio and application audio control.
     """
 
-    def __init__(self, audio_stream=None):
+    def __init__(self, audio_stream=None, show_chevron=True):
         """Initialize the audio slider.
 
         Args:
@@ -21,6 +24,16 @@ class AudioSlider(SettingSlider):
 
         # Initialize with default values first
         super().__init__(icon_name=icons["audio"]["volume"]["high"], start_value=0)
+
+        self.chevron_icon = Image(icon_name="arrow-right-symbolic", icon_size=12)
+
+        self.chevron_btn = HoverButton(
+            image=self.chevron_icon,
+            name="audio-chevron-button",
+        )
+
+        if show_chevron:
+            self.children = (*self.children, self.chevron_btn)
 
         if not audio_stream:
 
@@ -41,10 +54,9 @@ class AudioSlider(SettingSlider):
 
         # Connect signals
         self.scale.connect("change-value", self.on_scale_move)
-        if not audio_stream:
-            self.icon_button.connect("button-press-event", self.on_button_click)
-        else:
-            self.icon_button.connect("clicked", self.on_mute_click)
+
+        self.icon_button.connect("clicked", self.on_mute_click)
+        self.chevron_btn.connect("clicked", self.on_button_click)
 
     def _get_icon_name(self):
         """Get the appropriate icon name based on mute state."""
@@ -71,18 +83,19 @@ class AudioSlider(SettingSlider):
         """Update slider state when audio changes."""
         self.update_state()
 
-    def on_button_click(self, button, event):
-        """Handle button clicks on the icon button."""
-        if event.button == 3:  # Right click
-            # Find and toggle the AudioSubMenu
-            parent = self.get_parent()
-            while parent and not hasattr(parent, "audio_submenu"):
-                parent = parent.get_parent()
+    def on_button_click(self, button):
+        parent = self.get_parent()
+        while parent and not hasattr(parent, "audio_submenu"):
+            parent = parent.get_parent()
 
-            if parent and hasattr(parent, "audio_submenu"):
-                parent.audio_submenu.toggle_reveal()
-        else:  # Left click
-            self.on_mute_click(button)
+        if parent and hasattr(parent, "audio_submenu"):
+            is_visible = parent.audio_submenu.toggle_reveal()
+
+            self.chevron_icon.set_from_icon_name(
+                "arrow-down-symbolic", 12
+            ) if is_visible else self.chevron_icon.set_from_icon_name(
+                "arrow-right-symbolic", 12
+            )
 
     def on_mute_click(self, button):
         """Toggle mute state."""
