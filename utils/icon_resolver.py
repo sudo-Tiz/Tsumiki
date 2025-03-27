@@ -2,7 +2,7 @@ import json
 import os
 import re
 
-from gi.repository import GLib, Gtk
+from gi.repository import GdkPixbuf, GLib, Gtk
 from loguru import logger
 
 from .colors import Colors
@@ -45,6 +45,22 @@ class IconResolver:
         self._store_new_icon(app_id, new_icon)
         return new_icon
 
+    def resolve_icon(self, pixmap, icon_name, app_id: str, icon_size: int = 16):
+        try:
+            return (
+                pixmap.as_pixbuf(icon_size, GdkPixbuf.InterpType.HYPER)
+                if pixmap is not None
+                else Gtk.IconTheme()
+                .get_default()
+                .load_icon(
+                    icon_name,
+                    icon_size,
+                    Gtk.IconLookupFlags.FORCE_SIZE,
+                )
+            )
+        except GLib.GError:
+            return self.get_icon_pixbuf(app_id, icon_size)
+
     def get_icon_pixbuf(self, app_id: str, size: int = 16):
         icon_name = self.get_icon_name(app_id)
         try:
@@ -54,7 +70,15 @@ class IconResolver:
                 Gtk.IconLookupFlags.FORCE_SIZE,
             )
         except GLib.GError:
-            return "application-x-symbolic"
+            return (
+                Gtk.IconTheme()
+                .get_default()
+                .load_icon(
+                    "image-missing",
+                    size,
+                    Gtk.IconLookupFlags.FORCE_SIZE,
+                )
+            )
 
     def _store_new_icon(self, app_id: str, icon: str):
         self._icon_dict[app_id] = icon
