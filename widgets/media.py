@@ -23,10 +23,6 @@ from utils import APP_CACHE_DIRECTORY
 from utils.functions import ensure_dir_exists
 from utils.widget_utils import setup_cursor_hover
 
-icon_size = 15
-
-micro_to_seconds = 1000000  # player position is in microseconds
-
 
 class PlayerBoxStack(Box):
     """A widget that displays the current player information."""
@@ -343,6 +339,8 @@ class PlayerBox(Box):
             end_children=self.length_label,
         )
 
+        icon_size = 15
+
         self.skip_next_icon = Image(
             icon_name="media-skip-forward-symbolic",
             name="player-icon",
@@ -493,6 +491,7 @@ class PlayerBox(Box):
             self.shuffle_icon.add_style_class("shuffle-off")
 
     def length_str(self, micro_seconds: int) -> str:
+        micro_to_seconds = 1000000
         seconds = int(micro_seconds / micro_to_seconds)
         minutes = seconds // 60
         remaining_seconds = seconds % 60
