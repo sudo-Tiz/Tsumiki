@@ -534,7 +534,7 @@ class PlayerBox(Box):
             self.update_image()
             return
 
-        Gio.File.new_for_uri(uri=url).copy_async(  # type: ignore
+        Gio.File.new_for_uri(uri=url).copy_async(
             Gio.File.new_for_path(self.cover_path),
             Gio.FileCopyFlags.OVERWRITE,
             GLib.PRIORITY_DEFAULT,
