@@ -1,9 +1,10 @@
-from fabric.widgets.image import Image
+from fabric.widgets.box import Box
 
 from services import audio_service
 from shared import SettingSlider
 from shared.widget_container import HoverButton
 from utils.icons import icons
+from utils.widget_utils import text_icon
 
 
 class AudioSlider(SettingSlider):
@@ -25,11 +26,12 @@ class AudioSlider(SettingSlider):
         # Initialize with default values first
         super().__init__(icon_name=icons["audio"]["volume"]["high"], start_value=0)
 
-        self.chevron_icon = Image(icon_name="arrow-right-symbolic", icon_size=12)
+        self.chevron_icon = text_icon(icon="", props={"style": "font-size:12px;"})
 
         self.chevron_btn = HoverButton(
-            image=self.chevron_icon,
-            name="audio-chevron-button",
+            child=Box(
+                children=(self.chevron_icon,),
+            )
         )
 
         if show_chevron:
@@ -91,11 +93,7 @@ class AudioSlider(SettingSlider):
         if parent and hasattr(parent, "audio_submenu"):
             is_visible = parent.audio_submenu.toggle_reveal()
 
-            self.chevron_icon.set_from_icon_name(
-                "arrow-down-symbolic", 12
-            ) if is_visible else self.chevron_icon.set_from_icon_name(
-                "arrow-right-symbolic", 12
-            )
+            self.chevron_icon.set_label("" if is_visible else "")
 
     def on_mute_click(self, button):
         """Toggle mute state."""
