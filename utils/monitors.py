@@ -10,23 +10,7 @@ from utils.functions import ttl_lru_cache
 
 gi.require_version("Gdk", "3.0")
 
-
-# IDC,  Gdk.Screen.get_monitor_plug_name is deprecated
 warnings.filterwarnings("ignore", category=DeprecationWarning)
-
-# Another idea is to use Gdk.Monitor.get_model() however,
-#       there is no  guarantee that this will be unique
-#       Example: both monitors have the same model number
-#       (quite common in multi monitor setups)
-
-
-# Also, using Gdk.Display.get_monitor_at_point(x,y)
-#       does not work correctly on all wayland setups
-
-
-# Annoyingly, Gdk 4.0 has a solution to this with
-#       Gdk.Monitor.get_description() or Gdk.Monitor.get_connector()
-#       which both can be used to uniquely identify a monitor
 
 
 class HyprlandWithMonitors(Hyprland):
