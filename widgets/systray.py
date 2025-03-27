@@ -2,12 +2,15 @@ import gi
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
-from gi.repository import Gdk, GdkPixbuf, GLib, Gray, Gtk
+from gi.repository import Gdk, Gray, Gtk
 
 from shared import ButtonWidget, PopOverWindow, Separator
 from utils import BarConfig
+from utils.icon_resolver import IconResolver
 
 gi.require_version("Gray", "0.1")
+
+icon_resolver = IconResolver.get_default()
 
 
 class SystemTrayMenu(Box):
@@ -65,30 +68,14 @@ class SystemTrayMenu(Box):
 
     def do_update_item_button(self, item: Gray.Item, button: Button):
         # Get icon
-        pixmap = Gray.get_pixmap_for_pixmaps(item.get_icon_pixmaps(), 24)
-        try:
-            pixbuf = (
-                pixmap.as_pixbuf(self.config["icon_size"], GdkPixbuf.InterpType.HYPER)
-                if pixmap is not None
-                else Gtk.IconTheme()
-                .get_default()
-                .load_icon(
-                    item.get_icon_name(),
-                    self.config["icon_size"],
-                    Gtk.IconLookupFlags.FORCE_SIZE,
-                )
-            )
-        except GLib.GError:
-            pixbuf = (
-                Gtk.IconTheme()
-                .get_default()
-                .load_icon(
-                    "image-missing",
-                    self.config["icon_size"],
-                    Gtk.IconLookupFlags.FORCE_SIZE,
-                )
-            )
-
+        pixmap = Gray.get_pixmap_for_pixmaps(
+            item.get_icon_pixmaps(), self.config["icon_size"]
+        )
+        pixbuf = icon_resolver.resolve_icon(
+            pixmap,
+            item.get_icon_name(),
+            item.get_id(),
+        )
         button.set_image(Image(pixbuf=pixbuf, pixel_size=self.config["icon_size"]))
 
     def on_button_click(self, button, item: Gray.Item, event):
@@ -201,32 +188,15 @@ class SystemTrayWidget(ButtonWidget):
             button.set_margin_end(2)
 
             # Update icon
-            pixmap = Gray.get_pixmap_for_pixmaps(item.get_icon_pixmaps(), 24)
-            try:
-                pixbuf = (
-                    pixmap.as_pixbuf(
-                        self.config["icon_size"], GdkPixbuf.InterpType.HYPER
-                    )
-                    if pixmap is not None
-                    else Gtk.IconTheme()
-                    .get_default()
-                    .load_icon(
-                        item.get_icon_name(),
-                        self.config["icon_size"],
-                        Gtk.IconLookupFlags.FORCE_SIZE,
-                    )
-                )
-            except GLib.GError:
-                pixbuf = (
-                    Gtk.IconTheme()
-                    .get_default()
-                    .load_icon(
-                        "image-missing",
-                        self.config["icon_size"],
-                        Gtk.IconLookupFlags.FORCE_SIZE,
-                    )
-                )
+            pixmap = Gray.get_pixmap_for_pixmaps(
+                item.get_icon_pixmaps(), self.config["icon_size"]
+            )
 
+            pixbuf = icon_resolver.resolve_icon(
+                pixmap,
+                item.get_icon_name(),
+                item.get_id(),
+            )
             button.set_image(Image(pixbuf=pixbuf, pixel_size=self.config["icon_size"]))
 
             # Connect signals
