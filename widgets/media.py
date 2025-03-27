@@ -506,16 +506,6 @@ class PlayerBox(Box):
             self.play_pause_button.get_child().set_visible_child_name("pause")  # type: ignore
             self.art_animator.play()
 
-    def img_callback(self, source: Gio.File, result: Gio.AsyncResult):
-        try:
-            logger.info(f"[PLAYER] saving cover photo to {self.cover_path}")
-            os.path.isfile(self.cover_path)
-            # source.copy_finish(result)
-            if os.path.isfile(self.cover_path):
-                self.update_image()
-        except ValueError:
-            logger.error("[PLAYER] Failed to grab artUrl")
-
     def update_image(self):
         self.image_box.set_image_from_file(self.cover_path)
 
@@ -552,6 +542,16 @@ class PlayerBox(Box):
             None,
             self.img_callback,
         )
+
+    def img_callback(self, source: Gio.File, result: Gio.AsyncResult):
+        try:
+            logger.info(f"[PLAYER] saving cover photo to {self.cover_path}")
+            os.path.isfile(self.cover_path)
+            # source.copy_finish(result)
+            if os.path.isfile(self.cover_path):
+                self.update_image()
+        except ValueError:
+            logger.error("[PLAYER] Failed to grab artUrl")
 
     def move_seekbar(self):
         self.position_label.set_label(self.length_str(self.player.position))
