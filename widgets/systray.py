@@ -5,6 +5,7 @@ from fabric.widgets.image import Image
 from gi.repository import Gdk, Gray, Gtk
 
 from shared import ButtonWidget, PopOverWindow, Separator
+from shared.widget_container import HoverButton
 from utils import BarConfig
 from utils.icon_resolver import IconResolver
 
@@ -57,7 +58,7 @@ class SystemTrayMenu(Box):
             self.row += 1
 
     def do_bake_item_button(self, item: Gray.Item) -> Button:
-        button = Button(style_classes="flat")
+        button = HoverButton(style_classes="flat")
         button.connect(
             "button-press-event",
             lambda button, event: self.on_button_click(button, item, event),
@@ -176,7 +177,7 @@ class SystemTrayWidget(ButtonWidget):
         if is_hidden:
             self.popup_menu.add_item(item)
         else:
-            button = Button(style_classes="flat")
+            button = HoverButton(style_classes="flat")
             button.connect(
                 "button-press-event",
                 lambda button, event: self.popup_menu.on_button_click(
