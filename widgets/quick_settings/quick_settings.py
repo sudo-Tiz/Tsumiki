@@ -374,7 +374,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
 
         popup = PopOverWindow(
             parent=bar,
-            child=(QuickSettingsMenu(config=self.config),),
+            child=QuickSettingsMenu(config=self.config),
             visible=False,
             all_visible=False,
             pointing_to=self,
