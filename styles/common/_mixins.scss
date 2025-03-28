@@ -157,9 +157,13 @@
 }
 
 @mixin floating-widget($radius: variable.$bar-menus-popover-border-radius) {
-  box-shadow: if(variable.$bar-menus-popover-shadow-enabled, 0 0 1px 0 theme.$shadow-color, none);
+  $shadow: 0 0 0 variable.$bar-border-width theme.$shadow-color,
+    variable.$bar-menus-popover-shadow-offset variable.$bar-menus-popover-shadow-blur variable.$bar-menus-popover-shadow-spread color.adjust(theme.$shadow-color,
+      $alpha: calc(variable.$bar-menus-popover-shadow-opacity - 1));
+
+  box-shadow: if(variable.$bar-menus-popover-shadow-enabled, $shadow, none);
   margin: max(variable.$spacing, 8px);
-  border: if(variable.$bar-menus-popover-border-enabled,variable.$bar-menus-popover-border-width solid variable.$popover-border-color, none);
+  border: if(variable.$bar-menus-popover-border-enabled, variable.$bar-menus-popover-border-width solid variable.$popover-border-color, none);
   background-color: theme.$background-dark;
   color: theme.$text-main;
   border-radius: $radius;
