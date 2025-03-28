@@ -121,8 +121,13 @@ check_opensuse_updates() {
 
 
 update_arch() {
+    if command -v paru &> /dev/null; then
+		aur_helper="paru"
+	else
+		aur_helper="yay"
+	fi
     command="
-    yay -Syu
+    $aur_helper -Syu
     flatpak update -y || true
     read -n 1 -p 'Press any key to continue...'
     "
