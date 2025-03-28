@@ -40,7 +40,7 @@ class WindowTitleWidget(ButtonWidget):
             else win_title
         )
 
-        merged_titles = self.config["title_map"] + WINDOW_TITLE_MAP
+        merged_titles = WINDOW_TITLE_MAP + self.config["title_map"]
 
         # Find a matching window class in the windowTitleMap
         matched_window = next(
