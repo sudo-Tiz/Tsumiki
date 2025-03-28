@@ -16,7 +16,6 @@ padding: variable.$dock-padding_y variable.$dock-padding_x;
 margin: variable.$dock-margin_y variable.$dock-margin_x;
 border: if(variable.$dock-border-enabled, variable.$border, none);
 border-radius: variable.$dock-border-radius;
-border-width: variable.$bar-buttons-border-width;
 transition: all .25s cubic-bezier(.5, .25, 0, 1);
 }
 

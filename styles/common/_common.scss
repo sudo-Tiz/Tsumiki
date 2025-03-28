@@ -29,7 +29,6 @@
 .panel-box,
 .panel-button {
   background-color: theme.$background-dark;
-  border-radius: variable.$bar-buttons-border-radius;
 }
 
 .default {
@@ -46,8 +45,6 @@
 .panel-button {
   padding: variable.$bar-buttons-padding-x variable.$bar-buttons-padding-y;
   opacity: variable.$bar-buttons-opacity * .01;
-  border: if(variable.$bar-buttons-border-enabled, variable.$border, none);
-  border-width: variable.$bar-buttons-border-width;
 
   label {
     color: theme.$text-main;
@@ -55,6 +52,7 @@
 
   &:hover {
     @extend %widget_hover;
+    opacity: variable.$bar-buttons-hover-opacity * .01;
   }
 }
 
