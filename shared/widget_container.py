@@ -52,10 +52,6 @@ class ButtonWidget(Button):
             **kwargs,
         )
 
-        if config:
-            widget_style = config["general"]["widget_style"]
-            self.add_style_class(widget_style)
-
         setup_cursor_hover(self)
 
 
