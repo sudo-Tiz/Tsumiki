@@ -319,6 +319,7 @@
 		"bar": {
 			"scaling": 100,
 			"opacity": 70,
+			"widget_style": "default",
 			"shadow": {
 				"enabled": false,
 				"offset": 0,

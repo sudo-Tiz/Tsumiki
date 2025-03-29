@@ -10,6 +10,28 @@
   border: 1px solid red;
 }
 
+
+.flat {
+  border-radius: 4px;
+}
+
+.shadow {
+  @extend .flat;
+  box-shadow: color.mix(theme.$background-dark, black, 15%) 0 4px;
+}
+
+.bordered {
+  border: 1.5px solid theme.$surface-disabled;
+}
+
+.wave1 {
+  border-radius: 24px 10px;
+}
+
+.wave2 {
+  border-radius: 10px 24px;
+}
+
 #panel {
   &-inner {
     $bar-opacity-ratio: variable.$bar-opacity * .01;
@@ -58,6 +80,31 @@
 
   box-shadow: if(variable.$bar-buttons-shadow-enabled, $shadow, none);
 
+  @if variable.$bar-widget_style =="default" {
+    @extend .default;
+  }
+
+  @if variable.$bar-widget_style =="flat" {
+    @extend .flat;
+  }
+
+  @if variable.$bar-widget_style =="shadow" {
+    @extend .shadow;
+  }
+
+  @if variable.$bar-widget_style =="bordered" {
+    @extend .bordered;
+  }
+
+  @if variable.$bar-widget_style =="wave1" {
+    @extend .wave1;
+  }
+
+  @if variable.$bar-widget_style =="wave2" {
+    @extend .wave2;
+  }
+
+
   label {
     color: theme.$text-main;
   }
@@ -68,26 +115,7 @@
   }
 }
 
-.flat {
-  border-radius: 4px;
-}
 
-.shadow {
-  @extend .flat;
-  box-shadow: color.mix(theme.$background-dark, black, 15%) 0 4px;
-}
-
-.bordered {
-  border: 1.5px solid theme.$surface-disabled;
-}
-
-.wave1 {
-  border-radius: 24px 10px;
-}
-
-.wave2 {
-  border-radius: 10px 24px;
-}
 
 .panel-icon {
   margin-left: 2px;
