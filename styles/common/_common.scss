@@ -80,10 +80,6 @@
 
   box-shadow: if(variable.$bar-buttons-shadow-enabled, $shadow, none);
 
-  @if variable.$bar-widget_style =="default" {
-    @extend .default;
-  }
-
   @if variable.$bar-widget_style =="flat" {
     @extend .flat;
   }
@@ -104,6 +100,9 @@
     @extend .wave2;
   }
 
+  @else {
+    @extend .default;
+  }
 
   label {
     color: theme.$text-main;
