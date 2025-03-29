@@ -108,7 +108,6 @@ General = TypedDict(
         "debug": bool,
         "location": str,
         "layer": Layer,
-        "widget_style": str,
         "bar_style": Literal["default", "floating"],
     },
 )
@@ -282,8 +281,7 @@ OSD = TypedDict(
         "enabled": bool,
         "timeout": int,
         "anchor": str,
-        "show_percentage": bool,
-        "style": str,
+        "show_percentage": bool
     },
 )
 
