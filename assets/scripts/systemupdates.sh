@@ -127,7 +127,21 @@ update_arch() {
 		aur_helper="yay"
 	fi
     command="
-    $aur_helper -Syu
+    # Display Arch Linux ASCII Art
+    echo '        _      _   _       __   __     _       '
+    echo '       / \\    / \\  | |     /  \\ /  \\   | |      '
+    echo '      /   \\  /   \\ | |    /    \\    \\ | |       '
+    echo '     /     \\/     \\| |   /      \\    \\| |      '
+    echo '    |  ARCH LINUX   | |  |  LINUX   \\___| '
+    echo '      \\    /  | | /    \\       '
+    echo '                                  '
+    echo '          A R C H LINUX   '
+    echo '                                  '
+    echo '                                  '
+    echo '                                  '
+
+
+    $aur_helper -Syyu
     flatpak update -y || true
     read -n 1 -p 'Press any key to continue...'
     "
