@@ -146,6 +146,7 @@ update_arch() {
     read -n 1 -p 'Press any key to continue...'
     "
     kitty --title systemupdate sh -c "${command}"
+    echo "{\"total\":\"0\", \"tooltip\":\"0\"}"
 }
 
 
@@ -156,6 +157,7 @@ update_ubuntu() {
     read -n 1 -p 'Press any key to continue...'
     "
     kitty --title systemupdate sh -c "${command}"
+    echo "{\"total\":\"0\", \"tooltip\":\"0\"}"
 }
 
 
@@ -166,6 +168,7 @@ update_fedora() {
     read -n 1 -p 'Press any key to continue...'
     "
     kitty --title systemupdate sh -c "${command}"
+    echo "{\"total\":\"0\", \"tooltip\":\"0\"}"
 }
 
 update_opensuse() {
@@ -175,6 +178,7 @@ update_opensuse() {
     read -n 1 -p 'Press any key to continue...'
     "
     kitty --title systemupdate sh -c "${command}"
+    echo "{\"total\":\"0\", \"tooltip\":\"0\"}"
 }
 
 
