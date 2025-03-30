@@ -13,7 +13,7 @@ Layout = TypedDict(
 
 # Power button configuration
 PowerButton = TypedDict(
-    "PowerButton", {"icon": str, "tooltip": bool, "items": List[str]}
+    "PowerButton", {"icon": str, "tooltip": bool, "buttons": List[str]}
 )
 
 # HyprSunset configuration

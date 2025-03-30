@@ -32,6 +32,10 @@
   border-radius: 10px 24px;
 }
 
+.default {
+  border-radius: variable.$radius-large;
+}
+
 #panel {
   &-inner {
     $bar-opacity-ratio: variable.$bar-opacity * .01;
@@ -61,15 +65,16 @@
   background-color: theme.$background-dark;
 }
 
-.default {
-  border-radius: variable.$radius-large;
-}
 
 .panel-box {
   border-radius: variable.$radius-large;
   padding: .1em .9em;
   color: theme.$text-main;
-  font-weight: 700;
+
+  label {
+    color: theme.$text-main;
+    font-weight: variable.$font-weight;
+  }
 }
 
 
@@ -361,10 +366,6 @@ scrollbar {
 }
 
 
-
-#cava {
-  color: theme.$text-main;
-}
 
 #volumemenu {
   min-width: 5rem;
