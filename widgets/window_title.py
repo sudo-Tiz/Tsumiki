@@ -12,7 +12,7 @@ class WindowTitleWidget(ButtonWidget):
     """a widget that displays the title of the active window."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(widget_config, name="window-box", **kwargs)
+        super().__init__(widget_config, name="window_title", **kwargs)
 
         # Store the configuration for the window title
         self.config = widget_config["window_title"]

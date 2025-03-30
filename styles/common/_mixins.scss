@@ -236,3 +236,32 @@
     }
   }
 }
+
+
+@mixin widget_style($type) {
+  @if $type ==flat {
+    @extend .flat;
+  }
+
+  @else if $type ==shadow {
+    @extend .shadow;
+  }
+
+  @else if $type ==bordered {
+    @extend .bordered;
+  }
+
+  @else if $type ==wave1 {
+    @extend .wave1;
+    @extend %debug;
+    @debug "wave1";
+  }
+
+  @else if $type ==wave2 {
+    @extend .wave2;
+  }
+
+  @else {
+    @extend .default;
+  }
+}

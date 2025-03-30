@@ -10,7 +10,7 @@ class HyprPickerWidget(ButtonWidget):
     """A widget to pick a color."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(widget_config, name="hypr-picker", **kwargs)
+        super().__init__(widget_config, name="hypr_picker", **kwargs)
 
         self.config = widget_config["hypr_picker"]
 

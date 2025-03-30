@@ -32,15 +32,7 @@ class EventBoxWidget(EventBox):
             name="panel-eventbox",
             **kwargs,
         )
-
-        widget_style = config["general"]["widget_style"]
-        self.add_style_class(widget_style)
         setup_cursor_hover(self)
-
-        # hacky way to add style class to the child widget. but honest work
-        self.connect(
-            "child-notify", lambda *_: self.children[0].add_style_class(widget_style)
-        )
 
 
 class ButtonWidget(Button):
@@ -49,6 +41,7 @@ class ButtonWidget(Button):
     def __init__(self, config, **kwargs):
         super().__init__(
             style_classes="panel-button",
+
             **kwargs,
         )
 

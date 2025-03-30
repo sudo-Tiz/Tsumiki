@@ -17,6 +17,7 @@ class VolumeWidget(EventBoxWidget):
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(
             widget_config,
+            name="volume",
             events=["scroll", "smooth-scroll", "enter-notify-event"],
             **kwargs,
         )

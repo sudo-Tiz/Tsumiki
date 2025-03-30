@@ -9,7 +9,7 @@ class WorkSpacesWidget(BoxWidget):
     """A widget to display the current workspaces."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(name="workspaces-box", **kwargs)
+        super().__init__(name="workspaces", **kwargs)
 
         self.config = widget_config["workspaces"]
 
