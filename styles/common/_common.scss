@@ -573,12 +573,16 @@ menu#ocr-menu {
   }
 }
 
-#keyboard_layout {
-  border-radius: variable.$bar-widgets-keyboard_layout-border-radius;
-  border: if(variable.$bar-widgets-keyboard_layout-border-enabled, variable.$border, none);
-  border-width: variable.$bar-widgets-keyboard_layout-border-width;
+#keyboard {
+  border-radius: variable.$bar-widgets-keyboard-border-radius;
+  border: if(variable.$bar-widgets-keyboard-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-keyboard-border-width;
 
 
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-keyboard-icon_size;
+    margin-right: variable.$bar-widgets-keyboard-spacing;
+  }
 
 
 }
@@ -638,16 +642,16 @@ menu#ocr-menu {
 
 }
 
-#power_button {
-  border-radius: variable.$bar-widgets-power_button-border-radius;
-  border: if(variable.$bar-widgets-power_button-border-enabled, variable.$border, none);
-  border-width: variable.$bar-widgets-power_button-border-width;
+#power {
+  border-radius: variable.$bar-widgets-power-border-radius;
+  border: if(variable.$bar-widgets-power-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-power-border-width;
 
 
 
   #nerd-icon.panel-icon {
-    font-size: variable.$bar-widgets-power_button-icon_size;
-    margin-right: variable.$bar-widgets-power_button-spacing;
+    font-size: variable.$bar-widgets-power-icon_size;
+    margin-right: variable.$bar-widgets-power-spacing;
   }
 }
 
@@ -693,6 +697,15 @@ menu#ocr-menu {
   border-radius: variable.$bar-widgets-systray-border-radius;
   border: if(variable.$bar-widgets-systray-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-systray-border-width;
+
+
+}
+
+
+#quick_settings{
+  border-radius: variable.$bar-widgets-quick_settings-border-radius;
+  border: if(variable.$bar-widgets-quick_settings-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-quick_settings-border-width;
 
 
 }

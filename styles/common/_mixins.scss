@@ -253,8 +253,6 @@
 
   @else if $type ==wave1 {
     @extend .wave1;
-    @extend %debug;
-    @debug "wave1";
   }
 
   @else if $type ==wave2 {

@@ -359,7 +359,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
     """A button to display the date and time."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(widget_config, name="quick-settings-button", **kwargs)
+        super().__init__(widget_config, name="quick_settings", **kwargs)
 
         self.config = widget_config["quick_settings"]
         self.panel_icon_size = 16
