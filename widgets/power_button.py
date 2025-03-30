@@ -41,6 +41,7 @@ class PowerMenuPopup(PopupWindow):
                     orientation="h",
                     children=[
                         PowerControlButtons(
+                            config=config,
                             name=value,
                             size=self.icon_size,
                         )
@@ -51,6 +52,7 @@ class PowerMenuPopup(PopupWindow):
                     orientation="h",
                     children=[
                         PowerControlButtons(
+                            config=config,
                             name=value,
                             size=self.icon_size,
                         )
@@ -81,12 +83,13 @@ class PowerMenuPopup(PopupWindow):
 class PowerControlButtons(ButtonWidget):
     """A widget to show power options."""
 
-    def __init__(self, name: str, size: int, show_label=True, **kwargs):
+    def __init__(self,config, name: str, size: int, show_label=True, **kwargs):
         (
             super().__init__(
+                config=config,
                 orientation="v",
                 name="power-control-button",
-                on_clicked=lambda button: self.on_button_press(pressed_button=name),
+                on_clicked=lambda _: self.on_button_press(pressed_button=name),
                 child=Box(
                     orientation="v",
                     children=[
