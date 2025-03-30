@@ -11,7 +11,6 @@
 }
 
 
-
 .flat {
   border-radius: 4px;
 }
@@ -88,6 +87,7 @@
 
   label {
     color: theme.$text-main;
+    font-weight: variable.$font-weight;
   }
 
   &:hover {

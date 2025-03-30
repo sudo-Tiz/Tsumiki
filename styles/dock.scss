@@ -60,5 +60,5 @@ $shadow: 0 0 0 variable.$bar-border-width theme.$shadow-color,
   background: linear-gradient(to top, transparent, var(--surface-bright));
   border-bottom: variable.$dock-border-width solid theme.$shadow-color;
   border-top: variable.$dock-border-width solid theme.$surface-neutral;
-  padding: 3px 4px;
+  padding: 4px;
 }
