@@ -787,9 +787,3 @@ menu#ocr-menu {
     margin-right: variable.$bar-widgets-window_title-spacing;
   }
 }
-
-#workspaces {
-  border-radius: variable.$bar-widgets-workspaces-border-radius;
-  border: if(variable.$bar-widgets-workspaces-border-enabled, variable.$border, none);
-  border-width: variable.$bar-widgets-workspaces-border-width;
-}

@@ -2,17 +2,19 @@
 @use "common" as common;
 @use "variable.scss";
 
-$workspace-transition:
-  padding 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+$workspace-transition: padding 0.3s cubic-bezier(0.4, 0, 0.2, 1),
   background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
 /** workspace switcher widget */
 
 #workspaces {
   padding: 0.19em 1em;
+  border-radius: variable.$bar-widgets-workspaces-border-radius;
+  border: if(variable.$bar-widgets-workspaces-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-workspaces-border-width;
   font-weight: 700;
 
-  & > button {
+  &>button {
     padding: common.toEm(2) 0.5em;
     transition: $workspace-transition;
     border-radius: variable.$radius-large;
@@ -39,7 +41,7 @@ $workspace-transition:
       min-width: 1.4rem;
       transition: $workspace-transition;
 
-      & > label {
+      &>label {
         color: theme.$background-dark;
       }
     }
