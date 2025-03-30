@@ -10,7 +10,7 @@ class DesktopClock(Window):
 
     def __init__(self, date_format: str, anchor: str, **kwargs):
         super().__init__(
-            name="desktop-clock",
+            name="desktop_clock",
             layer="bottom",
             anchor=anchor,
             exclusivity="none",

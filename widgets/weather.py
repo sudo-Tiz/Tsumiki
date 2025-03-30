@@ -222,7 +222,7 @@ class WeatherWidget(ButtonWidget):
         # Initialize the Box with specific name and style
         super().__init__(
             widget_config,
-            name="weather-button",
+            name="weather",
             **kwargs,
         )
 
@@ -232,17 +232,14 @@ class WeatherWidget(ButtonWidget):
 
         self.bar = bar
 
-        self.box = Box(
-            name="weather",
-            style_classes="panel-box",
-        )
+        self.box = Box()
 
         self.children = self.box
 
         self.weather_icon = text_icon(
             icon="",
             props={
-                "style_classes": "weather-bar-icon",
+                "style_classes": "panel-icon",
             },
         )
 
