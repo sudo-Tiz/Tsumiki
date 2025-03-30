@@ -41,7 +41,6 @@ class ButtonWidget(Button):
     def __init__(self, config, **kwargs):
         super().__init__(
             style_classes="panel-button",
-
             **kwargs,
         )
 

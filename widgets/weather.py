@@ -232,17 +232,14 @@ class WeatherWidget(ButtonWidget):
 
         self.bar = bar
 
-        self.box = Box(
-            name="weather",
-            style_classes="panel-box",
-        )
+        self.box = Box()
 
         self.children = self.box
 
         self.weather_icon = text_icon(
             icon="",
             props={
-                "style_classes": "weather-bar-icon",
+                "style_classes": "panel-icon",
             },
         )
 
