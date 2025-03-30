@@ -5,6 +5,7 @@ from fabric.widgets.label import Label
 
 from services import PowerProfiles
 from shared import QuickSubMenu, QuickSubToggle
+from shared.widget_container import HoverButton
 
 
 class PowerProfileItem(Button):
@@ -67,9 +68,7 @@ class PowerProfileSubMenu(QuickSubMenu):
             for key, profile in self.profiles.items()
         }
 
-        self.scan_button = Button(
-            style="background-color: transparent",
-        )
+        self.scan_button = HoverButton()
 
         profile_items = list(self.profile_items.values())
         profile_box = Box(

@@ -454,6 +454,10 @@ menu#ocr-menu {
   border-width: variable.$bar-widgets-network_usage-border-width;
 
 
+  #upload_label{
+    margin-right: variable.$bar-widgets-network_usage-spacing;
+  }
+
   #nerd-icon.panel-icon {
     font-size: variable.$bar-widgets-network_usage-icon_size;
     margin-right: variable.$bar-widgets-network_usage-spacing;
@@ -702,7 +706,7 @@ menu#ocr-menu {
 }
 
 
-#quick_settings{
+#quick_settings {
   border-radius: variable.$bar-widgets-quick_settings-border-radius;
   border: if(variable.$bar-widgets-quick_settings-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-quick_settings-border-width;
@@ -787,6 +791,4 @@ menu#ocr-menu {
   border-radius: variable.$bar-widgets-workspaces-border-radius;
   border: if(variable.$bar-widgets-workspaces-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-workspaces-border-width;
-
-
 }

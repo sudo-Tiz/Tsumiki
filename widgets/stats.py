@@ -244,7 +244,7 @@ class NetworkUsageWidget(ButtonWidget):
         )
 
         self.upload_label = Label(
-            name="network_usage",
+            name="upload_label",
             label="0 MB",
             style_classes="panel-text",
             visible=show_upload,
@@ -257,7 +257,7 @@ class NetworkUsageWidget(ButtonWidget):
         )
 
         self.download_label = Label(
-            name="network_usage",
+            name="download_label",
             label="0 MB",
             style_classes="panel-text",
             visible=show_download,
