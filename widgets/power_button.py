@@ -83,29 +83,28 @@ class PowerMenuPopup(PopupWindow):
 class PowerControlButtons(ButtonWidget):
     """A widget to show power options."""
 
-    def __init__(self,config, name: str, size: int, show_label=True, **kwargs):
-        (
-            super().__init__(
-                config=config,
+    def __init__(self, config, name: str, size: int, show_label=True, **kwargs):
+        self.config = config
+        super().__init__(
+            config=config,
+            orientation="v",
+            name="power-control-button",
+            on_clicked=lambda _: self.on_button_press(pressed_button=name),
+            child=Box(
                 orientation="v",
-                name="power-control-button",
-                on_clicked=lambda _: self.on_button_press(pressed_button=name),
-                child=Box(
-                    orientation="v",
-                    children=[
-                        Image(
-                            image_file=get_relative_path(f"../assets/icons/{name}.png"),
-                            size=size,
-                        ),
-                        Label(
-                            label=name.capitalize(),
-                            style_classes="panel-text",
-                            visible=show_label,
-                        ),
-                    ],
-                ),
-                **kwargs,
+                children=[
+                    Image(
+                        image_file=get_relative_path(f"../assets/icons/{name}.png"),
+                        size=size,
+                    ),
+                    Label(
+                        label=name.capitalize(),
+                        style_classes="panel-text",
+                        visible=show_label,
+                    ),
+                ],
             ),
+            **kwargs,
         )
 
     def on_button_press(
@@ -119,7 +118,7 @@ class PowerControlButtons(ButtonWidget):
             "reboot",
         ],
     ):
-        PowerMenuPopup.get_default().toggle_popup()
+        PowerMenuPopup.get_default(widget_config=self.config).toggle_popup()
         return handle_power_action(pressed_button)
 
 
