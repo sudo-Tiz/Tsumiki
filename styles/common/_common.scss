@@ -355,21 +355,18 @@ scrollbar {
   min-width: .3em;
 }
 
-#corner {
-  background-color: theme.$bar-background;
-  border-radius: 0;
-}
+
+// widgets styles
 
 #corner-container {
   min-width: 20px;
   min-height: 20px;
+  #corner {
+      background-color: theme.$bar-background;
+      border-radius: 0;
+    }
 }
 
-
-
-#volumemenu {
-  min-width: 5rem;
-}
 
 .cover {
   min-height: .8em;
@@ -409,18 +406,19 @@ menu#ocr-menu {
 
 .desktop-clock-box {
   margin: 0 15rem 15rem 15rem;
+
+  #clock>label {
+      font-size: 9rem;
+      font-weight: 600;
+      @extend %desktop-widget;
+    }
+
+    #date>label {
+      @extend %title_1;
+      @extend %desktop-widget;
+    }
 }
 
-#clock>label {
-  font-size: 9rem;
-  font-weight: 600;
-  @extend %desktop-widget;
-}
-
-#date>label {
-  @extend %title_1;
-  @extend %desktop-widget;
-}
 
 
 #cpu {
