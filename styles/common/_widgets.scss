@@ -1,0 +1,356 @@
+@use "mixins";
+@use "../variable.scss";
+
+
+#desktop-clock-box {
+  margin: 0 15rem 15rem 15rem;
+
+  #clock>label {
+    font-size: 9rem;
+    font-weight: 600;
+    @extend %desktop-widget;
+  }
+
+  #date>label {
+    @extend %title_1;
+    @extend %desktop-widget;
+  }
+}
+
+
+
+#cpu {
+  border-radius: variable.$bar-widgets-cpu-border-radius;
+  border: if(variable.$bar-widgets-cpu-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-cpu-border-width;
+
+
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-cpu-icon_size;
+    margin-right: variable.$bar-widgets-cpu-spacing;
+  }
+}
+
+#memory {
+  border-radius: variable.$bar-widgets-memory-border-radius;
+  border: if(variable.$bar-widgets-memory-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-memory-border-width;
+
+
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-memory-icon_size;
+    margin-right: variable.$bar-widgets-memory-spacing;
+  }
+}
+
+#network_usage {
+  border-radius: variable.$bar-widgets-network_usage-border-radius;
+  border: if(variable.$bar-widgets-network_usage-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-network_usage-border-width;
+
+
+  #upload_label {
+    margin-right: variable.$bar-widgets-network_usage-spacing;
+  }
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-network_usage-icon_size;
+    margin-right: variable.$bar-widgets-network_usage-spacing;
+  }
+}
+
+#storage {
+  border-radius: variable.$bar-widgets-storage-border-radius;
+  border: if(variable.$bar-widgets-storage-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-storage-border-width;
+
+
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-storage-icon_size;
+    margin-right: variable.$bar-widgets-storage-spacing;
+  }
+}
+
+#battery {
+  border-radius: variable.$bar-widgets-battery-border-radius;
+  border: if(variable.$bar-widgets-battery-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-battery-border-width;
+
+
+}
+
+#bluetooth {
+  border-radius: variable.$bar-widgets-bluetooth-border-radius;
+  border: if(variable.$bar-widgets-bluetooth-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-bluetooth-border-width;
+
+
+}
+
+#brightness {
+  border-radius: variable.$bar-widgets-brightness-border-radius;
+  border: if(variable.$bar-widgets-brightness-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-brightness-border-width;
+
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-brightness-icon_size;
+    margin-right: variable.$bar-widgets-brightness-spacing;
+  }
+}
+
+#cava {
+  border-radius: variable.$bar-widgets-cava-border-radius;
+  border: if(variable.$bar-widgets-cava-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-cava-border-width;
+
+}
+
+#click_counter {
+  border-radius: variable.$bar-widgets-click_counter-border-radius;
+  border: if(variable.$bar-widgets-click_counter-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-click_counter-border-width;
+
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-click_counter-icon_size;
+    margin-right: variable.$bar-widgets-click_counter-spacing;
+  }
+}
+
+#datetime_menu {
+  border-radius: variable.$bar-widgets-datetime_menu-border-radius;
+  border: if(variable.$bar-widgets-datetime_menu-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-datetime_menu-border-width;
+
+}
+
+#desktop_clock {
+  border-radius: variable.$bar-widgets-desktop_clock-border-radius;
+  border: if(variable.$bar-widgets-desktop_clock-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-desktop_clock-border-width;
+
+}
+
+#hypr_idle {
+  border-radius: variable.$bar-widgets-hypr_idle-border-radius;
+  border: if(variable.$bar-widgets-hypr_idle-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-hypr_idle-border-width;
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-hypr_idle-icon_size;
+    margin-right: variable.$bar-widgets-hypr_idle-spacing;
+  }
+}
+
+#hypr_picker {
+  border-radius: variable.$bar-widgets-hypr_picker-border-radius;
+  border: if(variable.$bar-widgets-hypr_picker-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-hypr_picker-border-width;
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-hypr_picker-icon_size;
+    margin-right: variable.$bar-widgets-hypr_picker-spacing;
+  }
+}
+
+#hypr_sunset {
+  border-radius: variable.$bar-widgets-hypr_sunset-border-radius;
+  border: if(variable.$bar-widgets-hypr_sunset-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-hypr_sunset-border-width;
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-hypr_sunset-icon_size;
+    margin-right: variable.$bar-widgets-hypr_sunset-spacing;
+  }
+}
+
+#keyboard {
+  border-radius: variable.$bar-widgets-keyboard-border-radius;
+  border: if(variable.$bar-widgets-keyboard-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-keyboard-border-width;
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-keyboard-icon_size;
+    margin-right: variable.$bar-widgets-keyboard-spacing;
+  }
+}
+
+#language {
+  border-radius: variable.$bar-widgets-language-border-radius;
+  border: if(variable.$bar-widgets-language-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-language-border-width;
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-language-icon_size;
+    margin-right: variable.$bar-widgets-language-spacing;
+  }
+}
+
+#microphone {
+  border-radius: variable.$bar-widgets-microphone-border-radius;
+  border: if(variable.$bar-widgets-microphone-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-microphone-border-width;
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-microphone-icon_size;
+    margin-right: variable.$bar-widgets-microphone-spacing;
+  }
+}
+
+#mpris {
+  border-radius: variable.$bar-widgets-mpris-border-radius;
+  border: if(variable.$bar-widgets-mpris-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-mpris-border-width;
+
+}
+
+#ocr {
+  border-radius: variable.$bar-widgets-ocr-border-radius;
+  border: if(variable.$bar-widgets-ocr-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-ocr-border-width;
+
+  label {
+    font-size: variable.$bar-widgets-ocr-icon_size;
+    margin-right: variable.$bar-widgets-ocr-spacing;
+  }
+
+}
+
+#overview {
+  border-radius: variable.$bar-widgets-overview-border-radius;
+  border: if(variable.$bar-widgets-overview-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-overview-border-width;
+
+}
+
+#power {
+  border-radius: variable.$bar-widgets-power-border-radius;
+  border: if(variable.$bar-widgets-power-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-power-border-width;
+
+
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-power-icon_size;
+    margin-right: variable.$bar-widgets-power-spacing;
+  }
+}
+
+
+
+#recorder {
+  border-radius: variable.$bar-widgets-recorder-border-radius;
+  border: if(variable.$bar-widgets-recorder-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-recorder-border-width;
+
+}
+
+
+#stop_watch {
+  border-radius: variable.$bar-widgets-stop_watch-border-radius;
+  border: if(variable.$bar-widgets-stop_watch-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-stop_watch-border-width;
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-stop_watch-icon_size;
+    margin-right: variable.$bar-widgets-stop_watch-spacing;
+  }
+}
+
+#submap {
+  border-radius: variable.$bar-widgets-submap-border-radius;
+  border: if(variable.$bar-widgets-submap-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-submap-border-width;
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-submap-icon_size;
+    margin-right: variable.$bar-widgets-submap-spacing;
+  }
+}
+
+#systray {
+  border-radius: variable.$bar-widgets-systray-border-radius;
+  border: if(variable.$bar-widgets-systray-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-systray-border-width;
+
+}
+
+
+#quick_settings {
+  border-radius: variable.$bar-widgets-quick_settings-border-radius;
+  border: if(variable.$bar-widgets-quick_settings-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-quick_settings-border-width;
+
+}
+
+#taskbar {
+  border-radius: variable.$bar-widgets-taskbar-border-radius;
+  border: if(variable.$bar-widgets-taskbar-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-taskbar-border-width;
+
+}
+
+#theme_switcher {
+  border-radius: variable.$bar-widgets-theme-border-radius;
+  border: if(variable.$bar-widgets-theme-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-theme-border-width;
+
+
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-theme-icon_size;
+    margin-right: variable.$bar-widgets-theme-spacing;
+  }
+}
+
+#updates {
+  border-radius: variable.$bar-widgets-updates-border-radius;
+  border: if(variable.$bar-widgets-updates-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-updates-border-width;
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-updates-icon_size;
+    margin-right: variable.$bar-widgets-updates-spacing;
+  }
+}
+
+#volume {
+  border-radius: variable.$bar-widgets-volume-border-radius;
+  border: if(variable.$bar-widgets-volume-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-volume-border-width;
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-volume-icon_size;
+    margin-right: variable.$bar-widgets-volume-spacing;
+  }
+}
+
+#weather {
+  border-radius: variable.$bar-widgets-weather-border-radius;
+  border: if(variable.$bar-widgets-weather-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-weather-border-width;
+
+
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-weather-icon_size;
+    margin-right: variable.$bar-widgets-weather-spacing;
+  }
+}
+
+#window_title {
+  border-radius: variable.$bar-widgets-window_title-border-radius;
+  border: if(variable.$bar-widgets-window_title-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-window_title-border-width;
+
+
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-window_title-icon_size; // TODO: fix this
+    margin-right: variable.$bar-widgets-window_title-spacing;
+  }
+}

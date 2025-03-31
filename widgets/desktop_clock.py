@@ -15,7 +15,7 @@ class DesktopClock(Window):
             anchor=anchor,
             exclusivity="none",
             child=Box(
-                style_classes=["desktop-clock-box"],
+                name="desktop-clock-box",
                 orientation="v",
                 children=[
                     DateTime(formatters=["%I:%M"], name="clock"),

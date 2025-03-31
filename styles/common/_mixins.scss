@@ -20,7 +20,7 @@
 
 %desktop-widget {
   transition: color .5s ease;
-  color: color.mix(theme.$text-main, transparent, 70%);
+  color: theme.$text-main;
   font-family: "Jost*", sans-serif;
 }
 
