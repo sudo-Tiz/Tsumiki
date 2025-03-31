@@ -166,6 +166,7 @@ class SystemTrayWidget(ButtonWidget):
 
         # Check if item should be ignored completely
         ignored_list = self.config.get("ignored", [])
+
         if any(x.lower() in title.lower() for x in ignored_list):
             return
 
