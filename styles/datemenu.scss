@@ -3,8 +3,8 @@
 @use "common" as common;
 @use "variable.scss";
 
-#date-time-button {
-  .notification-count {
+#datetime_menu {
+  #notification-count {
     font-weight: 700;
     font-size: 11px;
   }
@@ -12,8 +12,8 @@
   separator {
     background-color: variable.$border-color;
     border-radius: variable.$radius;
-    margin: 5px 0px;
-    min-width: 1.2px;
+    margin: 2px 0px;
+    min-width: 2px;
   }
 }
 

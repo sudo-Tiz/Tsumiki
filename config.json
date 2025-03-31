@@ -634,9 +634,9 @@
 				"workspaces": {
 					"spacing": ".125em",
 					"pill": {
-						"height": "4em",
-						"width": "4em",
-						"active_width": "4em"
+						"height": ".125em",
+						"width": ".5em",
+						"active_width": "1em"
 					},
 					"border": {
 						"enabled": false,

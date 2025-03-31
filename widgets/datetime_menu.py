@@ -18,10 +18,11 @@ import utils.constants as constants
 import utils.functions as helpers
 from services import notification_service
 from shared import ButtonWidget, CustomImage, PopOverWindow, Separator
+from shared.widget_container import HoverButton
 from utils import BarConfig, Colors
 from utils.functions import uptime
 from utils.icons import icons
-from utils.widget_utils import get_icon, setup_cursor_hover, util_fabricator
+from utils.widget_utils import get_icon, util_fabricator
 
 
 class DateMenuNotification(EventBox):
@@ -259,7 +260,7 @@ class DateNotificationMenu(Box):
             name="clear-icon",
         )
 
-        self.clear_button = Button(
+        self.clear_button = HoverButton(
             name="clear-button",
             v_align="center",
             child=Box(
@@ -277,8 +278,6 @@ class DateNotificationMenu(Box):
                 self.clear_icon.set_from_icon_name(icons["trash"]["empty"], 15),
             ),
         )
-
-        setup_cursor_hover(self.clear_button)
 
         notification_column_header.pack_end(
             self.clear_button,
@@ -465,13 +464,13 @@ class DateTimeWidget(ButtonWidget):
 
         self.notification_indicator = Image(
             icon_name=icons["notifications"]["noisy"],
-            icon_size=15,
+            icon_size=14,
             visible=self.config["notification"],
         )
 
         count_label = Label(
+            name="notification-count",
             label=str(self.cache_notification_service.count),
-            style_classes="notification-count",
             v_align="start",
             visible=self.config["notification_count"] and self.config["notification"],
         )

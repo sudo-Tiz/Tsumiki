@@ -455,7 +455,7 @@ menu#ocr-menu {
   border-width: variable.$bar-widgets-network_usage-border-width;
 
 
-  #upload_label{
+  #upload_label {
     margin-right: variable.$bar-widgets-network_usage-spacing;
   }
 
@@ -530,7 +530,6 @@ menu#ocr-menu {
   border: if(variable.$bar-widgets-datetime_menu-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-datetime_menu-border-width;
 
-
 }
 
 #desktop_clock {
@@ -545,7 +544,6 @@ menu#ocr-menu {
   border: if(variable.$bar-widgets-hypr_idle-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-hypr_idle-border-width;
 
-
   #nerd-icon.panel-icon {
     font-size: variable.$bar-widgets-hypr_idle-icon_size;
     margin-right: variable.$bar-widgets-hypr_idle-spacing;
@@ -556,8 +554,6 @@ menu#ocr-menu {
   border-radius: variable.$bar-widgets-hypr_picker-border-radius;
   border: if(variable.$bar-widgets-hypr_picker-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-hypr_picker-border-width;
-
-
 
   #nerd-icon.panel-icon {
     font-size: variable.$bar-widgets-hypr_picker-icon_size;
@@ -570,8 +566,6 @@ menu#ocr-menu {
   border: if(variable.$bar-widgets-hypr_sunset-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-hypr_sunset-border-width;
 
-
-
   #nerd-icon.panel-icon {
     font-size: variable.$bar-widgets-hypr_sunset-icon_size;
     margin-right: variable.$bar-widgets-hypr_sunset-spacing;
@@ -583,21 +577,16 @@ menu#ocr-menu {
   border: if(variable.$bar-widgets-keyboard-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-keyboard-border-width;
 
-
   #nerd-icon.panel-icon {
     font-size: variable.$bar-widgets-keyboard-icon_size;
     margin-right: variable.$bar-widgets-keyboard-spacing;
   }
-
-
 }
 
 #language {
   border-radius: variable.$bar-widgets-language-border-radius;
   border: if(variable.$bar-widgets-language-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-language-border-width;
-
-
 
   #nerd-icon.panel-icon {
     font-size: variable.$bar-widgets-language-icon_size;
@@ -609,8 +598,6 @@ menu#ocr-menu {
   border-radius: variable.$bar-widgets-microphone-border-radius;
   border: if(variable.$bar-widgets-microphone-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-microphone-border-width;
-
-
 
   #nerd-icon.panel-icon {
     font-size: variable.$bar-widgets-microphone-icon_size;
@@ -630,8 +617,6 @@ menu#ocr-menu {
   border: if(variable.$bar-widgets-ocr-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-ocr-border-width;
 
-
-
   label {
     font-size: variable.$bar-widgets-ocr-icon_size;
     margin-right: variable.$bar-widgets-ocr-spacing;
@@ -643,7 +628,6 @@ menu#ocr-menu {
   border-radius: variable.$bar-widgets-overview-border-radius;
   border: if(variable.$bar-widgets-overview-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-overview-border-width;
-
 
 }
 
@@ -667,8 +651,6 @@ menu#ocr-menu {
   border: if(variable.$bar-widgets-recorder-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-recorder-border-width;
 
-
-
 }
 
 
@@ -676,8 +658,6 @@ menu#ocr-menu {
   border-radius: variable.$bar-widgets-stop_watch-border-radius;
   border: if(variable.$bar-widgets-stop_watch-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-stop_watch-border-width;
-
-
 
   #nerd-icon.panel-icon {
     font-size: variable.$bar-widgets-stop_watch-icon_size;
@@ -690,8 +670,6 @@ menu#ocr-menu {
   border: if(variable.$bar-widgets-submap-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-submap-border-width;
 
-
-
   #nerd-icon.panel-icon {
     font-size: variable.$bar-widgets-submap-icon_size;
     margin-right: variable.$bar-widgets-submap-spacing;
@@ -703,7 +681,6 @@ menu#ocr-menu {
   border: if(variable.$bar-widgets-systray-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-systray-border-width;
 
-
 }
 
 
@@ -711,7 +688,6 @@ menu#ocr-menu {
   border-radius: variable.$bar-widgets-quick_settings-border-radius;
   border: if(variable.$bar-widgets-quick_settings-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-quick_settings-border-width;
-
 
 }
 
@@ -740,8 +716,6 @@ menu#ocr-menu {
   border: if(variable.$bar-widgets-updates-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-updates-border-width;
 
-
-
   #nerd-icon.panel-icon {
     font-size: variable.$bar-widgets-updates-icon_size;
     margin-right: variable.$bar-widgets-updates-spacing;
@@ -752,9 +726,6 @@ menu#ocr-menu {
   border-radius: variable.$bar-widgets-volume-border-radius;
   border: if(variable.$bar-widgets-volume-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-volume-border-width;
-
-
-
 
   #nerd-icon.panel-icon {
     font-size: variable.$bar-widgets-volume-icon_size;
