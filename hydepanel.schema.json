@@ -587,6 +587,10 @@
 		"quick_settings": {
 			"type": "object",
 			"properties": {
+				"hover_reveal": {
+					"type": "boolean",
+					"description": "Determines whether to reveal the calendar on hover"
+				},
 				"media": {
 					"type": "object",
 					"properties": {
@@ -807,6 +811,10 @@
 					"calendar": {
 						"type": "boolean",
 						"description": "Determines whether to show the calendar icon"
+					},
+					"hover_reveal": {
+						"type": "boolean",
+						"description": "Determines whether to reveal the calendar on hover"
 					},
 					"uptime": {
 						"type": "boolean",

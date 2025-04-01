@@ -223,7 +223,13 @@ Overview = TypedDict("Overview", {})
 # DateTimeMenu configuration
 DateTimeMenu = TypedDict(
     "DateTimeMenu",
-    {"format": str, "notification_count": bool, "calendar": bool, "notification": bool},
+    {
+        "format": str,
+        "notification_count": bool,
+        "calendar": bool,
+        "notification": bool,
+        "hover_reveal": bool,
+    },
 )
 
 # ThemeSwitcher configuration
@@ -251,7 +257,7 @@ Media = TypedDict(
 )
 
 # QuickSettings configuration
-QuickSettings = TypedDict("QuickSettings", {"media": Media})
+QuickSettings = TypedDict("QuickSettings", {"media": Media, "hover_reveal": bool})
 
 # Spacing configuration
 Spacing = TypedDict("Spacing", {"size": int})

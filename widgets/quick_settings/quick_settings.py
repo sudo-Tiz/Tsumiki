@@ -1,6 +1,6 @@
 import os
 
-from fabric.utils import get_relative_path
+from fabric.utils import bulk_connect, get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.image import Image
@@ -399,9 +399,18 @@ class QuickSettingsButtonWidget(ButtonWidget):
                 self.brightness_icon,
             )
         )
-        self.connect(
-            "button-press-event",
-            lambda *_: popup.set_visible(not popup.get_visible()),
+
+        bulk_connect(
+            self,
+            {
+                "clicked": lambda *_: lambda *_: popup.set_visible(
+                    not popup.get_visible()
+                ),
+                "enter-notify-event": lambda *_: self.config["hover_reveal"]
+                and popup.set_visible(
+                    not popup.get_visible(),
+                ),
+            },
         )
 
         def get_network_icon(*_):

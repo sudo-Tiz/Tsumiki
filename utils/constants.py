@@ -40,6 +40,7 @@ DEFAULT_CONFIG = {
         "icon_size": 14,
     },
     "quick_settings": {
+        "hover_reveal": False,
         "media": {
             "ignore": [],
             "truncation_size": 26,
@@ -79,6 +80,7 @@ DEFAULT_CONFIG = {
         "notification": True,
         "clock_format": "12h",
         "uptime": True,
+        "hover_reveal": False,
     },
     "divider": {"size": 2},
     "hypr_idle": {
