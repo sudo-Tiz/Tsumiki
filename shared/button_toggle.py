@@ -1,4 +1,5 @@
-from fabric.utils import exec_shell_command_async
+import subprocess
+
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 
@@ -71,16 +72,23 @@ class CommandSwitcher(ButtonWidget):
 
     def toggle(self, *_):
         is_app_running = helpers.is_app_running(self.command_without_args)
+
         if is_app_running:
             helpers.kill_process(self.command_without_args)
         else:
-            exec_shell_command_async(f"bash -c '{self.command}&'", lambda *_: None)
-        self.update_ui(is_app_running)
+            subprocess.Popen(
+                self.command.split(" "),
+                stdin=subprocess.DEVNULL,  # No input stream
+                stdout=subprocess.DEVNULL,  # Optionally discard the output
+                stderr=subprocess.DEVNULL,  # Optionally discard the error output
+                start_new_session=True,  # This prevents the process from being killed
+            )
+
+        self.update_ui()
         return True
 
-    def update_ui(self, is_app_running: bool | None = None):
-        if is_app_running is None:
-            is_app_running = helpers.is_app_running(self.command_without_args)
+    def update_ui(self):
+        is_app_running = helpers.is_app_running(self.command_without_args)
 
         if is_app_running:
             self.add_style_class("active")
