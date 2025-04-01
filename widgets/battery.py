@@ -6,7 +6,11 @@ from services import battery_service
 from shared import ButtonWidget
 from utils import BarConfig
 from utils.functions import format_time
+import gi
 
+gi.require_version("Gdk", "3.0")
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk, Gdk, GdkPixbuf
 
 class BatteryWidget(ButtonWidget):
     """A widget to display the current battery status."""
@@ -46,6 +50,7 @@ class BatteryWidget(ButtonWidget):
             round(self.client.get_property("Percentage")) if is_present else 0
         )
 
+
         self.battery_label = Label(
             label=f"{battery_percent}%", style_classes="panel-text", visible=False
         )
@@ -65,8 +70,20 @@ class BatteryWidget(ButtonWidget):
 
         self.battery_icon = Image(
             icon_name=self.client.get_property("IconName"),
-            icon_size=14,
+            icon_size=self.config["icon_size"],
         )
+
+        if self.config["orientation"] == "horizontal":
+
+            # Get the Pixbuf from the Gtk.Image
+            pixbuf = Gtk.IconTheme.get_default().load_icon(
+                self.client.get_property("IconName"),
+                14,
+                Gtk.IconLookupFlags.FORCE_SIZE,
+            )
+
+            rotated_pixbuf = pixbuf.rotate_simple(GdkPixbuf.PixbufRotation.CLOCKWISE)
+            self.battery_icon.set_from_pixbuf(rotated_pixbuf)
 
         self.box.children = (self.battery_icon, self.battery_label)
 

@@ -127,6 +127,8 @@ Other components follow a similar structure, where each configuration defines th
     "tooltip": true,
     "hide_label_when_full": true,
     "full_battery_level": 100,
+    "orientation": "vertical",
+    "icon_size": 22,
 }
 ```
 
@@ -141,6 +143,9 @@ Other components follow a similar structure, where each configuration defines th
 
 - **full_battery_level** (integer):
   Defines the battery level percentage at which the system is considered to be fully charged. The default is 100.
+
+- **orientation** (string; enum: "horizontal", "vertical"):
+  Specifies the orientation of the battery display. It can be either horizontal or vertical.
 
 ## Bluetooth
 
