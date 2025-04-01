@@ -47,6 +47,7 @@ class WeatherService:
             current_weather = data["current_condition"][0]
             weather = data["weather"][0]
             hourly_weather = weather["hourly"]
+            location = data["nearest_area"][0]["areaName"][0]["value"]
 
             return {
                 "location": location.capitalize(),
