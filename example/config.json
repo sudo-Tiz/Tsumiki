@@ -72,7 +72,8 @@
 			"window_title"
 		], // this is the left section of the panel
 		"middle_section": [
-			"date_time"
+			"date_time",
+			"power"
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
@@ -175,14 +176,16 @@
 	"power": {
 		"icon": "󰐥",
 		"tooltip": true,
-		"buttons": [
-			"suspend",
-			"hibernate",
-			"shutdown",
-			"reboot",
-			"logout",
-			"lock"
-		]
+		"items_per_row": 3,
+		"icon_size": 100,
+		"buttons": {
+			"shutdown": "systemctl poweroff",
+			"reboot": "systemctl reboot",
+			"hibernate": "systemctl hibernate",
+			"suspend": "systemctl suspend",
+			"lock": "loginctl lock-session",
+			"logout": "loginctl terminate-user $USER",
+		},
 	},
 	"recorder": {
 		"path": "Videos/Screencasting",
@@ -292,7 +295,7 @@
 			"border": {
 				"enabled": false,
 				"width": "1px",
-					"radius": "16px"
+				"radius": "16px"
 			}
 		},
 		"notification": {
@@ -312,7 +315,7 @@
 			"border": {
 				"enabled": false,
 				"width": "1px",
-					"radius": "16px"
+				"radius": "16px"
 			}
 		},
 		"bar": {
@@ -333,7 +336,7 @@
 			"border": {
 				"enabled": true,
 				"width": "4px",
-					"radius": "16px"
+				"radius": "16px"
 			},
 			"buttons": {
 				"scaling": 100,
@@ -358,7 +361,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"memory": {
@@ -367,7 +370,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"storage": {
@@ -376,7 +379,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"network_usage": {
@@ -385,7 +388,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"battery": {
@@ -394,7 +397,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"bluetooth": {
@@ -403,7 +406,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"brightness": {
@@ -412,7 +415,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"cava": {
@@ -420,7 +423,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"click_counter": {
@@ -429,7 +432,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"datetime_menu": {
@@ -437,7 +440,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"desktop_clock": {
@@ -445,7 +448,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"hypr_idle": {
@@ -454,7 +457,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"hypr_picker": {
@@ -463,7 +466,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"hypr_sunset": {
@@ -472,7 +475,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"keyboard": {
@@ -481,7 +484,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"language": {
@@ -490,7 +493,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"microphone": {
@@ -499,7 +502,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"mpris": {
@@ -507,7 +510,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"ocr": {
@@ -516,7 +519,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"overview": {
@@ -524,7 +527,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"power": {
@@ -533,7 +536,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"recorder": {
@@ -541,7 +544,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"stop_watch": {
@@ -550,7 +553,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"submap": {
@@ -559,7 +562,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"systray": {
@@ -575,7 +578,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"taskbar": {
@@ -583,7 +586,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"theme": {
@@ -592,7 +595,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"updates": {
@@ -601,7 +604,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"volume": {
@@ -610,7 +613,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"weather": {
@@ -619,7 +622,7 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"window_title": {
@@ -628,15 +631,20 @@
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				},
 				"workspaces": {
 					"spacing": ".125em",
+					"pill": {
+						"height": ".125em",
+						"width": ".5em",
+						"active_width": "1em"
+					},
 					"border": {
 						"enabled": false,
 						"width": "1px",
-							"radius": "16px"
+						"radius": "16px"
 					}
 				}
 			},
@@ -646,7 +654,7 @@
 				"border": {
 					"enabled": false,
 					"width": "1px",
-						"radius": "16px"
+					"radius": "16px"
 				},
 				"popover": {
 					"scaling": 100,

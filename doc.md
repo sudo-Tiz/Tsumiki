@@ -352,7 +352,17 @@ Other components follow a similar structure, where each configuration defines th
 ## Power Button
 
 ```json
-"power": {"icon": "󰐥","tooltip": true, "buttons": ["power", "logout", "reboot", "shutdown"] }
+"power": {"icon": "󰐥","tooltip": true,
+        "items_per_row": 3,
+        "icon_size": 100,
+        "buttons": {
+            "shutdown": "systemctl poweroff",
+            "reboot": "systemctl reboot",
+            "hibernate": "systemctl hibernate",
+            "suspend": "systemctl suspend",
+            "lock": "loginctl lock-session",
+            "logout": "loginctl terminate-user $USER",
+        }, }
 
 ```
 
@@ -362,8 +372,20 @@ Other components follow a similar structure, where each configuration defines th
 - **tooltip** (boolean):
   Whether to show a tooltip. In this case, it is set to true.
 
-- **buttons** (array):
-  List of buttons to show. In this case, it is set to ["power", "logout", "reboot", "shutdown"].
+- **buttons** (object):
+  A dictionary of buttons and their corresponding commands. In this case, the buttons are defined as follows:
+  - **shutdown**: Executes the command "systemctl poweroff".
+  - **reboot**: Executes the command "systemctl reboot".
+  - **hibernate**: Executes the command "systemctl hibernate".
+  - **suspend**: Executes the command "systemctl suspend".
+  - **lock**: Executes the command "loginctl lock-session".
+  - **logout**: Executes the command "loginctl terminate-user $USER".
+
+- **items_per_row** (integer):
+  The number of items to display per row. In this case, it is set to 3.
+
+- **icon_size** (integer):
+  The size of the icon in number. In this case, it is set to 100.
 
 ## Recorder
 

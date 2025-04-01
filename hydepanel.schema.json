@@ -726,25 +726,43 @@
 				"properties": {
 					"icon": {
 						"type": "string",
-						"description": "Icon name from icon theme"
+						"description": "Icon string from icon theme"
 					},
 					"tooltip": {
 						"type": "boolean",
 						"description": "Determines whether the power widget has a tooltip"
 					},
+					"items_per_row": {
+						"type": "integer",
+						"description": "Number of items to display per row in the power widget",
+						"minimum": 1
+					},
+					"icon_size": {
+						"type": "integer",
+						"description": "Number of items to display in the power widget"
+					},
 					"buttons": {
-						"type": "array",
-						"items": {
-							"type": "string",
-							"description": "List of power buttons to display",
-							"enum": [
-								"logout",
-								"reboot",
-								"shutdown",
-								"suspend",
-								"lock",
-								"hibernate"
-							]
+						"type": "object",
+						"description": "Specifies the actions for the power widget buttons",
+						"properties": {
+							"shutdown": {
+								"type": "string"
+							},
+							"reboot": {
+								"type": "string"
+							},
+							"hibernate": {
+								"type": "string"
+							},
+							"suspend": {
+								"type": "string"
+							},
+							"lock": {
+								"type": "string"
+							},
+							"logout": {
+								"type": "string"
+							}
 						}
 					}
 				}

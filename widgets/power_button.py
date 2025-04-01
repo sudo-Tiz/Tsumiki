@@ -1,14 +1,12 @@
-from typing import Literal
-
-from fabric.utils import get_relative_path
+from fabric.utils import exec_shell_command_async, get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.widget import Widget
+from gi.repository import Gtk
 
 from shared import ButtonWidget, PopupWindow
 from utils import BarConfig
-from utils.functions import handle_power_action
 from utils.widget_utils import text_icon
 
 
@@ -29,38 +27,34 @@ class PowerMenuPopup(PopupWindow):
         config,
         **kwargs,
     ):
-        self.icon_size = 100
+        self.icon_size = config["icon_size"]
 
         power_buttons_list = config["buttons"]
 
-        self.menu = Box(
-            name="power-button-menu",
-            orientation="v",
-            children=[
-                Box(
-                    orientation="h",
-                    children=[
-                        PowerControlButtons(
-                            config=config,
-                            name=value,
-                            size=self.icon_size,
-                        )
-                        for value in power_buttons_list[0:3]
-                    ],
-                ),
-                Box(
-                    orientation="h",
-                    children=[
-                        PowerControlButtons(
-                            config=config,
-                            name=value,
-                            size=self.icon_size,
-                        )
-                        for value in power_buttons_list[3:]
-                    ],
-                ),
-            ],
+        self.grid = Gtk.Grid(
+            visible=True,
+            column_homogeneous=True,
+            row_homogeneous=True,
         )
+
+        self.row = 0
+        self.column = 0
+        self.max_columns = config["items_per_row"]
+
+        for index, (key, value) in enumerate(power_buttons_list.items()):
+            button = PowerControlButtons(
+                config=config,
+                name=key,
+                command=value,
+                size=self.icon_size,
+            )
+            self.grid.attach(button, self.column, self.row, 1, 1)
+            self.column += 1
+            if self.column >= self.max_columns:
+                self.column = 0
+                self.row += 1
+
+        self.menu = Box(name="power-button-menu", orientation="v", children=self.grid)
 
         super().__init__(
             transition_type="crossfade",
@@ -83,13 +77,15 @@ class PowerMenuPopup(PopupWindow):
 class PowerControlButtons(ButtonWidget):
     """A widget to show power options."""
 
-    def __init__(self, config, name: str, size: int, show_label=True, **kwargs):
+    def __init__(
+        self, config, name: str, command: str, size: int, show_label=True, **kwargs
+    ):
         self.config = config
         super().__init__(
             config=config,
             orientation="v",
             name="power-control-button",
-            on_clicked=lambda _: self.on_button_press(pressed_button=name),
+            on_clicked=lambda _: self.on_button_press(command=command),
             child=Box(
                 orientation="v",
                 children=[
@@ -109,17 +105,11 @@ class PowerControlButtons(ButtonWidget):
 
     def on_button_press(
         self,
-        pressed_button: Literal[
-            "lock",
-            "logout",
-            "suspend",
-            "hibernate",
-            "shutdown",
-            "reboot",
-        ],
+        command: str,
     ):
         PowerMenuPopup.get_default(widget_config=self.config).toggle_popup()
-        return handle_power_action(pressed_button)
+        exec_shell_command_async(command, lambda *_: None)
+        return True
 
 
 class PowerWidget(ButtonWidget):

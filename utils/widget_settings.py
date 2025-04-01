@@ -1,4 +1,4 @@
-from typing import List, Literal, TypedDict
+from typing import Dict, List, Literal, TypedDict
 
 # Define the type
 Layer = Literal["background", "bottom", "top", "overlay"]
@@ -13,7 +13,20 @@ Layout = TypedDict(
 
 # Power button configuration
 PowerButton = TypedDict(
-    "PowerButton", {"icon": str, "tooltip": bool, "buttons": List[str]}
+    "PowerButton",
+    {
+        "icon": str,
+        "icon_size": int,
+        "tooltip": bool,
+        "items_per_row": int,
+        "buttons": Dict[
+            Dict[
+                Literal["shutdown", "reboot", "hibernate", "suspend", "lock", "logout"],
+                str,
+            ],
+            str,
+        ],
+    },
 )
 
 # HyprSunset configuration

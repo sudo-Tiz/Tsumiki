@@ -196,14 +196,16 @@ DEFAULT_CONFIG = {
     "power": {
         "icon": "󰐥",
         "tooltip": True,
-        "buttons": [
-            "lock",
-            "logout",
-            "suspend",
-            "hibernate",
-            "shutdown",
-            "reboot",
-        ],
+        "items_per_row": 3,
+        "icon_size": 100,
+        "buttons": {
+            "shutdown": "systemctl poweroff",
+            "reboot": "systemctl reboot",
+            "hibernate": "systemctl hibernate",
+            "suspend": "systemctl suspend",
+            "lock": "loginctl lock-session",
+            "logout": "loginctl terminate-user $USER",
+        },
     },
     "recorder": {
         "path": "Videos/Screencasting",
