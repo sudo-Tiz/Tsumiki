@@ -1,3 +1,4 @@
+import gi
 from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
@@ -6,11 +7,11 @@ from services import battery_service
 from shared import ButtonWidget
 from utils import BarConfig
 from utils.functions import format_time
-import gi
 
 gi.require_version("Gdk", "3.0")
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gdk, GdkPixbuf
+from gi.repository import GdkPixbuf, Gtk
+
 
 class BatteryWidget(ButtonWidget):
     """A widget to display the current battery status."""
@@ -50,7 +51,6 @@ class BatteryWidget(ButtonWidget):
             round(self.client.get_property("Percentage")) if is_present else 0
         )
 
-
         self.battery_label = Label(
             label=f"{battery_percent}%", style_classes="panel-text", visible=False
         )
@@ -74,7 +74,6 @@ class BatteryWidget(ButtonWidget):
         )
 
         if self.config["orientation"] == "horizontal":
-
             # Get the Pixbuf from the Gtk.Image
             pixbuf = Gtk.IconTheme.get_default().load_icon(
                 self.client.get_property("IconName"),

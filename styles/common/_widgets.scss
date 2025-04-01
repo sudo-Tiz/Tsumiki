@@ -18,6 +18,13 @@
 }
 
 
+#divider{
+  min-width: variable.$bar-widgets-divider-size;
+}
+
+#spacing{
+  min-width: variable.$bar-widgets-spacing-size;
+}
 
 #cpu {
   border-radius: variable.$bar-widgets-cpu-border-radius;
