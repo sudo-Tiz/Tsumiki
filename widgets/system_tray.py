@@ -1,8 +1,10 @@
+import os
+
 import gi
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
-from gi.repository import Gdk, Gray, Gtk
+from gi.repository import Gdk, GdkPixbuf, GLib, Gray, Gtk
 
 from shared import ButtonWidget, PopOverWindow, Separator
 from shared.widget_container import HoverButton
@@ -12,6 +14,53 @@ from utils.icon_resolver import IconResolver
 gi.require_version("Gray", "0.1")
 
 icon_resolver = IconResolver.get_default()
+
+
+def resolve_icon(item, icon_size: int = 16):
+    pixmap = Gray.get_pixmap_for_pixmaps(item.get_icon_pixmaps(), icon_size)
+
+    try:
+        if pixmap is not None:
+            return pixmap.as_pixbuf(icon_size, GdkPixbuf.InterpType.HYPER)
+        else:
+            icon_name = item.get_icon_name()
+            icon_theme_path = item.get_icon_theme_path()
+
+            # Use custom theme path if available
+            if icon_theme_path:
+                custom_theme = Gtk.IconTheme.new()
+                custom_theme.prepend_search_path(icon_theme_path)
+                try:
+                    return custom_theme.load_icon(
+                        icon_name,
+                        icon_size,
+                        Gtk.IconLookupFlags.FORCE_SIZE,
+                    )
+                except GLib.Error:
+                    # Fallback to default theme if custom path fails
+                    return Gtk.IconTheme.get_default().load_icon(
+                        icon_name,
+                        icon_size,
+                        Gtk.IconLookupFlags.FORCE_SIZE,
+                    )
+            else:
+                if os.path.exists(icon_name):  # for some apps, the icon_name is a path
+                    return GdkPixbuf.Pixbuf.new_from_file_at_size(
+                        icon_name, width=icon_size, height=icon_size
+                    )
+                else:
+                    return Gtk.IconTheme.get_default().load_icon(
+                        icon_name,
+                        icon_size,
+                        Gtk.IconLookupFlags.FORCE_SIZE,
+                    )
+    except GLib.Error:
+        # Fallback to 'image-missing' icon
+        return Gtk.IconTheme.get_default().load_icon(
+            "image-missing",
+            icon_size,
+            Gtk.IconLookupFlags.FORCE_SIZE,
+        )
 
 
 class SystemTrayMenu(Box):
@@ -68,14 +117,8 @@ class SystemTrayMenu(Box):
         return button
 
     def do_update_item_button(self, item: Gray.Item, button: Button):
-        # Get icon
-        pixmap = Gray.get_pixmap_for_pixmaps(
-            item.get_icon_pixmaps(), self.config["icon_size"]
-        )
-        pixbuf = icon_resolver.resolve_icon(
-            pixmap,
-            item.get_icon_name(),
-            item.get_id(),
+        pixbuf = resolve_icon(
+            item=item,
         )
         button.set_image(Image(pixbuf=pixbuf, pixel_size=self.config["icon_size"]))
 
@@ -189,15 +232,8 @@ class SystemTrayWidget(ButtonWidget):
             button.set_margin_start(2)
             button.set_margin_end(2)
 
-            # Update icon
-            pixmap = Gray.get_pixmap_for_pixmaps(
-                item.get_icon_pixmaps(), self.config["icon_size"]
-            )
-
-            pixbuf = icon_resolver.resolve_icon(
-                pixmap,
-                item.get_icon_name(),
-                item.get_id(),
+            pixbuf = resolve_icon(
+                item=item,
             )
             button.set_image(Image(pixbuf=pixbuf, pixel_size=self.config["icon_size"]))
 
