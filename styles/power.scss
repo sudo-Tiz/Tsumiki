@@ -1,6 +1,21 @@
 @use "sass:color";
 @use "theme.scss";
-@use "common" as common;
+@use "common";
+@use "variable.scss";
+
+
+#power {
+  border-radius: variable.$bar-widgets-power-border-radius;
+  border: if(variable.$bar-widgets-power-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-power-border-width;
+
+
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-power-icon_size;
+    margin-right: variable.$bar-widgets-power-spacing;
+  }
+}
 
 #power-button-menu {
   background-color: theme.$background;

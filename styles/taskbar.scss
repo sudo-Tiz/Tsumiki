@@ -1,16 +1,21 @@
 @use "theme.scss";
-@use "common" as common;
+@use "common";
+@use "variable.scss";
 
 /** taskbar widget **/
 
 #taskbar {
+
+  border-radius: variable.$bar-widgets-taskbar-border-radius;
+  border: if(variable.$bar-widgets-taskbar-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-taskbar-border-width;
   font-style: normal;
   color: theme.$text-main;
   background-color: theme.$background-dark;
   padding-left: 0.95em;
   padding-right: 0.95em;
 
-  & > button {
+  &>button {
     padding: 0 common.toEm(2);
     margin: common.toEm(4) 0;
     border: 0;

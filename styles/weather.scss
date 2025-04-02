@@ -1,6 +1,6 @@
 @use "theme.scss";
 @use "variable.scss";
-@use "common" as common;
+@use "common";
 
 $base_margin: common.toEm(4);
 

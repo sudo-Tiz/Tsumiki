@@ -1,5 +1,5 @@
 @use "theme.scss";
-@use "common" as common;
+@use "common";
 @use "variable.scss";
 
 $workspace-transition: padding 0.3s cubic-bezier(0.4, 0, 0.2, 1),

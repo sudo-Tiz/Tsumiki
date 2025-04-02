@@ -2,7 +2,7 @@
 @use "sass:math";
 @use "theme.scss";
 @use "variable.scss";
-@use "common" as common;
+@use "common";
 
 #player-stack-button {
   @extend %dots_dots;

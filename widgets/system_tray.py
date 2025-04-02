@@ -2,7 +2,6 @@ import os
 
 import gi
 from fabric.widgets.box import Box
-from fabric.widgets.button import Button
 from fabric.widgets.image import Image
 from gi.repository import Gdk, GdkPixbuf, GLib, Gray, Gtk
 
@@ -69,7 +68,7 @@ class SystemTrayMenu(Box):
     def __init__(self, config, **kwargs) -> None:
         super().__init__(
             name="system-tray-menu",
-            orientation=Gtk.Orientation.VERTICAL,
+            orientation="vertical",
             style_classes=["panel-menu"],
             **kwargs,
         )
@@ -106,7 +105,7 @@ class SystemTrayMenu(Box):
             self.column = 0
             self.row += 1
 
-    def do_bake_item_button(self, item: Gray.Item) -> Button:
+    def do_bake_item_button(self, item: Gray.Item) -> HoverButton:
         button = HoverButton(style_classes="flat")
         button.connect(
             "button-press-event",
@@ -116,7 +115,7 @@ class SystemTrayMenu(Box):
         self.do_update_item_button(item, button)
         return button
 
-    def do_update_item_button(self, item: Gray.Item, button: Button):
+    def do_update_item_button(self, item: Gray.Item, button: HoverButton):
         pixbuf = resolve_icon(
             item=item,
         )
@@ -147,7 +146,8 @@ class SystemTrayWidget(ButtonWidget):
 
         # Create main tray box and toggle icon
         self.tray_box = Box(
-            name="system-tray-box", orientation=Gtk.Orientation.HORIZONTAL, spacing=8
+            name="system-tray-box",
+            orientation="horizontal",
         )
         self.toggle_icon = Image(
             icon_name="arrow-down-symbolic",
@@ -158,7 +158,7 @@ class SystemTrayWidget(ButtonWidget):
         # Set children directly in Box to avoid double styling
         self.children = Box(
             spacing=8,
-            orientation=Gtk.Orientation.HORIZONTAL,
+            orientation="horizontal",
             children=(self.tray_box, Separator(), self.toggle_icon),
         )
 

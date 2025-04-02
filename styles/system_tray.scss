@@ -1,6 +1,6 @@
 @use "theme.scss";
 @use "variable.scss";
-@use "common" as common;
+@use "common";
 
 /* system tray widget*/
 #system-tray-menu {
@@ -11,8 +11,8 @@
   min-height: 50px;
   background-color: theme.$background-dark;
 
-  grid{
-  &>button {
+  grid {
+    &>button {
       margin: 0 0.1em;
       padding: 0 0.15em;
       border-radius: variable.$radius-large;
@@ -33,9 +33,19 @@
 /* system tray widget*/
 #system_tray {
 
-  .toggle-icon, .panel-icon {
+  border-radius: variable.$bar-widgets-system_tray-border-radius;
+  border: if(variable.$bar-widgets-system_tray-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-system_tray-border-width;
+
+  &-box {
+    margin: 0 variable.$bar-widgets-system_tray-spacing;
+  }
+
+  .toggle-icon,
+  .panel-icon {
     margin: 0;
-    padding:0;
+    padding: 0;
+
     &.active {
       background-color: theme.$background-alt;
     }

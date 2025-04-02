@@ -18,11 +18,11 @@
 }
 
 
-#divider{
+#divider {
   min-width: variable.$bar-widgets-divider-size;
 }
 
-#spacing{
+#spacing {
   min-width: variable.$bar-widgets-spacing-size;
 }
 
@@ -234,20 +234,6 @@
 
 }
 
-#power {
-  border-radius: variable.$bar-widgets-power-border-radius;
-  border: if(variable.$bar-widgets-power-border-enabled, variable.$border, none);
-  border-width: variable.$bar-widgets-power-border-width;
-
-
-
-  #nerd-icon.panel-icon {
-    font-size: variable.$bar-widgets-power-icon_size;
-    margin-right: variable.$bar-widgets-power-spacing;
-  }
-}
-
-
 
 #recorder {
   border-radius: variable.$bar-widgets-recorder-border-radius;
@@ -279,14 +265,6 @@
   }
 }
 
-#system_tray {
-  border-radius: variable.$bar-widgets-system_tray-border-radius;
-  border: if(variable.$bar-widgets-system_tray-border-enabled, variable.$border, none);
-  border-width: variable.$bar-widgets-system_tray-border-width;
-
-}
-
-
 #quick_settings {
   border-radius: variable.$bar-widgets-quick_settings-border-radius;
   border: if(variable.$bar-widgets-quick_settings-border-enabled, variable.$border, none);
@@ -294,12 +272,7 @@
 
 }
 
-#taskbar {
-  border-radius: variable.$bar-widgets-taskbar-border-radius;
-  border: if(variable.$bar-widgets-taskbar-border-enabled, variable.$border, none);
-  border-width: variable.$bar-widgets-taskbar-border-width;
 
-}
 
 #theme_switcher {
   border-radius: variable.$bar-widgets-theme-border-radius;

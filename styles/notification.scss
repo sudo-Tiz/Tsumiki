@@ -1,7 +1,7 @@
 @use "sass:color";
 @use "theme.scss";
 @use "variable.scss";
-@use "common" as common;
+@use "common";
 
 $hover-transition: background .15s ease-in-out;
 
