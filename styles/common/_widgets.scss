@@ -279,10 +279,10 @@
   }
 }
 
-#systray {
-  border-radius: variable.$bar-widgets-systray-border-radius;
-  border: if(variable.$bar-widgets-systray-border-enabled, variable.$border, none);
-  border-width: variable.$bar-widgets-systray-border-width;
+#system_tray {
+  border-radius: variable.$bar-widgets-system_tray-border-radius;
+  border: if(variable.$bar-widgets-system_tray-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-system_tray-border-width;
 
 }
 

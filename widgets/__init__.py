@@ -21,7 +21,7 @@ from .recorder import *
 from .stats import *
 from .stop_watch import *
 from .submap import *
-from .systray import *
+from .system_tray import *
 from .taskbar import *
 from .theme import *
 from .updates import *
