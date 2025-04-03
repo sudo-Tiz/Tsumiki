@@ -479,17 +479,9 @@ class DateTimeWidget(ButtonWidget):
             children=(self.notification_indicator, count_label)
         )
 
-        bulk_connect(
-            self,
-            {
-                "clicked": lambda *_: lambda *_: popup.set_visible(
-                    not popup.get_visible()
-                ),
-                "enter-notify-event": lambda *_: self.config["hover_reveal"]
-                and popup.set_visible(
-                    not popup.get_visible(),
-                ),
-            },
+        self.connect(
+            "clicked",
+            lambda *_: popup.set_visible(not popup.get_visible()),
         )
 
         self.children = Box(
