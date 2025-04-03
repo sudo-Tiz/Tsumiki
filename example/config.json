@@ -40,8 +40,7 @@
 		"notification": true,
 		"calendar": true,
 		"clock_format": "24h",
-		"uptime": true,
-		"hover_reveal": false
+		"uptime": true
 	},
 	"hypr_idle": {
 		"enabled_icon": "",
@@ -139,8 +138,9 @@
 	"osd": {
 		"enabled": true,
 		"timeout": 2000,
+		"icon_size": 28,
 		"anchor": "bottom-center", // this is the position of the OSD, you can use top-center, top-left, top-right, bottom-center, bottom-left, bottom-right
-		"show_percentage": true
+		"percentage": true
 	},
 	"general": {
 		"screen_corners": {
@@ -200,7 +200,6 @@
 		"download": false
 	},
 	"quick_settings": {
-		"hover_reveal": false,
 		"media": {
 			"ignore": [],
 			"truncation_size": 30,

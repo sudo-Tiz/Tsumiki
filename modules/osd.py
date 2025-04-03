@@ -33,15 +33,14 @@ class GenericOSDContainer(Box):
         self.level = Label(
             name="osd-level", h_align="center", h_expand=True, visible=False
         )
-        self.icon = Image(icon_name=icons.icons["brightness"]["screen"], icon_size=28)
+        self.icon = Image(
+            icon_name=icons.icons["brightness"]["screen"], icon_size=config["icon_size"]
+        )
         self.scale = create_scale()
-
-        if config["style"]:
-            self.add_style_class(config["style"])
 
         self.children = (self.icon, self.scale, self.level)
 
-        if config["show_percentage"]:
+        if config["percentage"]:
             self.level.set_visible(True)
 
 

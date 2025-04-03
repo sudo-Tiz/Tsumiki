@@ -126,8 +126,8 @@ max_count = 5
 enabled = true
 timeout = 1_500
 anchor = "bottom-center"
-show_percentage = true
-widget_style = "wave2"
+percentage = true
+icon_size = 28
 
 [general]
 check_updates = false

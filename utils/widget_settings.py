@@ -45,7 +45,14 @@ TaskBar = TypedDict("TaskBar", {"icon_size": int})
 
 # SystemTray configuration
 SystemTray = TypedDict(
-    "SystemTray", {"icon_size": int, "ignored": List[str], "hidden": List[str]}
+    "SystemTray",
+    {
+        "icon_size": int,
+        "ignored": List[str],
+        "pinned": List[str],
+        "hidden": List[str],
+        "visible_count": int,
+    },
 )
 
 # HyprIdle configuration
@@ -298,7 +305,13 @@ Recording = TypedDict("Recording", {"path": str, "icon_size": int, "tooltip": bo
 # OSD configuration
 OSD = TypedDict(
     "Osd",
-    {"enabled": bool, "timeout": int, "anchor": str, "show_percentage": bool},
+    {
+        "enabled": bool,
+        "timeout": int,
+        "anchor": str,
+        "percentage": bool,
+        "icon_size": int,
+    },
 )
 
 

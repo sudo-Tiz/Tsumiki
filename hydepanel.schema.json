@@ -555,7 +555,11 @@
 					"type": "integer",
 					"description": "Duration in milliseconds to show the OSD"
 				},
-				"show_percentage": {
+				"icon_size": {
+					"type": "integer",
+					"description": "Size of the OSD icons"
+				},
+				"percentage": {
 					"type": "boolean",
 					"description": "Determines whether to show the percentage in the OSD"
 				},

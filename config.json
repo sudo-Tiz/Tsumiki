@@ -138,8 +138,9 @@
 	"osd": {
 		"enabled": true,
 		"timeout": 2000,
+		"icon_size": 28,
 		"anchor": "bottom-center", // this is the position of the OSD, you can use top-center, top-left, top-right, bottom-center, bottom-left, bottom-right
-		"show_percentage": true
+		"percentage": true
 	},
 	"general": {
 		"screen_corners": {

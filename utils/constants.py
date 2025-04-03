@@ -162,9 +162,8 @@ DEFAULT_CONFIG = {
         "enabled": True,
         "timeout": 1500,
         "anchor": "bottom-center",
-        "show_label": True,
-        "show_percentage": True,
-        "style": "default",
+        "percentage": True,
+        "icon_size": 28,
     },
     "ocr": {
         "icon": "󰐳",
@@ -230,7 +229,13 @@ DEFAULT_CONFIG = {
         "label": True,
         "tooltip": True,
     },
-    "system_tray": {"icon_size": 16, "ignored": [], "hidden": []},
+    "system_tray": {
+        "icon_size": 16,
+        "ignored": [],
+        "hidden": [],
+        "pinned": [],
+        "visible_count": 3,
+    },
     "task_bar": {"icon_size": 22},
     "theme": {
         "name": "catpuccin-mocha",
