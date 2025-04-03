@@ -200,7 +200,7 @@
 		"download": false
 	},
 	"quick_settings": {
-		"hover_reveal": false,
+		"hover_reveal": true,
 		"media": {
 			"ignore": [],
 			"truncation_size": 30,

@@ -1,5 +1,29 @@
 @use "mixins";
 @use "../variable.scss";
+@use "../theme.scss";
+@use "functions";
+
+// widgets styles
+
+#corner-container {
+  min-width: 20px;
+  min-height: 20px;
+
+  #corner {
+    background-color: theme.$bar-background;
+    border-radius: 0;
+  }
+}
+
+
+.cover {
+  min-height: .8em;
+  min-width: 3em;
+  border-radius: variable.$radius;
+  background-position: center;
+  background-size: contain;
+  margin: functions.toEm(3) functions.toEm(10) functions.toEm(3) 0;
+}
 
 
 #desktop-clock-box {
@@ -224,6 +248,33 @@
     font-size: variable.$bar-widgets-ocr-icon_size;
     margin-right: variable.$bar-widgets-ocr-spacing;
   }
+
+// Menu styling
+menu#ocr-menu {
+  padding: .45em;
+
+  menuitem {
+    padding: .25em 1em;
+    border-radius: variable.$radius;
+
+    &:hover {
+      background-color: theme.$surface-neutral;
+
+      label#ocr-menu-item {
+        color: theme.$background-dark;
+      }
+    }
+
+    label#ocr-menu-item {
+      color: theme.$surface-highlight;
+
+      &.selected {
+        font-weight: bold;
+        color: theme.$accent-light;
+      }
+    }
+  }
+}
 
 }
 
