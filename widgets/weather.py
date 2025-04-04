@@ -266,6 +266,8 @@ class WeatherWidget(ButtonWidget):
     def update_ui(self, fabricator, value):
         # Update the label with the weather icon and temperature in the main thread
         res = value.get("weather")
+
+        # todo: handle error
         current_weather = res["current"]
         text_icon = weather_icons[current_weather["weatherCode"]]["icon"]
         self.weather_label.set_label(f"{current_weather['FeelsLikeC']}°C")
