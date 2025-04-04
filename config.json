@@ -720,7 +720,7 @@
 		"step_size": 5
 	},
 	"weather": {
-		"location": "", // this is the location to show the weather, you can use city name or city id
+		"location": "", // this is the location to show the weather, you can use city name, latitude, longitude or zip code
 		"label": true,
 		"tooltip": true,
 		"interval": 3600000 // this is the interval in milliseconds to update the weather, 1 hour is 3600000 milliseconds

@@ -280,7 +280,7 @@
 			"properties": {
 				"location": {
 					"type": "string",
-					"description": "Specifies the location for the weather widget."
+					"description": "Specifies the location for the weather widget. Location can be a city name, lat/long, or  zip code."
 				},
 				"label": {
 					"type": "boolean",

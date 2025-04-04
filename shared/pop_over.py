@@ -28,6 +28,7 @@ class PopOverWindow(WaylandWindow):
         self._base_margin = self.extract_margin(margin)
         self.margin = self._base_margin.values()
         self.display = Gdk.Display.get_default()
+        self.add_keybinding("Escape", lambda *_: print("Escape pressed"))
 
         self.connect("notify::visible", self.do_update_handlers)
 
