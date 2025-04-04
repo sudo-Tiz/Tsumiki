@@ -194,7 +194,7 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 
 > **Note**: make sure to keep the config safe just in case
 
-## Check wiki for configuring individual widgets
+## Check [wiki](https://github.com/rubiin/HyDePanel/wiki) for configuring individual widgets
 
 ## **Available Modules**
 
