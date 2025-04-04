@@ -518,7 +518,7 @@ Other components follow a similar structure, where each configuration defines th
 
 ```json
 "weather": {
-"location": "Kathmandu",
+"location": "",
 "interval": 60000,
 "tooltip": true,
 "label": true
@@ -526,7 +526,7 @@ Other components follow a similar structure, where each configuration defines th
 ```
 
 - **location** (string):
-  The location to display weather for. In this case, it is set to "Kathmandu". This is the location to show the weather, you can use city name, latitude, longitude or zip code example: "Kathmandu", "27.7172,85.324", "12345".
+  The location to display weather for. In this case, it is set to blank string.This is optional as the weather service resolves the location with the IP thus blank. However if you are using vpn or want to fine tune the weather,  you can supply the location , which can be city name, latitude, longitude or zip code example: "Kathmandu", "27.7172,85.324", "12345".
 
 - **interval** (integer):
   The update interval for weather. In this case, it is set to 60000 milliseconds.
