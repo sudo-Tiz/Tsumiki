@@ -268,8 +268,10 @@ class WeatherWidget(ButtonWidget):
         res = value.get("weather")
 
         if res is None:
-            self.weather_label.set_label("Error fetching weather")
+            self.weather_label.set_label("")
             self.weather_icon.set_label("")
+            if self.config["tooltip"]:
+                self.set_tooltip_text("Error fetching weather data")
             return
 
         # todo: handle error
