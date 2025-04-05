@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
     windows = [bar]
 
-    if widget_config["notifications"]["enabled"]:
+    if widget_config["notification"]["enabled"]:
         from modules import NotificationPopup
 
         notifications = NotificationPopup(widget_config)
