@@ -63,6 +63,7 @@ class WeatherService:
                 logger.error(
                     f"{Colors.ERROR}Error: City not found. Try a different city."
                 )
+            return None
         except Exception as e:
             print(f"Error: {e}")
             return None

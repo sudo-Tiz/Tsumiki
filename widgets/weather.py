@@ -267,6 +267,11 @@ class WeatherWidget(ButtonWidget):
         # Update the label with the weather icon and temperature in the main thread
         res = value.get("weather")
 
+        if res is None:
+            self.weather_label.set_label("Error fetching weather")
+            self.weather_icon.set_label("")
+            return
+
         # todo: handle error
         current_weather = res["current"]
         text_icon = weather_icons[current_weather["weatherCode"]]["icon"]
