@@ -149,6 +149,7 @@ DEFAULT_CONFIG = {
         "tooltip": True,
     },
     "notification": {
+        "enabled": True,
         "anchor": "top-right",
         "auto_dismiss": True,
         "ignored": [],

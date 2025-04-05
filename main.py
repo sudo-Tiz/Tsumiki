@@ -4,7 +4,7 @@ from fabric.utils import cooldown, exec_shell_command, get_relative_path, monito
 from loguru import logger
 
 import utils.functions as helpers
-from modules import NotificationPopup, OSDContainer, StatusBar
+from modules import StatusBar
 from utils import (
     APP_CACHE_DIRECTORY,
     APPLICATION_NAME,
@@ -50,9 +50,14 @@ if not general_options["debug"]:
 if __name__ == "__main__":
     # Create the status bar
     bar = StatusBar(widget_config)
-    notifications = NotificationPopup(widget_config)
 
-    windows = [notifications, bar]
+    windows = [bar]
+
+    if widget_config["notifications"]["enabled"]:
+        from modules import NotificationPopup
+
+        notifications = NotificationPopup(widget_config)
+        windows.append(notifications)
 
     if (
         general_options["screen_corners"]
@@ -78,6 +83,8 @@ if __name__ == "__main__":
         )
 
     if widget_config["osd"]["enabled"]:
+        from modules import OSDContainer
+
         windows.append(OSDContainer(widget_config))
 
     # Initialize the application with the status bar

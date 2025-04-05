@@ -127,6 +127,7 @@
 		"tooltip": true
 	},
 	"notification": {
+		"enabled": true,
 		"anchor": "top-right",
 		"auto_dismiss": true,
 		"ignored": [],
