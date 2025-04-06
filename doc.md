@@ -544,7 +544,7 @@ Other components follow a similar structure, where each configuration defines th
 "window_title": {
 "truncation": true,
 "truncation_size": 50,
-"enable_icon": true,
+"icon": true,
 "title_map": []
 }
 ```
@@ -555,7 +555,7 @@ Other components follow a similar structure, where each configuration defines th
 - **truncation_size** (integer):
   Maximum length for the window title (requires truncation set to true). In this case, it is set to 50.
 
-- **enable_icon** (boolean):
+- **icon** (boolean):
   Whether to display the icon in the title bar. In this case, it is set to true.
 
 - **title_map** (array):

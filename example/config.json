@@ -727,7 +727,7 @@
 		"interval": 3600000 // this is the interval in milliseconds to update the weather, 1 hour is 3600000 milliseconds
 	},
 	"window_title": {
-		"enable_icon": true, // this is to enable the icon in the window title widget
+		"icon": true, // this is to enable the icon in the window title widget
 		"truncation": true,
 		"truncation_size": 50,
 		"title_map": []

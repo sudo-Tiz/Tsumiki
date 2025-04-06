@@ -457,7 +457,7 @@
 		"window_title": {
 			"type": "object",
 			"properties": {
-				"enable_icon": {
+				"icon": {
 					"type": "boolean",
 					"description": "Determines whether to enable the icon in the window title widget"
 				},

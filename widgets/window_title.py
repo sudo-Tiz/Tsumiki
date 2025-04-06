@@ -55,6 +55,6 @@ class WindowTitleWidget(ButtonWidget):
         # Return the formatted title with or without the icon
         return (
             f"{matched_window[1]} {matched_window[2]}"
-            if self.config["enable_icon"]
+            if self.config["icon"]
             else f"{matched_window[2]}"
         )

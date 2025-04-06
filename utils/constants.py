@@ -100,6 +100,8 @@ DEFAULT_CONFIG = {
         "disabled_icon": "󰛨",
         "label": True,
         "tooltip": True,
+        "sunrise": "06:00",
+        "sunset": "18:00",
     },
     "keyboard": {
         "icon": "󰌌",
@@ -264,7 +266,7 @@ DEFAULT_CONFIG = {
         "interval": HIGH_POLL_INTERVAL,
     },
     "window_title": {
-        "enable_icon": True,
+        "icon": True,
         "truncation": True,
         "truncation_size": 50,
         "title_map": [],

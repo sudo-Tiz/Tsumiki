@@ -238,7 +238,7 @@ tooltip = true
 interval = 3_600_000
 
 [window_title]
-enable_icon = true
+icon = true
 truncation = true
 truncation_size = 50
 title_map = [ ]

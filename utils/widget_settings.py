@@ -37,6 +37,8 @@ HyprSunset = TypedDict(
         "temperature": str,
         "enabled_icon": str,
         "disabled_icon": str,
+        "sunrise": str,
+        "sunset": str,
     },
 )
 
@@ -182,7 +184,7 @@ Workspaces = TypedDict(
 WindowTitle = TypedDict(
     "WindowTitle",
     {
-        "enable_icon": bool,
+        "icon": bool,
         "truncation": bool,
         "truncation_size": int,
         "title_map": any,
