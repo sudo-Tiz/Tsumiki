@@ -8,6 +8,7 @@ class AnimatedScale(Scale):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.add_style_class("animated-scale")
         self.animator = Animator(
             bezier_curve=(0.34, 1.56, 0.64, 1.0),
             duration=0.8,
