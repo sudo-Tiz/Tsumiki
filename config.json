@@ -40,7 +40,9 @@
 		"notification": true,
 		"calendar": true,
 		"clock_format": "24h",
-		"uptime": true
+		"uptime": true,
+		"auto_hide": false,
+		"auto_hide_timeout": 2000
 	},
 	"hypr_idle": {
 		"enabled_icon": "",
@@ -96,8 +98,7 @@
 		},
 		{
 			"widgets": [
-				"quick_settings",
-				"cpu"
+				"quick_settings"
 			],
 			"spacing": 0,
 			"style_classes": [
@@ -203,6 +204,8 @@
 		"download": false
 	},
 	"quick_settings": {
+		"auto_hide": false,
+		"auto_hide_timeout": 2000,
 		"media": {
 			"ignore": [],
 			"truncation_size": 30,
@@ -241,7 +244,6 @@
 		"icon_size": 16,
 		"ignored": [], // do not show these icons in the system tray
 		"hidden": []
-
 	},
 	"task_bar": {
 		"icon_size": 22

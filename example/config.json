@@ -96,8 +96,7 @@
 		},
 		{
 			"widgets": [
-				"quick_settings",
-				"cpu"
+				"quick_settings"
 			],
 			"spacing": 0,
 			"style_classes": [

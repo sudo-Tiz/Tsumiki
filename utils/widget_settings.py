@@ -238,6 +238,8 @@ DateTimeMenu = TypedDict(
         "calendar": bool,
         "notification": bool,
         "hover_reveal": bool,
+        "auto_hide": bool,
+        "auto_hide_timeout": int,
     },
 )
 
@@ -266,7 +268,16 @@ Media = TypedDict(
 )
 
 # QuickSettings configuration
-QuickSettings = TypedDict("QuickSettings", {"media": Media, "hover_reveal": bool})
+QuickSettings = TypedDict(
+    "QuickSettings",
+    {
+        "media": Media,
+        "hover_reveal": bool,
+        "auto_hide": bool,
+        "auto_hide_timeout": int,
+        "shortcuts": List[str],
+    },
+)
 
 # Spacing configuration
 Spacing = TypedDict("Spacing", {"size": int})
