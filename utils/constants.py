@@ -278,7 +278,7 @@ DEFAULT_CONFIG = {
         "reverse_scroll": False,
         "empty_scroll": False,
         "default_label_format": "{id}",
-        "icon_map": {"1": "1", "2": "2", "3": "3"},
+        "icon_map": {},
     },
 }
 
