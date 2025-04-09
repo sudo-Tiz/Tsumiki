@@ -1,7 +1,6 @@
 from typing import Dict, List, Literal, TypedDict
 
-# Define the type
-Layer = Literal["background", "bottom", "top", "overlay"]
+from utils.types import Anchor, Layer
 
 # Common configuration fields that will be reused
 BaseConfig = TypedDict("BaseConfig", {"label": bool, "tooltip": bool})
@@ -10,6 +9,7 @@ BaseConfig = TypedDict("BaseConfig", {"label": bool, "tooltip": bool})
 Layout = TypedDict(
     "Layout", {"left": List[str], "middle": List[str], "right": List[str]}
 )
+
 
 # Power button configuration
 PowerButton = TypedDict(
@@ -98,7 +98,7 @@ DesktopClock = TypedDict(
     "DesktopClock",
     {
         "enabled": bool,
-        "anchor": str,
+        "anchor": Anchor,
         "date_format": str,
     },
 )
@@ -117,8 +117,8 @@ Dock = TypedDict(
         "icon_size": int,
         "pinned_apps": List[str],
         "ignored_apps": List[str],
-        "layer": str,
-        "anchor": str,
+        "layer": Layer,
+        "anchor": Anchor,
     },
 )
 
@@ -189,7 +189,7 @@ WindowTitle = TypedDict(
         "icon": bool,
         "truncation": bool,
         "truncation_size": int,
-        "title_map": any,
+        "title_map": List[Dict[str, str]],
     },
 )
 
@@ -306,7 +306,7 @@ Notification = TypedDict(
         "enabled": bool,
         "ignored": List[str],
         "timeout": int,
-        "anchor": str,
+        "anchor": Anchor,
         "auto_dismiss": bool,
         "play_sound": bool,
         "sound_file": str,
@@ -327,7 +327,7 @@ OSD = TypedDict(
     {
         "enabled": bool,
         "timeout": int,
-        "anchor": str,
+        "anchor": Anchor,
         "percentage": bool,
         "icon_size": int,
     },

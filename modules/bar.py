@@ -4,7 +4,7 @@ from fabric.utils import (
 )
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
-from fabric.widgets.wayland import WaylandWindow
+from fabric.widgets.wayland import WaylandWindow as Window
 
 from shared import ModuleGroup
 from utils import HyprlandWithMonitors
@@ -12,7 +12,7 @@ from utils.functions import run_in_thread
 from utils.widget_utils import lazy_load_widget
 
 
-class StatusBar(WaylandWindow):
+class StatusBar(Window):
     """A widget to display the status bar panel."""
 
     @run_in_thread

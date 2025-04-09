@@ -10,7 +10,7 @@ from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
-from fabric.widgets.wayland import WaylandWindow
+from fabric.widgets.wayland import WaylandWindow as Window
 from gi.repository import Gdk, GdkPixbuf, GLib
 from loguru import logger
 
@@ -23,7 +23,7 @@ from utils import BarConfig, Colors, HyprlandWithMonitors
 from utils.widget_utils import get_icon
 
 
-class NotificationPopup(WaylandWindow):
+class NotificationPopup(Window):
     """A widget to grab and display notifications."""
 
     def __init__(self, widget_config: BarConfig, **kwargs):

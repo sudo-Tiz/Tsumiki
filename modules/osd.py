@@ -13,6 +13,7 @@ import utils.functions as helpers
 import utils.icons as icons
 from services import Brightness, audio_service
 from utils import BarConfig, HyprlandWithMonitors
+from utils.types import Keyboard_Mode
 from utils.widget_utils import (
     create_scale,
     get_audio_icon_name,
@@ -137,7 +138,7 @@ class OSDContainer(Window):
         self,
         widget_config: BarConfig,
         transition_duration=200,
-        keyboard_mode: Literal["none", "exclusive", "on-demand"] = "on-demand",
+        keyboard_mode: Keyboard_Mode = "on-demand",
         **kwargs,
     ):
         self.config = widget_config["osd"]

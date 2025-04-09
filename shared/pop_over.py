@@ -1,18 +1,18 @@
 import contextlib
 
 import gi
-from fabric.widgets.wayland import WaylandWindow
+from fabric.widgets.wayland import WaylandWindow as Window
 from gi.repository import Gdk, Gtk, GtkLayerShell
 
 gi.require_version("GtkLayerShell", "0.1")
 
 
-class PopOverWindow(WaylandWindow):
+class PopOverWindow(Window):
     """Window that displays content in a popover style"""
 
     def __init__(
         self,
-        parent: WaylandWindow,
+        parent: Window,
         pointing_to: Gtk.Widget | None = None,
         margin: tuple[int, ...] | str = "0 0 0 0",
         **kwargs,

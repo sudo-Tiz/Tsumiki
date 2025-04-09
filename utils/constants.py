@@ -16,18 +16,6 @@ NOTIFICATION_CACHE_FILE = f"{APP_CACHE_DIRECTORY}/notifications.json"
 WEATHER_CACHE_FILE = f"{APP_CACHE_DIRECTORY}/weather.json"
 
 
-VALID_ANCHORS = [
-    "top-left",
-    "top-right",
-    "top",
-    "bottom-left",
-    "bottom-right",
-    "bottom",
-    "left",
-    "right",
-    "center",
-]
-
 # Default configuration values
 DEFAULT_CONFIG = {
     "$schema": "./hydepanel.schema.json",

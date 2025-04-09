@@ -3,11 +3,12 @@ from typing import Literal
 from fabric.widgets.box import Box
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.revealer import Revealer
-from fabric.widgets.wayland import WaylandWindow
+from fabric.widgets.wayland import WaylandWindow as Window
 from fabric.widgets.widget import Widget
 from gi.repository import Gdk, GLib
 
 from utils import HyprlandWithMonitors
+from utils.types import Anchor, Keyboard_Mode, Layer
 
 
 class Padding(EventBox):
@@ -30,7 +31,7 @@ class PopupRevealer(EventBox):
 
     def __init__(
         self,
-        popup_window: WaylandWindow,
+        popup_window: Window,
         decorations: str = "padding: 1px;",
         name: str | None = None,
         child: Widget | None = None,
@@ -196,12 +197,12 @@ def make_layout(anchor: str, name: str, popup: PopupRevealer, **kwargs) -> Box:
             return None
 
 
-class PopupWindow(WaylandWindow):
+class PopupWindow(Window):
     """A popup window to display a message."""
 
     def __init__(
         self,
-        layer: Literal["background", "bottom", "top", "overlay"] = "top",
+        layer: Layer = "top",
         name: str = "popup-window",
         decorations: str = "padding: 1px;",
         child: Widget | None = None,
@@ -216,20 +217,9 @@ class PopupWindow(WaylandWindow):
         | None = None,
         transition_duration: int = 100,
         popup_visible: bool = False,
-        anchor: Literal[
-            "center-left",
-            "center",
-            "center-right",
-            "top",
-            "top-right",
-            "top-center",
-            "top-left",
-            "bottom-left",
-            "bottom-center",
-            "bottom-right",
-        ] = "top-right",
+        anchor: Anchor = "top-right",
         enable_inhibitor: bool = False,
-        keyboard_mode: Literal["none", "exclusive", "on-demand"] = "on-demand",
+        keyboard_mode: Keyboard_Mode = "on-demand",
         timeout: int = 1000,
     ):
         self._layer = layer
