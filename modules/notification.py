@@ -243,6 +243,7 @@ class NotificationWidget(EventBox):
             lambda *_: (
                 parent.remove(self) if (parent := self.get_parent()) else None,  # type: ignore
                 self.destroy(),
+                self.stop_timeout(),
             ),
         )
 
@@ -266,6 +267,7 @@ class NotificationWidget(EventBox):
     def on_button_press(self, _, event):
         if event.button != 1:
             self._notification.close("dismissed-by-user")
+            self.stop_timeout()
 
     def get_timeout(self):
         return (
@@ -283,12 +285,14 @@ class NotificationWidget(EventBox):
     def on_hover(self):
         self.pause_timeout()
         self.set_pointer_cursor(self, "hand2")
+        print("hover")
         self.config[
             "display_actions_on_hover"
         ] and self.actions_container.set_reveal_child(True)
 
     def on_unhover(self):
         self.resume_timeout()
+        print("unhover")
         self.set_pointer_cursor(self, "arrow")
         self.config[
             "display_actions_on_hover"
