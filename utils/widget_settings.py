@@ -36,9 +36,7 @@ HyprSunset = TypedDict(
         **BaseConfig.__annotations__,
         "temperature": str,
         "enabled_icon": str,
-        "disabled_icon": str,
-        "sunrise": str,
-        "sunset": str,
+        "disabled_icon": str
     },
 )
 

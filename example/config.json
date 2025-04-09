@@ -53,8 +53,6 @@
 	"hypr_sunset": {
 		"temperature": "2800k",
 		"enabled_icon": "󱩌",
-		"sunrise": "06:00",
-		"sunset": "18:00",
 		"disabled_icon": "󰛨",
 		"label": true,
 		"tooltip": true

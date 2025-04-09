@@ -87,9 +87,7 @@ DEFAULT_CONFIG = {
         "enabled_icon": "󱩌",
         "disabled_icon": "󰛨",
         "label": True,
-        "tooltip": True,
-        "sunrise": "06:00",
-        "sunset": "18:00",
+        "tooltip": True
     },
     "keyboard": {
         "icon": "󰌌",
