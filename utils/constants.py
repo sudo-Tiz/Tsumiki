@@ -159,6 +159,8 @@ DEFAULT_CONFIG = {
         "max_count": 200,
         "per_app_limits": {},
         "play_sound": False,
+        "max_actions": 5,
+        "display_actions_on_hover": True,
         "sound_file": "notification4",
     },
     "osd": {

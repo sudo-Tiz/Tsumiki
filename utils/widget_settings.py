@@ -309,6 +309,8 @@ Notification = TypedDict(
         "play_sound": bool,
         "sound_file": str,
         "max_count": int,
+        "max_actions": int,
+        "display_actions_on_hover": bool,
     },
 )
 
