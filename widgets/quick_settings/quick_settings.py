@@ -407,7 +407,6 @@ class QuickSettingsButtonWidget(ButtonWidget):
             lambda *_: (
                 popup.set_visible(
                     not popup.get_visible(),
-                    self.config["auto_hide"] and self.start_timeout(),
                 )
             ),
         )
