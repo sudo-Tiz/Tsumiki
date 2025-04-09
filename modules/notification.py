@@ -205,15 +205,20 @@ class NotificationWidget(EventBox):
             ),
         )
 
-        actions_container = Box(
-            spacing=4,
-            orientation="h",
-            name="notification-action-box",
-            children=[
-                ActionButton(action, i, len(self._notification.actions))
-                for i, action in enumerate(self._notification.actions)
-            ],
-            h_expand=True,
+        actions_container = Revealer(
+            transition_duration=500,
+            transition_type="slide-down",
+            child_revealed=True,
+            child=Box(
+                spacing=4,
+                orientation="h",
+                name="notification-action-box",
+                children=[
+                    ActionButton(action, i, len(self._notification.actions))
+                    for i, action in enumerate(self._notification.actions)
+                ],
+                h_expand=True,
+            )
         )
 
         # Add the header, body, and actions to the notification box
