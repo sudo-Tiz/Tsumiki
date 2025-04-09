@@ -138,7 +138,7 @@
 		"play_sound": true,
 		"sound_file": "notification4",
 		"max_count": 200,
-		"display_actions_on_hover": true // this is to display the actions on hover
+		"display_actions_on_hover": false // this is to display the actions on hover
 	},
 	"osd": {
 		"enabled": true,
