@@ -32,6 +32,9 @@ class EventBoxWidget(EventBox):
             name="panel-eventbox",
             **kwargs,
         )
+        self.config = config
+        self.box = Box()
+        self.children = (self.box,)
         setup_cursor_hover(self)
 
 
@@ -43,12 +46,11 @@ class ButtonWidget(Button):
             style_classes="panel-button",
             **kwargs,
         )
-
-        setup_cursor_hover(self)
-
         self.box = Box()
         self.children = (self.box,)
         self.config = config
+
+        setup_cursor_hover(self)
 
 
 class HoverButton(Button):

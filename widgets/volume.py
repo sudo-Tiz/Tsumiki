@@ -1,5 +1,4 @@
 from fabric.utils import cooldown
-from fabric.widgets.box import Box
 from fabric.widgets.circularprogressbar import CircularProgressBar
 from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
@@ -16,7 +15,7 @@ class VolumeWidget(EventBoxWidget):
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(
-            widget_config,
+            widget_config["volume"],
             name="volume",
             events=["scroll", "smooth-scroll", "enter-notify-event"],
             **kwargs,
@@ -24,7 +23,6 @@ class VolumeWidget(EventBoxWidget):
 
         # Initialize the audio service
         self.audio = audio_service
-        self.config = widget_config["volume"]
 
         # Create a circular progress bar to display the volume level
         self.progress_bar = CircularProgressBar(
@@ -43,14 +41,9 @@ class VolumeWidget(EventBoxWidget):
         )
 
         # Create an event box to handle scroll events for volume control
-        self.box = Box(
-            spacing=4,
-            name="volume",
-            style_classes="panel-box",
-            children=(
-                Overlay(child=self.progress_bar, overlays=self.icon, name="overlay"),
-                self.volume_label,
-            ),
+        self.box.children = (
+            Overlay(child=self.progress_bar, overlays=self.icon, name="overlay"),
+            self.volume_label,
         )
 
         # Connect the audio service to update the progress bar on volume change
@@ -58,9 +51,6 @@ class VolumeWidget(EventBoxWidget):
 
         # Connect the event box to handle scroll events
         self.connect("scroll-event", self.on_scroll)
-
-        # Add the event box as a child
-        self.add(self.box)
 
         if self.config["label"]:
             self.volume_label.set_visible(True)
