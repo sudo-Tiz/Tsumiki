@@ -207,7 +207,7 @@ class NotificationWidget(EventBox):
 
         actions_count = (
             len(self._notification.actions)
-            if self._notification.actions <= self.config["max_actions"]
+            if len(self._notification.actions) <= self.config["max_actions"]
             else self.config["max_actions"]
         )
 
