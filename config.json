@@ -89,7 +89,6 @@
 			"widgets": [
 				"updates",
 				"ocr",
-				"cpu",
 				"battery"
 			],
 			"spacing": 4,
@@ -134,13 +133,11 @@
 		"enabled": true,
 		"anchor": "top-right",
 		"auto_dismiss": true,
-		"per_app_limit": {},
 		"ignored": [],
 		"timeout": 3000,
 		"play_sound": true,
 		"sound_file": "notification4",
 		"max_count": 200,
-		"max_actions": 5,
 		"display_actions_on_hover": true // this is to display the actions on hover
 	},
 	"osd": {
@@ -251,7 +248,7 @@
 	},
 	"task_bar": {
 		"icon_size": 22,
-		"ignored": [],
+		"ignored": [], // do not show these icons in the task bar
 		"tooltip": true
 	},
 	"theme": {
@@ -739,7 +736,7 @@
 	"window_title": {
 		"icon": true, // this is to enable the icon in the window title widget
 		"truncation": true,
-		"truncation_size": 30,
+		"truncation_size": 50,
 		"title_map": []
 	},
 	"workspaces": {
