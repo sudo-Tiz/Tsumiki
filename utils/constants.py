@@ -241,7 +241,7 @@ DEFAULT_CONFIG = {
         "pinned": [],
         "visible_count": 3,
     },
-    "task_bar": {"icon_size": 22},
+    "task_bar": {"icon_size": 22, "ignored": [], "tooltip": True},
     "theme": {
         "name": "catpuccin-mocha",
     },

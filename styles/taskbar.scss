@@ -4,20 +4,22 @@
 
 /** taskbar widget **/
 
-#taskbar {
+#task_bar {
 
-  border-radius: variable.$bar-widgets-taskbar-border-radius;
-  border: if(variable.$bar-widgets-taskbar-border-enabled, variable.$border, none);
-  border-width: variable.$bar-widgets-taskbar-border-width;
+  border-radius: variable.$bar-widgets-task_bar-border-radius;
+  border: if(variable.$bar-widgets-task_bar-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-task_bar-border-width;
   font-style: normal;
   color: theme.$text-main;
   background-color: theme.$background-dark;
-  padding-left: 0.95em;
-  padding-right: 0.95em;
 
-  &>button {
+    &-box {
+        margin: 0 variable.$bar-widgets-task_bar-spacing;
+      }
+
+  button {
     padding: 0 common.toEm(2);
-    margin: common.toEm(4) 0;
+    margin: variable.$bar-widgets-task_bar-spacing variable.$bar-widgets-task_bar-spacing;
     border: 0;
 
     &:last-child {

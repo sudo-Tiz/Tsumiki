@@ -4,12 +4,11 @@ from typing import TypedDict
 
 from fabric.hyprland.widgets import get_hyprland_connection
 from fabric.utils import exec_shell_command_async
-from fabric.widgets.button import Button
 from fabric.widgets.image import Image
 from gi.repository import GdkPixbuf, GLib, Gtk
 from loguru import logger
 
-from shared import BoxWidget
+from shared.widget_container import ButtonWidget, HoverButton
 from utils import BarConfig, Colors
 
 
@@ -23,22 +22,19 @@ class PagerClient(TypedDict):
     address: str
 
 
-class TaskBarWidget(BoxWidget):
+class TaskBarWidget(ButtonWidget):
     """A widget to display the taskbar items."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(
-            widget_config,
-            name="taskbar",
+            widget_config["task_bar"],
+            name="task_bar",
+            visible=False,
             **kwargs,
         )
         self.connection = get_hyprland_connection()
 
-        self.config = widget_config["task_bar"]
-
         self.icon_theme = Gtk.IconTheme.get_default()
-
-        self.set_visible(False)
 
         if self.connection.ready:
             self.render_with_delay()
@@ -54,10 +50,10 @@ class TaskBarWidget(BoxWidget):
             self.connection.connect("event::" + event, lambda *_: self.render(None))
 
     def render_with_delay(self, *_):
-        GLib.timeout_add(101, self.render)
+        GLib.timeout_add(100, self.render)
 
     def render(self, *_):
-        self.children = []
+        self.box.children = []
 
         clients = self.fetch_clients()
         active_window_address = self.get_active_window_address()
@@ -71,7 +67,12 @@ class TaskBarWidget(BoxWidget):
                 window_class = client["initialClass"].lower()
                 icon = self.bake_window_icon(window_class)
 
-                button = Button(image=icon, tooltip_text=client["title"])
+                button = HoverButton(
+                    image=icon,
+                )
+                if self.config["tooltip"]:
+                    button.set_tooltip_text(client["title"])
+
                 if client["address"] != active_window_address:
                     button.connect(
                         "button-press-event",
@@ -79,7 +80,7 @@ class TaskBarWidget(BoxWidget):
                         client["address"],
                     )
 
-                self.add(button)
+                self.box.add(button)
 
             self.set_visible(True)
             self.show_all()

@@ -43,7 +43,9 @@ HyprSunset = TypedDict(
 )
 
 # TaskBar configuration
-TaskBar = TypedDict("TaskBar", {"icon_size": int})
+TaskBar = TypedDict(
+    "TaskBar", {"icon_size": int, "ignored": List[str], "tooltip": bool}
+)
 
 # SystemTray configuration
 SystemTray = TypedDict(
@@ -311,6 +313,7 @@ Notification = TypedDict(
         "max_count": int,
         "max_actions": int,
         "display_actions_on_hover": bool,
+        "per_app_limits": Dict[str, int],
     },
 )
 
