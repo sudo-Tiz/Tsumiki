@@ -29,7 +29,7 @@ class EventBoxWidget(EventBox):
 
     def __init__(self, config, **kwargs):
         super().__init__(
-            name="panel-eventbox",
+            style_classes="panel-eventbox",
             **kwargs,
         )
         self.config = config
