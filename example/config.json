@@ -89,6 +89,7 @@
 			"widgets": [
 				"updates",
 				"ocr",
+				"cpu",
 				"battery"
 			],
 			"spacing": 4,

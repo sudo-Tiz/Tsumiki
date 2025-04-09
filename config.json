@@ -89,7 +89,8 @@
 			"widgets": [
 				"updates",
 				"ocr",
-				"battery","cpu"
+				"cpu",
+				"battery"
 			],
 			"spacing": 4,
 			"style_classes": [
