@@ -133,6 +133,8 @@
 		"auto_dismiss": true,
 		"ignored": [],
 		"timeout": 3000,
+		"transition_type": "slide-left",
+		"transition_duration": 350,
 		"play_sound": true,
 		"sound_file": "notification4",
 		"max_count": 200,

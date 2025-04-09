@@ -36,7 +36,7 @@ HyprSunset = TypedDict(
         **BaseConfig.__annotations__,
         "temperature": str,
         "enabled_icon": str,
-        "disabled_icon": str
+        "disabled_icon": str,
     },
 )
 
@@ -240,6 +240,8 @@ DateTimeMenu = TypedDict(
         "hover_reveal": bool,
         "auto_hide": bool,
         "auto_hide_timeout": int,
+        "transition_type": str,
+        "transition_duration": int,
     },
 )
 

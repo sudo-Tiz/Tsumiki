@@ -319,7 +319,7 @@ class NotificationRevealer(Revealer):
                 children=[self.notification_box],
             ),
             transition_duration=500,
-            transition_type="crossfade",
+            transition_type=config["transition_type"],
             **kwargs,
         )
 

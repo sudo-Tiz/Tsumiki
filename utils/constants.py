@@ -87,7 +87,7 @@ DEFAULT_CONFIG = {
         "enabled_icon": "󱩌",
         "disabled_icon": "󰛨",
         "label": True,
-        "tooltip": True
+        "tooltip": True,
     },
     "keyboard": {
         "icon": "󰌌",
@@ -143,6 +143,8 @@ DEFAULT_CONFIG = {
         "ignored": [],
         "timeout": 3000,
         "max_count": 200,
+        "transition_type": "slide-left",
+        "transition_duration": 350,
         "per_app_limits": {},
         "play_sound": False,
         "max_actions": 5,
