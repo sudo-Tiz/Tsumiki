@@ -242,8 +242,8 @@ class NotificationWidget(EventBox):
             "closed",
             lambda *_: (
                 parent.remove(self) if (parent := self.get_parent()) else None,  # type: ignore
-                self.destroy(),
                 self.stop_timeout(),
+                self.destroy(),
             ),
         )
 
