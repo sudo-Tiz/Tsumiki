@@ -45,7 +45,7 @@ class UpdatesWidget(ButtonWidget):
 
         # Show initial value of 0 if label is enabled
         if self.config["label"]:
-            self.update_level_label.show()
+            self.update_level_label.set_visible(True)
 
         self.connect("button-press-event", self.on_button_press)
 

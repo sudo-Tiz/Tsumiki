@@ -50,7 +50,7 @@ class CpuWidget(ButtonWidget):
         # Update the label with the current CPU usage if enabled
         cpu_freq = value.get("cpu_freq")
         if self.config["label"]:
-            self.cpu_level_label.show()
+            self.cpu_level_label.set_visible(True)
             self.cpu_level_label.set_label(value.get("cpu_usage"))
 
         # Update the tooltip with the memory usage details if enabled
@@ -126,7 +126,7 @@ class MemoryWidget(ButtonWidget):
         # Update the label with the used memory if enabled
         if self.config["label"]:
             self.memory_level_label.set_label(self.get_used())
-            self.memory_level_label.show()
+            self.memory_level_label.set_visible(True)
 
         # Update the tooltip with the memory usage details if enabled
         if self.config["tooltip"]:
@@ -183,7 +183,7 @@ class StorageWidget(ButtonWidget):
         # Update the label with the used storage if enabled
         if self.config["label"]:
             self.storage_level_label.set_label(f"{self.get_used()}")
-            self.storage_level_label.show()
+            self.storage_level_label.set_visible(True)
 
         # Update the tooltip with the storage usage details if enabled
         if self.config["tooltip"]:

@@ -1,5 +1,4 @@
 from fabric.core.service import Signal
-from fabric.utils import invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
@@ -100,11 +99,6 @@ class QuickSubToggle(Box):
         self.pixel_size = pixel_size
         self.submenu = submenu
 
-        submenu.revealer.connect(
-            "notify::reveal-child",
-            lambda *args: self.animate_spin(submenu.revealer.get_reveal_child()),
-        ) if submenu else None
-
         self.button_image = Image(icon_name="pan-end-symbolic", icon_size=20)
 
         self.reveal_button = HoverButton(
@@ -156,22 +150,6 @@ class QuickSubToggle(Box):
 
     def do_reveal_toggle(self, _):
         self.emit("reveal-clicked")
-
-    def animate_spin(self, open: bool):
-        deg = 0 if open else 90
-        direction = -1 if not open else 1
-
-        def do_animate():
-            nonlocal deg
-            deg += direction * 10
-            self.button_image.set_style(
-                f"-gtk-icon-transform: rotate({deg}deg);",
-            )
-            if open and deg >= 90:
-                return False
-            return not (not open and deg <= 0)
-
-        invoke_repeater(10, do_animate)
 
     def set_active_style(self, action: bool) -> None:
         self.set_style_classes("") if not action else self.set_style_classes("active")

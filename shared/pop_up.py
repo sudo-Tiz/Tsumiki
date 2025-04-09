@@ -234,7 +234,7 @@ class PopupWindow(WaylandWindow):
     ):
         self._layer = layer
         self.timeout = timeout
-        self.currtimeout = 0
+        self.current_timeout = 0
         self.popup_running = False
 
         self.popup_visible = popup_visible
@@ -288,7 +288,7 @@ class PopupWindow(WaylandWindow):
             self.monitor_number = curr_monitor
 
         if not self.popup_visible:
-            self.reveal_child.revealer.show()
+            self.reveal_child.revealer.set_visible(True)
 
         self.set_property("pass-through", not self.enable_inhibitor)
         self.popup_visible = not self.popup_visible
@@ -299,22 +299,22 @@ class PopupWindow(WaylandWindow):
         self.monitor = curr_monitor
 
         if not self.popup_visible:
-            self.reveal_child.revealer.show()
+            self.reveal_child.revealer.set_visible(True)
         if self.popup_running:
-            self.currtimeout = 0
+            self.current_timeout = 0
             return
         self.popup_visible = True
         self.reveal_child.revealer.set_reveal_child(self.popup_visible)
         self.popup_running = True
 
         def popup_func():
-            if self.currtimeout >= self.timeout:
+            if self.current_timeout >= self.timeout:
                 self.popup_visible = False
                 self.reveal_child.revealer.set_reveal_child(self.popup_visible)
-                self.currtimeout = 0
+                self.current_timeout = 0
                 self.popup_running = False
                 return False
-            self.currtimeout += 500
+            self.current_timeout += 500
             return True
 
         self.set_property("pass-through", not self.enable_inhibitor)

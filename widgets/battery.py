@@ -82,7 +82,7 @@ class BatteryWidget(ButtonWidget):
 
         # Update the label with the battery percentage if enabled
         if self.config["label"]:
-            self.battery_label.show()
+            self.battery_label.set_visible(True)
 
             ## Hide the label when the battery is full
             if (

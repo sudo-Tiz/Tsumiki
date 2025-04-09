@@ -94,11 +94,11 @@ class PlayerBoxStack(Box):
         if player_name in self.config["ignore"]:
             return
 
-        self.show()
+        self.set_visible(True)
         if len(self.player_stack.get_children()) == 0:
             self.buttons_box.hide()
         else:
-            self.buttons_box.show()
+            self.buttons_box.set_visible(True)
 
         self.player_stack.children = [
             *self.player_stack.children,
@@ -126,7 +126,9 @@ class PlayerBoxStack(Box):
                 self.player_stack.get_children()[self.current_stack_pos],
             )
         self.player_buttons[self.current_stack_pos].set_style_classes(["active"])
-        self.buttons_box.hide() if len(players) == 2 else self.buttons_box.show()
+        self.buttons_box.hide() if len(players) == 2 else self.buttons_box.set_visible(
+            True
+        )
 
     def make_new_player_button(self, player_box):
         new_button = HoverButton(name="player-stack-button")

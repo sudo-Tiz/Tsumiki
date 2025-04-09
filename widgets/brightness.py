@@ -73,7 +73,7 @@ class BrightnessWidget(EventBoxWidget):
         self.add(self.box)
 
         if self.config["label"]:
-            self.brightness_label.show()
+            self.brightness_label.set_visible(True)
 
     @cooldown(1)
     def on_scroll(self, _, event):

@@ -59,4 +59,4 @@ class KeyboardLayoutWidget(ButtonWidget):
         # Update the label with the used storage if enabled
         if self.config["label"]:
             self.kb_label.set_label(KBLAYOUT_MAP[layout])
-            self.kb_label.show()
+            self.kb_label.set_visible(True)

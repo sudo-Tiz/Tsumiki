@@ -63,7 +63,7 @@ class VolumeWidget(EventBoxWidget):
         self.add(self.box)
 
         if self.config["label"]:
-            self.volume_label.show()
+            self.volume_label.set_visible(True)
 
     @cooldown(1)
     def on_scroll(self, _, event):
