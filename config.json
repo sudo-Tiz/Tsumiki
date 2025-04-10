@@ -6,7 +6,22 @@
 		"label": true,
 		"tooltip": true,
 		"orientation": "vertical",
-		"icon_size": 14
+		"icon_size": 14,
+		"notifications": {
+			"enabled": true,
+			"discharging": {
+				"title": "Charger Unplugged!",
+				"body": "Battery is at _LEVEL_%"
+			},
+			"charging": {
+				"title": "Charger Plugged In",
+				"body": "Battery is at _LEVEL_%"
+			},
+			"low": {
+				"title": "Battery Low!",
+				"body": "Battery is at _LEVEL_%"
+			},
+		}
 	},
 	"bluetooth": {
 		"icon_size": 14,

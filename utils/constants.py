@@ -26,6 +26,17 @@ DEFAULT_CONFIG = {
         "tooltip": True,
         "orientation": "vertical",
         "icon_size": 14,
+        "notifications": {
+            "enabled": True,
+            "discharging": {
+                "title": "Charger Unplugged!",
+                "body": "Battery is at _LEVEL_%",
+            },
+            "charging": {
+                "title": "Charger Plugged In",
+                "body": "Battery is at _LEVEL_%",
+            },
+        },
     },
     "quick_settings": {
         "hover_reveal": False,

@@ -1,4 +1,5 @@
 import gi
+from fabric.utils import exec_shell_command_async
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from gi.repository import GdkPixbuf, Gtk
@@ -33,6 +34,8 @@ class BatteryWidget(ButtonWidget):
 
         self.client.connect("changed", lambda *_: self.update_ui())
 
+        self.state = None
+
         self.update_ui()
 
     def update_ui(self):
@@ -52,6 +55,31 @@ class BatteryWidget(ButtonWidget):
         battery_state = self.client.get_property("State")
 
         is_charging = battery_state == 1 if is_present else False
+
+        notification_config = self.config["notifications"]
+
+        if self.state is None or self.state != battery_state:
+            self.state = battery_state
+
+            if notification_config["enabled"]:
+                if is_charging:
+                    percent = f"{battery_percent}%"
+                    charging_config = notification_config["charging"]
+                    exec_shell_command_async(
+                        f"notify-send '{charging_config['title']}' '{
+                            charging_config['body'].replace('_LEVEL_%', percent)
+                        }'",
+                        lambda *_: None,
+                    )
+                else:
+                    percent = f"{battery_percent}%"
+                    discharging_config = notification_config["discharging"]
+                    exec_shell_command_async(
+                        f"notify-send '{discharging_config['title']}' '{
+                            discharging_config['body'].replace('_LEVEL_%', percent)
+                        }'",
+                        lambda *_: None,
+                    )
 
         temperature = self.client.get_property("Temperature")
         energy = self.client.get_property("Energy")
