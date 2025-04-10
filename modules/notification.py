@@ -18,7 +18,7 @@ import utils.constants as constants
 import utils.functions as helpers
 import utils.icons as icons
 from services import notification_service
-from shared import CustomImage
+from shared.circle_image import CircleImage
 from utils import BarConfig, Colors, HyprlandWithMonitors
 from utils.widget_utils import get_icon
 
@@ -180,13 +180,13 @@ class NotificationWidget(EventBox):
         try:
             if image_pixbuf := self._notification.image_pixbuf:
                 body_container.add(
-                    CustomImage(
+                    CircleImage(
                         pixbuf=image_pixbuf.scale_simple(
                             constants.NOTIFICATION_IMAGE_SIZE,
                             constants.NOTIFICATION_IMAGE_SIZE,
                             GdkPixbuf.InterpType.BILINEAR,
                         ),
-                        style_classes="image",
+                        size=constants.NOTIFICATION_IMAGE_SIZE,
                     ),
                 )
         except GLib.GError:
@@ -285,14 +285,12 @@ class NotificationWidget(EventBox):
     def on_hover(self):
         self.pause_timeout()
         self.set_pointer_cursor(self, "hand2")
-        print("hover")
         self.config[
             "display_actions_on_hover"
         ] and self.actions_container.set_reveal_child(True)
 
     def on_unhover(self):
         self.resume_timeout()
-        print("unhover")
         self.set_pointer_cursor(self, "arrow")
         self.config[
             "display_actions_on_hover"
