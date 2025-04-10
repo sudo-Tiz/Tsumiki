@@ -316,12 +316,6 @@ menu#ocr-menu {
   }
 }
 
-#quick_settings {
-  border-radius: variable.$bar-widgets-quick_settings-border-radius;
-  border: if(variable.$bar-widgets-quick_settings-border-enabled, variable.$border, none);
-  border-width: variable.$bar-widgets-quick_settings-border-width;
-
-}
 
 
 
@@ -360,18 +354,6 @@ menu#ocr-menu {
   }
 }
 
-#weather {
-  border-radius: variable.$bar-widgets-weather-border-radius;
-  border: if(variable.$bar-widgets-weather-border-enabled, variable.$border, none);
-  border-width: variable.$bar-widgets-weather-border-width;
-
-
-
-  #nerd-icon.panel-icon {
-    font-size: variable.$bar-widgets-weather-icon_size;
-    margin-right: variable.$bar-widgets-weather-spacing;
-  }
-}
 
 #window_title {
   border-radius: variable.$bar-widgets-window_title-border-radius;
