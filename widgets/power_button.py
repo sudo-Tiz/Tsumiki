@@ -1,4 +1,4 @@
-from fabric.utils import exec_shell_command_async, get_relative_path
+from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
@@ -6,6 +6,7 @@ from fabric.widgets.widget import Widget
 from gi.repository import Gtk
 
 from shared import ButtonWidget, PopupWindow
+from shared.dialog import Dialog
 from utils import BarConfig
 from utils.widget_utils import text_icon
 
@@ -81,6 +82,13 @@ class PowerControlButtons(ButtonWidget):
         self, config, name: str, command: str, size: int, show_label=True, **kwargs
     ):
         self.config = config
+        self.dialog = Dialog(
+            title=name,
+            body=f"Are you sure you want to {name}?",
+            command=command,
+            **kwargs,
+        )
+
         super().__init__(
             config=config,
             orientation="v",
@@ -108,7 +116,7 @@ class PowerControlButtons(ButtonWidget):
         command: str,
     ):
         PowerMenuPopup.get_default(widget_config=self.config).toggle_popup()
-        exec_shell_command_async(command, lambda *_: None)
+        self.dialog.toggle_popup()
         return True
 
 

@@ -1,10 +1,7 @@
-from typing import Literal
-
+from fabric.utils import exec_shell_command_async
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.label import Label
-
-from utils.functions import handle_power_action
 
 from .pop_up import PopupWindow
 
@@ -14,8 +11,9 @@ class Dialog(PopupWindow):
 
     def __init__(
         self,
-        title: Literal["shutdown", "reboot", "hibernate", "suspend", "lock", "logout"],
+        title: str,
         body: str,
+        command: str,
         **kwargs,
     ):
         self.wrapper = Box(orientation="v", name="dialog-wrapper")
@@ -36,7 +34,9 @@ class Dialog(PopupWindow):
 
         self.buttons.children = (self.ok_btn, self.cancel_btn)
 
-        self.ok_btn.connect("clicked", lambda *_: handle_power_action(operation=title))
+        self.ok_btn.connect(
+            "clicked", lambda *_: exec_shell_command_async(command, lambda *_: None)
+        )
         self.cancel_btn.connect("clicked", lambda *_: self.destroy())
 
         self.wrapper.children = (self.title, self.body, self.buttons)
