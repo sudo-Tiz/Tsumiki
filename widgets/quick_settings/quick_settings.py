@@ -179,6 +179,8 @@ class QuickSettingsMenu(Box):
             size=70,
         )
 
+        avatar.set_size_request(70, 70)
+
         self.user_box.attach(
             avatar,
             0,
