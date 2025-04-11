@@ -1,4 +1,3 @@
-import gi
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from gi.repository import GdkPixbuf, Gtk
@@ -7,9 +6,6 @@ from services import battery_service
 from shared import ButtonWidget
 from utils import BarConfig
 from utils.functions import format_time
-
-gi.require_version("Gdk", "3.0")
-gi.require_version("Gtk", "3.0")
 
 
 class BatteryWidget(ButtonWidget):

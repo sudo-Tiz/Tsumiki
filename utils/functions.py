@@ -6,7 +6,6 @@ import time
 from functools import lru_cache
 from typing import Dict, List, Literal, Optional
 
-import gi
 import psutil
 from fabric.utils import (
     cooldown,
@@ -21,8 +20,6 @@ from .colors import Colors
 from .constants import named_colors
 from .icons import distro_text_icons
 from .thread import run_in_thread
-
-gi.require_version("Gio", "2.0")
 
 
 # Function to escape the markup
