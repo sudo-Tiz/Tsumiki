@@ -59,8 +59,8 @@ class NotificationPopup(Window):
             **kwargs,
         )
 
-    def on_new_notification(self, fabric_notif, id):
-        notification: Notification = fabric_notif.get_notification_from_id(id)
+    def on_new_notification(self, fabric_notification, id):
+        notification: Notification = fabric_notification.get_notification_from_id(id)
 
         # Check if the notification is in the "do not disturb" mode, hacky way
         if (

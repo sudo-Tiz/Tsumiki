@@ -362,7 +362,9 @@
 			},
 			"widgets": {
 				"divider": {
-					"size": " 2px"
+					"size": " 2px",
+					"margin_x": "0",
+					"margin_y": "1.25em"
 				},
 				"spacing": {
 					"size": " 20px"

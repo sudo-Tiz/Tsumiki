@@ -44,6 +44,7 @@
 
 #divider {
   min-width: variable.$bar-widgets-divider-size;
+  margin: variable.$bar-widgets-divider-margin_x variable.$bar-widgets-divider-margin_y;
 }
 
 #spacing {
