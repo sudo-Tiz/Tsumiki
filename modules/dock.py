@@ -363,26 +363,40 @@ class Dock(Window):
                 # If that fails, try command line or executable
                 if not launch_success:
                     if desktop_app.command_line:
-                        exec_shell_command_async(f"nohup {desktop_app.command_line}")
+                        exec_shell_command_async(
+                            f"nohup {desktop_app.command_line}",
+                            lambda _: None,
+                        )
                     elif desktop_app.executable:
-                        exec_shell_command_async(f"nohup {desktop_app.executable}")
+                        exec_shell_command_async(
+                            f"nohup {desktop_app.executable}",
+                            lambda _: None,
+                        )
             else:
                 # No desktop entry found, try direct execution
                 if isinstance(app_identifier, dict):
                     # Try command_line first, then executable, then name as last resort
                     if app_identifier.get("command_line"):
                         exec_shell_command_async(
-                            f"nohup {app_identifier['command_line']}"
+                            f"nohup {app_identifier['command_line']}",
+                            lambda _: None,
                         )
                     elif app_identifier.get("executable"):
                         exec_shell_command_async(
-                            f"nohup {app_identifier['executable']}"
+                            f"nohup {app_identifier['executable']}",
+                            lambda _: None,
                         )
                     elif app_identifier.get("name"):
-                        exec_shell_command_async(f"nohup {app_identifier['name']}")
+                        exec_shell_command_async(
+                            f"nohup {app_identifier['name']}",
+                            lambda _: None,
+                        )
                 elif isinstance(app_identifier, str):
                     # Try direct execution with the identifier as fallback
-                    exec_shell_command_async(f"nohup {app_identifier}")
+                    exec_shell_command_async(
+                        f"nohup {app_identifier}",
+                        lambda _: None,
+                    )
         else:
             # Handle window switching for running instances
             focused = self.get_focused()
