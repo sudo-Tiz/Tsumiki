@@ -26,7 +26,6 @@ By default, `config.json` is read. If the config is not found, then `config.toml
         "debug": false,
         "layer": "top",
         "auto_hide": false,
-        "bar_style": "default",
         "location": "top",
         "widget_style": "default",
     }
@@ -38,9 +37,6 @@ By default, `config.json` is read. If the config is not found, then `config.toml
 
 - **location** (string; enum: "top", "bottom"):
   Determines where the panel is positioned on the screen. It can either be at the top or the bottom.
-
-- **bar_style** (string; enum: "default", "floating"):
-  Selects the style of the panel bar. "default" provides a standard appearance, while "floating" gives it a floating look.
 
 - **layer** (string; enum: "background", "bottom", "top", "overlay"):
   Specifies the stacking order or z-index of the panel, determining which layer it should be rendered on.

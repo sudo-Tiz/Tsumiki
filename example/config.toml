@@ -134,7 +134,6 @@ check_updates = false
 layer = "top"
 auto_hide = false
 debug = true
-bar_style = "default"
 location = "top"
 widget_style = "default"
 

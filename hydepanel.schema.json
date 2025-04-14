@@ -219,11 +219,6 @@
 					"enum": ["top", "bottom"],
 					"description": "Determines the location of the bar."
 				},
-				"bar_style": {
-					"type": "string",
-					"enum": ["default", "floating"],
-					"description": "Determines the style of the bar."
-				},
 				"layer": {
 					"type": "string",
 					"enum": ["background", "bottom", "top", "overlay"],

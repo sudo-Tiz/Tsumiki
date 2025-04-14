@@ -174,7 +174,6 @@
 		"layer": "top",
 		"auto_hide": false,
 		"debug": true,
-		"bar_style": "default",
 		"location": "top"
 	},
 	"power": {
@@ -327,7 +326,10 @@
 		"bar": {
 			"scaling": 100,
 			"opacity": 70,
-			"widget_style": "default",
+			"style": {
+				"panel": "default",
+				"widget": "default"
+			},
 			"shadow": {
 				"enabled": false,
 				"offset": 0,

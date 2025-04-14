@@ -185,7 +185,6 @@ DEFAULT_CONFIG = {
         "layer": "top",
         "auto_hide": False,
         "debug": True,
-        "bar_style": "default",
         "location": "top",
         "widget_style": "default",
     },

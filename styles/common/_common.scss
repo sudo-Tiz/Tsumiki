@@ -10,7 +10,6 @@
   border: 1px solid red;
 }
 
-
 .flat {
   border-radius: 4px;
 }
@@ -51,7 +50,10 @@
 
   box-shadow: if(variable.$bar-shadow-enabled, $shadow, none);
 
-
+  @if (variable.$bar-style-panel !=default) {
+    margin: 1rem 1.5rem 0rem 1.5rem;
+    border-color: theme.$surface-disabled;
+  }
 }
 }
 
@@ -88,7 +90,7 @@
 
   box-shadow: if(variable.$bar-buttons-shadow-enabled, $shadow, none);
 
-  @include mixins.widget_style(variable.$bar-widget_style);
+  @include mixins.widget_style(variable.$bar-style-widget);
 
   label {
     color: theme.$text-main;

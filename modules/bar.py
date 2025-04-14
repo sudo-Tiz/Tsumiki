@@ -98,9 +98,6 @@ class StatusBar(Window):
             **kwargs,
         )
 
-        if options["bar_style"]:
-            self.box.add_style_class(options["bar_style"])
-
         if options["check_updates"]:
             self.check_for_bar_updates()
 
