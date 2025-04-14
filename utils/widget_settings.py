@@ -133,7 +133,6 @@ General = TypedDict(
         "debug": bool,
         "location": str,
         "layer": Layer,
-        "bar_style": Literal["default", "floating"],
     },
 )
 

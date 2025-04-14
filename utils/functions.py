@@ -6,7 +6,6 @@ import time
 from functools import lru_cache
 from typing import Dict, List, Literal, Optional
 
-import gi
 import psutil
 from fabric.utils import (
     cooldown,
@@ -21,8 +20,6 @@ from .colors import Colors
 from .constants import named_colors
 from .icons import distro_text_icons
 from .thread import run_in_thread
-
-gi.require_version("Gio", "2.0")
 
 
 # Function to escape the markup
@@ -209,25 +206,6 @@ def check_icon_exists(icon_name: str, fallback_icon: str) -> str:
 @run_in_thread
 def play_sound(file: str):
     exec_shell_command_async(f"pw-play {file}", lambda *_: None)
-    return True
-
-
-def handle_power_action(
-    operation: Literal["shutdown", "reboot", "hibernate", "suspend", "lock", "logout"],
-):
-    match operation:
-        case "shutdown":
-            exec_shell_command_async("systemctl poweroff", lambda *_: None)
-        case "reboot":
-            exec_shell_command_async("systemctl reboot", lambda *_: None)
-        case "hibernate":
-            exec_shell_command_async("systemctl hibernate", lambda *_: None)
-        case "suspend":
-            exec_shell_command_async("systemctl suspend", lambda *_: None)
-        case "lock":
-            exec_shell_command_async("loginctl lock-session", lambda *_: None)
-        case "logout":
-            exec_shell_command_async("loginctl terminate-user $USER", lambda *_: None)
     return True
 
 

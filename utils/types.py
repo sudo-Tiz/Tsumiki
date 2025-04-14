@@ -19,3 +19,6 @@ Anchor = Literal[
 
 
 Keyboard_Mode = Literal["none", "exclusive", "on-demand"]
+
+
+Power_Options = Literal["shutdown", "reboot", "hibernate", "suspend", "lock", "logout"]

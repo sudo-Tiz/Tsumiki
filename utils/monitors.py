@@ -2,13 +2,10 @@ import json
 import warnings
 from typing import Dict
 
-import gi
 from fabric.hyprland import Hyprland
 from gi.repository import Gdk
 
 from utils.functions import ttl_lru_cache
-
-gi.require_version("Gdk", "3.0")
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 

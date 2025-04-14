@@ -17,7 +17,8 @@ from loguru import logger
 import utils.constants as constants
 import utils.functions as helpers
 from services import notification_service
-from shared import ButtonWidget, CustomImage, PopOverWindow, Separator
+from shared import ButtonWidget, PopOverWindow, Separator
+from shared.circle_image import CircleImage
 from shared.widget_container import HoverButton
 from utils import BarConfig, Colors
 from utils.functions import uptime
@@ -114,13 +115,13 @@ class DateMenuNotification(EventBox):
         try:
             if image_pixbuf := self._notification.image_pixbuf:
                 body_container.add(
-                    CustomImage(
+                    CircleImage(
                         pixbuf=image_pixbuf.scale_simple(
                             constants.NOTIFICATION_IMAGE_SIZE,
                             constants.NOTIFICATION_IMAGE_SIZE,
                             GdkPixbuf.InterpType.BILINEAR,
                         ),
-                        style_classes="image",
+                        size=constants.NOTIFICATION_IMAGE_SIZE,
                     ),
                 )
         except GLib.GError:
@@ -402,11 +403,13 @@ class DateNotificationMenu(Box):
             widget.destroy()
         return False
 
-    def on_new_notification(self, fabric_notif, id):
+    def on_new_notification(self, fabric_notification, id):
         if self.cache_notification_service.dont_disturb:
             return
 
-        notification: Notification = fabric_notif.get_notification_from_id(id)
+        fabric_notification: Notification = (
+            fabric_notification.get_notification_from_id(id)
+        )
 
         # Clean up any destroyed widgets first
         try:
@@ -425,7 +428,7 @@ class DateNotificationMenu(Box):
 
         self.notification_list_box.add(
             DateMenuNotification(
-                notification=notification,
+                notification=fabric_notification,
                 id=id,
             )
         )

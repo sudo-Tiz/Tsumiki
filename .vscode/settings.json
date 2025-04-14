@@ -1,3 +1,11 @@
 {
-	"cSpell.words": ["brightnessctl", "ellipsization", "pkill"]
+	"cSpell.words": [
+		"brightnessctl",
+		"ellipsization",
+		"Interp",
+		"pkill",
+		"psutil",
+		"pycairo",
+		"rlottie"
+	]
 }

@@ -176,8 +176,10 @@ class QuickSettingsMenu(Box):
 
         avatar = CircleImage(
             image_file=user_image,
-            size=70,
+            size=65,
         )
+
+        avatar.set_size_request(65, 65)
 
         self.user_box.attach(
             avatar,
