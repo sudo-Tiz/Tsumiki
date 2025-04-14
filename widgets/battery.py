@@ -64,7 +64,7 @@ class BatteryWidget(ButtonWidget):
             and self.config["notifications"]["full_battery"]
         ):
             exec_shell_command_async(
-                "notify-send 'Battery Full' 'Your battery is fully charged!' --icon=battery-full-charging-symbolic",
+                "notify-send 'Battery Full' 'Your battery is fully charged!' -i=battery-full-charging-symbolic",
                 lambda *_: None,
             )
 
