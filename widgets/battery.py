@@ -61,11 +61,10 @@ class BatteryWidget(ButtonWidget):
 
         if (
             battery_percent == self.full_battery_level
-            and is_charging
             and self.config["notifications"]["full_battery"]
         ):
             exec_shell_command_async(
-                "notify-send 'Battery Full' 'Your battery is fully charged!'",
+                "notify-send 'Battery Full' 'Your battery is fully charged!' --icon=battery-full-charging-symbolic",
                 lambda *_: None,
             )
 
