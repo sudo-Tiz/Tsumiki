@@ -1,3 +1,4 @@
+from fabric.utils import exec_shell_command_async
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from gi.repository import GdkPixbuf, Gtk
@@ -25,7 +26,18 @@ class BatteryWidget(ButtonWidget):
         )
         self.full_battery_level = self.config["full_battery_level"]
 
+        self.battery_label = Label(
+            label="100%", style_classes="panel-text", visible=False
+        )
+
+        self.battery_icon = Image(
+            icon_name="battery-full-charging-symbolic",
+            icon_size=self.config["icon_size"],
+        )
+
         self.client = battery_service
+
+        self.time_since_last_notification = 0
 
         self.client.connect("changed", lambda *_: self.update_ui())
 
@@ -37,44 +49,25 @@ class BatteryWidget(ButtonWidget):
         """Update the battery status by fetching the current battery information
         and updating the widget accordingly.
         """
-        is_present = self.client.get_property("IsPresent")
+        is_present = self.client.get_property("IsPresent") == 1
 
         battery_percent = (
             round(self.client.get_property("Percentage")) if is_present else 0
-        )
-
-        self.battery_label = Label(
-            label=f"{battery_percent}%", style_classes="panel-text", visible=False
         )
 
         battery_state = self.client.get_property("State")
 
         is_charging = battery_state == 1 if is_present else False
 
-        notification_config = self.config["notifications"]
-
-        if self.state is None or self.state != battery_state:
-            self.state = battery_state
-
-            if notification_config["enabled"]:
-                if is_charging:
-                    percent = f"{battery_percent}%"
-                    charging_config = notification_config["charging"]
-                    exec_shell_command_async(
-                        f"notify-send '{charging_config['title']}' '{
-                            charging_config['body'].replace('_LEVEL_%', percent)
-                        }'",
-                        lambda *_: None,
-                    )
-                else:
-                    percent = f"{battery_percent}%"
-                    discharging_config = notification_config["discharging"]
-                    exec_shell_command_async(
-                        f"notify-send '{discharging_config['title']}' '{
-                            discharging_config['body'].replace('_LEVEL_%', percent)
-                        }'",
-                        lambda *_: None,
-                    )
+        if (
+            battery_percent == self.full_battery_level
+            and is_charging
+            and self.config["notifications"]["full_battery"]
+        ):
+            exec_shell_command_async(
+                "notify-send 'Battery Full' 'Your battery is fully charged!'",
+                lambda *_: None,
+            )
 
         temperature = self.client.get_property("Temperature")
         energy = self.client.get_property("Energy")
@@ -85,9 +78,10 @@ class BatteryWidget(ButtonWidget):
             else self.client.get_property("TimeToEmpty")
         )
 
-        self.battery_icon = Image(
-            icon_name=self.client.get_property("IconName"),
-            icon_size=self.config["icon_size"],
+        self.battery_label.set_text(f"{battery_percent}%")
+
+        self.battery_icon.set_from_icon_name(
+            self.client.get_property("IconName"), self.config["icon_size"]
         )
 
         if self.config["orientation"] == "horizontal":

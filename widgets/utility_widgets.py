@@ -7,7 +7,6 @@ class SpacingWidget(Box):
     """A simple widget to add spacing between widgets."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        self.config = widget_config["spacing"]
         super().__init__(name="spacing", **kwargs)
 
 
@@ -15,6 +14,4 @@ class DividerWidget(Box):
     """A simple widget to add a divider between widgets."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        self.config = widget_config["divider"]
-
         super().__init__(name="divider", orientation="vertical", **kwargs)

@@ -140,7 +140,6 @@ def get_brightness_icon_name(level: int) -> dict[Literal["icon_text", "icon"], s
             "text_icon": brightness_text_icons["medium"],
             "icon": "display-brightness-medium-symbolic",
         }
-    # level > 66
     return {
         "text_icon": brightness_text_icons["high"],
         "icon": "display-brightness-high-symbolic",
