@@ -113,7 +113,7 @@ class BatteryWidget(ButtonWidget):
                 f"󱐋 Energy : {round(energy, 2)} Wh\n Temperature: {temperature}°C"
             )
             if battery_percent == self.full_battery_level:
-                self.set_tooltip_text(f"Full\n{tool_tip_text}")
+                self.set_tooltip_text(f"󰄉 Time to full: 0\n{tool_tip_text}")
             elif is_charging and battery_percent < self.full_battery_level:
                 self.set_tooltip_text(
                     f"󰄉 Time to full: {format_time(time_remaining)}\n{tool_tip_text}"
