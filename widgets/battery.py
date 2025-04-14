@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from fabric.utils import exec_shell_command_async
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
@@ -37,7 +39,7 @@ class BatteryWidget(ButtonWidget):
 
         self.client = battery_service
 
-        self.time_since_last_notification = 0
+        self.notification_time = 0
 
         self.client.connect("changed", lambda *_: self.update_ui())
 
@@ -59,14 +61,21 @@ class BatteryWidget(ButtonWidget):
 
         is_charging = battery_state == 1 if is_present else False
 
+        time_since_last_notification = (
+            datetime.now() - self.time_since_last_notification
+        ).total_seconds()
+        # Check if the notification time has passed
+
         if (
-            battery_percent == self.full_battery_level
+            time_since_last_notification > 60 * 5
+            and battery_percent == self.full_battery_level
             and self.config["notifications"]["full_battery"]
         ):
             exec_shell_command_async(
                 "notify-send 'Battery Full' 'Your battery is fully charged!' -i=battery-full-charging-symbolic",
                 lambda *_: None,
             )
+            self.time_since_last_notification = datetime.now()
 
         temperature = self.client.get_property("Temperature")
         energy = self.client.get_property("Energy")
