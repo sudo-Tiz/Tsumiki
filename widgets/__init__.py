@@ -28,5 +28,6 @@ from .updates import *
 from .utility_widgets import *
 from .volume import *
 from .weather import *
+from .window_count import *
 from .window_title import *
 from .workspaces import *

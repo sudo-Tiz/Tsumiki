@@ -63,6 +63,12 @@ HyprIdle = TypedDict(
     {**BaseConfig.__annotations__, "enabled_icon": str, "disabled_icon": str},
 )
 
+# Window Count configuration
+WindowCount = TypedDict(
+    "WindowCount",
+    {**BaseConfig.__annotations__, "label_format": str},
+)
+
 # Battery configuration
 Battery = TypedDict(
     "Battery",
@@ -375,4 +381,5 @@ class BarConfig(TypedDict):
     volume: Volume
     weather: Weather
     window_title: WindowTitle
+    window_count: WindowCount
     workspaces: Workspaces

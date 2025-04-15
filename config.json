@@ -67,6 +67,11 @@
 		"label": true,
 		"tooltip": true
 	},
+	"window_count": {
+		"icon": "",
+		"label_format": "[{count}]",
+		"tooltip": true
+	},
 	"language": {
 		"truncation_size": 2, // this is the number of characters to show in the language widget
 		"tooltip": true,
@@ -78,7 +83,8 @@
 			"window_title"
 		], // this is the left section of the panel
 		"middle_section": [
-			"date_time"
+			"date_time",
+			"window_count"
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
@@ -377,6 +383,15 @@
 					"size": " 20px"
 				},
 				"cpu": {
+					"spacing": ".125em",
+					"icon_size": "12px",
+					"border": {
+						"enabled": false,
+						"width": "1px",
+						"radius": "16px"
+					}
+				},
+				"window_count": {
 					"spacing": ".125em",
 					"icon_size": "12px",
 					"border": {

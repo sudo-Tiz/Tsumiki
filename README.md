@@ -212,6 +212,7 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 | **hypr_picker**       | Widget that picks color from images.                                           |
 | **hypr_sunset**       | Widget that adjusts screen settings based on the time of sunset.               |
 | **keyboard**          | Widget that manages and manages the keyboard layout or settings.               |
+| **window_count**      | Widget that shows window count on active workspace.                            |
 | **language**          | Widget allows selection of the system's language or locale settings.           |
 | **media**             | Widget controls media playback, volume, or other media-related settings.       |
 | **microphone**        | Widget manages microphone settings and input levels.                           |

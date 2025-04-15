@@ -59,6 +59,7 @@ class StatusBar(Window):
             "stop_watch": "widgets.StopWatchWidget",
             "divider": "widgets.DividerWidget",
             "quick_settings": "widgets.QuickSettingsButtonWidget",
+            "window_count": "widgets.WindowCountWidget",
         }
 
         options = config["general"]
