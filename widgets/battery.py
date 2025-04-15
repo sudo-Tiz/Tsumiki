@@ -76,8 +76,8 @@ class BatteryWidget(ButtonWidget):
         )
 
         if (
-            time_since_last_notification > NOTIFICATION_TIMEOUT and
-            battery_percent == self.full_battery_level
+            time_since_last_notification > NOTIFICATION_TIMEOUT
+            and battery_percent == self.full_battery_level
             and self.config["notifications"]["full_battery"]
         ):
             print("Battery is full and notification is enabled")
