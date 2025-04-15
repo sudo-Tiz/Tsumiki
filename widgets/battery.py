@@ -44,8 +44,7 @@ class BatteryWidget(ButtonWidget):
         self.notification_time = 0
 
         self.client.connect("changed", lambda *_: self.update_ui())
-
-        self.state = None
+        self.time_since_last_notification = datetime.now()
 
         self.update_ui()
 
@@ -67,6 +66,10 @@ class BatteryWidget(ButtonWidget):
             datetime.now() - self.time_since_last_notification
         ).total_seconds()
         # Check if the notification time has passed
+
+
+        print(
+            f"Time since last notification: {time_since_last_notification} seconds")
 
         if (
             time_since_last_notification > NOTIFICATION_TIMEOUT
