@@ -10,6 +10,8 @@ from shared import ButtonWidget
 from utils import BarConfig
 from utils.functions import format_time
 
+NOTIFICATION_TIMEOUT = 60 * 5  # 5 minutes
+
 
 class BatteryWidget(ButtonWidget):
     """A widget to display the current battery status."""
@@ -67,12 +69,15 @@ class BatteryWidget(ButtonWidget):
         # Check if the notification time has passed
 
         if (
-            time_since_last_notification > 60 * 5
+            time_since_last_notification > NOTIFICATION_TIMEOUT
             and battery_percent == self.full_battery_level
             and self.config["notifications"]["full_battery"]
         ):
             exec_shell_command_async(
-                "notify-send 'Battery Full' 'Your battery is fully charged!' -i=battery-full-charging-symbolic",
+                "notify-send \
+                'Battery Full' \
+                'Your battery is fully charged!' \
+                 -i 'battery-full-charging-symbolic'",
                 lambda *_: None,
             )
             self.time_since_last_notification = datetime.now()

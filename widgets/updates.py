@@ -82,7 +82,7 @@ class UpdatesWidget(ButtonWidget):
         # Execute the update script asynchronously and update values
         if update:
             exec_shell_command_async(
-                f"{self.script_file} -{self.config['os']} -up",
+                f"{self.script_file} --{self.config['os']} up",
                 lambda output: self.update_values(output),
             )
         else:
