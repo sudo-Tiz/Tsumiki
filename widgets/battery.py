@@ -1,14 +1,13 @@
 from datetime import datetime
 
-from fabric.utils import exec_shell_command_async
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
-from gi.repository import GdkPixbuf, Gtk
+from gi.repository import GdkPixbuf, GLib, Gtk
 
 from services import battery_service
 from shared import ButtonWidget
 from utils import BarConfig
-from utils.functions import format_time
+from utils.functions import format_time, send_notification
 
 NOTIFICATION_TIMEOUT = 60 * 5  # 5 minutes
 
@@ -67,21 +66,27 @@ class BatteryWidget(ButtonWidget):
         ).total_seconds()
         # Check if the notification time has passed
 
-
-        print(
-            f"Time since last notification: {time_since_last_notification} seconds")
+        print(f"Time since last notification: {time_since_last_notification} seconds")
 
         if (
-            time_since_last_notification > NOTIFICATION_TIMEOUT
-            and battery_percent == self.full_battery_level
+            battery_percent == self.full_battery_level
             and self.config["notifications"]["full_battery"]
         ):
-            exec_shell_command_async(
-                "notify-send \
-                'Battery Full' \
-                'Your battery is fully charged!' \
-                 -i 'battery-full-charging-symbolic'",
-                lambda *_: None,
+            print("Battery is full and notification is enabled")
+            # Create and store the timeout_id
+            timeout_id = GLib.timeout_add(
+                5000,
+                lambda: (
+                    send_notification(
+                        title="Battery Full",
+                        body="Battery is fully charged.",
+                        urgency="normal",
+                        icon="battery-full-charging-symbolic",
+                        app_name="Battery",
+                    ),
+                    # remove the timeout after sending the notification
+                    GLib.source_remove(timeout_id),
+                ),
             )
             self.time_since_last_notification = datetime.now()
 
