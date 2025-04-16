@@ -1,4 +1,5 @@
 import importlib
+from numbers import Number
 from time import sleep
 from typing import Literal
 
@@ -120,6 +121,24 @@ def text_icon(icon: str, props=None):
         label_props.update(props)
 
     return Label(**label_props)
+
+
+def get_bar_graph(usage: Number):
+    if usage < 12.5:
+        return "▁"
+    if usage < 25:
+        return "▂"
+    if usage < 37.5:
+        return "▃"
+    if usage < 50:
+        return "▄"
+    if usage < 62.5:
+        return "▅"
+    if usage < 75:
+        return "▆"
+    if usage < 87.5:
+        return "▇"
+    return "█"
 
 
 # Function to get the brightness icons
