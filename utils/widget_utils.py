@@ -23,10 +23,10 @@ def stats_poll(fabricator):
     storage_config = widget_config["storage"]
     while True:
         yield {
-            "cpu_usage": f"{round(psutil.cpu_percent())}%",
+            "cpu_usage": round(psutil.cpu_percent(), 1),
             "cpu_freq": psutil.cpu_freq(),
             "temperature": psutil.sensors_temperatures(),
-            "ram_usage": f"{round(psutil.virtual_memory().percent)}%",
+            "ram_usage": round(psutil.virtual_memory().percent, 1),
             "memory": psutil.virtual_memory(),
             "disk": psutil.disk_usage(storage_config["path"]),
             "user": psutil.users()[0][0],
@@ -123,6 +123,7 @@ def text_icon(icon: str, props=None):
     return Label(**label_props)
 
 
+# Function to get the bar graph representation
 def get_bar_graph(usage: Number):
     if usage < 12.5:
         return "▁"

@@ -152,6 +152,8 @@ Cpu = TypedDict(
         "unit": Literal["celsius", "fahrenheit"],
         "show_unit": bool,
         "round": bool,
+        "graph": bool,
+        "graph_length": int,
     },
 )
 
@@ -159,7 +161,15 @@ Cpu = TypedDict(
 Mpris = TypedDict("Mpris", {**BaseConfig.__annotations__, "truncation_size": int})
 
 # Memory configuration
-Memory = TypedDict("Memory", {**BaseConfig.__annotations__, "icon": str})
+Memory = TypedDict(
+    "Memory",
+    {
+        **BaseConfig.__annotations__,
+        "icon": str,
+        "graph": bool,
+        "graph_length": int,
+    },
+)
 
 # Submap configuration
 Submap = TypedDict("Submap", {**BaseConfig.__annotations__, "icon": str})
@@ -178,7 +188,16 @@ NetworkUsage = TypedDict(
 )
 
 # Storage configuration
-Storage = TypedDict("Storage", {**BaseConfig.__annotations__, "icon": str, "path": str})
+Storage = TypedDict(
+    "Storage",
+    {
+        **BaseConfig.__annotations__,
+        "icon": str,
+        "path": str,
+        "graph": bool,
+        "graph_length": int,
+    },
+)
 
 # Workspaces configuration
 Workspaces = TypedDict(

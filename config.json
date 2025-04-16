@@ -37,7 +37,9 @@
 		"unit": "celsius",
 		"round": true,
 		"show_unit": true,
-		"sensor": "acpitz"
+		"sensor": "acpitz",
+		"graph": true,
+		"graph_length": 4
 	},
 	"date_time": {
 		"format": "%b %d %H:%M",
@@ -83,7 +85,8 @@
 			"window_title"
 		], // this is the left section of the panel
 		"middle_section": [
-			"date_time"
+			"date_time",
+			"cpu"
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
@@ -127,7 +130,9 @@
 	"memory": {
 		"icon": "",
 		"label": true,
-		"tooltip": true
+		"tooltip": true,
+		"graph": false,
+		"graph_length": 4
 	},
 	"submap": {
 		"icon": "󰌌",
@@ -258,7 +263,9 @@
 	"storage": {
 		"icon": "󰋊",
 		"label": true,
-		"tooltip": true
+		"tooltip": true,
+		"graph": false,
+		"graph_length": 4
 	},
 	"system_tray": {
 		"icon_size": 16,

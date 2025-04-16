@@ -71,6 +71,8 @@ DEFAULT_CONFIG = {
         "unit": "celsius",
         "show_unit": True,
         "sensor": "",
+        "graph": False,
+        "graph_length": 4,
     },
     "date_time": {
         "format": "%b %d %H:%M",
@@ -136,6 +138,8 @@ DEFAULT_CONFIG = {
         "icon": "",
         "label": True,
         "tooltip": True,
+        "graph": False,
+        "graph_length": 4,
     },
     "network_usage": {
         "upload_icon": "",
@@ -231,6 +235,8 @@ DEFAULT_CONFIG = {
         "label": True,
         "tooltip": True,
         "path": "/",
+        "graph": False,
+        "graph_length": 4,
     },
     "submap": {
         "icon": "󰌌",

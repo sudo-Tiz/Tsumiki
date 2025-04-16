@@ -57,7 +57,6 @@
 							"network_usage",
 							"ocr",
 							"power",
-							"ram",
 							"recorder",
 							"spacer",
 							"storage",
@@ -386,6 +385,14 @@
 				"sensor": {
 					"type": "string",
 					"description": "Sensor to use for temperature"
+				},
+				"graph": {
+					"type": "boolean",
+					"description": "Determines whether to show the graph"
+				},
+				"graph_length": {
+					"type": "integer",
+					"description": "Length of the graph in pixels"
 				}
 			}
 		},
@@ -396,6 +403,14 @@
 				"icon": {
 					"type": "string",
 					"description": "Icon name from icon theme"
+				},
+				"graph": {
+					"type": "boolean",
+					"description": "Determines whether to show the graph"
+				},
+				"graph_length": {
+					"type": "integer",
+					"description": "Length of the graph in pixels"
 				}
 			}
 		},
@@ -406,6 +421,14 @@
 				"icon": {
 					"type": "string",
 					"description": "Icon name from icon theme"
+				},
+				"graph": {
+					"type": "boolean",
+					"description": "Determines whether to show the graph"
+				},
+				"graph_length": {
+					"type": "integer",
+					"description": "Length of the graph in pixels"
 				}
 			}
 		},
