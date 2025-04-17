@@ -111,9 +111,10 @@ DEFAULT_CONFIG = {
         "show_icon": True,
     },
     "window_count": {
-        "icon": "",
+        "icon": "",
         "label_format": "[{count}]",
         "tooltip": True,
+        "show_icon": False,
     },
     "language": {
         "icon": "",

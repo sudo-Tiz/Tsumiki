@@ -64,6 +64,11 @@ class WindowCountWidget(ButtonWidget):
             self.config["label_format"].format(count=data["windows"])
         )
 
+        if self.config["tooltip"]:
+            self.set_tooltip_text(
+                f"Workspace: {data['id']}, Windows: {data['windows']}"
+            )
+
         return (
             logger.info("[WindowCount] Could not find active windows for workspace")
             if not data
