@@ -187,6 +187,8 @@ class NotificationWidget(EventBox):
                             GdkPixbuf.InterpType.BILINEAR,
                         ),
                         size=constants.NOTIFICATION_IMAGE_SIZE,
+                        h_expand=True,
+                        v_expand=True,
                     ),
                 )
         except GLib.GError:
