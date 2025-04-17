@@ -9,8 +9,8 @@
 		"icon_size": 14,
 		"notifications": {
 			"low_threshold": 10,
-			"full_battery": true,
-			"low_battery": true
+			"full_battery": false,
+			"low_battery": false
 		}
 	},
 	"bluetooth": {
@@ -31,6 +31,7 @@
 		"count": 0
 	},
 	"cpu": {
+		"show_icon": true,
 		"icon": "",
 		"label": true,
 		"tooltip": true,
@@ -38,7 +39,7 @@
 		"round": true,
 		"show_unit": true,
 		"sensor": "acpitz",
-		"graph": true,
+		"graph": false,
 		"graph_length": 4
 	},
 	"date_time": {
@@ -85,8 +86,7 @@
 			"window_title"
 		], // this is the left section of the panel
 		"middle_section": [
-			"date_time",
-			"cpu"
+			"date_time"
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
@@ -128,6 +128,7 @@
 		}
 	],
 	"memory": {
+		"show_icon": true,
 		"icon": "",
 		"label": true,
 		"tooltip": true,
@@ -261,6 +262,7 @@
 		"running_icon": "󱫠"
 	},
 	"storage": {
+		"show_icon": true,
 		"icon": "󰋊",
 		"label": true,
 		"tooltip": true,

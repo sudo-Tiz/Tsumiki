@@ -30,6 +30,10 @@
 			"tooltip": {
 				"type": "boolean",
 				"description": "Determines whether the widget has a tooltip."
+			},
+			"show_icon": {
+				"type": "boolean",
+				"description": "Determines whether to show the icon."
 			}
 		},
 		"widgets": {

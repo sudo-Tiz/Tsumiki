@@ -66,14 +66,14 @@ class BatteryWidget(ButtonWidget):
         ).total_seconds()
         # Check if the notification time has passed
 
-        print(f"Time since last notification: {time_since_last_notification} seconds")
-        print(time_since_last_notification > NOTIFICATION_TIMEOUT)
+        # print(f"Time since last notification: {time_since_last_notification} seconds")
+        # print(time_since_last_notification > NOTIFICATION_TIMEOUT)
 
-        print(
-            time_since_last_notification > NOTIFICATION_TIMEOUT
-            and battery_percent == self.full_battery_level
-            and self.config["notifications"]["full_battery"]
-        )
+        # print(
+        #     time_since_last_notification > NOTIFICATION_TIMEOUT
+        #     and battery_percent == self.full_battery_level
+        #     and self.config["notifications"]["full_battery"]
+        # )
 
         if (
             time_since_last_notification > NOTIFICATION_TIMEOUT

@@ -64,6 +64,7 @@ DEFAULT_CONFIG = {
     "overview": {},
     "click_counter": {"count": 0},
     "cpu": {
+        "show_icon": True,
         "icon": "",
         "label": True,
         "tooltip": True,
@@ -135,6 +136,7 @@ DEFAULT_CONFIG = {
         "right_section": ["@group:0", "@group:1", "system_tray"],
     },
     "memory": {
+        "show_icon": True,
         "icon": "",
         "label": True,
         "tooltip": True,
@@ -231,6 +233,7 @@ DEFAULT_CONFIG = {
     "spacing": {"size": 20},
     "stop_watch": {"stopped_icon": "󱫞", "running_icon": "󱫠"},
     "storage": {
+        "show_icon": True,
         "icon": "󰋊",
         "label": True,
         "tooltip": True,

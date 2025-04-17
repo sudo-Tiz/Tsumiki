@@ -35,7 +35,7 @@ class CpuWidget(ButtonWidget):
             lambda value: setattr(self, "cpu_name", value.strip()),
         )
 
-        if self.config["graph"]:
+        if self.config["graph"] or not self.config["show_icon"]:
             self.graph_values = []
             self.box.children = self.cpu_level_label
 
@@ -120,7 +120,7 @@ class MemoryWidget(ButtonWidget):
             label="0%", style_classes="panel-text", visible=False
         )
 
-        if self.config["graph"]:
+        if self.config["graph"] or not self.config["show_icon"]:
             self.graph_values = []
             self.box.children = self.memory_level_label
 
@@ -192,7 +192,7 @@ class StorageWidget(ButtonWidget):
             label="0", style_classes="panel-text", visible=False
         )
 
-        if self.config["graph"]:
+        if self.config["graph"] or not self.config["show_icon"]:
             self.graph_values = []
             self.box.children = self.storage_level_label
         else:

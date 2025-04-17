@@ -147,7 +147,7 @@ Cpu = TypedDict(
     "Cpu",
     {
         **BaseConfig.__annotations__,
-        "icon": str,
+        "show_icon": bool,
         "sensor": str,
         "unit": Literal["celsius", "fahrenheit"],
         "show_unit": bool,
@@ -165,6 +165,7 @@ Memory = TypedDict(
     "Memory",
     {
         **BaseConfig.__annotations__,
+        "show_icon": bool,
         "icon": str,
         "graph": bool,
         "graph_length": int,
@@ -192,6 +193,7 @@ Storage = TypedDict(
     "Storage",
     {
         **BaseConfig.__annotations__,
+        "show_icon": bool,
         "icon": str,
         "path": str,
         "graph": bool,
