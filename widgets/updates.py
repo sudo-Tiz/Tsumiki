@@ -6,7 +6,6 @@ from fabric.utils import (
     get_relative_path,
     invoke_repeater,
 )
-from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 from loguru import logger
 
@@ -31,21 +30,16 @@ class UpdatesWidget(ButtonWidget):
 
         self.script_file = get_relative_path("../assets/scripts/systemupdates.sh")
 
-        self.text_icon = text_icon(
-            icon=self.config["icon"],
-            props={"style_classes": "panel-icon"},
-        )
-        self.update_level_label = Label(
-            label="0", style_classes="panel-text", visible=False
-        )
+        self.update_label = Label(label="0", style_classes="panel-text")
 
-        self.children = Box(
-            children=(self.text_icon, self.update_level_label),
-        )
+        if self.config["show_icon"]:
+            self.icon = text_icon(
+                icon=self.config["icon"],
+                props={"style_classes": "panel-icon"},
+            )
+            self.box.add(self.icon)
 
-        # Show initial value of 0 if label is enabled
-        if self.config["label"]:
-            self.update_level_label.set_visible(True)
+        self.box.add(self.update_label)
 
         self.connect("button-press-event", self.on_button_press)
 
@@ -62,7 +56,7 @@ class UpdatesWidget(ButtonWidget):
 
         # Update the label if enabled
         if self.config["label"]:
-            self.update_level_label.set_label(value["total"])
+            self.update_label.set_label(value["total"])
 
         # Update the tooltip if enabled
         if self.config["tooltip"]:

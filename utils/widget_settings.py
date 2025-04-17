@@ -19,6 +19,8 @@ PowerButton = TypedDict(
         "icon_size": int,
         "tooltip": bool,
         "items_per_row": int,
+        "label": bool,
+        "show_icon": bool,
         "buttons": Dict[
             Dict[
                 Literal["shutdown", "reboot", "hibernate", "suspend", "lock", "logout"],

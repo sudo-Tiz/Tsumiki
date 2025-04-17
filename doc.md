@@ -207,6 +207,7 @@ Other components follow a similar structure, where each configuration defines th
     "icon": "",
     "label": true,
     "tooltip": true,
+    "show_icon": true,
 }
 ```
 
@@ -217,6 +218,7 @@ Other components follow a similar structure, where each configuration defines th
 - unit: The unit of the temperature.
 - show_unit: Whether to show the unit.
 - sensor: The sensor to use for temperature.
+- show_icon: Whether to show the icon.
 
 ## HyprIdle
 
@@ -275,6 +277,7 @@ Other components follow a similar structure, where each configuration defines th
     "icon": "",
     "label": true,
     "tooltip": true,
+    "show_icon": true,
 }
 ```
 
@@ -286,6 +289,9 @@ Other components follow a similar structure, where each configuration defines th
 
 - **tooltip** (boolean):
   Specifies whether a tooltip should be displayed. In this case, the value is `true`, meaning the tooltip will be shown.
+
+- **show_icon** (boolean):
+  Specifies whether the icon should be displayed. In this case, the value is `true`, meaning the icon will be shown.
 
 ## Language
 
@@ -303,6 +309,7 @@ Other components follow a similar structure, where each configuration defines th
     "icon": "",
     "label": true,
     "tooltip": true,
+    "show_icon": true,
 }
 ```
 
@@ -314,6 +321,9 @@ Other components follow a similar structure, where each configuration defines th
 
 - **tooltip** (boolean):
   Specifies whether a tooltip should be displayed. In this case, the value is `true`, meaning the tooltip will be shown.
+
+- **show_icon** (boolean):
+  Specifies whether the icon should be displayed. In this case, the value is `true`, meaning the icon will be shown.
 
 ## MPRIS
 
@@ -356,6 +366,8 @@ Other components follow a similar structure, where each configuration defines th
 "power": {"icon": "󰐥","tooltip": true,
         "items_per_row": 3,
         "icon_size": 100,
+        "show_icon": true,
+        "label": true,
         "buttons": {
             "shutdown": "systemctl poweroff",
             "reboot": "systemctl reboot",
@@ -387,6 +399,10 @@ Other components follow a similar structure, where each configuration defines th
 
 - **icon_size** (integer):
   The size of the icon in number. In this case, it is set to 100.
+- **show_icon** (boolean):
+  Whether to show the icon. In this case, it is set to true.
+- **label** (boolean):
+  Whether to show a label. In this case, it is set to true.
 
 ## Recorder
 
@@ -419,6 +435,7 @@ Other components follow a similar structure, where each configuration defines th
 "icon": "󰋊",
 "label": true,
 "tooltip": true,
+"show_icon": true,
 }
 
 ```
@@ -431,6 +448,9 @@ Other components follow a similar structure, where each configuration defines th
 
 - **tooltip** (boolean):
   Whether to show a tooltip. In this case, it is set to true.
+
+- **show_icon** (boolean):
+  Whether to show the icon. In this case, it is set to true.
 
 ## Storage
 
@@ -439,6 +459,7 @@ Other components follow a similar structure, where each configuration defines th
 "icon": "󰋊",
 "label": true,
 "tooltip": true,
+"show_icon": true,
 }
 ```
 
@@ -450,6 +471,10 @@ Other components follow a similar structure, where each configuration defines th
 
 - **tooltip** (boolean):
   Whether to show a tooltip. In this case, it is set to true.
+
+
+- **show_icon** (boolean):
+  Whether to show the icon. In this case, it is set to true.
 
 ## TaskBar and System Tray
 
@@ -473,6 +498,7 @@ Other components follow a similar structure, where each configuration defines th
 "interval": 60000,
 "tooltip": true,
 "label": true,
+"show_icon": true,
 }
 ```
 
@@ -490,6 +516,9 @@ Other components follow a similar structure, where each configuration defines th
 
 - **tooltip** (boolean):
   Whether to show a tooltip. In this case, it is set to true.
+
+- **show_icon** (boolean):
+  Whether to show the icon. In this case, it is set to true.
 
 ## Volume
 

@@ -16,15 +16,17 @@ class KeyboardLayoutWidget(ButtonWidget):
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(widget_config["keyboard"], name="keyboard", **kwargs)
 
-        # Create a TextIcon with the specified icon and size
-        self.icon = text_icon(
-            icon=self.config["icon"],
-            props={"style_classes": "panel-icon"},
-        )
+        self.kb_label = Label(label="0", style_classes="panel-text")
 
-        self.kb_label = Label(label="0", style_classes="panel-text", visible=False)
+        if self.config["show_icon"]:
+            # Create a TextIcon with the specified icon and size
+            self.icon = text_icon(
+                icon=self.config["icon"],
+                props={"style_classes": "panel-icon"},
+            )
+            self.box.add(self.icon)
 
-        self.box.children = (self.icon, self.kb_label)
+        self.box.add(self.kb_label)
 
         self.connection = get_hyprland_connection()
 

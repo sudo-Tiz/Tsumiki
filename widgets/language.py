@@ -22,14 +22,16 @@ class LanguageWidget(ButtonWidget):
             style_classes="panel-text",
         )
 
-        self.icon = text_icon(
-            icon=self.config["icon"],
-            props={
-                "style_classes": "panel-icon",
-            },
-        )
+        if self.config["show_icon"]:
+            self.icon = text_icon(
+                icon=self.config["icon"],
+                props={
+                    "style_classes": "panel-icon",
+                },
+            )
+            self.box.add(self.icon)
 
-        self.box.children = (self.icon, self.lang)
+        self.box.add(self.lang)
 
         if self.config["tooltip"]:
             self.set_tooltip_text(f"Language: {self.lang.get_label()}")

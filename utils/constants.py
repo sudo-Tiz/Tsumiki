@@ -94,7 +94,8 @@ DEFAULT_CONFIG = {
     "hypr_picker": {
         "icon": "",
         "tooltip": True,
-        "label": True,
+        "label": False,
+        "show_icon": True,
     },
     "hypr_sunset": {
         "temperature": "2800k",
@@ -107,6 +108,7 @@ DEFAULT_CONFIG = {
         "icon": "󰌌",
         "label": True,
         "tooltip": True,
+        "show_icon": True,
     },
     "window_count": {
         "icon": "",
@@ -117,6 +119,7 @@ DEFAULT_CONFIG = {
         "icon": "",
         "tooltip": True,
         "truncation_size": 2,
+        "show_icon": True,
     },
     "module_groups": [
         {
@@ -153,6 +156,7 @@ DEFAULT_CONFIG = {
     "microphone": {
         "label": False,
         "tooltip": True,
+        "show_icon": True,
     },
     "mpris": {
         "truncation_size": 30,
@@ -215,6 +219,8 @@ DEFAULT_CONFIG = {
         "tooltip": True,
         "items_per_row": 3,
         "icon_size": 100,
+        "show_icon": True,
+        "label": False,
         "buttons": {
             "shutdown": "systemctl poweroff",
             "reboot": "systemctl reboot",
@@ -245,6 +251,7 @@ DEFAULT_CONFIG = {
         "icon": "󰌌",
         "label": True,
         "tooltip": True,
+        "show_icon": True,
     },
     "system_tray": {
         "icon_size": 16,
@@ -262,8 +269,9 @@ DEFAULT_CONFIG = {
         "notify": False,  # Whether to show a notification when the theme is changed
     },
     "updates": {
-        "os": "arch",
+        "show_icon": True,
         "icon": "󱧘",
+        "os": "arch",
         "interval": HIGH_POLL_INTERVAL,
         "tooltip": True,
         "label": True,
