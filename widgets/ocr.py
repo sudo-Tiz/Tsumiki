@@ -1,11 +1,13 @@
 import subprocess
 
 from fabric.utils import exec_shell_command_async, get_relative_path
+from fabric.widgets.label import Label
 from gi.repository import Gdk, Gtk
 
 from shared import ButtonWidget
 from utils import BarConfig
 from utils.functions import ttl_lru_cache
+from utils.widget_utils import text_icon
 
 
 class OCRWidget(ButtonWidget):
@@ -21,7 +23,18 @@ class OCRWidget(ButtonWidget):
         self.current_lang = "eng"  # default
         self.script_file = get_relative_path("../assets/scripts/ocr.sh")
 
-        self.set_label(f"{self.config['icon']}")
+        self.ocr_label = Label(label="Ocr", style_classes="panel-text")
+
+        if self.config["show_icon"]:
+            # Create a TextIcon with the specified icon and size
+            self.icon = text_icon(
+                icon=self.config["icon"],
+                props={"style_classes": "panel-icon"},
+            )
+            self.box.add(self.icon)
+
+        if self.config["label"]:
+            self.box.add(self.ocr_label)
 
         # Left click for OCR
         self.connect("button-press-event", self.on_button_press)

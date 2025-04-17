@@ -28,9 +28,14 @@ class UpdatesWidget(ButtonWidget):
         super().__init__(widget_config, name="updates", **kwargs)
         self.config = widget_config["updates"]
 
-        self.script_file = get_relative_path("../assets/scripts/systemupdates.sh")
+        script_file = get_relative_path("../assets/scripts/systemupdates.sh")
 
         self.update_label = Label(label="0", style_classes="panel-text")
+
+        self.base_command = f"{script_file} --{self.config['os']}"
+
+        if self.config["flatpak"]:
+            self.base_command += " --flatpak"
 
         if self.config["show_icon"]:
             self.icon = text_icon(
@@ -39,7 +44,8 @@ class UpdatesWidget(ButtonWidget):
             )
             self.box.add(self.icon)
 
-        self.box.add(self.update_label)
+        if self.config["label"]:
+            self.box.add(self.update_label)
 
         self.connect("button-press-event", self.on_button_press)
 
@@ -52,6 +58,8 @@ class UpdatesWidget(ButtonWidget):
 
     def update_values(self, value: str):
         # Parse the JSON value
+
+        print(value)
         value = json.loads(value)
 
         # Update the label if enabled
@@ -74,15 +82,16 @@ class UpdatesWidget(ButtonWidget):
     @run_in_thread
     def check_update(self, update=False):
         # Execute the update script asynchronously and update values
+
         if update:
             exec_shell_command_async(
-                f"{self.script_file} --{self.config['os']} up",
+                f"{self.base_command} up",
                 lambda output: self.update_values(output),
             )
         else:
             logger.info(f"{Colors.INFO}[Updates] Checking for updates...")
             exec_shell_command_async(
-                f"{self.script_file} --{self.config['os']}",
+                self.base_command,
                 lambda output: self.update_values(output),
             )
 

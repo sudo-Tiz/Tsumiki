@@ -188,7 +188,8 @@ DEFAULT_CONFIG = {
     "ocr": {
         "icon": "󰐳",
         "tooltip": True,
-        "label": True,
+        "label": False,
+        "show_icon": True,
     },
     "general": {
         "screen_corners": {
@@ -276,6 +277,7 @@ DEFAULT_CONFIG = {
         "interval": HIGH_POLL_INTERVAL,
         "tooltip": True,
         "label": True,
+        "flatpak": False,
     },
     "volume": {
         "label": True,

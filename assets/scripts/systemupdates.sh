@@ -2,122 +2,91 @@
 
 # Word of caution: changing this can break update module, be vigilant
 
+# Parse arguments
+DISTRO=""
+DO_UPDATE=0
+CHECK_FLATPAK=0
+
+check_flatpak_updates() {
+    local count=0
+    if [[ "$CHECK_FLATPAK" -eq 1 && "$(command -v flatpak)" ]]; then
+        count=$(flatpak remote-ls --updates 2>/dev/null | wc -l)
+    fi
+    echo "$count"
+}
+
+run_flatpak_update() {
+    if [[ "$CHECK_FLATPAK" -eq 1 && "$(command -v flatpak)" ]]; then
+        flatpak update -y || true
+    fi
+}
+
+
+
 check_arch_updates() {
     official_updates=0
     aur_updates=0
-    flatpak_updates=0
-    tooltip="" # Initialize tooltip variable
+    tooltip=""
 
-    # Get the number of official updates using 'checkupdates'
     official_updates=$(checkupdates 2>/dev/null | wc -l)
 
     if command -v paru &> /dev/null; then
-		aur_helper="paru"
-	else
-		aur_helper="yay"
-	fi
-
-    # Get the number of AUR updates using 'yay'
-    aur_updates=$($aur_helper -Qum 2>/dev/null | wc -l)
-
-    # Calculate total updates
-    total_updates=$((official_updates + aur_updates + flatpak_updates))
-
-    # Build the tooltip for official updates
-    tooltip="󰣇 Official $official_updates\n󰮯 AUR $aur_updates"
-
-    # Check if flatpak is installed
-    if command -v flatpak &>/dev/null; then
-        # Get the number of Flatpak updates if flatpak is installed
-        flatpak_updates=$(flatpak remote-ls --updates | wc -l)
-
-        # Append Flatpak updates to the tooltip
-        tooltip="$tooltip\n Flatpak $flatpak_updates"
-
-        # Recalculate total updates
-        total_updates=$((official_updates + aur_updates + flatpak_updates))
+        aur_helper="paru"
+    else
+        aur_helper="yay"
     fi
 
-    # Output the result as a JSON object
+    aur_updates=$($aur_helper -Qum 2>/dev/null | wc -l)
+
+    tooltip="󰣇 Official $official_updates\n󰮯 AUR $aur_updates"
+    flatpak_updates=0
+
+    if [[ "$CHECK_FLATPAK" -eq 1 ]]; then
+        flatpak_updates=$(check_flatpak_updates)
+        tooltip="$tooltip\n Flatpak $flatpak_updates"
+    fi
+
+
+    total_updates=$((official_updates + aur_updates + flatpak_updates))
+
     echo "{\"total\":\"$total_updates\", \"tooltip\":\"$tooltip\"}"
 }
 
+
+
 check_ubuntu_updates() {
-    official_updates=0
-    flatpak_updates=0
-
-    # Check if flatpak is installed and get Flatpak updates if it is
-    if command -v flatpak &>/dev/null; then
-        flatpak_updates=$(flatpak remote-ls --updates | wc -l)
-        # Always show Flatpak updates in the tooltip, even if there are none
-        tooltip="󰕈 Official $official_updates\n Flatpak $flatpak_updates"
-    else
-        # If flatpak is not installed, only show official updates
-        tooltip="󰕈 Official $official_updates"
-    fi
-
-    # Get the number of official updates using 'apt-get'
     official_updates=$(apt-get -s -o Debug::NoLocking=true upgrade | grep -c ^Inst)
+    flatpak_updates=$(check_flatpak_updates)
 
-    # Calculate total updates
+    tooltip="󰕈 Official $official_updates"
+    [[ "$CHECK_FLATPAK" -eq 1 ]] && tooltip="$tooltip\n Flatpak $flatpak_updates"
+
     total_updates=$((official_updates + flatpak_updates))
-
-    # Output the result as a JSON object
     echo "{\"total\":\"$total_updates\", \"tooltip\":\"$tooltip\"}"
 }
 
 check_fedora_updates() {
-    official_updates=0
-    flatpak_updates=0
-
-    # Get the number of official updates using 'dnf'
     official_updates=$(dnf check-update -q | grep -v '^Loaded plugins' | grep -v '^No match for' | wc -l)
+    flatpak_updates=$(check_flatpak_updates)
 
-    # Calculate total updates
+    tooltip="󰣛 Official $official_updates"
+    [[ "$CHECK_FLATPAK" -eq 1 ]] && tooltip="$tooltip\n Flatpak $flatpak_updates"
+
     total_updates=$((official_updates + flatpak_updates))
-
-    # Check if flatpak is installed and get Flatpak updates if it is
-    if command -v flatpak &>/dev/null; then
-        flatpak_updates=$(flatpak remote-ls --updates | wc -l)
-        # Always show Flatpak updates in the tooltip, even if there are none
-        tooltip="󰣛 Official $official_updates\n Flatpak $flatpak_updates"
-    else
-        # If flatpak is not installed, only show official updates
-        tooltip="󰣛 Official $official_updates"
-    fi
-
-    # Output the result as a JSON object
     echo "{\"total\":\"$total_updates\", \"tooltip\":\"$tooltip\"}"
 }
 
 check_opensuse_updates() {
-    official_updates=0
-    flatpak_updates=0
-
-    # Check if flatpak is installed and get Flatpak updates if it is
-    if command -v flatpak &>/dev/null; then
-        flatpak_updates=$(flatpak remote-ls --updates | wc -l)
-    fi
-
-    # Get the number of official updates using 'dnf'
     official_updates=$(zypper lu | wc -l)
+    flatpak_updates=$(check_flatpak_updates)
 
-    # Calculate total updates
+    tooltip=" Official $official_updates"
+    [[ "$CHECK_FLATPAK" -eq 1 ]] && tooltip="$tooltip\n Flatpak $flatpak_updates"
+
     total_updates=$((official_updates + flatpak_updates))
-
-    # Check if flatpak is installed and get Flatpak updates if it is
-    if command -v flatpak &>/dev/null; then
-        flatpak_updates=$(flatpak remote-ls --updates | wc -l)
-        # Always show Flatpak updates in the tooltip, even if there are none
-        tooltip=" Official $official_updates\n Flatpak $flatpak_updates"
-    else
-        # If flatpak is not installed, only show official updates
-        tooltip=" Official $official_updates"
-    fi
-
-    # Output the result as a JSON object
     echo "{\"total\":\"$total_updates\", \"tooltip\":\"$tooltip\"}"
 }
+
 
 
 update_arch() {
@@ -183,9 +152,7 @@ update_opensuse() {
 
 
 
-# Parse arguments
-DISTRO=""
-DO_UPDATE=0
+
 
 for arg in "$@"; do
     case "$arg" in
@@ -193,9 +160,10 @@ for arg in "$@"; do
         --ubuntu) DISTRO="ubuntu" ;;
         --fedora) DISTRO="fedora" ;;
         --suse)   DISTRO="suse" ;;
+         --flatpak)   CHECK_FLATPAK=1 ;;
         up)       DO_UPDATE=1 ;;
         *)
-            echo "Usage: $0 [--arch|--ubuntu|--fedora|--suse] [up (optional)]"
+            echo "Usage: $0 [--arch|--ubuntu|--fedora|--suse]  [--flatpak] [up (optional)]"
             exit 1
             ;;
     esac
@@ -208,7 +176,7 @@ case "$DISTRO" in
     fedora) (( DO_UPDATE )) && update_fedora      || check_fedora_updates ;;
     suse)   (( DO_UPDATE )) && update_opensuse    || check_opensuse_updates ;;
     *)
-        echo "Usage: $0 [--arch|--ubuntu|--fedora|--suse] [up (optional)]"
+        echo "Usage: $0 [--arch|--ubuntu|--fedora|--suse] [--flatpak] [up (optional)]"
         exit 1
         ;;
 esac
