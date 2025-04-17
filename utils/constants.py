@@ -278,6 +278,8 @@ DEFAULT_CONFIG = {
         "tooltip": True,
         "label": True,
         "flatpak": False,
+        "snap": False,
+        "brew": False,
     },
     "volume": {
         "label": True,

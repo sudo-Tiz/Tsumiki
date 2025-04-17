@@ -6,6 +6,8 @@
 DISTRO=""
 DO_UPDATE=0
 CHECK_FLATPAK=0
+CHECK_SNAP=0
+CHECK_BREW=0
 
 check_flatpak_updates() {
     local count=0
@@ -21,11 +23,43 @@ run_flatpak_update() {
     fi
 }
 
+check_snap_updates() {
+    local count=0
+    if [[ "$CHECK_SNAP" -eq 1 && "$(command -v snap)" ]]; then
+        count=$(snap refresh --list 2>/dev/null | grep -c "^\S")
+    fi
+    echo "$count"
+}
+
+run_snap_update() {
+    if [[ "$CHECK_SNAP" -eq 1 && "$(command -v snap)" ]]; then
+        sudo snap refresh || true
+    fi
+}
+
+check_brew_updates() {
+    local count=0
+    if [[ "$CHECK_BREW" -eq 1 && "$(command -v brew)" ]]; then
+        count=$(brew outdated --quiet | wc -l)
+    fi
+    echo "$count"
+}
+
+run_brew_update() {
+    if [[ "$CHECK_BREW" -eq 1 && "$(command -v brew)" ]]; then
+        brew update && brew upgrade || true
+    fi
+}
+
+
 
 
 check_arch_updates() {
     official_updates=0
     aur_updates=0
+    flatpak_updates=0
+    brew_updates=0
+    snap_updates=0
     tooltip=""
 
     official_updates=$(checkupdates 2>/dev/null | wc -l)
@@ -39,15 +73,24 @@ check_arch_updates() {
     aur_updates=$($aur_helper -Qum 2>/dev/null | wc -l)
 
     tooltip="󰣇 Official $official_updates\n󰮯 AUR $aur_updates"
-    flatpak_updates=0
 
     if [[ "$CHECK_FLATPAK" -eq 1 ]]; then
         flatpak_updates=$(check_flatpak_updates)
         tooltip="$tooltip\n Flatpak $flatpak_updates"
     fi
 
+    if [[ "$CHECK_SNAP" -eq 1 ]]; then
+        snap_updates=$(check_snap_updates)
+        tooltip="$tooltip\n Snap $snap_updates"
+    fi
 
-    total_updates=$((official_updates + aur_updates + flatpak_updates))
+    if [[ "$CHECK_BREW" -eq 1 ]]; then
+        brew_updates=$(check_brew_updates)
+        tooltip="$tooltip\n Brew $brew_updates"
+    fi
+
+
+    total_updates=$((official_updates + aur_updates + flatpak_updates + snap_updates + brew_updates))
 
     echo "{\"total\":\"$total_updates\", \"tooltip\":\"$tooltip\"}"
 }
@@ -159,11 +202,13 @@ for arg in "$@"; do
         --arch)   DISTRO="arch" ;;
         --ubuntu) DISTRO="ubuntu" ;;
         --fedora) DISTRO="fedora" ;;
-        --suse)   DISTRO="suse" ;;
+        --suse)      DISTRO="suse" ;;
          --flatpak)   CHECK_FLATPAK=1 ;;
+         --snap)   CHECK_SNAP=1 ;;
+         --brew)   CHECK_BREW=1 ;;
         up)       DO_UPDATE=1 ;;
         *)
-            echo "Usage: $0 [--arch|--ubuntu|--fedora|--suse]  [--flatpak] [up (optional)]"
+            echo "Usage: $0 [--arch|--ubuntu|--fedora|--suse]  [--flatpak] [--snap] [--brew] [up (optional)]"
             exit 1
             ;;
     esac
@@ -176,7 +221,7 @@ case "$DISTRO" in
     fedora) (( DO_UPDATE )) && update_fedora      || check_fedora_updates ;;
     suse)   (( DO_UPDATE )) && update_opensuse    || check_opensuse_updates ;;
     *)
-        echo "Usage: $0 [--arch|--ubuntu|--fedora|--suse] [--flatpak] [up (optional)]"
+        echo "Usage: $0 [--arch|--ubuntu|--fedora|--suse] [--flatpak] [--snap] [--brew] [up (optional)]"
         exit 1
         ;;
 esac

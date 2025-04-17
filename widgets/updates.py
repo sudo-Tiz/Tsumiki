@@ -37,6 +37,12 @@ class UpdatesWidget(ButtonWidget):
         if self.config["flatpak"]:
             self.base_command += " --flatpak"
 
+        if self.config["snap"]:
+            self.base_command += " --snap"
+
+        if self.config["brew"]:
+            self.base_command += " --brew"
+
         if self.config["show_icon"]:
             self.icon = text_icon(
                 icon=self.config["icon"],
@@ -59,7 +65,6 @@ class UpdatesWidget(ButtonWidget):
     def update_values(self, value: str):
         # Parse the JSON value
 
-        print(value)
         value = json.loads(value)
 
         # Update the label if enabled

@@ -229,6 +229,8 @@ Updates = TypedDict(
         "icon": str,
         "interval": int,
         "flatpak": bool,
+        "snap": bool,
+        "brew": bool,
     },
 )
 

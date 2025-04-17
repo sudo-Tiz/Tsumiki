@@ -771,7 +771,9 @@
 		"interval": 3600000,
 		"tooltip": true,
 		"label": true,
-		"flatpak": false
+		"flatpak": true,
+		"snap": false,
+		"brew": false
 	},
 	"volume": {
 		"label": true,
