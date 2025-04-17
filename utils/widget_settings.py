@@ -63,6 +63,12 @@ HyprIdle = TypedDict(
     {**BaseConfig.__annotations__, "enabled_icon": str, "disabled_icon": str},
 )
 
+# Window Count configuration
+WindowCount = TypedDict(
+    "WindowCount",
+    {**BaseConfig.__annotations__, "label_format": str},
+)
+
 # Battery configuration
 Battery = TypedDict(
     "Battery",
@@ -73,6 +79,7 @@ Battery = TypedDict(
         "full_battery_level": int,
         "hide_label_when_full": bool,
         "icon_size": int,
+        "notifications": Dict,
     },
 )
 
@@ -140,11 +147,13 @@ Cpu = TypedDict(
     "Cpu",
     {
         **BaseConfig.__annotations__,
-        "icon": str,
+        "show_icon": bool,
         "sensor": str,
         "unit": Literal["celsius", "fahrenheit"],
         "show_unit": bool,
         "round": bool,
+        "graph": bool,
+        "graph_length": int,
     },
 )
 
@@ -152,7 +161,16 @@ Cpu = TypedDict(
 Mpris = TypedDict("Mpris", {**BaseConfig.__annotations__, "truncation_size": int})
 
 # Memory configuration
-Memory = TypedDict("Memory", {**BaseConfig.__annotations__, "icon": str})
+Memory = TypedDict(
+    "Memory",
+    {
+        **BaseConfig.__annotations__,
+        "show_icon": bool,
+        "icon": str,
+        "graph": bool,
+        "graph_length": int,
+    },
+)
 
 # Submap configuration
 Submap = TypedDict("Submap", {**BaseConfig.__annotations__, "icon": str})
@@ -171,7 +189,17 @@ NetworkUsage = TypedDict(
 )
 
 # Storage configuration
-Storage = TypedDict("Storage", {**BaseConfig.__annotations__, "icon": str, "path": str})
+Storage = TypedDict(
+    "Storage",
+    {
+        **BaseConfig.__annotations__,
+        "show_icon": bool,
+        "icon": str,
+        "path": str,
+        "graph": bool,
+        "graph_length": int,
+    },
+)
 
 # Workspaces configuration
 Workspaces = TypedDict(
@@ -374,4 +402,5 @@ class BarConfig(TypedDict):
     volume: Volume
     weather: Weather
     window_title: WindowTitle
+    window_count: WindowCount
     workspaces: Workspaces

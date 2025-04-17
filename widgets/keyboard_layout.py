@@ -1,6 +1,7 @@
 import json
+import re
 
-from fabric.hyprland.widgets import get_hyprland_connection
+from fabric.hyprland.widgets import HyprlandEvent, get_hyprland_connection
 from fabric.widgets.label import Label
 from loguru import logger
 
@@ -36,6 +37,19 @@ class KeyboardLayoutWidget(ButtonWidget):
     def on_ready(self, _):
         return self.get_keyboard(), logger.info(
             "[Keyboard] Connected to the hyprland socket"
+        )
+
+    def on_activelayout(self, _, event: HyprlandEvent):
+        if len(event.data) < 2:
+            return logger.warning("[Keyboard] got invalid event data from hyprland")
+        keyboard, language = event.data
+        matched: bool = False
+
+        if re.match(self.keyboard, keyboard) and (matched := True):
+            self.kb_label.set_label(self.formatter.format(language=language))
+
+        return logger.debug(
+            f"[Keyboard] Keyboard: {keyboard}, Language: {language}, Match: {matched}"
         )
 
     def get_keyboard(self):

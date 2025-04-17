@@ -6,7 +6,7 @@ from services import network_speed
 from shared import ButtonWidget
 from utils import BarConfig
 from utils.icons import common_text_icons
-from utils.widget_utils import text_icon, util_fabricator
+from utils.widget_utils import get_bar_graph, text_icon, util_fabricator
 
 
 class CpuWidget(ButtonWidget):
@@ -24,12 +24,6 @@ class CpuWidget(ButtonWidget):
             **kwargs,
         )
 
-        # Create a TextIcon with the specified icon and size
-        self.text_icon = text_icon(
-            icon=self.config["icon"],
-            props={"style_classes": "panel-icon"},
-        )
-
         self.cpu_level_label = Label(
             label="0%", style_classes="panel-text", visible=False
         )
@@ -41,7 +35,17 @@ class CpuWidget(ButtonWidget):
             lambda value: setattr(self, "cpu_name", value.strip()),
         )
 
-        self.box.children = (self.text_icon, self.cpu_level_label)
+        if self.config["graph"] or not self.config["show_icon"]:
+            self.graph_values = []
+            self.box.children = self.cpu_level_label
+
+        else:
+            # Create a TextIcon with the specified icon and size
+            self.icon = text_icon(
+                icon=self.config["icon"],
+                props={"style_classes": "panel-icon"},
+            )
+            self.box.children = (self.icon, self.cpu_level_label)
 
         # Set up a fabricator to call the update_label method when the CPU usage changes
         util_fabricator.connect("changed", self.update_ui)
@@ -49,9 +53,19 @@ class CpuWidget(ButtonWidget):
     def update_ui(self, fabricator, value):
         # Update the label with the current CPU usage if enabled
         cpu_freq = value.get("cpu_freq")
+
         if self.config["label"]:
             self.cpu_level_label.set_visible(True)
-            self.cpu_level_label.set_label(value.get("cpu_usage"))
+
+            self.cpu_level_label.set_label(f"{value.get('cpu_usage')}%")
+
+            if self.config["graph"]:
+                self.graph_values.append(get_bar_graph(value.get("cpu_usage")))
+
+                if len(self.graph_values) > self.config["graph_length"]:
+                    self.graph_values.pop(0)
+
+                self.cpu_level_label.set_label("".join(self.graph_values))
 
         # Update the tooltip with the memory usage details if enabled
         if self.config["tooltip"]:
@@ -102,16 +116,21 @@ class MemoryWidget(ButtonWidget):
             **kwargs,
         )
 
-        # Create a TextIcon with the specified icon and size
-        self.icon = text_icon(
-            icon=self.config["icon"],
-            props={"style_classes": "panel-icon"},
-        )
         self.memory_level_label = Label(
             label="0%", style_classes="panel-text", visible=False
         )
 
-        self.box.children = (self.icon, self.memory_level_label)
+        if self.config["graph"] or not self.config["show_icon"]:
+            self.graph_values = []
+            self.box.children = self.memory_level_label
+
+        else:
+            # Create a TextIcon with the specified icon and size
+            self.icon = text_icon(
+                icon=self.config["icon"],
+                props={"style_classes": "panel-icon"},
+            )
+            self.box.children = (self.icon, self.memory_level_label)
 
         # Set up a fabricator to call the update_label method  at specified intervals
         util_fabricator.connect("changed", self.update_ui)
@@ -127,6 +146,14 @@ class MemoryWidget(ButtonWidget):
         if self.config["label"]:
             self.memory_level_label.set_label(self.get_used())
             self.memory_level_label.set_visible(True)
+
+            if self.config["graph"]:
+                self.graph_values.append(get_bar_graph(value.get("cpu_usage")))
+
+                if len(self.graph_values) > self.config["graph_length"]:
+                    self.graph_values.pop(0)
+
+                self.memory_level_label.set_label("".join(self.graph_values))
 
         # Update the tooltip with the memory usage details if enabled
         if self.config["tooltip"]:
@@ -161,17 +188,20 @@ class StorageWidget(ButtonWidget):
             **kwargs,
         )
 
-        # Create a TextIcon with the specified icon and size
-        self.icon = text_icon(
-            icon=self.config["icon"],
-            props={"style_classes": "panel-icon"},
-        )
-
         self.storage_level_label = Label(
             label="0", style_classes="panel-text", visible=False
         )
 
-        self.box.children = (self.icon, self.storage_level_label)
+        if self.config["graph"] or not self.config["show_icon"]:
+            self.graph_values = []
+            self.box.children = self.storage_level_label
+        else:
+            # Create a TextIcon with the specified icon and size
+            self.icon = text_icon(
+                icon=self.config["icon"],
+                props={"style_classes": "panel-icon"},
+            )
+            self.box.children = (self.icon, self.storage_level_label)
 
         # Set up a fabricator to call the update_label method at specified intervals
         util_fabricator.connect("changed", self.update_ui)
@@ -184,6 +214,14 @@ class StorageWidget(ButtonWidget):
         if self.config["label"]:
             self.storage_level_label.set_label(f"{self.get_used()}")
             self.storage_level_label.set_visible(True)
+
+            if self.config["graph"]:
+                self.graph_values.append(get_bar_graph(value.get("cpu_usage")))
+
+                if len(self.graph_values) > self.config["graph_length"]:
+                    self.graph_values.pop(0)
+
+                self.storage_level_label.set_label("".join(self.graph_values))
 
         # Update the tooltip with the storage usage details if enabled
         if self.config["tooltip"]:

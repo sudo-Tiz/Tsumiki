@@ -30,6 +30,10 @@
 			"tooltip": {
 				"type": "boolean",
 				"description": "Determines whether the widget has a tooltip."
+			},
+			"show_icon": {
+				"type": "boolean",
+				"description": "Determines whether to show the icon."
 			}
 		},
 		"widgets": {
@@ -57,7 +61,6 @@
 							"network_usage",
 							"ocr",
 							"power",
-							"ram",
 							"recorder",
 							"spacer",
 							"storage",
@@ -70,6 +73,7 @@
 							"weather",
 							"window_title",
 							"workspaces",
+							"window_count",
 							"quick_settings",
 							"theme_switcher"
 						],
@@ -385,6 +389,14 @@
 				"sensor": {
 					"type": "string",
 					"description": "Sensor to use for temperature"
+				},
+				"graph": {
+					"type": "boolean",
+					"description": "Determines whether to show the graph"
+				},
+				"graph_length": {
+					"type": "integer",
+					"description": "Length of the graph in pixels"
 				}
 			}
 		},
@@ -395,6 +407,14 @@
 				"icon": {
 					"type": "string",
 					"description": "Icon name from icon theme"
+				},
+				"graph": {
+					"type": "boolean",
+					"description": "Determines whether to show the graph"
+				},
+				"graph_length": {
+					"type": "integer",
+					"description": "Length of the graph in pixels"
 				}
 			}
 		},
@@ -405,6 +425,14 @@
 				"icon": {
 					"type": "string",
 					"description": "Icon name from icon theme"
+				},
+				"graph": {
+					"type": "boolean",
+					"description": "Determines whether to show the graph"
+				},
+				"graph_length": {
+					"type": "integer",
+					"description": "Length of the graph in pixels"
 				}
 			}
 		},
@@ -570,6 +598,16 @@
 				"icon": {
 					"type": "string",
 					"description": "Icon name from icon theme"
+				}
+			}
+		},
+		"window_count": {
+			"type": "object",
+			"properties": {
+				"$ref": "#/definitions/baseProperties",
+				"label_format": {
+					"type": "string",
+					"description": "Format for window count labels. Use '{count}' for the number of windows, or any other string/icon"
 				}
 			}
 		},

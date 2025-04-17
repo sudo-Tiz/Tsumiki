@@ -1,4 +1,5 @@
 import importlib
+from numbers import Number
 from time import sleep
 from typing import Literal
 
@@ -22,10 +23,10 @@ def stats_poll(fabricator):
     storage_config = widget_config["storage"]
     while True:
         yield {
-            "cpu_usage": f"{round(psutil.cpu_percent())}%",
+            "cpu_usage": round(psutil.cpu_percent(), 1),
             "cpu_freq": psutil.cpu_freq(),
             "temperature": psutil.sensors_temperatures(),
-            "ram_usage": f"{round(psutil.virtual_memory().percent)}%",
+            "ram_usage": round(psutil.virtual_memory().percent, 1),
             "memory": psutil.virtual_memory(),
             "disk": psutil.disk_usage(storage_config["path"]),
             "user": psutil.users()[0][0],
@@ -122,6 +123,25 @@ def text_icon(icon: str, props=None):
     return Label(**label_props)
 
 
+# Function to get the bar graph representation
+def get_bar_graph(usage: Number):
+    if usage < 12.5:
+        return "▁"
+    if usage < 25:
+        return "▂"
+    if usage < 37.5:
+        return "▃"
+    if usage < 50:
+        return "▄"
+    if usage < 62.5:
+        return "▅"
+    if usage < 75:
+        return "▆"
+    if usage < 87.5:
+        return "▇"
+    return "█"
+
+
 # Function to get the brightness icons
 def get_brightness_icon_name(level: int) -> dict[Literal["icon_text", "icon"], str]:
     if level <= 0:
@@ -140,7 +160,6 @@ def get_brightness_icon_name(level: int) -> dict[Literal["icon_text", "icon"], s
             "text_icon": brightness_text_icons["medium"],
             "icon": "display-brightness-medium-symbolic",
         }
-    # level > 66
     return {
         "text_icon": brightness_text_icons["high"],
         "icon": "display-brightness-high-symbolic",

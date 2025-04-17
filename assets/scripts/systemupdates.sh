@@ -183,38 +183,32 @@ update_opensuse() {
 
 
 
+# Parse arguments
+DISTRO=""
+DO_UPDATE=0
 
-case "$1" in
--arch)
-    if [ -z "$2" ]; then  # If second argument is null (not provided)
-        check_arch_updates
-    else
-        update_arch
-    fi
-    ;;
--ubuntu)
-    if [ -z "$2" ]; then  # If second argument is null (not provided)
-        check_ubuntu_updates
-    else
-        update_ubuntu
-    fi
-    ;;
--fedora)
-    if [ -z "$2" ]; then  # If second argument is null (not provided)
-        check_fedora_updates
-    else
-        update_fedora
-    fi
-    ;;
--suse)
-    if [ -z "$2" ]; then  # If second argument is null (not provided)
-        check_opensuse_updates
-    else
-        update_opensuse
-    fi
-    ;;
-*)
-    echo "Usage: $0 [-arch|-ubuntu|-fedora|-suse] [up (optional)]"
-    exit 1
-    ;;
+for arg in "$@"; do
+    case "$arg" in
+        --arch)   DISTRO="arch" ;;
+        --ubuntu) DISTRO="ubuntu" ;;
+        --fedora) DISTRO="fedora" ;;
+        --suse)   DISTRO="suse" ;;
+        up)       DO_UPDATE=1 ;;
+        *)
+            echo "Usage: $0 [--arch|--ubuntu|--fedora|--suse] [up (optional)]"
+            exit 1
+            ;;
+    esac
+done
+
+# Run appropriate action
+case "$DISTRO" in
+    arch)   (( DO_UPDATE )) && update_arch        || check_arch_updates ;;
+    ubuntu) (( DO_UPDATE )) && update_ubuntu      || check_ubuntu_updates ;;
+    fedora) (( DO_UPDATE )) && update_fedora      || check_fedora_updates ;;
+    suse)   (( DO_UPDATE )) && update_opensuse    || check_opensuse_updates ;;
+    *)
+        echo "Usage: $0 [--arch|--ubuntu|--fedora|--suse] [up (optional)]"
+        exit 1
+        ;;
 esac

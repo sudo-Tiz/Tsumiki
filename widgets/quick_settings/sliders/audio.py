@@ -23,8 +23,14 @@ class AudioSlider(SettingSlider):
         self.client = audio_service
         self.audio_stream = audio_stream
 
+        self.pixel_size = 16
+
         # Initialize with default values first
-        super().__init__(icon_name=icons["audio"]["volume"]["high"], start_value=0)
+        super().__init__(
+            icon_name=icons["audio"]["volume"]["high"],
+            start_value=0,
+            pixel_size=self.pixel_size,
+        )
 
         self.chevron_icon = text_icon(icon="", props={"style": "font-size:12px;"})
 
@@ -74,7 +80,7 @@ class AudioSlider(SettingSlider):
         self.scale.set_sensitive(not self.audio_stream.muted)
         self.scale.set_value(self.audio_stream.volume)
         self.scale.set_tooltip_text(f"{round(self.audio_stream.volume)}%")
-        self.icon.set_from_icon_name(self._get_icon_name(), 20)
+        self.icon.set_from_icon_name(self._get_icon_name(), self.pixel_size)
 
     def on_scale_move(self, _, __, moved_pos):
         """Handle volume slider changes."""

@@ -26,6 +26,17 @@ DEFAULT_CONFIG = {
         "tooltip": True,
         "orientation": "vertical",
         "icon_size": 14,
+        "notifications": {
+            "enabled": True,
+            "discharging": {
+                "title": "Charger Unplugged!",
+                "body": "Battery is at _LEVEL_%",
+            },
+            "charging": {
+                "title": "Charger Plugged In",
+                "body": "Battery is at _LEVEL_%",
+            },
+        },
     },
     "quick_settings": {
         "hover_reveal": False,
@@ -53,6 +64,7 @@ DEFAULT_CONFIG = {
     "overview": {},
     "click_counter": {"count": 0},
     "cpu": {
+        "show_icon": True,
         "icon": "",
         "label": True,
         "tooltip": True,
@@ -60,6 +72,8 @@ DEFAULT_CONFIG = {
         "unit": "celsius",
         "show_unit": True,
         "sensor": "",
+        "graph": False,
+        "graph_length": 4,
     },
     "date_time": {
         "format": "%b %d %H:%M",
@@ -94,6 +108,11 @@ DEFAULT_CONFIG = {
         "label": True,
         "tooltip": True,
     },
+    "window_count": {
+        "icon": "",
+        "label_format": "[{count}]",
+        "tooltip": True,
+    },
     "language": {
         "icon": "",
         "tooltip": True,
@@ -117,9 +136,12 @@ DEFAULT_CONFIG = {
         "right_section": ["@group:0", "@group:1", "system_tray"],
     },
     "memory": {
+        "show_icon": True,
         "icon": "",
         "label": True,
         "tooltip": True,
+        "graph": False,
+        "graph_length": 4,
     },
     "network_usage": {
         "upload_icon": "",
@@ -211,10 +233,13 @@ DEFAULT_CONFIG = {
     "spacing": {"size": 20},
     "stop_watch": {"stopped_icon": "󱫞", "running_icon": "󱫠"},
     "storage": {
+        "show_icon": True,
         "icon": "󰋊",
         "label": True,
         "tooltip": True,
         "path": "/",
+        "graph": False,
+        "graph_length": 4,
     },
     "submap": {
         "icon": "󰌌",

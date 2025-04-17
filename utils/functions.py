@@ -244,7 +244,7 @@ def send_notification(
 
     # Set the icon if provided
     if icon:
-        notification.set_icon(icon)
+        notification.set_icon(Gio.ThemedIcon.new(icon))
 
     # Optionally, set the application name
     notification.set_title(app_name)

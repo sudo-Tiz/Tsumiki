@@ -68,6 +68,7 @@ class BatteryService(Service):
             "State",
             "Capacity",
             "IsPresent",
+            "Vendor",
         ],
     ):
         try:

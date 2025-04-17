@@ -64,6 +64,20 @@
   }
 }
 
+
+#window_count {
+  border-radius: variable.$bar-widgets-window_count-border-radius;
+  border: if(variable.$bar-widgets-window_count-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-window_count-border-width;
+
+
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-cpu-icon_size;
+    margin-right: variable.$bar-widgets-cpu-spacing;
+  }
+}
+
 #memory {
   border-radius: variable.$bar-widgets-memory-border-radius;
   border: if(variable.$bar-widgets-memory-border-enabled, variable.$border, none);

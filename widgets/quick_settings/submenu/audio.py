@@ -51,8 +51,8 @@ class AudioSubMenu(QuickSubMenu):
 
         # Wrap in scrolled window
         self.child = ScrolledWindow(
-            min_content_size=(-1, 190),
-            max_content_size=(-1, 190),
+            min_content_size=(-1, 100),
+            max_content_size=(-1, 100),
             propagate_width=True,
             propagate_height=True,
             child=self.app_list,
