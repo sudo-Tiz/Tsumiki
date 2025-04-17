@@ -163,12 +163,14 @@ menu {
   border: variable.$border;
 }
 
+
 menuitem {
   transition: background-color 75ms cubic-bezier(0, 0, .2, 1);
   min-height: 30px;
   min-width: 40px;
   background-clip: border-box;
   border-radius: variable.$radius;
+  margin-bottom: 40px;
 
 
   arrow {
@@ -188,6 +190,7 @@ menuitem {
 menu>menuitem:hover {
   background-color: theme.$surface-highlight;
 }
+
 
 menu>arrow {
   min-height: 16px;

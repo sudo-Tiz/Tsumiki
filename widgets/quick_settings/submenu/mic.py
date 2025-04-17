@@ -11,11 +11,11 @@ from shared.circle_image import CircleImage
 from shared.submenu import QuickSubMenu
 from shared.widget_container import HoverButton
 from utils.icons import icons
-from widgets.quick_settings.sliders.audio import AudioSlider
+from widgets.quick_settings.sliders.mic import MicrophoneSlider
 
 
-class AudioSubMenu(QuickSubMenu):
-    """A submenu to display application-specific audio controls."""
+class MicroPhoneSubMenu(QuickSubMenu):
+    """A submenu to display mic controls."""
 
     def __init__(self, **kwargs):
         self.client = audio_service
@@ -61,8 +61,8 @@ class AudioSubMenu(QuickSubMenu):
 
         # Initialize parent with our components
         super().__init__(
-            title="Applications",
-            title_icon=icons["audio"]["volume"]["high"],
+            title="Microphones",
+            title_icon=icons["audio"]["mic"]["high"],
             scan_button=self.scan_button,
             child=Box(orientation="v", children=[self.child]),
             **kwargs,
@@ -81,7 +81,7 @@ class AudioSubMenu(QuickSubMenu):
             self.app_list.remove(row)
 
         # Add applications
-        for app in self.client.applications:
+        for app in self.client.microphones:
             row = Gtk.ListBoxRow()
             row.get_style_context().add_class("menu-item")
 
@@ -101,7 +101,7 @@ class AudioSubMenu(QuickSubMenu):
 
             # App icon
             icon = Image(
-                icon_name=app.icon_name or icons["audio"]["volume"]["high"],
+                icon_name=app.icon_name or icons["audio"]["mic"]["high"],
                 icon_size=16,
             )
             name_box.pack_start(icon, False, True, 0)
@@ -123,7 +123,7 @@ class AudioSubMenu(QuickSubMenu):
             )
 
             # Create audio slider for this app
-            slider = AudioSlider(app, show_chevron=False)
+            slider = MicrophoneSlider(app, show_chevron=False)
             audio_box.pack_start(slider, True, True, 0)
 
             box.add(audio_box)

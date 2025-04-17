@@ -32,15 +32,15 @@ class AudioSlider(SettingSlider):
             pixel_size=self.pixel_size,
         )
 
-        self.chevron_icon = text_icon(icon="", props={"style": "font-size:12px;"})
-
-        self.chevron_btn = HoverButton(
-            child=Box(
-                children=(self.chevron_icon,),
-            )
-        )
-
         if show_chevron:
+            self.chevron_icon = text_icon(icon="", props={"style": "font-size:12px;"})
+
+            self.chevron_btn = HoverButton(
+                child=Box(
+                    children=(self.chevron_icon,),
+                )
+            )
+            self.chevron_btn.connect("clicked", self.on_button_click)
             self.children = (*self.children, self.chevron_btn)
 
         if not audio_stream:
@@ -51,20 +51,19 @@ class AudioSlider(SettingSlider):
                 self.audio_stream = self.client.speaker
                 self.update_state()
                 self.client.disconnect_by_func(init_device_audio)
-                self.client.connect("speaker-changed", self.on_audio_change)
+                self.client.connect("speaker-changed", lambda *_: self.update_state())
 
             self.client.connect("changed", init_device_audio)
             if self.client.speaker:
                 init_device_audio()
         else:
             self.update_state()
-            self.audio_stream.connect("changed", self.on_audio_change)
+            self.audio_stream.connect("changed", lambda *_: self.update_state())
 
         # Connect signals
         self.scale.connect("change-value", self.on_scale_move)
 
         self.icon_button.connect("clicked", self.on_mute_click)
-        self.chevron_btn.connect("clicked", self.on_button_click)
 
     def _get_icon_name(self):
         """Get the appropriate icon name based on mute state."""
@@ -86,10 +85,6 @@ class AudioSlider(SettingSlider):
         """Handle volume slider changes."""
         if self.audio_stream:
             self.audio_stream.volume = moved_pos
-
-    def on_audio_change(self, *args):
-        """Update slider state when audio changes."""
-        self.update_state()
 
     def on_button_click(self, button):
         parent = self.get_parent()

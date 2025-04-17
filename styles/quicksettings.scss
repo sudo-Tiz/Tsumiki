@@ -5,6 +5,10 @@
 
 $slider-height: 12px;
 
+#list-box-row {
+  margin-bottom: 10px;
+}
+
 #dialog {
   &-wrapper {
     background-color: theme.$background-dark;

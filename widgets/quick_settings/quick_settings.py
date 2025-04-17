@@ -25,6 +25,7 @@ from utils.widget_utils import (
 )
 from widgets.media import PlayerBoxStack
 from widgets.quick_settings.shortcuts import ShortcutsContainer
+from widgets.quick_settings.submenu.mic import MicroPhoneSubMenu
 from widgets.quick_settings.togglers import (
     HyprIdleQuickSetting,
     HyprSunsetQuickSetting,
@@ -258,6 +259,7 @@ class QuickSettingsMenu(Box):
 
         # Add audio submenu
         self.audio_submenu = AudioSubMenu()
+        self.mic_submenu = MicroPhoneSubMenu()
 
         # Add sliders to the grid in a single column
         sliders_grid.attach(BrightnessSlider(), 0, 0, 1, 1)
@@ -292,7 +294,7 @@ class QuickSettingsMenu(Box):
             orientation="v",
             spacing=10,
             style_classes=[slider_class],
-            children=(sliders_grid, self.audio_submenu),
+            children=(sliders_grid, self.audio_submenu, self.mic_submenu),
             h_expand=True,
         )
 
