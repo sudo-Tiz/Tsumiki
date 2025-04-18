@@ -102,7 +102,7 @@ if __name__ == "__main__":
     setproctitle.setproctitle(APPLICATION_NAME)
     helpers.copy_theme(widget_config["theme"]["name"])
 
-    helpers.ensure_dir_exists(APP_CACHE_DIRECTORY)
+    helpers.ensure_directory(APP_CACHE_DIRECTORY)
 
     # Run the application
     app.run()

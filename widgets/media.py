@@ -20,7 +20,7 @@ from loguru import logger
 from services import MprisPlayer, MprisPlayerManager
 from shared import Animator, CircleImage, HoverButton
 from utils import APP_CACHE_DIRECTORY
-from utils.functions import ensure_dir_exists
+from utils.functions import ensure_directory
 from utils.widget_utils import setup_cursor_hover
 
 
@@ -30,7 +30,7 @@ class PlayerBoxStack(Box):
     def __init__(self, mpris_manager: MprisPlayerManager, config, **kwargs):
         self.config = config
 
-        ensure_dir_exists(f"{APP_CACHE_DIRECTORY}/media")
+        ensure_directory(f"{APP_CACHE_DIRECTORY}/media")
 
         # The player stack
         self.player_stack = Stack(

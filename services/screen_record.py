@@ -28,7 +28,7 @@ class ScreenRecorder(Service):
         self.config = widget_config["recorder"]
         self.screenrecord_path = f"{GLib.get_home_dir()}/{self.config['path']}"
 
-        helpers.ensure_dir_exists(self.screenrecord_path)
+        helpers.ensure_directory(self.screenrecord_path)
 
         super().__init__(**kwargs)
 

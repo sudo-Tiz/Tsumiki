@@ -286,11 +286,22 @@ def convert_to_percent(
         return (current / max) * 100
 
 
+# Function to ensure the file exists
+def ensure_file(path: str) -> None:
+    file = Gio.File.new_for_path(path)
+    parent = file.get_parent()
+
+    if parent and not parent.query_exists(None):
+        parent.make_directory_with_parents(None)
+
+    if not file.query_exists(None):
+        file.create(Gio.FileCreateFlags.NONE, None)
+
+
 # Function to ensure the directory exists
-@run_in_thread
-def ensure_dir_exists(path: str):
-    if not os.path.exists(path):
-        os.makedirs(path)
+def ensure_directory(path: str) -> None:
+    if not GLib.file_test(path, GLib.FileTest.EXISTS):
+        Gio.File.new_for_path(path).make_directory_with_parents(None)
 
 
 # Function to unique list
