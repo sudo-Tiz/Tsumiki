@@ -29,7 +29,6 @@ def stats_poll(fabricator):
             "ram_usage": round(psutil.virtual_memory().percent, 1),
             "memory": psutil.virtual_memory(),
             "disk": psutil.disk_usage(storage_config["path"]),
-            "user": psutil.users()[0][0],
             "uptime": uptime(),
         }
         sleep(1)

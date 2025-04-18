@@ -301,6 +301,16 @@ Media = TypedDict(
     },
 )
 
+# User configuration for QuickSettings
+UserConfig = TypedDict(
+    "UserConfig",
+    {
+        "image": str,
+        "name": str,
+        "distro_icon": bool,
+    },
+)
+
 # QuickSettings configuration
 QuickSettings = TypedDict(
     "QuickSettings",
@@ -310,6 +320,7 @@ QuickSettings = TypedDict(
         "auto_hide": bool,
         "auto_hide_timeout": int,
         "shortcuts": List[str],
+        "user": UserConfig,
     },
 )
 

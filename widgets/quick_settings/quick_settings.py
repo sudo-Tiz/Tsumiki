@@ -139,8 +139,17 @@ class QuickSettingsMenu(Box):
             else os.path.expandvars("$HOME/.face")
         )
 
+        username = (
+            GLib.get_user_name()
+            if self.config["user"]["name"] == "system"
+            else self.config["user"]["name"]
+        )
+
+        if self.config["user"]["distro_icon"]:
+            username = f"{helpers.get_distro_icon()} {username}"
+
         username_label = Label(
-            label="User", v_align="center", h_align="start", style_classes="user"
+            label=username, v_align="center", h_align="start", style_classes="user"
         )
 
         uptime_label = Label(
@@ -334,12 +343,7 @@ class QuickSettingsMenu(Box):
 
         util_fabricator.connect(
             "changed",
-            lambda _, value: (
-                username_label.set_label(
-                    f"{helpers.get_distro_icon()} {value.get('user')}"
-                ),
-                uptime_label.set_label(f" {value.get('uptime')}"),
-            ),
+            lambda _, value: (uptime_label.set_label(f" {value.get('uptime')}"),),
         )
 
 

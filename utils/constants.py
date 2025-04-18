@@ -40,6 +40,7 @@ DEFAULT_CONFIG = {
     },
     "quick_settings": {
         "hover_reveal": False,
+        "user": {"avatar": "~/.face", "name": "system", "distro_icon": True},
         "media": {
             "ignore": [],
             "truncation_size": 26,
