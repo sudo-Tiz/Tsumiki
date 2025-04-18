@@ -82,6 +82,23 @@ class MicroPhoneSubMenu(QuickSubMenu):
         while row := self.app_list.get_row_at_index(0):
             self.app_list.remove(row)
 
+        if len(self.client.microphones) == 0:
+            self.app_list.add(
+                Label(
+                    label="No microphones found",
+                    style_classes="menu-item",
+                    halign="center",
+                    valign="center",
+                    h_expand=True,
+                    v_expand=True,
+                )
+            )
+            return
+
+        # Clear existing rows
+        while row := self.app_list.get_row_at_index(0):
+            self.app_list.remove(row)
+
         # Add applications
         for app in self.client.microphones:
             row = Gtk.ListBoxRow()
@@ -135,3 +152,5 @@ class MicroPhoneSubMenu(QuickSubMenu):
 
             row.add(box)
             self.app_list.add(row)
+
+        self.app_list.show_all()
