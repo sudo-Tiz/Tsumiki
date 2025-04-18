@@ -291,14 +291,14 @@ class QuickSettingsMenu(Box):
             h_expand=True,
         )
 
-        if self.config.get("shortcuts"):
+        if self.config.get("shortcuts")["enabled"]:
             shortcuts_box = Box(
                 orientation="v",
                 spacing=10,
                 style_classes=["section-box", "shortcuts-box"],
                 children=(
                     ShortcutsContainer(
-                        shortcuts_config=self.config["shortcuts"],
+                        shortcuts_config=self.config["shortcuts"]["items"],
                         style_classes="shortcuts-grid",
                         v_align="start",
                         h_align="fill",
@@ -325,7 +325,10 @@ class QuickSettingsMenu(Box):
                 children=(self.user_box, QuickSettingsButtonBox()),
             ),
             center_children=center_box,
-            end_children=(
+        )
+
+        if self.config["media"]["enabled"]:
+            box.end_children = (
                 Box(
                     orientation="v",
                     spacing=10,
@@ -336,8 +339,7 @@ class QuickSettingsMenu(Box):
                         ),
                     ),
                 ),
-            ),
-        )
+            )
 
         self.add(box)
 

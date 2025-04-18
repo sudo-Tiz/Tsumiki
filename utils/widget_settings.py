@@ -311,6 +311,11 @@ UserConfig = TypedDict(
     },
 )
 
+
+ShortcutsConfig = TypedDict(
+    "Shortcuts", {"enabled": bool, "items": List[Dict[str, str]]}
+)
+
 # QuickSettings configuration
 QuickSettings = TypedDict(
     "QuickSettings",
@@ -319,7 +324,7 @@ QuickSettings = TypedDict(
         "hover_reveal": bool,
         "auto_hide": bool,
         "auto_hide_timeout": int,
-        "shortcuts": List[str],
+        "shortcuts": ShortcutsConfig,
         "user": UserConfig,
     },
 )

@@ -49,7 +49,10 @@ DEFAULT_CONFIG = {
             "show_time": True,
             "show_time_tooltip": True,
         },
-        "shortcuts": [],  # Empty list by default - shortcuts are optional
+        "shortcuts": {
+            "enabled": True,
+            "items": [],
+        },  # Empty list by default - shortcuts are optional
     },
     "bluetooth": {
         "icon_size": 14,

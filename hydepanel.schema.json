@@ -661,31 +661,39 @@
 					}
 				},
 				"shortcuts": {
-					"type": "array",
-					"maxItems": 4,
-					"items": {
-						"type": "object",
-						"required": ["command"],
-						"properties": {
-							"icon": {
-								"type": "string",
-								"description": "Icon name from icon theme"
-							},
-							"label": {
-								"type": "string",
-								"description": "Optional text label for the button"
-							},
-							"command": {
-								"type": "string",
-								"description": "Command to execute when clicked"
-							},
-							"tooltip": {
-								"type": "string",
-								"description": "Optional tooltip text"
-							},
-							"icon_size": {
-								"type": "integer",
-								"description": "Icon size in pixels"
+					"type": "object",
+					"properties": {
+						"enabled": {
+							"type": "boolean",
+							"description": "Determines whether the shortcuts are enabled"
+						},
+						"items": {
+							"type": "array",
+							"description": "List of shortcuts to display",
+							"items": {
+								"type": "object",
+								"properties": {
+									"icon": {
+										"type": "string",
+										"description": "Icon name from icon theme"
+									},
+									"label": {
+										"type": "string",
+										"description": "Name of the shortcut"
+									},
+									"command": {
+										"type": "string",
+										"description": "Command to execute when the shortcut is clicked"
+									},
+									"tooltip": {
+										"type": "string",
+										"description": "Tooltip to display when hovering over the shortcut"
+									},
+									"icon_size": {
+										"type": "integer",
+										"description": "Size of the shortcut icon"
+									}
+								}
 							}
 						}
 					}
