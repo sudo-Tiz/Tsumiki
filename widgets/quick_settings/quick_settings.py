@@ -264,7 +264,9 @@ class QuickSettingsMenu(Box):
         # Add sliders to the grid in a single column
         sliders_grid.attach(BrightnessSlider(), 0, 0, 1, 1)
         sliders_grid.attach(AudioSlider(), 0, 1, 1, 1)
-        sliders_grid.attach(MicrophoneSlider(), 0, 2, 1, 1)
+        sliders_grid.attach(
+            MicrophoneSlider(), 0, 2, 1, 1
+        )  # TODO: check gtk_adjustment_set_value: assertion 'GTK_IS_ADJUSTMENT
 
         # Create center box with sliders and shortcuts if configured
         center_box = Box(

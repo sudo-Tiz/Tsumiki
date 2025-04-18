@@ -8,7 +8,6 @@ from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow as Window
 from gi.repository import GObject
-from loguru import logger
 
 import utils.functions as helpers
 import utils.icons as icons
@@ -60,7 +59,7 @@ class BrightnessOSDContainer(GenericOSDContainer):
         self.scale.connect("value-changed", lambda *_: self.update_brightness())
         self.brightness_service.connect("screen", self.on_brightness_changed)
 
-    @cooldown(0.1, lambda *_: logger.error("cooldown reached"))
+    @cooldown(0.1)
     def update_brightness(self):
         normalized_brightness = helpers.convert_to_percent(
             self.brightness_service.screen_brightness,
@@ -111,7 +110,7 @@ class AudioOSDContainer(GenericOSDContainer):
                 self.audio.speaker.set_volume(volume)
                 self.update_icon(volume)
 
-    @cooldown(0.1, lambda *_: logger.error("cooldown reached"))
+    @cooldown(0.1)
     def handle_change(self, *_):
         self.update_volume()
         self.emit("volume-changed")

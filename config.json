@@ -240,7 +240,7 @@
 		"auto_hide": false,
 		"auto_hide_timeout": 2000,
 		"media": {
-			"ignore": [],
+			"ignore": ["vlc"],
 			"truncation_size": 30,
 			"show_album": true,
 			"show_artist": true,
