@@ -1,12 +1,14 @@
 import json
+import os
 import ssl
+import time
 import urllib.request
 from urllib.error import HTTPError
 
 from loguru import logger
 
 from utils import Colors
-from utils.functions import ttl_lru_cache
+from utils.constants import WEATHER_CACHE_FILE
 
 # Create an SSLContext that ignores certificate validation
 context = ssl._create_unverified_context()
@@ -24,7 +26,6 @@ class WeatherService:
 
         return WeatherService.instance
 
-    @ttl_lru_cache(600, 10)
     def simple_weather_info(self, location: str):
         try:
             url = ""
@@ -67,3 +68,27 @@ class WeatherService:
         except Exception as e:
             print(f"Error: {e}")
             return None
+
+    def get_weather(self, location: str):
+        # Check if cache exists and is fresh
+        if os.path.exists(WEATHER_CACHE_FILE):
+            last_modified = os.path.getmtime(WEATHER_CACHE_FILE)
+            logger.info(
+                f"{Colors.INFO} reading weather from cache file {WEATHER_CACHE_FILE}"
+            )
+            if time.time() - last_modified < 86400:  # 24 hours
+                with open(WEATHER_CACHE_FILE, "r") as f:
+                    return json.load(f)
+
+        logger.info(
+            f"{Colors.INFO}Cache file {WEATHER_CACHE_FILE} does not exist or is stale. "
+            f"Fetching new data."
+        )
+        weather = self.simple_weather_info(location)
+        if weather is None:
+            return None
+        # Save the weather data to the cache file
+        with open(WEATHER_CACHE_FILE, "w") as f:
+            json.dump(weather, f)
+
+        return weather

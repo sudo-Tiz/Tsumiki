@@ -250,11 +250,7 @@ class WeatherWidget(ButtonWidget):
 
     def weather_poll(self, fabricator):
         while True:
-            yield {
-                "weather": self.weather_service.simple_weather_info(
-                    self.config["location"]
-                )
-            }
+            yield {"weather": self.weather_service.get_weather(self.config["location"])}
             time.sleep(self.config["interval"] / 1000)
 
     def update_ui(self, fabricator, value):
