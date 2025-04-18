@@ -44,24 +44,6 @@ from .submenu import (
 )
 
 
-class DialogBox(Gtk.Dialog):
-    """A dialog box to display additional information."""
-
-    def __init__(self, parent):
-        super().__init__(title="My Dialog", transient_for=parent, flags=0)
-        self.add_buttons(
-            Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL, Gtk.STOCK_OK, Gtk.ResponseType.OK
-        )
-
-        self.set_size_request(20, 20)
-
-        label = Gtk.Label(label="This is a dialog to display additional information")
-
-        box = self.get_content_area()
-        box.add(label)
-        self.show_all()
-
-
 class QuickSettingsButtonBox(Box):
     """A box to display the quick settings buttons."""
 
