@@ -45,7 +45,9 @@ class MicroPhoneSubMenu(QuickSubMenu):
 
         # Create app list container
         self.app_list = Gtk.ListBox(
-            selection_mode=Gtk.SelectionMode.NONE, name="app-list"
+            selection_mode=Gtk.SelectionMode.NONE,
+            name="app-list",
+            visible=True,
         )
         self.app_list.get_style_context().add_class("menu")
 
@@ -107,10 +109,13 @@ class MicroPhoneSubMenu(QuickSubMenu):
             name_box.pack_start(icon, False, True, 0)
 
             # App name label
-            name_label = Label(label=app.name, style_classes="submenu-item-label")
+            name_label = Label(
+                label=app.name,
+                style_classes="submenu-item-label",
+                h_align="start",
+                tooltip_text=app.description or app.name,
+            )
             name_label.set_ellipsize(3)  # PANGO_ELLIPSIZE_END
-            name_label.set_halign(Gtk.Align.START)
-            name_label.set_tooltip_text(app.description or app.name)
             name_box.pack_start(name_label, True, True, 0)
 
             box.add(name_box)
@@ -122,13 +127,11 @@ class MicroPhoneSubMenu(QuickSubMenu):
                 margin_start=24,  # Indent to align with app name
             )
 
-            # Create audio slider for this app
-            slider = MicrophoneSlider(app, show_chevron=False)
-            audio_box.pack_start(slider, True, True, 0)
+            audio_box.pack_start(
+                MicrophoneSlider(app, show_chevron=False), True, True, 0
+            )
 
             box.add(audio_box)
 
             row.add(box)
             self.app_list.add(row)
-
-        self.app_list.show_all()
