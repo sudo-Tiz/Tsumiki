@@ -628,6 +628,31 @@
 					"type": "boolean",
 					"description": "Determines whether to reveal the calendar on hover"
 				},
+				"user": {
+					"type": "object",
+					"properties": {
+						"user": {
+							"type": "object",
+							"properties": {
+								"avatar": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								},
+								"distro_icon": {
+									"type": "boolean"
+								}
+							},
+							"required": [
+								"avatar",
+								"name",
+								"distro_icon"
+							],
+							"additionalProperties": false
+						}
+					}
+				},
 				"media": {
 					"type": "object",
 					"properties": {

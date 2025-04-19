@@ -244,6 +244,7 @@ class QuickSettingsMenu(Box):
             column_spacing=10,
             column_homogeneous=True,
             row_homogeneous=False,
+            valign="center",
             hexpand=True,
             vexpand=True,
         )
@@ -252,12 +253,7 @@ class QuickSettingsMenu(Box):
         self.audio_submenu = AudioSubMenu()
         self.mic_submenu = MicroPhoneSubMenu()
 
-        # Add sliders to the grid in a single column
-        sliders_grid.attach(BrightnessSlider(), 0, 0, 1, 1)
-        sliders_grid.attach(AudioSlider(), 0, 1, 1, 1)
-        sliders_grid.attach(
-            MicrophoneSlider(), 0, 2, 1, 1
-        )  # TODO: check gtk_adjustment_set_value: assertion 'GTK_IS_ADJUSTMENT
+        # TODO: check gtk_adjustment_set_value: assertion 'GTK_IS_ADJUSTMENT, microphone
 
         # Create center box with sliders and shortcuts if configured
         center_box = Box(
@@ -290,6 +286,32 @@ class QuickSettingsMenu(Box):
             children=(sliders_grid, self.audio_submenu, self.mic_submenu),
             h_expand=True,
         )
+
+        for index, slider in enumerate(self.config["controls"]["sliders"]):
+            if slider == "brightness":
+                sliders_grid.attach(
+                    BrightnessSlider(),
+                    0,
+                    index,
+                    1,
+                    1,
+                )
+            elif slider == "volume":
+                sliders_grid.attach(
+                    AudioSlider(),
+                    0,
+                    index,
+                    1,
+                    1,
+                )
+            else:
+                sliders_grid.attach(
+                    MicrophoneSlider(),
+                    0,
+                    index,
+                    1,
+                    1,
+                )
 
         if self.config.get("shortcuts")["enabled"]:
             shortcuts_box = Box(

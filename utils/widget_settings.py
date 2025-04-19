@@ -316,6 +316,13 @@ ShortcutsConfig = TypedDict(
     "Shortcuts", {"enabled": bool, "items": List[Dict[str, str]]}
 )
 
+ControlsConfig = TypedDict(
+    "Controls",
+    {
+        "sliders": List[Literal["brightness", "volume", "microphone"]],
+    },
+)
+
 # QuickSettings configuration
 QuickSettings = TypedDict(
     "QuickSettings",
@@ -326,6 +333,7 @@ QuickSettings = TypedDict(
         "auto_hide_timeout": int,
         "shortcuts": ShortcutsConfig,
         "user": UserConfig,
+        "controls": ControlsConfig,
     },
 )
 

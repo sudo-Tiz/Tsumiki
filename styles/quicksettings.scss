@@ -195,7 +195,7 @@ $slider-height: 12px;
       #setting-slider {
         @include common.slider(
           $highlight-color: theme.$accent-blue,
-          $slider: true,
+          $slider: false,
           $min-length: 230px
         );
       }
@@ -207,7 +207,7 @@ $slider-height: 12px;
       #setting-slider {
         @include common.slider(
           $highlight-color: theme.$accent-blue,
-          $slider: true,
+          $slider: false,
           $min-length: 140px
         );
       }

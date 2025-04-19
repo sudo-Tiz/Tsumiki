@@ -237,16 +237,25 @@
 		"download": false
 	},
 	"quick_settings": {
-		"avatar": {
-			"image": "~/.face",
-			"name": "system",   // system means it will use the system user name, you can also use your own name
+		"user": {
+			"avatar": "~/.face",
+			"name": "system",
+			// system means it will use the system user name, you can also use your own name
 			"distro_icon": true
+		},
+		"controls": {
+			"sliders": [
+				"brightness",
+				"volume"
+			]
 		},
 		"auto_hide": false,
 		"auto_hide_timeout": 2000,
 		"media": {
 			"enabled": true,
-			"ignore": ["vlc"],
+			"ignore": [
+				"vlc"
+			],
 			"truncation_size": 30,
 			"show_album": true,
 			"show_artist": true,
@@ -255,7 +264,7 @@
 		},
 		"shortcuts": {
 			"enabled": true,
-			"items":[
+			"items": [
 				{
 					"icon": "terminal-symbolic",
 					"label": "Terminal",
