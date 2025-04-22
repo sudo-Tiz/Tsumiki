@@ -184,7 +184,8 @@ $slider-height: 12px;
         @include common.slider(
           $highlight-color: theme.$accent-blue,
           $slider: variable.$bar-widgets-quick_settings-sliders-slider,
-          $min-length: 320px
+          $min-length: 320px,
+          $height: variable.$bar-widgets-quick_settings-sliders-height
         );
       }
     }
@@ -196,7 +197,8 @@ $slider-height: 12px;
         @include common.slider(
           $highlight-color: theme.$accent-blue,
           $slider: variable.$bar-widgets-quick_settings-sliders-slider,
-          $min-length: 230px
+          $min-length: 230px,
+          $height: variable.$bar-widgets-quick_settings-sliders-height
         );
       }
     }
@@ -208,7 +210,8 @@ $slider-height: 12px;
         @include common.slider(
           $highlight-color: theme.$accent-blue,
           $slider: variable.$bar-widgets-quick_settings-sliders-slider,
-          $min-length: 140px
+          $min-length: 140px,
+          $height: variable.$bar-widgets-quick_settings-sliders-height
         );
       }
     }

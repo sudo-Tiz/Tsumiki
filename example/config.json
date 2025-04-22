@@ -654,6 +654,10 @@
 				},
 				"quick_settings": {
 					"spacing": ".125em",
+					"sliders": {
+						"height": "0.7em",
+						"slider": false
+					},
 					"border": {
 						"enabled": false,
 						"width": "1px",
