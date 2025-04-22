@@ -91,13 +91,13 @@
   background-color: theme.$text-main;
 }
 
-@mixin slider($width: 11px,
-  $slider-width: .5em,
+@mixin slider(
+  $height: 11px,
   $highlight-color: white,
   $slider: false,
   $radius: variable.$radius,
   $slider-color: theme.$background-dark,
-  $min-length: ""
+  $min-length: "",
 
 ) {
   trough {
@@ -105,14 +105,14 @@
     border-radius: $radius;
     border: variable.$border;
     background-color: $slider-color;
-    min-height: $width;
-    min-width: $width;
+    min-height: $height;
+    min-width: $height;
 
     highlight,
     progress {
       border-radius: max($radius - variable.$border-width, 0);
       background-color: $highlight-color;
-      min-height: $width;
+      min-height: $height;
 
       &:hover {
         background-color: color.mix($highlight-color,
@@ -135,9 +135,9 @@
       border: variable.$border-width solid transparent;
       transition: 200ms;
       border-radius: variable.$radius-large;
-      min-height: $width;
-      min-width: $width;
-      margin: -$slider-width;
+      min-height: $height;
+      min-width: $height;
+      margin: -0.5em;
 
       &:hover {
         background-color: color.mix(theme.$text-main,

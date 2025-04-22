@@ -183,7 +183,7 @@ $slider-height: 12px;
       #setting-slider {
         @include common.slider(
           $highlight-color: theme.$accent-blue,
-          $slider: true,
+          $slider: variable.$bar-widgets-quick_settings-sliders-slider,
           $min-length: 320px
         );
       }
@@ -195,7 +195,7 @@ $slider-height: 12px;
       #setting-slider {
         @include common.slider(
           $highlight-color: theme.$accent-blue,
-          $slider: false,
+          $slider: variable.$bar-widgets-quick_settings-sliders-slider,
           $min-length: 230px
         );
       }
@@ -207,7 +207,7 @@ $slider-height: 12px;
       #setting-slider {
         @include common.slider(
           $highlight-color: theme.$accent-blue,
-          $slider: false,
+          $slider: variable.$bar-widgets-quick_settings-sliders-slider,
           $min-length: 140px
         );
       }
