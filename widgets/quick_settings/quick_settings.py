@@ -15,7 +15,7 @@ from shared import (
     Dialog,
     HoverButton,
     PopOverWindow,
-    QuickSubToggle,
+    QSChevronButton,
 )
 from utils import BarConfig
 from utils.widget_utils import (
@@ -115,7 +115,7 @@ class QuickSettingsButtonBox(Box):
         self.add(self.bluetooth_toggle.submenu)
         self.add(self.power_pfl.submenu)
 
-    def set_active_submenu(self, btn: QuickSubToggle):
+    def set_active_submenu(self, btn: QSChevronButton):
         if btn.submenu != self.active_submenu and self.active_submenu is not None:
             self.active_submenu.do_reveal(False)
 

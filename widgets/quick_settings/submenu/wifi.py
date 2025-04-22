@@ -6,7 +6,7 @@ from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 
 from services import NetworkClient, Wifi, network_service
-from shared import Animator, CircleImage, HoverButton, QuickSubMenu, QuickSubToggle
+from shared import Animator, CircleImage, HoverButton, QSChevronButton, QuickSubMenu
 
 
 class WifiSubMenu(QuickSubMenu):
@@ -95,7 +95,7 @@ class WifiSubMenu(QuickSubMenu):
         return ap_button
 
 
-class WifiToggle(QuickSubToggle):
+class WifiToggle(QSChevronButton):
     """A widget to display a toggle button for Wifi."""
 
     def __init__(self, submenu: QuickSubMenu, **kwargs):

@@ -4,7 +4,7 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
 from services import PowerProfiles
-from shared import QuickSubMenu, QuickSubToggle
+from shared import QSChevronButton, QuickSubMenu
 from shared.widget_container import HoverButton
 
 
@@ -93,7 +93,7 @@ class PowerProfileSubMenu(QuickSubMenu):
             item.set_active(profile)
 
 
-class PowerProfileToggle(QuickSubToggle):
+class PowerProfileToggle(QSChevronButton):
     """A widget to display a toggle button for Wifi."""
 
     def __init__(self, submenu: QuickSubMenu, **kwargs):

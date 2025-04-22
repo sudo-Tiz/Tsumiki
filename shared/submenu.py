@@ -80,11 +80,8 @@ class QuickSubMenu(Box):
         return self.revealer.get_reveal_child()
 
 
-class QuickSubToggle(Box):
+class QSToggleButton(Box):
     """A widget to display a toggle button for quick settings."""
-
-    @Signal
-    def reveal_clicked(self) -> None: ...
 
     @Signal
     def action_clicked(self) -> None: ...
@@ -94,18 +91,11 @@ class QuickSubToggle(Box):
         action_label: str = "My Label",
         action_icon: str = "package-x-generic-symbolic",
         pixel_size: int = 20,
-        submenu: QuickSubMenu | None = None,
         **kwargs,
     ):
         self.pixel_size = pixel_size
-        self.submenu = submenu
 
-        self.button_image = Image(icon_name="pan-end-symbolic", icon_size=20)
-
-        self.reveal_button = HoverButton(
-            style_classes="toggle-revealer",
-            image=self.button_image,
-        )
+        self.box = Box()
 
         # Action button can hold an icon and a label NOTHING MORE
         self.action_icon = Image(
@@ -122,8 +112,6 @@ class QuickSubToggle(Box):
             h_expand=True,
         )
 
-        self.pad_action_label(action_label)
-
         self.action_button = HoverButton(style_classes="quicksettings-toggle-action")
 
         self.action_button.add(
@@ -135,36 +123,64 @@ class QuickSubToggle(Box):
             )
         )
 
+        self.box.add(self.action_button)
+
         super().__init__(
             name="quicksettings-togglebutton",
             h_align="start",
             v_align="start",
-            children=[self.action_button, self.reveal_button],
+            children=[self.box],
             **kwargs,
         )
 
-        self.reveal_button.connect("clicked", self.do_reveal_toggle)
         self.action_button.connect("clicked", self.do_action)
 
     def do_action(self, _):
         self.emit("action-clicked")
 
-    def do_reveal_toggle(self, _):
-        self.emit("reveal-clicked")
-
     def set_active_style(self, action: bool) -> None:
         self.set_style_classes("") if not action else self.set_style_classes("active")
 
     def set_action_label(self, label: str):
-        self.pad_action_label(label.strip())
         self.action_label.set_label(label.strip())
-
-    # hacky way to fix the size, works for now
-    def pad_action_label(self, label):
-        self.action_label.set_style("padding-right: 60px;") if len(
-            label
-        ) <= 10 else self.action_label.set_style(f"padding-right: {35 - len(label)}px;")
-        return True
 
     def set_action_icon(self, icon_name: str):
         self.action_icon.set_from_icon_name(icon_name, self.pixel_size)
+
+
+class QSChevronButton(QSToggleButton):
+    """A widget to display a toggle button for quick settings."""
+
+    @Signal
+    def reveal_clicked(self) -> None: ...
+
+    def __init__(
+        self,
+        action_label: str = "My Label",
+        action_icon: str = "package-x-generic-symbolic",
+        pixel_size: int = 20,
+        submenu: QuickSubMenu | None = None,
+        **kwargs,
+    ):
+        self.submenu = submenu
+
+        self.button_image = Image(icon_name="pan-end-symbolic", icon_size=20)
+
+        self.reveal_button = HoverButton(
+            style_classes="toggle-revealer",
+            image=self.button_image,
+        )
+
+        super().__init__(
+            action_label,
+            action_icon,
+            pixel_size,
+            **kwargs,
+        )
+
+        self.box.add(self.reveal_button)
+
+        self.reveal_button.connect("clicked", self.do_reveal_toggle)
+
+    def do_reveal_toggle(self, _):
+        self.emit("reveal-clicked")

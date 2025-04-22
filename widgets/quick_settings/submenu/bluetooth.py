@@ -8,7 +8,7 @@ from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 
 from services import bluetooth_service
-from shared import Animator, CircleImage, HoverButton, QuickSubMenu, QuickSubToggle
+from shared import Animator, CircleImage, HoverButton, QSChevronButton, QuickSubMenu
 
 
 class BluetoothDeviceBox(CenterBox):
@@ -161,7 +161,7 @@ class BluetoothSubMenu(QuickSubMenu):
             self.available_devices.add(BluetoothDeviceBox(device))
 
 
-class BluetoothToggle(QuickSubToggle):
+class BluetoothToggle(QSChevronButton):
     """A widget to display the Bluetooth status."""
 
     def __init__(self, submenu: QuickSubMenu, **kwargs):
