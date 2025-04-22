@@ -53,7 +53,7 @@ class CircleImage(Gtk.DrawingArea, Widget):
             v_align=v_align,
             h_expand=h_expand,
             v_expand=v_expand,
-            size=20,
+            size=size,
             **kwargs,
         )
         self._image_file = image_file
