@@ -7,6 +7,7 @@ from fabric.widgets.revealer import Revealer
 from fabric.widgets.widget import Widget
 
 from shared import HoverButton
+from utils.widget_utils import setup_cursor_hover
 
 
 class QuickSubMenu(Box):
@@ -135,6 +136,8 @@ class QSToggleButton(Box):
             **kwargs,
         )
 
+        setup_cursor_hover(self)
+
         self.action_button.connect("clicked", self.do_action)
 
     def do_action(self, _):
@@ -166,9 +169,7 @@ class QSChevronButton(QSToggleButton):
     ):
         self.submenu = submenu
 
-        self.button_image = Image(
-            icon_name="pan-end-symbolic", icon_size=20
-        )
+        self.button_image = Image(icon_name="pan-end-symbolic", icon_size=20)
 
         self.reveal_button = HoverButton(
             style_classes="toggle-revealer", image=self.button_image, h_expand=True
