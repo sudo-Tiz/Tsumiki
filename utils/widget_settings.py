@@ -148,13 +148,13 @@ General = TypedDict(
 Cpu = TypedDict(
     "Cpu",
     {
-        **BaseConfig.__annotations__,
+        "mode": Literal["circular", "graph", "label"],
+        "tooltip": bool,
         "show_icon": bool,
         "sensor": str,
         "unit": Literal["celsius", "fahrenheit"],
         "show_unit": bool,
         "round": bool,
-        "graph": bool,
         "graph_length": int,
     },
 )
@@ -166,7 +166,8 @@ Mpris = TypedDict("Mpris", {**BaseConfig.__annotations__, "truncation_size": int
 Memory = TypedDict(
     "Memory",
     {
-        **BaseConfig.__annotations__,
+        "mode": Literal["circular", "graph", "label"],
+        "tooltip": bool,
         "show_icon": bool,
         "icon": str,
         "graph": bool,
@@ -194,7 +195,8 @@ NetworkUsage = TypedDict(
 Storage = TypedDict(
     "Storage",
     {
-        **BaseConfig.__annotations__,
+        "mode": Literal["circular", "graph", "label"],
+        "tooltip": bool,
         "show_icon": bool,
         "icon": str,
         "path": str,

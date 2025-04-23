@@ -1,12 +1,18 @@
 from fabric.utils import exec_shell_command_async
+from fabric.widgets.circularprogressbar import CircularProgressBar
 from fabric.widgets.label import Label
+from fabric.widgets.overlay import Overlay
 
 import utils.functions as helpers
 from services import network_speed
 from shared import ButtonWidget
 from utils import BarConfig
 from utils.icons import common_text_icons
-from utils.widget_utils import get_bar_graph, text_icon, util_fabricator
+from utils.widget_utils import (
+    get_bar_graph,
+    text_icon,
+    util_fabricator,
+)
 
 
 class CpuWidget(ButtonWidget):
@@ -35,9 +41,32 @@ class CpuWidget(ButtonWidget):
             lambda value: setattr(self, "cpu_name", value.strip()),
         )
 
-        if self.config["graph"] or not self.config["show_icon"]:
+        if self.config["mode"] == "graph":
             self.graph_values = []
             self.box.children = self.cpu_level_label
+
+        elif self.config["mode"] == "progress":
+            # Create a circular progress bar to display the volume level
+            self.progress_bar = CircularProgressBar(
+                name="stat-circle",
+                line_style="round",
+                line_width=2,
+                size=28,
+                start_angle=150,
+                end_angle=390,
+            )
+
+            self.icon = text_icon(
+                icon=self.config["icon"],
+                props={
+                    "style_classes": "panel-icon overlay-icon",
+                },
+            )
+
+            # Create an event box to handle scroll events for volume control
+            self.box.children = (
+                Overlay(child=self.progress_bar, overlays=self.icon, name="overlay"),
+            )
 
         else:
             # Create a TextIcon with the specified icon and size
@@ -52,20 +81,25 @@ class CpuWidget(ButtonWidget):
 
     def update_ui(self, fabricator, value):
         # Update the label with the current CPU usage if enabled
-        cpu_freq = value.get("cpu_freq")
+        frequency = value.get("cpu_freq")
+        usage = value.get("cpu_usage")
 
-        if self.config["label"]:
+        if self.config["mode"] == "graph":
+            self.cpu_level_label.set_visible(True)
+            self.graph_values.append(get_bar_graph(usage))
+
+            if len(self.graph_values) > self.config["graph_length"]:
+                self.graph_values.pop(0)
+
+            self.cpu_level_label.set_label("".join(self.graph_values))
+
+        elif self.config["mode"] == "progress":
+            self.progress_bar.set_value(usage / 100.0)
+
+        else:
             self.cpu_level_label.set_visible(True)
 
-            self.cpu_level_label.set_label(f"{value.get('cpu_usage')}%")
-
-            if self.config["graph"]:
-                self.graph_values.append(get_bar_graph(value.get("cpu_usage")))
-
-                if len(self.graph_values) > self.config["graph_length"]:
-                    self.graph_values.pop(0)
-
-                self.cpu_level_label.set_label("".join(self.graph_values))
+            self.cpu_level_label.set_label(f"{usage}%")
 
         # Update the tooltip with the memory usage details if enabled
         if self.config["tooltip"]:
@@ -93,8 +127,8 @@ class CpuWidget(ButtonWidget):
                 if self.config["unit"] == "celsius"
                 else f"{temp}°F"
             )
-            tooltip_text += f"\n󰾆 Utilization: {value.get('cpu_usage')}"
-            tooltip_text += f"\n Clock Speed: {round(cpu_freq[0], 2)} MHz"
+            tooltip_text += f"\n󰾆 Utilization: {usage}"
+            tooltip_text += f"\n Clock Speed: {round(frequency[0], 2)} MHz"
 
             self.set_tooltip_text(tooltip_text)
 
@@ -120,9 +154,32 @@ class MemoryWidget(ButtonWidget):
             label="0%", style_classes="panel-text", visible=False
         )
 
-        if self.config["graph"] or not self.config["show_icon"]:
+        if self.config["mode"] == "graph":
             self.graph_values = []
             self.box.children = self.memory_level_label
+
+        elif self.config["mode"] == "progress":
+            # Create a circular progress bar to display the volume level
+            self.progress_bar = CircularProgressBar(
+                name="stat-circle",
+                line_style="round",
+                line_width=2,
+                size=28,
+                start_angle=150,
+                end_angle=390,
+            )
+
+            self.icon = text_icon(
+                icon=self.config["icon"],
+                props={
+                    "style_classes": "panel-icon overlay-icon",
+                },
+            )
+
+            # Create an event box to handle scroll events for volume control
+            self.box.children = (
+                Overlay(child=self.progress_bar, overlays=self.icon, name="overlay"),
+            )
 
         else:
             # Create a TextIcon with the specified icon and size
@@ -142,18 +199,22 @@ class MemoryWidget(ButtonWidget):
         self.total_memory = memory.total
         self.percent_used = memory.percent
 
-        # Update the label with the used memory if enabled
-        if self.config["label"]:
-            self.memory_level_label.set_label(self.get_used())
+        if self.config["mode"] == "graph":
+            self.memory_level_label.set_visible(True)
+            self.graph_values.append(get_bar_graph(self.percent_used))
+
+            if len(self.graph_values) > self.config["graph_length"]:
+                self.graph_values.pop(0)
+
+            self.memory_level_label.set_label("".join(self.graph_values))
+
+        elif self.config["mode"] == "progress":
+            self.progress_bar.set_value(self.percent_used / 100.0)
+
+        else:
             self.memory_level_label.set_visible(True)
 
-            if self.config["graph"]:
-                self.graph_values.append(get_bar_graph(value.get("cpu_usage")))
-
-                if len(self.graph_values) > self.config["graph_length"]:
-                    self.graph_values.pop(0)
-
-                self.memory_level_label.set_label("".join(self.graph_values))
+            self.memory_level_label.set_label(f"{self.get_used()}")
 
         # Update the tooltip with the memory usage details if enabled
         if self.config["tooltip"]:
@@ -192,9 +253,33 @@ class StorageWidget(ButtonWidget):
             label="0", style_classes="panel-text", visible=False
         )
 
-        if self.config["graph"] or not self.config["show_icon"]:
+        if self.config["mode"] == "graph":
             self.graph_values = []
             self.box.children = self.storage_level_label
+
+        elif self.config["mode"] == "progress":
+            # Create a circular progress bar to display the volume level
+            self.progress_bar = CircularProgressBar(
+                name="stat-circle",
+                line_style="round",
+                line_width=2,
+                size=28,
+                start_angle=150,
+                end_angle=390,
+            )
+
+            self.icon = text_icon(
+                icon=self.config["icon"],
+                props={
+                    "style_classes": "panel-icon overlay-icon",
+                },
+            )
+
+            # Create an event box to handle scroll events for volume control
+            self.box.children = (
+                Overlay(child=self.progress_bar, overlays=self.icon, name="overlay"),
+            )
+
         else:
             # Create a TextIcon with the specified icon and size
             self.icon = text_icon(
@@ -209,24 +294,29 @@ class StorageWidget(ButtonWidget):
     def update_ui(self, fabricator, value):
         # Get the current disk usage
         self.disk = value.get("disk")
+        percent = self.disk.percent
 
-        # Update the label with the used storage if enabled
-        if self.config["label"]:
-            self.storage_level_label.set_label(f"{self.get_used()}")
+        if self.config["mode"] == "graph":
+            self.storage_level_label.set_visible(True)
+            self.graph_values.append(get_bar_graph(percent))
+
+            if len(self.graph_values) > self.config["graph_length"]:
+                self.graph_values.pop(0)
+
+            self.storage_level_label.set_label("".join(self.graph_values))
+
+        elif self.config["mode"] == "progress":
+            self.progress_bar.set_value(percent / 100.0)
+
+        else:
             self.storage_level_label.set_visible(True)
 
-            if self.config["graph"]:
-                self.graph_values.append(get_bar_graph(value.get("cpu_usage")))
-
-                if len(self.graph_values) > self.config["graph_length"]:
-                    self.graph_values.pop(0)
-
-                self.storage_level_label.set_label("".join(self.graph_values))
+            self.storage_level_label.set_label(f"{self.get_used()}")
 
         # Update the tooltip with the storage usage details if enabled
         if self.config["tooltip"]:
             self.set_tooltip_text(
-                f"󰾆 {self.disk.percent}%\n{common_text_icons['storage']} {self.ratio()}"
+                f"󰾆 {percent}%\n{common_text_icons['storage']} {self.ratio()}"
             )
 
         return True

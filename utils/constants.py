@@ -73,13 +73,12 @@ DEFAULT_CONFIG = {
     "cpu": {
         "show_icon": True,
         "icon": "",
-        "label": True,
         "tooltip": True,
         "round": True,
         "unit": "celsius",
         "show_unit": True,
         "sensor": "",
-        "graph": False,
+        "mode": "circular",
         "graph_length": 4,
     },
     "date_time": {
@@ -149,9 +148,8 @@ DEFAULT_CONFIG = {
     "memory": {
         "show_icon": True,
         "icon": "",
-        "label": True,
         "tooltip": True,
-        "graph": False,
+        "mode": "circular",
         "graph_length": 4,
     },
     "network_usage": {
@@ -250,10 +248,9 @@ DEFAULT_CONFIG = {
     "storage": {
         "show_icon": True,
         "icon": "󰋊",
-        "label": True,
+        "mode": "circular",
         "tooltip": True,
         "path": "/",
-        "graph": False,
         "graph_length": 4,
     },
     "submap": {

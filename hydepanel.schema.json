@@ -62,6 +62,7 @@
 							"ocr",
 							"power",
 							"recorder",
+							"memory",
 							"spacer",
 							"storage",
 							"submap",
@@ -368,7 +369,19 @@
 		"cpu": {
 			"type": "object",
 			"properties": {
-				"$ref": "#/definitions/baseProperties",
+				"mode": {
+					"type": "string",
+					"enum": ["label", "graph", "progress"],
+					"description": "Specifies the mode of the widget."
+				},
+				"tooltip": {
+					"type": "boolean",
+					"description": "Determines whether the widget has a tooltip."
+				},
+				"show_icon": {
+					"type": "boolean",
+					"description": "Determines whether to show the icon."
+				},
 				"icon": {
 					"type": "string",
 					"description": "Icon name from icon theme"
@@ -403,7 +416,19 @@
 		"memory": {
 			"type": "object",
 			"properties": {
-				"$ref": "#/definitions/baseProperties",
+				"mode": {
+					"type": "string",
+					"enum": ["label", "graph", "progress"],
+					"description": "Specifies the mode of the widget."
+				},
+				"tooltip": {
+					"type": "boolean",
+					"description": "Determines whether the widget has a tooltip."
+				},
+				"show_icon": {
+					"type": "boolean",
+					"description": "Determines whether to show the icon."
+				},
 				"icon": {
 					"type": "string",
 					"description": "Icon name from icon theme"
@@ -421,7 +446,19 @@
 		"storage": {
 			"type": "object",
 			"properties": {
-				"$ref": "#/definitions/baseProperties",
+				"mode": {
+					"type": "string",
+					"enum": ["label", "graph", "progress"],
+					"description": "Specifies the mode of the widget."
+				},
+				"tooltip": {
+					"type": "boolean",
+					"description": "Determines whether the widget has a tooltip."
+				},
+				"show_icon": {
+					"type": "boolean",
+					"description": "Determines whether to show the icon."
+				},
 				"icon": {
 					"type": "string",
 					"description": "Icon name from icon theme"

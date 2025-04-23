@@ -205,14 +205,14 @@ Other components follow a similar structure, where each configuration defines th
 ```json
 "cpu": {
     "icon": "",
-    "label": true,
+		"mode": "label",
     "tooltip": true,
     "show_icon": true,
 }
 ```
 
 - icon: The icon used to display the module.
-- label: Whether to show a label.
+- mode: The mode of the CPU display. It can be "label","progress" or "graph".
 - tooltip: Whether to show a tooltip.
 - round: Whether to round the temperature.
 - unit: The unit of the temperature.
@@ -307,7 +307,7 @@ Other components follow a similar structure, where each configuration defines th
 ```json
 "memory": {
     "icon": "",
-    "label": true,
+    "mode": "label",
     "tooltip": true,
     "show_icon": true,
 }
@@ -316,8 +316,8 @@ Other components follow a similar structure, where each configuration defines th
 - **icon** (string):
   Specifies the icon to be displayed. In this case, the icon is represented by `""`.
 
-- **label** (boolean):
-  Specifies whether a label should be displayed. In this case, the value is `true`, meaning the label will be shown.
+- **label** (string):
+  The mode of the CPU display. It can be "label","progress" or "graph".
 
 - **tooltip** (boolean):
   Specifies whether a tooltip should be displayed. In this case, the value is `true`, meaning the tooltip will be shown.
@@ -457,7 +457,7 @@ Other components follow a similar structure, where each configuration defines th
 ```json
 "storage": {
 "icon": "󰋊",
-"label": true,
+"mode": "label",
 "tooltip": true,
 "show_icon": true,
 }
@@ -466,8 +466,8 @@ Other components follow a similar structure, where each configuration defines th
 - **icon** (string):
   The icon used to display the module. In this case, the icon is "󰋊".
 
-- **label** (boolean):
-  Whether to show a label. In this case, it is set to true.
+- **mode** (string):
+  The mode of the CPU display. It can be "label","progress" or "graph".
 
 - **tooltip** (boolean):
   Whether to show a tooltip. In this case, it is set to true.
