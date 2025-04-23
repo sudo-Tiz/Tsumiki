@@ -340,6 +340,10 @@
 			"scaling": 100,
 			"opacity": 100,
 			"widget_style": "default",
+			"sliders": {
+				"height": "0.5em",
+				"slider": false
+			},
 			"shadow": {
 				"enabled": false,
 				"offset": 0,

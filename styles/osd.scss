@@ -49,5 +49,5 @@
     padding-left: common.toEm(5);
   }
 
-  @include common.slider($slider: false, $min-length: 150px, $height: 9px);
+  @include common.slider($slider: variable.$osd-sliders-slider, $min-length: 150px, $height: variable.$osd-sliders-height);
 }
