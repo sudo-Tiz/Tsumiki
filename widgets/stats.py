@@ -30,22 +30,23 @@ class CpuWidget(ButtonWidget):
             **kwargs,
         )
 
+        # Set the CPU name and mode
+        self.current_mode = self.config["mode"]
+
         self.cpu_level_label = Label(
             label="0%", style_classes="panel-text", visible=False
         )
-
-        self.cpu_name = ""
 
         exec_shell_command_async(
             "bash -c \"lscpu | grep 'Model name' | awk -F: '{print $2}'\"",
             lambda value: setattr(self, "cpu_name", value.strip()),
         )
 
-        if self.config["mode"] == "graph":
+        if self.current_mode == "graph":
             self.graph_values = []
             self.box.children = self.cpu_level_label
 
-        elif self.config["mode"] == "progress":
+        elif self.current_mode == "progress":
             # Create a circular progress bar to display the volume level
             self.progress_bar = CircularProgressBar(
                 name="stat-circle",
@@ -84,7 +85,7 @@ class CpuWidget(ButtonWidget):
         frequency = value.get("cpu_freq")
         usage = value.get("cpu_usage")
 
-        if self.config["mode"] == "graph":
+        if self.current_mode == "graph":
             self.cpu_level_label.set_visible(True)
             self.graph_values.append(get_bar_graph(usage))
 
@@ -93,7 +94,7 @@ class CpuWidget(ButtonWidget):
 
             self.cpu_level_label.set_label("".join(self.graph_values))
 
-        elif self.config["mode"] == "progress":
+        elif self.current_mode == "progress":
             self.progress_bar.set_value(usage / 100.0)
 
         else:
@@ -150,15 +151,18 @@ class MemoryWidget(ButtonWidget):
             **kwargs,
         )
 
+        # Set the memory name and mode
+        self.current_mode = self.config["mode"]
+
         self.memory_level_label = Label(
             label="0%", style_classes="panel-text", visible=False
         )
 
-        if self.config["mode"] == "graph":
+        if self.current_mode == "graph":
             self.graph_values = []
             self.box.children = self.memory_level_label
 
-        elif self.config["mode"] == "progress":
+        elif self.current_mode == "progress":
             # Create a circular progress bar to display the volume level
             self.progress_bar = CircularProgressBar(
                 name="stat-circle",
@@ -199,7 +203,7 @@ class MemoryWidget(ButtonWidget):
         self.total_memory = memory.total
         self.percent_used = memory.percent
 
-        if self.config["mode"] == "graph":
+        if self.current_mode == "graph":
             self.memory_level_label.set_visible(True)
             self.graph_values.append(get_bar_graph(self.percent_used))
 
@@ -208,7 +212,7 @@ class MemoryWidget(ButtonWidget):
 
             self.memory_level_label.set_label("".join(self.graph_values))
 
-        elif self.config["mode"] == "progress":
+        elif self.current_mode == "progress":
             self.progress_bar.set_value(self.percent_used / 100.0)
 
         else:
@@ -249,15 +253,18 @@ class StorageWidget(ButtonWidget):
             **kwargs,
         )
 
+        # Set the memory name and mode
+        self.current_mode = self.config["mode"]
+
         self.storage_level_label = Label(
             label="0", style_classes="panel-text", visible=False
         )
 
-        if self.config["mode"] == "graph":
+        if self.current_mode == "graph":
             self.graph_values = []
             self.box.children = self.storage_level_label
 
-        elif self.config["mode"] == "progress":
+        elif self.current_mode == "progress":
             # Create a circular progress bar to display the volume level
             self.progress_bar = CircularProgressBar(
                 name="stat-circle",
@@ -296,7 +303,7 @@ class StorageWidget(ButtonWidget):
         self.disk = value.get("disk")
         percent = self.disk.percent
 
-        if self.config["mode"] == "graph":
+        if self.current_mode == "graph":
             self.storage_level_label.set_visible(True)
             self.graph_values.append(get_bar_graph(percent))
 
@@ -305,7 +312,7 @@ class StorageWidget(ButtonWidget):
 
             self.storage_level_label.set_label("".join(self.graph_values))
 
-        elif self.config["mode"] == "progress":
+        elif self.current_mode == "progress":
             self.progress_bar.set_value(percent / 100.0)
 
         else:
