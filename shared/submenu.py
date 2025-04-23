@@ -115,7 +115,7 @@ class QSToggleButton(Box):
 
         self.action_button = HoverButton(style_classes="quicksettings-toggle-action")
 
-        self.action_button.set_size_request(165, 20)
+        self.action_button.set_size_request(170, 20)
 
         self.action_button.add(
             Box(
