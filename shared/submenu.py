@@ -114,6 +114,8 @@ class QSToggleButton(Box):
 
         self.action_button = HoverButton(style_classes="quicksettings-toggle-action")
 
+        self.action_button.set_size_request(170, 20)
+
         self.action_button.add(
             Box(
                 h_align="start",
@@ -164,11 +166,12 @@ class QSChevronButton(QSToggleButton):
     ):
         self.submenu = submenu
 
-        self.button_image = Image(icon_name="pan-end-symbolic", icon_size=20)
+        self.button_image = Image(
+            icon_name="pan-end-symbolic", icon_size=20
+        )
 
         self.reveal_button = HoverButton(
-            style_classes="toggle-revealer",
-            image=self.button_image,
+            style_classes="toggle-revealer", image=self.button_image, h_expand=True
         )
 
         super().__init__(
