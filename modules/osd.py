@@ -140,7 +140,7 @@ class OSDContainer(Window):
         self,
         widget_config: BarConfig,
         transition_duration=200,
-        keyboard_mode: Keyboard_Mode = "on-demand",
+        keyboard_mode: Keyboard_Mode = "none",
         **kwargs,
     ):
         self.config = widget_config["osd"]
