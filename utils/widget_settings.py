@@ -218,6 +218,7 @@ WindowTitle = TypedDict(
         "icon": bool,
         "truncation": bool,
         "truncation_size": int,
+        "hide_when_zero": bool,
         "title_map": List[Dict[str, str]],
     },
 )

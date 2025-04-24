@@ -645,6 +645,10 @@
 				"label_format": {
 					"type": "string",
 					"description": "Format for window count labels. Use '{count}' for the number of windows, or any other string/icon"
+				},
+				"hide_when_zero": {
+					"type": "boolean",
+					"description": "Hide the window count when there are no windows"
 				}
 			}
 		},

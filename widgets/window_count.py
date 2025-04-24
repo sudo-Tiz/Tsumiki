@@ -68,6 +68,8 @@ class WindowCountWidget(ButtonWidget):
             self.set_tooltip_text(
                 f"Workspace: {data['id']}, Windows: {data['windows']}"
             )
+        if self.config["hide_when_zero"]:
+            self.box.hide() if data["windows"] == 0 else self.box.show()
 
         return (
             logger.info("[WindowCount] Could not find active windows for workspace")

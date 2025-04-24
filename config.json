@@ -74,7 +74,8 @@
 		"icon": "",
 		"label_format": "[{count}]",
 		"tooltip": true,
-		"show_icon": false
+		"show_icon": false,
+		"hide_when_zero": true
 	},
 	"language": {
 		"truncation_size": 2, // this is the number of characters to show in the language widget
