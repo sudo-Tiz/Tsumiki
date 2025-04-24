@@ -1,13 +1,13 @@
 from fabric.utils import bulk_connect
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
-from fabric.widgets.revealer import Revealer
 from loguru import logger
 
 from services import MprisPlayer, MprisPlayerManager
 from shared import ButtonWidget
+from shared.pop_over import PopOverWindow
 from utils import BarConfig, Colors
-from utils.icons import common_text_icons
+from widgets.media import PlayerBoxStack
 
 
 class Mpris(ButtonWidget):
@@ -22,16 +22,17 @@ class Mpris(ButtonWidget):
         # Initialize the EventBox with specific name and style
         super().__init__(
             widget_config,
-            name="mpris" ** kwargs,
+            name="mpris",
+            **kwargs,
         )
         self.config = widget_config["mpris"]
 
         self.player = None
 
         self.label = Label(label="Nothing playing", style_classes="panel-text")
-        self.text_icon = Label(
-            label=common_text_icons["playing"],
-        )
+
+        self.cover = Box(style_classes="cover")
+        self.box.children = [self.cover, self.label]
 
         # Services
         self.mpris_manager = MprisPlayerManager()
@@ -42,39 +43,44 @@ class Mpris(ButtonWidget):
                 f"{player.get_property('player-name')}",
             )
             self.player = MprisPlayer(player)
-            bulk_connect(
-                self.player,
-                {
-                    "notify::metadata": self.get_current,
-                    "notify::playback-status": self.get_playback_status,
-                },
-            )
+            self.get_current()
+            break
 
-        self.revealer = Revealer(
-            name="mpris-revealer",
-            transition_type="slide-right",
-            transition_duration=400,
-            child=self.label,
-            child_revealed=True,
+        config = {
+            "enabled": True,
+            "ignore": ["vlc"],
+            "truncation_size": 30,
+            "show_album": True,
+            "show_artist": True,
+            "show_time": True,
+            "show_time_tooltip": True,
+        }
+
+        popup = PopOverWindow(
+            margin="10px 0 0 0",
+            parent=bar,
+            child=Box(
+                style_classes="mpris-box",
+                children=[
+                    PlayerBoxStack(self.mpris_manager, config=config),
+                ],
+            ),
+            visible=False,
+            all_visible=False,
+            pointing_to=self,
         )
-
-        self.cover = Box(style_classes="cover")
-
-        self.box = Box(
-            children=[self.text_icon],
-        )
-
-        self.children = self.box
 
         # Connect the button press event to the play_pause method
         bulk_connect(
             self,
             {
-                "button-press-event": lambda *_: self.play_pause(),
+                "button-press-event": lambda *_: popup.set_visible(
+                    not popup.get_visible(),
+                ),
             },
         )
 
-    def get_current(self, *_):
+    def get_current(self):
         bar_label = self.player.title
 
         truncated_info = (
@@ -96,23 +102,3 @@ class Mpris(ButtonWidget):
 
         if self.config["tooltip"]:
             self.set_tooltip_text(bar_label)
-
-    def get_playback_status(self, *_):
-        # Get the current playback status and change the icon accordingly
-        status = self.player.playback_status.lower()
-        if status == "playing":
-            self.box.children = [self.cover, self.text_icon, self.revealer]
-            self.revealer.set_reveal_child(True)
-            self.text_icon.set_label(common_text_icons["paused"])
-        elif status == "paused":
-            self.box.children = [self.cover, self.text_icon, self.revealer]
-            self.revealer.set_reveal_child(True)
-            self.text_icon.set_label(common_text_icons["playing"])
-        else:
-            self.box.children = [self.text_icon]
-            self.revealer.set_reveal_child(False)
-
-    def play_pause(self, *_):
-        # Toggle play/pause using playerctl
-        if self.player is not None:
-            self.player.play_pause()

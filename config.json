@@ -89,7 +89,8 @@
 			"window_title"
 		], // this is the left section of the panel
 		"middle_section": [
-			"date_time"
+			"date_time",
+			"mpris"
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
@@ -154,8 +155,8 @@
 		"show_icon": true
 	},
 	"mpris": {
-		"truncation_size": 200,
-		"tooltip": true
+		"truncation_size": 10,
+		"tooltip": false
 	},
 	"notification": {
 		"enabled": true,
