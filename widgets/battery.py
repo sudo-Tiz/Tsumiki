@@ -139,18 +139,24 @@ class BatteryWidget(ButtonWidget):
 
         # Update the tooltip with the battery status details if enabled
         if self.config["tooltip"]:
+            status_text = (
+                "󱠴 Status: Charging" if is_charging else "󱠴 Status: Discharging"
+            )
             tool_tip_text = (
                 f"󱐋 Energy : {round(energy, 2)} Wh\n Temperature: {temperature}°C"
             )
+            formatted_time = format_time(time_remaining)
             if battery_percent == self.full_battery_level:
-                self.set_tooltip_text(f"󰄉 Time to full: 0\n{tool_tip_text}")
+                self.set_tooltip_text(
+                    f"{status_text}\n󰄉 Time to full: 0\n{tool_tip_text}"
+                )
             elif is_charging and battery_percent < self.full_battery_level:
                 self.set_tooltip_text(
-                    f"󰄉 Time to full: {format_time(time_remaining)}\n{tool_tip_text}"
+                    f"{status_text}\n󰄉 Time to full: {formatted_time}\n{tool_tip_text}"
                 )
             else:
                 self.set_tooltip_text(
-                    f"󰄉 Time to empty: {format_time(time_remaining)}\n{tool_tip_text}"
+                    f"{status_text}\n󰄉 Time to empty: {formatted_time}\n{tool_tip_text}"
                 )
 
         return True
