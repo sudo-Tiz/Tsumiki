@@ -388,7 +388,9 @@ class QuickSettingsButtonWidget(ButtonWidget):
         self.brightness_service = Brightness.get_default()
 
         self.audio.connect("notify::speaker", self.on_speaker_changed)
-        self.brightness_service.connect("screen", self.on_brightness_changed)
+        self.brightness_service.connect(
+            "brightness_changed", self.on_brightness_changed
+        )
 
         popup = PopOverWindow(
             parent=bar,

@@ -45,7 +45,7 @@ class Brightness(Service):
         return Brightness.instance
 
     @Signal
-    def screen(self, value: int) -> None:
+    def brightness_changed(self, value: int) -> None:
         """Signal emitted when screen brightness changes."""
         # Implement as needed for your application
 
@@ -70,7 +70,7 @@ class Brightness(Service):
         self.screen_monitor.connect(
             "changed",
             lambda _, file, *args: self.emit(
-                "screen",
+                "brightness_changed",
                 round(int(file.load_bytes()[0].get_data())),
             ),
         )
@@ -108,7 +108,7 @@ class Brightness(Service):
 
         try:
             exec_brightnessctl_async(f"--device '{screen_device}' set {value}")
-            self.emit("screen", int((value / self.max_screen) * 100))
+            self.emit("brightness_changed", int((value / self.max_screen) * 100))
             logger.info(
                 f"{Colors.INFO}Set screen brightness to {value} "
                 f"(out of {self.max_screen})"

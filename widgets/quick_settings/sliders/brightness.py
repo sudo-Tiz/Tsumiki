@@ -24,7 +24,7 @@ class BrightnessSlider(SettingSlider):
 
         if self.scale:
             self.scale.connect("change-value", self.on_scale_move)
-            self.client.connect("screen", self.on_brightness_change)
+            self.client.connect("brightness_changed", self.on_brightness_change)
 
         self.icon_button.connect(
             "clicked", lambda *_: setattr(self.client, "screen_brightness", 0)
