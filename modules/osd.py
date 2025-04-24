@@ -103,11 +103,17 @@ class AudioOSDContainer(GenericOSDContainer):
     def update_volume(self):
         if self.audio_service.speaker and not self.is_hovered():
             volume = round(self.audio_service.speaker.volume)
-            scaled_volume = volume if volume <= 100 else volume - 100
+            is_over_amplified = volume > 100
+            scaled_volume = volume - 100 if is_over_amplified else volume
 
             self.scale.set_value(scaled_volume)
             self.level.set_label(f"{volume}%")
             self.update_icon(volume)
+
+            if is_over_amplified:
+                self.scale.add_style_class("overamplified")
+            else:
+                self.scale.remove_style_class("overamplified")
 
     def update_icon(self, volume):
         icon_name = get_audio_icon_name(volume, self.audio_service.speaker.muted)[
