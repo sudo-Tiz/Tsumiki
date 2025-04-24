@@ -56,7 +56,7 @@ class BrightnessOSDContainer(GenericOSDContainer):
         self.brightness_service = Brightness.get_default()
         self.update_brightness()
 
-        self.scale.connect("value-changed", lambda *_: self.update_brightness())
+
         self.brightness_service.connect("screen", self.on_brightness_changed)
 
     @cooldown(0.1)
@@ -92,23 +92,10 @@ class AudioOSDContainer(GenericOSDContainer):
         )
         self.audio = audio_service
 
-        self.sync_with_audio()
+        self.update_volume()
 
-        self.scale.connect("value-changed", self.on_volume_changed)
         self.audio.connect("notify::speaker", self.on_audio_speaker_changed)
 
-    def sync_with_audio(self):
-        if self.audio.speaker:
-            volume = round(self.audio.speaker.volume)
-            self.scale.set_value(volume)
-            self.update_icon(volume)
-
-    def on_volume_changed(self, *_):
-        if self.audio.speaker:
-            volume = self.scale.value
-
-            self.audio.speaker.set_volume(volume)
-            self.update_icon(volume)
 
     @cooldown(0.1)
     def handle_change(self, *_):
@@ -117,14 +104,16 @@ class AudioOSDContainer(GenericOSDContainer):
         return True
 
     def on_audio_speaker_changed(self, *_):
+        print("Speaker changed", self.audio.speaker.volume)
         if self.audio.speaker:
             self.audio.speaker.connect("notify::volume", self.handle_change)
             self.update_volume()
+        return True
 
-    def update_volume(self, *_):
+    def update_volume(self):
         if self.audio.speaker and not self.is_hovered():
             volume = round(self.audio.speaker.volume)
-            self.scale.set_value(volume)
+            self.scale.set_value(volume if volume <= 100 else volume -100)
             self.level.set_label(f"{volume}%")
             self.update_icon(volume)
 
