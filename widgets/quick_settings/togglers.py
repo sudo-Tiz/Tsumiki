@@ -10,12 +10,13 @@ from utils.icons import icons
 class QuickSettingToggler(CommandSwitcher):
     """A button widget to toggle a command."""
 
-    def __init__(self, command, name, enabled_icon, disabled_icon, **kwargs):
+    def __init__(self, command, name, enabled_icon, disabled_icon, args="", **kwargs):
         super().__init__(
             command,
             enabled_icon,
             disabled_icon,
             name,
+            args=args,
             label=True,
             tooltip=False,
             interval=1000,
@@ -41,7 +42,8 @@ class HyprSunsetQuickSetting(QuickSettingToggler):
 
     def __init__(self, **kwargs):
         super().__init__(
-            command="hyprsunset -t 2800k",
+            command="hyprsunset",
+            args="-t 2800k",
             enabled_icon="󱩌",
             disabled_icon="󰛨",
             name="quicksettings-togglebutton",
