@@ -16,10 +16,6 @@
 }
 
 
-
-
-
-
 #desktop-clock-box {
   margin: 0 15rem 15rem 15rem;
 
@@ -50,8 +46,6 @@
   border: if(variable.$bar-widgets-cpu-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-cpu-border-width;
 
-
-
   #nerd-icon.panel-icon {
     font-size: variable.$bar-widgets-cpu-icon_size;
     margin-right: variable.$bar-widgets-cpu-spacing;
@@ -63,8 +57,6 @@
   border-radius: variable.$bar-widgets-window_count-border-radius;
   border: if(variable.$bar-widgets-window_count-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-window_count-border-width;
-
-
 
   #nerd-icon.panel-icon {
     font-size: variable.$bar-widgets-cpu-icon_size;
@@ -106,8 +98,6 @@
   border: if(variable.$bar-widgets-storage-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-storage-border-width;
 
-
-
   #nerd-icon.panel-icon {
     font-size: variable.$bar-widgets-storage-icon_size;
     margin-right: variable.$bar-widgets-storage-spacing;
@@ -119,16 +109,14 @@
   border: if(variable.$bar-widgets-battery-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-battery-border-width;
 
-
 }
 
 #bluetooth {
   border-radius: variable.$bar-widgets-bluetooth-border-radius;
   border: if(variable.$bar-widgets-bluetooth-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-bluetooth-border-width;
-
-
 }
+
 
 #brightness {
   border-radius: variable.$bar-widgets-brightness-border-radius;
@@ -165,7 +153,6 @@
   border-radius: variable.$bar-widgets-datetime_menu-border-radius;
   border: if(variable.$bar-widgets-datetime_menu-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-datetime_menu-border-width;
-
 }
 
 #desktop_clock {
@@ -255,8 +242,6 @@
     background-size: contain;
     margin: functions.toEm(3) functions.toEm(10) functions.toEm(3) 0;
   }
-
-
 
 }
 
@@ -353,8 +338,6 @@
   border: if(variable.$bar-widgets-theme-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-theme-border-width;
 
-
-
   #nerd-icon.panel-icon {
     font-size: variable.$bar-widgets-theme-icon_size;
     margin-right: variable.$bar-widgets-theme-spacing;
@@ -388,8 +371,6 @@
   border-radius: variable.$bar-widgets-window_title-border-radius;
   border: if(variable.$bar-widgets-window_title-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-window_title-border-width;
-
-
 
   #nerd-icon.panel-icon {
     font-size: variable.$bar-widgets-window_title-icon_size; // TODO: fix this

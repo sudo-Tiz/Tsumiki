@@ -3,6 +3,7 @@
 		"brightnessctl",
 		"ellipsization",
 		"Interp",
+		"Jost",
 		"pkill",
 		"psutil",
 		"pycairo",
