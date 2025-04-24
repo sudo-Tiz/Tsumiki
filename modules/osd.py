@@ -65,13 +65,13 @@ class BrightnessOSDContainer(GenericOSDContainer):
             self.brightness_service.screen_brightness,
             self.brightness_service.max_screen,
         )
-        self.scale.animate_value(normalized_brightness)
         self.update_icon(int(normalized_brightness))
 
     def update_icon(self, current_brightness):
         icon_name = get_brightness_icon_name(current_brightness)["icon"]
         self.level.set_label(f"{current_brightness}%")
         self.icon.set_from_icon_name(icon_name)
+        self.scale.set_value(current_brightness)
 
     def on_brightness_changed(self, sender, value, *args):
         self.update_brightness()
@@ -102,12 +102,6 @@ class AudioOSDContainer(GenericOSDContainer):
 
     def update_volume(self):
         if self.audio_service.speaker and not self.is_hovered():
-            self.scale.animate_value(
-                self.audio_service.speaker.volume
-                if self.audio_service.speaker.volume <= 100
-                else self.audio_service.speaker.volume - 100
-            )
-
             volume = round(self.audio_service.speaker.volume)
             scaled_volume = volume if volume <= 100 else volume - 100
 

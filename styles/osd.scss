@@ -26,6 +26,10 @@
     min-width: 35px;
     padding-left: common.toEm(5);
   }
+  
+  .overamplified trough highlight {
+      background-color: theme.$accent-red;
+    }
 
   @include common.slider($slider: variable.$osd-sliders-slider, $min-length: 150px, $height: variable.$osd-sliders-height);
 }
