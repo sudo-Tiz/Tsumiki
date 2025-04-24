@@ -106,9 +106,9 @@ class AudioOSDContainer(GenericOSDContainer):
     def on_volume_changed(self, *_):
         if self.audio.speaker:
             volume = self.scale.value
-            if 0 <= volume <= 100:
-                self.audio.speaker.set_volume(volume)
-                self.update_icon(volume)
+
+            self.audio.speaker.set_volume(volume)
+            self.update_icon(volume)
 
     @cooldown(0.1)
     def handle_change(self, *_):
