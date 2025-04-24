@@ -19,29 +19,7 @@
 
   box-shadow: if(variable.$osd-shadow-enabled, $shadow, none);
 
-  @if variable.$osd-widget_style =="flat" {
-    @extend .flat;
-  }
-
-  @if variable.$osd-widget_style =="shadow" {
-    @extend .shadow;
-  }
-
-  @if variable.$osd-widget_style =="bordered" {
-    @extend .bordered;
-  }
-
-  @if variable.$osd-widget_style =="wave1" {
-    @extend .wave1;
-  }
-
-  @if variable.$osd-widget_style =="wave2" {
-    @extend .wave2;
-  }
-
-  @else {
-    @extend .default;
-  }
+  @include common.widget_style(variable.$osd-widget_style);
 
   #osd-level {
     font-weight: 600;
