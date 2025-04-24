@@ -10,7 +10,8 @@ class HyprSunsetWidget(CommandSwitcher):
         self.config = widget_config["hypr_sunset"]
 
         # Set the command to adjust the screen temperature
-        self.command = f"hyprsunset -t {self.config['temperature']}"
+        self.command = "hyprsunset"
+        self.args = f"-t {self.config['temperature']}"
 
         super().__init__(
             config=widget_config,

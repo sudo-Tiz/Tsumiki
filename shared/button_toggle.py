@@ -23,13 +23,14 @@ class CommandSwitcher(ButtonWidget):
         disabled_icon: str,
         name: str,
         label=True,
+        args: str = "",
         tooltip=True,
         config=None,
         style_classes: str = "",
         **kwargs,
     ):
         self.command = command
-        self.command_without_args = self.command.split(" ")[0]  # command without args
+        self.full_command = f"{command} {args}"
 
         super().__init__(
             config,
@@ -37,8 +38,8 @@ class CommandSwitcher(ButtonWidget):
             **kwargs,
         )
 
-        if not helpers.executable_exists(self.command_without_args):
-            raise ExecutableNotFoundError(self.command_without_args)
+        if not helpers.executable_exists(self.command):
+            raise ExecutableNotFoundError(self.command)
 
         self.add_style_class(style_classes)
 
@@ -66,13 +67,13 @@ class CommandSwitcher(ButtonWidget):
         util_fabricator.connect("changed", lambda *_: self.update_ui())
 
     def toggle(self, *_):
-        is_app_running = helpers.is_app_running(self.command_without_args)
+        is_app_running = helpers.is_app_running(self.command)
 
         if is_app_running:
-            helpers.kill_process(self.command_without_args)
+            helpers.kill_process(self.command)
         else:
             subprocess.Popen(
-                self.command.split(" "),
+                self.full_command.split(" "),
                 stdin=subprocess.DEVNULL,  # No input stream
                 stdout=subprocess.DEVNULL,  # Optionally discard the output
                 stderr=subprocess.DEVNULL,  # Optionally discard the error output
@@ -83,7 +84,7 @@ class CommandSwitcher(ButtonWidget):
         return True
 
     def update_ui(self):
-        is_app_running = helpers.is_app_running(self.command_without_args)
+        is_app_running = helpers.is_app_running(self.command)
 
         if is_app_running:
             self.add_style_class("active")
@@ -98,8 +99,8 @@ class CommandSwitcher(ButtonWidget):
 
         if self.tooltip:
             self.set_tooltip_text(
-                f"{self.command_without_args} enabled"
+                f"{self.command} enabled"
                 if is_app_running
-                else f"{self.command_without_args} disabled",
+                else f"{self.command} disabled",
             )
         return True
