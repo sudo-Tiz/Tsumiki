@@ -20,14 +20,14 @@ class PopOverWindow(Window):
         super().__init__(
             name="popover",
             style_classes="popover",
-            exclusivity="none",
-            display = Gdk.Display.get_default(),
             **kwargs,
         )
+        self.exclusivity = "none"
         self._parent = parent
         self._pointing_widget = pointing_to
         self._base_margin = self.extract_margin(margin)
         self.margin = self._base_margin.values()
+        self.display = Gdk.Display.get_default()
         self.add_keybinding("Escape", lambda *_: print("Escape pressed"))
 
         self.connect("notify::visible", self.do_update_handlers)
