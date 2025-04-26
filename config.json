@@ -187,7 +187,7 @@
 			"icon_size": 30,
 			"anchor": "bottom-center",
 			"ignored_apps": [],
-			"layer": "top",
+			"layer": "bottom",
 			"pinned_apps": [
 				"vivaldi",
 				"wezterm",
@@ -198,7 +198,8 @@
 		"desktop_clock": {
 			"enabled": true,
 			"anchor": "bottom-right",
-			"date_format": "%A, %d %B %Y"
+			"date_format": "%A, %d %B %Y",
+			"layer": "bottom"
 		},
 		"check_updates": false,
 		"layer": "top",

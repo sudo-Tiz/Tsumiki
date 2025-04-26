@@ -106,6 +106,7 @@ DesktopClock = TypedDict(
     {
         "enabled": bool,
         "anchor": Anchor,
+        "layer": Layer,
         "date_format": str,
     },
 )

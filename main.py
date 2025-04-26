@@ -77,8 +77,9 @@ if __name__ == "__main__":
 
         windows.append(
             DesktopClock(
-                general_options["desktop_clock"]["date_format"],
-                general_options["desktop_clock"]["anchor"],
+                format=general_options["desktop_clock"]["date_format"],
+                layer=general_options["desktop_clock"]["layer"],
+                anchor=general_options["desktop_clock"]["anchor"],
             )
         )
 
@@ -90,6 +91,8 @@ if __name__ == "__main__":
     # Initialize the application with the status bar
     app = Application(APPLICATION_NAME, windows=windows)
 
+    helpers.copy_theme(widget_config["theme"]["name"])
+
     # Monitor styles folder for changes
     if general_options["debug"]:
         main_css_file = monitor_file(get_relative_path("styles"))
@@ -100,7 +103,6 @@ if __name__ == "__main__":
         process_and_apply_css(app)
 
     setproctitle.setproctitle(APPLICATION_NAME)
-    helpers.copy_theme(widget_config["theme"]["name"])
 
     helpers.ensure_directory(APP_CACHE_DIRECTORY)
 

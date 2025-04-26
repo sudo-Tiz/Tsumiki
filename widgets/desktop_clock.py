@@ -2,7 +2,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.datetime import DateTime
 from fabric.widgets.wayland import WaylandWindow as Window
 
-from utils.types import Anchor
+from utils.types import Anchor, Layer
 
 
 class DesktopClock(Window):
@@ -10,10 +10,10 @@ class DesktopClock(Window):
     A simple desktop clock widget.
     """
 
-    def __init__(self, date_format: str, anchor: Anchor, **kwargs):
+    def __init__(self, date_format: str, anchor: Anchor, layer: Layer, **kwargs):
         super().__init__(
             name="desktop_clock",
-            layer="bottom",
+            layer=layer,
             anchor=anchor,
             exclusivity="none",
             child=Box(

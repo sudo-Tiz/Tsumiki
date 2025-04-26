@@ -202,7 +202,7 @@ class PopupWindow(Window):
 
     def __init__(
         self,
-        layer: Layer = "top",
+        layer: Layer = "overlay",
         name: str = "popup-window",
         decorations: str = "padding: 1px;",
         child: Widget | None = None,

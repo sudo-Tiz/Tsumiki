@@ -182,7 +182,6 @@ class QSChevronButton(QSToggleButton):
             **kwargs,
         )
 
-
         self.box.add(Separator())
         self.box.add(self.reveal_button)
 

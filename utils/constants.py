@@ -208,10 +208,11 @@ DEFAULT_CONFIG = {
             "ignored_apps": [],
             "icon_size": 30,
             "anchor": "bottom-center",
-            "layer": "top",
+            "layer": "bottom",
         },
         "desktop_clock": {
             "enabled": True,
+            "layer": "bottom",
             "anchor": "center",
             "date_format": "%A, %d %B %Y",
         },
