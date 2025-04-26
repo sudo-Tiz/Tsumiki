@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
         windows.append(
             DesktopClock(
-                format=general_options["desktop_clock"]["date_format"],
+                date_format=general_options["desktop_clock"]["date_format"],
                 layer=general_options["desktop_clock"]["layer"],
                 anchor=general_options["desktop_clock"]["anchor"],
             )

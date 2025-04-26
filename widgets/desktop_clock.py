@@ -15,7 +15,6 @@ class DesktopClock(Window):
             name="desktop_clock",
             layer=layer,
             anchor=anchor,
-            exclusivity="none",
             child=Box(
                 name="desktop-clock-box",
                 orientation="v",
