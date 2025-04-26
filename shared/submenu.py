@@ -7,6 +7,7 @@ from fabric.widgets.revealer import Revealer
 from fabric.widgets.widget import Widget
 
 from shared import HoverButton
+from shared.separator import Separator
 from utils.widget_utils import setup_cursor_hover
 
 
@@ -106,7 +107,6 @@ class QSToggleButton(Box):
         )
         self.action_label = Label(
             style_classes="panel-text",
-            name="quicksettings-toggle-action-label",
             label=action_label,
             ellipsization="end",
             h_align="start",
@@ -182,6 +182,8 @@ class QSChevronButton(QSToggleButton):
             **kwargs,
         )
 
+
+        self.box.add(Separator())
         self.box.add(self.reveal_button)
 
         self.reveal_button.connect("clicked", self.do_reveal_toggle)
