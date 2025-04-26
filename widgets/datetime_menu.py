@@ -17,7 +17,7 @@ from loguru import logger
 import utils.constants as constants
 import utils.functions as helpers
 from services import notification_service
-from shared import ButtonWidget, PopOverWindow, Separator
+from shared import ButtonWidget, Popover, Separator
 from shared.circle_image import CircleImage
 from shared.widget_container import HoverButton
 from utils import BarConfig, Colors
@@ -457,14 +457,9 @@ class DateTimeWidget(ButtonWidget):
 
         self.cache_notification_service = notification_service
 
-        date_menu = DateNotificationMenu(config=self.config)
-
-        popup = PopOverWindow(
-            parent=bar,
-            child=date_menu,
-            visible=False,
-            all_visible=False,
-            pointing_to=self,
+        popup = Popover(
+            content=DateNotificationMenu(config=self.config),
+            point_to=self,
         )
 
         self.notification_indicator = Image(
@@ -486,7 +481,7 @@ class DateTimeWidget(ButtonWidget):
 
         self.connect(
             "clicked",
-            lambda *_: popup.set_visible(not popup.get_visible()),
+            lambda *_: popup.open(),
         )
 
         self.children = Box(

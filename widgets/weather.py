@@ -10,7 +10,7 @@ from fabric.widgets.label import Label
 from gi.repository import Gtk
 
 from services import WeatherService
-from shared import ButtonWidget, PopOverWindow, Separator
+from shared import ButtonWidget, Popover, Separator
 from utils import BarConfig
 from utils.functions import convert_seconds_to_milliseconds
 from utils.icons import weather_icons
@@ -276,12 +276,9 @@ class WeatherWidget(ButtonWidget):
                 f"{res['location']}, {current_weather['weatherDesc'][0]['value']}"
             )
 
-        popup = PopOverWindow(
-            parent=self.bar,
-            child=WeatherMenu(data=res),
-            visible=False,
-            all_visible=False,
-            pointing_to=self,
+        popup = Popover(
+            content=WeatherMenu(data=res),
+            point_to=self,
         )
 
         self.connect(

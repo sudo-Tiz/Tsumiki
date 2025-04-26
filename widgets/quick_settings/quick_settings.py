@@ -14,7 +14,7 @@ from shared import (
     CircleImage,
     Dialog,
     HoverButton,
-    PopOverWindow,
+    Popover,
     QSChevronButton,
 )
 from utils import BarConfig
@@ -392,12 +392,10 @@ class QuickSettingsButtonWidget(ButtonWidget):
             "brightness_changed", self.on_brightness_changed
         )
 
-        popup = PopOverWindow(
-            parent=bar,
-            child=QuickSettingsMenu(config=self.config),
-            visible=False,
-            all_visible=False,
-            pointing_to=self,
+
+        popup = Popover(
+            content=QuickSettingsMenu(config=self.config),
+            point_to=self,
         )
 
         self.audio_icon = Image(style_classes="panel-icon")
@@ -422,11 +420,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
 
         self.connect(
             "clicked",
-            lambda *_: (
-                popup.set_visible(
-                    not popup.get_visible(),
-                )
-            ),
+            lambda *_: (popup.open()),
         )
 
     def start_timeout(self):

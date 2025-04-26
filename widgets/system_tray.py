@@ -5,7 +5,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from gi.repository import Gdk, GdkPixbuf, GLib, Gray, Gtk
 
-from shared import ButtonWidget, PopOverWindow, Separator
+from shared import ButtonWidget, Popover, Separator
 from shared.widget_container import HoverButton
 from utils import BarConfig
 from utils.icon_resolver import IconResolver
@@ -165,12 +165,9 @@ class SystemTrayWidget(ButtonWidget):
         # Create popup menu for hidden items
         self.popup_menu = SystemTrayMenu(config=self.config)
 
-        self.popup = PopOverWindow(
-            parent=bar,
-            child=self.popup_menu,
-            visible=False,
-            all_visible=False,
-            pointing_to=self,
+        self.popup = Popover(
+            content=self.popup_menu,
+            point_to=self,
         )
 
         # Initialize watcher
