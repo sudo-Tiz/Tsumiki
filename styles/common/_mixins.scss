@@ -2,15 +2,27 @@
 @use "../theme";
 @use "../variable";
 
+
+/* General */
 %unset {
   outline: none;
   border: 0;
   box-shadow: none;
 }
 
+%debug {
+  border: 1px solid red;
+}
+
 %clear_icon {
   -gtk-icon-transform: scale(1.05);
   -gtk-icon-effect: highlight;
+}
+
+%label {
+  @extend %unset;
+  color: theme.$text-main;
+  font-weight: variable.$font-weight;
 }
 
 %widget_hover {
@@ -147,7 +159,6 @@
   }
 
   &:disabled {
-
     highlight,
     progress {
       background-color: color.mix(theme.$text-main, transparent, 60%);
@@ -157,6 +168,7 @@
 }
 
 @mixin floating-widget($radius: variable.$bar-menus-popover-border-radius) {
+
   $shadow: 0 0 0 variable.$bar-border-width theme.$shadow-color,
     variable.$bar-menus-popover-shadow-offset variable.$bar-menus-popover-shadow-blur variable.$bar-menus-popover-shadow-spread color.adjust(theme.$shadow-color,
       $alpha: calc(variable.$bar-menus-popover-shadow-opacity - 1));
