@@ -142,9 +142,10 @@ class NotificationWidget(EventBox):
                 h_align="start",
                 style_classes="summary",
                 line_wrap="word-char",
-                ellipsization="end",
                 v_align="start",
                 h_expand=True,
+                chars_width=20,
+                max_chars_width=40,
             ),
         )
 
@@ -198,12 +199,13 @@ class NotificationWidget(EventBox):
         body_container.add(
             Label(
                 markup=helpers.parse_markup(self._notification.body),
-                line_wrap="word-char",
-                ellipsization="end",
+                line_wrap="char",
                 v_align="start",
                 h_expand=True,
                 h_align="start",
                 style_classes="body",
+                chars_width=20,
+                max_chars_width=40,
             ),
         )
 
