@@ -470,15 +470,17 @@ class DateTimeWidget(ButtonWidget):
         self.notification_indicator = Image(
             icon_name=icons["notifications"]["noisy"],
             icon_size=14,
-            visible=self.config["notification"],
+            visible=self.config["notification"]["enabled"],
         )
 
         count_label = Label(
             name="notification-count",
             label=str(self.cache_notification_service.count),
             v_align="start",
-            visible=self.config["notification_count"] and self.config["notification"],
+            visible=self.config["notification"]["enabled"]
+            and self.config["notification"]["count"],
         )
+
 
         self.notification_indicator_box = Box(
             children=(self.notification_indicator, count_label)
