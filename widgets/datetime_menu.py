@@ -82,7 +82,8 @@ class DateMenuNotification(EventBox):
                 h_align="start",
                 h_expand=True,
                 line_wrap="word-char",
-                ellipsization="end",
+                chars_width=20,
+                max_chars_width=40,
                 style_classes="summary",
                 style="font-size: 13.5px;",
             ),
@@ -133,12 +134,13 @@ class DateMenuNotification(EventBox):
         body_container.add(
             Label(
                 markup=helpers.parse_markup(self._notification.body),
-                line_wrap="word-char",
-                ellipsization="end",
                 v_align="start",
                 h_expand=True,
                 h_align="start",
                 style="font-size: 13.5px;",
+                line_wrap="word-char",
+                chars_width=20,
+                max_chars_width=40,
             ),
         )
 
