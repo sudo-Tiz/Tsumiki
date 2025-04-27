@@ -265,14 +265,23 @@ Cava = TypedDict("Cava", {"bars": int, "color": str})
 # Overview configuration
 Overview = TypedDict("Overview", {})
 
+
+DateTimeNotification = TypedDict(
+    "DateTimeNotification",
+    {
+        "enabled": bool,
+        "hide_count_on_zero": bool,
+        "count": bool,
+    },
+)
+
 # DateTimeMenu configuration
 DateTimeMenu = TypedDict(
     "DateTimeMenu",
     {
         "format": str,
-        "notification_count": bool,
+        "notification": DateTimeNotification,
         "calendar": bool,
-        "notification": bool,
         "hover_reveal": bool,
         "auto_hide": bool,
         "auto_hide_timeout": int,
