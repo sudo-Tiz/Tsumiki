@@ -468,7 +468,7 @@ class DateTimeWidget(ButtonWidget):
             visible=self.config["notification"]["enabled"],
         )
 
-        count_label = Label(
+        self.count_label = Label(
             name="notification-count",
             label=str(self.cache_notification_service.count),
             v_align="start",
@@ -476,8 +476,14 @@ class DateTimeWidget(ButtonWidget):
             and self.config["notification"]["count"],
         )
 
+        if (
+            self.config["notification"]["hide_count_on_zero"]
+            and self.cache_notification_service.count == 0
+        ):
+            self.count_label.set_visible(False)
+
         self.notification_indicator_box = Box(
-            children=(self.notification_indicator, count_label)
+            children=(self.notification_indicator, self.count_label)
         )
 
         self.connect(
@@ -498,12 +504,19 @@ class DateTimeWidget(ButtonWidget):
         bulk_connect(
             self.cache_notification_service,
             {
-                "notification_count": lambda _, value, *args: count_label.set_text(
-                    str(value)
-                ),
+                "notification_count": lambda _,
+                value,
+                *args: self.on_notification_count(value),
                 "dnd": lambda _, value, *args: self.on_dnd_switch(value),
             },
         )
+
+    def on_notification_count(self, value):
+        if value > 0:
+            self.count_label.set_text(str(value))
+            self.count_label.set_visible(str(value))
+        else:
+            self.count_label.set_visible(False)
 
     def on_dnd_switch(self, value):
         if value:

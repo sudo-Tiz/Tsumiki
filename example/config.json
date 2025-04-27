@@ -46,7 +46,7 @@
 		"notification": {
 			"enabled": true,
 			"count": true,
-			"hide_count_on_zero": false
+			"hide_count_on_zero": true
 		},
 		"calendar": true,
 		"clock_format": "24h",
