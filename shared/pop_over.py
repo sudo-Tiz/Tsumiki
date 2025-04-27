@@ -1,4 +1,3 @@
-# Claude.ai's so called "memory-efficient" popover. I don't fully understand this code, but it works :)
 from typing import ClassVar
 
 import gi
@@ -106,7 +105,6 @@ class PopoverManager:
         self.overlay.show_all()
 
 
-
 @GObject.Signal(
     flags=GObject.SignalFlags.RUN_LAST, return_type=GObject.TYPE_NONE, arg_types=()
 )
@@ -131,7 +129,7 @@ class Popover(Widget):
     def __init__(
         self,
         point_to,
-        content_factory = None,
+        content_factory=None,
         content=None,
     ):
         super().__init__()
@@ -214,7 +212,8 @@ class Popover(Widget):
         # Get a window from the pool
         self._content_window = self._manager.get_popover_window()
 
-        # This is a hack to fix wrong positioning for widgets that are not rendered immediately (e.g., Gtk.Calendar())
+        # This is a hack to fix wrong positioning for widgets that are not rendered
+        # immediately (e.g., Gtk.Calendar())
         self._content.connect("draw", self._on_content_ready)
 
         # Add content to window

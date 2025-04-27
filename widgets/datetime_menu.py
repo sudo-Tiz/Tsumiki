@@ -460,10 +460,9 @@ class DateTimeWidget(ButtonWidget):
         self.cache_notification_service = notification_service
 
         popup = Popover(
-            content=DateNotificationMenu(config=self.config),
+            content_factory=lambda: DateNotificationMenu(config=self.config),
             point_to=self,
         )
-
         self.notification_indicator = Image(
             icon_name=icons["notifications"]["noisy"],
             icon_size=14,

@@ -392,9 +392,8 @@ class QuickSettingsButtonWidget(ButtonWidget):
             "brightness_changed", self.on_brightness_changed
         )
 
-
         popup = Popover(
-            content=QuickSettingsMenu(config=self.config),
+            content_factory=lambda: QuickSettingsMenu(config=self.config),
             point_to=self,
         )
 

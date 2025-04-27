@@ -56,14 +56,13 @@ class Mpris(ButtonWidget):
             "show_time_tooltip": True,
         }
 
-
         popup = Popover(
-            content=Box(
-                    style_classes="mpris-box",
-                    children=[
-                        PlayerBoxStack(self.mpris_manager, config=config),
-                    ],
-                ),
+            content_factory=lambda: Box(
+                style_classes="mpris-box",
+                children=[
+                    PlayerBoxStack(self.mpris_manager, config=config),
+                ],
+            ),
             point_to=self,
         )
 

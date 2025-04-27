@@ -277,7 +277,7 @@ class WeatherWidget(ButtonWidget):
             )
 
         popup = Popover(
-            content=WeatherMenu(data=res),
+            content_factory=lambda: WeatherMenu(data=res),
             point_to=self,
         )
 
