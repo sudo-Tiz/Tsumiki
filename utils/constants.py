@@ -83,12 +83,11 @@ DEFAULT_CONFIG = {
     },
     "date_time": {
         "format": "%b %d %H:%M",
-        "notification_count": True,
         "calendar": True,
-        "notification": True,
         "clock_format": "12h",
         "uptime": True,
         "hover_reveal": False,
+        "notification": {"enabled": True, "count": True, "hide_count_on_zero": False},
     },
     "divider": {"size": 2},
     "hypr_idle": {
