@@ -1,8 +1,20 @@
-from fabric.hyprland.widgets import WorkspaceButton, Workspaces
+from fabric.hyprland.widgets import WorkspaceButton as WsButton
+from fabric.hyprland.widgets import Workspaces
 
 from shared import BoxWidget
 from utils import BarConfig
 from utils.functions import unique_list
+from utils.widget_utils import setup_cursor_hover
+
+
+class WorkspaceButton(WsButton):
+    """A button to represent a workspace."""
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        # Set the hover hand
+        setup_cursor_hover(self)
 
 
 class WorkSpacesWidget(BoxWidget):
