@@ -5,7 +5,7 @@ from loguru import logger
 
 from services import MprisPlayer, MprisPlayerManager
 from shared import ButtonWidget
-from shared.pop_over import PopOverWindow
+from shared.pop_over import Popover
 from utils import BarConfig, Colors
 from widgets.media import PlayerBoxStack
 
@@ -56,27 +56,21 @@ class Mpris(ButtonWidget):
             "show_time_tooltip": True,
         }
 
-        popup = PopOverWindow(
-            margin="10px 0 0 0",
-            parent=bar,
-            child=Box(
+        popup = Popover(
+            content_factory=lambda: Box(
                 style_classes="mpris-box",
                 children=[
                     PlayerBoxStack(self.mpris_manager, config=config),
                 ],
             ),
-            visible=False,
-            all_visible=False,
-            pointing_to=self,
+            point_to=self,
         )
 
         # Connect the button press event to the play_pause method
         bulk_connect(
             self,
             {
-                "button-press-event": lambda *_: popup.set_visible(
-                    not popup.get_visible(),
-                ),
+                "button-press-event": lambda *_: popup.open(),
             },
         )
 
