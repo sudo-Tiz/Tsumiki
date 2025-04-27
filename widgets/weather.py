@@ -283,5 +283,5 @@ class WeatherWidget(ButtonWidget):
 
         self.connect(
             "clicked",
-            lambda *_: popup.set_visible(not popup.get_visible()),
+            lambda *_: popup.open(),
         )

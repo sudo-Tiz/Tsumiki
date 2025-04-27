@@ -102,7 +102,7 @@ class BluetoothSubMenu(QuickSubMenu):
         )
 
         self.scan_image = CircleImage(
-            image_file=get_relative_path("../../../assets/icons/refresh.png"),
+            image_file=get_relative_path("../../../assets/icons/png/refresh.png"),
             size=24,
         )
 
