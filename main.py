@@ -1,6 +1,7 @@
 import setproctitle
 from fabric import Application
 from fabric.utils import cooldown, exec_shell_command, get_relative_path, monitor_file
+from gi.repository import Gtk
 from loguru import logger
 
 import utils.functions as helpers
@@ -92,6 +93,11 @@ if __name__ == "__main__":
     app = Application(APPLICATION_NAME, windows=windows)
 
     helpers.copy_theme(widget_config["theme"]["name"])
+
+    # Set custom `-symbolic.svg` icons' dir
+    icon_theme = Gtk.IconTheme.get_default()
+    icons_dir = get_relative_path("./assets/icons/svg/gtk")
+    icon_theme.append_search_path(icons_dir)
 
     # Monitor styles folder for changes
     if general_options["debug"]:

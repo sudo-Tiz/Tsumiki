@@ -45,7 +45,7 @@ class WeatherMenu(Box):
             data["astronomy"]["sunset"],
         ]
 
-        self.weather_icons_dir = get_relative_path("../assets/icons/weather")
+        self.weather_icons_dir = get_relative_path("../assets/icons/svg/weather")
 
         self.current_weather_image = Image(
             self.get_weather_asset(self.current_weather["weatherCode"]),

@@ -98,7 +98,7 @@ class PowerControlButtons(ButtonWidget):
                 orientation="v",
                 children=[
                     Image(
-                        image_file=get_relative_path(f"../assets/icons/{name}.png"),
+                        image_file=get_relative_path(f"../assets/icons/png/{name}.png"),
                         size=size,
                     ),
                     Label(
