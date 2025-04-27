@@ -481,7 +481,6 @@ class DateTimeWidget(ButtonWidget):
             and self.config["notification"]["count"],
         )
 
-
         self.notification_indicator_box = Box(
             children=(self.notification_indicator, count_label)
         )
