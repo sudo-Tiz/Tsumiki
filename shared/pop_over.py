@@ -102,7 +102,7 @@ class PopoverManager:
             self.active_popover.hide_popover()
 
         self.active_popover = popover
-        self.overlay.show_all()
+        self.overlay.show()
 
 
 @GObject.Signal(
@@ -165,7 +165,7 @@ class Popover(Widget):
                 logger.error(f"Could not create popover! Error: {e}")
         else:
             self._manager.activate_popover(self)
-            self._content_window.show_all()
+            self._content_window.show()
             self._content_window.steal_input()
             self._visible = True
 
@@ -225,7 +225,7 @@ class Popover(Widget):
 
         self._content_window.connect("key-press-event", self._on_key_press)
         self._manager.activate_popover(self)
-        self._content_window.show_all()
+        self._content_window.show()
         self._content_window.steal_input()
         self._visible = True
 
