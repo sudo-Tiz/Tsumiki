@@ -43,8 +43,11 @@
 	},
 	"date_time": {
 		"format": "%b %d %H:%M",
-		"notification_count": true,
-		"notification": true,
+		"notification": {
+			"enabled": true,
+			"count": true,
+			"hide_count_on_zero": true
+		},
 		"calendar": true,
 		"clock_format": "24h",
 		"uptime": true,
