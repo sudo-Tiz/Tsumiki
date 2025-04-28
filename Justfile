@@ -4,5 +4,9 @@
 freeze:
     pip freeze > requirements.txt
 
-config:
+copy_config:
+    cp config.json config.json.bak
+
+restore_config:
     cp config.json.bak config.json
+    rm config.json.bak
