@@ -144,7 +144,7 @@
 		"icon": "󰌌",
 		"label": true,
 		"tooltip": true,
-		"show_icon": false,
+		"show_icon": false
 	},
 	"microphone": {
 		"label": false,
