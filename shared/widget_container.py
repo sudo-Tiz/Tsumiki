@@ -61,4 +61,6 @@ class HoverButton(Button):
             **kwargs,
         )
 
+        Button()
+
         setup_cursor_hover(self)

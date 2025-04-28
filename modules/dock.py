@@ -5,6 +5,7 @@ from typing import ClassVar
 import cairo
 from fabric.hyprland.widgets import get_hyprland_connection
 from fabric.utils import (
+    bulk_connect,
     exec_shell_command,
     exec_shell_command_async,
     idle_add,
@@ -95,14 +96,30 @@ class Dock(Window):
         # Main dock container with hover handling
         self.dock_eventbox = EventBox()
         self.dock_eventbox.add(self.wrapper)
-        self.dock_eventbox.connect("enter-notify-event", self._on_dock_enter)
-        self.dock_eventbox.connect("leave-notify-event", self._on_dock_leave)
+
+        bulk_connect(
+            self.dock_eventbox,
+            {
+                "enter-notify-event",
+                self._on_dock_enter,
+                "leave-notify-event",
+                self._on_dock_leave,
+            },
+        )
 
         # Bottom hover activation area
         self.hover_activator = EventBox()
         self.hover_activator.set_size_request(-1, 1)
-        self.hover_activator.connect("enter-notify-event", self._on_hover_enter)
-        self.hover_activator.connect("leave-notify-event", self._on_hover_leave)
+
+        bulk_connect(
+            self.hover_activator,
+            {
+                "enter-notify-event",
+                self._on_hover_enter,
+                "leave-notify-event",
+                self._on_hover_leave,
+            },
+        )
 
         self.main_box = Box(
             orientation="v", children=[self.dock_eventbox, self.hover_activator]
@@ -114,8 +131,10 @@ class Dock(Window):
             self.update_dock()
             GLib.timeout_add(500, self.check_hide)
         else:
-            self.conn.connect("event::ready", self.update_dock)
-            self.conn.connect("event::ready", self.check_hide)
+            bulk_connect(
+                self.conn,
+                {"event::ready", self.check_hide, "event::ready", self.check_hide},
+            )
 
         for ev in ("activewindow", "openwindow", "closewindow", "changefloatingmode"):
             self.conn.connect(f"event::{ev}", self.update_dock)

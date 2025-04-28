@@ -1,6 +1,9 @@
 import os
 
 import gi
+from fabric.utils import (
+    bulk_connect,
+)
 from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from gi.repository import Gdk, GdkPixbuf, GLib, Gray, Gtk
@@ -93,11 +96,18 @@ class SystemTrayMenu(Box):
 
     def add_item(self, item):
         button = self.do_bake_item_button(item)
-        item.connect("removed", lambda *args: button.destroy())
-        item.connect(
-            "icon-changed",
-            lambda icon_item: self.do_update_item_button(icon_item, button),
+
+        # Connect signals
+        bulk_connect(
+            item,
+            {
+                "removed",
+                lambda *args: button.destroy(),
+                "icon-changed",
+                lambda icon_item: self.do_update_item_button(icon_item, button),
+            },
         )
+
         button.show_all()
         self.grid.attach(button, self.column, self.row, 1, 1)
         self.column += 1
@@ -218,16 +228,15 @@ class SystemTrayWidget(ButtonWidget):
         if is_hidden:
             self.popup_menu.add_item(item)
         else:
-            button = HoverButton(style_classes="flat")
+            button = HoverButton(
+                style_classes="flat", tooltip_text=title, margin_start=2, margin_end=2
+            )
             button.connect(
                 "button-press-event",
                 lambda button, event: self.popup_menu.on_button_click(
                     button, item, event
                 ),
             )
-            button.set_tooltip_text(title)
-            button.set_margin_start(2)
-            button.set_margin_end(2)
 
             pixbuf = resolve_icon(
                 item=item,
@@ -235,12 +244,16 @@ class SystemTrayWidget(ButtonWidget):
             button.set_image(Image(pixbuf=pixbuf, pixel_size=self.config["icon_size"]))
 
             # Connect signals
-            item.connect("removed", lambda *args: button.destroy())
-            item.connect(
-                "icon-changed",
-                lambda icon_item: self.popup_menu.do_update_item_button(
-                    icon_item, button
-                ),
+            bulk_connect(
+                item,
+                {
+                    "removed",
+                    lambda *args: button.destroy(),
+                    "icon-changed",
+                    lambda icon_item: self.popup_menu.do_update_item_button(
+                        icon_item, button
+                    ),
+                },
             )
 
             button.show_all()

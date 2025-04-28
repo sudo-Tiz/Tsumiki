@@ -1,6 +1,7 @@
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo, available_timezones
 
+import loguru
 from fabric.widgets.label import Label
 
 from shared import ButtonWidget
@@ -35,7 +36,7 @@ class WorldClockWidget(ButtonWidget):
                 tz = ZoneInfo(tz_name)
                 self.clocks.append((label, tz))
             else:
-                print(f"Skipping invalid timezone: {tz_name}")
+                loguru.info(f"[world_clock] Skipping invalid timezone: {tz_name}")
 
         # reusing the fabricator to call specified intervals
         util_fabricator.connect("changed", self.update_ui)
