@@ -233,6 +233,18 @@
   }
 }
 
+
+#world_clock {
+  border-radius: variable.$bar-widgets-world_clock-border-radius;
+  border: if(variable.$bar-widgets-world_clock-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-world_clock-border-width;
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-world_clock-icon_size;
+    margin-right: variable.$bar-widgets-world_clock-spacing;
+  }
+}
+
 #mpris {
   border-radius: variable.$bar-widgets-mpris-border-radius;
   border: if(variable.$bar-widgets-mpris-border-enabled, variable.$border, none);

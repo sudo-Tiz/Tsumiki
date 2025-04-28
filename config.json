@@ -458,6 +458,15 @@
 						"radius": "16px"
 					}
 				},
+				"world_clock": {
+					"spacing": ".125em",
+					"icon_size": "12px",
+					"border": {
+						"enabled": false,
+						"width": "1px",
+						"radius": "16px"
+					}
+				},
 				"memory": {
 					"spacing": ".125em",
 					"icon_size": "14px",
