@@ -167,11 +167,7 @@ class SystemTrayWidget(ButtonWidget):
         )
 
         # Set children directly in Box to avoid double styling
-        self.children = Box(
-            spacing=8,
-            orientation="horizontal",
-            children=(self.tray_box, Separator(), self.toggle_icon),
-        )
+        self.box.children = (self.tray_box, Separator(), self.toggle_icon)
 
         # Create popup menu for hidden items
         self.popup_menu = SystemTrayMenu(config=self.config)
