@@ -56,25 +56,21 @@ class WeatherMenu(Box):
         self.title_box = CenterBox(
             style_classes="weather-header-box",
             start_children=(
+                self.current_weather_image,
                 Box(
+                    orientation="v",
+                    v_align="center",
                     children=(
-                        self.current_weather_image,
-                        Box(
-                            orientation="v",
-                            v_align="center",
-                            children=(
-                                Label(
-                                    style_classes="condition",
-                                    label=f"{self.current_weather['weatherDesc'][0]['value']}",
-                                ),
-                                Label(
-                                    style_classes="temperature",
-                                    label=f"{self.current_weather['temp_C']}°C",
-                                ),
-                            ),
+                        Label(
+                            style_classes="condition",
+                            label=f"{self.current_weather['weatherDesc'][0]['value']}",
+                        ),
+                        Label(
+                            style_classes="temperature",
+                            label=f"{self.current_weather['temp_C']}°C",
                         ),
                     ),
-                )
+                ),
             ),
             center_children=(
                 Box(

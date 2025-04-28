@@ -116,12 +116,13 @@ class SystemTrayMenu(Box):
             self.row += 1
 
     def do_bake_item_button(self, item: Gray.Item) -> HoverButton:
-        button = HoverButton(style_classes="flat")
+        button = HoverButton(
+            style_classes="flat", toottip_text=item.get_property("title")
+        )
         button.connect(
             "button-press-event",
             lambda button, event: self.on_button_click(button, item, event),
         )
-        button.set_tooltip_text(item.get_property("title"))
         self.do_update_item_button(item, button)
         return button
 
@@ -244,16 +245,12 @@ class SystemTrayWidget(ButtonWidget):
             button.set_image(Image(pixbuf=pixbuf, pixel_size=self.config["icon_size"]))
 
             # Connect signals
-            bulk_connect(
-                item,
-                {
-                    "removed",
-                    lambda *args: button.destroy(),
-                    "icon-changed",
-                    lambda icon_item: self.popup_menu.do_update_item_button(
-                        icon_item, button
-                    ),
-                },
+            item.connect("removed", lambda *args: button.destroy())
+            item.connect(
+                "icon-changed",
+                lambda icon_item: self.popup_menu.do_update_item_button(
+                    icon_item, button
+                ),
             )
 
             button.show_all()
