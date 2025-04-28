@@ -160,6 +160,15 @@
 		"truncation_size": 10,
 		"tooltip": false
 	},
+	"world_clock": {
+		"icon": "󱉊",
+		"show_icon": true,
+		"timezones": [
+			"America/New_York",
+			"Europe/London",
+			"Asia/Tokyo"
+		]
+	},
 	"notification": {
 		"enabled": true,
 		"anchor": "top-right",

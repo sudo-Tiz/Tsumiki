@@ -312,6 +312,12 @@ DEFAULT_CONFIG = {
         "default_label_format": "{id}",
         "icon_map": {},
     },
+    "world_clock": {
+        "icon": "󱉊'",
+        "show_icon": True,
+        "format": "%Y-%m-%d %H:%M:%S",
+        "timezones": ["America/New_York", "Europe/London", "Asia/Tokyo"],
+    },
 }
 
 # sourced from hyprpanel

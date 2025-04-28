@@ -31,3 +31,4 @@ from .weather import *
 from .window_count import *
 from .window_title import *
 from .workspaces import *
+from .world_clock import *

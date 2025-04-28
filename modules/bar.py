@@ -27,6 +27,7 @@ class StatusBar(Window):
         self.widgets_list = {
             "battery": "widgets.BatteryWidget",
             "bluetooth": "widgets.BlueToothWidget",
+            "world_clock": "widgets.WorldClockWidget",
             "brightness": "widgets.BrightnessWidget",
             "cava": "widgets.CavaWidget",
             "click_counter": "widgets.ClickCounterWidget",

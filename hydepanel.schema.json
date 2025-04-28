@@ -77,6 +77,7 @@
 							"workspaces",
 							"window_count",
 							"quick_settings",
+							"world_clock",
 							"theme_switcher"
 						],
 						"description": "Specifies the widget to display."
@@ -952,6 +953,26 @@
 						"type": "string",
 						"enum": ["12h", "24h"],
 						"description": "Specifies the clock format"
+					}
+				}
+			},
+			"world_clock": {
+				"type": "object",
+				"properties": {
+					"timezones": {
+						"type": "array",
+						"description": "List of locations for the world clock",
+						"items": {
+							"type": "string"
+						}
+					},
+					"format": {
+						"type": "string",
+						"description": "Format for world clock time display"
+					},
+					"show_icon": {
+						"type": "boolean",
+						"description": "Determines whether to show the icon"
 					}
 				}
 			},

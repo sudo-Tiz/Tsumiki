@@ -290,6 +290,16 @@ DateTimeMenu = TypedDict(
     },
 )
 
+
+WorldClock = TypedDict(
+    "WorldClock",
+    {
+        "timezones": List[str],
+        "show_icon": bool,
+        "icon": str,
+    },
+)
+
 # ThemeSwitcher configuration
 ThemeSwitcher = TypedDict("ThemeSwitcher", {**BaseConfig.__annotations__, "icon": str})
 
@@ -446,3 +456,4 @@ class BarConfig(TypedDict):
     window_title: WindowTitle
     window_count: WindowCount
     workspaces: Workspaces
+    world_clock: WorldClock

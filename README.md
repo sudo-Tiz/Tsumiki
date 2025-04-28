@@ -233,6 +233,7 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 | **weather**           | Widget that displays current weather information or forecasts.                 |
 | **window_title**      | Widget that shows the title of the current window or application.              |
 | **workspaces**        | Widget that displays virtual desktops or workspaces.                           |
+| **world_clock**       | Widget that displays clock for various timezones.                              |
 
 > [!WARNING]
 > This is still in early development and will include breaking changes
