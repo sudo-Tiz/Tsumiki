@@ -93,7 +93,7 @@ class PowerControlButtons(ButtonWidget):
             config=config,
             orientation="v",
             name="power-control-button",
-            on_clicked=lambda _: self.on_button_press(command=command),
+            on_clicked=lambda _: self.on_button_press(),
             child=Box(
                 orientation="v",
                 children=[
@@ -113,7 +113,6 @@ class PowerControlButtons(ButtonWidget):
 
     def on_button_press(
         self,
-        command: str,
     ):
         PowerMenuPopup.get_default(widget_config=self.config).toggle_popup()
         self.dialog.toggle_popup()
