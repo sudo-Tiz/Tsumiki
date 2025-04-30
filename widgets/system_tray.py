@@ -154,9 +154,6 @@ class SystemTrayWidget(ButtonWidget):
 
         self.config = widget_config["system_tray"]
 
-        if self.config["tooltip"]:
-            self.set_tooltip_text("System Tray")
-
         # Create main tray box and toggle icon
         self.tray_box = Box(
             name="system-tray-box",
