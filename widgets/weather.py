@@ -4,7 +4,6 @@ from datetime import datetime
 from fabric import Fabricator
 from fabric.utils import get_relative_path, invoke_repeater
 from fabric.widgets.box import Box
-from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from gi.repository import Gtk
@@ -53,60 +52,84 @@ class WeatherMenu(Box):
             style_classes="weather",
         )
 
-        self.title_box = CenterBox(
-            style_classes="weather-header-box",
-            start_children=(
-                self.current_weather_image,
-                Box(
-                    orientation="v",
-                    v_align="center",
-                    children=(
-                        Label(
-                            style_classes="condition",
-                            label=f"{self.current_weather['weatherDesc'][0]['value']}",
-                        ),
-                        Label(
-                            style_classes="temperature",
-                            label=f"{self.current_weather['temp_C']}°C",
-                        ),
-                    ),
-                ),
+        self.title_box = Gtk.Grid(
+            name="weather-header-grid",
+            column_spacing=20,
+            visible=True,
+        )
+
+        self.title_box.attach(
+            self.current_weather_image,
+            0,
+            0,
+            2,
+            2,
+        )
+
+        self.title_box.attach_next_to(
+            Label(
+                style_classes="header-label",
+                label=f"{self.current_weather['weatherDesc'][0]['value']}",
             ),
-            center_children=(
-                Box(
-                    name="weather-details",
-                    orientation="v",
-                    spacing=10,
-                    v_align="center",
-                    children=(
-                        Label(
-                            style_classes="windspeed",
-                            label=f" {self.current_weather['windspeedKmph']} mph",
-                        ),
-                        Label(
-                            style_classes="humidity",
-                            label=f"󰖎 {self.current_weather['humidity']}%",
-                        ),
-                    ),
-                )
+            self.current_weather_image,
+            Gtk.PositionType.RIGHT,
+            1,
+            1,
+        )
+
+        self.title_box.attach(
+            Label(
+                style_classes="temperature",
+                label=f"{self.current_weather['temp_C']}°C",
             ),
-            end_children=(
-                Box(
-                    orientation="v",
-                    spacing=10,
-                    v_align="center",
-                    children=(
-                        Label(
-                            style_classes="location",
-                            label=f"{data['location']}",
-                        ),
-                        Label(
-                            style_classes="feels-like",
-                            label=f"Feels Like {self.current_weather['FeelsLikeC']}°C",
-                        ),
-                    ),
-                )
+            2,
+            1,
+            1,
+            1,
+        )
+
+        self.title_box.attach(
+            Label(
+                style_classes="header-label",
+                label=f" {self.current_weather['windspeedKmph']} mph",
             ),
+            3,
+            0,
+            1,
+            1,
+        )
+
+        self.title_box.attach(
+            Label(
+                style_classes="humidity",
+                label=f"󰖎 {self.current_weather['humidity']}%",
+            ),
+            3,
+            1,
+            1,
+            1,
+        )
+
+        self.title_box.attach(
+            Label(
+                style_classes="header-label",
+                label=f"{data['location']}",
+            ),
+            4,
+            0,
+            1,
+            1,
+        )
+
+        self.title_box.attach(
+            Label(
+                style_classes="feels-like",
+                label=f"Feels Like {self.current_weather['FeelsLikeC']}°C",
+            ),
+            4,
+            1,
+            1,
+            1,
         )
 
         # Create a grid to display the hourly forecast

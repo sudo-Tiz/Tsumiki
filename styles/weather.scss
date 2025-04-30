@@ -18,12 +18,17 @@ $base_margin: common.toEm(4);
 .weather-box {
   @include common.floating-widget;
 
-  // header
+  #weather-header-grid {
 
-  .weather-header-box {
+    // header
     font-size: 11pt;
     color: white;
     font-weight: 500;
+
+
+    .header-label {
+      font-size: 1em;
+    }
 
     .temperature {
       font-size: 2em;
@@ -32,24 +37,8 @@ $base_margin: common.toEm(4);
     .feels-like {
       font-size: .8em;
     }
-
-    .location {
-      font-size: 1em;
-
-    }
-
-    #weather-details {
-      margin: common.toEm(8) common.toEm(50);
-
-      .windspeed {
-        font-size: 1.1em;
-      }
-
-      .humidity {
-        font-size: 1em;
-      }
-    }
   }
+
 
   #weather-separator {
     margin-top: 10px;
