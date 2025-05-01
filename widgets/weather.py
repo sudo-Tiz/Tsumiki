@@ -4,8 +4,8 @@ from datetime import datetime
 from fabric import Fabricator
 from fabric.utils import get_relative_path, invoke_repeater
 from fabric.widgets.box import Box
-from fabric.widgets.image import Image
 from fabric.widgets.label import Label
+from fabric.widgets.svg import Svg
 from gi.repository import Gtk
 
 from services import WeatherService
@@ -46,8 +46,8 @@ class WeatherMenu(Box):
 
         self.weather_icons_dir = get_relative_path("../assets/icons/svg/weather")
 
-        self.current_weather_image = Image(
-            self.get_weather_asset(self.current_weather["weatherCode"]),
+        self.current_weather_image = Svg(
+            svg_file=self.get_weather_asset(self.current_weather["weatherCode"]),
             size=100,
             style_classes="weather",
         )
@@ -172,8 +172,8 @@ class WeatherMenu(Box):
                 label=f"{self.convert_to_12hr_format(column_data['time'])}",
                 h_align="center",
             )
-            icon = Image(
-                image_file=self.get_weather_asset(
+            icon = Svg(
+                svg_file=self.get_weather_asset(
                     column_data["weatherCode"],
                     self.convert_to_12hr_format(column_data["time"]),
                 ),

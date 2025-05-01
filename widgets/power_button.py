@@ -7,6 +7,7 @@ from gi.repository import Gtk
 
 from shared import ButtonWidget, PopupWindow
 from shared.dialog import Dialog
+from shared.widget_container import HoverButton
 from utils import BarConfig
 from utils.widget_utils import text_icon
 
@@ -75,7 +76,7 @@ class PowerMenuPopup(PopupWindow):
         return super().toggle_popup()
 
 
-class PowerControlButtons(ButtonWidget):
+class PowerControlButtons(HoverButton):
     """A widget to show power options."""
 
     def __init__(
