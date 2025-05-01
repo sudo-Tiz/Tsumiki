@@ -1,6 +1,6 @@
 from typing import Dict, List, Literal, TypedDict
 
-from utils.types import Anchor, Layer
+from .types import Anchor, Layer
 
 # Common configuration fields that will be reused
 BaseConfig = TypedDict("BaseConfig", {"label": bool, "tooltip": bool})

@@ -1,4 +1,3 @@
-from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
@@ -6,10 +5,7 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import Gtk
 
 from services import audio_service
-from shared.animator import Animator
-from shared.circle_image import CircleImage
-from shared.submenu import QuickSubMenu
-from shared.widget_container import HoverButton
+from shared.submenu import QuickSubMenu, ScanButton
 from utils.icons import icons
 from widgets.quick_settings.sliders.audio import AudioSlider
 
@@ -20,27 +16,8 @@ class AudioSubMenu(QuickSubMenu):
     def __init__(self, **kwargs):
         self.client = audio_service
 
-        self.scan_image = CircleImage(
-            image_file=get_relative_path("../../../assets/icons/png/refresh.png"),
-            size=20,
-        )
-
         # Create refresh button first since parent needs it
-        self.scan_button = HoverButton(
-            style_classes="submenu-button",
-            name="scan-button",
-            image=self.scan_image,
-        )
-
-        self.scan_animator = Animator(
-            bezier_curve=(0, 0, 1, 1),
-            duration=4,
-            min_value=0,
-            max_value=360,
-            tick_widget=self,
-            repeat=False,
-            notify_value=lambda p, *_: self.scan_image.set_angle(p.value),
-        )
+        self.scan_button = ScanButton()
         self.scan_button.connect("clicked", lambda _: self.update_apps())
 
         # Create app list container
@@ -77,7 +54,7 @@ class AudioSubMenu(QuickSubMenu):
     def update_apps(self, *args):
         """Update the list of applications with volume controls."""
 
-        self.scan_animator.play()
+        self.scan_button.play_animation()
         # Clear existing rows
         while row := self.app_list.get_row_at_index(0):
             self.app_list.remove(row)

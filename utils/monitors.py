@@ -5,7 +5,7 @@ from typing import Dict
 from fabric.hyprland import Hyprland
 from gi.repository import Gdk
 
-from utils.functions import ttl_lru_cache
+from .functions import ttl_lru_cache
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 

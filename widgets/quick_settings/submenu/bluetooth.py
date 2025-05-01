@@ -1,5 +1,5 @@
 from fabric.bluetooth.service import BluetoothClient, BluetoothDevice
-from fabric.utils import bulk_connect, get_relative_path
+from fabric.utils import bulk_connect
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
@@ -8,7 +8,8 @@ from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 
 from services import bluetooth_service
-from shared import Animator, CircleImage, HoverButton, QSChevronButton, QuickSubMenu
+from shared import HoverButton, QSChevronButton, QuickSubMenu
+from shared.submenu import ScanButton
 
 
 class BluetoothDeviceBox(CenterBox):
@@ -101,24 +102,7 @@ class BluetoothSubMenu(QuickSubMenu):
             ),
         )
 
-        self.scan_image = CircleImage(
-            image_file=get_relative_path("../../../assets/icons/png/refresh.png"),
-            size=24,
-        )
-
-        self.scan_animator = Animator(
-            bezier_curve=(0, 0, 1, 1),
-            duration=3,
-            min_value=0,
-            max_value=360,
-            tick_widget=self,
-            notify_value=lambda p, *_: self.scan_image.set_angle(p.value),
-        )
-
-        self.scan_button = HoverButton(
-            style_classes="submenu-button",
-            image=self.scan_image,
-        )
+        self.scan_button = ScanButton()
         self.scan_button.connect("clicked", self.on_scan_toggle)
 
         self.child = ScrolledWindow(
@@ -151,7 +135,11 @@ class BluetoothSubMenu(QuickSubMenu):
         btn.set_style_classes(
             ["active"]
         ) if self.client.scanning else btn.set_style_classes([""])
-        self.scan_animator.play() if self.client.scanning else self.scan_animator.stop()
+
+        if self.client.scanning:
+            self.scan_button.play_animation()
+        else:
+            self.scan_button.stop_animation()
 
     def populate_new_device(self, client: BluetoothClient, address: str):
         device: BluetoothDevice = client.get_device(address)

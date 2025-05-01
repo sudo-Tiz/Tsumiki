@@ -23,15 +23,9 @@ from utils.widget_utils import (
     get_brightness_icon_name,
     util_fabricator,
 )
-from widgets.media import PlayerBoxStack
-from widgets.quick_settings.shortcuts import ShortcutsContainer
-from widgets.quick_settings.submenu.mic import MicroPhoneSubMenu
-from widgets.quick_settings.togglers import (
-    HyprIdleQuickSetting,
-    HyprSunsetQuickSetting,
-    NotificationQuickSetting,
-)
 
+from ..media import PlayerBoxStack
+from .shortcuts import ShortcutsContainer
 from .sliders import AudioSlider, BrightnessSlider, MicrophoneSlider
 from .submenu import (
     AudioSubMenu,
@@ -41,6 +35,12 @@ from .submenu import (
     PowerProfileToggle,
     WifiSubMenu,
     WifiToggle,
+)
+from .submenu.mic import MicroPhoneSubMenu
+from .togglers import (
+    HyprIdleQuickSetting,
+    HyprSunsetQuickSetting,
+    NotificationQuickSetting,
 )
 
 

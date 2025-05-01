@@ -12,9 +12,9 @@ from fabric.widgets.scale import ScaleMark
 from gi.repository import Gdk, GLib
 
 from shared import AnimatedScale
-from utils.functions import uptime
 
 from .config import widget_config
+from .functions import uptime
 from .icons import brightness_text_icons, icons, volume_text_icons
 
 

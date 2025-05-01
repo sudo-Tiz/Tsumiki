@@ -3,6 +3,7 @@ from .animated.circularprogress import *
 from .animated.scale import *
 from .animator import *
 from .button_toggle import *
+from .buttons import *
 from .circle_image import *
 from .dialog import *
 from .lottie import *

@@ -10,6 +10,7 @@ from gi.repository import Gtk
 
 from services import WeatherService
 from shared import ButtonWidget, Popover, Separator
+from shared.submenu import ScanButton
 from utils import BarConfig
 from utils.functions import convert_seconds_to_milliseconds
 from utils.icons import weather_icons
@@ -31,6 +32,9 @@ class WeatherMenu(Box):
             spacing=5,
             **kwargs,
         )
+        self.scan_btn = ScanButton(h_align="end")
+
+        self.scan_btn.connect("clicked", lambda *_: self.scan_btn.play_animation())
 
         # Get the current weather
         self.current_weather = data["current"]
@@ -141,6 +145,7 @@ class WeatherMenu(Box):
         )
 
         self.children = (
+            self.scan_btn,
             self.title_box,
             Separator(
                 orientation="vertical",
@@ -177,7 +182,7 @@ class WeatherMenu(Box):
                     column_data["weatherCode"],
                     self.convert_to_12hr_format(column_data["time"]),
                 ),
-                size=70,
+                size=65,
                 h_align="center",
                 h_expand=True,
                 style_classes="weather-forecast-icon",
