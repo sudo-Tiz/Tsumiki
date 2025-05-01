@@ -4,7 +4,7 @@ from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
 
 import utils.functions as helpers
-from services import network_speed
+from services import NetworkSpeed
 from shared import ButtonWidget
 from utils import BarConfig
 from utils.icons import common_text_icons
@@ -388,7 +388,7 @@ class NetworkUsageWidget(ButtonWidget):
             self.download_label,
         )
 
-        self.client = network_speed
+        self.client = NetworkSpeed()
 
         # Set up a fabricator to call the update_label method at specified intervals
         util_fabricator.connect("changed", self.update_ui)

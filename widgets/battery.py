@@ -4,7 +4,7 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from gi.repository import GdkPixbuf, GLib, Gtk
 
-from services import battery_service
+from services import BatteryService
 from shared import ButtonWidget
 from utils import BarConfig
 from utils.functions import format_time, send_notification
@@ -38,7 +38,7 @@ class BatteryWidget(ButtonWidget):
             icon_size=self.config["icon_size"],
         )
 
-        self.client = battery_service
+        self.client = BatteryService()
 
         self.notification_time = 0
 

@@ -29,8 +29,6 @@ class NotificationPopup(Window):
     def __init__(self, widget_config: BarConfig, **kwargs):
         self._server = notification_service
 
-        self.cache_notification_service = notification_service
-
         self.widget_config = widget_config
 
         self.config = widget_config["notification"]
@@ -63,10 +61,7 @@ class NotificationPopup(Window):
         notification: Notification = fabric_notification.get_notification_from_id(id)
 
         # Check if the notification is in the "do not disturb" mode, hacky way
-        if (
-            self.cache_notification_service.dont_disturb
-            or notification.app_name in self.ignored_apps
-        ):
+        if self._server.dont_disturb or notification.app_name in self.ignored_apps:
             return
 
         new_box = NotificationRevealer(self.config, notification)
@@ -76,7 +71,7 @@ class NotificationPopup(Window):
             f"{Colors.INFO}[Notification] New notification from "
             f"{Colors.OKGREEN}{notification.app_name}"
         )
-        self.cache_notification_service.cache_notification(
+        self._server.cache_notification(
             self.widget_config, notification, self.config["max_count"]
         )
 

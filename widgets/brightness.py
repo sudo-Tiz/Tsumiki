@@ -23,7 +23,7 @@ class BrightnessWidget(EventBoxWidget):
         )
 
         # Initialize the audio service
-        self.brightness_service = Brightness.get_default()
+        self.brightness_service = Brightness()
 
         normalized_brightness = helpers.convert_to_percent(
             self.brightness_service.screen_brightness,

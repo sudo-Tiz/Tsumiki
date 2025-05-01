@@ -6,14 +6,12 @@ from fabric.utils import exec_shell_command
 class NetworkSpeed:
     """A service to monitor network speed."""
 
-    instance = None
+    _instance = None  # Class-level private instance variable
 
-    @staticmethod
-    def get_default():
-        if NetworkSpeed.instance is None:
-            NetworkSpeed.instance = NetworkSpeed()
-
-        return NetworkSpeed.instance
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(NetworkSpeed, cls).__new__(cls)
+        return cls._instance
 
     def __init__(self):
         self.interval = 1000

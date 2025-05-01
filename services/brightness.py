@@ -35,14 +35,12 @@ except FileNotFoundError:
 class Brightness(Service):
     """Service to manage screen brightness levels."""
 
-    instance = None
+    _instance = None  # Class-level private instance variable
 
-    @staticmethod
-    def get_default():
-        if Brightness.instance is None:
-            Brightness.instance = Brightness()
-
-        return Brightness.instance
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(Brightness, cls).__new__(cls)
+        return cls._instance
 
     @Signal
     def brightness_changed(self, value: int) -> None:

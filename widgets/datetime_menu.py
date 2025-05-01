@@ -47,8 +47,6 @@ class DateMenuNotification(EventBox):
 
         self._timeout_id = None
 
-        self.cache_notification_service = notification_service
-
         self.notification_box = Box(
             spacing=8,
             name="notification",
@@ -175,7 +173,7 @@ class DateMenuNotification(EventBox):
             GLib.timeout_add(400, self.destroy)
 
     def clear_notification(self):
-        self.cache_notification_service.remove_notification(self._id)
+        notification_service.remove_notification(self._id)
         self.revealer.set_reveal_child(False)
         GLib.timeout_add(400, self.destroy)
 
@@ -195,7 +193,6 @@ class DateNotificationMenu(Box):
         )
 
         self.config = config
-        self.cache_notification_service = notification_service
 
         self.clock_label = Label(
             label=time.strftime("%H:%M")
@@ -204,9 +201,7 @@ class DateNotificationMenu(Box):
             style_classes="clock",
         )
 
-        self.notifications: List[Notification] = (
-            self.cache_notification_service.get_deserialized()
-        )
+        self.notifications: List[Notification] = notification_service.get_deserialized()
 
         self.notifications_list = [
             DateMenuNotification(notification=val, id=val["id"])
@@ -279,7 +274,7 @@ class DateNotificationMenu(Box):
         self.clear_button.connect(
             "clicked",
             lambda _: (
-                self.cache_notification_service.clear_all_notifications(),
+                notification_service.clear_all_notifications(),
                 self.clear_icon.set_from_icon_name(icons["trash"]["empty"], 15),
             ),
         )
@@ -346,18 +341,12 @@ class DateNotificationMenu(Box):
         if config["calendar"]:
             date_column.set_visible(True)
 
-        self.cache_notification_service.connect(
-            "notification-added", self.on_new_notification
-        )
-        self.cache_notification_service.connect(
-            "clear_all", self.on_clear_all_notifications
-        )
-        self.cache_notification_service.connect(
-            "notification-closed", self.on_notification_closed
-        )
+        notification_service.connect("notification-added", self.on_new_notification)
+        notification_service.connect("clear_all", self.on_clear_all_notifications)
+        notification_service.connect("notification-closed", self.on_notification_closed)
 
         self.dnd_switch.connect("notify::active", self.on_dnd_switch)
-        self.cache_notification_service.connect(
+        notification_service.connect(
             "dnd", lambda _, value, *args: self.dnd_switch.set_active(value)
         )
 
@@ -367,9 +356,9 @@ class DateNotificationMenu(Box):
     def on_dnd_switch(self, switch, _):
         """Handle the do not disturb switch."""
         if switch.get_active():
-            self.cache_notification_service.dont_disturb = True
+            notification_service.dont_disturb = True
         else:
-            self.cache_notification_service.dont_disturb = False
+            notification_service.dont_disturb = False
 
     def on_clear_all_notifications(self, *_):
         self.notification_list_box.children = []
@@ -408,7 +397,7 @@ class DateNotificationMenu(Box):
         return False
 
     def on_new_notification(self, fabric_notification, id):
-        if self.cache_notification_service.dont_disturb:
+        if notification_service.dont_disturb:
             return
 
         fabric_notification: Notification = (
@@ -457,8 +446,6 @@ class DateTimeWidget(ButtonWidget):
 
         self.config = widget_config["date_time"]
 
-        self.cache_notification_service = notification_service
-
         popup = Popover(
             content_factory=lambda: DateNotificationMenu(config=self.config),
             point_to=self,
@@ -471,7 +458,7 @@ class DateTimeWidget(ButtonWidget):
 
         self.count_label = Label(
             name="notification-count",
-            label=str(self.cache_notification_service.count),
+            label=str(notification_service.count),
             v_align="start",
             visible=self.config["notification"]["enabled"]
             and self.config["notification"]["count"],
@@ -479,7 +466,7 @@ class DateTimeWidget(ButtonWidget):
 
         if (
             self.config["notification"]["hide_count_on_zero"]
-            and self.cache_notification_service.count == 0
+            and notification_service.count == 0
         ):
             self.count_label.set_visible(False)
 
@@ -503,7 +490,7 @@ class DateTimeWidget(ButtonWidget):
         )
 
         bulk_connect(
-            self.cache_notification_service,
+            notification_service,
             {
                 "notification_count": lambda _,
                 value,

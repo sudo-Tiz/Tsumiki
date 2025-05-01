@@ -24,13 +24,12 @@ class BatteryService(Service):
     def changed(self) -> None:
         """Signal emitted when battery changes."""
 
-    instance = None
+    _instance = None  # Class-level private instance variable
 
-    @staticmethod
-    def get_default():
-        if BatteryService.instance is None:
-            BatteryService.instance = BatteryService()
-        return BatteryService.instance
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(BatteryService, cls).__new__(cls)
+        return cls._instance
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
