@@ -15,7 +15,7 @@ import utils.icons as icons
 from utils import BarConfig
 from utils.icon_resolver import IconResolver
 
-icon_resolver = IconResolver.get_default()
+icon_resolver = IconResolver()
 connection = Hyprland()
 SCALE = 0.1
 

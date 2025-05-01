@@ -14,14 +14,12 @@ ICON_CACHE_FILE = APP_CACHE_DIRECTORY + "/icons.json"
 class IconResolver:
     """A class to resolve icons for applications."""
 
-    instance = None
+    _instance = None  # Class-level private instance variable
 
-    @staticmethod
-    def get_default():
-        if IconResolver.instance is None:
-            IconResolver.instance = IconResolver()
-
-        return IconResolver.instance
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(IconResolver, cls).__new__(cls)
+        return cls._instance
 
     def __init__(self):
         if os.path.exists(ICON_CACHE_FILE):

@@ -8,7 +8,7 @@ from services import Brightness
 from shared import EventBoxWidget
 from utils import BarConfig
 from utils.icons import brightness_text_icons
-from utils.widget_utils import get_brightness_icon_name
+from utils.widget_utils import get_brightness_icon_name, text_icon
 
 
 class BrightnessWidget(EventBoxWidget):
@@ -42,7 +42,7 @@ class BrightnessWidget(EventBoxWidget):
             visible=False, label=f"{normalized_brightness}%", style_classes="panel-text"
         )
 
-        self.icon = helpers.text_icon(
+        self.icon = text_icon(
             icon=brightness_text_icons["medium"],
             props={
                 "style_classes": "panel-icon overlay-icon",
@@ -73,6 +73,7 @@ class BrightnessWidget(EventBoxWidget):
 
         if val_y > 0:
             self.brightness_service.screen_brightness += self.config["step_size"]
+        else:
             self.brightness_service.screen_brightness -= self.config["step_size"]
 
     def on_brightness_changed(self, *_):

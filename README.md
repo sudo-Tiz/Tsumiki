@@ -264,6 +264,11 @@ layerrule = ignorezero ,gtk-layer-shell
 
 ```
 
+### 5. **No Icons?**
+Make sure your icon theme has the required icons. One of the recommended icon theme is  `Tela Circle`
+
+```ini
+
 ## Contributing
 
 We welcome all sorts of contributions, no matter how small, to this project! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute.

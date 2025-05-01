@@ -385,6 +385,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
 
         self.network = network_service
 
+        # Initialize the audio service
         self.brightness_service = Brightness()
 
         self.audio.connect("notify::speaker", self.on_speaker_changed)
@@ -485,13 +486,12 @@ class QuickSettingsButtonWidget(ButtonWidget):
         """Update the brightness icon."""
         try:
             # Convert brightness to percentage (0-100)
-            normalized_brightness = int(
-                (
-                    self.brightness_service.screen_brightness
-                    / self.brightness_service.max_screen
-                )
-                * 100
+
+            normalized_brightness = helpers.convert_to_percent(
+                self.brightness_service.screen_brightness,
+                self.brightness_service.max_screen,
             )
+
             icon_info = get_brightness_icon_name(normalized_brightness)
             if icon_info:
                 self.brightness_icon.set_from_icon_name(

@@ -9,7 +9,7 @@ class BrightnessSlider(SettingSlider):
     def __init__(
         self,
     ):
-        self.client = Brightness.get_default()
+        self.client = Brightness()
         super().__init__(
             pixel_size=20,
             icon_name=icons["brightness"]["screen"],
