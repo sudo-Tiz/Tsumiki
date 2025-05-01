@@ -115,7 +115,6 @@ install_packages() {
 		python-gobject
 		python-psutil
 		python-cairo
-		python-dbus
 		python-loguru
 		python-setproctitle
 	)

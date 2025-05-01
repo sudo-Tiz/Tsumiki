@@ -1,9 +1,10 @@
 from typing import Literal
 
-import dbus
-from dbus.mainloop.glib import DBusGMainLoop
 from fabric import Service, Signal
+from gi.repository import Gio
 from loguru import logger
+
+from shared.dbus_helper import GioDBusHelper
 
 DeviceState = {
     0: "UNKNOWN",
@@ -17,7 +18,7 @@ DeviceState = {
 
 
 class BatteryService(Service):
-    """Service to interact with the PowerProfiles service."""
+    """Service to interact with UPower via GIO D-Bus"""
 
     @Signal
     def changed(self) -> None:
@@ -29,33 +30,33 @@ class BatteryService(Service):
     def get_default():
         if BatteryService.instance is None:
             BatteryService.instance = BatteryService()
-
         return BatteryService.instance
 
-    def __init__(
-        self,
-        **kwargs,
-    ):
-        super().__init__(
-            **kwargs,
-        )
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
         self.bus_name = "org.freedesktop.UPower"
         self.object_path = "/org/freedesktop/UPower/devices/DisplayDevice"
+        self.interface_name = "org.freedesktop.UPower.Device"
 
-        # Set up the dbus main loop
-        DBusGMainLoop(set_as_default=True)
-
-        self.bus = dbus.SystemBus()
-
-        self.power_profiles_obj = self.bus.get_object(self.bus_name, self.object_path)
-
-        self.iface = dbus.Interface(
-            self.power_profiles_obj, "org.freedesktop.DBus.Properties"
+        self.dbus_helper = GioDBusHelper(
+            bus_type=Gio.BusType.SYSTEM,
+            bus_name=self.bus_name,
+            object_path=self.object_path,
+            interface_name=self.interface_name,
         )
 
-        # Connect the 'g-properties-changed' signal to the handler
-        self.iface.connect_to_signal("PropertiesChanged", self.handle_property_change)
+        self.bus = self.dbus_helper.bus
+        self.proxy = self.dbus_helper.proxy
+
+        # Listen for PropertiesChanged signals
+        self.dbus_helper.listen_signal(
+            sender=self.bus_name,
+            interface_name="org.freedesktop.DBus.Properties",
+            member="PropertiesChanged",
+            object_path=self.object_path,
+            callback=self.handle_property_change,
+        )
 
     def get_property(
         self,
@@ -72,11 +73,12 @@ class BatteryService(Service):
         ],
     ):
         try:
-            return self.iface.Get("org.freedesktop.UPower.Device", property)
+            result = self.proxy.get_cached_property(property)
+            return result.unpack() if result is not None else None
+        except Exception as e:
+            logger.error(f"[Battery] Error retrieving '{property}': {e}")
+            return None
 
-        except dbus.DBusException as e:
-            logger.error(f"[Battery] Error retrieving info: {e}")
-
-    # Function to handle properties change signals
     def handle_property_change(self, *_):
+        # You may filter which property changed by checking parameters[1]
         self.emit("changed")

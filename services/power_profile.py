@@ -1,13 +1,13 @@
-import dbus
-from dbus.mainloop.glib import DBusGMainLoop
 from fabric import Service, Signal
+from gi.repository import Gio, GLib
 from loguru import logger
 
+from shared.dbus_helper import GioDBusHelper
 from utils import Colors
 
 
 class PowerProfiles(Service):
-    """Service to interact with the PowerProfiles service."""
+    """Service to interact with the PowerProfiles service via GIO."""
 
     @Signal
     def profile(self, value: str) -> None:
@@ -19,19 +19,14 @@ class PowerProfiles(Service):
     def get_default():
         if PowerProfiles.instance is None:
             PowerProfiles.instance = PowerProfiles()
-
         return PowerProfiles.instance
 
-    def __init__(
-        self,
-        **kwargs,
-    ):
-        super().__init__(
-            **kwargs,
-        )
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
         self.bus_name = "net.hadess.PowerProfiles"
         self.object_path = "/net/hadess/PowerProfiles"
+        self.interface_name = "net.hadess.PowerProfiles"
 
         self.power_profiles = {
             "power-saver": {
@@ -48,43 +43,61 @@ class PowerProfiles(Service):
             },
         }
 
-        # Set up the dbus main loop
-        DBusGMainLoop(set_as_default=True)
-
-        self.bus = dbus.SystemBus()
-
-        self.power_profiles_obj = self.bus.get_object(self.bus_name, self.object_path)
-
-        self.iface = dbus.Interface(
-            self.power_profiles_obj, "org.freedesktop.DBus.Properties"
+        self.dbus_helper = GioDBusHelper(
+            bus_type=Gio.BusType.SYSTEM,
+            bus_name=self.bus_name,
+            object_path=self.object_path,
+            interface_name=self.interface_name,
         )
 
-        # Connect the 'g-properties-changed' signal to the handler
-        self.iface.connect_to_signal("PropertiesChanged", self.handle_property_change)
+        self.bus = self.dbus_helper.bus
+        self.proxy = self.dbus_helper.proxy
+
+        # Listen for PropertiesChanged signals
+        self.dbus_helper.listen_signal(
+            sender=self.bus_name,
+            interface_name="org.freedesktop.DBus.Properties",
+            member="PropertiesChanged",
+            object_path=self.object_path,
+            callback=self.handle_property_change,
+        )
 
     def get_current_profile(self):
         try:
-            return self.iface.Get("net.hadess.PowerProfiles", "ActiveProfile").strip()
-
-        except dbus.DBusException as e:
+            value = self.proxy.get_cached_property("ActiveProfile")
+            return value.unpack().strip() if value else "balanced"
+        except Exception as e:
             logger.error(f"[PowerProfile] Error retrieving current power profile: {e}")
             return "balanced"
 
-    def set_power_profile(self, profile):
+    def set_power_profile(self, profile: str):
         try:
-            self.iface.Set(self.bus_name, "ActiveProfile", dbus.String(profile))
+            self.bus.set_property(
+                self.bus_name,
+                self.object_path,
+                self.interface_name,
+                "ActiveProfile",
+                GLib.Variant("s", profile),
+            )
             logger.info(f"[PowerProfile] Power profile set to {profile}")
-        except dbus.DBusException as e:
+        except Exception as e:
             logger.error(
                 f"[PowerProfile] Could not change power level to {profile}: {e}"
             )
 
-    # Function to handle properties change signals
-    def handle_property_change(self, proxy, changed, invalidated):
-        # Print the changed ActiveProfile
-        if "ActiveProfile" in changed:
-            logger.info(f"{Colors.INFO}Profile changed: {changed['ActiveProfile']}")
-            self.emit("profile", changed["ActiveProfile"])
+    def handle_property_change(self, *_args):
+        """Callback for property change signals.
+        args: (connection, sender_name, object_path,
+        interface_name, signal_name,parameters)"""
 
-    def get_profile_icon(self, profile):
-        return self.power_profiles.get(profile, "balanced").get("icon_name")
+        parameters = _args[-1]
+        interface, changed_props, _invalidated = parameters.unpack()
+        if "ActiveProfile" in changed_props:
+            new_profile = changed_props["ActiveProfile"]
+            logger.info(f"{Colors.INFO}Profile changed: {new_profile}")
+            self.emit("profile", new_profile)
+
+    def get_profile_icon(self, profile: str) -> str:
+        return self.power_profiles.get(profile, self.power_profiles["balanced"]).get(
+            "icon_name"
+        )
