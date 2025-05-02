@@ -380,16 +380,6 @@ class DateNotificationMenu(Box):
                     GLib.timeout_add(400, lambda: self._remove_notification(child))
                 break
 
-        # Update visibility if no notifications left
-        has_notifications = any(
-            isinstance(c, DateMenuNotification)
-            for c in self.notification_list_box.children
-        )
-        if not has_notifications:
-            self.notification_list_box.set_visible(False)
-            self.placeholder.set_visible(True)
-            self.clear_icon.set_from_icon_name(icons["trash"]["empty"], 15)
-
     def _remove_notification(self, widget):
         if widget in self.notification_list_box.children:
             self.notification_list_box.remove(widget)
