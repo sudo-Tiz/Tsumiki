@@ -16,6 +16,8 @@ from utils.functions import convert_seconds_to_milliseconds
 from utils.icons import weather_icons
 from utils.widget_utils import text_icon
 
+weather_service = WeatherService()
+
 
 class WeatherMenu(Box):
     """A menu to display the weather information."""
@@ -249,8 +251,6 @@ class WeatherWidget(ButtonWidget):
             **kwargs,
         )
 
-        self.weather_service = WeatherService().get_default()
-
         self.bar = bar
 
         self.weather_icon = text_icon(
@@ -273,7 +273,7 @@ class WeatherWidget(ButtonWidget):
 
     def weather_poll(self, fabricator):
         while True:
-            yield {"weather": self.weather_service.get_weather(self.config["location"])}
+            yield {"weather": weather_service.get_weather(self.config["location"])}
             time.sleep(self.config["interval"] / 1000)
 
     def update_ui(self, fabricator, value):

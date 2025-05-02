@@ -17,14 +17,12 @@ context = ssl._create_unverified_context()
 class WeatherService:
     """This class provides weather information for a given city."""
 
-    instance = None
+    _instance = None  # Class-level private instance variable
 
-    @staticmethod
-    def get_default():
-        if WeatherService.instance is None:
-            WeatherService.instance = WeatherService()
-
-        return WeatherService.instance
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(WeatherService, cls).__new__(cls)
+        return cls._instance
 
     def simple_weather_info(self, location: str):
         try:
@@ -69,22 +67,26 @@ class WeatherService:
             print(f"Error: {e}")
             return None
 
-    def get_weather(self, location: str):
-        # Check if cache exists and is fresh
-        if os.path.exists(WEATHER_CACHE_FILE):
-            last_modified = os.path.getmtime(WEATHER_CACHE_FILE)
-            logger.info(
-                f"{Colors.INFO} reading weather from cache file {WEATHER_CACHE_FILE}"
-            )
-            if time.time() - last_modified < 86400:  # 24 hours
-                with open(WEATHER_CACHE_FILE, "r") as f:
-                    return json.load(f)
+    def get_weather(self, location: str, refresh=False):
+        if not refresh:
+            # Check if cache exists and is fresh
+            if os.path.exists(WEATHER_CACHE_FILE):
+                last_modified = os.path.getmtime(WEATHER_CACHE_FILE)
+                logger.info(
+                    f"{Colors.INFO} reading weather from cache file {WEATHER_CACHE_FILE}"
+                )
+                if time.time() - last_modified < 86400:  # 24 hours
+                    with open(WEATHER_CACHE_FILE, "r") as f:
+                        return json.load(f)
 
-        logger.info(
-            f"{Colors.INFO}Cache file {WEATHER_CACHE_FILE} does not exist or is stale. "
-            f"Fetching new data."
-        )
+            logger.info(
+                f"{Colors.INFO}Cache file {WEATHER_CACHE_FILE} does not exist or is stale"
+                f"Fetching new data."
+            )
+
         weather = self.simple_weather_info(location)
+
+        # If the weather data is None, return None
         if weather is None:
             return None
         # Save the weather data to the cache file
