@@ -80,8 +80,6 @@ class DateMenuNotification(EventBox):
                 h_align="start",
                 h_expand=True,
                 line_wrap="word-char",
-                chars_width=20,
-                max_chars_width=40,
                 style_classes="summary",
                 style="font-size: 13.5px;",
             ),

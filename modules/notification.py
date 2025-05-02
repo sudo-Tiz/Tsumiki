@@ -139,8 +139,6 @@ class NotificationWidget(EventBox):
                 line_wrap="word-char",
                 v_align="start",
                 h_expand=True,
-                chars_width=20,
-                max_chars_width=40,
             ),
         )
 

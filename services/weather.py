@@ -73,15 +73,18 @@ class WeatherService:
             if os.path.exists(WEATHER_CACHE_FILE):
                 last_modified = os.path.getmtime(WEATHER_CACHE_FILE)
                 logger.info(
-                    f"{Colors.INFO} reading weather from cache file {WEATHER_CACHE_FILE}"
+                    f"{Colors.INFO} reading weather from cache file{WEATHER_CACHE_FILE}"
                 )
+
                 if time.time() - last_modified < 86400:  # 24 hours
                     with open(WEATHER_CACHE_FILE, "r") as f:
                         return json.load(f)
 
             logger.info(
-                f"{Colors.INFO}Cache file {WEATHER_CACHE_FILE} does not exist or is stale"
-                f"Fetching new data."
+                (
+                    f"{Colors.INFO}Cache file {WEATHER_CACHE_FILE} doesn't exist or stale"
+                    f"Fetching new data."
+                )
             )
 
         weather = self.simple_weather_info(location)

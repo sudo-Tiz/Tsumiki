@@ -54,8 +54,8 @@ class WeatherMenu(Box):
 
         self.current_weather_image = Svg(
             svg_file=self.get_weather_asset(self.current_weather["weatherCode"]),
-            size=100,
             style_classes="weather",
+            size=100,
         )
 
         self.title_box = Gtk.Grid(
@@ -149,9 +149,8 @@ class WeatherMenu(Box):
         expander = Gtk.Expander(
             name="weather-expander",
             visible=True,
+            child=self.forecast_box,
         )
-
-        expander.add(self.forecast_box)
 
         self.children = (self.scan_btn, self.title_box, expander)
 
