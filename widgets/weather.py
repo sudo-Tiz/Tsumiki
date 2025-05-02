@@ -9,7 +9,7 @@ from fabric.widgets.svg import Svg
 from gi.repository import Gtk
 
 from services import WeatherService
-from shared import ButtonWidget, Popover, Separator
+from shared import ButtonWidget, Popover
 from shared.submenu import ScanButton
 from utils import BarConfig
 from utils.functions import convert_seconds_to_milliseconds
@@ -144,15 +144,14 @@ class WeatherMenu(Box):
             visible=True,
         )
 
-        self.children = (
-            self.scan_btn,
-            self.title_box,
-            Separator(
-                orientation="vertical",
-                name="weather-separator",
-            ),
-            self.forecast_box,
+        expander = Gtk.Expander(
+            name="weather-expander",
+            visible=True,
         )
+
+        expander.add(self.forecast_box)
+
+        self.children = (self.scan_btn, self.title_box, expander)
 
         invoke_repeater(
             convert_seconds_to_milliseconds(3600),
