@@ -22,6 +22,15 @@ weather_service = WeatherService()
 class WeatherMenu(Box):
     """A menu to display the weather information."""
 
+    def sunrise_sunset_time(self) -> str:
+        return f" {self.sunrise_time}  {self.sunset_time}"
+
+    def temperature(self, celsius = True) -> str:
+        if celsius:
+            return f" {self.current_weather['temp_C']}°C"
+        else:
+            return f" {self.current_weather['temp_F']}°F"
+
     def __init__(
         self,
         data,
@@ -34,7 +43,7 @@ class WeatherMenu(Box):
             spacing=5,
             **kwargs,
         )
-        self.scan_btn = ScanButton(h_align="end")
+        self.scan_btn = ScanButton(h_align="start", visible=False)
 
         self.scan_btn.connect("clicked", lambda *_: self.scan_btn.play_animation())
 
@@ -54,13 +63,13 @@ class WeatherMenu(Box):
 
         self.current_weather_image = Svg(
             svg_file=self.get_weather_asset(self.current_weather["weatherCode"]),
-            style_classes="weather",
             size=100,
+            v_align="start",
+            h_align="start",
         )
 
         self.title_box = Gtk.Grid(
             name="weather-header-grid",
-            column_spacing=20,
             visible=True,
         )
 
@@ -69,25 +78,27 @@ class WeatherMenu(Box):
             0,
             0,
             2,
-            2,
+            3,
         )
 
-        self.title_box.attach_next_to(
+        self.title_box.attach(
             Label(
                 style_classes="header-label",
+                h_align="start",
+                label=f"{data['location']}",
+            ),
+            2,
+            0,
+            1,
+            1,
+        )
+
+        self.title_box.attach(
+            Label(
+                name="condition",
+                h_align="start",
                 label=f"{self.current_weather['weatherDesc'][0]['value']}",
             ),
-            self.current_weather_image,
-            Gtk.PositionType.RIGHT,
-            1,
-            1,
-        )
-
-        self.title_box.attach(
-            Label(
-                style_classes="temperature",
-                label=f"{self.current_weather['temp_C']}°C",
-            ),
             2,
             1,
             1,
@@ -97,7 +108,21 @@ class WeatherMenu(Box):
         self.title_box.attach(
             Label(
                 style_classes="header-label",
-                label=f" {self.current_weather['windspeedKmph']} mph",
+                name="sunrise-sunset",
+                h_align="start",
+                label=self.sunrise_sunset_time(),
+            ),
+            2,
+            2,
+            1,
+            1,
+        )
+
+        self.title_box.attach(
+            Label(
+                style_classes="header-label",
+                h_align="start",
+                label=self.temperature(),
             ),
             3,
             0,
@@ -107,7 +132,8 @@ class WeatherMenu(Box):
 
         self.title_box.attach(
             Label(
-                style_classes="humidity",
+                style_classes="header-label",
+                h_align="start",
                 label=f"󰖎 {self.current_weather['humidity']}%",
             ),
             3,
@@ -119,24 +145,72 @@ class WeatherMenu(Box):
         self.title_box.attach(
             Label(
                 style_classes="header-label",
-                label=f"{data['location']}",
+                h_align="start",
+                label=f" {self.current_weather['windspeedKmph']} mph",
             ),
-            4,
-            0,
+            3,
+            2,
             1,
             1,
         )
 
-        self.title_box.attach(
-            Label(
-                style_classes="feels-like",
-                label=f"Feels Like {self.current_weather['FeelsLikeC']}°C",
-            ),
-            4,
-            1,
-            1,
-            1,
-        )
+
+
+
+        # self.title_box.attach(
+        #     Label(
+        #         style_classes="temperature",
+        #         label=f"{self.current_weather['temp_C']}°C",
+        #     ),
+        #     2,
+        #     1,
+        #     1,
+        #     1,
+        # )
+
+        # self.title_box.attach(
+        #     Label(
+        #         style_classes="header-label",
+        #         label=f" {self.current_weather['windspeedKmph']} mph",
+        #     ),
+        #     3,
+        #     0,
+        #     1,
+        #     1,
+        # )
+
+        # self.title_box.attach(
+        #     Label(
+        #         style_classes="humidity",
+        #         label=f"󰖎 {self.current_weather['humidity']}%",
+        #     ),
+        #     3,
+        #     1,
+        #     1,
+        #     1,
+        # )
+
+        # self.title_box.attach(
+        #     Label(
+        #         style_classes="header-label",
+        #         label=f"{data['location']}",
+        #     ),
+        #     4,
+        #     0,
+        #     1,
+        #     1,
+        # )
+
+        # self.title_box.attach(
+        #     Label(
+        #         style_classes="feels-like",
+        #         label=f"Feels Like {self.current_weather['FeelsLikeC']}°C",
+        #     ),
+        #     4,
+        #     1,
+        #     1,
+        #     1,
+        # )
 
         # Create a grid to display the hourly forecast
         self.forecast_box = Gtk.Grid(

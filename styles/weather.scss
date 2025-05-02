@@ -33,15 +33,24 @@ $base_margin: common.toEm(4);
 
 
     .header-label {
-      font-size: 1em;
+      font-size: 0.8em;
     }
 
-    .temperature {
-      font-size: 2em;
+    #condition{
+      font-size: 1.5em;
+      font-weight: 600;
     }
 
     .feels-like {
       font-size: .8em;
+    }
+
+    .header-label#sunrise-sunset {
+      font-size: 0.8em;
+      font-weight: 500;
+      color: darken(theme.$text-main,10%);
+      margin-right: 50px;
+
     }
   }
 
