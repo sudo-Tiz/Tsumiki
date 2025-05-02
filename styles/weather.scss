@@ -33,23 +33,25 @@ $base_margin: common.toEm(4);
 
 
     .header-label {
-      font-size: 0.8em;
+      font-size: 0.87em;
     }
 
     #condition{
-      font-size: 1.5em;
+      font-size: 1.6em;
       font-weight: 600;
     }
 
-    .feels-like {
-      font-size: .8em;
-    }
 
     .header-label#sunrise-sunset {
       font-size: 0.8em;
       font-weight: 500;
       color: darken(theme.$text-main,10%);
-      margin-right: 50px;
+    }
+
+    .stats{
+      @extend .header-label;
+      margin: 0 10px 0 30px;
+
 
     }
   }

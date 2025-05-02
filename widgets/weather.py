@@ -25,7 +25,7 @@ class WeatherMenu(Box):
     def sunrise_sunset_time(self) -> str:
         return f" {self.sunrise_time}  {self.sunset_time}"
 
-    def temperature(self, celsius = True) -> str:
+    def temperature(self, celsius=True) -> str:
         if celsius:
             return f" {self.current_weather['temp_C']}°C"
         else:
@@ -120,8 +120,8 @@ class WeatherMenu(Box):
 
         self.title_box.attach(
             Label(
-                style_classes="header-label",
-                h_align="start",
+                style_classes="stats",
+                h_align="center",
                 label=self.temperature(),
             ),
             3,
@@ -132,8 +132,8 @@ class WeatherMenu(Box):
 
         self.title_box.attach(
             Label(
-                style_classes="header-label",
-                h_align="start",
+                style_classes="stats",
+                h_align="center",
                 label=f"󰖎 {self.current_weather['humidity']}%",
             ),
             3,
@@ -144,8 +144,8 @@ class WeatherMenu(Box):
 
         self.title_box.attach(
             Label(
-                style_classes="header-label",
-                h_align="start",
+                style_classes="stats",
+                h_align="center",
                 label=f" {self.current_weather['windspeedKmph']} mph",
             ),
             3,
@@ -153,9 +153,6 @@ class WeatherMenu(Box):
             1,
             1,
         )
-
-
-
 
         # self.title_box.attach(
         #     Label(

@@ -82,7 +82,7 @@ class WeatherService:
 
             logger.info(
                 (
-                    f"{Colors.INFO}Cache file {WEATHER_CACHE_FILE} doesn't exist or stale"
+                    f"{Colors.INFO}Cache file {WEATHER_CACHE_FILE} stale"
                     f"Fetching new data."
                 )
             )
