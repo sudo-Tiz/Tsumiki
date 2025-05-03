@@ -66,7 +66,7 @@ class UpdatesWidget(ButtonWidget):
             "changed",
             lambda *_: self.check_update()
             if (datetime.now() - self.update_time).total_seconds()
-            <= self.config["interval"]
+            >= self.config["interval"]
             else None,
         )
 
