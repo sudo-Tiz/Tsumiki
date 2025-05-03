@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 from fabric.core.service import Property, Service, Signal
 from fabric.utils import exec_shell_command, exec_shell_command_async
@@ -38,7 +38,7 @@ class ScreenRecorder(Service):
                 "[SCREENRECORD] Another instance of wf-recorder is already running."
             )
             return
-        time = datetime.datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
+        time = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
         file_path = f"{self.screenrecord_path}/{time}.mp4"
 
         self._current_screencast_path = file_path
