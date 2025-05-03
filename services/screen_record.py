@@ -91,6 +91,24 @@ class ScreenRecorder(Service):
 
         proc.communicate_utf8_async(None, None, do_callback)
 
+    def screenshot(self, fullscreen=False, save_copy=True):
+        time = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
+        file_path = self.screenshot_path + str(time) + ".png"
+        command = (
+            ["grimblast", "copysave", "screen", file_path]
+            if save_copy
+            else ["grimblast", "copyscreen"]
+        )
+        if not fullscreen:
+            command[2] = "area"
+        try:
+            subprocess.run(command, check=True)
+            self.send_screenshot_notification(
+                file_path=file_path if file_path else None,
+            )
+        except Exception:
+            logger.error(f"[SCREENSHOT] Failed to run command: {command}")
+
     def send_screenrecord_notification(self, file_path):
         cmd = ["notify-send"]
         cmd.extend(
@@ -129,24 +147,6 @@ class ScreenRecorder(Service):
                     exec_shell_command_async(f"xdg-open {file_path}", lambda *_: None)
 
         proc.communicate_utf8_async(None, None, do_callback)
-
-    def screenshot(self, fullscreen=False, save_copy=True):
-        time = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
-        file_path = self.screenshot_path + str(time) + ".png"
-        command = (
-            ["grimblast", "copysave", "screen", file_path]
-            if save_copy
-            else ["grimblast", "copyscreen"]
-        )
-        if not fullscreen:
-            command[2] = "area"
-        try:
-            subprocess.run(command, check=True)
-            self.send_screenshot_notification(
-                file_path=file_path if file_path else None,
-            )
-        except Exception:
-            logger.error(f"[SCREENSHOT] Failed to run command: {command}")
 
     @Property(bool, "readable", default_value=False)
     def is_recording(self):
