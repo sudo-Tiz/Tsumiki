@@ -241,6 +241,10 @@
 		"icon_size": 16,
 		"tooltip": true
 	},
+	"screen_shot": {
+		"icon_size": 16,
+		"tooltip": true
+	},
 	"network_usage": {
 		"upload_icon": "",
 		"download_icon": "",

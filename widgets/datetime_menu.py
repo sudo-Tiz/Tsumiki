@@ -430,9 +430,7 @@ class DateTimeWidget(ButtonWidget):
     """A widget to power off the system."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
-        super().__init__(widget_config, name="datetime_menu", **kwargs)
-
-        self.config = widget_config["date_time"]
+        super().__init__(widget_config["date_time"], name="datetime_menu", **kwargs)
 
         popup = Popover(
             content_factory=lambda: DateNotificationMenu(config=self.config),
