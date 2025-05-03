@@ -259,8 +259,6 @@ class WeatherWidget(ButtonWidget):
             **kwargs,
         )
 
-        self.bar = bar
-
         self.weather_icon = text_icon(
             icon="",
             props={

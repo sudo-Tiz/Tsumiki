@@ -150,9 +150,7 @@ class SystemTrayWidget(ButtonWidget):
     """A widget to display the system tray items."""
 
     def __init__(self, widget_config: BarConfig, bar, **kwargs) -> None:
-        super().__init__(widget_config, name="system_tray", **kwargs)
-
-        self.config = widget_config["system_tray"]
+        super().__init__(widget_config["system_tray"], name="system_tray", **kwargs)
 
         # Create main tray box and toggle icon
         self.tray_box = Box(
