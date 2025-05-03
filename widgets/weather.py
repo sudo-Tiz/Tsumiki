@@ -13,6 +13,7 @@ from services import WeatherService
 from shared import ButtonWidget, Popover
 from shared.submenu import ScanButton
 from utils import BarConfig
+from utils.functions import convert_to_12hr_format
 from utils.icons import weather_icons
 from utils.widget_utils import (
     text_icon,
@@ -200,13 +201,13 @@ class WeatherMenu(Box):
 
             hour = Label(
                 style_classes="weather-forecast-time",
-                label=f"{self.convert_to_12hr_format(column_data['time'])}",
+                label=f"{convert_to_12hr_format(column_data['time'])}",
                 h_align="center",
             )
             icon = Svg(
                 svg_file=self.get_weather_asset(
                     column_data["weatherCode"],
-                    self.convert_to_12hr_format(column_data["time"]),
+                    convert_to_12hr_format(column_data["time"]),
                 ),
                 size=65,
                 h_align="center",
@@ -222,24 +223,6 @@ class WeatherMenu(Box):
             self.forecast_box.attach(hour, col, 0, 1, 1)
             self.forecast_box.attach(icon, col, 1, 1, 1)
             self.forecast_box.attach(temp, col, 2, 1, 1)
-
-    # wttr.in time are in 300,400...2100 format , we need to convert it to 4:00...21:00
-    def convert_to_12hr_format(self, time: str) -> str:
-        time = int(time)
-        hour = time // 100  # Get the hour (e.g., 1200 -> 12)
-        minute = time % 100  # Get the minutes (e.g., 1200 -> 00)
-
-        # Convert to 12-hour format
-        period = "AM" if hour < 12 else "PM"
-
-        # Adjust hour for 12-hour format
-        if hour == 0:
-            hour = 12
-        elif hour > 12:
-            hour -= 12
-
-        # Format the time as a string
-        return f"{hour}:{minute:02d} {period}"
 
     def check_if_day(self, current_time: str | None = None) -> str:
         time_format = "%I:%M %p"

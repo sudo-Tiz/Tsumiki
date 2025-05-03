@@ -1,8 +1,8 @@
-import datetime
 import os
 import re
 import shutil
 import time
+from datetime import datetime
 from functools import lru_cache
 from typing import Dict, List, Literal, Optional
 
@@ -174,11 +174,31 @@ def convert_bytes(bytes: int, to: Literal["kb", "mb", "gb"], format_spec=".1f"):
 
     return f"{format(bytes / (1024**multiplier), format_spec)}{to.upper()}"
 
+    # wttr.in time are in 300,400...2100 format , we need to convert it to 4:00...21:00
+
+
+def convert_to_12hr_format(self, time: str) -> str:
+    time = int(time)
+    hour = time // 100  # Get the hour (e.g., 1200 -> 12)
+    minute = time % 100  # Get the minutes (e.g., 1200 -> 00)
+
+    # Convert to 12-hour format
+    period = "AM" if hour < 12 else "PM"
+
+    # Adjust hour for 12-hour format
+    if hour == 0:
+        hour = 12
+    elif hour > 12:
+        hour -= 12
+
+    # Format the time as a string
+    return f"{hour}:{minute:02d} {period}"
+
 
 # Function to get the system uptime
 def uptime():
     boot_time = psutil.boot_time()
-    now = datetime.datetime.now()
+    now = datetime.now()
 
     diff = now.timestamp() - boot_time
 
