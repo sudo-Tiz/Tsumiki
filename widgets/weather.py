@@ -180,7 +180,7 @@ class WeatherMenu(Box):
         util_fabricator.connect("changed", lambda *_: self.update_widget())
 
     def update_widget(self):
-        if (datetime.now() - self.update_time).total_seconds() < 600:
+        if (datetime.now() - self.update_time).total_seconds() < 60:
             # Check if the update time is more than 10 minutes ago
             return
 
