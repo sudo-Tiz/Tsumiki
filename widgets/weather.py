@@ -2,19 +2,22 @@ import time
 from datetime import datetime
 
 from fabric import Fabricator
-from fabric.utils import get_relative_path, invoke_repeater
+from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 from fabric.widgets.svg import Svg
 from gi.repository import Gtk
+from loguru import logger
 
 from services import WeatherService
 from shared import ButtonWidget, Popover
 from shared.submenu import ScanButton
 from utils import BarConfig
-from utils.functions import convert_seconds_to_milliseconds
 from utils.icons import weather_icons
-from utils.widget_utils import text_icon
+from utils.widget_utils import (
+    text_icon,
+    util_fabricator,
+)
 
 weather_service = WeatherService()
 
@@ -44,6 +47,8 @@ class WeatherMenu(Box):
             **kwargs,
         )
         self.scan_btn = ScanButton(h_align="start", visible=False)
+
+        self.update_time = datetime.now()
 
         self.scan_btn.connect("clicked", lambda *_: self.scan_btn.play_animation())
 
@@ -154,61 +159,6 @@ class WeatherMenu(Box):
             1,
         )
 
-        # self.title_box.attach(
-        #     Label(
-        #         style_classes="temperature",
-        #         label=f"{self.current_weather['temp_C']}°C",
-        #     ),
-        #     2,
-        #     1,
-        #     1,
-        #     1,
-        # )
-
-        # self.title_box.attach(
-        #     Label(
-        #         style_classes="header-label",
-        #         label=f" {self.current_weather['windspeedKmph']} mph",
-        #     ),
-        #     3,
-        #     0,
-        #     1,
-        #     1,
-        # )
-
-        # self.title_box.attach(
-        #     Label(
-        #         style_classes="humidity",
-        #         label=f"󰖎 {self.current_weather['humidity']}%",
-        #     ),
-        #     3,
-        #     1,
-        #     1,
-        #     1,
-        # )
-
-        # self.title_box.attach(
-        #     Label(
-        #         style_classes="header-label",
-        #         label=f"{data['location']}",
-        #     ),
-        #     4,
-        #     0,
-        #     1,
-        #     1,
-        # )
-
-        # self.title_box.attach(
-        #     Label(
-        #         style_classes="feels-like",
-        #         label=f"Feels Like {self.current_weather['FeelsLikeC']}°C",
-        #     ),
-        #     4,
-        #     1,
-        #     1,
-        #     1,
-        # )
-
         # Create a grid to display the hourly forecast
         self.forecast_box = Gtk.Grid(
             row_spacing=10,
@@ -225,13 +175,18 @@ class WeatherMenu(Box):
 
         self.children = (self.scan_btn, self.title_box, expander)
 
-        invoke_repeater(
-            convert_seconds_to_milliseconds(3600),
-            self.update_widget,
-            initial_call=True,
-        )
+        # reusing the fabricator to call specified intervals
+        util_fabricator.connect("changed", lambda *_: self.update_widget())
 
     def update_widget(self):
+        if (datetime.now() - self.update_time).total_seconds() < 600:
+            # Check if the update time is more than 10 minutes ago
+            return
+
+        logger.debug("[Weather] Updating weather widget")
+
+        self.update_time = datetime.now()
+
         current_time = int(time.strftime("%H00"))
 
         next_values = self.hourly_forecast[:4]
