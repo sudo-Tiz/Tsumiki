@@ -284,6 +284,10 @@
 					"type": "string",
 					"description": "Specifies the location for the weather widget. Location can be a city name, lat/long, or  zip code."
 				},
+				"interval": {
+					"type": "integer",
+					"description": "Interval in seconds to check for updates"
+				},
 				"label": {
 					"type": "boolean",
 					"description": "Determines whether the widget has a label."
@@ -598,7 +602,7 @@
 				},
 				"interval": {
 					"type": "integer",
-					"description": "Interval in milliseconds to check for updates"
+					"description": "Interval in seconds to check for updates"
 				}
 			}
 		},

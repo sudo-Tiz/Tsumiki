@@ -64,7 +64,10 @@ class UpdatesWidget(ButtonWidget):
         # reusing the fabricator to call specified intervals
         util_fabricator.connect(
             "changed",
-            lambda *_: self.check_update()
+            lambda *_: (
+                self.check_update(),
+                setattr(self, "update_time", datetime.now()),
+            )
             if (datetime.now() - self.update_time).total_seconds()
             >= self.config["interval"]
             else None,

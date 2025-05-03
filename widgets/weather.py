@@ -280,7 +280,7 @@ class WeatherWidget(ButtonWidget):
     def weather_poll(self, fabricator):
         while True:
             yield {"weather": weather_service.get_weather(self.config["location"])}
-            time.sleep(self.config["interval"] / 1000)
+            time.sleep(self.config["interval"])
 
     def update_ui(self, fabricator, value):
         # Update the label with the weather icon and temperature in the main thread
