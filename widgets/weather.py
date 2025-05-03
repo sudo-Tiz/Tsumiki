@@ -1,7 +1,6 @@
 import time
 from datetime import datetime
 
-from fabric import Fabricator
 from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
@@ -266,7 +265,7 @@ class WeatherWidget(ButtonWidget):
             },
         )
 
-        self.weather_fabricator = Fabricator(poll_from=self.weather_poll, stream=True)
+        self.update_time = datetime.now()
 
         self.weather_label = Label(
             label="Fetching weather...",
@@ -275,16 +274,17 @@ class WeatherWidget(ButtonWidget):
         self.box.children = (self.weather_icon, self.weather_label)
 
         # Set up a fabricator to call the update_label method at specified intervals
-        self.weather_fabricator.connect("changed", self.update_ui)
-
-    def weather_poll(self, fabricator):
-        while True:
-            yield {"weather": weather_service.get_weather(self.config["location"])}
-            time.sleep(self.config["interval"])
+        util_fabricator.connect("changed", self.update_ui)
 
     def update_ui(self, fabricator, value):
-        # Update the label with the weather icon and temperature in the main thread
-        res = value.get("weather")
+        if (datetime.now() - self.update_time).total_seconds() < self.config[
+            "interval"
+        ]:
+            # Check if the update time is more than interval seconds ago
+            return
+        res = weather_service.get_weather(self.config["location"])
+
+        self.update_time = datetime.now()
 
         if res is None:
             self.weather_label.set_label("")
@@ -293,7 +293,6 @@ class WeatherWidget(ButtonWidget):
                 self.set_tooltip_text("Error fetching weather data")
             return
 
-        # todo: handle error
         current_weather = res["current"]
         text_icon = weather_icons[current_weather["weatherCode"]]["icon"]
         self.weather_label.set_label(f"{current_weather['FeelsLikeC']}°C")
