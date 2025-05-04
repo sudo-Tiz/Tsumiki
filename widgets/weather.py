@@ -273,13 +273,15 @@ class WeatherWidget(ButtonWidget):
         )
         self.box.children = (self.weather_icon, self.weather_label)
 
-        # Set up a fabricator to call the update_label method at specified intervals
-        util_fabricator.connect("changed", self.update_ui)
+        self.update_ui(initial=True)
 
-    def update_ui(self, fabricator, value):
+        # Set up a fabricator to call the update_label method at specified intervals
+        util_fabricator.connect("changed", lambda *_: self.update_ui())
+
+    def update_ui(self, initial=False):
         if (datetime.now() - self.update_time).total_seconds() < self.config[
             "interval"
-        ]:
+        ] and not initial:
             # Check if the update time is more than interval seconds ago
             return
         res = weather_service.get_weather(self.config["location"])
