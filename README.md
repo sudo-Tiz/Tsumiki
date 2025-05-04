@@ -162,7 +162,7 @@ sudo pacman -S --noconfirm --needed pipewire playerctl dart-sass power-profiles-
 Using `yay` to install the required AUR packages:
 
 ```sh
-yay -S --needed gray-git python-fabric gnome-bluetooth-3.0 python-rlottie-python python-pytomlpp slurp imagemagick tesseract tesseract-data-eng python-pyjson5 ttf-jetbrains-mono-nerd
+yay -S --needed gray-git python-fabric gnome-bluetooth-3.0 python-rlottie-python python-pytomlpp slurp imagemagick tesseract tesseract-data-eng python-pyjson5 ttf-jetbrains-mono-nerd grimblast-git
 ```
 
 If you have something else besides `yay`, install with the respective aur helper.
