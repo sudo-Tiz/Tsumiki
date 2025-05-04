@@ -91,9 +91,13 @@ class ScreenRecorder(Service):
 
         proc.communicate_utf8_async(None, None, do_callback)
 
-    def screenshot(self, fullscreen=False, save_copy=True):
+    def screenshot(self, path, fullscreen=False, save_copy=True):
+        self.screenshot_path = f"{GLib.get_home_dir()}/{path}"
+
+        helpers.ensure_directory(self.screenshot_path)
+
         time = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
-        file_path = self.screenshot_path + str(time) + ".png"
+        file_path = f"{self.screenshot_path}/{time}.png"
         command = (
             ["grimblast", "copysave", "screen", file_path]
             if save_copy

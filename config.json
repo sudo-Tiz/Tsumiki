@@ -92,7 +92,7 @@
 			"window_title"
 		], // this is the left section of the panel
 		"middle_section": [
-			"date_time","weather"
+			"date_time","weather","screen_shot"
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
@@ -242,8 +242,10 @@
 		"tooltip": true
 	},
 	"screen_shot": {
+		"path": "Pictures/Screenshots",
 		"icon_size": 16,
-		"tooltip": true
+		"tooltip": true,
+		"icon": "󰄀"
 	},
 	"network_usage": {
 		"upload_icon": "",
