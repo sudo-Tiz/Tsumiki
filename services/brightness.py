@@ -129,4 +129,4 @@ class Brightness(Service):
         try:
             exec_brightnessctl_async(f"--device '{kbd}' set {value}")
         except GLib.Error as e:
-            print(e.message)
+            logger.exception(e.message)
