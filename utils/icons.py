@@ -455,9 +455,11 @@ icons = {
         "notification": "dialog-information-symbolic",
         "video": "video-x-generic-symbolic",
         "audio": "audio-x-generic-symbolic",
+        "image": "image-x-generic-symbolic",
     },
     "ui": {
-        "close": "window-close-symbolic",
+        "window_close": "window-close-symbolic",
+        "close": "close-symbolic",
         "colorpicker": "color-select-symbolic",
         "info": "info-symbolic",
         "link": "external-link-symbolic",
@@ -500,7 +502,7 @@ icons = {
         },
         "mixer": "mixer-symbolic",
     },
-    "powerprofile": {
+    "powerprofiles": {
         "balanced": "power-profile-balanced-symbolic",
         "power-saver": "power-profile-power-saver-symbolic",
         "performance": "power-profile-performance-symbolic",

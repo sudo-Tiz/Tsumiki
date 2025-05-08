@@ -197,7 +197,7 @@ class QuickSettingsMenu(Box):
                 children=(
                     HoverButton(
                         image=Image(
-                            icon_name=icons["powermenu"]["restart"], icon_size=16
+                            icon_name=icons["powermenu"]["reboot"], icon_size=16
                         ),
                         v_align="center",
                         on_clicked=lambda *_: (

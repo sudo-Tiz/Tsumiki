@@ -86,12 +86,11 @@ class DateMenuNotification(EventBox):
         )
         self.close_button = Button(
             style_classes="close-button",
-            visible=True,
             image=Image(
                 name="close-icon",
                 icon_name=helpers.check_icon_exists(
-                    "close-symbolic",
                     icons["ui"]["close"],
+                    icons["ui"]["window_close"],
                 ),
                 icon_size=16,
             ),
