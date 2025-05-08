@@ -5,6 +5,7 @@ import time
 import urllib.request
 from urllib.error import HTTPError
 
+from fabric.core.service import Service
 from loguru import logger
 
 from utils import Colors
@@ -14,7 +15,7 @@ from utils.constants import WEATHER_CACHE_FILE
 context = ssl._create_unverified_context()
 
 
-class WeatherService:
+class WeatherService(Service):
     """This class provides weather information for a given city."""
 
     _instance = None  # Class-level private instance variable
@@ -23,6 +24,9 @@ class WeatherService:
         if cls._instance is None:
             cls._instance = super(WeatherService, cls).__new__(cls)
         return cls._instance
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
     def simple_weather_info(self, location: str):
         try:
@@ -67,7 +71,7 @@ class WeatherService:
             print(f"Error: {e}")
             return None
 
-    def get_weather(self, location: str, refresh=False):
+    def get_weather(self, location: str, ttl=3600, refresh=False):
         if not refresh:
             # Check if cache exists and is fresh
             if os.path.exists(WEATHER_CACHE_FILE):
@@ -76,7 +80,7 @@ class WeatherService:
                     f"{Colors.INFO} reading weather from cache file{WEATHER_CACHE_FILE}"
                 )
 
-                if time.time() - last_modified < 86400:  # 24 hours
+                if time.time() - last_modified < ttl:  # 1 hour
                     with open(WEATHER_CACHE_FILE, "r") as f:
                         return json.load(f)
 
@@ -94,6 +98,6 @@ class WeatherService:
             return None
         # Save the weather data to the cache file
         with open(WEATHER_CACHE_FILE, "w") as f:
-            json.dump(weather, f)
+            json.dump(weather, f, indent=4, ensure_ascii=False)
 
         return weather

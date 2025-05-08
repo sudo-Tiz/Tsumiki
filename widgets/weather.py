@@ -286,7 +286,9 @@ class WeatherWidget(ButtonWidget):
         ] and not initial:
             # Check if the update time is more than interval seconds ago
             return
-        res = weather_service.get_weather(self.config["location"])
+        res = weather_service.get_weather(
+            location=self.config["location"], ttl=self.config["interval"]
+        )
 
         self.update_time = datetime.now()
 
