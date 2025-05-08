@@ -14,6 +14,9 @@ class HyprPickerWidget(ButtonWidget):
     def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(widget_config["hypr_picker"], name="hypr_picker", **kwargs)
 
+        if not executable_exists("hyprpicker"):
+            raise ExecutableNotFoundError("hyprpicker")
+
         self.picker_label = Label(label="picker", style_classes="panel-text")
 
         if self.config["show_icon"]:
@@ -30,9 +33,6 @@ class HyprPickerWidget(ButtonWidget):
         self.connect("button-press-event", self.on_button_press)
 
         self.script_file = get_relative_path("../assets/scripts/hyprpicker.sh")
-
-        if not executable_exists("hyprpicker"):
-            raise ExecutableNotFoundError("hyprpicker")
 
         if self.config["tooltip"]:
             self.set_tooltip_text("Pick a color")
