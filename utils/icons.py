@@ -519,7 +519,7 @@ icons = {
         "screen": "display-brightness-symbolic",
     },
     "powermenu": {
-        "sleep": "weather-clear-night-symbolic",
+        "sleep": "system-suspend-symbolic",
         "reboot": "system-reboot-symbolic",
         "logout": "system-log-out-symbolic",
         "shutdown": "system-shutdown-symbolic",
