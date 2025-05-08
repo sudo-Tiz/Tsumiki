@@ -434,14 +434,6 @@ volume_text_icons = {
     "muted": "󰝟",
 }
 
-volume_text_icons = {
-    "overamplified": "󰕾",
-    "high": "󰕾",
-    "medium": "󰖀",
-    "low": "󰕿",
-    "muted": "󰝟",
-}
-
 brightness_text_icons = {
     "off": "",  # lowest brightness
     "low": "",
