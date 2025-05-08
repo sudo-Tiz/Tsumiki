@@ -18,6 +18,7 @@ from shared import (
     QSChevronButton,
 )
 from utils import BarConfig
+from utils.icons import icons
 from utils.widget_utils import (
     get_audio_icon_name,
     get_brightness_icon_name,
@@ -195,7 +196,9 @@ class QuickSettingsMenu(Box):
                 orientation="h",
                 children=(
                     HoverButton(
-                        image=Image(icon_name="system-restart-symbolic", icon_size=16),
+                        image=Image(
+                            icon_name=icons["powermenu"]["restart"], icon_size=16
+                        ),
                         v_align="center",
                         on_clicked=lambda *_: (
                             self.get_parent().set_visible(False),
@@ -205,7 +208,9 @@ class QuickSettingsMenu(Box):
                         ),
                     ),
                     HoverButton(
-                        image=Image(icon_name="system-shutdown-symbolic", icon_size=16),
+                        image=Image(
+                            icon_name=icons["powermenu"]["shutdown"], icon_size=16
+                        ),
                         v_align="center",
                         on_clicked=lambda *_: (
                             self.get_parent().set_visible(False),
