@@ -39,7 +39,7 @@ class WeatherService(Service):
             else:
                 url = "http://wttr.in/?format=j1"
 
-            logger.info(f"[Weather] Fetching weather information from {url}")
+            logger.info(f"[WeatherService] Fetching weather information from {url}")
             contents = (
                 urllib.request.urlopen(url, context=context, timeout=10)
                 .read()
@@ -64,11 +64,11 @@ class WeatherService(Service):
         except HTTPError as e:
             if e.code == 404:
                 logger.error(
-                    f"{Colors.ERROR}Error: City not found. Try a different city."
+                    f"{Colors.ERROR}[WeatherService] Error: City not found. Try a different city."  # noqa: E501
                 )
             return None
         except Exception as e:
-            print(f"Error: {e}")
+            logger.exception(f"[WeatherService] Error: {e}")
             return None
 
     def get_weather(self, location: str, ttl=3600, refresh=False):
@@ -77,7 +77,7 @@ class WeatherService(Service):
             if os.path.exists(WEATHER_CACHE_FILE):
                 last_modified = os.path.getmtime(WEATHER_CACHE_FILE)
                 logger.info(
-                    f"{Colors.INFO} reading weather from cache file{WEATHER_CACHE_FILE}"
+                    f"{Colors.INFO}[WeatherService] Reading weather from cache file{WEATHER_CACHE_FILE}"  # noqa: E501
                 )
 
                 if time.time() - last_modified < ttl:  # 1 hour
@@ -86,7 +86,7 @@ class WeatherService(Service):
 
             logger.info(
                 (
-                    f"{Colors.INFO}Cache file {WEATHER_CACHE_FILE} stale"
+                    f"{Colors.INFO}[WeatherService] Cache file {WEATHER_CACHE_FILE} stale"  # noqa: E501
                     f"Fetching new data."
                 )
             )

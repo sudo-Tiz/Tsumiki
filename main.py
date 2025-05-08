@@ -30,7 +30,6 @@ def process_and_apply_css(app: Application):
         logger.info(f"{Colors.INFO}[Main] CSS applied")
         app.set_stylesheet_from_file(get_relative_path("dist/main.css"))
     else:
-        print(output)
         app.set_stylesheet_from_string("")
         logger.error(f"{Colors.ERROR}[Main]Failed to compile sass!")
 
