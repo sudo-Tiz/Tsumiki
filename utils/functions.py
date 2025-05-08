@@ -18,7 +18,7 @@ from loguru import logger
 
 from .colors import Colors
 from .constants import named_colors
-from .icons import distro_text_icons
+from .icons import text_icons
 from .thread import run_in_thread
 
 
@@ -235,7 +235,7 @@ def get_distro_icon():
     distro_id = GLib.get_os_info("ID")
 
     # Search for the icon in the list
-    return distro_text_icons.get(distro_id, "")
+    return text_icons["distro"].get(distro_id, "")
 
 
 # Function to check if an executable exists

@@ -9,36 +9,51 @@ common_text_icons = {
     "thermometer": "",
 }
 
-distro_text_icons = {
-    "deepin": "",
-    "fedora": "",
-    "arch": "",
-    "nixos": "",
-    "debian": "",
-    "opensuse-tumbleweed": "",
-    "ubuntu": "",
-    "endeavouros": "",
-    "manjaro": "",
-    "popos": "",
-    "garuda": "",
-    "zorin": "",
-    "mxlinux": "",
-    "arcolinux": "",
-    "gentoo": "",
-    "artix": "",
-    "centos": "",
-    "hyperbola": "",
-    "kubuntu": "",
-    "mandriva": "",
-    "xerolinux": "",
-    "parabola": "",
-    "void": "",
-    "linuxmint": "",
-    "archlabs": "",
-    "devuan": "",
-    "freebsd": "",
-    "openbsd": "",
-    "slackware": "",
+
+text_icons = {
+    "volume": {
+        "off": "",  # lowest brightness
+        "low": "",
+        "medium": "",
+        "high": "",  # highest brightness
+    },
+    "brightness": {
+        "off": "",  # lowest brightness
+        "low": "",
+        "medium": "",
+        "high": "",  # highest brightness
+    },
+    "distro": {
+        "deepin": "",
+        "fedora": "",
+        "arch": "",
+        "nixos": "",
+        "debian": "",
+        "opensuse-tumbleweed": "",
+        "ubuntu": "",
+        "endeavouros": "",
+        "manjaro": "",
+        "popos": "",
+        "garuda": "",
+        "zorin": "",
+        "mxlinux": "",
+        "arcolinux": "",
+        "gentoo": "",
+        "artix": "",
+        "centos": "",
+        "hyperbola": "",
+        "kubuntu": "",
+        "mandriva": "",
+        "xerolinux": "",
+        "parabola": "",
+        "void": "",
+        "linuxmint": "",
+        "archlabs": "",
+        "devuan": "",
+        "freebsd": "",
+        "openbsd": "",
+        "slackware": "",
+    },
 }
 
 # sourced from wttr.in
@@ -426,20 +441,6 @@ weather_icons = {
     },
 }
 
-volume_text_icons = {
-    "overamplified": "󰕾",
-    "high": "󰕾",
-    "medium": "󰖀",
-    "low": "󰕿",
-    "muted": "󰝟",
-}
-
-brightness_text_icons = {
-    "off": "",  # lowest brightness
-    "low": "",
-    "medium": "",
-    "high": "",  # highest brightness
-}
 
 icons = {
     "missing": "image-missing-symbolic",

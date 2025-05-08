@@ -15,7 +15,7 @@ from shared import AnimatedScale
 
 from .config import widget_config
 from .functions import uptime
-from .icons import brightness_text_icons, icons, volume_text_icons
+from .icons import icons, text_icons
 
 
 # Function to get the system stats using psutil
@@ -145,22 +145,22 @@ def get_bar_graph(usage: Number):
 def get_brightness_icon_name(level: int) -> dict[Literal["icon_text", "icon"], str]:
     if level <= 0:
         return {
-            "text_icon": brightness_text_icons["off"],
+            "text_icon": text_icons["brightness"]["off"],
             "icon": "display-brightness-off-symbolic",
         }
 
     if level <= 32:
         return {
-            "text_icon": brightness_text_icons["low"],
+            "text_icon": text_icons["brightness"]["low"],
             "icon": "display-brightness-low-symbolic",
         }
     if level <= 66:
         return {
-            "text_icon": brightness_text_icons["medium"],
+            "text_icon": text_icons["brightness"]["medium"],
             "icon": "display-brightness-medium-symbolic",
         }
     return {
-        "text_icon": brightness_text_icons["high"],
+        "text_icon": text_icons["brightness"]["high"],
         "icon": "display-brightness-high-symbolic",
     }
 
@@ -201,27 +201,27 @@ def get_audio_icon_name(
 ) -> dict[Literal["icon_text", "icon"], str]:
     if volume <= 0 or is_muted:
         return {
-            "text_icon": volume_text_icons["low"],
+            "text_icon": text_icons["volume"]["low"],
             "icon": "audio-volume-muted-symbolic",
         }
     if volume > 0 and volume < 32:
         return {
-            "text_icon": volume_text_icons["low"],
+            "text_icon": text_icons["volume"]["low"],
             "icon": "audio-volume-low-symbolic",
         }
     if volume > 32 and volume < 66:
         return {
-            "text_icon": volume_text_icons["medium"],
+            "text_icon": text_icons["volume"]["medium"],
             "icon": "audio-volume-medium-symbolic",
         }
     if volume >= 66 and volume <= 100:
         return {
-            "text_icon": volume_text_icons["high"],
+            "text_icon": text_icons["volume"]["high"],
             "icon": "audio-volume-high-symbolic",
         }
     else:
         return {
-            "text_icon": volume_text_icons["overamplified"],
+            "text_icon": text_icons["volume"]["overamplified"],
             "icon": "audio-volume-overamplified-symbolic",
         }
 
