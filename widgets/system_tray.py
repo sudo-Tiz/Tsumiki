@@ -12,6 +12,7 @@ from shared import ButtonWidget, Popover, Separator
 from shared.widget_container import HoverButton
 from utils import BarConfig
 from utils.icon_resolver import IconResolver
+from utils.icons import icons
 
 gi.require_version("Gray", "0.1")
 
@@ -158,7 +159,7 @@ class SystemTrayWidget(ButtonWidget):
             orientation="horizontal",
         )
         self.toggle_icon = Image(
-            icon_name="arrow-down-symbolic",
+            icon_name=icons["ui"]["arrow"]["down"],
             icon_size=self.config["icon_size"],
             style_classes=["panel-icon", "toggle-icon"],
         )
@@ -190,13 +191,13 @@ class SystemTrayWidget(ButtonWidget):
         if visible:
             self.popup.hide()
             self.toggle_icon.set_from_icon_name(
-                "arrow-down-symbolic", self.config["icon_size"]
+                icons["ui"]["arrow"]["down"], self.config["icon_size"]
             )
             self.toggle_icon.get_style_context().remove_class("active")
         else:
             self.popup.show_all()
             self.toggle_icon.set_from_icon_name(
-                "arrow-up-symbolic", self.config["icon_size"]
+                icons["ui"]["arrow"]["up"], self.config["icon_size"]
             )
             self.toggle_icon.get_style_context().add_class("active")
 

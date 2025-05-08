@@ -4,6 +4,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
+from utils.icons import icons
 from utils.widget_utils import setup_cursor_hover
 
 from .animator import Animator
@@ -130,7 +131,7 @@ class QSChevronButton(QSToggleButton):
     ):
         self.submenu = submenu
 
-        self.button_image = Image(icon_name="pan-end-symbolic", icon_size=20)
+        self.button_image = Image(icon_name=icons["ui"]["arrow"]["right"], icon_size=20)
 
         self.reveal_button = HoverButton(
             style_classes="toggle-revealer", image=self.button_image, h_expand=True

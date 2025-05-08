@@ -149,8 +149,8 @@ class NotificationWidget(EventBox):
                     Button(
                         image=Image(
                             icon_name=helpers.check_icon_exists(
-                                "close-symbolic",
                                 icons.icons["ui"]["close"],
+                                icons.icons["ui"]["window_close"],
                             ),
                             icon_size=16,
                         ),
