@@ -13,13 +13,12 @@ class PowerProfiles(Service):
     def profile(self, value: str) -> None:
         """Signal emitted when profile changes."""
 
-    instance = None
+    _instance = None  # Class-level private instance variable
 
-    @staticmethod
-    def get_default():
-        if PowerProfiles.instance is None:
-            PowerProfiles.instance = PowerProfiles()
-        return PowerProfiles.instance
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(PowerProfiles, cls).__new__(cls)
+        return cls._instance
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
