@@ -326,6 +326,8 @@ class WeatherWidget(ButtonWidget):
             lambda *_: popup.open(),
         )
 
+        return False
+
     # todo check for initial
     def update_ui(self, initial=False):
         if (datetime.now() - self.update_time).total_seconds() < self.config[
