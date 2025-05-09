@@ -449,7 +449,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
                     )
                 else:
                     self.network_icon.set_from_icon_name(
-                        "network-offline-symbolic",
+                        icons["network"]["wifi"]["disconnected"],
                         self.panel_icon_size,
                     )
 
@@ -462,7 +462,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
                     )
                 else:
                     self.network_icon.set_from_icon_name(
-                        "network-offline-symbolic",
+                        icons["network"]["wifi"]["disconnected"],
                         self.panel_icon_size,
                     )
 
@@ -507,13 +507,13 @@ class QuickSettingsButtonWidget(ButtonWidget):
             else:
                 # Fallback icon if something goes wrong
                 self.brightness_icon.set_from_icon_name(
-                    "display-brightness-symbolic",
+                    icons["brightness"]["indicator"],
                     self.panel_icon_size,
                 )
         except Exception as e:
             print(f"Error updating brightness icon: {e}")
             # Fallback icon if something goes wrong
             self.brightness_icon.set_from_icon_name(
-                "display-brightness-symbolic",
+                icons["brightness"]["indicator"],
                 self.panel_icon_size,
             )

@@ -53,7 +53,7 @@ class QSToggleButton(Box):
     def __init__(
         self,
         action_label: str = "My Label",
-        action_icon: str = "package-x-generic-symbolic",
+        action_icon: str = icons["fallback"]["package"],
         pixel_size: int = 20,
         **kwargs,
     ):
@@ -124,7 +124,7 @@ class QSChevronButton(QSToggleButton):
     def __init__(
         self,
         action_label: str = "My Label",
-        action_icon: str = "package-x-generic-symbolic",
+        action_icon: str = icons["fallback"]["package"],
         pixel_size: int = 20,
         submenu: QuickSubMenu | None = None,
         **kwargs,
