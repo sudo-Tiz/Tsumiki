@@ -204,17 +204,17 @@ def get_audio_icon_name(
             "text_icon": text_icons["volume"]["low"],
             "icon": icons["audio"]["volume"]["muted"],
         }
-    if volume > 0 and volume < 32:
+    if volume > 0 and volume <= 32:
         return {
             "text_icon": text_icons["volume"]["low"],
             "icon": icons["audio"]["volume"]["low"],
         }
-    if volume > 32 and volume < 66:
+    if volume > 32 and volume <= 66:
         return {
             "text_icon": text_icons["volume"]["medium"],
             "icon": icons["audio"]["volume"]["medium"],
         }
-    if volume >= 66 and volume <= 100:
+    if volume > 66 and volume <= 100:
         return {
             "text_icon": text_icons["volume"]["high"],
             "icon": icons["audio"]["volume"]["high"],
