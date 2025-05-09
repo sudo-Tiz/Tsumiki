@@ -115,8 +115,8 @@ class NotificationWidget(EventBox):
             self,
             {
                 "button-press-event": self.on_button_press,
-                "enter-notify-event": lambda *_: self.on_hover(),
-                "leave-notify-event": lambda *_: self.on_unhover(),
+                "enter-notify-event": self.on_hover,
+                "leave-notify-event": self.on_unhover,
             },
         )
 
@@ -279,14 +279,14 @@ class NotificationWidget(EventBox):
     def resume_timeout(self):
         self.start_timeout()
 
-    def on_hover(self):
+    def on_hover(self, *_):
         self.pause_timeout()
         self.set_pointer_cursor(self, "hand2")
         self.config[
             "display_actions_on_hover"
         ] and self.actions_container.set_reveal_child(True)
 
-    def on_unhover(self):
+    def on_unhover(self, *_):
         self.resume_timeout()
         self.set_pointer_cursor(self, "arrow")
         self.config[

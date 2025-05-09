@@ -51,14 +51,14 @@ class AudioSlider(SettingSlider):
                 self.audio_stream = self.client.speaker
                 self.update_state()
                 self.client.disconnect_by_func(init_device_audio)
-                self.client.connect("speaker-changed", lambda *_: self.update_state())
+                self.client.connect("speaker-changed", self.update_state)
 
             self.client.connect("changed", init_device_audio)
             if self.client.speaker:
                 init_device_audio()
         else:
             self.update_state()
-            self.audio_stream.connect("changed", lambda *_: self.update_state())
+            self.audio_stream.connect("changed", self.update_state)
 
         # Connect signals
         self.scale.connect("change-value", self.on_scale_move)
@@ -71,7 +71,7 @@ class AudioSlider(SettingSlider):
             return icons["audio"]["volume"]["high"]
         return icons["audio"]["volume"]["muted" if self.audio_stream.muted else "high"]
 
-    def update_state(self):
+    def update_state(self, *args):
         """Update the slider state from the audio stream."""
         if not self.audio_stream:
             return
