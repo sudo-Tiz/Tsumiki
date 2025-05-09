@@ -170,7 +170,7 @@ class NotificationWidget(EventBox):
             spacing=4, orientation="h", style_classes="notification-body"
         )
 
-        # Use provided image if available, otherwise use "notification-symbolic" icon
+        # Use provided image if available
         try:
             if image_pixbuf := self._notification.image_pixbuf:
                 body_container.add(

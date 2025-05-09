@@ -4,6 +4,7 @@ from loguru import logger
 
 from shared.dbus_helper import GioDBusHelper
 from utils import Colors
+from utils.icons import icons
 
 
 class PowerProfiles(Service):
@@ -30,15 +31,15 @@ class PowerProfiles(Service):
         self.power_profiles = {
             "power-saver": {
                 "name": "Power Saver",
-                "icon_name": "power-profile-power-saver-symbolic",
+                "icon_name": icons["powerprofiles"]["power-saver"],
             },
             "balanced": {
                 "name": "Balanced",
-                "icon_name": "power-profile-balanced-symbolic",
+                "icon_name": icons["powerprofiles"]["balanced"],
             },
             "performance": {
                 "name": "Performance",
-                "icon_name": "power-profile-performance-symbolic",
+                "icon_name": icons["powerprofiles"]["performance"],
             },
         }
 

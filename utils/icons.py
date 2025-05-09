@@ -475,6 +475,8 @@ icons = {
         "toolbars": "toolbars-symbolic",
         "warning": "dialog-warning-symbolic",
         "avatar": "avatar-default-symbolic",
+        "camera": "camera-photo-symbolic",
+        "camera-video": "camera-video-symbolic",
         "arrow": {
             "right": "pan-end-symbolic",
             "left": "pan-start-symbolic",
@@ -510,7 +512,13 @@ icons = {
     },
     "battery": {
         "charging": "battery-flash-symbolic",
-        "warning": "battery-empty-symbolic",
+        "full": "battery-full-charged-symbolic",
+        "full-charging": "battery-full-charging-symbolic",
+        "full-discharging": "battery-full-discharging-symbolic",
+        "discharging": "battery-empty-symbolic",
+        "empty": "battery-empty-symbolic",
+        "charging-unknown": "battery-charging-symbolic",
+        "unknown": "battery-missing-symbolic",
     },
     "bluetooth": {
         "enabled": "bluetooth-active-symbolic",
