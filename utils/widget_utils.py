@@ -89,6 +89,7 @@ def get_icon(app_icon, size=25) -> Image:
             icon_size=icon_size,
         )
 
+
 # Function to get the widget class dynamically
 def lazy_load_widget(widget_name, widgets_list):
     if widget_name in widgets_list:
