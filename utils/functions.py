@@ -174,6 +174,20 @@ def convert_bytes(bytes: int, to: Literal["kb", "mb", "gb"], format_spec=".1f"):
 
     return f"{format(bytes / (1024**multiplier), format_spec)}{to.upper()}"
 
+
+def check_if_day(sunrise_time, sunset_time, current_time: str | None = None) -> str:
+    time_format = "%I:%M %p"
+
+    if current_time is None:
+        current_time = datetime.now().strftime(time_format)
+
+    current_time_obj = datetime.strptime(current_time, time_format)
+    sunrise_time_obj = datetime.strptime(sunrise_time, time_format)
+    sunset_time_obj = datetime.strptime(sunset_time, time_format)
+
+    # Compare current time with sunrise and sunset
+    return sunrise_time_obj <= current_time_obj < sunset_time_obj
+
     # wttr.in time are in 300,400...2100 format , we need to convert it to 4:00...21:00
 
 

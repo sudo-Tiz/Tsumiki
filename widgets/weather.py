@@ -13,7 +13,7 @@ from services import WeatherService
 from shared import ButtonWidget, Popover
 from shared.submenu import ScanButton
 from utils import BarConfig
-from utils.functions import convert_to_12hr_format
+from utils.functions import check_if_day, convert_to_12hr_format
 from utils.icons import weather_icons
 from utils.widget_utils import (
     text_icon,
@@ -226,21 +226,12 @@ class WeatherMenu(Box):
             self.forecast_box.attach(icon, col, 1, 1, 1)
             self.forecast_box.attach(temp, col, 2, 1, 1)
 
-    def check_if_day(self, current_time: str | None = None) -> str:
-        time_format = "%I:%M %p"
-
-        if current_time is None:
-            current_time = datetime.now().strftime(time_format)
-
-        current_time_obj = datetime.strptime(current_time, time_format)
-        sunrise_time_obj = datetime.strptime(self.sunrise_time, time_format)
-        sunset_time_obj = datetime.strptime(self.sunset_time, time_format)
-
-        # Compare current time with sunrise and sunset
-        return sunrise_time_obj <= current_time_obj < sunset_time_obj
-
-    def get_weather_asset(self, code: int, time: str | None = None) -> str:
-        is_day = self.check_if_day(time)
+    def get_weather_asset(self, code: int, time_str: str | None = None) -> str:
+        is_day = check_if_day(
+            sunrise_time=self.sunrise_time,
+            sunset_time=self.sunset_time,
+            current_time=time_str,
+        )
         image_name = "image" if is_day else "image-night"
         return f"{self.weather_icons_dir}/{weather_icons[str(code)][image_name]}.svg"
 
@@ -300,7 +291,22 @@ class WeatherWidget(ButtonWidget):
             return
 
         current_weather = res["current"]
-        text_icon = weather_icons[current_weather["weatherCode"]]["icon"]
+
+        # Get the sunrise and sunset times
+        [self.sunrise_time, self.sunset_time] = [
+            res["astronomy"]["sunrise"],
+            res["astronomy"]["sunset"],
+        ]
+
+        is_day = check_if_day(
+            sunrise_time=self.sunrise_time, sunset_time=self.sunset_time
+        )
+        text_icon = (
+            weather_icons[current_weather["weatherCode"]]["icon"]
+            if is_day
+            else weather_icons[current_weather["weatherCode"]]["icon-night"]
+        )
+
         self.weather_label.set_label(f"{current_weather['FeelsLikeC']}°C")
         self.weather_icon.set_label(text_icon)
 
