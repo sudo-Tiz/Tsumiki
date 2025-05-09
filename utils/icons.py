@@ -456,6 +456,7 @@ icons = {
         "video": "video-x-generic-symbolic",
         "audio": "audio-x-generic-symbolic",
         "image": "image-x-generic-symbolic",
+        "package": "package-x-generic-symbolic",
     },
     "ui": {
         "window_close": "window-close-symbolic",
@@ -538,6 +539,25 @@ icons = {
     "trash": {
         "full": "user-trash-full-symbolic",
         "empty": "user-trash-symbolic",
+    },
+    "network": {
+        "wifi": {
+            "generic": "network-wireless-symbolic",
+            "connected": "network-wireless-connected-symbolic",
+            "disconnected": "network-wireless-disconnected-symbolic",
+            "connecting": "network-wireless-acquiring-symbolic",
+            "disabled": "network-wireless-disabled-symbolic",
+        },
+        "ethernet": {
+            "connected": "network-wired-connected-symbolic",
+            "disconnected": "network-wired-disconnected-symbolic",
+            "connecting": "network-wired-acquiring-symbolic",
+            "disabled": "network-wired-disabled-symbolic",
+        },
+        "vpn": {
+            "enabled": "network-vpn-symbolic",
+            "disabled": "network-vpn-off-symbolic",
+        },
     },
     "mpris": {
         "shuffle": {
