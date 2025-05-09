@@ -86,8 +86,7 @@ class WeatherService(Service):
 
             logger.info(
                 (
-                    f"{Colors.INFO}[WeatherService] Cache file {WEATHER_CACHE_FILE} stale"  # noqa: E501
-                    f"Fetching new data."
+                    f"{Colors.INFO}[WeatherService] Cache file {WEATHER_CACHE_FILE} stale, Fetching new data."  # noqa: E501
                 )
             )
 
