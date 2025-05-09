@@ -124,19 +124,19 @@ def text_icon(icon: str, props=None):
 
 # Function to get the bar graph representation
 def get_bar_graph(usage: Number):
-    if usage < 12.5:
+    if usage < 10:
         return "▁"
-    if usage < 25:
+    if usage < 30:
         return "▂"
-    if usage < 37.5:
+    if usage < 40:
         return "▃"
     if usage < 50:
         return "▄"
-    if usage < 62.5:
+    if usage < 60:
         return "▅"
-    if usage < 75:
+    if usage < 70:
         return "▆"
-    if usage < 87.5:
+    if usage < 80:
         return "▇"
     return "█"
 
