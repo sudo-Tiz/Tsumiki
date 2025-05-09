@@ -146,22 +146,22 @@ def get_brightness_icon_name(level: int) -> dict[Literal["icon_text", "icon"], s
     if level <= 0:
         return {
             "text_icon": text_icons["brightness"]["off"],
-            "icon": "display-brightness-off-symbolic",
+            "icon": icons["brightness"]["off"],
         }
 
     if level <= 32:
         return {
             "text_icon": text_icons["brightness"]["low"],
-            "icon": "display-brightness-low-symbolic",
+            "icon": icons["brightness"]["low"],
         }
     if level <= 66:
         return {
             "text_icon": text_icons["brightness"]["medium"],
-            "icon": "display-brightness-medium-symbolic",
+            "icon": icons["brightness"]["medium"],
         }
     return {
         "text_icon": text_icons["brightness"]["high"],
-        "icon": "display-brightness-high-symbolic",
+        "icon": icons["brightness"]["high"],
     }
 
 
@@ -202,27 +202,27 @@ def get_audio_icon_name(
     if volume <= 0 or is_muted:
         return {
             "text_icon": text_icons["volume"]["low"],
-            "icon": "audio-volume-muted-symbolic",
+            "icon": icons["audio"]["volume"]["muted"],
         }
     if volume > 0 and volume < 32:
         return {
             "text_icon": text_icons["volume"]["low"],
-            "icon": "audio-volume-low-symbolic",
+            "icon": icons["audio"]["volume"]["low"],
         }
     if volume > 32 and volume < 66:
         return {
             "text_icon": text_icons["volume"]["medium"],
-            "icon": "audio-volume-medium-symbolic",
+            "icon": icons["audio"]["volume"]["medium"],
         }
     if volume >= 66 and volume <= 100:
         return {
             "text_icon": text_icons["volume"]["high"],
-            "icon": "audio-volume-high-symbolic",
+            "icon": icons["audio"]["volume"]["high"],
         }
     else:
         return {
             "text_icon": text_icons["volume"]["overamplified"],
-            "icon": "audio-volume-overamplified-symbolic",
+            "icon": icons["audio"]["volume"]["overamplified"],
         }
 
 
