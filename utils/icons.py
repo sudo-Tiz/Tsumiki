@@ -528,6 +528,10 @@ icons = {
         "indicator": "display-brightness-symbolic",
         "keyboard": "keyboard-brightness-symbolic",
         "screen": "display-brightness-symbolic",
+        "low": "display-brightness-low-symbolic",
+        "medium": "display-brightness-medium-symbolic",
+        "high": "display-brightness-high-symbolic",
+        "off": "display-brightness-off-symbolic",
     },
     "powermenu": {
         "sleep": "system-suspend-symbolic",
