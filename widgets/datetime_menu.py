@@ -268,12 +268,13 @@ class DateNotificationMenu(Box):
             ),
         )
 
+        def on_clear_button_click(*_):
+            notification_service.clear_all_notifications()
+            self.clear_icon.set_from_icon_name(icons["trash"]["empty"], 15)
+
         self.clear_button.connect(
             "clicked",
-            lambda _: (
-                notification_service.clear_all_notifications(),
-                self.clear_icon.set_from_icon_name(icons["trash"]["empty"], 15),
-            ),
+            on_clear_button_click,
         )
 
         notification_column_header.pack_end(
@@ -338,30 +339,29 @@ class DateNotificationMenu(Box):
         if config["calendar"]:
             date_column.set_visible(True)
 
-        notification_service.connect("notification-added", self.on_new_notification)
-        notification_service.connect("clear_all", self.on_clear_all_notifications)
-        notification_service.connect("notification-closed", self.on_notification_closed)
+        bulk_connect(
+            notification_service,
+            {
+                "notification-added": self.on_new_notification,
+                "notification-closed": self.on_notification_closed,
+                "clear_all": self.on_clear_all_notifications,
+                "dnd": self.on_dnd_switch,
+            },
+        )
 
         self.dnd_switch.connect("notify::active", self.on_dnd_switch)
-        notification_service.connect(
-            "dnd", lambda _, value, *args: self.dnd_switch.set_active(value)
-        )
 
         # reusing the fabricator to call specified intervals
         util_fabricator.connect("changed", self.update_ui)
 
-    def on_dnd_switch(self, switch, _):
-        """Handle the do not disturb switch."""
-        if switch.get_active():
-            notification_service.dont_disturb = True
-        else:
-            notification_service.dont_disturb = False
+    def on_dnd_switch(self, _, value, *args):
+        self.dnd_switch.set_active(value)
 
     def on_clear_all_notifications(self, *_):
-        self.notification_list_box.children = []
-        self.notifications = []
-        self.notification_list_box.set_visible(False)
-        self.placeholder.set_visible(True)
+        """Handle clearing all notifications."""
+
+        notification_service.clear_all_notifications()
+        self.clear_icon.set_from_icon_name(icons["trash"]["empty"], 15)
 
     def on_notification_closed(self, _, id, reason):
         """Handle notification being closed."""

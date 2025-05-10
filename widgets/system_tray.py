@@ -195,7 +195,7 @@ class SystemTrayWidget(ButtonWidget):
             )
             self.toggle_icon.get_style_context().remove_class("active")
         else:
-            self.popup.show_all()
+            self.popup.open()
             self.toggle_icon.set_from_icon_name(
                 icons["ui"]["arrow"]["up"], self.config["icon_size"]
             )
