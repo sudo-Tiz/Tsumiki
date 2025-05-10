@@ -282,16 +282,22 @@ class NotificationWidget(EventBox):
     def on_hover(self, *_):
         self.pause_timeout()
         self.set_pointer_cursor(self, "hand2")
-        self.config[
-            "display_actions_on_hover"
-        ] and self.actions_container.set_reveal_child(True)
+
+        if self.config["dismiss_on_hover"]:
+            self.close_notification()
+
+        if self.config["display_actions_on_hover"]:
+            self.actions_container.set_reveal_child(
+                not self.actions_container.get_child_revealed()
+            )
 
     def on_unhover(self, *_):
         self.resume_timeout()
         self.set_pointer_cursor(self, "arrow")
-        self.config[
-            "display_actions_on_hover"
-        ] and self.actions_container.set_reveal_child(False)
+        if self.config["display_actions_on_hover"]:
+            self.actions_container.set_reveal_child(
+                not self.actions_container.get_child_revealed()
+            )
 
     @staticmethod
     def set_pointer_cursor(widget, cursor_name):
