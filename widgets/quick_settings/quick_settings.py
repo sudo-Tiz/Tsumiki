@@ -194,6 +194,8 @@ class QuickSettingsMenu(Box):
             v_expand=True,
         )
 
+        dialog = Dialog()
+
         button_box.pack_end(
             Box(
                 orientation="h",
@@ -205,8 +207,10 @@ class QuickSettingsMenu(Box):
                         v_align="center",
                         on_clicked=lambda *_: (
                             self_ref() and self_ref().get_parent().set_visible(False),
-                            Dialog(
-                                "restart", "Do you really want to restart?"
+                            dialog.add_content(
+                                title="restart",
+                                body="Do you really want to restart?",
+                                command="restart",
                             ).toggle_popup(),
                         ),
                     ),
@@ -217,8 +221,10 @@ class QuickSettingsMenu(Box):
                         v_align="center",
                         on_clicked=lambda *_: (
                             self_ref() and self_ref().get_parent().set_visible(False),
-                            Dialog(
-                                "shutdown", "Do you really want to shutdown?"
+                            dialog.add_content(
+                                title="shutdown",
+                                body="Do you really want to shutdown?",
+                                command="shutdown",
                             ).toggle_popup(),
                         ),
                     ),

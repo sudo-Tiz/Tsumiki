@@ -11,16 +11,15 @@ class Dialog(PopupWindow):
 
     def __init__(
         self,
-        title: str,
-        body: str,
-        command: str,
         **kwargs,
     ):
         self.wrapper = Box(orientation="v", name="dialog-wrapper")
 
-        self.title = Label(h_align="center", name="dialog-title", label=title.upper())
-
-        self.body = Label(h_align="center", name="dialog-body", label=body)
+        self.title = Label(
+            h_align="center",
+            name="dialog-title",
+        )
+        self.body = Label(h_align="center", name="dialog-body")
 
         self.buttons = Box(
             orientation="h",
@@ -34,9 +33,6 @@ class Dialog(PopupWindow):
 
         self.buttons.children = (self.ok_btn, self.cancel_btn)
 
-        self.ok_btn.connect(
-            "clicked", lambda *_: exec_shell_command_async(command, lambda *_: None)
-        )
         self.cancel_btn.connect("clicked", lambda *_: self.destroy())
 
         self.wrapper.children = (self.title, self.body, self.buttons)
@@ -49,3 +45,17 @@ class Dialog(PopupWindow):
             keyboard_mode="on-demand",
             **kwargs,
         )
+
+    def add_content(
+        self,
+        title: str,
+        body: str,
+        command: str,
+    ):
+        self.title.set_label(title.upper())
+        self.body.set_label(body)
+        self.ok_btn.connect(
+            "clicked", lambda *_: exec_shell_command_async(command, lambda *_: None)
+        )
+
+        return self
