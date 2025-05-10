@@ -316,7 +316,7 @@ class PlayerBox(Box):
         # Create a fabricator to poll the system stats
         self.player_fabricator = Fabricator(poll_from=position_poll, stream=True)
 
-        self.player_fabricator.connect("changed", lambda *_: self.move_seekbar())
+        self.player_fabricator.connect("changed", self.move_seekbar)
 
         # Buttons
         self.button_box = Box(
@@ -385,7 +385,7 @@ class PlayerBox(Box):
             name="player-button",
             child=self.play_pause_stack,
         )
-        self.play_pause_button.connect("clicked", lambda _: self.player.play_pause())
+        self.play_pause_button.connect("clicked", self.player.play_pause)
         self.player.bind_property("can_pause", self.play_pause_button, "sensitive")
 
         self.next_button = HoverButton(name="player-button", child=self.skip_next_icon)
@@ -396,7 +396,7 @@ class PlayerBox(Box):
         self.prev_button.connect("clicked", self.on_player_prev)
 
         self.shuffle_button = HoverButton(name="player-button", child=self.shuffle_icon)
-        self.shuffle_button.connect("clicked", lambda _: player.toggle_shuffle())
+        self.shuffle_button.connect("clicked", self.player.toggle_shuffle)
         self.player.bind_property("can_shuffle", self.shuffle_button, "sensitive")
 
         self.button_box.children = (
@@ -478,12 +478,12 @@ class PlayerBox(Box):
         self.exit = value
         self.destroy()
 
-    def on_player_next(self, _):
+    def on_player_next(self, *_):
         self.angle_direction = 1
         self.art_animator.pause()
         self.player.next()
 
-    def on_player_prev(self, _):
+    def on_player_prev(self, *_):
         self.angle_direction = -1
         self.art_animator.pause()
         self.player.previous()
@@ -559,7 +559,7 @@ class PlayerBox(Box):
         except ValueError:
             logger.error("[PLAYER] Failed to grab artUrl")
 
-    def move_seekbar(self):
+    def move_seekbar(self, *_):
         self.position_label.set_label(self.length_str(self.player.position))
         if self.exit or not self.player.can_seek:
             return False

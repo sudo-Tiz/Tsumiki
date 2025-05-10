@@ -77,19 +77,17 @@ class NotificationQuickSetting(HoverButton):
             ),
         )
 
-        notification_service.connect(
-            "dnd", lambda _, value, *args: self.toggle_notification(value)
-        )
+        notification_service.connect("dnd", self.toggle_notification)
 
         self.connect("clicked", self.on_click)
 
-        self.toggle_notification(notification_service.dont_disturb)
+        self.toggle_notification(None, notification_service.dont_disturb)
 
-    def on_click(self, *args):
+    def on_click(self, *_):
         """Toggle the notification."""
         notification_service.dont_disturb = not notification_service.dont_disturb
 
-    def toggle_notification(self, value: bool):
+    def toggle_notification(self, _, value, *args):
         """Toggle the notification."""
 
         if value:

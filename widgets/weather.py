@@ -13,7 +13,6 @@ from services import WeatherService
 from shared import ButtonWidget, Popover
 from shared.submenu import ScanButton
 from utils import BarConfig
-from utils.functions import check_if_day, convert_to_12hr_format
 from utils.icons import weather_icons
 from utils.widget_utils import (
     text_icon,
@@ -23,17 +22,60 @@ from utils.widget_utils import (
 weather_service = WeatherService()
 
 
-class WeatherMenu(Box):
-    """A menu to display the weather information."""
+class BaseWeatherWidget:
+    """Base class for weather widgets."""
 
     def sunrise_sunset_time(self) -> str:
         return f" {self.sunrise_time}  {self.sunset_time}"
 
+    def update_sunrise_sunset(self, data):
+        # Get the sunrise and sunset times
+        self.sunrise_time = data["astronomy"]["sunrise"]
+        self.sunset_time = data["astronomy"]["sunset"]
+        return True
+
     def temperature(self, celsius=True) -> str:
         if celsius:
-            return f" {self.current_weather['temp_C']}°C"
+            return f"{self.current_weather['temp_C']}°C"
         else:
-            return f" {self.current_weather['temp_F']}°F"
+            return f"{self.current_weather['temp_F']}°F"
+
+    def check_if_day(self, current_time: str | None = None) -> str:
+        time_format = "%I:%M %p"
+
+        if current_time is None:
+            current_time = datetime.now().strftime(time_format)
+
+        current_time_obj = datetime.strptime(current_time, time_format)
+        sunrise_time_obj = datetime.strptime(self.sunrise_time, time_format)
+        sunset_time_obj = datetime.strptime(self.sunset_time, time_format)
+
+        # Compare current time with sunrise and sunset
+        return sunrise_time_obj <= current_time_obj < sunset_time_obj
+
+        # wttr.in time are in 300,400...2100 format ,
+        #  we need to convert it to 4:00...21:00
+
+    def convert_to_12hr_format(self, time: str) -> str:
+        time = int(time)
+        hour = time // 100  # Get the hour (e.g., 1200 -> 12)
+        minute = time % 100  # Get the minutes (e.g., 1200 -> 00)
+
+        # Convert to 12-hour format
+        period = "AM" if hour < 12 else "PM"
+
+        # Adjust hour for 12-hour format
+        if hour == 0:
+            hour = 12
+        elif hour > 12:
+            hour -= 12
+
+        # Format the time as a string
+        return f"{hour}:{minute:02d} {period}"
+
+
+class WeatherMenu(Box, BaseWeatherWidget):
+    """A menu to display the weather information."""
 
     def __init__(
         self,
@@ -51,19 +93,13 @@ class WeatherMenu(Box):
 
         self.update_time = datetime.now()
 
-        self.scan_btn.connect("clicked", lambda *_: self.scan_btn.play_animation())
-
         # Get the current weather
         self.current_weather = data["current"]
 
         # Get the hourly forecast
         self.hourly_forecast = data["hourly"]
 
-        # Get the sunrise and sunset times
-        [self.sunrise_time, self.sunset_time] = [
-            data["astronomy"]["sunrise"],
-            data["astronomy"]["sunset"],
-        ]
+        self.update_sunrise_sunset(data)
 
         self.weather_icons_dir = get_relative_path("../assets/icons/svg/weather")
 
@@ -128,7 +164,7 @@ class WeatherMenu(Box):
             Label(
                 style_classes="stats",
                 h_align="center",
-                label=self.temperature(),
+                label=f" {self.temperature()}",
             ),
             3,
             0,
@@ -203,13 +239,13 @@ class WeatherMenu(Box):
 
             hour = Label(
                 style_classes="weather-forecast-time",
-                label=f"{convert_to_12hr_format(column_data['time'])}",
+                label=f"{self.convert_to_12hr_format(column_data['time'])}",
                 h_align="center",
             )
             icon = Svg(
                 svg_file=self.get_weather_asset(
                     column_data["weatherCode"],
-                    convert_to_12hr_format(column_data["time"]),
+                    self.convert_to_12hr_format(column_data["time"]),
                 ),
                 size=65,
                 h_align="center",
@@ -227,7 +263,7 @@ class WeatherMenu(Box):
             self.forecast_box.attach(temp, col, 2, 1, 1)
 
     def get_weather_asset(self, code: int, time_str: str | None = None) -> str:
-        is_day = check_if_day(
+        is_day = self.check_if_day(
             sunrise_time=self.sunrise_time,
             sunset_time=self.sunset_time,
             current_time=time_str,
@@ -236,7 +272,7 @@ class WeatherMenu(Box):
         return f"{self.weather_icons_dir}/{weather_icons[str(code)][image_name]}.svg"
 
 
-class WeatherWidget(ButtonWidget):
+class WeatherWidget(ButtonWidget, BaseWeatherWidget):
     """A widget to display the current weather."""
 
     def __init__(
@@ -273,51 +309,45 @@ class WeatherWidget(ButtonWidget):
         util_fabricator.connect("changed", lambda *_: self.update_ui())
 
     def fetch_data_from_url(self):
-        res = weather_service.get_weather(
+        data = weather_service.get_weather(
             location=self.config["location"], ttl=self.config["interval"]
         )
 
         # Update label in main GTK thread
-        GLib.idle_add(self.update_data, res)
+        GLib.idle_add(self.update_data, data)
 
-    def update_data(self, res):
+    def update_data(self, data):
         self.update_time = datetime.now()
 
-        if res is None:
+        if data is None:
             self.weather_label.set_label("")
             self.weather_icon.set_label("")
             if self.config["tooltip"]:
                 self.set_tooltip_text("Error fetching weather data")
             return
 
-        current_weather = res["current"]
+        # Get the current weather
+        self.current_weather = data["current"]
 
-        # Get the sunrise and sunset times
-        [self.sunrise_time, self.sunset_time] = [
-            res["astronomy"]["sunrise"],
-            res["astronomy"]["sunset"],
-        ]
+        self.update_sunrise_sunset(data)
 
-        is_day = check_if_day(
-            sunrise_time=self.sunrise_time, sunset_time=self.sunset_time
-        )
         text_icon = (
-            weather_icons[current_weather["weatherCode"]]["icon"]
-            if is_day
-            else weather_icons[current_weather["weatherCode"]]["icon-night"]
+            weather_icons[self.current_weather["weatherCode"]]["icon"]
+            if self.check_if_day()
+            else weather_icons[self.current_weather["weatherCode"]]["icon-night"]
         )
 
-        self.weather_label.set_label(f"{current_weather['FeelsLikeC']}°C")
+        self.weather_label.set_label(self.temperature())
         self.weather_icon.set_label(text_icon)
 
         # Update the tooltip with the city and weather condition if enabled
         if self.config["tooltip"]:
             self.set_tooltip_text(
-                f"{res['location']}, {current_weather['weatherDesc'][0]['value']}"
+                f"{data['location']}, {self.current_weather['weatherDesc'][0]['value']}"
             )
 
         popup = Popover(
-            content_factory=lambda: WeatherMenu(data=res),
+            content_factory=lambda: WeatherMenu(data=data),
             point_to=self,
         )
 
@@ -328,7 +358,6 @@ class WeatherWidget(ButtonWidget):
 
         return False
 
-    # todo check for initial
     def update_ui(self, initial=False):
         if (datetime.now() - self.update_time).total_seconds() < self.config[
             "interval"

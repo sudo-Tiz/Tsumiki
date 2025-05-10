@@ -40,7 +40,7 @@ class SubMapWidget(ButtonWidget):
             "[Submap] Connected to the hyprland socket"
         )
 
-    def get_submap(self):
+    def get_submap(self, *_):
         submap = str(self.connection.send_command("submap").reply.decode()).strip("\n")
         if self.config["label"]:
             self.submap_label.set_visible(True)

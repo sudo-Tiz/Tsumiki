@@ -39,7 +39,7 @@ class TaskBarWidget(ButtonWidget):
         if self.connection.ready:
             self.render_with_delay()
         else:
-            self.connection.connect("event::ready", lambda *_: self.render_with_delay())
+            self.connection.connect("event::ready", self.render_with_delay)
 
         for event in (
             "activewindow",
@@ -47,7 +47,7 @@ class TaskBarWidget(ButtonWidget):
             "closewindow",
             "changefloatingmode",
         ):
-            self.connection.connect("event::" + event, lambda *_: self.render(None))
+            self.connection.connect("event::" + event, self.render)
 
     def render_with_delay(self, *_):
         GLib.timeout_add(100, self.render)

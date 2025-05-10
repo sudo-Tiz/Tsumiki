@@ -34,7 +34,7 @@ class StopWatchWidget(ButtonWidget):
 
         self.timeout_id = GLib.timeout_add(100, self.update_time)
 
-    def on_start_stop_clicked(self, button):
+    def on_start_stop_clicked(self, *_):
         if self.running:
             self.running = False
             self.icon.set_label(

@@ -186,7 +186,7 @@ class SystemTrayWidget(ButtonWidget):
         # Connect click handler
         self.connect("clicked", self.on_clicked)
 
-    def on_clicked(self, _):
+    def on_clicked(self, *_):
         visible = self.popup.get_visible()
         if visible:
             self.popup.hide()

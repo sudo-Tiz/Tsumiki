@@ -102,10 +102,10 @@ class QSToggleButton(Box):
 
         self.action_button.connect("clicked", self.do_action)
 
-    def do_action(self, _):
+    def do_action(self, *_):
         self.emit("action-clicked")
 
-    def set_active_style(self, action: bool) -> None:
+    def set_active_style(self, action: bool, *args) -> None:
         self.set_style_classes("") if not action else self.set_style_classes("active")
 
     def set_action_label(self, label: str):
@@ -149,5 +149,5 @@ class QSChevronButton(QSToggleButton):
 
         self.reveal_button.connect("clicked", self.do_reveal_toggle)
 
-    def do_reveal_toggle(self, _):
+    def do_reveal_toggle(self, *_):
         self.emit("reveal-clicked")

@@ -40,7 +40,7 @@ class WorldClockWidget(ButtonWidget):
         # reusing the fabricator to call specified intervals
         util_fabricator.connect("changed", self.update_ui)
 
-    def update_ui(self, fabricator, value):
+    def update_ui(self, *_):
         utc_now = datetime.now(timezone.utc)
         for label, tz in self.clocks:
             local_time = utc_now.astimezone(tz)

@@ -94,7 +94,7 @@ class DateMenuNotification(EventBox):
                 ),
                 icon_size=16,
             ),
-            on_clicked=lambda _: self.clear_notification(),
+            on_clicked=self.clear_notification,
         )
 
         header_container.pack_end(
@@ -169,7 +169,7 @@ class DateMenuNotification(EventBox):
             self.revealer.set_reveal_child(False)
             GLib.timeout_add(400, self.destroy)
 
-    def clear_notification(self):
+    def clear_notification(self, *_):
         notification_service.remove_notification(self._id)
         self.revealer.set_reveal_child(False)
         GLib.timeout_add(400, self.destroy)

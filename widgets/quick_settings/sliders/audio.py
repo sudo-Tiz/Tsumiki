@@ -86,7 +86,7 @@ class AudioSlider(SettingSlider):
         if self.audio_stream:
             self.audio_stream.volume = moved_pos
 
-    def on_button_click(self, button):
+    def on_button_click(self, *_):
         parent = self.get_parent()
         while parent and not hasattr(parent, "audio_submenu"):
             parent = parent.get_parent()
@@ -96,7 +96,7 @@ class AudioSlider(SettingSlider):
 
             self.chevron_icon.set_label("" if is_visible else "")
 
-    def on_mute_click(self, button):
+    def on_mute_click(self, *_):
         """Toggle mute state."""
         if self.audio_stream:
             self.audio_stream.muted = not self.audio_stream.muted

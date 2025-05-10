@@ -1,4 +1,5 @@
 import os
+import weakref
 
 from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
@@ -134,6 +135,8 @@ class QuickSettingsMenu(Box):
 
         self.config = config
 
+        self_ref = weakref.ref(self)
+
         user_image = (
             get_relative_path("../../assets/images/banner.jpg")
             if not os.path.exists(os.path.expandvars("$HOME/.face"))
@@ -201,7 +204,7 @@ class QuickSettingsMenu(Box):
                         ),
                         v_align="center",
                         on_clicked=lambda *_: (
-                            self.get_parent().set_visible(False),
+                            self_ref() and self_ref().get_parent().set_visible(False),
                             Dialog(
                                 "restart", "Do you really want to restart?"
                             ).toggle_popup(),
@@ -213,7 +216,7 @@ class QuickSettingsMenu(Box):
                         ),
                         v_align="center",
                         on_clicked=lambda *_: (
-                            self.get_parent().set_visible(False),
+                            self_ref() and self_ref().get_parent().set_visible(False),
                             Dialog(
                                 "shutdown", "Do you really want to shutdown?"
                             ).toggle_popup(),

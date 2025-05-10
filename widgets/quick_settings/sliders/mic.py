@@ -71,7 +71,7 @@ class MicrophoneSlider(SettingSlider):
             return icons["audio"]["mic"]["high"]
         return icons["audio"]["mic"]["muted" if self.audio_stream.muted else "high"]
 
-    def on_button_click(self, button):
+    def on_button_click(self, *_):
         parent = self.get_parent()
         while parent and not hasattr(parent, "mic_submenu"):
             parent = parent.get_parent()
