@@ -296,9 +296,7 @@ class PlayerBox(Box):
         bulk_connect(
             self.player,
             {
-                "notify::title": lambda *_: self.track_title.set_label(
-                    self.player.title
-                ),
+                "notify::title": self.on_title,
                 "exit": self.on_player_exit,
                 "notify::playback-status": self.on_playback_change,
                 "notify::shuffle": self.shuffle_update,
@@ -473,6 +471,9 @@ class PlayerBox(Box):
         self.player.position = moved_pos
         self.position_label.set_label(self.length_str(moved_pos))
         # self.player.set_position(moved_pos)
+
+    def on_title(self, _):
+        self.track_title.set_label(self.player.title)
 
     def on_player_exit(self, _, value):
         self.exit = value

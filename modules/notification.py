@@ -318,12 +318,12 @@ class NotificationRevealer(Revealer):
             **kwargs,
         )
 
-        self.connect(
-            "notify::child-revealed",
-            lambda *_: self.destroy() if not self.get_child_revealed() else None,
-        )
-
+        self.connect("notify::child-revealed", self.on_child_revealed)
         self._notification.connect("closed", self.on_resolved)
+
+    def on_child_revealed(self, *_):
+        if not self.get_child_revealed():
+            self.destroy()
 
     def on_resolved(
         self,

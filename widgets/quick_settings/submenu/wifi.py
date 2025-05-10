@@ -6,7 +6,7 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 
 from services import NetworkClient, Wifi, network_service
 from shared import QSChevronButton, QuickSubMenu
-from shared.submenu import ScanButton
+from shared.buttons import ScanButton
 from utils.icons import icons
 
 

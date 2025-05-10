@@ -1,44 +1,9 @@
-from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.widget import Widget
-
-from .animator import Animator
-from .circle_image import CircleImage
-from .widget_container import HoverButton
-
-
-class ScanButton(HoverButton):
-    """A button to start a scan action."""
-
-    def __init__(self, **kwargs):
-        super().__init__(name="scan-button", style_classes="submenu-button", **kwargs)
-
-        self.scan_image = CircleImage(
-            image_file=get_relative_path("../assets/icons/png/refresh.png"),
-            size=20,
-        )
-
-        self.scan_animator = Animator(
-            bezier_curve=(0, 0, 1, 1),
-            duration=4,
-            min_value=0,
-            max_value=360,
-            tick_widget=self,
-            repeat=False,
-            notify_value=lambda p, *_: self.scan_image.set_angle(p.value),
-        )
-
-        self.set_image(self.scan_image)
-
-    def play_animation(self):
-        self.scan_animator.play()
-
-    def stop_animation(self):
-        self.scan_animator.stop()
 
 
 class QuickSubMenu(Box):
@@ -76,10 +41,13 @@ class QuickSubMenu(Box):
         )
         self.revealer.connect(
             "notify::child-revealed",
-            lambda rev, _: self.set_visible(rev.get_reveal_child()),
+            self.on_child_revealed,
         )
 
         self.add(self.revealer)
+
+    def on_child_revealed(self, revealer: Revealer, *_):
+        self.set_visible(revealer.get_reveal_child())
 
     def make_submenu_title_box(self) -> Box | None:
         submenu_box = Box(spacing=4, style_classes="submenu-title-box")
