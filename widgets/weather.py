@@ -92,14 +92,16 @@ class WeatherMenu(Box, BaseWeatherWidget):
         self.scan_btn = ScanButton(h_align="start", visible=False)
 
         self.update_time = datetime.now()
+        self.update_sunrise_sunset(data)
+
+
+        print("first widget")
 
         # Get the current weather
         self.current_weather = data["current"]
 
         # Get the hourly forecast
         self.hourly_forecast = data["hourly"]
-
-        self.update_sunrise_sunset(data)
 
         self.weather_icons_dir = get_relative_path("../assets/icons/svg/weather")
 
@@ -264,8 +266,6 @@ class WeatherMenu(Box, BaseWeatherWidget):
 
     def get_weather_asset(self, code: int, time_str: str | None = None) -> str:
         is_day = self.check_if_day(
-            sunrise_time=self.sunrise_time,
-            sunset_time=self.sunset_time,
             current_time=time_str,
         )
         image_name = "image" if is_day else "image-night"
@@ -294,6 +294,8 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
                 "style_classes": "panel-icon",
             },
         )
+
+        self.popover = None
 
         self.update_time = datetime.now()
 
@@ -346,15 +348,21 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
                 f"{data['location']}, {self.current_weather['weatherDesc'][0]['value']}"
             )
 
-        popup = Popover(
-            content_factory=lambda: WeatherMenu(data=data),
-            point_to=self,
-        )
+        # Create popover only once
 
-        self.connect(
-            "clicked",
-            lambda *_: popup.open(),
-        )
+        if self.popover is None:
+            self.popover = Popover(
+                content_factory=lambda: WeatherMenu(data=data),
+                point_to=self,
+            )
+
+            self._clicked_signal_id = self.connect(
+                "clicked",
+                lambda *_: self.popover.open(),
+            )
+        else:
+            # Just update content_factory with latest data
+            self.popover.set_content_factory(lambda: WeatherMenu(data=data))
 
         return False
 

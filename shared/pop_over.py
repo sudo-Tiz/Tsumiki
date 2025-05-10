@@ -149,6 +149,14 @@ class Popover(Widget):
         # Use weak reference to avoid circular reference issues
         self._manager = PopoverManager.get_instance()
 
+    def set_content_factory(self, content_factory):
+        """Set the content factory for the popover."""
+        self._content_factory = content_factory
+
+    def set_content(self, content):
+        """Set the content for the popover."""
+        self._content = content
+
     def _on_key_press(self, widget, event):
         if event.keyval == Gdk.KEY_Escape and self._manager.active_popover:
             self._manager.active_popover.hide_popover()
