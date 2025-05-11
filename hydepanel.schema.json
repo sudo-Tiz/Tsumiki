@@ -289,6 +289,10 @@
 					"type": "integer",
 					"description": "Interval in seconds to check for updates"
 				},
+				"expanded": {
+					"type": "boolean",
+					"description": "Determines whether to show the expanded view of the weather widget."
+				},
 				"temperature_unit": {
 					"type": "string",
 					"enum": ["celsius", "fahrenheit"],

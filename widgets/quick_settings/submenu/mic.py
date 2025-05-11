@@ -44,7 +44,7 @@ class MicroPhoneSubMenu(QuickSubMenu):
             title="Microphones",
             title_icon=icons["audio"]["mic"]["high"],
             scan_button=self.scan_button,
-            child=Box(orientation="v", children=[self.child]),
+            child=self.child,
             **kwargs,
         )
 

@@ -12,10 +12,11 @@ common_text_icons = {
 
 text_icons = {
     "volume": {
-        "off": "",  # lowest brightness
-        "low": "",
-        "medium": "",
-        "high": "",  # highest brightness
+        "overamplified": "󰕾",
+        "high": "󰕾",
+        "medium": "󰖀",
+        "low": "󰕿",
+        "muted": "󰝟",
     },
     "brightness": {
         "off": "",  # lowest brightness

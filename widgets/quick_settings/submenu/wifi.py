@@ -35,7 +35,7 @@ class WifiSubMenu(QuickSubMenu):
             title="Network",
             title_icon=icons["network"]["wifi"]["generic"],
             scan_button=self.scan_button,
-            child=Box(orientation="v", children=[self.child]),
+            child=self.child,
             **kwargs,
         )
 

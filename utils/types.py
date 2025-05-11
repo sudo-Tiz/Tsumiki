@@ -18,6 +18,8 @@ Anchor = Literal[
 ]
 
 
+Temperature_Unit = Literal["celsius", "fahrenheit"]
+
 Keyboard_Mode = Literal["none", "exclusive", "on-demand"]
 
 
