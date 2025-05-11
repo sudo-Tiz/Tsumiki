@@ -78,11 +78,11 @@ dart-sass
 
 ## Brightness module for OSD
 brightnessctl
-```
 
 ## To open and execute commands in a terminal ex: updates, cava
 
 kitty
+```
 
 ### Optional
 
@@ -268,7 +268,6 @@ layerrule = ignorezero ,gtk-layer-shell
 ### 5. **No Icons?**
 Make sure your icon theme has the required icons. One of the recommended icon theme is  `Tela Circle`
 
-```ini
 
 ## Contributing
 
