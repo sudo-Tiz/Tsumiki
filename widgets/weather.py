@@ -33,11 +33,12 @@ class BaseWeatherWidget:
         self.sunset_time = data["astronomy"]["sunset"]
         return True
 
-    def temperature(self, celsius=True) -> str:
+    def temperature(self, value) -> str:
+        celsius = self.config["temperature_unit"] == "celsius"
         if celsius:
-            return f"{self.current_weather['temp_C']}°C"
+            return f"{value}°C"
         else:
-            return f"{self.current_weather['temp_F']}°F"
+            return f"{int(int(value) * 9 / 5 + 32)}°F"
 
     def check_if_day(self, current_time: str | None = None) -> str:
         time_format = "%I:%M %p"
@@ -78,6 +79,7 @@ class WeatherMenu(Box, BaseWeatherWidget):
 
     def __init__(
         self,
+        config,
         data,
         **kwargs,
     ):
@@ -89,6 +91,8 @@ class WeatherMenu(Box, BaseWeatherWidget):
             **kwargs,
         )
         self.scan_btn = ScanButton(h_align="start", visible=False)
+
+        self.config = config
 
         self.update_time = datetime.now()
         self.update_sunrise_sunset(data)
@@ -161,7 +165,7 @@ class WeatherMenu(Box, BaseWeatherWidget):
             Label(
                 style_classes="stats",
                 h_align="center",
-                label=f" {self.temperature()}",
+                label=f" {self.temperature(value=self.current_weather['temp_C'])}",
             ),
             3,
             0,
@@ -251,7 +255,7 @@ class WeatherMenu(Box, BaseWeatherWidget):
 
             temp = Label(
                 style_classes="weather-forecast-temp",
-                label=f"{column_data['tempC']}°C",
+                label=self.temperature(column_data["tempC"]),
                 h_align="center",
             )
             self.forecast_box.attach(hour, col, 0, 1, 1)
@@ -332,7 +336,9 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
             else weather_icons[self.current_weather["weatherCode"]]["icon-night"]
         )
 
-        self.weather_label.set_label(self.temperature())
+        self.weather_label.set_label(
+            self.temperature(value=self.current_weather["temp_C"])
+        )
         self.weather_icon.set_label(text_icon)
 
         # Update the tooltip with the city and weather condition if enabled
@@ -345,7 +351,7 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
 
         if self.popover is None:
             self.popover = Popover(
-                content_factory=lambda: WeatherMenu(data=data),
+                content_factory=lambda: WeatherMenu(data=data, config=self.config),
                 point_to=self,
             )
 
