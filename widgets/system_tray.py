@@ -10,12 +10,9 @@ from gi.repository import Gdk, GdkPixbuf, GLib, Gray, Gtk
 
 from shared import ButtonWidget, Grid, HoverButton, Popover, Separator
 from utils import BarConfig
-from utils.icon_resolver import IconResolver
 from utils.icons import icons
 
 gi.require_version("Gray", "0.1")
-
-icon_resolver = IconResolver()
 
 
 def resolve_icon(item, icon_size: int = 16):
