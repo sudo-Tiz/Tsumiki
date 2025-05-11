@@ -5,7 +5,8 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import Gtk
 
 from services import audio_service
-from shared.submenu import QuickSubMenu, ScanButton
+from shared.buttons import ScanButton
+from shared.submenu import QuickSubMenu
 from utils.icons import icons
 from widgets.quick_settings.sliders.audio import AudioSlider
 
@@ -18,7 +19,7 @@ class AudioSubMenu(QuickSubMenu):
 
         # Create refresh button first since parent needs it
         self.scan_button = ScanButton()
-        self.scan_button.connect("clicked", lambda _: self.update_apps())
+        self.scan_button.connect("clicked", self.update_apps)
 
         # Create app list container
         self.app_list = Gtk.ListBox(
@@ -51,7 +52,7 @@ class AudioSubMenu(QuickSubMenu):
         self.client.connect("changed", self.update_apps)
         self.update_apps()
 
-    def update_apps(self, *args):
+    def update_apps(self, *_):
         """Update the list of applications with volume controls."""
 
         self.scan_button.play_animation()

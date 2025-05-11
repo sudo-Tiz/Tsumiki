@@ -20,7 +20,7 @@ class WorkspaceButton(WsButton):
 class WorkSpacesWidget(BoxWidget):
     """A widget to display the current workspaces."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(name="workspaces", **kwargs)
 
         self.config = widget_config["workspaces"]
@@ -41,7 +41,7 @@ class WorkSpacesWidget(BoxWidget):
         def setup_button_empty_state(button):
             """Set up empty state tracking for workspace button"""
 
-            def update_empty_state(*args):
+            def update_empty_state(*_):
                 if button.get_empty():
                     button.add_style_class("unoccupied")
                 else:

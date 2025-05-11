@@ -90,6 +90,7 @@ def get_icon(app_icon, size=25) -> Image:
         )
 
 
+# Function to get the widget class dynamically
 def lazy_load_widget(widget_name, widgets_list):
     if widget_name in widgets_list:
         # Get the full module path (e.g., "widgets.BatteryWidget")
@@ -124,19 +125,19 @@ def text_icon(icon: str, props=None):
 
 # Function to get the bar graph representation
 def get_bar_graph(usage: Number):
-    if usage < 10:
+    if usage <= 10:
         return "▁"
-    if usage < 30:
+    if usage <= 30:
         return "▂"
-    if usage < 40:
+    if usage <= 40:
         return "▃"
-    if usage < 50:
+    if usage <= 50:
         return "▄"
-    if usage < 60:
+    if usage <= 60:
         return "▅"
-    if usage < 70:
+    if usage <= 70:
         return "▆"
-    if usage < 80:
+    if usage <= 80:
         return "▇"
     return "█"
 
@@ -204,17 +205,17 @@ def get_audio_icon_name(
             "text_icon": text_icons["volume"]["low"],
             "icon": icons["audio"]["volume"]["muted"],
         }
-    if volume > 0 and volume < 32:
+    if volume > 0 and volume <= 32:
         return {
             "text_icon": text_icons["volume"]["low"],
             "icon": icons["audio"]["volume"]["low"],
         }
-    if volume > 32 and volume < 66:
+    if volume > 32 and volume <= 66:
         return {
             "text_icon": text_icons["volume"]["medium"],
             "icon": icons["audio"]["volume"]["medium"],
         }
-    if volume >= 66 and volume <= 100:
+    if volume > 66 and volume <= 100:
         return {
             "text_icon": text_icons["volume"]["high"],
             "icon": icons["audio"]["volume"]["high"],

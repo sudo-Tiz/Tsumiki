@@ -10,7 +10,7 @@ from utils.widget_utils import text_icon
 class SubMapWidget(ButtonWidget):
     """A widget to display the current submap."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(widget_config["submap"], name="submap", **kwargs)
 
         self.submap_label = Label(label="0", style_classes="panel-text")
@@ -40,7 +40,7 @@ class SubMapWidget(ButtonWidget):
             "[Submap] Connected to the hyprland socket"
         )
 
-    def get_submap(self):
+    def get_submap(self, *_):
         submap = str(self.connection.send_command("submap").reply.decode()).strip("\n")
         if self.config["label"]:
             self.submap_label.set_visible(True)

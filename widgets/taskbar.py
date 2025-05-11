@@ -25,7 +25,7 @@ class PagerClient(TypedDict):
 class TaskBarWidget(ButtonWidget):
     """A widget to display the taskbar items."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(
             widget_config["task_bar"],
             name="task_bar",
@@ -39,7 +39,7 @@ class TaskBarWidget(ButtonWidget):
         if self.connection.ready:
             self.render_with_delay()
         else:
-            self.connection.connect("event::ready", lambda *_: self.render_with_delay())
+            self.connection.connect("event::ready", self.render_with_delay)
 
         for event in (
             "activewindow",
@@ -47,7 +47,7 @@ class TaskBarWidget(ButtonWidget):
             "closewindow",
             "changefloatingmode",
         ):
-            self.connection.connect("event::" + event, lambda *_: self.render(None))
+            self.connection.connect("event::" + event, self.render)
 
     def render_with_delay(self, *_):
         GLib.timeout_add(100, self.render)

@@ -23,7 +23,6 @@ class UpdatesWidget(ButtonWidget):
     def __init__(
         self,
         widget_config: BarConfig,
-        bar,
         **kwargs,
     ):
         # Initialize the EventBox with specific name and style
@@ -62,16 +61,19 @@ class UpdatesWidget(ButtonWidget):
         self.check_update()
 
         # reusing the fabricator to call specified intervals
-        util_fabricator.connect(
-            "changed",
-            lambda *_: (
-                self.check_update(),
-                setattr(self, "update_time", datetime.now()),
-            )
-            if (datetime.now() - self.update_time).total_seconds()
-            >= self.config["interval"]
-            else None,
-        )
+        util_fabricator.connect("changed", self.should_update)
+
+    def should_update(self, *_):
+        """
+        Handles the 'changed' signal from the fabricator.
+        Checks if the update interval has elapsed and triggers an update if necessary.
+        """
+        if (datetime.now() - self.update_time).total_seconds() >= self.config[
+            "interval"
+        ]:
+            self.check_update()
+            self.update_time = datetime.now()
+        return True
 
     def update_values(self, value: str):
         # Parse the JSON value

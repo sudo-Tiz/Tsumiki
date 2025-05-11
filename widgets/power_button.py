@@ -3,11 +3,8 @@ from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.widget import Widget
-from gi.repository import Gtk
 
-from shared import ButtonWidget, PopupWindow
-from shared.dialog import Dialog
-from shared.widget_container import HoverButton
+from shared import ButtonWidget, Dialog, Grid, HoverButton, PopupWindow
 from utils import BarConfig
 from utils.widget_utils import text_icon
 
@@ -33,8 +30,7 @@ class PowerMenuPopup(PopupWindow):
 
         power_buttons_list = config["buttons"]
 
-        self.grid = Gtk.Grid(
-            visible=True,
+        self.grid = Grid(
             column_homogeneous=True,
             row_homogeneous=True,
         )
@@ -123,7 +119,7 @@ class PowerControlButtons(HoverButton):
 class PowerWidget(ButtonWidget):
     """A widget to power off the system."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(widget_config["power"], name="power", **kwargs)
 
         self.power_label = Label(label="power", style_classes="panel-text")

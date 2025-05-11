@@ -1,4 +1,5 @@
 import os
+import weakref
 
 from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
@@ -13,6 +14,7 @@ from shared import (
     ButtonWidget,
     CircleImage,
     Dialog,
+    Grid,
     HoverButton,
     Popover,
     QSChevronButton,
@@ -59,8 +61,7 @@ class QuickSettingsButtonBox(Box):
             **kwargs,
         )
 
-        self.grid = Gtk.Grid(
-            visible=True,
+        self.grid = Grid(
             row_spacing=10,
             column_spacing=10,
             column_homogeneous=True,
@@ -134,6 +135,8 @@ class QuickSettingsMenu(Box):
 
         self.config = config
 
+        self_ref = weakref.ref(self)
+
         user_image = (
             get_relative_path("../../assets/images/banner.jpg")
             if not os.path.exists(os.path.expandvars("$HOME/.face"))
@@ -160,11 +163,10 @@ class QuickSettingsMenu(Box):
             h_align="start",
         )
 
-        self.user_box = Gtk.Grid(
+        self.user_box = Grid(
             column_spacing=10,
             name="user-box-grid",
-            visible=True,
-            hexpand=True,
+            h_expand=True,
         )
 
         avatar = CircleImage(
@@ -191,6 +193,8 @@ class QuickSettingsMenu(Box):
             v_expand=True,
         )
 
+        dialog = Dialog()
+
         button_box.pack_end(
             Box(
                 orientation="h",
@@ -201,9 +205,11 @@ class QuickSettingsMenu(Box):
                         ),
                         v_align="center",
                         on_clicked=lambda *_: (
-                            self.get_parent().set_visible(False),
-                            Dialog(
-                                "restart", "Do you really want to restart?"
+                            self_ref() and self_ref().get_parent().set_visible(False),
+                            dialog.add_content(
+                                title="restart",
+                                body="Do you really want to restart?",
+                                command="restart",
                             ).toggle_popup(),
                         ),
                     ),
@@ -213,9 +219,11 @@ class QuickSettingsMenu(Box):
                         ),
                         v_align="center",
                         on_clicked=lambda *_: (
-                            self.get_parent().set_visible(False),
-                            Dialog(
-                                "shutdown", "Do you really want to shutdown?"
+                            self_ref() and self_ref().get_parent().set_visible(False),
+                            dialog.add_content(
+                                title="shutdown",
+                                body="Do you really want to shutdown?",
+                                command="shutdown",
                             ).toggle_popup(),
                         ),
                     ),
@@ -243,15 +251,14 @@ class QuickSettingsMenu(Box):
         )
 
         # Create sliders grid
-        sliders_grid = Gtk.Grid(
-            visible=True,
+        sliders_grid = Grid(
             row_spacing=10,
             column_spacing=10,
             column_homogeneous=True,
             row_homogeneous=False,
-            valign="center",
-            hexpand=True,
-            vexpand=True,
+            v_align="center",
+            h_expand=True,
+            v_expand=True,
         )
 
         # Add audio submenu
@@ -265,9 +272,7 @@ class QuickSettingsMenu(Box):
             orientation="h", spacing=10, style_classes="section-box", h_expand=True
         )
 
-        main_grid = Gtk.Grid(
-            visible=True, column_spacing=10, hexpand=True, column_homogeneous=False
-        )
+        main_grid = Grid(column_spacing=10, h_expand=True, column_homogeneous=False)
         center_box.add(main_grid)
 
         # Set up grid columns
@@ -379,7 +384,7 @@ class QuickSettingsMenu(Box):
 class QuickSettingsButtonWidget(ButtonWidget):
     """A button to display the date and time."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(
             widget_config["quick_settings"], name="quick_settings", **kwargs
         )

@@ -13,7 +13,7 @@ from utils.widget_utils import get_audio_icon_name, text_icon
 class VolumeWidget(EventBoxWidget):
     """a widget that displays and controls the volume."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(
             widget_config["volume"],
             name="volume",

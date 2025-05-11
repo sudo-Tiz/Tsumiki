@@ -12,7 +12,7 @@ from utils.widget_utils import text_icon, util_fabricator
 class WorldClockWidget(ButtonWidget):
     """a widget that displays the title of the active window."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(widget_config["world_clock"], name="world_clock", **kwargs)
 
         self.clocks = []
@@ -40,7 +40,7 @@ class WorldClockWidget(ButtonWidget):
         # reusing the fabricator to call specified intervals
         util_fabricator.connect("changed", self.update_ui)
 
-    def update_ui(self, fabricator, value):
+    def update_ui(self, *_):
         utc_now = datetime.now(timezone.utc)
         for label, tz in self.clocks:
             local_time = utc_now.astimezone(tz)

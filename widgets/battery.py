@@ -19,7 +19,6 @@ class BatteryWidget(ButtonWidget):
     def __init__(
         self,
         widget_config: BarConfig,
-        bar,
         **kwargs,
     ):
         # Initialize the Box with specific name and style
@@ -43,12 +42,12 @@ class BatteryWidget(ButtonWidget):
 
         self.notification_time = 0
 
-        self.client.connect("changed", lambda *_: self.update_ui())
+        self.client.connect("changed", self.update_ui)
         self.time_since_last_notification = datetime.now()
 
         self.update_ui()
 
-    def update_ui(self):
+    def update_ui(self, *_):
         """Update the battery status by fetching the current battery information
         and updating the widget accordingly.
         """

@@ -17,7 +17,7 @@ class OCRWidget(ButtonWidget):
     Right-click to select the OCR language from available tesseract language packs.
     """
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(widget_config["ocr"], name="ocr", **kwargs)
 
         self.current_lang = "eng"  # default

@@ -16,7 +16,6 @@ class Mpris(ButtonWidget):
     def __init__(
         self,
         widget_config: BarConfig,
-        bar,
         **kwargs,
     ):
         # Initialize the EventBox with specific name and style

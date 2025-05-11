@@ -9,7 +9,7 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 
 from services import bluetooth_service
 from shared import HoverButton, QSChevronButton, QuickSubMenu
-from shared.submenu import ScanButton
+from shared.buttons import ScanButton
 from utils.icons import icons
 
 

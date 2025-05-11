@@ -37,15 +37,18 @@ class Wifi(Service):
             bulk_connect(
                 self._device,
                 {
-                    "notify::active-access-point": lambda *args: self._activate_ap(),
-                    "access-point-added": lambda *args: self.emit("changed"),
-                    "access-point-removed": lambda *args: self.emit("changed"),
-                    "state-changed": lambda *args: self.ap_update(),
+                    "notify::active-access-point": self._activate_ap,
+                    "access-point-added": self.emit_changed,
+                    "access-point-removed": self.emit_changed,
+                    "state-changed": self.ap_update,
                 },
             )
             self._activate_ap()
 
-    def ap_update(self):
+    def emit_changed(self, *_):
+        self.emit("changed")
+
+    def ap_update(self, *_):
         self.emit("changed")
         for sn in [
             "enabled",
@@ -59,7 +62,7 @@ class Wifi(Service):
         ]:
             self.notify(sn)
 
-    def _activate_ap(self):
+    def _activate_ap(self, *_):
         if self._ap:
             self._ap.disconnect(self._ap_signal)
         self._ap = self._device.get_active_access_point()
@@ -234,7 +237,7 @@ class Ethernet(Service):
 
         return "network-wired-disconnected-symbolic"
 
-    def __init__(self, client: NM.Client, device: NM.DeviceEthernet, **kwargs) -> None:
+    def __init__(self, client: NM.Client, device: NM.DeviceEthernet, **kwargs):
         super().__init__(**kwargs)
         self._client: NM.Client = client
         self._device: NM.DeviceEthernet = device

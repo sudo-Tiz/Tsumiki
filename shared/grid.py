@@ -1,26 +1,20 @@
 from collections.abc import Iterable
 from typing import Literal
 
-from fabric.utils.helpers import get_enum_member
 from fabric.widgets.widget import Widget
 from gi.repository import Gtk
 
 
-class Separator(Gtk.Separator, Widget):
-    """A simple widget to add a separator between widgets."""
+class Grid(Gtk.Grid, Widget):
+    """A simple widget to add a grid layout between widgets."""
 
     def __init__(
         self,
         name: str | None = None,
         visible: bool = True,
         all_visible: bool = False,
-        orientation: Literal[
-            "horizontal",
-            "vertical",
-            "h",
-            "v",
-        ]
-        | Gtk.Orientation = Gtk.Orientation.HORIZONTAL,
+        row_spacing: int = 0,
+        column_spacing: int = 0,
         style: str | None = None,
         style_classes: Iterable[str] | str | None = None,
         tooltip_text: str | None = None,
@@ -36,7 +30,7 @@ class Separator(Gtk.Separator, Widget):
         size: Iterable[int] | int | None = None,
         **kwargs,
     ):
-        Gtk.Separator.__init__(self)
+        Gtk.Grid.__init__(self)
         Widget.__init__(
             self,
             name,
@@ -53,8 +47,5 @@ class Separator(Gtk.Separator, Widget):
             size,
             **kwargs,
         )
-        self.set_orientation(
-            get_enum_member(
-                Gtk.Orientation, orientation, default=Gtk.Orientation.HORIZONTAL
-            )
-        )
+        self.set_row_spacing(row_spacing)
+        self.set_column_spacing(column_spacing)

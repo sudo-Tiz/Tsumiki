@@ -8,15 +8,11 @@ from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from gi.repository import Gdk, GdkPixbuf, GLib, Gray, Gtk
 
-from shared import ButtonWidget, Popover, Separator
-from shared.widget_container import HoverButton
+from shared import ButtonWidget, Grid, HoverButton, Popover, Separator
 from utils import BarConfig
-from utils.icon_resolver import IconResolver
 from utils.icons import icons
 
 gi.require_version("Gray", "0.1")
-
-icon_resolver = IconResolver()
 
 
 def resolve_icon(item, icon_size: int = 16):
@@ -69,7 +65,7 @@ def resolve_icon(item, icon_size: int = 16):
 class SystemTrayMenu(Box):
     """A widget to display additional system tray items in a grid."""
 
-    def __init__(self, config, **kwargs) -> None:
+    def __init__(self, config, **kwargs):
         super().__init__(
             name="system-tray-menu",
             orientation="vertical",
@@ -80,8 +76,7 @@ class SystemTrayMenu(Box):
         self.config = config
 
         # Create a grid for the items
-        self.grid = Gtk.Grid(
-            visible=True,
+        self.grid = Grid(
             row_spacing=8,
             column_spacing=12,
             margin_top=6,
@@ -150,7 +145,7 @@ class SystemTrayMenu(Box):
 class SystemTrayWidget(ButtonWidget):
     """A widget to display the system tray items."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs) -> None:
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(widget_config["system_tray"], name="system_tray", **kwargs)
 
         # Create main tray box and toggle icon
@@ -186,7 +181,7 @@ class SystemTrayWidget(ButtonWidget):
         # Connect click handler
         self.connect("clicked", self.on_clicked)
 
-    def on_clicked(self, _):
+    def on_clicked(self, *_):
         visible = self.popup.get_visible()
         if visible:
             self.popup.hide()
@@ -195,7 +190,7 @@ class SystemTrayWidget(ButtonWidget):
             )
             self.toggle_icon.get_style_context().remove_class("active")
         else:
-            self.popup.show_all()
+            self.popup.open()
             self.toggle_icon.set_from_icon_name(
                 icons["ui"]["arrow"]["up"], self.config["icon_size"]
             )

@@ -180,7 +180,8 @@ DEFAULT_CONFIG = {
         "per_app_limits": {},
         "play_sound": False,
         "max_actions": 5,
-        "display_actions_on_hover": True,
+        "display_actions_on_hover": False,
+        "dismiss_on_hover": False,
         "sound_file": "notification4",
     },
     "osd": {
@@ -301,6 +302,7 @@ DEFAULT_CONFIG = {
         "location": "",
         "label": True,
         "tooltip": True,
+        "temperature_unit": "celsius",
         "interval": HIGH_POLL_INTERVAL,
     },
     "window_title": {

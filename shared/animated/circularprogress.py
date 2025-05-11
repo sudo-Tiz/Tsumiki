@@ -17,12 +17,15 @@ class AnimatedCircularProgressBar(CircularProgressBar):
                 min_value=self.min_value,
                 max_value=self.value,
                 tick_widget=self,
-                notify_value=lambda p, *_: self.set_value(p.value),
+                notify_value=self.set_notify_value,
             )
             .build()
             .play()
             .unwrap()
         )
+
+    def set_notify_value(self, p, *_):
+        self.set_value(p.value)
 
     def animate_value(self, value: float):
         self.animator.pause()

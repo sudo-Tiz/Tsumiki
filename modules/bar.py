@@ -134,6 +134,6 @@ class StatusBar(Window):
                     # Handle regular widgets
                     if widget_name in self.widgets_list:
                         widget_class = lazy_load_widget(widget_name, self.widgets_list)
-                        layout[key].append(widget_class(widget_config, bar=self))
+                        layout[key].append(widget_class(widget_config))
 
         return layout

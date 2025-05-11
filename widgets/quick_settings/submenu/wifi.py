@@ -6,7 +6,7 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 
 from services import NetworkClient, Wifi, network_service
 from shared import QSChevronButton, QuickSubMenu
-from shared.submenu import ScanButton
+from shared.buttons import ScanButton
 from utils.icons import icons
 
 
@@ -98,7 +98,7 @@ class WifiToggle(QSChevronButton):
         if wifi:
             wifi.connect(
                 "notify::enabled",
-                lambda *args: self.set_active_style(wifi.get_property("enabled")),  # type: ignore
+                self.set_active_style(wifi.get_property("enabled")),  # type: ignore
             )
 
             self.action_icon.set_from_icon_name(

@@ -93,16 +93,16 @@ class MprisPlayer(Service):
         # TODO check if this is needed
         del self
 
-    def toggle_shuffle(self):
+    def toggle_shuffle(self, *_):
         self.shuffle = not self.shuffle if self.can_shuffle else self.shuffle
 
-    def play_pause(self):
+    def play_pause(self, *_):
         self._player.play_pause() if self.can_pause else None
 
-    def next(self):
+    def next(self, *_):
         self._player.next() if self.can_go_next else None
 
-    def previous(self):
+    def previous(self, *_):
         self._player.previous() if self.can_go_previous else None
 
     # Properties

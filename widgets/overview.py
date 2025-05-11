@@ -154,7 +154,7 @@ class WorkspaceEventBox(EventBox):
 class OverviewWidget(Box):
     """A widget to display an overview of all windows."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         # Initialize as a Box instead of a PopupWindow.
         super().__init__(name="overview", orientation="v", spacing=0)
         self.workspace_boxes: dict[int, Box] = {}

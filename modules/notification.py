@@ -115,8 +115,8 @@ class NotificationWidget(EventBox):
             self,
             {
                 "button-press-event": self.on_button_press,
-                "enter-notify-event": lambda *_: self.on_hover(),
-                "leave-notify-event": lambda *_: self.on_unhover(),
+                "enter-notify-event": self.on_hover,
+                "leave-notify-event": self.on_unhover,
             },
         )
 
@@ -279,19 +279,25 @@ class NotificationWidget(EventBox):
     def resume_timeout(self):
         self.start_timeout()
 
-    def on_hover(self):
+    def on_hover(self, *_):
         self.pause_timeout()
         self.set_pointer_cursor(self, "hand2")
-        self.config[
-            "display_actions_on_hover"
-        ] and self.actions_container.set_reveal_child(True)
 
-    def on_unhover(self):
+        if self.config["dismiss_on_hover"]:
+            self.close_notification()
+
+        if self.config["display_actions_on_hover"]:
+            self.actions_container.set_reveal_child(
+                not self.actions_container.get_child_revealed()
+            )
+
+    def on_unhover(self, *_):
         self.resume_timeout()
         self.set_pointer_cursor(self, "arrow")
-        self.config[
-            "display_actions_on_hover"
-        ] and self.actions_container.set_reveal_child(False)
+        if self.config["display_actions_on_hover"]:
+            self.actions_container.set_reveal_child(
+                not self.actions_container.get_child_revealed()
+            )
 
     @staticmethod
     def set_pointer_cursor(widget, cursor_name):
@@ -318,12 +324,12 @@ class NotificationRevealer(Revealer):
             **kwargs,
         )
 
-        self.connect(
-            "notify::child-revealed",
-            lambda *_: self.destroy() if not self.get_child_revealed() else None,
-        )
-
+        self.connect("notify::child-revealed", self.on_child_revealed)
         self._notification.connect("closed", self.on_resolved)
+
+    def on_child_revealed(self, *_):
+        if not self.get_child_revealed():
+            self.destroy()
 
     def on_resolved(
         self,

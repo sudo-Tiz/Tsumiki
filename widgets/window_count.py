@@ -1,5 +1,6 @@
 import json
 
+from fabric.hyprland.service import HyprlandEvent
 from fabric.hyprland.widgets import get_hyprland_connection
 from fabric.utils import bulk_connect
 from fabric.widgets.label import Label
@@ -13,7 +14,7 @@ from utils.widget_utils import text_icon
 class WindowCountWidget(ButtonWidget):
     """A widget to display windows in active workspace."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(widget_config["window_count"], name="window_count", **kwargs)
 
         self.connection = get_hyprland_connection()
@@ -32,11 +33,11 @@ class WindowCountWidget(ButtonWidget):
         bulk_connect(
             self.connection,
             {
-                "event::workspace": lambda *_: self.get_window_count(),
-                "event::focusedmon": lambda *_: self.get_window_count(),
-                "event::openwindow": lambda *_: self.get_window_count(),
-                "event::closewindow": lambda *_: self.get_window_count(),
-                "event::movewindow": lambda *_: self.get_window_count(),
+                "event::workspace": self.get_window_count,
+                "event::focusedmon": self.get_window_count,
+                "event::openwindow": self.get_window_count,
+                "event::closewindow": self.get_window_count,
+                "event::movewindow": self.get_window_count,
             },
         )
 
@@ -47,13 +48,11 @@ class WindowCountWidget(ButtonWidget):
             self.connection.connect("event::ready", self.on_ready)
 
     def on_ready(self, _):
-        return self.get_window_count(), logger.info(
+        return self.get_window_count(None, None), logger.info(
             "[WindowCount] Connected to the hyprland socket"
         )
 
-    def get_window_count(
-        self,
-    ):
+    def get_window_count(self, _, event: HyprlandEvent):
         """Get the number of windows in the active workspace."""
         data = json.loads(
             str(self.connection.send_command("j/activeworkspace").reply.decode())

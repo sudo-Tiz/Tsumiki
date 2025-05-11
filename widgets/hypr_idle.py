@@ -5,7 +5,7 @@ from utils import BarConfig
 class HyprIdleWidget(CommandSwitcher):
     """A widget to control the hypridle command."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         # Store the configuration for hypridle
         self.config = widget_config["hypr_idle"]
 
