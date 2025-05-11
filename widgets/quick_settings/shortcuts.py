@@ -3,9 +3,8 @@ import subprocess
 from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
-from gi.repository import Gtk
 
-from shared import HoverButton
+from shared import Grid, HoverButton
 
 
 class ShortcutButton(HoverButton):
@@ -64,12 +63,11 @@ class ShortcutsContainer(Box):
         num_shortcuts = len(shortcuts_config)
 
         # Create grid for shortcuts
-        grid = Gtk.Grid(
-            visible=True,
+        grid = Grid(
             row_spacing=10,
             column_spacing=10,
-            hexpand=True,
-            vexpand=True,
+            h_expand=True,
+            v_expand=True,
         )
 
         # Use single column for 1-2 shortcuts, 2x2 grid for 3-4

@@ -269,6 +269,11 @@ class DateNotificationMenu(Box):
         )
 
         def on_clear_button_click(*_):
+            """Handle clear button click."""
+            for child in self.notification_list_box.children:
+                self.notification_list_box.remove(child)
+                child.destroy()
+
             notification_service.clear_all_notifications()
             self.clear_icon.set_from_icon_name(icons["trash"]["empty"], 15)
 
@@ -359,8 +364,6 @@ class DateNotificationMenu(Box):
 
     def on_clear_all_notifications(self, *_):
         """Handle clearing all notifications."""
-
-        notification_service.clear_all_notifications()
         self.clear_icon.set_from_icon_name(icons["trash"]["empty"], 15)
 
     def on_notification_closed(self, _, id, reason):

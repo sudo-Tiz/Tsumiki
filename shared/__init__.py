@@ -6,6 +6,7 @@ from .button_toggle import *
 from .buttons import *
 from .circle_image import *
 from .dialog import *
+from .grid import *
 from .lottie import *
 from .module_group import *
 from .pop_over import *

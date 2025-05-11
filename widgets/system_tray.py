@@ -8,8 +8,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from gi.repository import Gdk, GdkPixbuf, GLib, Gray, Gtk
 
-from shared import ButtonWidget, Popover, Separator
-from shared.widget_container import HoverButton
+from shared import ButtonWidget, Grid, HoverButton, Popover, Separator
 from utils import BarConfig
 from utils.icon_resolver import IconResolver
 from utils.icons import icons
@@ -80,8 +79,7 @@ class SystemTrayMenu(Box):
         self.config = config
 
         # Create a grid for the items
-        self.grid = Gtk.Grid(
-            visible=True,
+        self.grid = Grid(
             row_spacing=8,
             column_spacing=12,
             margin_top=6,

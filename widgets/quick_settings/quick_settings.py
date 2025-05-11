@@ -14,6 +14,7 @@ from shared import (
     ButtonWidget,
     CircleImage,
     Dialog,
+    Grid,
     HoverButton,
     Popover,
     QSChevronButton,
@@ -60,8 +61,7 @@ class QuickSettingsButtonBox(Box):
             **kwargs,
         )
 
-        self.grid = Gtk.Grid(
-            visible=True,
+        self.grid = Grid(
             row_spacing=10,
             column_spacing=10,
             column_homogeneous=True,
@@ -163,11 +163,10 @@ class QuickSettingsMenu(Box):
             h_align="start",
         )
 
-        self.user_box = Gtk.Grid(
+        self.user_box = Grid(
             column_spacing=10,
             name="user-box-grid",
-            visible=True,
-            hexpand=True,
+            h_expand=True,
         )
 
         avatar = CircleImage(
@@ -252,15 +251,14 @@ class QuickSettingsMenu(Box):
         )
 
         # Create sliders grid
-        sliders_grid = Gtk.Grid(
-            visible=True,
+        sliders_grid = Grid(
             row_spacing=10,
             column_spacing=10,
             column_homogeneous=True,
             row_homogeneous=False,
-            valign="center",
-            hexpand=True,
-            vexpand=True,
+            v_align="center",
+            h_expand=True,
+            v_expand=True,
         )
 
         # Add audio submenu
@@ -274,9 +272,7 @@ class QuickSettingsMenu(Box):
             orientation="h", spacing=10, style_classes="section-box", h_expand=True
         )
 
-        main_grid = Gtk.Grid(
-            visible=True, column_spacing=10, hexpand=True, column_homogeneous=False
-        )
+        main_grid = Grid(column_spacing=10, h_expand=True, column_homogeneous=False)
         center_box.add(main_grid)
 
         # Set up grid columns

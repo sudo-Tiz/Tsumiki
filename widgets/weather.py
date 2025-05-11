@@ -10,8 +10,7 @@ from gi.repository import GLib, Gtk
 from loguru import logger
 
 from services import WeatherService
-from shared import ButtonWidget, Popover
-from shared.buttons import ScanButton
+from shared import ButtonWidget, Grid, Popover, ScanButton
 from utils import BarConfig
 from utils.icons import weather_icons
 from utils.widget_utils import (
@@ -111,9 +110,8 @@ class WeatherMenu(Box, BaseWeatherWidget):
             h_align="start",
         )
 
-        self.title_box = Gtk.Grid(
+        self.title_box = Grid(
             name="weather-header-grid",
-            visible=True,
         )
 
         self.title_box.attach(
@@ -198,11 +196,10 @@ class WeatherMenu(Box, BaseWeatherWidget):
         )
 
         # Create a grid to display the hourly forecast
-        self.forecast_box = Gtk.Grid(
+        self.forecast_box = Grid(
             row_spacing=10,
             column_spacing=20,
             name="weather-grid",
-            visible=True,
         )
 
         expander = Gtk.Expander(
