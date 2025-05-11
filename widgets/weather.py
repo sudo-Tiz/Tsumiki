@@ -336,10 +336,11 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
             else weather_icons[self.current_weather["weatherCode"]]["icon-night"]
         )
 
+        self.weather_icon.set_label(text_icon)
+
         self.weather_label.set_label(
             self.temperature(value=self.current_weather["temp_C"])
         )
-        self.weather_icon.set_label(text_icon)
 
         # Update the tooltip with the city and weather condition if enabled
         if self.config["tooltip"]:
@@ -366,6 +367,16 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
         return False
 
     def update_ui(self, initial=False):
+
+        # Check if the update time is more than 5 minutes ago, update the icon
+        if (datetime.now() - self.update_time).total_seconds() > 300:
+            text_icon = (
+                weather_icons[self.current_weather["weatherCode"]]["icon"]
+                if self.check_if_day()
+                else weather_icons[self.current_weather["weatherCode"]]["icon-night"]
+            )
+            self.weather_icon.set_label(text_icon)
+
         if (datetime.now() - self.update_time).total_seconds() < self.config[
             "interval"
         ] and not initial:
