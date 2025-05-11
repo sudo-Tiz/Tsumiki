@@ -9,7 +9,7 @@ from utils.widget_utils import text_icon
 class LanguageWidget(ButtonWidget):
     """A widget to display the current language."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(widget_config["language"], name="language", **kwargs)
 
         self.lang = Language(

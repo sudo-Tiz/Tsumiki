@@ -11,7 +11,7 @@ from utils.widget_utils import text_icon
 class ThemeSwitcherWidget(ButtonWidget):
     """A widget to switch themes."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(
             widget_config["theme_switcher"], name="theme_switcher", **kwargs
         )

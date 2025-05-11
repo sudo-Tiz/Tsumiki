@@ -14,7 +14,7 @@ from utils.widget_utils import text_icon
 class WindowCountWidget(ButtonWidget):
     """A widget to display windows in active workspace."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(widget_config["window_count"], name="window_count", **kwargs)
 
         self.connection = get_hyprland_connection()

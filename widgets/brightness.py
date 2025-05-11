@@ -14,7 +14,7 @@ from utils.widget_utils import get_brightness_icon_name, text_icon
 class BrightnessWidget(EventBoxWidget):
     """a widget that displays and controls the brightness."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(
             widget_config["brightness"],
             name="brightness",

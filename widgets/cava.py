@@ -11,7 +11,7 @@ from utils import BarConfig, ExecutableNotFoundError
 class CavaWidget(ButtonWidget):
     """A widget to display the Cava audio visualizer."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(widget_config["cava"], name="cava", **kwargs)
 
         cava_command = "cava"

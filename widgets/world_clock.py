@@ -12,7 +12,7 @@ from utils.widget_utils import text_icon, util_fabricator
 class WorldClockWidget(ButtonWidget):
     """a widget that displays the title of the active window."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(widget_config["world_clock"], name="world_clock", **kwargs)
 
         self.clocks = []

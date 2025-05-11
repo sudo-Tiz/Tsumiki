@@ -449,6 +449,7 @@ class PlayerBox(Box):
             name="outer-player-box",
             h_align="start",
         )
+
         self.overlay_box = Overlay(
             child=self.outer_box,
             overlays=[

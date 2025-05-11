@@ -384,7 +384,7 @@ class QuickSettingsMenu(Box):
 class QuickSettingsButtonWidget(ButtonWidget):
     """A button to display the date and time."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(
             widget_config["quick_settings"], name="quick_settings", **kwargs
         )

@@ -19,7 +19,6 @@ class BatteryWidget(ButtonWidget):
     def __init__(
         self,
         widget_config: BarConfig,
-        bar,
         **kwargs,
     ):
         # Initialize the Box with specific name and style

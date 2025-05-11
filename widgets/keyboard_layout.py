@@ -13,7 +13,7 @@ from utils.widget_utils import text_icon
 class KeyboardLayoutWidget(ButtonWidget):
     """A widget to display the current keyboard layout."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs):
+    def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(widget_config["keyboard"], name="keyboard", **kwargs)
 
         self.kb_label = Label(label="0", style_classes="panel-text")
