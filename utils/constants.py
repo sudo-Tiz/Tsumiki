@@ -302,6 +302,7 @@ DEFAULT_CONFIG = {
         "location": "",
         "label": True,
         "tooltip": True,
+        "expanded": True,
         "temperature_unit": "celsius",
         "interval": HIGH_POLL_INTERVAL,
     },

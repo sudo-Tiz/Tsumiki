@@ -208,6 +208,7 @@ class WeatherMenu(Box, BaseWeatherWidget):
             name="weather-expander",
             visible=True,
             child=self.forecast_box,
+            expanded=self.config["expanded"],
         )
 
         self.children = (self.scan_btn, self.title_box, expander)
@@ -367,7 +368,6 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
         return False
 
     def update_ui(self, initial=False):
-
         # Check if the update time is more than 5 minutes ago, update the icon
         if (datetime.now() - self.update_time).total_seconds() > 300:
             text_icon = (

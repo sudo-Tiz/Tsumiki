@@ -112,8 +112,8 @@ class BluetoothSubMenu(QuickSubMenu):
             propagate_width=True,
             propagate_height=True,
             child=Box(
-                    orientation="v",
-                    children=[self.paired_devices, self.available_devices],
+                orientation="v",
+                children=[self.paired_devices, self.available_devices],
             ),
         )
 
