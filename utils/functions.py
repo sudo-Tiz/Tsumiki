@@ -287,7 +287,7 @@ def convert_to_percent(
 
 
 # Function to ensure the file exists
-def ensure_file(path: str) -> None:
+def ensure_file(path: str):
     file = Gio.File.new_for_path(path)
     parent = file.get_parent()
 

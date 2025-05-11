@@ -68,7 +68,7 @@ def resolve_icon(item, icon_size: int = 16):
 class SystemTrayMenu(Box):
     """A widget to display additional system tray items in a grid."""
 
-    def __init__(self, config, **kwargs) -> None:
+    def __init__(self, config, **kwargs):
         super().__init__(
             name="system-tray-menu",
             orientation="vertical",
@@ -148,7 +148,7 @@ class SystemTrayMenu(Box):
 class SystemTrayWidget(ButtonWidget):
     """A widget to display the system tray items."""
 
-    def __init__(self, widget_config: BarConfig, bar, **kwargs) -> None:
+    def __init__(self, widget_config: BarConfig, bar, **kwargs):
         super().__init__(widget_config["system_tray"], name="system_tray", **kwargs)
 
         # Create main tray box and toggle icon

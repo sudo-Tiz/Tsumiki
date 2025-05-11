@@ -234,7 +234,7 @@ class Ethernet(Service):
 
         return "network-wired-disconnected-symbolic"
 
-    def __init__(self, client: NM.Client, device: NM.DeviceEthernet, **kwargs) -> None:
+    def __init__(self, client: NM.Client, device: NM.DeviceEthernet, **kwargs):
         super().__init__(**kwargs)
         self._client: NM.Client = client
         self._device: NM.DeviceEthernet = device
