@@ -472,7 +472,7 @@ class PlayerBox(Box):
         self.position_label.set_label(self.length_str(moved_pos))
         # self.player.set_position(moved_pos)
 
-    def on_title(self, _):
+    def on_title(self, *_):
         self.track_title.set_label(self.player.title)
 
     def on_player_exit(self, _, value):
