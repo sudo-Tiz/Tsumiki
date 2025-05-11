@@ -112,11 +112,8 @@ class BluetoothSubMenu(QuickSubMenu):
             propagate_width=True,
             propagate_height=True,
             child=Box(
-                orientation="v",
-                children=Box(
                     orientation="v",
                     children=[self.paired_devices, self.available_devices],
-                ),
             ),
         )
 
@@ -124,10 +121,7 @@ class BluetoothSubMenu(QuickSubMenu):
             title="Bluetooth",
             title_icon=icons["bluetooth"]["enabled"],
             scan_button=self.scan_button,
-            child=Box(
-                orientation="v",
-                children=[self.child],
-            ),
+            child=self.child,
             **kwargs,
         )
 

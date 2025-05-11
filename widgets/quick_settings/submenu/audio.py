@@ -44,7 +44,7 @@ class AudioSubMenu(QuickSubMenu):
             title="Applications",
             title_icon=icons["audio"]["volume"]["high"],
             scan_button=self.scan_button,
-            child=Box(orientation="v", children=[self.child]),
+            child=self.child,
             **kwargs,
         )
 

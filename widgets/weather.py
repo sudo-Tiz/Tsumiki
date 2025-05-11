@@ -239,13 +239,13 @@ class WeatherMenu(Box, BaseWeatherWidget):
 
             hour = Label(
                 style_classes="weather-forecast-time",
-                label=f"{convert_to_12hr_format(column_data['time'])}",
+                label=f"{self.convert_to_12hr_format(column_data['time'])}",
                 h_align="center",
             )
             icon = Svg(
                 svg_file=self.get_weather_asset(
                     column_data["weatherCode"],
-                    convert_to_12hr_format(column_data["time"]),
+                    self.convert_to_12hr_format(column_data["time"]),
                 ),
                 size=65,
                 h_align="center",
