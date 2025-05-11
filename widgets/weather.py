@@ -93,8 +93,6 @@ class WeatherMenu(Box, BaseWeatherWidget):
         self.update_time = datetime.now()
         self.update_sunrise_sunset(data)
 
-        print("first widget")
-
         # Get the current weather
         self.current_weather = data["current"]
 
