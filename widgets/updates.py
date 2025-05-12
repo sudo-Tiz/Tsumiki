@@ -104,13 +104,13 @@ class UpdatesWidget(ButtonWidget):
         if update:
             exec_shell_command_async(
                 f"{self.base_command} up",
-                lambda output: self.update_values(output),
+                self.update_values,
             )
         else:
             logger.info(f"{Colors.INFO}[Updates] Checking for updates...")
             exec_shell_command_async(
                 self.base_command,
-                lambda output: self.update_values(output),
+                self.update_values,
             )
 
         return True
