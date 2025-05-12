@@ -68,7 +68,7 @@ class Mpris(ButtonWidget):
         bulk_connect(
             self,
             {
-                "button-press-event": lambda *_: popup.open(),
+                "button-press-event": popup.open,
             },
         )
 

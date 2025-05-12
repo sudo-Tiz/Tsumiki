@@ -464,7 +464,7 @@ class DateTimeWidget(ButtonWidget):
 
         self.connect(
             "clicked",
-            lambda *_: popup.open(),
+            popup.open,
         )
 
         self.children = Box(

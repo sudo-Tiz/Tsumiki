@@ -359,7 +359,7 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
 
             self._clicked_signal_id = self.connect(
                 "clicked",
-                lambda *_: self.popover.open(),
+                self.popover.open,
             )
         else:
             # Just update content_factory with latest data
