@@ -11,7 +11,7 @@ from fabric.widgets.wayland import WaylandWindow as Window
 import utils.functions as helpers
 import utils.icons as icons
 from services import Brightness, audio_service
-from utils import BarConfig, HyprlandWithMonitors
+from utils import HyprlandWithMonitors
 from utils.types import Keyboard_Mode
 from utils.widget_utils import (
     create_scale,
@@ -127,12 +127,12 @@ class OSDContainer(Window):
 
     def __init__(
         self,
-        widget_config: BarConfig,
+        config,
         transition_duration=200,
         keyboard_mode: Keyboard_Mode = "none",
         **kwargs,
     ):
-        self.config = widget_config["osd"]
+        self.config = config["modules"]["osd"]
 
         self.audio_container = AudioOSDContainer(config=self.config)
         self.brightness_container = BrightnessOSDContainer(config=self.config)

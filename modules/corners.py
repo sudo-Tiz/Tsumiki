@@ -20,10 +20,10 @@ class SideCorner(Box):
 class ScreenCorners(Window):
     """A window that displays all four corners."""
 
-    def __init__(
-        self,
-        size=20,
-    ):
+    def __init__(self, config):
+        self.config = config["modules"]["screen_corners"]
+
+        size = self.config["size"]
         super().__init__(
             name="corners",
             layer="top",

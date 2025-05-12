@@ -35,6 +35,7 @@ def process_and_apply_css(app: Application):
 
 
 general_options = widget_config["general"]
+module_options = widget_config["modules"]
 
 if not general_options["debug"]:
     for log in [
@@ -55,37 +56,31 @@ if __name__ == "__main__":
 
     windows = [bar]
 
-    if widget_config["notification"]["enabled"]:
+    if module_options["notification"]["enabled"]:
         from modules import NotificationPopup
 
-        notifications = NotificationPopup(widget_config)
-        windows.append(notifications)
+        windows.append(NotificationPopup(widget_config))
 
-    if (
-        general_options["screen_corners"]
-        and general_options["screen_corners"]["enabled"]
-    ):
+    if module_options["screen_corners"]["enabled"]:
         from modules.corners import ScreenCorners
 
-        windows.append(ScreenCorners(general_options["screen_corners"]["size"]))
+        windows.append(ScreenCorners(widget_config))
 
-    if general_options["dock"] and general_options["dock"]["enabled"]:
+    if module_options["dock"]["enabled"]:
         from modules.dock import Dock
 
-        windows.append(Dock(general_options["dock"]))
+        windows.append(Dock(widget_config))
 
-    if general_options["desktop_clock"] and general_options["desktop_clock"]["enabled"]:
+    if module_options["desktop_clock"]["enabled"]:
         from widgets.desktop_clock import DesktopClock
 
         windows.append(
             DesktopClock(
-                date_format=general_options["desktop_clock"]["date_format"],
-                layer=general_options["desktop_clock"]["layer"],
-                anchor=general_options["desktop_clock"]["anchor"],
+                widget_config,
             )
         )
 
-    if widget_config["osd"]["enabled"]:
+    if module_options["osd"]["enabled"]:
         from modules import OSDContainer
 
         windows.append(OSDContainer(widget_config))

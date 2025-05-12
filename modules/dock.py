@@ -56,7 +56,7 @@ class Dock(Window):
         return filtered_apps
 
     def __init__(self, config, **kwargs):
-        self.config = config
+        self.config = config["modules"]["dock"]
 
         super().__init__(
             name="dock-window",
