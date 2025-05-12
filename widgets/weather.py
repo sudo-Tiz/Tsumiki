@@ -363,7 +363,9 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
             )
         else:
             # Just update content_factory with latest data
-            self.popover.set_content_factory(lambda: WeatherMenu(data=data))
+            self.popover.set_content_factory(
+                lambda: WeatherMenu(data=data, config=self.config)
+            )
 
         return False
 
