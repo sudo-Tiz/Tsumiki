@@ -32,10 +32,13 @@ class ScanButton(HoverButton):
             max_value=360,
             tick_widget=self,
             repeat=False,
-            notify_value=lambda p, *_: self.scan_image.set_angle(p.value),
+            notify_value=self.set_notify_value,
         )
 
         self.set_image(self.scan_image)
+
+    def set_notify_value(self, p, *_):
+        self.scan_image.set_angle(p.value)
 
     def play_animation(self):
         self.scan_animator.play()

@@ -223,7 +223,7 @@ class PlayerBox(Box):
             max_value=360,
             tick_widget=self,
             repeat=True,
-            notify_value=lambda p, *_: self.image_box.set_angle(p.value),
+            notify_value=self.set_notify_value,
         )
 
         # Track Info
@@ -466,6 +466,9 @@ class PlayerBox(Box):
             ],
         )
         self.children = [*self.children, self.overlay_box]
+
+    def set_notify_value(self, p, *_):
+        self.image_box.set_angle(p.value)
 
     def on_scale_move(self, scale: Scale, event, moved_pos: int):
         scale.set_value(moved_pos)

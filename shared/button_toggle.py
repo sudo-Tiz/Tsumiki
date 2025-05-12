@@ -61,12 +61,13 @@ class CommandSwitcher(ButtonWidget):
 
         self.box.children = (self.icon, self.label_text)
 
-        self.connect("clicked", self.toggle)
+        self.connect("clicked", self.handle_click)
 
         # reusing the fabricator to call specified intervals
         util_fabricator.connect("changed", self.update_ui)
 
-    def toggle(self, *_):
+    # toggle the command on click
+    def handle_click(self, *_):
         is_app_running = helpers.is_app_running(self.command)
 
         if is_app_running:

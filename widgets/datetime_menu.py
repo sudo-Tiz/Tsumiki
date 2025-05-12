@@ -268,7 +268,7 @@ class DateNotificationMenu(Box):
             ),
         )
 
-        def on_clear_button_click(*_):
+        def handle_clear_click(*_):
             """Handle clear button click."""
             for child in self.notification_list_box.children:
                 self.notification_list_box.remove(child)
@@ -279,7 +279,7 @@ class DateNotificationMenu(Box):
 
         self.clear_button.connect(
             "clicked",
-            on_clear_button_click,
+            handle_clear_click,
         )
 
         notification_column_header.pack_end(

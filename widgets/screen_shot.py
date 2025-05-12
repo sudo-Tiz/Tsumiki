@@ -15,7 +15,7 @@ class ScreenShotWidget(ButtonWidget):
         if self.config["tooltip"]:
             self.set_tooltip_text("Screen Shot")
 
-        recorder_service = ScreenRecorder()
+        self.recorder_service = ScreenRecorder()
 
         self.submap_label = Label(label="0", style_classes="panel-text")
 
@@ -24,6 +24,8 @@ class ScreenShotWidget(ButtonWidget):
             props={"style_classes": "panel-icon"},
         )
 
-        self.connect(
-            "clicked", lambda _: recorder_service.screenshot(path=self.config["path"])
-        )
+        self.connect("clicked", self.handle_click)
+
+    def handle_click(self, *_):
+        """Start recording the screen."""
+        self.recorder_service.start_recording(path=self.config["path"])
