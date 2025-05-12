@@ -14,6 +14,7 @@ from shared import ButtonWidget, Grid, Popover, ScanButton
 from utils import BarConfig
 from utils.icons import weather_icons
 from utils.widget_utils import (
+    setup_cursor_hover,
     text_icon,
     util_fabricator,
 )
@@ -210,6 +211,8 @@ class WeatherMenu(Box, BaseWeatherWidget):
             child=self.forecast_box,
             expanded=self.config["expanded"],
         )
+
+        setup_cursor_hover(expander)
 
         self.children = (self.scan_btn, self.title_box, expander)
 
