@@ -121,10 +121,10 @@ def validate_widgets(parsed_data, default_config):
                         f"'{group_idx}' in section {section}. Must be a number."
                     )
                 idx = int(group_idx)
-                groups = parsed_data.get("module_groups", [])
+                groups = parsed_data.get("widget_groups", [])
                 if not isinstance(groups, list):
                     raise ValueError(
-                        "module_groups must be an array when using @group references"
+                        "widget_groups must be an array when using @group references"
                     )
                 if not (0 <= idx < len(groups)):
                     raise ValueError(

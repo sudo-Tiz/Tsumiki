@@ -128,7 +128,7 @@ DEFAULT_CONFIG = {
         "truncation_size": 2,
         "show_icon": True,
     },
-    "module_groups": [
+    "widget_groups": [
         {
             "widgets": ["updates", "battery"],
             "spacing": 4,

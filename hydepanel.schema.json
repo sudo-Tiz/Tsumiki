@@ -249,7 +249,7 @@
 				"right_section": {
 					"$ref": "#/definitions/widgets"
 				},
-				"module_groups": {
+				"widget_groups": {
 					"type": "array",
 					"items": {
 						"type": "object",

@@ -118,7 +118,7 @@ class StatusBar(Window):
 
                     if group_name.isdigit():
                         idx = int(group_name)
-                        groups = widget_config.get("module_groups", [])
+                        groups = widget_config.get("widget_groups", [])
                         if isinstance(groups, list) and 0 <= idx < len(groups):
                             group_config = groups[idx]
 
