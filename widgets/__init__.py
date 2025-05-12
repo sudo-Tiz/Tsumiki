@@ -4,6 +4,7 @@ from .bluetooth import *
 from .brightness import *
 from .cava import *
 from .click_counter import *
+from .cliphist import *
 from .datetime_menu import *
 from .hypr_idle import *
 from .hypr_picker import *

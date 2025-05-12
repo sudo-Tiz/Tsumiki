@@ -22,6 +22,7 @@ class StatusBar(Window, ToggleableWidget):
             "world_clock": "widgets.WorldClockWidget",
             "brightness": "widgets.BrightnessWidget",
             "cava": "widgets.CavaWidget",
+            "cliphist": "widgets.ClipHistoryWidget",
             "click_counter": "widgets.ClickCounterWidget",
             "cpu": "widgets.CpuWidget",
             "date_time": "widgets.DateTimeWidget",
