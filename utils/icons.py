@@ -58,7 +58,6 @@ text_icons = {
 }
 
 # sourced from wttr.in
-
 WEATHER_SYMBOL_WI_DAY = {
     "Unknown": "",
     "Cloudy": "",

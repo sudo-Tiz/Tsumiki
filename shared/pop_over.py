@@ -161,7 +161,7 @@ class Popover(Widget):
         if event.keyval == Gdk.KEY_Escape and self._manager.active_popover:
             self._manager.active_popover.hide_popover()
 
-    def open(self):
+    def open(self, *_):
         if self._destroy_timeout is not None:
             GLib.source_remove(self._destroy_timeout)
             self._destroy_timeout = None

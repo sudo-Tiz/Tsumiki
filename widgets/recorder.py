@@ -39,18 +39,24 @@ class RecorderWidget(ButtonWidget):
         if self.config["tooltip"]:
             self.set_tooltip_text("Recording stopped")
 
-        recorder_service = ScreenRecorder()
+        self.recorder_service = ScreenRecorder()
 
-        recorder_service.connect("recording", self.update_ui)
+        self.recorder_service.connect("recording", self.update_ui)
 
         self.connect(
             "clicked",
-            lambda _: recorder_service.screenrecord_stop()
-            if recorder_service.is_recording
-            else recorder_service.screenrecord_start(
-                path=self.config["path"], allow_audio=self.config["audio"]
-            ),
+            self.handle_click,
         )
+
+    # record or stop on click
+    def handle_click(self, *_):
+        """Start or stop recording the screen."""
+        if self.recorder_service.is_recording:
+            self.recorder_service.screenrecord_stop()
+        else:
+            self.recorder_service.screenrecord_start(
+                path=self.config["path"], allow_audio=self.config["audio"]
+            )
 
     def update_ui(self, _, is_recording: bool):
         if is_recording:

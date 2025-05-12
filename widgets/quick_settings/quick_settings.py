@@ -431,7 +431,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
 
         self.connect(
             "clicked",
-            lambda *_: (popup.open()),
+            popup.open,
         )
 
     def start_timeout(self):

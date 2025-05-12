@@ -39,7 +39,7 @@ class CpuWidget(ButtonWidget):
 
         exec_shell_command_async(
             "bash -c \"lscpu | grep 'Model name' | awk -F: '{print $2}'\"",
-            lambda value: setattr(self, "cpu_name", value.strip()),
+            self.set_cpu_name,
         )
 
         if self.current_mode == "graph":
@@ -79,6 +79,9 @@ class CpuWidget(ButtonWidget):
 
         # Set up a fabricator to call the update_label method when the CPU usage changes
         util_fabricator.connect("changed", self.update_ui)
+
+    def set_cpu_name(self, cpu_name):
+        self.cpu_name = cpu_name.strip()
 
     def update_ui(self, _, value):
         # Update the label with the current CPU usage if enabled

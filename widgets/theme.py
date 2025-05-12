@@ -28,9 +28,10 @@ class ThemeSwitcherWidget(ButtonWidget):
             props={"style_classes": "panel-icon"},
         )
         self.set_tooltip_text(self.current_theme)
-        self.connect("clicked", self.cycle_themes)
+        self.connect("clicked", self.handle_click)
 
-    def cycle_themes(self, *_):
+    ## Cycle through the themes on click
+    def handle_click(self, *_):
         """Cycle through the themes."""
         self.current_theme = self.themes_list[
             (self.themes_list.index(self.current_theme) + 1) % len(self.themes_list)

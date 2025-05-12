@@ -30,11 +30,12 @@ class StopWatchWidget(ButtonWidget):
         self.time_label = Label(label="00:00", style_classes="panel-text")
         self.box.children = (self.icon, self.time_label)
 
-        self.connect("clicked", self.on_start_stop_clicked)
+        self.connect("clicked", self.handle_click)
 
         self.timeout_id = GLib.timeout_add(100, self.update_time)
 
-    def on_start_stop_clicked(self, *_):
+    # stop or run on click
+    def handle_click(self, *_):
         if self.running:
             self.running = False
             self.icon.set_label(

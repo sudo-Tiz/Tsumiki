@@ -219,8 +219,8 @@ class WeatherMenu(Box, BaseWeatherWidget):
         util_fabricator.connect("changed", lambda *_: self.update_widget())
 
     def update_widget(self, initial=False):
+        # Check if the update time is more than 1 minute ago
         if (datetime.now() - self.update_time).total_seconds() < 60 and not initial:
-            # Check if the update time is more than 10 minutes ago
             return
 
         logger.debug("[Weather] Updating weather widget")
@@ -359,7 +359,7 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
 
             self._clicked_signal_id = self.connect(
                 "clicked",
-                lambda *_: self.popover.open(),
+                self.popover.open,
             )
         else:
             # Just update content_factory with latest data
@@ -375,6 +375,7 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
                 if self.check_if_day()
                 else weather_icons[self.current_weather["weatherCode"]]["icon-night"]
             )
+
             self.weather_icon.set_label(text_icon)
 
         if (datetime.now() - self.update_time).total_seconds() < self.config[

@@ -54,11 +54,11 @@ class MprisPlayer(Service):
         )
         self._signal_connectors["metadata"] = self._player.connect(
             "metadata",
-            lambda *args: self.update_status(),
+            self.update_status,
         )
-        idle_add(lambda *args: self.update_status_once())
+        idle_add(self.update_status_once)
 
-    def update_status(self):
+    def update_status(self, *_):
         for prop in [
             "metadata",
             "title",
@@ -76,7 +76,7 @@ class MprisPlayer(Service):
         ]:
             self.notifier(prop)
 
-    def update_status_once(self):
+    def update_status_once(self, *_):
         for prop in self.list_properties():  # type: ignore
             self.notifier(prop.name)
 
