@@ -41,7 +41,7 @@ class WeatherService(Service):
 
             logger.info(f"[WeatherService] Fetching weather information from {url}")
             contents = (
-                urllib.request.urlopen(url, context=context, timeout=10)
+                urllib.request.urlopen(url, context=context, timeout=20)
                 .read()
                 .decode("utf-8")
             )
