@@ -8,7 +8,7 @@ from .circle_image import *
 from .dialog import *
 from .grid import *
 from .lottie import *
-from .module_group import *
+from .widget_groups import *
 from .pop_over import *
 from .pop_up import *
 from .separator import *

@@ -6,7 +6,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow as Window
 
-from shared import ModuleGroup
+from shared import WidgetGroup
 from utils import HyprlandWithMonitors
 from utils.functions import run_in_thread
 from utils.widget_utils import lazy_load_widget
@@ -123,7 +123,7 @@ class StatusBar(Window):
                             group_config = groups[idx]
 
                     if group_config:
-                        group = ModuleGroup.from_config(
+                        group = WidgetGroup.from_config(
                             group_config,
                             self.widgets_list,
                             bar=self,
