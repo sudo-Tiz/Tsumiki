@@ -1,6 +1,7 @@
 # ruff: noqa: N802
 import math
 import os
+import re
 from time import sleep
 from typing import List
 
@@ -261,14 +262,14 @@ class PlayerBox(Box):
             self.track_title,
             "label",
             GObject.BindingFlags.DEFAULT,
-            lambda _, x: x if x != "" else "No Title",  # type: ignore
+            lambda _, x: re.sub(r"\r?\n", " ", x) if x != "" else "No Title",  # type: ignore
         )
         self.player.bind_property(
             "artist",
             self.track_artist,
             "label",
             GObject.BindingFlags.DEFAULT,
-            lambda _, x: x if x != "" else "No Artist",  # type: ignore
+            lambda _, x: re.sub(r"\r?\n", " ", x) if x != "" else "No Artist",  # type: ignore
         )
 
         self.player.bind_property(
@@ -276,7 +277,7 @@ class PlayerBox(Box):
             self.track_album,
             "label",
             GObject.BindingFlags.DEFAULT,
-            lambda _, x: x if x != "" else "No Album",  # type: ignore
+            lambda _, x: re.sub(r"\r?\n", " ", x) if x != "" else "No Album",  # type: ignore
         )
 
         self.track_info = Box(
