@@ -28,4 +28,4 @@ class ScreenShotWidget(ButtonWidget):
 
     def handle_click(self, *_):
         """Start recording the screen."""
-        self.recorder_service.start_recording(path=self.config["path"])
+        self.recorder_service.screenshot(path=self.config["path"])
