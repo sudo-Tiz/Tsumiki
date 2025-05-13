@@ -374,8 +374,7 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
 
         return False
 
-    def update_ui(self,*args, **kwargs):
-
+    def update_ui(self, *args, **kwargs):
         initial = kwargs.get("initial", False)
 
         # Check if the update time is more than 5 minutes ago, update the icon

@@ -13,7 +13,7 @@ from utils.icons import icons
 class ScreenRecorder(Service):
     """Service to handle screen recording"""
 
-    _instance = None  # Class-level private instance variable
+    _instance = None
 
     def __new__(cls):
         if cls._instance is None:

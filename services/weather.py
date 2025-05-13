@@ -18,7 +18,7 @@ context = ssl._create_unverified_context()
 class WeatherService(Service):
     """This class provides weather information for a given city."""
 
-    _instance = None  # Class-level private instance variable
+    _instance = None
 
     def __new__(cls):
         if cls._instance is None:
@@ -27,24 +27,21 @@ class WeatherService(Service):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.request = urllib.request.build_opener()
+        self.request.addheaders = [
+            (
+                "User-Agent",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3",  # noqa: E501
+            )
+        ]
 
     def simple_weather_info(self, location: str):
         try:
-            url = ""
-            # Construct the URL for fetching weather information
-            if location != "":
-                encoded_location = urllib.parse.quote_plus(location.capitalize())
-
-                url = f"http://wttr.in/{encoded_location}?format=j1"
-            else:
-                url = "http://wttr.in/?format=j1"
-
+            url = f"https://wttr.in/{location.title().replace(' ', '_')}?format=j1"
             logger.info(f"[WeatherService] Fetching weather information from {url}")
-            contents = (
-                urllib.request.urlopen(url, context=context, timeout=20)
-                .read()
-                .decode("utf-8")
-            )
+
+            # Open the URL and read the contents
+            contents = self.request.open(url, timeout=20).read().decode("utf-8")
 
             # Parse the weather information
             data = json.loads(contents)

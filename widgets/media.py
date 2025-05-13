@@ -219,7 +219,7 @@ class PlayerBox(Box):
 
         self.art_animator = Animator(
             bezier_curve=(0, 0, 1, 1),
-            duration=12,
+            duration=10,
             min_value=0,
             max_value=360,
             tick_widget=self,
