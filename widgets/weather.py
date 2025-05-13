@@ -37,15 +37,17 @@ class BaseWeatherWidget:
         self.sunset_time = data["astronomy"]["sunset"]
         return True
 
-
     def get_temperature(self):
+        """Get the current temperature in the specified unit."""
+
         if self.config["temperature_unit"] == "celsius":
             return self.current_weather["temp_C"] + "°C"
 
         return self.current_weather["temp_F"] + "°F"
 
-
     def get_temperature_hour(self, index):
+        """Get the temperature for a specific hour in the specified unit."""
+
         if self.config["temperature_unit"] == "celsius":
             return self.hourly_forecast[index]["tempC"] + "°C"
 
@@ -354,15 +356,11 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
 
         self.weather_icon.set_label(text_icon)
 
-        self.weather_label.set_label(
-            self.get_temperature()
-        )
+        self.weather_label.set_label(self.get_temperature())
 
         # Update the tooltip with the city and weather condition if enabled
         if self.config["tooltip"]:
-            self.set_tooltip_text(
-                f"{data['location']}, {self.get_description()}"
-            )
+            self.set_tooltip_text(f"{data['location']}, {self.get_description()}")
 
         # Create popover only once
 
