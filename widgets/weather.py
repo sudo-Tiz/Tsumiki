@@ -219,9 +219,11 @@ class WeatherMenu(Box, BaseWeatherWidget):
         self.update_widget(initial=True)
 
         # reusing the fabricator to call specified intervals
-        util_fabricator.connect("changed", lambda *_: self.update_widget())
+        util_fabricator.connect("changed", self.update_widget)
 
-    def update_widget(self, initial=False):
+    def update_widget(self, *args, **kwargs):
+        initial = kwargs.get("initial", False)
+
         # Check if the update time is more than 1 minute ago
         if (datetime.now() - self.update_time).total_seconds() < 60 and not initial:
             return
@@ -309,7 +311,7 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
         self.update_ui(initial=True)
 
         # Set up a fabricator to call the update_label method at specified intervals
-        util_fabricator.connect("changed", lambda *_: self.update_ui())
+        util_fabricator.connect("changed", self.update_ui)
 
     def fetch_data_from_url(self):
         data = weather_service.get_weather(
@@ -372,7 +374,10 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
 
         return False
 
-    def update_ui(self, initial=False):
+    def update_ui(self,*args, **kwargs):
+
+        initial = kwargs.get("initial", False)
+
         # Check if the update time is more than 5 minutes ago, update the icon
         if (datetime.now() - self.update_time).total_seconds() > 300:
             text_icon = (

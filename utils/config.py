@@ -83,7 +83,6 @@ class HydeConfig:
 
                     print("default", DEFAULT_CONFIG[key])
 
-
         self.config = parsed_data
 
     @run_in_thread
