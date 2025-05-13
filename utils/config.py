@@ -75,6 +75,15 @@ class HydeConfig:
                     parsed_data.get(key, {}), DEFAULT_CONFIG[key]
                 )
 
+                if key == "modules":
+                    # For modules, merge with defaults
+                    print("key", parsed_data.get(key, {}))
+
+                    print("\n\n")
+
+                    print("default", DEFAULT_CONFIG[key])
+
+
         self.config = parsed_data
 
     @run_in_thread
