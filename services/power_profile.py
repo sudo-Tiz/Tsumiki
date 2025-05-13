@@ -72,7 +72,7 @@ class PowerProfiles(Service):
 
     def set_power_profile(self, profile: str):
         try:
-            self.bus.set_property(
+            self.dbus_helper.set_property(
                 self.bus_name,
                 self.object_path,
                 self.interface_name,
