@@ -75,8 +75,18 @@ def celsius_to_fahrenheit(celsius):
 
 
 # Merge the parsed data with the default configuration
-def merge_defaults(data: dict, defaults: dict):
-    return {**defaults, **data}
+def merge_defaults(data, defaults):
+    merged = defaults.copy()
+    for key, user_value in data.items():
+        if (
+            key in merged
+            and isinstance(merged[key], dict)
+            and isinstance(user_value, dict)
+        ):
+            merged[key] = merge_defaults(user_value, merged[key])
+        else:
+            merged[key] = user_value
+    return merged
 
 
 ## Function to execute a shell command asynchronously

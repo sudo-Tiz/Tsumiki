@@ -75,14 +75,6 @@ class HydeConfig:
                     parsed_data.get(key, {}), DEFAULT_CONFIG[key]
                 )
 
-                if key == "modules":
-                    # For modules, merge with defaults
-                    logger.debug(f"Modules key: {parsed_data.get(key, {})}")
-
-                    logger.debug("\n\n")
-
-                    logger.debug(f"Default modules: {DEFAULT_CONFIG[key]}")
-
         self.config = parsed_data
 
     @run_in_thread
