@@ -357,7 +357,7 @@
 		"label": true,
 		"tooltip": true,
 		"temperature_unit": "celsius",
-		"wind_speed_unit": "km/h",
+		"wind_speed_unit": "kmh",
 		"expanded": true, // this is to show the expanded weather widget
 		"interval": 5 // this is the interval in seconds to update the weather, 1 hour is 3600 seconds
 	},
