@@ -37,6 +37,7 @@ class WeatherService(Service):
     def simple_weather_info(self, location: str):
         try:
             url = f"https://wttr.in/{parse.quote_plus(location.title())}?format=j1"
+
             logger.info(f"[WeatherService] Fetching weather information from {url}")
 
             # Open the URL and read the contents
