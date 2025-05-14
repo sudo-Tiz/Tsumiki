@@ -300,7 +300,7 @@
 				},
 				"wind_speed_unit": {
 					"type": "string",
-					"enum": ["kmh","mph"],
+					"enum": ["kmh", "mph"],
 					"description": "Specifies the wind speed unit to use."
 				},
 				"label": {
@@ -409,10 +409,7 @@
 				},
 				"temperature_unit": {
 					"type": "string",
-					"enum": [
-						"celsius",
-						"fahrenheit"
-					],
+					"enum": ["celsius", "fahrenheit"],
 					"description": "Specifies the temperature unit to use."
 				},
 				"round": {
