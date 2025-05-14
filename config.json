@@ -35,7 +35,7 @@
 		"icon": "",
 		"mode": "graph",
 		"tooltip": true,
-		"temp": "celsius",
+		"temperature_unit": "celsius",
 		"round": true,
 		"show_unit": true,
 		"sensor": "acpitz",
