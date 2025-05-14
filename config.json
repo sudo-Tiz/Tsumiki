@@ -35,7 +35,7 @@
 		"icon": "",
 		"mode": "graph",
 		"tooltip": true,
-		"unit": "celsius",
+		"temp": "celsius",
 		"round": true,
 		"show_unit": true,
 		"sensor": "acpitz",
@@ -357,6 +357,7 @@
 		"label": true,
 		"tooltip": true,
 		"temperature_unit": "celsius",
+		"wind_speed_unit": "km/h",
 		"expanded": true, // this is to show the expanded weather widget
 		"interval": 5 // this is the interval in seconds to update the weather, 1 hour is 3600 seconds
 	},
