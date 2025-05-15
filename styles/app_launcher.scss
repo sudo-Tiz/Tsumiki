@@ -1,0 +1,24 @@
+
+@use "theme.scss";
+
+
+#launcher {
+  background-color: theme.$background-dark;
+  border-radius: 15px;
+  border: 0.5px solid theme.$surface-disabled;
+
+  &-contents{
+    padding: 10px;
+    min-width: 600px;
+  }
+
+  &-close-button {
+    border-radius: 15px;
+
+    &:hover {
+      background-color: theme.$accent-red;
+    }
+  }
+}
+
+

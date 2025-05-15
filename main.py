@@ -56,6 +56,12 @@ if __name__ == "__main__":
 
     windows = [bar]
 
+    if module_options["app_launcher"]["enabled"]:
+        from modules.app_launcher import Launcher
+
+        launcher = Launcher()
+        windows.append(launcher)
+
     if module_options["notification"]["enabled"]:
         from modules import NotificationPopup
 

@@ -171,6 +171,11 @@
 	],
 
 	"modules": {
+		"app_launcher": {
+			"enabled": true,
+			"icon_size": 16,
+			"ignored_apps": []
+		},
 		"notification": {
 			"enabled": true,
 			"anchor": "top-right",

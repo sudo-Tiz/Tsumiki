@@ -164,6 +164,30 @@ Dock = TypedDict(
 )
 
 
+# Dock configuration
+AppLauncher = TypedDict(
+    "AppLauncher",
+    {
+        "enabled": bool,
+        "icon_size": int,
+        "ignored_apps": List[str],
+    },
+)
+
+# Modules configuration
+Modules = TypedDict(
+    "Modules",
+    {
+        "screen_corners": ScreenCorners,
+        "dock": Dock,
+        "desktop_clock": DesktopClock,
+        "notification": Notification,
+        "osd": OSD,
+        "app_launcher": AppLauncher,
+    },
+)
+
+
 # Bar configuration
 General = TypedDict(
     "General",
@@ -343,18 +367,6 @@ HyprPicker = TypedDict("HyprPicker", {**BaseConfig.__annotations__, "icon": str}
 # OCR configuration
 OCR = TypedDict("OCR", {**BaseConfig.__annotations__, "icon": str})
 
-
-# Modules configuration
-Modules = TypedDict(
-    "Modules",
-    {
-        "screen_corners": ScreenCorners,
-        "dock": Dock,
-        "desktop_clock": DesktopClock,
-        "notification": Notification,
-        "osd": OSD,
-    },
-)
 
 # Media configuration
 Media = TypedDict(
