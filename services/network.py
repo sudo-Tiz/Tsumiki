@@ -76,8 +76,6 @@ class Wifi(Service):
     def toggle_wifi(self):
         self._client.wireless_set_enabled(not self._client.wireless_get_enabled())
 
-    # def set_active_ap(self, ap):
-    #     self._device.access
 
     def scan(self):
         self._device.request_scan_async(
