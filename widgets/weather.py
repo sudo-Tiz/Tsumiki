@@ -74,6 +74,7 @@ class BaseWeatherWidget:
 
         # wttr.in time are in 300,400...2100 format ,
         #  we need to convert it to 4:00...21:00
+
     def convert_to_12hr_format(self, time: str) -> str:
         time = int(time)
         hour = time // 100  # Get the hour (e.g., 1200 -> 12)
@@ -90,6 +91,7 @@ class BaseWeatherWidget:
 
         # Format the time as a string
         return f"{hour}:{minute:02d} {period}"
+
 
 class WeatherMenu(Box, BaseWeatherWidget):
     """A menu to display the weather information."""
