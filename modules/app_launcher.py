@@ -13,6 +13,7 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 from fabric.widgets.wayland import WaylandWindow as Window
 
 from shared.tagentry import TagEntry
+from shared.widget_container import HoverButton
 
 
 class LauncherCommandType(Enum):
@@ -78,7 +79,7 @@ class Launcher(Window):
                         orientation="h",
                         children=[
                             self.search_entry,
-                            Button(
+                            HoverButton(
                                 name="launcher-close-button",
                                 image=Image(icon_name="window-close"),
                                 tooltip_text="Exit",
@@ -167,7 +168,7 @@ class Launcher(Window):
         return False
 
     def bake_application_slot(self, app: DesktopApp, **kwargs) -> Button:
-        return Button(
+        return HoverButton(
             style_classes="launcher-button",
             child=Box(
                 orientation="h",
