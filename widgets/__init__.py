@@ -1,5 +1,4 @@
 # ruff: noqa: F403
-from ..modules.desktop_clock import *
 from .battery import *
 from .bluetooth import *
 from .brightness import *
