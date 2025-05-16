@@ -110,7 +110,7 @@ class Launcher(Window):
         prompt = ""
         try:
             command, prompt = query.split(" ", 1)
-        except:
+        except Exception:
             command = query
 
         if len(command) > 0 and self._command_handler:
@@ -197,8 +197,7 @@ class Launcher(Window):
         self._command_handler = command_handler
 
     def toggle(self):
-        visible = self.get_visible()
-        if visible:
+        if self.is_visible():
             return self.set_visible(False)
         self._all_apps = get_desktop_applications()
         (self.search_entry.set_text(""),)

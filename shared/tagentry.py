@@ -3,6 +3,8 @@ from gi.repository import Gdk, Gtk
 
 
 class TagEntry(Gtk.Box):
+    """A widget that allows the user to enter and manage tags."""
+
     def __init__(self, available_tags=None, **kwargs):
         super().__init__(orientation=Gtk.Orientation.HORIZONTAL)
         self.set_spacing(2)
@@ -101,68 +103,3 @@ class TagEntry(Gtk.Box):
 
     def get_tags(self):
         return [tag.tag_text for tag in self.tags]
-
-
-class TagInputDemo(Gtk.Window):
-    def __init__(self):
-        super().__init__(title="Tag Input Demo")
-        self.set_default_size(400, 100)
-        self.set_border_width(10)
-
-        # Load CSS
-        self.load_css()
-
-        # Main container
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
-        self.add(vbox)
-
-        # Instructions
-        instruction = Gtk.Label()
-        instruction.set_markup(
-            "<b>Available tags:</b> python, gtk, programming, ui, linux"
-        )
-        instruction.set_halign(Gtk.Align.START)
-        vbox.pack_start(instruction, False, False, 0)
-
-        # Create tag entry
-        self.tag_entry = TagEntry()
-        vbox.pack_start(self.tag_entry, False, False, 0)
-
-        # Button to get tags
-        button = Gtk.Button(label="Get Tags")
-        button.connect("clicked", self.on_get_tags_clicked)
-        vbox.pack_start(button, False, False, 0)
-
-        # Result label
-        self.result_label = Gtk.Label(label="")
-        self.result_label.set_halign(Gtk.Align.START)
-        vbox.pack_start(self.result_label, False, False, 0)
-
-    def load_css(self):
-        css_provider = Gtk.CssProvider()
-        css = """
-        .tag {
-            background-color: #3498db;
-            border-radius: 4px;
-            color: white;
-            padding: 2px;
-        }
-
-        .tag-match {
-            background-color: #e8f4fc;
-        }
-        """
-        css_provider.load_from_data(css.encode())
-
-        screen = Gdk.Screen.get_default()
-        style_context = Gtk.StyleContext()
-        style_context.add_provider_for_screen(
-            screen, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-        )
-
-    def on_get_tags_clicked(self, button):
-        tags = self.tag_entry.get_tags()
-        if tags:
-            self.result_label.set_text(f"Selected tags: {', '.join(tags)}")
-        else:
-            self.result_label.set_text("No tags selected")

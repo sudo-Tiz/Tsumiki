@@ -7,12 +7,13 @@ from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow as Window
 
 from shared import WidgetGroup
+from shared.widget_container import ToggleableWidget
 from utils import HyprlandWithMonitors
 from utils.functions import run_in_thread
 from utils.widget_utils import lazy_load_widget
 
 
-class StatusBar(Window):
+class StatusBar(Window, ToggleableWidget):
     """A widget to display the status bar panel."""
 
     @run_in_thread
@@ -103,13 +104,6 @@ class StatusBar(Window):
 
         if options["check_updates"]:
             self.check_for_bar_updates()
-
-    def toggle(self):
-        """Toggle the visibility of the bar."""
-        if self.is_visible():
-            self.hide()
-        else:
-            self.show()
 
     def make_layout(self, widget_config):
         """assigns the three sections their respective widgets"""
