@@ -16,7 +16,7 @@ from shared.tagentry import TagEntry
 
 
 class LauncherCommandType(Enum):
-    """Launcher command types for the launcher command handler."""
+    """Types of commands that can be executed by the launcher."""
 
     SINGLE_ENTRY = 0
     SINGLE_ENTRY_WITH_CONFIRMATION = 1
@@ -119,9 +119,9 @@ class Launcher(Window):
                 command_type, command_factory = command_data
                 result = command_factory(prompt)
 
-                if command_type == LauncherCommandType.SINGLE_ENTRY_COMMAND:
+                if command_type == LauncherCommandType.SINGLE_ENTRY:
                     print(result.title, result.label)
-                elif command_type == LauncherCommandType.LIST_COMMAND:
+                elif command_type == LauncherCommandType.LIST:
                     ...
                 else:
                     ...
