@@ -60,7 +60,7 @@ if __name__ == "__main__":
     if module_options["app_launcher"]["enabled"]:
         from modules.app_launcher import Launcher
 
-        launcher = Launcher()
+        launcher = Launcher(widget_config)
         windows.append(launcher)
 
     if module_options["notification"]["enabled"]:
