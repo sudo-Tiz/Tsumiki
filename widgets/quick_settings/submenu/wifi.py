@@ -7,6 +7,7 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 from services import NetworkClient, Wifi, network_service
 from shared import QSChevronButton, QuickSubMenu
 from shared.buttons import ScanButton
+from shared.widget_container import HoverButton
 from utils.icons import icons
 
 
@@ -58,7 +59,11 @@ class WifiSubMenu(QuickSubMenu):
                 self.available_networks_box.add(btn)
 
     def make_button_from_ap(self, ap) -> Button:
-        ap_button = Button(style_classes="submenu-button", name="wifi-ap-button")
+
+        def disconnect(*_):
+            self.client.disconnect_wifi_bssid(ap.get("bssid"))
+
+        ap_button = HoverButton(style_classes="submenu-button", name="wifi-ap-button")
         ap_button.add(
             Box(
                 style="padding: 5px;",
@@ -72,7 +77,7 @@ class WifiSubMenu(QuickSubMenu):
             )
         )
         ap_button.connect(
-            "clicked", lambda _: self.client.connect_wifi_bssid(ap.get("bssid"))
+            "clicked", disconnect
         )
         return ap_button
 
