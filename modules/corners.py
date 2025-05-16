@@ -20,7 +20,7 @@ class SideCorner(Box):
 class ScreenCorners(Window):
     """A window that displays all four corners."""
 
-    def __init__(self, config):
+    def __init__(self, config, **kwargs):
         self.config = config["modules"]["screen_corners"]
 
         size = self.config["size"]
@@ -32,6 +32,7 @@ class ScreenCorners(Window):
             pass_through=True,
             visible=False,
             all_visible=False,
+            **kwargs,
         )
 
         self.all_corners = Box(

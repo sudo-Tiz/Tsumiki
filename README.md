@@ -51,7 +51,7 @@ HyDePanel is a modular status bar for the Hyprland Wayland compositor. Built on 
   Built with full support for Hyprland’s ecosystem and event model.
 
 - 🧩 **Modular Widget System**
-  Includes pluggable widgets for CPU, memory, network, media playback, battery, and more.
+  Includes pluggable widgets for Dock, Launcher, CPU, memory, network, media playback, battery, and more.
 
 - 🎨 **Fully Themeable**
   Customize fonts, colors, layouts, and behavior using the power of Fabric.

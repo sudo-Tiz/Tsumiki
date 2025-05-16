@@ -30,7 +30,8 @@ class LauncherCommandType(Enum):
 class Launcher(Window):
     """Launcher widget for launching applications and commands."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, config, **kwargs):
+        self.config = config["modules"]["app_launcher"]
         super().__init__(
             name="launcher",
             layer="top",
@@ -174,7 +175,11 @@ class Launcher(Window):
                 orientation="h",
                 spacing=12,
                 children=[
-                    Image(pixbuf=app.get_icon_pixbuf(), h_align="start", size=32),
+                    Image(
+                        pixbuf=app.get_icon_pixbuf(),
+                        h_align="start",
+                        size=self.config["icon_size"],
+                    ),
                     Label(
                         label=app.display_name or "Unknown",
                         v_align="center",
