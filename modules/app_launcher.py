@@ -27,7 +27,7 @@ class LauncherCommandType(Enum):
     WIDGET_WITH_CONFIRMATION = 5
 
 
-class Launcher(Window):
+class AppLauncher(Window):
     """Launcher widget for launching applications and commands."""
 
     def __init__(self, config, **kwargs):

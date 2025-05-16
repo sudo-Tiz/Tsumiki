@@ -59,7 +59,6 @@ class WifiSubMenu(QuickSubMenu):
                 self.available_networks_box.add(btn)
 
     def make_button_from_ap(self, ap) -> Button:
-
         def disconnect(*_):
             self.client.disconnect_wifi_bssid(ap.get("bssid"))
 
@@ -76,9 +75,7 @@ class WifiSubMenu(QuickSubMenu):
                 ],
             )
         )
-        ap_button.connect(
-            "clicked", disconnect
-        )
+        ap_button.connect("clicked", disconnect)
         return ap_button
 
 

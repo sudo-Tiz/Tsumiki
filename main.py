@@ -58,9 +58,9 @@ if __name__ == "__main__":
     windows = [bar]
 
     if module_options["app_launcher"]["enabled"]:
-        from modules.app_launcher import Launcher
+        from modules import AppLauncher
 
-        launcher = Launcher(widget_config)
+        launcher = AppLauncher(widget_config)
         windows.append(launcher)
 
     if module_options["notification"]["enabled"]:
@@ -69,23 +69,25 @@ if __name__ == "__main__":
         windows.append(NotificationPopup(widget_config))
 
     if module_options["screen_corners"]["enabled"]:
-        from modules.corners import ScreenCorners
+        from modules import ScreenCorners
 
-        windows.append(ScreenCorners(widget_config))
+        screen_corners = ScreenCorners(widget_config)
+
+        windows.append(screen_corners)
 
     if module_options["dock"]["enabled"]:
         from modules.dock import Dock
 
-        windows.append(Dock(widget_config))
+        dock = Dock(widget_config)
+
+        windows.append(dock)
 
     if module_options["desktop_clock"]["enabled"]:
-        from widgets.desktop_clock import DesktopClock
+        from modules import DesktopClock
 
-        windows.append(
-            DesktopClock(
-                widget_config,
-            )
-        )
+        desktop_clock = DesktopClock(widget_config)
+
+        windows.append(desktop_clock)
 
     if module_options["osd"]["enabled"]:
         from modules import OSDContainer
