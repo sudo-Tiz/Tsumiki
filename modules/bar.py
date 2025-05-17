@@ -9,20 +9,11 @@ from fabric.widgets.wayland import WaylandWindow as Window
 from shared import WidgetGroup
 from shared.widget_container import ToggleableWidget
 from utils import HyprlandWithMonitors
-from utils.functions import run_in_thread
 from utils.widget_utils import lazy_load_widget
 
 
 class StatusBar(Window, ToggleableWidget):
     """A widget to display the status bar panel."""
-
-    @run_in_thread
-    def check_for_bar_updates(self):
-        exec_shell_command_async(
-            get_relative_path("../assets/scripts/barupdate.sh"),
-            lambda _: None,
-        )
-        return True
 
     def __init__(self, config, **kwargs):
         self.widgets_list = {
@@ -103,7 +94,10 @@ class StatusBar(Window, ToggleableWidget):
         )
 
         if options["check_updates"]:
-            self.check_for_bar_updates()
+            exec_shell_command_async(
+                get_relative_path("../assets/scripts/barupdate.sh"),
+                lambda _: None,
+            )
 
     def make_layout(self, widget_config):
         """assigns the three sections their respective widgets"""

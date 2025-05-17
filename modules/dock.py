@@ -6,7 +6,6 @@ import cairo
 from fabric.hyprland.widgets import get_hyprland_connection
 from fabric.utils import (
     bulk_connect,
-    exec_shell_command,
     exec_shell_command_async,
     idle_add,
     remove_handler,
@@ -426,7 +425,7 @@ class Dock(Window, ToggleableWidget):
                 -1,
             )
             next_inst = instances[(idx + 1) % len(instances)]
-            exec_shell_command(
+            exec_shell_command_async(
                 f"hyprctl dispatch focuswindow address:{next_inst['address']}"
             )
 
