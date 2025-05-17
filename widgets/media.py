@@ -2,11 +2,9 @@
 import math
 import os
 import re
-from time import sleep
 from typing import List
 
-from fabric import Fabricator
-from fabric.utils import bulk_connect, get_relative_path
+from fabric.utils import bulk_connect, get_relative_path, invoke_repeater
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
@@ -21,7 +19,7 @@ from loguru import logger
 from services import MprisPlayer, MprisPlayerManager
 from shared import Animator, CircleImage, HoverButton
 from utils import APP_CACHE_DIRECTORY
-from utils.functions import ensure_directory
+from utils.functions import convert_to_percent, ensure_directory
 from utils.icons import icons
 from utils.widget_utils import setup_cursor_hover
 
@@ -304,19 +302,6 @@ class PlayerBox(Box):
             },
         )
 
-        def position_poll(_):
-            while True:
-                try:
-                    yield self.player.position
-                    sleep(1)
-                except Exception:  # noqa: PERF203
-                    self.player_fabricator.stop()
-
-        # Create a fabricator to poll the system stats
-        self.player_fabricator = Fabricator(poll_from=position_poll, stream=True)
-
-        self.player_fabricator.connect("changed", self.move_seekbar)
-
         # Buttons
         self.button_box = Box(
             name="button-box",
@@ -336,6 +321,40 @@ class PlayerBox(Box):
             style_classes="time-label",
             visible=self.config["show_time"],
         )
+
+        self.seek_bar = Scale(
+            min_value=0,
+            max_value=100,
+            increments=(5, 5),
+            orientation="h",
+            draw_value=False,
+            name="seek-bar",
+            value=0,
+        )
+        self.seek_bar.connect("change-value", self.on_scale_move)
+        self.player.bind("can-seek", "sensitive", self.seek_bar)
+
+        setup_cursor_hover(self.seek_bar)
+
+        self.player.connect(
+            "notify::length",
+            lambda *_: (
+                self.length_label.set_label(self.length_str(self.player.length)),
+                self.art_animator.play(),
+            ),
+        )
+
+        self.player.connect(
+            "notify::position",
+            lambda *_: (
+                self.seek_bar.set_value(
+                    convert_to_percent(self.player.position, self.player.length)
+                ),
+                self.position_label.set_label(self.length_str(self.player.position)),
+            ),
+        )
+
+        invoke_repeater(1000, self.move_seekbar)
 
         self.controls_box = CenterBox(
             style_classes="player-controls",
@@ -380,10 +399,13 @@ class PlayerBox(Box):
         self.play_pause_stack.add_named(self.play_icon, "play")
         self.play_pause_stack.add_named(self.pause_icon, "pause")
 
-        self.play_pause_button = HoverButton(
+        self.play_pause_button = Button(
             name="player-button",
             child=self.play_pause_stack,
         )
+
+        setup_cursor_hover(self.play_pause_button)
+
         self.play_pause_button.connect("clicked", self.player.play_pause)
         self.player.bind_property("can_pause", self.play_pause_button, "sensitive")
 
@@ -404,34 +426,6 @@ class PlayerBox(Box):
             self.play_pause_button,
             self.next_button,
         )
-
-        # Seek Bar
-        self.seek_bar = Scale(
-            min_value=0,
-            max_value=100,
-            increments=(5, 5),
-            orientation="h",
-            draw_value=False,
-            name="seek-bar",
-        )
-
-        setup_cursor_hover(self.seek_bar)
-
-        self.player.connect(
-            "notify::length",
-            lambda _, x: (
-                self.seek_bar.set_value(self.player.position),
-                self.seek_bar.set_range(0, self.player.length),
-                self.length_label.set_label(
-                    self.length_str(self.player.length),
-                ),
-                self.art_animator.play(),
-            )  # type: ignore
-            if self.player.length
-            else None,
-        )
-        self.player.bind_property("can-seek", self.seek_bar, "sensitive")
-
         self.player_info_box = Box(
             name="player-info-box",
             v_align="center",
@@ -466,16 +460,11 @@ class PlayerBox(Box):
                 ),
             ],
         )
+
         self.children = [*self.children, self.overlay_box]
 
     def set_notify_value(self, p, *_):
         self.image_box.set_angle(p.value)
-
-    def on_scale_move(self, scale: Scale, event, moved_pos: int):
-        scale.set_value(moved_pos)
-        self.player.position = moved_pos
-        self.position_label.set_label(self.length_str(moved_pos))
-        # self.player.set_position(moved_pos)
 
     def on_title(self, *_):
         self.track_title.set_label(self.player.title)
@@ -566,7 +555,13 @@ class PlayerBox(Box):
             logger.error("[PLAYER] Failed to grab artUrl")
 
     def move_seekbar(self, *_):
-        self.position_label.set_label(self.length_str(self.player.position))
-        if self.exit or not self.player.can_seek:
+        if self.player.position is None:
             return False
-        self.seek_bar.set_value(self.player.position)
+        position = convert_to_percent(self.player.position, self.player.length)
+        self.position_label.set_label(self.length_str(self.player.position))
+        self.seek_bar.set_value(position)
+
+    def on_scale_move(self, scale: Scale, event, moved_pos: int):
+        # TODO: fix this seek
+        self.player.position = moved_pos
+        self.position_label.set_label(self.length_str(moved_pos))
