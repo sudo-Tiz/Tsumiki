@@ -182,7 +182,12 @@ DEFAULT_CONFIG = {
             "percentage": True,
             "icon_size": 28,
         },
-        "app_launcher": {"enabled": False, "icon_size": 16, "ignored_apps": []},
+        "app_launcher": {
+            "enabled": False,
+            "tooltip": True,
+            "icon_size": 16,
+            "ignored_apps": [],
+        },
         "notification": {
             "enabled": True,
             "anchor": "top-right",

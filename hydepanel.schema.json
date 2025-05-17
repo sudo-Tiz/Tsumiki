@@ -1015,6 +1015,10 @@
 						"type": "boolean",
 						"description": "Determines whether the app launcher is enabled"
 					},
+					"tooltip": {
+						"type": "boolean",
+						"description": "Determines whether the app launcher has a tooltip"
+					},
 					"icon_size": {
 						"type": "integer",
 						"description": "Size of the app launcher icon"
