@@ -396,6 +396,26 @@
 		"padding": "7pt",
 		"spacing": "12pt",
 		"border-width": "1px",
+		"app_launcher": {
+			"scaling": 100,
+			"opacity": 50,
+			"shadow": {
+				"enabled": false,
+				"offset": 0,
+				"blur": 0,
+				"spread": 0,
+				"opacity": 100
+			},
+			"padding_x": "8px",
+			"padding_y": "8px",
+			"margin_x": "8px",
+			"margin_y": "8px",
+			"border": {
+				"enabled": false,
+				"width": "1px",
+				"radius": "1.5rem"
+			}
+		},
 		"dock": {
 			"scaling": 100,
 			"opacity": 50,
