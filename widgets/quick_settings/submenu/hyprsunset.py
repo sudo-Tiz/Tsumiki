@@ -18,11 +18,10 @@ class HyprSunsetSubMenu(QuickSubMenu):
 
         self.scale = create_scale(
             name="hyprsunset-scale",
-            min_value=1000,
-            max_value=9000,
-            value=6500,
             increments=(100, 100),
         )
+
+        self.scale.set_range(1000.0, 10000.0)
 
         super().__init__(
             title="HyprSunset",
@@ -30,25 +29,42 @@ class HyprSunsetSubMenu(QuickSubMenu):
             name="hyprsunset-sub-menu",
             scan_button=self.scan_button,
             child=self.scale,
+            **kwargs,
         )
 
         if self.scale:
             self.scale.connect("change-value", self.on_scale_move)
-            self.update_ui(int(self.scale.get_value()))
+            self.update_ui(6500)
+
+        # reusing the fabricator to call specified intervals
+        util_fabricator.connect("changed", self.update_scale)
 
     def on_scale_move(self, _, __, moved_pos):
         exec_shell_command_async(
-            f"hyprctl hyprsunset temperature {int(moved_pos)}", lambda *_: None
+            f"hyprctl hyprsunset temperature {int(moved_pos)}",
+            lambda *_: self.update_ui(int(moved_pos)),
         )
-        self.update_ui(int(moved_pos))
-
         return True
 
+    def update_scale(self, *_):
+        if is_app_running("hyprsunset"):
+            self.scale.set_sensitive(True)
+            exec_shell_command_async(
+                "hyprctl hyprsunset temperature",
+                self.update_ui,
+            )
+        else:
+            self.scale.set_sensitive(False)
+
     def update_ui(self, moved_pos):
-        """Update the UI elements."""
         # Update the scale value based on the current temperature
-        self.scale.set_value(moved_pos)
-        self.scale.set_tooltip_text(f"{moved_pos}K")
+        sanitized_value = (
+            float(moved_pos.strip("\n").strip(""))
+            if isinstance(moved_pos, str)
+            else moved_pos
+        )
+        self.scale.set_value(sanitized_value)
+        self.scale.set_tooltip_text(f"{sanitized_value}K")
 
 
 class HyprSunsetToggle(QSChevronButton):
