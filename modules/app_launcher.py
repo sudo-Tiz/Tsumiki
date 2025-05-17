@@ -183,7 +183,7 @@ class AppLauncher(Window):
                 spacing=12,
                 children=[
                     Image(
-                        pixbuf=app.get_icon_pixbuf(),
+                        pixbuf=app.get_icon_pixbuf(self.config["icon_size"]),
                         h_align="start",
                         size=self.config["icon_size"],
                     ),
