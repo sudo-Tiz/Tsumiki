@@ -173,6 +173,7 @@
 	"modules": {
 		"app_launcher": {
 			"enabled": true,
+			"tooltip":false,
 			"icon_size": 16,
 			"ignored_apps": []
 		},

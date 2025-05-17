@@ -187,7 +187,7 @@ class AppLauncher(Window):
                     ),
                 ],
             ),
-            tooltip_text=app.description,
+            tooltip_text=app.description if self.config["tooltip"] else None,
             on_clicked=lambda *_: (
                 app.launch(),
                 self.hide(),

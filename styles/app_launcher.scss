@@ -3,11 +3,11 @@
 
 
 #launcher {
-  background-color: theme.$background-dark;
-  border-radius: 15px;
-  border: 0.5px solid theme.$surface-disabled;
 
   &-contents{
+    border-radius: 15px;
+    border: 0.5px solid theme.$surface-disabled;
+    background-color: theme.$background-dark;
     padding: 10px;
     min-width: 600px;
   }
