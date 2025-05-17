@@ -1,13 +1,15 @@
+from fabric.widgets.box import Box
 from fabric.widgets.entry import Entry
-from gi.repository import Gdk, Gtk
+from fabric.widgets.eventbox import EventBox
+from fabric.widgets.label import Label
+from gi.repository import Gdk
 
 
-class TagEntry(Gtk.Box):
+class TagEntry(Box):
     """A widget that allows the user to enter and manage tags."""
 
     def __init__(self, available_tags=None, **kwargs):
-        super().__init__(orientation=Gtk.Orientation.HORIZONTAL)
-        self.set_spacing(2)
+        super().__init__(spacing=2, **kwargs)
 
         # List of available tags
         self.available_tags = available_tags or [
@@ -23,13 +25,12 @@ class TagEntry(Gtk.Box):
 
         # Create the active entry
         self.entry = Entry(**kwargs)
-        self.entry.set_hexpand(True)
+
         self.entry.connect("key-press-event", self.on_key_press)
         self.entry.connect("changed", self.on_text_changed)
 
         # Add entry to the box
         self.pack_start(self.entry, True, True, 0)
-        self.show_all()
 
     def on_text_changed(self, entry):
         text = entry.get_text().strip()
@@ -60,20 +61,15 @@ class TagEntry(Gtk.Box):
 
     def create_tag(self, text):
         # Create a tag button
-        tag_box = Gtk.EventBox()
+        tag_box = EventBox(style_classes="tag")
         tag_box.connect("button-press-event", self.on_tag_clicked)
         tag_box.tag_text = text
 
         # Container for the tag content
-        tag_container = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
-        tag_container.set_spacing(4)
+        tag_container = Box(spacing=4)
 
         # Tag label
-        label = Gtk.Label(label=text)
-
-        # Apply styling
-        context = tag_box.get_style_context()
-        context.add_class("tag")
+        label = Label(label=text)
 
         # Pack widgets
         tag_container.pack_start(label, False, False, 4)
@@ -86,8 +82,6 @@ class TagEntry(Gtk.Box):
 
         # Store the tag
         self.tags.append(tag_box)
-
-        self.show_all()
 
     def remove_last_tag(self):
         if self.tags:
