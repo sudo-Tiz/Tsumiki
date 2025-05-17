@@ -404,8 +404,6 @@ class PlayerBox(Box):
             child=self.play_pause_stack,
         )
 
-        setup_cursor_hover(self.play_pause_button)
-
         self.play_pause_button.connect("clicked", self.player.play_pause)
         self.player.bind_property("can_pause", self.play_pause_button, "sensitive")
 
