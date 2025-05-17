@@ -85,6 +85,8 @@ class AppLauncher(Window):
                                 image=Image(icon_name="window-close"),
                                 tooltip_text="Exit",
                                 on_clicked=lambda *_: self.hide(),
+                                v_align="center",
+                                h_align="center",
                             ),
                         ],
                     ),

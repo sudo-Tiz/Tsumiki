@@ -173,6 +173,7 @@
 	"modules": {
 		"app_launcher": {
 			"enabled": true,
+			"tooltip":true,
 			"icon_size": 16,
 			"ignored_apps": []
 		},
@@ -363,7 +364,7 @@
 		"temperature_unit": "celsius",
 		"wind_speed_unit": "kmh",
 		"expanded": true, // this is to show the expanded weather widget
-		"interval": 5 // this is the interval in seconds to update the weather, 1 hour is 3600 seconds
+		"interval": 3600 // this is the interval in seconds to update the weather, 1 hour is 3600 seconds
 	},
 	"window_title": {
 		"icon": true, // this is to enable the icon in the window title widget
