@@ -11,6 +11,7 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 from fabric.widgets.wayland import WaylandWindow as Window
+from gi.repository import Gdk
 
 from shared.tagentry import TagEntry
 from shared.widget_container import HoverButton
@@ -45,7 +46,7 @@ class AppLauncher(Window):
         self._arranger_handler: int = 0
         self._all_apps = get_desktop_applications()
 
-        self.add_keybinding("ESC", self.destroy)
+        self.connect("key-press-event", self._on_key_press)
 
         self._commands = {}
         self._command_handler = None
@@ -100,6 +101,10 @@ class AppLauncher(Window):
 
         self.search_entry.grab_focus_without_selecting()
         self.hide()
+
+    def _on_key_press(self, widget, event):
+        if event.keyval == Gdk.KEY_Escape:
+            self.destroy()
 
     def arrange_viewport(self, query: str = ""):
         # reset everything so we can filter current viewport's slots...
