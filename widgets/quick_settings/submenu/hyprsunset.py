@@ -39,7 +39,7 @@ class HyprSunsetSubMenu(QuickSubMenu):
         # reusing the fabricator to call specified intervals
         util_fabricator.connect("changed", self.update_scale)
 
-    @cooldown(1)
+    @cooldown(0.1)
     def on_scale_move(self, _, __, moved_pos):
         exec_shell_command_async(
             f"hyprctl hyprsunset temperature {int(moved_pos)}",
