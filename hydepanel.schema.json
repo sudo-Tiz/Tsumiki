@@ -387,7 +387,7 @@
 				}
 			}
 		},
-		"cliphist":{
+		"cliphist": {
 			"type": "object",
 			"properties": {
 				"max_items": {
