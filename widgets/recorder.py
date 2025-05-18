@@ -15,11 +15,9 @@ class RecorderWidget(ButtonWidget):
 
         check_executable_exists("wf-recorder")
 
-        self.weather_lottie_dir = get_relative_path("../assets/icons/lottie")
-
         self.recording_ongoing_lottie = LottieAnimationWidget(
             LottieAnimation.from_file(
-                f"{self.weather_lottie_dir}/recording.json",
+                f"{get_relative_path('../assets/icons/')}/recording.json",
             ),
             scale=0.40,
             h_align=True,
