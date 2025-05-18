@@ -24,15 +24,14 @@
 
 #close-button,
 #clear-button {
-  background-color: theme.$surface-disabled;
-  border-radius: 16px;
-  padding: 8px;
+  padding: 10px;
 }
 
 #close-button:hover,
 #close-button:focus,
 #clear-button:hover,
 #clear-button:focus {
+  border-radius: variable.$radius-large;
   background-color: theme.$surface-highlight;
 }
 
@@ -44,7 +43,7 @@
 #close-label,
 #clear-label {
   color: theme.$accent-red;
-  font-size: 16px;
+  font-size: 12px;
 }
 
 #close-button:active #close-label,
@@ -72,16 +71,14 @@
 
 #slot-button {
   border-radius: 16px;
-  padding: 16px;
+  padding: 8px;
   transition: padding 0.1s ease;
   animation: loadSlot 0.5s ease;
 
   &:active {
     background-color: theme.$background;
 
-    #app-label {
-      color: theme.$shadow-color;
-    }
+
   }
 }
 
@@ -90,20 +87,10 @@
 #slot-button:selected,
 #slot-button.selected {
   background-color: theme.$surface-highlight;
-  padding-left: 20px;
+  padding-left: 10px;
 }
 
-#slot-button:hover #app-label,
-#slot-button:focus #app-label,
-#slot-button:selected #app-label,
-#slot-button.selected #app-label {
-  color: theme.$background;
-}
 
-#clip-icon {
-  font-size: 16px;
-  color: theme.$background;
-}
 
 #clip-label {
   font-weight: bold;

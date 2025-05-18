@@ -42,14 +42,16 @@ class ClipHistoryMenu(Box):
         self._pending_updates = False
 
         self.viewport = Box(name="viewport", spacing=4, orientation="v")
+
         self.search_entry = Entry(
             name="search-entry",
             placeholder="Search Clipboard History",
             h_expand=True,
             notify_text=self.filter_items,
-            on_activate=lambda entry, *_: self.use_selected_item(),
+            on_activate=self.use_selected_item,
             on_key_press_event=self.on_search_entry_key_press,
         )
+
         self.search_entry.props.xalign = 0.5
 
         self.scrolled_window = ScrolledWindow(
@@ -65,18 +67,12 @@ class ClipHistoryMenu(Box):
             spacing=10,
             orientation="h",
             children=[
+                self.search_entry,
                 Button(
                     name="clear-button",
                     child=Label(name="clear-label", label=""),
                     tooltip_text="Clear History",
                     on_clicked=self.clear_history,
-                ),
-                self.search_entry,
-                Button(
-                    name="close-button",
-                    child=Label(name="close-label", label="󰜺"),
-                    tooltip_text="Exit",
-                    on_clicked=self.close,
                 ),
             ],
         )
@@ -298,25 +294,13 @@ class ClipHistoryMenu(Box):
         """Create a button for a text clipboard item"""
         return Button(
             name="slot-button",
-            child=Box(
-                name="slot-box",
-                orientation="h",
-                spacing=10,
-                children=[
-                    Label(
-                        name="clip-icon",
-                        label="",
-                        h_align="start",
-                    ),
-                    Label(
-                        name="clip-label",
-                        label=display_text,
-                        ellipsization="end",
-                        v_align="center",
-                        h_align="start",
-                        h_expand=True,
-                    ),
-                ],
+            child=Label(
+                name="clip-label",
+                label=display_text,
+                ellipsization="end",
+                v_align="center",
+                h_align="start",
+                h_expand=True,
             ),
             tooltip_text=display_text,
             on_clicked=lambda *_: self.paste_item(item_id),
@@ -471,7 +455,7 @@ class ClipHistoryMenu(Box):
 
         GLib.idle_add(scroll)
 
-    def use_selected_item(self):
+    def use_selected_item(self, *_):
         """Use (paste) the selected clipboard item"""
         children = self.viewport.get_children()
         if (
