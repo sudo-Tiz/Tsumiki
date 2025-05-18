@@ -34,7 +34,7 @@ class HyprSunsetSubMenu(QuickSubMenu):
 
         if self.scale:
             self.scale.connect("change-value", self.on_scale_move)
-            self.update_ui(6500)
+            self.update_ui(2600)
 
         # reusing the fabricator to call specified intervals
         util_fabricator.connect("changed", self.update_scale)
