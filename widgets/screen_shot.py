@@ -18,15 +18,13 @@ class ScreenShotWidget(ButtonWidget):
 
         self.recorder_service = ScreenRecorder()
 
-        self.screenshot_label = Label(label="0", style_classes="panel-text")
-
         self.box.children = text_icon(
             self.config["icon"],
             props={"style_classes": "panel-icon"},
         )
 
         if self.config["label"]:
-            self.box.add(self.screenshot_label)
+            self.box.add(Label(label="0", style_classes="panel-text"))
 
         self.connect("clicked", self.handle_click)
 

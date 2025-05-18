@@ -49,13 +49,16 @@ class CommandSwitcher(ButtonWidget):
             props={"style_classes": "panel-icon"},
         )
 
-        self.label_text = Label(
-            visible=False,
-            label="Enabled",
-            style_classes="panel-text",
+        self.box.add(
+            self.icon,
         )
 
-        self.box.children = (self.icon, self.label_text)
+        if self.label:
+            self.label_text = Label(
+                label="Enabled",
+                style_classes="panel-text",
+            )
+            self.box.add(self.label_text)
 
         self.connect("clicked", self.handle_click)
 
@@ -80,7 +83,6 @@ class CommandSwitcher(ButtonWidget):
             self.remove_style_class("active")
 
         if self.label:
-            self.label_text.set_visible(True)
             self.label_text.set_label("Enabled" if is_app_running else "Disabled")
 
         self.icon.set_label(self.enabled_icon if is_app_running else self.disabled_icon)

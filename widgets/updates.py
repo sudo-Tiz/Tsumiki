@@ -32,8 +32,6 @@ class UpdatesWidget(ButtonWidget):
 
         script_file = get_relative_path("../assets/scripts/systemupdates.sh")
 
-        self.update_label = Label(label="0", style_classes="panel-text")
-
         self.base_command = f"{script_file} --{self.config['os']}"
 
         if self.config["flatpak"]:
@@ -53,6 +51,7 @@ class UpdatesWidget(ButtonWidget):
             self.box.add(self.icon)
 
         if self.config["label"]:
+            self.update_label = Label(label="0", style_classes="panel-text")
             self.box.add(self.update_label)
 
         self.connect("button-press-event", self.on_button_press)

@@ -539,6 +539,15 @@
 						"radius": "16px"
 					}
 				},
+				"cliphist": {
+					"spacing": ".125em",
+					"icon_size": "12px",
+					"border": {
+						"enabled": false,
+						"width": "1px",
+						"radius": "16px"
+					}
+				},
 				"window_count": {
 					"spacing": ".125em",
 					"icon_size": "12px",

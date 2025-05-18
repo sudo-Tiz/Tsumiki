@@ -21,7 +21,13 @@ class BlueToothWidget(ButtonWidget):
             icon_size=self.config["icon_size"],
         )
 
-        self.bt_label = Label(label="On", visible=False, style_classes="panel-text")
+        self.box.add(
+            self.bluetooth_icon,
+        )
+
+        if self.config["label"]:
+            self.bt_label = Label(label="On", style_classes="panel-text")
+            self.box.add(self.bt_label)
 
         self.bluetooth_client.connect("changed", self.update_bluetooth_status)
 
@@ -33,11 +39,9 @@ class BlueToothWidget(ButtonWidget):
         icon = self.icons["enabled"] if bt_status == "on" else self.icons["disabled"]
 
         self.bluetooth_icon.set_from_icon_name(icon, icon_size=self.config["icon_size"])
-        self.box.children = (self.bluetooth_icon, self.bt_label)
 
         if self.config["label"]:
             self.bt_label.set_text(bt_status.capitalize())
-            self.bt_label.set_visible(True)
 
         if self.config["tooltip"]:
             self.set_tooltip_text(f"Bluetooth is {bt_status}")

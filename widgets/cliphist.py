@@ -511,7 +511,7 @@ class ClipHistoryWidget(ButtonWidget):
     ):
         super().__init__(
             widget_config["cliphist"],
-            name="clip-history",
+            name="cliphist",
             **kwargs,
         )
 
@@ -519,6 +519,9 @@ class ClipHistoryWidget(ButtonWidget):
             "",
             props={"style_classes": "panel-icon"},
         )
+
+        if self.config["label"]:
+            self.box.add(self.picker_label)
 
         popup = Popover(
             content_factory=lambda: ClipHistoryMenu(),

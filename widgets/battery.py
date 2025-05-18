@@ -27,16 +27,19 @@ class BatteryWidget(ButtonWidget):
             name="battery",
             **kwargs,
         )
-        self.full_battery_level = self.config["full_battery_level"]
 
-        self.battery_label = Label(
-            label="100%", style_classes="panel-text", visible=False
-        )
+        self.full_battery_level = self.config["full_battery_level"]
 
         self.battery_icon = Image(
             icon_name=icons["battery"]["full"],
             icon_size=self.config["icon_size"],
         )
+
+        self.box.add(self.battery_icon)
+
+        if self.config["label"]:
+            self.battery_label = Label(label="100%", style_classes="panel-text")
+            self.box.add(self.battery_label)
 
         self.client = BatteryService()
 
@@ -107,8 +110,6 @@ class BatteryWidget(ButtonWidget):
             else self.client.get_property("TimeToEmpty")
         )
 
-        self.battery_label.set_text(f"{battery_percent}%")
-
         self.battery_icon.set_from_icon_name(
             self.client.get_property("IconName"), self.config["icon_size"]
         )
@@ -124,11 +125,9 @@ class BatteryWidget(ButtonWidget):
             rotated_pixbuf = pixbuf.rotate_simple(GdkPixbuf.PixbufRotation.CLOCKWISE)
             self.battery_icon.set_from_pixbuf(rotated_pixbuf)
 
-        self.box.children = (self.battery_icon, self.battery_label)
-
         # Update the label with the battery percentage if enabled
         if self.config["label"]:
-            self.battery_label.set_visible(True)
+            self.battery_label.set_text(f"{battery_percent}%")
 
             ## Hide the label when the battery is full
             if (

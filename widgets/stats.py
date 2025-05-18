@@ -33,10 +33,6 @@ class CpuWidget(ButtonWidget):
         # Set the CPU name and mode
         self.current_mode = self.config["mode"]
 
-        self.cpu_level_label = Label(
-            label="0%", style_classes="panel-text", visible=False
-        )
-
         exec_shell_command_async(
             "bash -c \"lscpu | grep 'Model name' | awk -F: '{print $2}'\"",
             self.set_cpu_name,
@@ -44,6 +40,10 @@ class CpuWidget(ButtonWidget):
 
         if self.current_mode == "graph":
             self.graph_values = []
+            self.cpu_level_label = Label(
+                label="0%",
+                style_classes="panel-text",
+            )
             self.box.children = self.cpu_level_label
 
         elif self.current_mode == "progress":
@@ -75,6 +75,11 @@ class CpuWidget(ButtonWidget):
                 icon=self.config["icon"],
                 props={"style_classes": "panel-icon"},
             )
+
+            self.cpu_level_label = Label(
+                label="0%",
+                style_classes="panel-text",
+            )
             self.box.children = (self.icon, self.cpu_level_label)
 
         # Set up a fabricator to call the update_label method when the CPU usage changes
@@ -89,7 +94,6 @@ class CpuWidget(ButtonWidget):
         usage = value.get("cpu_usage")
 
         if self.current_mode == "graph":
-            self.cpu_level_label.set_visible(True)
             self.graph_values.append(get_bar_graph(usage))
 
             if len(self.graph_values) > self.config["graph_length"]:
@@ -101,8 +105,6 @@ class CpuWidget(ButtonWidget):
             self.progress_bar.set_value(usage / 100.0)
 
         else:
-            self.cpu_level_label.set_visible(True)
-
             self.cpu_level_label.set_label(f"{usage}%")
 
         # Update the tooltip with the memory usage details if enabled
@@ -157,12 +159,12 @@ class MemoryWidget(ButtonWidget):
         # Set the memory name and mode
         self.current_mode = self.config["mode"]
 
-        self.memory_level_label = Label(
-            label="0%", style_classes="panel-text", visible=False
-        )
-
         if self.current_mode == "graph":
             self.graph_values = []
+            self.memory_level_label = Label(
+                label="0%", style_classes="panel-text", visible=False
+            )
+
             self.box.children = self.memory_level_label
 
         elif self.current_mode == "progress":
@@ -194,6 +196,11 @@ class MemoryWidget(ButtonWidget):
                 icon=self.config["icon"],
                 props={"style_classes": "panel-icon"},
             )
+
+            self.memory_level_label = Label(
+                label="0%",
+                style_classes="panel-text",
+            )
             self.box.children = (self.icon, self.memory_level_label)
 
         # Set up a fabricator to call the update_label method  at specified intervals
@@ -207,7 +214,6 @@ class MemoryWidget(ButtonWidget):
         self.percent_used = memory.percent
 
         if self.current_mode == "graph":
-            self.memory_level_label.set_visible(True)
             self.graph_values.append(get_bar_graph(self.percent_used))
 
             if len(self.graph_values) > self.config["graph_length"]:
@@ -219,8 +225,6 @@ class MemoryWidget(ButtonWidget):
             self.progress_bar.set_value(self.percent_used / 100.0)
 
         else:
-            self.memory_level_label.set_visible(True)
-
             self.memory_level_label.set_label(f"{self.get_used()}")
 
         # Update the tooltip with the memory usage details if enabled
@@ -259,12 +263,14 @@ class StorageWidget(ButtonWidget):
         # Set the memory name and mode
         self.current_mode = self.config["mode"]
 
-        self.storage_level_label = Label(
-            label="0", style_classes="panel-text", visible=False
-        )
-
         if self.current_mode == "graph":
             self.graph_values = []
+
+            self.storage_level_label = Label(
+                label="0",
+                style_classes="panel-text",
+            )
+
             self.box.children = self.storage_level_label
 
         elif self.current_mode == "progress":
@@ -296,6 +302,12 @@ class StorageWidget(ButtonWidget):
                 icon=self.config["icon"],
                 props={"style_classes": "panel-icon"},
             )
+
+            self.storage_level_label = Label(
+                label="0",
+                style_classes="panel-text",
+            )
+
             self.box.children = (self.icon, self.storage_level_label)
 
         # Set up a fabricator to call the update_label method at specified intervals
@@ -307,7 +319,6 @@ class StorageWidget(ButtonWidget):
         percent = self.disk.percent
 
         if self.current_mode == "graph":
-            self.storage_level_label.set_visible(True)
             self.graph_values.append(get_bar_graph(percent))
 
             if len(self.graph_values) > self.config["graph_length"]:
@@ -319,8 +330,6 @@ class StorageWidget(ButtonWidget):
             self.progress_bar.set_value(percent / 100.0)
 
         else:
-            self.storage_level_label.set_visible(True)
-
             self.storage_level_label.set_label(f"{self.get_used()}")
 
         # Update the tooltip with the storage usage details if enabled

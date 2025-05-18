@@ -7,91 +7,105 @@
   @include common.floating-widget;
   @include common.spacing;
 
-}
 
-#search-entry {
-  font-weight: bold;
-  background-color: theme.$surface-disabled;
-  color: theme.$text-main;
-  border-radius: 16px;
-  padding: 10px;
+  #search-entry {
+    font-weight: bold;
+    background-color: theme.$surface-disabled;
+    color: theme.$text-main;
+    border-radius: 16px;
+    padding: 10px;
 
-  selection {
-    color: theme.$background-alt;
-    background-color: theme.$background;
+    selection {
+      color: theme.$background-alt;
+      background-color: theme.$background;
+    }
+  }
+
+  #close-button,
+  #clear-button {
+    padding: 10px;
+  }
+
+  #close-button:hover,
+  #close-button:focus,
+  #clear-button:hover,
+  #clear-button:focus {
+    border-radius: variable.$radius-large;
+    background-color: theme.$surface-highlight;
+  }
+
+  #close-button:active,
+  #clear-button:active {
+    background-color: theme.$accent-red;
+  }
+
+  #close-label,
+  #clear-label {
+    color: theme.$accent-red;
+    font-size: 12px;
+  }
+
+  #close-button:active #close-label,
+  #clear-button:active #clear-label {
+    color: theme.$shadow-color;
+  }
+
+
+  #scrolled-window {
+    border-radius: 16px;
+    min-height: 300px;
+
+  }
+
+
+  @keyframes loadSlot {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  #slot-button {
+    border-radius: 16px;
+    padding: 8px;
+    transition: padding 0.1s ease;
+    animation: loadSlot 0.5s ease;
+
+    &:active {
+      background-color: theme.$background;
+
+
+    }
+  }
+
+  #slot-button:hover,
+  #slot-button:focus,
+  #slot-button:selected,
+  #slot-button.selected {
+    background-color: theme.$surface-highlight;
+    padding-left: 10px;
+  }
+
+
+
+  #clip-label {
+    font-weight: bold;
   }
 }
 
-#close-button,
-#clear-button {
-  padding: 10px;
-}
 
-#close-button:hover,
-#close-button:focus,
-#clear-button:hover,
-#clear-button:focus {
-  border-radius: variable.$radius-large;
-  background-color: theme.$surface-highlight;
-}
-
-#close-button:active,
-#clear-button:active {
-  background-color: theme.$accent-red;
-}
-
-#close-label,
-#clear-label {
-  color: theme.$accent-red;
-  font-size: 12px;
-}
-
-#close-button:active #close-label,
-#clear-button:active #clear-label {
-  color: theme.$shadow-color;
-}
+#cliphist {
+  border-radius: variable.$bar-widgets-cliphist-border-radius;
+  border: if(variable.$bar-widgets-cliphist-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-cliphist-border-width;
 
 
-#scrolled-window {
-  border-radius: 16px;
-  min-height: 300px;
 
-}
-
-
-@keyframes loadSlot {
-  0% {
-    opacity: 0;
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-cliphist-icon_size;
+    margin-right: variable.$bar-widgets-cliphist-spacing;
   }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-#slot-button {
-  border-radius: 16px;
-  padding: 8px;
-  transition: padding 0.1s ease;
-  animation: loadSlot 0.5s ease;
-
-  &:active {
-    background-color: theme.$background;
-
-
-  }
-}
-
-#slot-button:hover,
-#slot-button:focus,
-#slot-button:selected,
-#slot-button.selected {
-  background-color: theme.$surface-highlight;
-  padding-left: 10px;
-}
-
-
-
-#clip-label {
-  font-weight: bold;
 }

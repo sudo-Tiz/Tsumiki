@@ -31,9 +31,7 @@ class GenericOSDContainer(Box):
             name="osd-container",
             **kwargs,
         )
-        self.level = Label(
-            name="osd-level", h_align="center", h_expand=True, visible=False
-        )
+
         self.icon = Image(
             icon_name=icons.icons["brightness"]["screen"], icon_size=config["icon_size"]
         )
@@ -41,10 +39,10 @@ class GenericOSDContainer(Box):
             name="osd-scale",
         )
 
-        self.children = (self.icon, self.scale, self.level)
+        self.children = (self.icon, self.scale)
 
         if config["percentage"]:
-            self.level.set_visible(True)
+            self.add(Label(name="osd-level", h_align="center", h_expand=True))
 
 
 class BrightnessOSDContainer(GenericOSDContainer):

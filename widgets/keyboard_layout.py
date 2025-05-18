@@ -72,7 +72,4 @@ class KeyboardLayoutWidget(ButtonWidget):
                 f"Caps Lock 󰪛: {main_kb['capsLock']} | Num Lock : {main_kb['numLock']}"
             )
 
-        # Update the label with the used storage if enabled
-        if self.config["label"]:
-            self.kb_label.set_label(KBLAYOUT_MAP[layout])
-            self.kb_label.set_visible(True)
+        self.kb_label.set_label(KBLAYOUT_MAP[layout])

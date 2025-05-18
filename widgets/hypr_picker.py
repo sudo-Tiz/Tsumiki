@@ -16,18 +16,17 @@ class HyprPickerWidget(ButtonWidget):
 
         check_executable_exists("hyprpicker")
 
-        self.picker_label = Label(label="picker", style_classes="panel-text")
-
         if self.config["show_icon"]:
             # Create a TextIcon with the specified icon and size
-            self.icon = text_icon(
-                icon=self.config["icon"],
-                props={"style_classes": "panel-icon"},
+            self.box.add(
+                text_icon(
+                    icon=self.config["icon"],
+                    props={"style_classes": "panel-icon"},
+                )
             )
-            self.box.add(self.icon)
 
         if self.config["label"]:
-            self.box.add(self.picker_label)
+            self.box.add(Label(label="picker", style_classes="panel-text"))
 
         self.connect("button-press-event", self.on_button_press)
 
