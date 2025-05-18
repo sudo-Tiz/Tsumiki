@@ -1,3 +1,5 @@
+from typing import Literal
+
 import setproctitle
 from fabric import Application
 from fabric.utils import cooldown, exec_shell_command, get_relative_path, monitor_file
@@ -93,6 +95,28 @@ if __name__ == "__main__":
         from modules import OSDContainer
 
         windows.append(OSDContainer(widget_config))
+
+    @Application.action("toggle")
+    def toggle(
+        item: Literal["bar", "desktop_clock", "dock", "screen_corners", "app_launcher"],
+    ):
+        """Toggle the visibility of the specified item."""
+        match item:
+            case "bar":
+                bar.toggle()
+            case "desktop_clock":
+                desktop_clock.toggle()
+            case "dock":
+                dock.toggle()
+            case "screen_corners":
+                screen_corners.toggle()
+            case "app_launcher":
+                app_launcher.toggle()
+            case _:
+                logger.error(
+                    f"{Colors.ERROR}[Main] Invalid item '{item}' specified for toggle."
+                    "Valid options are: bar, desktop_clock, dock, screen_corners, app_launcher."  # noqa: E501
+                )
 
     # Initialize the application with the status bar
     app = Application(APPLICATION_NAME, windows=windows)
