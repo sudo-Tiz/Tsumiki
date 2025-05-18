@@ -3,8 +3,8 @@ from fabric.widgets.image import Image
 
 from services import ScreenRecorder
 from shared import ButtonWidget, LottieAnimation, LottieAnimationWidget
-from utils import BarConfig, ExecutableNotFoundError, icons
-from utils.functions import executable_exists
+from utils import BarConfig, icons
+from utils.functions import check_executable_exists
 
 
 class RecorderWidget(ButtonWidget):
@@ -13,8 +13,7 @@ class RecorderWidget(ButtonWidget):
     def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(widget_config["recorder"], name="recorder", **kwargs)
 
-        if not executable_exists("wf-recorder"):
-            raise ExecutableNotFoundError("wf-recorder")
+        check_executable_exists("wf-recorder")
 
         self.weather_lottie_dir = get_relative_path("../assets/icons/lottie")
 

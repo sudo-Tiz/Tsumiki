@@ -1,7 +1,6 @@
 from fabric.widgets.label import Label
 
 import utils.functions as helpers
-from utils import ExecutableNotFoundError
 from utils.widget_utils import (
     text_icon,
     util_fabricator,
@@ -36,8 +35,7 @@ class CommandSwitcher(ButtonWidget):
             **kwargs,
         )
 
-        if not helpers.executable_exists(self.command):
-            raise ExecutableNotFoundError(self.command)
+        helpers.check_executable_exists(self.command)
 
         self.add_style_class(style_classes)
 

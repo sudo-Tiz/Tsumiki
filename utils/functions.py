@@ -17,6 +17,8 @@ from fabric.utils import (
 from gi.repository import Gdk, Gio, GLib, Gtk
 from loguru import logger
 
+from utils.exceptions import ExecutableNotFoundError
+
 from .colors import Colors
 from .constants import named_colors
 from .icons import text_icons
@@ -279,9 +281,12 @@ def get_distro_icon():
 
 # Function to check if an executable exists
 @ttl_lru_cache(600, 10)
-def executable_exists(executable_name):
+def check_executable_exists(executable_name):
     executable_path = shutil.which(executable_name)
-    return bool(executable_path)
+    if not bool(executable_path):
+        raise ExecutableNotFoundError(
+            executable_name
+        )  # Raise an error if the executable is not found and exit the application
 
 
 # Function to send a notification

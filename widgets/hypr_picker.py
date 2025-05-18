@@ -3,8 +3,8 @@ from fabric.widgets.label import Label
 from gi.repository import Gdk
 
 from shared import ButtonWidget
-from utils import BarConfig, ExecutableNotFoundError
-from utils.functions import executable_exists
+from utils import BarConfig
+from utils.functions import check_executable_exists
 from utils.widget_utils import text_icon
 
 
@@ -14,8 +14,7 @@ class HyprPickerWidget(ButtonWidget):
     def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(widget_config["hypr_picker"], name="hypr_picker", **kwargs)
 
-        if not executable_exists("hyprpicker"):
-            raise ExecutableNotFoundError("hyprpicker")
+        check_executable_exists("hyprpicker")
 
         self.picker_label = Label(label="picker", style_classes="panel-text")
 

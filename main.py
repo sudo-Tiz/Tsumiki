@@ -12,7 +12,6 @@ from utils import (
     APP_CACHE_DIRECTORY,
     APPLICATION_NAME,
     Colors,
-    ExecutableNotFoundError,
     widget_config,
 )
 
@@ -20,11 +19,7 @@ from utils import (
 @cooldown(2)
 @helpers.run_in_thread
 def process_and_apply_css(app: Application):
-    if not helpers.executable_exists("sass"):
-        raise ExecutableNotFoundError(
-            "sass"
-        )  # Raise an error if sass is not found and exit the application
-
+    helpers.check_executable_exists("sass")
     logger.info(f"{Colors.INFO}[Main] Compiling CSS")
     output = exec_shell_command("sass styles/main.scss dist/main.css --no-source-map")
 

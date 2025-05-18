@@ -50,8 +50,7 @@ class Brightness(Service):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        if not helpers.executable_exists("brightnessctl"):
-            logger.error(f"{Colors.ERROR}Command brightnessctl not found")
+        helpers.check_executable_exists("brightnessctl")
 
         # Path for screen backlight control
         self.screen_backlight_path = f"/sys/class/backlight/{screen_device}"
