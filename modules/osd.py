@@ -42,7 +42,8 @@ class GenericOSDContainer(Box):
         self.children = (self.icon, self.scale)
 
         if config["percentage"]:
-            self.add(Label(name="osd-level", h_align="center", h_expand=True))
+            self.level = Label(name="osd-level", h_align="center", h_expand=True)
+            self.add(self.level)
 
 
 class BrightnessOSDContainer(GenericOSDContainer):

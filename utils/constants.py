@@ -19,7 +19,11 @@ WEATHER_CACHE_FILE = f"{APP_CACHE_DIRECTORY}/weather.json"
 # Default configuration values
 DEFAULT_CONFIG = {
     "$schema": "./hydepanel.schema.json",
-    "cliphist": {},
+    "cliphist": {
+        "icon": "",
+        "label": True,
+        "tooltip": True,
+    },
     "battery": {
         "full_battery_level": 100,
         "hide_label_when_full": True,

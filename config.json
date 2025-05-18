@@ -93,6 +93,11 @@
 		"tooltip": true,
 		"graph_length": 4
 	},
+	"cliphist": {
+		"icon": "",
+		"label": true,
+		"tooltip": true
+	},
 	"submap": {
 		"icon": "󰌌",
 		"label": true,

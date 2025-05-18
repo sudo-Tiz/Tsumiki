@@ -323,7 +323,7 @@ Cava = TypedDict("Cava", {"bars": int, "color": str})
 Overview = TypedDict("Overview", {})
 
 
-Cliphist = TypedDict("Cliphist", {})
+Cliphist = TypedDict("Cliphist", {"icon": str, **BaseConfig.__annotations__})
 
 
 # DateTime configuration

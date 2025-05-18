@@ -59,6 +59,7 @@
 							"media",
 							"microphone",
 							"network_usage",
+							"cliphist",
 							"ocr",
 							"power",
 							"recorder",

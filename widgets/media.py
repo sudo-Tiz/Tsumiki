@@ -28,7 +28,10 @@ from utils import APP_CACHE_DIRECTORY
 from utils.bezier import cubic_bezier
 from utils.functions import convert_to_percent, ensure_directory
 from utils.icons import icons
-from utils.widget_utils import setup_cursor_hover
+from utils.widget_utils import (
+    create_scale,
+    setup_cursor_hover,
+)
 
 
 class PlayerBoxStack(Box):
@@ -329,15 +332,8 @@ class PlayerBox(Box):
             visible=self.config["show_time"],
         )
 
-        self.seek_bar = Scale(
-            min_value=0,
-            max_value=100,
-            increments=(5, 5),
-            orientation="h",
-            draw_value=False,
-            name="seek-bar",
-            value=0,
-        )
+        self.seek_bar = create_scale()
+
         self.seek_bar.connect("change-value", self.on_scale_move)
         self.player.bind("can-seek", "sensitive", self.seek_bar)
 

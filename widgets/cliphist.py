@@ -515,13 +515,18 @@ class ClipHistoryWidget(ButtonWidget):
             **kwargs,
         )
 
-        self.children = text_icon(
-            "",
-            props={"style_classes": "panel-icon"},
+        self.box.add(
+            text_icon(
+                self.config["icon"],
+                props={"style_classes": "panel-icon"},
+            )
         )
 
         if self.config["label"]:
-            self.box.add(self.picker_label)
+            self.box.add(Label(label="Clip", style_classes="panel-text"))
+
+        if self.config["tooltip"]:
+            self.set_tooltip_text("Clipboard History")
 
         popup = Popover(
             content_factory=lambda: ClipHistoryMenu(),
