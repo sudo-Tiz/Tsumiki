@@ -1,4 +1,4 @@
-from fabric.utils import exec_shell_command_async
+from fabric.utils import cooldown, exec_shell_command_async
 
 from shared.buttons import QSChevronButton, ScanButton
 from shared.submenu import QuickSubMenu
@@ -39,6 +39,7 @@ class HyprSunsetSubMenu(QuickSubMenu):
         # reusing the fabricator to call specified intervals
         util_fabricator.connect("changed", self.update_scale)
 
+    @cooldown(2)
     def on_scale_move(self, _, __, moved_pos):
         exec_shell_command_async(
             f"hyprctl hyprsunset temperature {int(moved_pos)}",
