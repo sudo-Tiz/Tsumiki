@@ -351,9 +351,18 @@ separator {
   background-color: theme.$surface-disabled;
 }
 
+
 scrollbar {
-  background-color: theme.$text-main;
-  border-radius: variable.$radius;
-  margin-left: 8px;
-  min-width: .3em;
+  background-color: theme.$surface-disabled;
+  border-radius: 10px;
+  padding: 2px;
+  margin-left: 6px;
 }
+
+slider {
+  border-radius: 8px;
+  min-width: 6px;
+  min-height: 30px;
+  background-color: theme.$background;
+}
+

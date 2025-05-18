@@ -44,7 +44,7 @@ class ClipHistoryMenu(Box):
         self.viewport = Box(name="viewport", spacing=4, orientation="v")
         self.search_entry = Entry(
             name="search-entry",
-            placeholder="Search Clipboard History...",
+            placeholder="Search Clipboard History",
             h_expand=True,
             notify_text=self.filter_items,
             on_activate=lambda entry, *_: self.use_selected_item(),
@@ -55,8 +55,8 @@ class ClipHistoryMenu(Box):
         self.scrolled_window = ScrolledWindow(
             name="scrolled-window",
             spacing=10,
-            min_content_size=(450, 105),
-            max_content_size=(450, 105),
+            min_content_size=(300, 105),
+            max_content_size=(300, 105),
             child=self.viewport,
         )
 
@@ -68,14 +68,15 @@ class ClipHistoryMenu(Box):
                 Button(
                     name="clear-button",
                     child=Label(name="clear-label", label=""),
-                    on_clicked=lambda *_: self.clear_history(),
+                    tooltip_text="Clear History",
+                    on_clicked=self.clear_history,
                 ),
                 self.search_entry,
                 Button(
                     name="close-button",
                     child=Label(name="close-label", label="󰜺"),
                     tooltip_text="Exit",
-                    on_clicked=lambda *_: self.close(),
+                    on_clicked=self.close,
                 ),
             ],
         )
@@ -94,7 +95,7 @@ class ClipHistoryMenu(Box):
         self.add(self.history_box)
         self.open()  # Load items when the widget is created
 
-    def close(self):
+    def close(self, *_):
         """Close the clipboard history panel"""
         self.viewport.children = []
         self.selected_index = -1  # Reset selection
@@ -370,7 +371,7 @@ class ClipHistoryMenu(Box):
 
         GLib.idle_add(delete)
 
-    def clear_history(self):
+    def clear_history(self, *_):
         """Clear all clipboard history (GLib.idle_add)"""
 
         def clear():

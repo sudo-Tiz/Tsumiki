@@ -15,11 +15,11 @@
   color: theme.$text-main;
   border-radius: 16px;
   padding: 10px;
-}
 
-#search-entry selection {
-  color: theme.$background-alt;
-  background-color: theme.$background;
+  selection {
+    color: theme.$background-alt;
+    background-color: theme.$background;
+  }
 }
 
 #close-button,
@@ -52,37 +52,13 @@
   color: theme.$shadow-color;
 }
 
-#config-button:active,
-#new-session-button:active {
-  background-color: theme.$background;
-}
-
-
 
 #scrolled-window {
   border-radius: 16px;
+  min-height: 300px;
+
 }
 
-#scrolled-window scrollbar {
-  border-radius: 10px;
-  background-color: theme.$surface-disabled;
-  padding: 2px;
-  margin-left: 6px;
-}
-
-#scrolled-window slider {
-  border-radius: 8px;
-  min-width: 10px;
-  min-height: 40px;
-  background-color: theme.$background;
-}
-
-#slot-button {
-  border-radius: 16px;
-  padding: 16px;
-  transition: padding 0.1s ease;
-  animation: loadSlot 0.5s ease;
-}
 
 @keyframes loadSlot {
   0% {
@@ -94,6 +70,21 @@
   }
 }
 
+#slot-button {
+  border-radius: 16px;
+  padding: 16px;
+  transition: padding 0.1s ease;
+  animation: loadSlot 0.5s ease;
+
+  &:active {
+    background-color: theme.$background;
+
+    #app-label {
+      color: theme.$shadow-color;
+    }
+  }
+}
+
 #slot-button:hover,
 #slot-button:focus,
 #slot-button:selected,
@@ -102,11 +93,6 @@
   padding-left: 20px;
 }
 
-#slot-button:active {
-  background-color: theme.$background;
-}
-
-
 #slot-button:hover #app-label,
 #slot-button:focus #app-label,
 #slot-button:selected #app-label,
@@ -114,15 +100,10 @@
   color: theme.$background;
 }
 
-#slot-button:active #app-label {
-  color: theme.$shadow-color;
-}
-
 #clip-icon {
-  font-size: 20px;
+  font-size: 16px;
   color: theme.$background;
 }
-
 
 #clip-label {
   font-weight: bold;
