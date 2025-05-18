@@ -1,9 +1,12 @@
+from functools import partial
+
 from fabric.core.service import Signal
 from fabric.utils import get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
+from utils.bezier import cubic_bezier
 from utils.icons import icons
 from utils.widget_utils import setup_cursor_hover
 
@@ -26,12 +29,11 @@ class ScanButton(HoverButton):
         )
 
         self.scan_animator = Animator(
-            bezier_curve=(0, 0, 1, 1),
+            timing_function=partial(cubic_bezier, 0, 0, 1, 1),
             duration=4,
             min_value=0,
             max_value=360,
             tick_widget=self,
-            repeat=False,
             notify_value=self.set_notify_value,
         )
 

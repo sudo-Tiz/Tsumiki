@@ -2,6 +2,7 @@
 import math
 import os
 import re
+from functools import partial
 from typing import List
 
 from fabric.utils import (
@@ -24,6 +25,7 @@ from loguru import logger
 from services import MprisPlayer, MprisPlayerManager
 from shared import Animator, CircleImage, HoverButton
 from utils import APP_CACHE_DIRECTORY
+from utils.bezier import cubic_bezier
 from utils.functions import convert_to_percent, ensure_directory
 from utils.icons import icons
 from utils.widget_utils import setup_cursor_hover
@@ -221,7 +223,7 @@ class PlayerBox(Box):
         self.player.connect("notify::arturl", self.set_image)
 
         self.art_animator = Animator(
-            bezier_curve=(0, 0, 1, 1),
+            timing_function=partial(cubic_bezier, 0, 0, 1, 1),
             duration=10,
             min_value=0,
             max_value=360,
