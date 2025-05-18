@@ -95,7 +95,7 @@
 	},
 	"cliphist": {
 		"icon": "",
-		"label": true,
+		"label": false,
 		"tooltip": true
 	},
 	"submap": {

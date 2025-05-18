@@ -352,16 +352,19 @@ separator {
 }
 
 
-scrollbar {
-  background-color: theme.$surface-disabled;
-  border-radius: 10px;
-  padding: 2px;
-  margin-left: 6px;
-}
+scrolledwindow {
+  scrollbar {
+    background-color: theme.$surface-disabled;
+    border-radius: 10px;
+    padding: 2px;
+    margin-left: 6px;
+  }
 
-slider {
-  border-radius: 8px;
-  min-width: 6px;
-  min-height: 30px;
-  background-color: theme.$background;
+  slider {
+    border-radius: 8px;
+    min-width: 6px;
+    min-height: 30px;
+    background-color: theme.$background;
+
+  }
 }

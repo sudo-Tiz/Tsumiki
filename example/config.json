@@ -93,6 +93,11 @@
 		"tooltip": true,
 		"graph_length": 4
 	},
+	"cliphist": {
+		"icon": "",
+		"label": false,
+		"tooltip": true
+	},
 	"submap": {
 		"icon": "󰌌",
 		"label": true,
@@ -128,7 +133,8 @@
 			"window_title"
 		], // this is the left section of the panel
 		"middle_section": [
-			"date_time"
+			"date_time",
+			"cliphist"
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
@@ -530,6 +536,15 @@
 					"size": " 20px"
 				},
 				"cpu": {
+					"spacing": ".125em",
+					"icon_size": "12px",
+					"border": {
+						"enabled": false,
+						"width": "1px",
+						"radius": "16px"
+					}
+				},
+				"cliphist": {
 					"spacing": ".125em",
 					"icon_size": "12px",
 					"border": {
