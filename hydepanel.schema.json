@@ -403,7 +403,7 @@
 					"description": "Determines whether to show the icon."
 				}
 			}
-		}
+		},
 		"cpu": {
 			"type": "object",
 			"properties": {
