@@ -4,7 +4,12 @@ import os
 import re
 from typing import List
 
-from fabric.utils import bulk_connect, get_relative_path, invoke_repeater
+from fabric.utils import (
+    bulk_connect,
+    cooldown,
+    get_relative_path,
+    invoke_repeater,
+)
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
@@ -559,6 +564,7 @@ class PlayerBox(Box):
         self.position_label.set_label(self.length_str(self.player.position))
         self.seek_bar.set_value(position)
 
+    @cooldown(1)
     def on_scale_move(self, scale: Scale, event, moved_pos: int):
         # TODO: fix this seek
         self.player.position = moved_pos

@@ -1,3 +1,5 @@
+from fabric.utils import cooldown
+
 from services import Brightness
 from shared import SettingSlider
 from utils.icons import icons
@@ -32,6 +34,7 @@ class BrightnessSlider(SettingSlider):
         """Reset the brightness to the default value."""
         self.client.screen_brightness = 0
 
+    @cooldown(1)
     def on_scale_move(self, _, __, moved_pos):
         self.client.screen_brightness = moved_pos
 

@@ -1,3 +1,4 @@
+from fabric.utils import cooldown
 from fabric.widgets.box import Box
 
 from services import audio_service
@@ -85,6 +86,7 @@ class AudioSlider(SettingSlider):
         self.scale.set_tooltip_text(f"{round(volume)}%")
         self.icon.set_from_icon_name(self._get_icon_name(), self.pixel_size)
 
+    @cooldown(1)
     def on_scale_move(self, _, __, moved_pos):
         """Handle volume slider changes."""
         if self.audio_stream:
