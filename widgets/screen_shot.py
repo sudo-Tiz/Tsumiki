@@ -6,7 +6,6 @@ from utils import BarConfig
 from utils.widget_utils import text_icon
 
 
-# todo check children
 class ScreenShotWidget(ButtonWidget):
     """A widget to switch themes."""
 
