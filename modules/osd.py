@@ -52,7 +52,7 @@ class BrightnessOSDContainer(GenericOSDContainer):
 
     __gsignals__: ClassVar = {
         "brightness-changed": (GObject.SignalFlags.RUN_FIRST, None, (int,))
-    }  # noqa: E501
+    }
 
     def __init__(self, config, **kwargs):
         super().__init__(
@@ -90,7 +90,7 @@ class AudioOSDContainer(GenericOSDContainer):
 
     __gsignals__: ClassVar = {
         "volume-changed": (GObject.SignalFlags.RUN_FIRST, None, ())
-    }  # noqa: E501
+    }
 
     def __init__(self, config, **kwargs):
         super().__init__(
