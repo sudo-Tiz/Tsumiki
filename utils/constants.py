@@ -21,6 +21,11 @@ DEFAULT_CONFIG = {
     "$schema": "./hydepanel.schema.json",
     "cliphist": {
         "icon": "",
+        "label": False,
+        "tooltip": True,
+    },
+    "kanban": {
+        "icon": "",
         "label": True,
         "tooltip": True,
     },

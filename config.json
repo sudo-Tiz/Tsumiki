@@ -98,6 +98,11 @@
 		"label": false,
 		"tooltip": true
 	},
+	"kanban": {
+		"icon": "",
+		"label": false,
+		"tooltip": true
+	},
 	"submap": {
 		"icon": "󰌌",
 		"label": true,
@@ -134,7 +139,7 @@
 		], // this is the left section of the panel
 		"middle_section": [
 			"date_time",
-			"cliphist"
+			"kanban"
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",

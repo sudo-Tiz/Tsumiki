@@ -1,0 +1,81 @@
+@use "sass:color";
+@use "theme.scss";
+@use "common";
+@use "variable.scss";
+
+#kanban {
+  @include common.floating-widget;
+  @include common.spacing;
+  border: 4px solid theme.$surface-disabled;
+  min-height: 400px;
+  min-width: 600px;
+}
+
+#kanban-header {
+  border: 2px solid theme.$surface-disabled;
+  border-radius: 12px;
+  padding: 4px;
+}
+
+#column-header {
+  padding: 4px;
+  font-weight: bold;
+  color: theme.$text-main;
+}
+
+#kanban-note {
+  background-color: theme.$surface-disabled;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 4px;
+}
+
+#kanban-row:first-child>*>* {
+  border-radius: 16px 16px 4px 4px;
+}
+
+#kanban-row:last-child>*>* {
+  border-radius: 4px 4px 16px 16px;
+}
+
+#inline-editor {
+  border: 2px solid theme.$surface-highlight;
+  border-radius: 12px;
+  padding: 8px;
+}
+
+#kanban-btn,
+#kanban-btn-add {
+  background-color: theme.$surface-disabled;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+#kanban-btn {
+  background-color: theme.$shadow-color;
+}
+
+#kanban-btn:hover,
+#kanban-btn-add:hover {
+  background-color: theme.$surface-highlight;
+}
+
+#kanban-btn:active,
+#kanban-btn-add:active {
+  background-color: theme.$text-main;
+}
+
+#kanban-btn-label,
+#kanban-btn-neg {
+  font-size: 12px;
+  color: theme.$text-main;
+}
+
+#kanban-btn-neg {
+  color: theme.$accent-red;
+}
+
+#kanban-btn:active #kanban-btn-label,
+#kanban-btn-add:active #kanban-btn-label {
+  color: theme.$shadow-color;
+}

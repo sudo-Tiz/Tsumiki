@@ -23,6 +23,7 @@ class StatusBar(Window, ToggleableWidget):
             "brightness": "widgets.BrightnessWidget",
             "cava": "widgets.CavaWidget",
             "cliphist": "widgets.ClipHistoryWidget",
+            "kanban": "widgets.KanbanWidget",
             "click_counter": "widgets.ClickCounterWidget",
             "cpu": "widgets.CpuWidget",
             "date_time": "widgets.DateTimeWidget",
