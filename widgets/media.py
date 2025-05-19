@@ -563,7 +563,7 @@ class PlayerBox(Box):
         self.seek_bar.set_value(position)
 
     @cooldown(1)
-    def on_scale_move(self, scale: Scale, event, moved_pos: int):
-        # TODO: fix this seek
-        self.player.position = moved_pos
-        self.position_label.set_label(self.length_str(moved_pos))
+    def on_scale_move(self, scale: Scale, event, pos: int):
+        actual_pos = pos * self.player.length * 0.01
+        self.player.position = actual_pos
+        self.position_label.set_label(self.length_str(actual_pos))
