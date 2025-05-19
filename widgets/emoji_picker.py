@@ -353,7 +353,7 @@ class EmojiPickerWidget(ButtonWidget):
             self.box.add(Label(label="Clip", style_classes="panel-text"))
 
         if self.config["tooltip"]:
-            self.set_tooltip_text("Clipboard History")
+            self.set_tooltip_text("Emoji Picker")
 
         popup = Popover(
             content_factory=lambda: EmojiPickerMenu(),
