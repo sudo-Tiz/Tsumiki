@@ -5,7 +5,7 @@
 
 
 
-#emoji {
+#emoji-menu {
 
   @include common.floating-widget;
   @include common.spacing;
@@ -110,5 +110,16 @@
   100% {
     padding: 16px;
     text-shadow: 0 4px 4px theme.$shadow-color;
+  }
+}
+
+#emoji_picker {
+  border-radius: variable.$bar-widgets-emoji_picker-border-radius;
+  border: if(variable.$bar-widgets-emoji_picker-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-emoji_picker-border-width;
+
+  #nerd-icon.panel-icon {
+    font-size: variable.$bar-widgets-emoji_picker-icon_size;
+    margin-right: variable.$bar-widgets-emoji_picker-spacing;
   }
 }

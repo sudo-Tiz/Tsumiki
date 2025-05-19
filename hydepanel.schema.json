@@ -50,6 +50,8 @@
 							"click_counter",
 							"cpu",
 							"date_time",
+							"emoji_picker",
+							"kanban",
 							"divider",
 							"hypr_idle",
 							"hypr_sunset",
@@ -389,6 +391,40 @@
 			}
 		},
 		"cliphist": {
+			"type": "object",
+			"properties": {
+				"max_items": {
+					"type": "integer",
+					"description": "Maximum number of items to display in the clipboard history."
+				},
+				"icon_size": {
+					"type": "integer",
+					"description": "Specifies the size of the clipboard icon."
+				},
+				"show_icon": {
+					"type": "boolean",
+					"description": "Determines whether to show the icon."
+				}
+			}
+		},
+		"emoji_picker": {
+			"type": "object",
+			"properties": {
+				"max_items": {
+					"type": "integer",
+					"description": "Maximum number of items to display in the emoji picker."
+				},
+				"icon_size": {
+					"type": "integer",
+					"description": "Specifies the size of the emoji icon."
+				},
+				"show_icon": {
+					"type": "boolean",
+					"description": "Determines whether to show the icon."
+				}
+			}
+		},
+		"kanban": {
 			"type": "object",
 			"properties": {
 				"max_items": {

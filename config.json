@@ -563,6 +563,24 @@
 						"radius": "16px"
 					}
 				},
+				"kanban": {
+					"spacing": ".125em",
+					"icon_size": "12px",
+					"border": {
+						"enabled": false,
+						"width": "1px",
+						"radius": "16px"
+					}
+				},
+				"emoji_picker": {
+					"spacing": ".125em",
+					"icon_size": "12px",
+					"border": {
+						"enabled": false,
+						"width": "1px",
+						"radius": "16px"
+					}
+				},
 				"window_count": {
 					"spacing": ".125em",
 					"icon_size": "12px",

@@ -98,6 +98,16 @@
 		"label": false,
 		"tooltip": true
 	},
+	"kanban": {
+		"icon": "󱞁",
+		"label": false,
+		"tooltip": true
+	},
+	"emoji_picker": {
+		"icon": "",
+		"label": false,
+		"tooltip": true
+	},
 	"submap": {
 		"icon": "󰌌",
 		"label": true,
@@ -134,7 +144,7 @@
 		], // this is the left section of the panel
 		"middle_section": [
 			"date_time",
-			"cliphist"
+			"kanban"
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
@@ -545,6 +555,24 @@
 					}
 				},
 				"cliphist": {
+					"spacing": ".125em",
+					"icon_size": "12px",
+					"border": {
+						"enabled": false,
+						"width": "1px",
+						"radius": "16px"
+					}
+				},
+				"kanban": {
+					"spacing": ".125em",
+					"icon_size": "12px",
+					"border": {
+						"enabled": false,
+						"width": "1px",
+						"radius": "16px"
+					}
+				},
+				"emoji_picker": {
 					"spacing": ".125em",
 					"icon_size": "12px",
 					"border": {
