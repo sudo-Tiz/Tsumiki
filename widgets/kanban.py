@@ -315,7 +315,7 @@ class Kanban(Box):
     STATE_FILE = Path(os.path.expanduser("~/.kanban.json"))
 
     def __init__(self):
-        super().__init__(name="kanban")
+        super().__init__(name="kanban-board", spacing=4)
 
         self.grid = Gtk.Grid(column_spacing=4, column_homogeneous=True, vexpand=True)
 
