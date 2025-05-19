@@ -72,7 +72,6 @@ class EmojiPickerMenu(Box):
 
         self.add(self.picker_box)
 
-
     def _load_emoji_data(self):
         emoji_data = {}
         emoji_file_path = get_relative_path("../assets/emoji.json")
