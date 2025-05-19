@@ -218,7 +218,9 @@ class PlayerBox(Box):
         self.angle_direction = 1
         self.skipped = False
 
-        self.image_box = CircleImage(size=self.image_size, image_file=self.fallback_cover_path)
+        self.image_box = CircleImage(
+            size=self.image_size, image_file=self.fallback_cover_path
+        )
 
         self.image_box.set_size_request(self.image_size, self.image_size)
 

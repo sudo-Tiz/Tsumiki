@@ -64,6 +64,8 @@ class HyprSunsetSubMenu(QuickSubMenu):
             if isinstance(moved_pos, str)
             else moved_pos
         )
+        if sanitized_value == self.scale.get_value():
+            return
         self.scale.set_value(sanitized_value)
         self.scale.set_tooltip_text(f"{sanitized_value}K")
 
