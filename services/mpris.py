@@ -110,21 +110,21 @@ class MprisPlayer(Service):
         GLib.idle_add(lambda: (self.emit("exit", True), False))
         del self._player
 
-    def toggle_shuffle(self):
+    def toggle_shuffle(self, *_):
         if self.can_shuffle:
             # schedule the shuffle toggle in the GLib idle loop
             GLib.idle_add(lambda: (setattr(self, "shuffle", not self.shuffle), False))
         # else do nothing
 
-    def play_pause(self):
+    def play_pause(self, *_):
         if self.can_pause:
             GLib.idle_add(lambda: (self._player.play_pause(), False))
 
-    def next(self):
+    def next(self, *_):
         if self.can_go_next:
             GLib.idle_add(lambda: (self._player.next(), False))
 
-    def previous(self):
+    def previous(self, *_):
         if self.can_go_previous:
             GLib.idle_add(lambda: (self._player.previous(), False))
 

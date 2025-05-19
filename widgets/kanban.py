@@ -8,6 +8,7 @@ from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
+from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import Gdk, GLib, GObject, Gtk
 
 from shared.pop_over import Popover
@@ -47,7 +48,7 @@ class InlineEditor(Box):
         cancel_btn.get_style_context().add_class("flat")
 
         # Pack the TextView inside a ScrolledWindow for better appearance.
-        sw = Gtk.ScrolledWindow()
+        sw = ScrolledWindow()
         sw.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         sw.set_min_content_height(50)
         sw.add(self.text_view)
@@ -215,10 +216,9 @@ class KanbanColumn(Gtk.Frame):
 
         self.add_btn.connect("clicked", self.on_add_clicked)
 
-        scrolled = Gtk.ScrolledWindow(name="kanban-scroll")
+        scrolled = ScrolledWindow(name="kanban-scroll", v_expand=True)
         scrolled.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scrolled.add(self.listbox)
-        scrolled.set_vexpand(True)
 
         self.box.pack_start(scrolled, True, True, 0)
         self.box.pack_start(self.add_btn, False, False, 0)
