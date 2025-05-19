@@ -24,6 +24,7 @@ class StatusBar(Window, ToggleableWidget):
             "cava": "widgets.CavaWidget",
             "cliphist": "widgets.ClipHistoryWidget",
             "kanban": "widgets.KanbanWidget",
+            "emoji_picker": "widgets.EmojiPickerWidget",
             "click_counter": "widgets.ClickCounterWidget",
             "cpu": "widgets.CpuWidget",
             "date_time": "widgets.DateTimeWidget",

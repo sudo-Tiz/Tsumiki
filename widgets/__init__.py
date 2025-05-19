@@ -6,6 +6,7 @@ from .cava import *
 from .click_counter import *
 from .cliphist import *
 from .datetime_menu import *
+from .emoji_picker import *
 from .hypr_idle import *
 from .hypr_picker import *
 from .hypr_sunset import *

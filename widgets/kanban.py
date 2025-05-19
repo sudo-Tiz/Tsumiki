@@ -372,8 +372,8 @@ class KanbanWidget(ButtonWidget):
         **kwargs,
     ):
         super().__init__(
-            widget_config["cliphist"],
-            name="cliphist",
+            widget_config["kanban"],
+            name="kanban",
             **kwargs,
         )
 

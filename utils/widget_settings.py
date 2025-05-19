@@ -325,6 +325,10 @@ Overview = TypedDict("Overview", {})
 
 Cliphist = TypedDict("Cliphist", {"icon": str, **BaseConfig.__annotations__})
 
+Kanban = TypedDict("kanban", {"icon": str, **BaseConfig.__annotations__})
+
+EmojiPicker = TypedDict("emoji_picker", {"icon": str, **BaseConfig.__annotations__})
+
 
 # DateTime configuration
 DateTimeNotification = TypedDict(
@@ -458,6 +462,8 @@ class BarConfig(TypedDict):
     cava: Cava
     click_counter: ClickCounter
     cpu: Cpu
+    emoji_picker: EmojiPicker
+    kanban: Kanban
     date_time: DateTimeMenu
     divider: Divider
     hypr_idle: HyprIdle

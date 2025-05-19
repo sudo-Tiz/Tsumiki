@@ -24,8 +24,13 @@ DEFAULT_CONFIG = {
         "label": False,
         "tooltip": True,
     },
+    "emoji_picker": {
+        "icon": "",
+        "label": False,
+        "tooltip": True,
+    },
     "kanban": {
-        "icon": "",
+        "icon": "󱞁",
         "label": True,
         "tooltip": True,
     },

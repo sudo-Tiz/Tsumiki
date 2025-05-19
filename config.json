@@ -99,7 +99,12 @@
 		"tooltip": true
 	},
 	"kanban": {
-		"icon": "",
+		"icon": "󱞁",
+		"label": false,
+		"tooltip": true
+	},
+	"emoji_picker": {
+		"icon": "",
 		"label": false,
 		"tooltip": true
 	},
@@ -139,7 +144,7 @@
 		], // this is the left section of the panel
 		"middle_section": [
 			"date_time",
-			"kanban"
+			"emoji_picker"
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
