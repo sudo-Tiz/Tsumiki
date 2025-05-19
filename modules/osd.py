@@ -1,5 +1,5 @@
 import time
-from typing import Literal
+from typing import ClassVar, Literal
 
 from fabric.utils import cooldown, invoke_repeater
 from fabric.widgets.box import Box
@@ -7,6 +7,7 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow as Window
+from gi.repository import GObject
 from loguru import logger
 
 import utils.functions as helpers
@@ -49,6 +50,10 @@ class GenericOSDContainer(Box):
 class BrightnessOSDContainer(GenericOSDContainer):
     """A widget to display the OSD for brightness."""
 
+    __gsignals__: ClassVar = {
+        "brightness-changed": (GObject.SignalFlags.RUN_FIRST, None, (int,))
+    }  # noqa: E501
+
     def __init__(self, config, **kwargs):
         super().__init__(
             config=config,
@@ -75,12 +80,17 @@ class BrightnessOSDContainer(GenericOSDContainer):
         self.icon.set_from_icon_name(icon_name)
         self.scale.set_value(current_brightness)
 
-    def on_brightness_changed(self, sender, value, *args):
+    def on_brightness_changed(self, service, value):
         self.update_brightness()
+        self.emit("brightness-changed", 0)
 
 
 class AudioOSDContainer(GenericOSDContainer):
     """A widget to display the OSD for audio."""
+
+    __gsignals__: ClassVar = {
+        "volume-changed": (GObject.SignalFlags.RUN_FIRST, None, ())
+    }  # noqa: E501
 
     def __init__(self, config, **kwargs):
         super().__init__(
@@ -89,33 +99,39 @@ class AudioOSDContainer(GenericOSDContainer):
         )
         self.audio_service = audio_service
 
-        self.update_volume()
+        self.audio_service.connect("notify::speaker", self.on_speaker_changed)
+        self.audio_service.connect("changed", self.check_mute)
 
-        self.audio_service.connect("notify::speaker", self.on_audio_speaker_changed)
+    def check_mute(self, audio):
+        if not audio.speaker:
+            return
+        if audio.speaker.muted:
+            self.update_icon(0)
+            self.emit("volume-changed")
+        else:
+            self.update_icon(audio.speaker.volume)
 
-    def on_volume_changed(self, *_):
-        self.update_volume()
+    def on_speaker_changed(self, audio, _):
+        if speaker := self.audio_service.speaker:
+            speaker.connect("notify::volume", self.update_volume)
 
-    def on_audio_speaker_changed(self, *_):
-        if self.audio_service.speaker:
-            self.audio_service.speaker.connect("notify::volume", self.on_volume_changed)
-            self.update_volume()
-        return True
+    def update_volume(self, speaker, _):
+        speaker.handler_block_by_func(self.update_volume)
+        self.emit(
+            "volume-changed",
+        )
+        if not self.audio_service.speaker:
+            return
 
-    def update_volume(self):
-        if self.audio_service.speaker and not self.is_hovered():
-            volume = round(self.audio_service.speaker.volume)
-            is_over_amplified = volume > 100
-            scaled_volume = volume - 100 if is_over_amplified else volume
+        volume = round(self.audio_service.speaker.volume)
 
-            self.scale.set_value(scaled_volume)
-            self.level.set_label(f"{volume}%")
+        if self.audio_service.speaker.muted:
+            self.update_icon(0)
+        else:
             self.update_icon(volume)
-
-            if is_over_amplified:
-                self.scale.add_style_class("overamplified")
-            else:
-                self.scale.remove_style_class("overamplified")
+        self.scale.set_value(volume)
+        self.level.set_label(f"{volume}%")
+        speaker.handler_unblock_by_func(self.update_volume)
 
     def update_icon(self, volume):
         icon_name = get_audio_icon_name(volume, self.audio_service.speaker.muted)[
@@ -162,17 +178,9 @@ class OSDContainer(Window):
 
         self.last_activity_time = time.time()
 
-        audio_service = self.audio_container.audio_service
+        self.audio_container.connect("volume-changed", self.show_audio)
 
-        def on_audio_speaker_changed(*_):
-            if audio_service.speaker:
-                audio_service.speaker.connect("notify::volume", self.show_audio)
-
-        self.brightness_container.brightness_service.connect(
-            "brightness_changed",
-            self.show_brightness,
-        )
-        audio_service.connect("notify::speaker", on_audio_speaker_changed)
+        self.brightness_container.connect("brightness-changed", self.show_brightness)
 
         invoke_repeater(100, self.check_inactivity, initial_call=True)
 
