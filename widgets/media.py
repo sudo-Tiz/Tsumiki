@@ -223,7 +223,6 @@ class PlayerBox(Box):
         )
         self.image_stack.children = [*self.image_stack.children, self.image_box]
 
-        self.player.connect("notify::arturl", self.set_image)
 
         self.art_animator = Animator(
             timing_function=partial(cubic_bezier, 0, 0, 1, 1),
@@ -301,17 +300,6 @@ class PlayerBox(Box):
             ],
         )
 
-        # Player Signals
-        bulk_connect(
-            self.player,
-            {
-                "notify::title": self.on_title,
-                "exit": self.on_player_exit,
-                "notify::playback-status": self.on_playback_change,
-                "notify::shuffle": self.shuffle_update,
-            },
-        )
-
         # Buttons
         self.button_box = Box(
             name="button-box",
@@ -332,32 +320,14 @@ class PlayerBox(Box):
             visible=self.config["show_time"],
         )
 
-        self.seek_bar = create_scale()
+        self.seek_bar = create_scale(
+            name="player-seek-bar",
+        )
 
         self.seek_bar.connect("change-value", self.on_scale_move)
         self.player.bind("can-seek", "sensitive", self.seek_bar)
 
         setup_cursor_hover(self.seek_bar)
-
-        self.player.connect(
-            "notify::length",
-            lambda *_: (
-                self.length_label.set_label(self.length_str(self.player.length)),
-                self.art_animator.play(),
-            ),
-        )
-
-        self.player.connect(
-            "notify::position",
-            lambda *_: (
-                self.seek_bar.set_value(
-                    convert_to_percent(self.player.position, self.player.length)
-                ),
-                self.position_label.set_label(self.length_str(self.player.position)),
-            ),
-        )
-
-        invoke_repeater(1000, self.move_seekbar)
 
         self.controls_box = CenterBox(
             style_classes="player-controls",
@@ -464,6 +434,32 @@ class PlayerBox(Box):
 
         self.children = [*self.children, self.overlay_box]
 
+        # Player Signals
+        bulk_connect(
+            self.player,
+            {
+                "notify::arturl": self.set_image,
+                "notify::title": self.on_title,
+                "exit": self.on_player_exit,
+                "notify::playback-status": self.on_playback_change,
+                "notify::shuffle": self.shuffle_update,
+                "notify::length": self.on_length,
+                "notify::position": self.on_position,
+            },
+        )
+
+        invoke_repeater(1000, self.move_seekbar)
+
+    def on_position(self, *_):
+        self.seek_bar.set_value(
+            convert_to_percent(self.player.position, self.player.length)
+        )
+        self.position_label.set_label(self.length_str(self.player.position))
+
+    def on_length(self, *_):
+        self.length_label.set_label(self.length_str(self.player.length))
+        self.art_animator.play()
+
     def set_notify_value(self, p, *_):
         self.image_box.set_angle(p.value)
 
@@ -485,6 +481,8 @@ class PlayerBox(Box):
         self.player.previous()
 
     def shuffle_update(self, _, __):
+        if self.player.shuffle is None:
+            return
         if self.player.shuffle is True:
             self.shuffle_icon.style_classes = []
             self.shuffle_icon.add_style_class("shuffle-on")
@@ -501,6 +499,7 @@ class PlayerBox(Box):
 
     def on_playback_change(self, player, status):
         status = self.player.playback_status
+
         if status == "paused":
             self.play_pause_button.get_child().set_visible_child_name("play")  # type: ignore
             self.art_animator.pause()
