@@ -2,6 +2,9 @@
 import math
 import os
 import re
+import tempfile
+import urllib.parse
+import urllib.request
 from functools import partial
 from typing import List
 
@@ -19,7 +22,7 @@ from fabric.widgets.label import Label
 from fabric.widgets.overlay import Overlay
 from fabric.widgets.scale import Scale
 from fabric.widgets.stack import Stack
-from gi.repository import Gio, GLib, GObject
+from gi.repository import GLib, GObject
 from loguru import logger
 
 from services import MprisPlayer, MprisPlayerManager
@@ -229,7 +232,7 @@ class PlayerBox(Box):
             max_value=360,
             tick_widget=self,
             repeat=True,
-            notify_value=self.set_notify_value,
+            notify_value=self._set_notify_value,
         )
 
         # Track Info
@@ -326,7 +329,7 @@ class PlayerBox(Box):
             name="seek-bar",
         )
 
-        self.seek_bar.connect("change-value", self.on_scale_move)
+        self.seek_bar.connect("change-value", self._on_scale_move)
         self.player.bind("can-seek", "sensitive", self.seek_bar)
 
         setup_cursor_hover(self.seek_bar)
@@ -383,11 +386,11 @@ class PlayerBox(Box):
         self.player.bind_property("can_pause", self.play_pause_button, "sensitive")
 
         self.next_button = HoverButton(name="player-button", child=self.skip_next_icon)
-        self.next_button.connect("clicked", self.on_player_next)
+        self.next_button.connect("clicked", self._on_player_next)
         self.player.bind_property("can_go_next", self.next_button, "sensitive")
 
         self.prev_button = HoverButton(name="player-button", child=self.skip_prev_icon)
-        self.prev_button.connect("clicked", self.on_player_prev)
+        self.prev_button.connect("clicked", self._on_player_prev)
 
         self.shuffle_button = HoverButton(name="player-button", child=self.shuffle_icon)
         self.shuffle_button.connect("clicked", self.player.toggle_shuffle)
@@ -440,49 +443,49 @@ class PlayerBox(Box):
         bulk_connect(
             self.player,
             {
-                "notify::arturl": self.set_image,
-                "notify::title": self.on_title,
-                "exit": self.on_player_exit,
-                "notify::playback-status": self.on_playback_change,
-                "notify::shuffle": self.shuffle_update,
-                "notify::length": self.on_length,
-                "notify::position": self.on_position,
+                "notify::arturl": self._set_image,
+                "notify::title": self._on_title,
+                "exit": self._on_player_exit,
+                "notify::playback-status": self._on_playback_change,
+                "notify::shuffle": self._on_shuffle_update,
+                "notify::length": self._on_length,
+                "notify::position": self._on_position,
             },
         )
 
-        invoke_repeater(1000, self.move_seekbar)
+        invoke_repeater(1000, self._move_seekbar)
 
-    def on_position(self, *_):
+    def _on_position(self, *_):
         self.seek_bar.set_value(
             convert_to_percent(self.player.position, self.player.length)
         )
         self.position_label.set_label(self.length_str(self.player.position))
 
-    def on_length(self, *_):
+    def _on_length(self, *_):
         self.length_label.set_label(self.length_str(self.player.length))
         self.art_animator.play()
 
-    def set_notify_value(self, p, *_):
+    def _set_notify_value(self, p, *_):
         self.image_box.set_angle(p.value)
 
-    def on_title(self, *_):
+    def _on_title(self, *_):
         self.track_title.set_label(self.player.title)
 
-    def on_player_exit(self, _, value):
+    def _on_player_exit(self, _, value):
         self.exit = value
         self.destroy()
 
-    def on_player_next(self, *_):
+    def _on_player_next(self, *_):
         self.angle_direction = 1
         self.art_animator.pause()
         self.player.next()
 
-    def on_player_prev(self, *_):
+    def _on_player_prev(self, *_):
         self.angle_direction = -1
         self.art_animator.pause()
         self.player.previous()
 
-    def shuffle_update(self, _, __):
+    def _on_shuffle_update(self, _, __):
         if self.player.shuffle is None:
             return
         if self.player.shuffle is True:
@@ -499,7 +502,7 @@ class PlayerBox(Box):
         remaining_seconds = seconds % 60
         return f"{minutes:02}:{remaining_seconds:02}"
 
-    def on_playback_change(self, player, status):
+    def _on_playback_change(self, player, status):
         status = self.player.playback_status
 
         if status == "paused":
@@ -509,54 +512,43 @@ class PlayerBox(Box):
             self.play_pause_button.get_child().set_visible_child_name("pause")  # type: ignore
             self.art_animator.play()
 
-    def update_image(self):
-        self.image_box.set_image_from_file(self.cover_path)
+    def _update_image(self, image_path):
+        if image_path and os.path.isfile(image_path):
+            self.image_box.set_image_from_file(image_path)
+        else:
+            self.image_box.set_image_from_file(self.fallback_cover_path)
 
-    def set_image(self, *args):
-        url = self.player.arturl
+    def _set_image(self, *_):
+        art_url = self.player.arturl
 
-        if url is None:
-            return
+        parsed = urllib.parse.urlparse(art_url)
+        if parsed.scheme == "file":
+            local_arturl = urllib.parse.unquote(parsed.path)
+            self._update_image(local_arturl)
+        elif parsed.scheme in ("http", "https"):
+            GLib.Thread.new("download-artwork", self._download_and_set_artwork, art_url)
+        else:
+            self._update_image(art_url)
 
-        new_cover_path = (
-            (
-                f"{APP_CACHE_DIRECTORY}/media"
-                + "/"
-                + GLib.compute_checksum_for_string(GLib.ChecksumType.SHA1, url, -1)  # type: ignore
-            )
-            if url[0:7] != "file://"
-            else url[7:]
-        )
-
-        if new_cover_path == self.cover_path:
-            return
-
-        self.cover_path = new_cover_path
-
-        if os.path.exists(self.cover_path):
-            self.update_image()
-            return
-
-        Gio.File.new_for_uri(uri=url).copy_async(
-            Gio.File.new_for_path(self.cover_path),
-            Gio.FileCopyFlags.OVERWRITE,
-            GLib.PRIORITY_DEFAULT,
-            None,
-            None,
-            self.img_callback,
-        )
-
-    def img_callback(self, source: Gio.File, result: Gio.AsyncResult):
+    def _download_and_set_artwork(self, arturl):
+        """
+        Download the artwork from the given URL asynchronously and update the cover
+        using GLib.idle_add to ensure UI updates occur on the main thread.
+        """
         try:
-            logger.info(f"[PLAYER] saving cover photo to {self.cover_path}")
-            os.path.isfile(self.cover_path)
-            # source.copy_finish(result)
-            if os.path.isfile(self.cover_path):
-                self.update_image()
-        except ValueError:
-            logger.error("[PLAYER] Failed to grab artUrl")
+            parsed = urllib.parse.urlparse(arturl)
+            suffix = os.path.splitext(parsed.path)[1] or ".png"
+            with urllib.request.urlopen(arturl) as response:
+                data = response.read()
+            with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as temp_file:
+                temp_file.write(data)
+                local_arturl = temp_file.name
+        except Exception:
+            local_arturl = self.fallback_cover_path
+        GLib.idle_add(self._update_image, local_arturl)
+        return None
 
-    def move_seekbar(self, *_):
+    def _move_seekbar(self, *_):
         if self.player.position is None:
             return False
         position = convert_to_percent(self.player.position, self.player.length)
@@ -564,7 +556,7 @@ class PlayerBox(Box):
         self.seek_bar.set_value(position)
 
     @cooldown(1)
-    def on_scale_move(self, scale: Scale, event, pos: int):
+    def _on_scale_move(self, scale: Scale, event, pos: int):
         actual_pos = pos * self.player.length * 0.01
         self.player.position = actual_pos
         self.position_label.set_label(self.length_str(actual_pos))
