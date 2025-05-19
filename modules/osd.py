@@ -1,13 +1,12 @@
-import time
 from typing import ClassVar, Literal
 
-from fabric.utils import cooldown, invoke_repeater
+from fabric.utils import cooldown
 from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow as Window
-from gi.repository import GObject
+from gi.repository import GLib, GObject
 from loguru import logger
 
 import utils.functions as helpers
@@ -176,13 +175,12 @@ class OSDContainer(Window):
 
         self.monitor = HyprlandWithMonitors().get_current_gdk_monitor_id()
 
-        self.last_activity_time = time.time()
+        self.hide_timer_id = None
+        self.suppressed: bool = False
 
         self.audio_container.connect("volume-changed", self.show_audio)
 
         self.brightness_container.connect("brightness-changed", self.show_brightness)
-
-        invoke_repeater(100, self.check_inactivity, initial_call=True)
 
     def show_audio(self, *_):
         logger.debug("Audio changed,showing audio OSD")
@@ -193,21 +191,23 @@ class OSDContainer(Window):
         self.show_box(box_to_show="brightness")
 
     def show_box(self, box_to_show: Literal["audio", "brightness"]):
+        if self.suppressed:
+            return
+
         if box_to_show == "audio":
             self.revealer.children = self.audio_container
         elif box_to_show == "brightness":
             self.revealer.children = self.brightness_container
-        self.set_visible(True)
         self.revealer.set_reveal_child(True)
-        self.reset_inactivity_timer()
 
-    def start_hide_timer(self):
+        self.set_visible(True)
+
+        if self.hide_timer_id is not None:
+            GLib.source_remove(self.hide_timer_id)
+
+        self.hide_timer_id = GLib.timeout_add(self.timeout, self._hide)
+
+    def _hide(self):
         self.set_visible(False)
-
-    def reset_inactivity_timer(self):
-        self.last_activity_time = time.time()
-
-    def check_inactivity(self):
-        if time.time() - self.last_activity_time >= (self.timeout / 1000):
-            self.start_hide_timer()
-        return True
+        self.hide_timer_id = None
+        return False
