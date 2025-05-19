@@ -211,6 +211,8 @@ class PlayerBox(Box):
 
         self.config = config
 
+        self.icon_size = 15
+
         # State
         self.exit = False
         self.angle_direction = 1
@@ -341,45 +343,35 @@ class PlayerBox(Box):
             end_children=self.length_label,
         )
 
-        icon_size = 15
-
         self.skip_next_icon = Image(
             icon_name=icons["mpris"]["next"],
             name="player-icon",
-            icon_size=icon_size,
+            icon_size=self.icon_size,
         )
         self.skip_prev_icon = Image(
             icon_name=icons["mpris"]["prev"],
             name="player-icon",
-            icon_size=icon_size,
+            icon_size=self.icon_size,
         )
         self.loop_icon = Image(
             icon_name=icons["mpris"]["prev"],
             name="player-icon",
-            icon_size=icon_size,
+            icon_size=self.icon_size,
         )
         self.shuffle_icon = Image(
             icon_name=icons["mpris"]["shuffle"]["enabled"],
             name="player-icon",
-            icon_size=icon_size,
+            icon_size=self.icon_size,
         )
-        self.play_icon = Image(
+        self.play_pause_icon = Image(
             icon_name=icons["mpris"]["paused"],
             name="player-icon",
-            icon_size=icon_size,
+            icon_size=self.icon_size,
         )
-        self.pause_icon = Image(
-            icon_name=icons["mpris"]["playing"],
-            name="player-icon",
-            icon_size=icon_size,
-        )
-        self.play_pause_stack = Stack()
-        self.play_pause_stack.add_named(self.play_icon, "play")
-        self.play_pause_stack.add_named(self.pause_icon, "pause")
 
-        self.play_pause_button = Button(
+        self.play_pause_button = HoverButton(
             name="player-button",
-            child=self.play_pause_stack,
+            child=self.play_pause_icon,
         )
 
         self.play_pause_button.connect("clicked", self.player.play_pause)
@@ -506,10 +498,16 @@ class PlayerBox(Box):
         status = self.player.playback_status
 
         if status == "paused":
-            self.play_pause_button.get_child().set_visible_child_name("play")  # type: ignore
+            self.play_pause_icon.set_from_icon_name(
+                icons["mpris"]["paused"],
+                icon_size=self.icon_size,
+            )
             self.art_animator.pause()
         if status == "playing":
-            self.play_pause_button.get_child().set_visible_child_name("pause")  # type: ignore
+            self.play_pause_icon.set_from_icon_name(
+                icons["mpris"]["playing"],
+                icon_size=self.icon_size,
+            )
             self.art_animator.play()
 
     def _update_image(self, image_path):
