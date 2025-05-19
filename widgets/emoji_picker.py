@@ -23,8 +23,6 @@ class EmojiPickerMenu(Box):
     def __init__(self, **kwargs):
         super().__init__(
             name="emoji",
-            visible=False,
-            all_visible=False,
             **kwargs,
         )
 
@@ -73,6 +71,7 @@ class EmojiPickerMenu(Box):
         self.resize_viewport()
 
         self.add(self.picker_box)
+
 
     def _load_emoji_data(self):
         emoji_data = {}
