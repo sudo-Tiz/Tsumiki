@@ -29,7 +29,6 @@ from utils.bezier import cubic_bezier
 from utils.functions import convert_to_percent, ensure_directory
 from utils.icons import icons
 from utils.widget_utils import (
-    create_scale,
     setup_cursor_hover,
 )
 
@@ -223,7 +222,6 @@ class PlayerBox(Box):
         )
         self.image_stack.children = [*self.image_stack.children, self.image_box]
 
-
         self.art_animator = Animator(
             timing_function=partial(cubic_bezier, 0, 0, 1, 1),
             duration=10,
@@ -320,8 +318,12 @@ class PlayerBox(Box):
             visible=self.config["show_time"],
         )
 
-        self.seek_bar = create_scale(
-            name="player-seek-bar",
+        # Seek Bar
+        self.seek_bar = Scale(
+            min_value=0,
+            max_value=100,
+            increments=(5, 5),
+            name="seek-bar",
         )
 
         self.seek_bar.connect("change-value", self.on_scale_move)
