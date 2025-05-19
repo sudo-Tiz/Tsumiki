@@ -1,6 +1,5 @@
 import json
 
-import cairo
 from fabric.hyprland.service import Hyprland
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
@@ -14,27 +13,13 @@ from loguru import logger
 import utils.icons as icons
 from utils import BarConfig
 from utils.icon_resolver import IconResolver
+from utils.widget_utils import create_surface_from_widget
 
 icon_resolver = IconResolver()
 connection = Hyprland()
 SCALE = 0.1
 
 TARGET = [Gtk.TargetEntry.new("text/plain", Gtk.TargetFlags.SAME_APP, 0)]
-
-
-def create_surface_from_widget(widget: Gtk.Widget) -> cairo.ImageSurface:
-    alloc = widget.get_allocation()
-    surface = cairo.ImageSurface(
-        cairo.Format.ARGB32,
-        alloc.width,
-        alloc.height,
-    )
-    cr = cairo.Context(surface)
-    cr.set_source_rgba(255, 255, 255, 0)
-    cr.rectangle(0, 0, alloc.width, alloc.height)
-    cr.fill()
-    widget.draw(cr)
-    return surface
 
 
 class HyprlandWindowButton(Button):
@@ -70,7 +55,7 @@ class HyprlandWindowButton(Button):
                 address, len(address)
             ),
             on_drag_begin=lambda _, context: Gtk.drag_set_icon_surface(
-                context, create_surface_from_widget(self)
+                context, create_surface_from_widget(self, (255, 255, 255, 0))
             ),
         )
 

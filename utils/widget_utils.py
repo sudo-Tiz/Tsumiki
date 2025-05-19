@@ -3,13 +3,14 @@ from numbers import Number
 from time import sleep
 from typing import Literal
 
+import cairo  # For rendering the drag preview
 import psutil
 from fabric import Fabricator
 from fabric.utils import bulk_connect
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scale import ScaleMark
-from gi.repository import Gdk, GLib
+from gi.repository import Gdk, GLib, Gtk
 
 from shared.animated.scale import AnimatedScale
 
@@ -121,6 +122,21 @@ def text_icon(icon: str, props=None):
         label_props.update(props)
 
     return Label(**label_props)
+
+
+# Function to create a surface from a widget
+def create_surface_from_widget(
+    widget: Gtk.Widget, color=(0, 0, 0, 0)
+) -> cairo.ImageSurface:
+    alloc = widget.get_allocation()
+    surface = cairo.ImageSurface(cairo.Format.ARGB32, alloc.width, alloc.height)
+    cr = cairo.Context(surface)
+    # Use a transparent background.
+    cr.set_source_rgba(*color)
+    cr.rectangle(0, 0, alloc.width, alloc.height)
+    cr.fill()
+    widget.draw(cr)
+    return surface
 
 
 # Function to get the bar graph representation

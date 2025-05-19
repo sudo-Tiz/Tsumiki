@@ -2,7 +2,6 @@ import json
 import logging
 from typing import ClassVar
 
-import cairo
 from fabric.hyprland.widgets import get_hyprland_connection
 from fabric.utils import (
     bulk_connect,
@@ -16,30 +15,13 @@ from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.wayland import WaylandWindow as Window
-from gi.repository import Gdk, GLib, Gtk
+from gi.repository import Gdk, GLib
 
 from shared.widget_container import ToggleableWidget
 from utils.icon_resolver import IconResolver
 from utils.icons import icons
 from utils.monitors import HyprlandWithMonitors
 from utils.occulison import check_occlusion
-
-
-# Credit to ax-shell for the dock code
-def create_surface_from_widget(widget: Gtk.Widget) -> cairo.ImageSurface:
-    """Create a cairo surface from a widget."""
-    alloc = widget.get_allocation()
-    surface = cairo.ImageSurface(
-        cairo.Format.ARGB28,
-        alloc.width,
-        alloc.height,
-    )
-    cr = cairo.Context(surface)
-    cr.set_source_rgba(255, 255, 255, 0)
-    cr.rectangle(0, 0, alloc.width, alloc.height)
-    cr.fill()
-    widget.draw(cr)
-    return surface
 
 
 class Dock(Window, ToggleableWidget):

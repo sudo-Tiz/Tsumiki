@@ -1,8 +1,8 @@
 import json
 import os
+import typing
 from pathlib import Path
 
-import cairo  # For rendering the drag preview
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
@@ -13,25 +13,13 @@ from gi.repository import Gdk, GLib, GObject, Gtk
 from shared.pop_over import Popover
 from shared.widget_container import ButtonWidget
 from utils.widget_settings import BarConfig
-from utils.widget_utils import text_icon
-
-
-def createSurfaceFromWidget(widget: Gtk.Widget) -> cairo.ImageSurface:
-    alloc = widget.get_allocation()
-    surface = cairo.ImageSurface(cairo.Format.ARGB32, alloc.width, alloc.height)
-    cr = cairo.Context(surface)
-    # Use a transparent background.
-    cr.set_source_rgba(0, 0, 0, 0)
-    cr.rectangle(0, 0, alloc.width, alloc.height)
-    cr.fill()
-    widget.draw(cr)
-    return surface
+from utils.widget_utils import create_surface_from_widget, text_icon
 
 
 class InlineEditor(Box):
     """A simple inline editor for editing text in a Gtk.TextView."""
 
-    __gsignals__ = {
+    __gsignals__: typing.ClassVar = {
         "confirmed": (GObject.SignalFlags.RUN_LAST, None, (str,)),
         "canceled": (GObject.SignalFlags.RUN_LAST, None, ()),
     }
@@ -108,7 +96,7 @@ class InlineEditor(Box):
 class KanbanNote(EventBox):
     """A widget representing a single note in the Kanban board."""
 
-    __gsignals__ = {
+    __gsignals__: typing.ClassVar = {
         "changed": (GObject.SignalFlags.RUN_LAST, None, ()),
     }
 
@@ -157,7 +145,7 @@ class KanbanNote(EventBox):
         return False
 
     def on_drag_begin(self, widget, context):
-        surface = createSurfaceFromWidget(self)
+        surface = create_surface_from_widget(self)
         Gtk.drag_set_icon_surface(context, surface)
 
     def on_drag_data_get(self, widget, drag_context, data, info, time):
@@ -191,14 +179,13 @@ class KanbanNote(EventBox):
         row.remove(self)
         row.add(editor)
         row.show_all()
-        # Usamos un retardo de 50 milisegundos:
         GLib.timeout_add(50, lambda: (editor.text_view.grab_focus(), False))
 
 
 class KanbanColumn(Gtk.Frame):
     """A column in the Kanban board, containing notes."""
 
-    __gsignals__ = {
+    __gsignals__: typing.ClassVar = {
         "changed": (GObject.SignalFlags.RUN_LAST, None, ()),
     }
 
