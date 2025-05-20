@@ -59,6 +59,7 @@ class BrightnessOSDContainer(GenericOSDContainer):
             **kwargs,
         )
         self.brightness_service = Brightness()
+        self.config = config
         self.update_brightness()
 
         self.brightness_service.connect(
@@ -71,13 +72,13 @@ class BrightnessOSDContainer(GenericOSDContainer):
             self.brightness_service.screen_brightness,
             self.brightness_service.max_screen,
         )
+        self.level.set_label(f"{round(normalized_brightness)}%")
+        self.scale.set_value(round(normalized_brightness))
         self.update_icon(int(normalized_brightness))
 
     def update_icon(self, current_brightness):
         icon_name = get_brightness_icon_name(current_brightness)["icon"]
-        self.level.set_label(f"{current_brightness}%")
-        self.icon.set_from_icon_name(icon_name)
-        self.scale.set_value(current_brightness)
+        self.icon.set_from_icon_name(icon_name, self.config["icon_size"])
 
     def on_brightness_changed(self, service, value):
         self.update_brightness()
@@ -97,6 +98,8 @@ class AudioOSDContainer(GenericOSDContainer):
             **kwargs,
         )
         self.audio_service = audio_service
+
+        self.config = config
 
         self.audio_service.connect("notify::speaker", self.on_speaker_changed)
         self.audio_service.connect("changed", self.check_mute)
@@ -136,7 +139,7 @@ class AudioOSDContainer(GenericOSDContainer):
         icon_name = get_audio_icon_name(volume, self.audio_service.speaker.muted)[
             "icon"
         ]
-        self.icon.set_from_icon_name(icon_name)  # TODO: Fix icon name
+        self.icon.set_from_icon_name(icon_name, self.config["icon_size"])
 
 
 class OSDContainer(Window):
