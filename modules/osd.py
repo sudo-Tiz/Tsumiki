@@ -11,8 +11,7 @@ from loguru import logger
 
 import utils.functions as helpers
 from services import Brightness, audio_service
-from utils import HyprlandWithMonitors, symbolic_icons
-from utils.types import Keyboard_Mode
+from utils import HyprlandWithMonitors, Keyboard_Mode, symbolic_icons
 from utils.widget_utils import (
     create_scale,
     get_audio_icon_name,
