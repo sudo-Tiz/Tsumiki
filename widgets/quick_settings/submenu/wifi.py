@@ -4,20 +4,21 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 
-from services import NetworkClient, Wifi, network_service
+from services import NetworkService, Wifi
 from shared import QSChevronButton, QuickSubMenu
 from shared.buttons import ScanButton
 from shared.widget_container import HoverButton
 from utils.icons import icons
+
+client = NetworkService()
 
 
 class WifiSubMenu(QuickSubMenu):
     """A submenu to display the Wifi settings."""
 
     def __init__(self, **kwargs):
-        self.client = network_service
-        self.wifi_device = self.client.wifi_device
-        self.client.connect("device-ready", self.on_device_ready)
+        self.wifi_device = client.wifi_device
+        client.connect("device-ready", self.on_device_ready)
 
         self.available_networks_box = Box(orientation="v", spacing=4, h_expand=True)
 
@@ -41,11 +42,11 @@ class WifiSubMenu(QuickSubMenu):
         )
 
     def start_new_scan(self, _):
-        self.client.wifi_device.scan() if self.client.wifi_device else None
+        client.wifi_device.scan() if client.wifi_device else None
         self.build_wifi_options()
         self.scan_button.play_animation()
 
-    def on_device_ready(self, client: NetworkClient):
+    def on_device_ready(self, client: NetworkService):
         self.wifi_device = client.wifi_device
         self.build_wifi_options()
 
@@ -60,7 +61,7 @@ class WifiSubMenu(QuickSubMenu):
 
     def make_button_from_ap(self, ap) -> Button:
         def disconnect(*_):
-            self.client.disconnect_wifi_bssid(ap.get("bssid"))
+            client.disconnect_wifi_bssid(ap.get("bssid"))
 
         ap_button = HoverButton(style_classes="submenu-button", name="wifi-ap-button")
         ap_button.add(
@@ -89,20 +90,18 @@ class WifiToggle(QSChevronButton):
             submenu=submenu,
             **kwargs,
         )
-        self.client = network_service
-        self.client.connect("device-ready", self.update_action_button)
+
+        client.connect("device-ready", self.update_action_button)
 
         self.connect("action-clicked", self.on_action)
 
-    def update_action_button(self, client: NetworkClient):
+    def update_action_button(self, client: NetworkService):
         wifi = client.wifi_device
-
-        print("wifi", wifi)
 
         if wifi:
             wifi.connect(
                 "notify::enabled",
-                self.set_active_style(wifi.get_property("enabled")),  # type: ignore
+                lambda *_: self.set_active_style(wifi.get_property("enabled")),
             )
 
             self.action_icon.set_from_icon_name(
@@ -114,6 +113,6 @@ class WifiToggle(QSChevronButton):
             wifi.bind_property("ssid", self.action_label, "label")
 
     def on_action(self, btn):
-        wifi: Wifi | None = self.client.wifi_device
+        wifi: Wifi | None = client.wifi_device
         if wifi:
             wifi.toggle_wifi()

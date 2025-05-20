@@ -9,7 +9,7 @@ from fabric.widgets.label import Label
 from gi.repository import GLib, Gtk
 
 import utils.functions as helpers
-from services import Brightness, MprisPlayerManager, audio_service, network_service
+from services import Brightness, MprisPlayerManager, NetworkService, audio_service
 from shared import (
     ButtonWidget,
     CircleImage,
@@ -399,7 +399,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
 
         self._timeout_id = None
 
-        self.network = network_service
+        self.network = NetworkService()
 
         # Initialize the audio service
         self.brightness_service = Brightness()
