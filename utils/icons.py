@@ -442,7 +442,7 @@ weather_icons = {
 }
 
 
-icons = {
+symbolic_icons = {
     "missing": "image-missing-symbolic",
     "nix": {
         "nix": "nix-snowflake-symbolic",

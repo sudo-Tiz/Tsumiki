@@ -16,7 +16,7 @@ from shared.animated.scale import AnimatedScale
 
 from .config import widget_config
 from .functions import uptime
-from .icons import icons, text_icons
+from .icons import symbolic_icons, text_icons
 
 
 # Function to get the system stats using psutil
@@ -80,13 +80,13 @@ def get_icon(app_icon, size=25) -> Image:
                     name="app-icon",
                     icon_name=app_icon
                     if app_icon
-                    else icons["fallback"]["notification"],
+                    else symbolic_icons["fallback"]["notification"],
                     icon_size=icon_size,
                 )
     except GLib.GError:
         return Image(
             name="app-icon",
-            icon_name=icons["fallback"]["notification"],
+            icon_name=symbolic_icons["fallback"]["notification"],
             icon_size=icon_size,
         )
 
@@ -163,22 +163,22 @@ def get_brightness_icon_name(level: int) -> dict[Literal["icon_text", "icon"], s
     if level <= 0:
         return {
             "text_icon": text_icons["brightness"]["off"],
-            "icon": icons["brightness"]["off"],
+            "icon": symbolic_icons["brightness"]["off"],
         }
 
     if level <= 32:
         return {
             "text_icon": text_icons["brightness"]["low"],
-            "icon": icons["brightness"]["low"],
+            "icon": symbolic_icons["brightness"]["low"],
         }
     if level <= 66:
         return {
             "text_icon": text_icons["brightness"]["medium"],
-            "icon": icons["brightness"]["medium"],
+            "icon": symbolic_icons["brightness"]["medium"],
         }
     return {
         "text_icon": text_icons["brightness"]["high"],
-        "icon": icons["brightness"]["high"],
+        "icon": symbolic_icons["brightness"]["high"],
     }
 
 
@@ -223,27 +223,27 @@ def get_audio_icon_name(
     if volume <= 0 or is_muted:
         return {
             "text_icon": text_icons["volume"]["muted"],
-            "icon": icons["audio"]["volume"]["muted"],
+            "icon": symbolic_icons["audio"]["volume"]["muted"],
         }
     if volume > 0 and volume <= 32:
         return {
             "text_icon": text_icons["volume"]["low"],
-            "icon": icons["audio"]["volume"]["low"],
+            "icon": symbolic_icons["audio"]["volume"]["low"],
         }
     if volume > 32 and volume <= 66:
         return {
             "text_icon": text_icons["volume"]["medium"],
-            "icon": icons["audio"]["volume"]["medium"],
+            "icon": symbolic_icons["audio"]["volume"]["medium"],
         }
     if volume > 66 and volume <= 100:
         return {
             "text_icon": text_icons["volume"]["high"],
-            "icon": icons["audio"]["volume"]["high"],
+            "icon": symbolic_icons["audio"]["volume"]["high"],
         }
     else:
         return {
             "text_icon": text_icons["volume"]["overamplified"],
-            "icon": icons["audio"]["volume"]["overamplified"],
+            "icon": symbolic_icons["audio"]["volume"]["overamplified"],
         }
 
 

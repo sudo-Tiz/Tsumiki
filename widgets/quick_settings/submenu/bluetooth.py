@@ -10,7 +10,7 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 from services import bluetooth_service
 from shared import HoverButton, QSChevronButton, QuickSubMenu
 from shared.buttons import ScanButton
-from utils.icons import icons
+from utils import symbolic_icons
 
 
 class BluetoothDeviceBox(CenterBox):
@@ -119,7 +119,7 @@ class BluetoothSubMenu(QuickSubMenu):
 
         super().__init__(
             title="Bluetooth",
-            title_icon=icons["bluetooth"]["enabled"],
+            title_icon=symbolic_icons["bluetooth"]["enabled"],
             scan_button=self.scan_button,
             child=self.child,
             **kwargs,
@@ -150,7 +150,7 @@ class BluetoothToggle(QSChevronButton):
     def __init__(self, submenu: QuickSubMenu, **kwargs):
         super().__init__(
             action_label="Enabled",
-            action_icon=icons["bluetooth"]["enabled"],
+            action_icon=symbolic_icons["bluetooth"]["enabled"],
             submenu=submenu,
             **kwargs,
         )
@@ -177,11 +177,15 @@ class BluetoothToggle(QSChevronButton):
     def toggle_bluetooth(self, client: BluetoothClient, *_):
         if client.enabled:
             self.set_active_style(True)
-            self.action_icon.set_from_icon_name(icons["bluetooth"]["enabled"], 18)
+            self.action_icon.set_from_icon_name(
+                symbolic_icons["bluetooth"]["enabled"], 18
+            )
             self.action_label.set_label("Enabled")
         else:
             self.set_active_style(False)
-            self.action_icon.set_from_icon_name(icons["bluetooth"]["disabled"], 18)
+            self.action_icon.set_from_icon_name(
+                symbolic_icons["bluetooth"]["disabled"], 18
+            )
             self.action_label.set_label("Disabled")
 
     def new_device(self, client: BluetoothClient, address):

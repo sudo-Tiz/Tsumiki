@@ -2,9 +2,8 @@ from fabric.bluetooth import BluetoothClient
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
-import utils.icons as icons
 from shared import ButtonWidget
-from utils import BarConfig
+from utils import BarConfig, symbolic_icons
 
 
 class BlueToothWidget(ButtonWidget):
@@ -14,7 +13,7 @@ class BlueToothWidget(ButtonWidget):
         super().__init__(widget_config["bluetooth"], name="bluetooth", **kwargs)
         self.bluetooth_client = BluetoothClient()
 
-        self.icons = icons.icons["bluetooth"]
+        self.icons = symbolic_icons["bluetooth"]
 
         self.bluetooth_icon = Image(
             icon_name=self.icons["enabled"],

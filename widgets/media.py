@@ -30,7 +30,7 @@ from shared import Animator, CircleImage, HoverButton
 from utils import APP_CACHE_DIRECTORY
 from utils.bezier import cubic_bezier
 from utils.functions import convert_to_percent, ensure_directory
-from utils.icons import icons
+from utils.icons import symbolic_icons
 from utils.widget_utils import (
     setup_cursor_hover,
 )
@@ -346,27 +346,27 @@ class PlayerBox(Box):
         )
 
         self.skip_next_icon = Image(
-            icon_name=icons["mpris"]["next"],
+            icon_name=symbolic_icons["mpris"]["next"],
             name="player-icon",
             icon_size=self.icon_size,
         )
         self.skip_prev_icon = Image(
-            icon_name=icons["mpris"]["prev"],
+            icon_name=symbolic_icons["mpris"]["prev"],
             name="player-icon",
             icon_size=self.icon_size,
         )
         self.loop_icon = Image(
-            icon_name=icons["mpris"]["prev"],
+            icon_name=symbolic_icons["mpris"]["prev"],
             name="player-icon",
             icon_size=self.icon_size,
         )
         self.shuffle_icon = Image(
-            icon_name=icons["mpris"]["shuffle"]["enabled"],
+            icon_name=symbolic_icons["mpris"]["shuffle"]["enabled"],
             name="player-icon",
             icon_size=self.icon_size,
         )
         self.play_pause_icon = Image(
-            icon_name=icons["mpris"]["paused"],
+            icon_name=symbolic_icons["mpris"]["paused"],
             name="player-icon",
             icon_size=self.icon_size,
         )
@@ -501,13 +501,13 @@ class PlayerBox(Box):
 
         if status == "paused":
             self.play_pause_icon.set_from_icon_name(
-                icons["mpris"]["paused"],
+                symbolic_icons["mpris"]["paused"],
                 icon_size=self.icon_size,
             )
             self.art_animator.pause()
         if status == "playing":
             self.play_pause_icon.set_from_icon_name(
-                icons["mpris"]["playing"],
+                symbolic_icons["mpris"]["playing"],
                 icon_size=self.icon_size,
             )
             self.art_animator.play()

@@ -20,7 +20,7 @@ from shared import (
     QSChevronButton,
 )
 from utils import BarConfig
-from utils.icons import icons
+from utils.icons import symbolic_icons
 from utils.widget_utils import (
     get_audio_icon_name,
     get_brightness_icon_name,
@@ -206,7 +206,8 @@ class QuickSettingsMenu(Box):
                 children=(
                     HoverButton(
                         image=Image(
-                            icon_name=icons["powermenu"]["reboot"], icon_size=16
+                            icon_name=symbolic_icons["powermenu"]["reboot"],
+                            icon_size=16,
                         ),
                         v_align="center",
                         on_clicked=lambda *_: (
@@ -220,7 +221,8 @@ class QuickSettingsMenu(Box):
                     ),
                     HoverButton(
                         image=Image(
-                            icon_name=icons["powermenu"]["shutdown"], icon_size=16
+                            icon_name=symbolic_icons["powermenu"]["shutdown"],
+                            icon_size=16,
                         ),
                         v_align="center",
                         on_clicked=lambda *_: (
@@ -504,13 +506,13 @@ class QuickSettingsButtonWidget(ButtonWidget):
             else:
                 # Fallback icon if something goes wrong
                 self.brightness_icon.set_from_icon_name(
-                    icons["brightness"]["indicator"],
+                    symbolic_icons["brightness"]["indicator"],
                     self.panel_icon_size,
                 )
         except Exception as e:
             print(f"Error updating brightness icon: {e}")
             # Fallback icon if something goes wrong
             self.brightness_icon.set_from_icon_name(
-                icons["brightness"]["indicator"],
+                symbolic_icons["brightness"]["indicator"],
                 self.panel_icon_size,
             )

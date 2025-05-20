@@ -13,5 +13,6 @@ from .pop_up import *
 from .separator import *
 from .setting_scale import *
 from .submenu import *
+from .tagentry import *
 from .widget_container import *
 from .widget_groups import *

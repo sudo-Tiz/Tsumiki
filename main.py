@@ -35,11 +35,13 @@ def process_and_apply_css(app: Application):
 general_options = widget_config["general"]
 module_options = widget_config["modules"]
 
+
 if not general_options["debug"]:
     for log in [
         "fabric",
         "widgets",
         "utils",
+        "utils.config",
         "modules",
         "services",
     ]:

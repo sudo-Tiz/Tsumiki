@@ -8,7 +8,7 @@ from services import BatteryService
 from shared import ButtonWidget
 from utils import BarConfig
 from utils.functions import format_time, send_notification
-from utils.icons import icons
+from utils.icons import symbolic_icons
 
 NOTIFICATION_TIMEOUT = 60 * 5  # 5 minutes
 
@@ -31,7 +31,7 @@ class BatteryWidget(ButtonWidget):
         self.full_battery_level = self.config["full_battery_level"]
 
         self.battery_icon = Image(
-            icon_name=icons["battery"]["full"],
+            icon_name=symbolic_icons["battery"]["full"],
             icon_size=self.config["icon_size"],
         )
 
@@ -92,7 +92,7 @@ class BatteryWidget(ButtonWidget):
                         title="Battery Full",
                         body="Battery is fully charged.",
                         urgency="normal",
-                        icon=icons["battery"]["full-charging"],
+                        icon=symbolic_icons["battery"]["full-charging"],
                         app_name="Battery",
                     ),
                     # remove the timeout after sending the notification

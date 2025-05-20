@@ -2,7 +2,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.shapes import Corner
 from fabric.widgets.wayland import WaylandWindow as Window
 
-from shared.widget_container import ToggleableWidget
+from shared import ToggleableWidget
 
 
 class SideCorner(Box):

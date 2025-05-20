@@ -13,8 +13,7 @@ from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import Gdk, GdkPixbuf, GLib
 
-from shared.pop_over import Popover
-from shared.widget_container import ButtonWidget
+from shared import ButtonWidget, Popover
 from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon
 

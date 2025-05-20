@@ -143,7 +143,8 @@
 			"window_title"
 		], // this is the left section of the panel
 		"middle_section": [
-			"date_time"
+			"date_time",
+			"weather"
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
@@ -239,7 +240,7 @@
 		"check_updates": false,
 		"layer": "top",
 		"auto_hide": false,
-		"debug": true,
+		"debug": false,
 		"location": "top"
 	},
 	"power": {

@@ -9,7 +9,6 @@ import utils.functions as helpers
 from utils import Colors
 
 
-@helpers.run_in_thread
 def exec_brightnessctl_async(args: str):
     exec_shell_command_async(f"brightnessctl {args}", lambda _: None)
 

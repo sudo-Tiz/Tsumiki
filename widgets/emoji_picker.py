@@ -11,8 +11,7 @@ from fabric.widgets.label import Label
 from fabric.widgets.stack import Stack
 from gi.repository import Gdk
 
-from shared.pop_over import Popover
-from shared.widget_container import ButtonWidget
+from shared import ButtonWidget, Popover
 from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon
 

@@ -3,7 +3,7 @@ from fabric.widgets.image import Image
 
 from services import ScreenRecorder
 from shared import ButtonWidget, LottieAnimation, LottieAnimationWidget
-from utils import BarConfig, icons
+from utils import BarConfig, symbolic_icons
 from utils.functions import check_executable_exists
 
 
@@ -24,7 +24,7 @@ class RecorderWidget(ButtonWidget):
         )
 
         self.recording_idle_image = Image(
-            icon_name=icons.icons["recorder"]["stopped"],
+            icon_name=symbolic_icons["recorder"]["stopped"],
             icon_size=self.config["icon_size"],
             h_align=True,
         )

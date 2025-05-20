@@ -10,7 +10,7 @@ from fabric.widgets.label import Label
 from loguru import logger
 
 from shared import ButtonWidget
-from utils import BarConfig, Colors, run_in_thread
+from utils import BarConfig, Colors
 from utils.widget_utils import (
     text_icon,
     util_fabricator,
@@ -96,7 +96,6 @@ class UpdatesWidget(ButtonWidget):
         return True
 
     @cooldown(1)
-    @run_in_thread
     def check_update(self, update=False):
         # Execute the update script asynchronously and update values
 

@@ -10,9 +10,8 @@ from gi.repository import GLib, GObject
 from loguru import logger
 
 import utils.functions as helpers
-import utils.icons as icons
 from services import Brightness, audio_service
-from utils import HyprlandWithMonitors
+from utils import HyprlandWithMonitors, symbolic_icons
 from utils.types import Keyboard_Mode
 from utils.widget_utils import (
     create_scale,
@@ -33,7 +32,8 @@ class GenericOSDContainer(Box):
         )
 
         self.icon = Image(
-            icon_name=icons.icons["brightness"]["screen"], icon_size=config["icon_size"]
+            icon_name=symbolic_icons["brightness"]["screen"],
+            icon_size=config["icon_size"],
         )
         self.scale = create_scale(
             name="osd-scale",

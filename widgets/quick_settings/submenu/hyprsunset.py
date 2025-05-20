@@ -1,7 +1,6 @@
 from fabric.utils import cooldown, exec_shell_command_async
 
-from shared.buttons import QSChevronButton, ScanButton
-from shared.submenu import QuickSubMenu
+from shared import QSChevronButton, QuickSubMenu, ScanButton
 from utils.functions import is_app_running, toggle_command
 from utils.widget_utils import (
     create_scale,

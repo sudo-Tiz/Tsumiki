@@ -10,7 +10,7 @@ from gi.repository import Gdk, GdkPixbuf, GLib, Gray, Gtk
 
 from shared import ButtonWidget, Grid, HoverButton, Popover, Separator
 from utils import BarConfig
-from utils.icons import icons
+from utils.icons import symbolic_icons
 
 gi.require_version("Gray", "0.1")
 
@@ -151,7 +151,7 @@ class SystemTrayWidget(ButtonWidget):
         # Create main tray box and toggle icon
         self.tray_box = Box(name="system-tray-box", orientation="horizontal", spacing=2)
         self.toggle_icon = Image(
-            icon_name=icons["ui"]["arrow"]["down"],
+            icon_name=symbolic_icons["ui"]["arrow"]["down"],
             icon_size=self.config["icon_size"],
             style_classes=["panel-icon", "toggle-icon"],
         )
@@ -184,13 +184,13 @@ class SystemTrayWidget(ButtonWidget):
         if visible:
             self.popup.hide()
             self.toggle_icon.set_from_icon_name(
-                icons["ui"]["arrow"]["down"], self.config["icon_size"]
+                symbolic_icons["ui"]["arrow"]["down"], self.config["icon_size"]
             )
             self.toggle_icon.get_style_context().remove_class("active")
         else:
             self.popup.open()
             self.toggle_icon.set_from_icon_name(
-                icons["ui"]["arrow"]["up"], self.config["icon_size"]
+                symbolic_icons["ui"]["arrow"]["up"], self.config["icon_size"]
             )
             self.toggle_icon.get_style_context().add_class("active")
 

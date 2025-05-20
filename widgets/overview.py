@@ -10,7 +10,6 @@ from fabric.widgets.overlay import Overlay
 from gi.repository import Gdk, Gtk
 from loguru import logger
 
-import utils.icons as icons
 from utils import BarConfig
 from utils.icon_resolver import IconResolver
 from utils.widget_utils import create_surface_from_widget

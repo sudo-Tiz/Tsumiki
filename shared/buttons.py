@@ -7,7 +7,7 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
 from utils.bezier import cubic_bezier
-from utils.icons import icons
+from utils.icons import symbolic_icons
 from utils.widget_utils import setup_cursor_hover
 
 from .animator import Animator
@@ -58,8 +58,8 @@ class QSToggleButton(Box):
     def __init__(
         self,
         action_label: str = "My Label",
-        action_icon: str = icons["fallback"]["package"],
-        pixel_size: int = 20,
+        action_icon: str = symbolic_icons["fallback"]["package"],
+        pixel_size: int = 18,
         **kwargs,
     ):
         self.pixel_size = pixel_size
@@ -129,14 +129,16 @@ class QSChevronButton(QSToggleButton):
     def __init__(
         self,
         action_label: str = "My Label",
-        action_icon: str = icons["fallback"]["package"],
-        pixel_size: int = 20,
+        action_icon: str = symbolic_icons["fallback"]["package"],
+        pixel_size: int = 18,
         submenu: QuickSubMenu | None = None,
         **kwargs,
     ):
         self.submenu = submenu
 
-        self.button_image = Image(icon_name=icons["ui"]["arrow"]["right"], icon_size=20)
+        self.button_image = Image(
+            icon_name=symbolic_icons["ui"]["arrow"]["right"], icon_size=20
+        )
 
         self.reveal_button = HoverButton(
             style_classes="toggle-revealer", image=self.button_image, h_expand=True

@@ -8,7 +8,7 @@ from services import NetworkService, Wifi
 from shared import QSChevronButton, QuickSubMenu
 from shared.buttons import ScanButton
 from shared.widget_container import HoverButton
-from utils.icons import icons
+from utils import symbolic_icons
 
 
 class WifiSubMenu(QuickSubMenu):
@@ -34,7 +34,7 @@ class WifiSubMenu(QuickSubMenu):
 
         super().__init__(
             title="Network",
-            title_icon=icons["network"]["wifi"]["generic"],
+            title_icon=symbolic_icons["network"]["wifi"]["generic"],
             scan_button=self.scan_button,
             child=self.child,
             **kwargs,
@@ -84,14 +84,13 @@ class WifiToggle(QSChevronButton):
 
     def __init__(self, submenu: QuickSubMenu, **kwargs):
         super().__init__(
-            action_icon=icons["network"]["wifi"]["generic"],
+            action_icon=symbolic_icons["network"]["wifi"]["generic"],
             action_label=" Wifi Disabled",
             submenu=submenu,
             **kwargs,
         )
         self.client = NetworkService()
         self.client.connect("device-ready", self.update_action_button)
-
 
         self.connect("action-clicked", self.on_action)
 
@@ -106,7 +105,7 @@ class WifiToggle(QSChevronButton):
             wifi.connect("changed", self.update_status)
 
             self.action_icon.set_from_icon_name(
-                wifi.get_property("icon-name") + "-symbolic", 18
+                wifi.get_property("icon-name") + "-symbolic", self.pixel_size
             )
             wifi.bind_property("icon-name", self.action_icon, "icon-name")
 
@@ -121,5 +120,5 @@ class WifiToggle(QSChevronButton):
     def update_status(self, wifi: Wifi):
         self.action_icon.set_from_icon_name(
             wifi.icon_name,
-            self.panel_icon_size,
+            self.pixel_size,
         )

@@ -2,7 +2,7 @@ from fabric.utils import cooldown
 
 from services import Brightness
 from shared import SettingSlider
-from utils.icons import icons
+from utils.icons import symbolic_icons
 
 
 class BrightnessSlider(SettingSlider):
@@ -14,7 +14,7 @@ class BrightnessSlider(SettingSlider):
         self.client = Brightness()
         super().__init__(
             pixel_size=20,
-            icon_name=icons["brightness"]["screen"],
+            icon_name=symbolic_icons["brightness"]["screen"],
             min=0,
             max=self.client.max_screen,  # Use actual max brightness
             start_value=self.client.screen_brightness,

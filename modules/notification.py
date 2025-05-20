@@ -16,10 +16,10 @@ from loguru import logger
 
 import utils.constants as constants
 import utils.functions as helpers
-import utils.icons as icons
 from services import notification_service
-from shared.circle_image import CircleImage
+from shared import CircleImage
 from utils import BarConfig, Colors, HyprlandWithMonitors
+from utils.icons import symbolic_icons
 from utils.widget_utils import get_icon
 
 
@@ -149,8 +149,8 @@ class NotificationWidget(EventBox):
                     Button(
                         image=Image(
                             icon_name=helpers.check_icon_exists(
-                                icons.icons["ui"]["close"],
-                                icons.icons["ui"]["window_close"],
+                                symbolic_icons["ui"]["close"],
+                                symbolic_icons["ui"]["window_close"],
                             ),
                             icon_size=16,
                         ),

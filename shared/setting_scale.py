@@ -2,7 +2,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.scale import Scale
 
-from utils.icons import icons
+from utils.icons import symbolic_icons
 
 from .widget_container import HoverButton
 
@@ -15,7 +15,7 @@ class SettingSlider(Box):
         min: float = 0,
         max: float = 100,
         start_value: float = 50,
-        icon_name: str = icons["fallback"]["package"],
+        icon_name: str = symbolic_icons["fallback"]["package"],
         pixel_size: int = 18,
         **kwargs,
     ):

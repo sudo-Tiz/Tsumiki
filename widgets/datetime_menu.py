@@ -17,12 +17,10 @@ from loguru import logger
 import utils.constants as constants
 import utils.functions as helpers
 from services import notification_service
-from shared import ButtonWidget, Popover, Separator
-from shared.circle_image import CircleImage
-from shared.widget_container import HoverButton
+from shared import ButtonWidget, CircleImage, HoverButton, Popover, Separator
 from utils import BarConfig, Colors
 from utils.functions import uptime
-from utils.icons import icons
+from utils.icons import symbolic_icons
 from utils.widget_utils import get_icon, util_fabricator
 
 
@@ -89,8 +87,8 @@ class DateMenuNotification(EventBox):
             image=Image(
                 name="close-icon",
                 icon_name=helpers.check_icon_exists(
-                    icons["ui"]["close"],
-                    icons["ui"]["window_close"],
+                    symbolic_icons["ui"]["close"],
+                    symbolic_icons["ui"]["window_close"],
                 ),
                 icon_size=16,
             ),
@@ -228,7 +226,7 @@ class DateNotificationMenu(Box):
             visible=len(self.notifications) == 0,  # visible if no notifications
             children=(
                 Image(
-                    icon_name=icons["notifications"]["silent"],
+                    icon_name=symbolic_icons["notifications"]["silent"],
                     icon_size=64,
                 ),
                 Label(label="Your inbox is empty"),
@@ -250,9 +248,9 @@ class DateNotificationMenu(Box):
         )
 
         self.clear_icon = Image(
-            icon_name=icons["trash"]["empty"]
+            icon_name=symbolic_icons["trash"]["empty"]
             if len(self.notifications) == 0
-            else icons["trash"]["full"],
+            else symbolic_icons["trash"]["full"],
             icon_size=13,
             name="clear-icon",
         )
@@ -275,7 +273,7 @@ class DateNotificationMenu(Box):
                 child.destroy()
 
             notification_service.clear_all_notifications()
-            self.clear_icon.set_from_icon_name(icons["trash"]["empty"], 15)
+            self.clear_icon.set_from_icon_name(symbolic_icons["trash"]["empty"], 15)
 
         self.clear_button.connect(
             "clicked",
@@ -364,7 +362,7 @@ class DateNotificationMenu(Box):
 
     def on_clear_all_notifications(self, *_):
         """Handle clearing all notifications."""
-        self.clear_icon.set_from_icon_name(icons["trash"]["empty"], 15)
+        self.clear_icon.set_from_icon_name(symbolic_icons["trash"]["empty"], 15)
 
     def on_notification_closed(self, _, id, reason):
         """Handle notification being closed."""
@@ -407,7 +405,7 @@ class DateNotificationMenu(Box):
 
         self.notification_list_box.children = active_children
 
-        self.clear_icon.set_from_icon_name(icons["trash"]["full"], 15)
+        self.clear_icon.set_from_icon_name(symbolic_icons["trash"]["full"], 15)
 
         self.notification_list_box.add(
             DateMenuNotification(
@@ -439,7 +437,7 @@ class DateTimeWidget(ButtonWidget):
             point_to=self,
         )
         self.notification_indicator = Image(
-            icon_name=icons["notifications"]["noisy"],
+            icon_name=symbolic_icons["notifications"]["noisy"],
             icon_size=14,
             visible=self.config["notification"]["enabled"],
         )
@@ -497,10 +495,10 @@ class DateTimeWidget(ButtonWidget):
     def on_dnd_switch(self, value):
         if value:
             self.notification_indicator.set_from_icon_name(
-                icons["notifications"]["silent"], icon_size=16
+                symbolic_icons["notifications"]["silent"], icon_size=16
             )
 
         else:
             self.notification_indicator.set_from_icon_name(
-                icons["notifications"]["noisy"], icon_size=16
+                symbolic_icons["notifications"]["noisy"], icon_size=16
             )

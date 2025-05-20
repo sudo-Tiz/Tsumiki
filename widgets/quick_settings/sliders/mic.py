@@ -2,9 +2,8 @@ from fabric.utils import cooldown
 from fabric.widgets.box import Box
 
 from services import audio_service
-from shared import SettingSlider
-from shared.widget_container import HoverButton
-from utils.icons import icons
+from shared import HoverButton, SettingSlider
+from utils.icons import symbolic_icons
 from utils.widget_utils import text_icon
 
 
@@ -18,7 +17,7 @@ class MicrophoneSlider(SettingSlider):
         self.pixel_size = 16
 
         super().__init__(
-            icon_name=icons["audio"]["mic"]["medium"],
+            icon_name=symbolic_icons["audio"]["mic"]["medium"],
             start_value=0,
             pixel_size=self.pixel_size,
         )
@@ -70,8 +69,10 @@ class MicrophoneSlider(SettingSlider):
     def _get_icon_name(self):
         """Get the appropriate icon name based on mute state."""
         if not self.audio_stream:
-            return icons["audio"]["mic"]["high"]
-        return icons["audio"]["mic"]["muted" if self.audio_stream.muted else "high"]
+            return symbolic_icons["audio"]["mic"]["high"]
+        return symbolic_icons["audio"]["mic"][
+            "muted" if self.audio_stream.muted else "high"
+        ]
 
     def on_button_click(self, *_):
         parent = self.get_parent()

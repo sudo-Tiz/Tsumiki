@@ -11,8 +11,7 @@ from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import Gdk, GLib, GObject, Gtk
 
-from shared.pop_over import Popover
-from shared.widget_container import ButtonWidget
+from shared import ButtonWidget, Popover
 from utils.widget_settings import BarConfig
 from utils.widget_utils import create_surface_from_widget, text_icon
 

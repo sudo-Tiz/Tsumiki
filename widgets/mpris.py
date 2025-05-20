@@ -6,8 +6,7 @@ from fabric.widgets.label import Label
 from loguru import logger
 
 from services import MprisPlayer, MprisPlayerManager
-from shared import ButtonWidget
-from shared.pop_over import Popover
+from shared import ButtonWidget, Popover
 from utils import BarConfig, Colors
 from widgets.media import PlayerBoxStack
 
