@@ -189,6 +189,8 @@ class DateNotificationMenu(Box):
 
         self.config = config
 
+        self.pixel_size = 13
+
         self.clock_label = Label(
             label=time.strftime("%H:%M")
             if self.config["clock_format"] == "24h"
@@ -251,7 +253,7 @@ class DateNotificationMenu(Box):
             icon_name=symbolic_icons["trash"]["empty"]
             if len(self.notifications) == 0
             else symbolic_icons["trash"]["full"],
-            icon_size=13,
+            icon_size=self.pixel_size,
             name="clear-icon",
         )
 
@@ -273,7 +275,9 @@ class DateNotificationMenu(Box):
                 child.destroy()
 
             notification_service.clear_all_notifications()
-            self.clear_icon.set_from_icon_name(symbolic_icons["trash"]["empty"], 15)
+            self.clear_icon.set_from_icon_name(
+                symbolic_icons["trash"]["empty"], self.pixel_size
+            )
 
         self.clear_button.connect(
             "clicked",
@@ -362,7 +366,9 @@ class DateNotificationMenu(Box):
 
     def on_clear_all_notifications(self, *_):
         """Handle clearing all notifications."""
-        self.clear_icon.set_from_icon_name(symbolic_icons["trash"]["empty"], 15)
+        self.clear_icon.set_from_icon_name(
+            symbolic_icons["trash"]["empty"], self.pixel_size
+        )
 
     def on_notification_closed(self, _, id, reason):
         """Handle notification being closed."""
@@ -405,7 +411,9 @@ class DateNotificationMenu(Box):
 
         self.notification_list_box.children = active_children
 
-        self.clear_icon.set_from_icon_name(symbolic_icons["trash"]["full"], 15)
+        self.clear_icon.set_from_icon_name(
+            symbolic_icons["trash"]["full"], self.pixel_size
+        )
 
         self.notification_list_box.add(
             DateMenuNotification(

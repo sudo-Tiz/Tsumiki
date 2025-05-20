@@ -136,7 +136,7 @@ class AudioOSDContainer(GenericOSDContainer):
         icon_name = get_audio_icon_name(volume, self.audio_service.speaker.muted)[
             "icon"
         ]
-        self.icon.set_from_icon_name(icon_name)
+        self.icon.set_from_icon_name(icon_name)  # TODO: Fix icon name
 
 
 class OSDContainer(Window):
