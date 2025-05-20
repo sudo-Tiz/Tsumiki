@@ -9,7 +9,8 @@ from fabric.widgets.label import Label
 from gi.repository import GLib, Gtk
 
 import utils.functions as helpers
-from services import Brightness, MprisPlayerManager, NetworkService, Wifi, audio_service
+from services import Brightness, MprisPlayerManager, audio_service
+from services.network import NetworkService
 from shared import (
     ButtonWidget,
     CircleImage,
