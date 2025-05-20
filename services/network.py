@@ -10,7 +10,7 @@ try:
     gi.require_version("NM", "1.0")
     from gi.repository import NM
 except ValueError:
-    logger.error("Failed to start network manager")
+    logger.error("[NetworkManager] Failed to start network manager")
 
 
 class Wifi(Service):
@@ -40,15 +40,15 @@ class Wifi(Service):
             bulk_connect(
                 self._device,
                 {
-                    "notify::active-access-point": lambda *args: self._activate_ap(),
+                    "notify::active-access-point": self._activate_ap,
                     "access-point-added": lambda *args: self.emit("changed"),
                     "access-point-removed": lambda *args: self.emit("changed"),
-                    "state-changed": lambda *args: self.ap_update(),
+                    "state-changed": self.ap_update,
                 },
             )
             self._activate_ap()
 
-    def ap_update(self):
+    def ap_update(self, *_):
         self.emit("changed")
         for sn in [
             "enabled",
@@ -62,7 +62,7 @@ class Wifi(Service):
         ]:
             self.notify(sn)
 
-    def _activate_ap(self):
+    def _activate_ap(self, *_):
         if self._ap:
             self._ap.disconnect(self._ap_signal)
         self._ap = self._device.get_active_access_point()
@@ -76,8 +76,6 @@ class Wifi(Service):
     def toggle_wifi(self):
         self._client.wireless_set_enabled(not self._client.wireless_get_enabled())
 
-    # def set_active_ap(self, ap):
-    #     self._device.access
 
     def scan(self):
         """Start scanning for WiFi networks and emit scanning signal"""
@@ -264,15 +262,15 @@ class Ethernet(Service):
 class NetworkService(Service):
     """A service to manage network devices"""
 
-    @Signal
-    def device_ready(self) -> None: ...
-
     _instance = None
 
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(NetworkService, cls).__new__(cls)
         return cls._instance
+
+    @Signal
+    def device_ready(self) -> None: ...
 
     def __init__(self, **kwargs):
         self._client: NM.Client | None = None
@@ -331,7 +329,6 @@ class NetworkService(Service):
         )
 
     def connect_wifi_bssid(self, bssid):
-        # We are using nmcli here, idk im lazy
         exec_shell_command_async(
             f"nmcli device wifi connect {bssid}", lambda *args: print(args)
         )
