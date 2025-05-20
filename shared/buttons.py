@@ -34,6 +34,7 @@ class ScanButton(HoverButton):
             max_value=360,
             tick_widget=self,
             notify_value=self.set_notify_value,
+            repeat=True,
         )
 
         self.set_image(self.scan_image)

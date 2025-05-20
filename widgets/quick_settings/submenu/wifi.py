@@ -14,7 +14,7 @@ class WifiSubMenu(QuickSubMenu):
 
     def __init__(self, **kwargs):
         self.client = NetworkService()
-        self.wifi_device = self.client.wifi_device
+
         self.client.connect("device-ready", self.on_device_ready)
 
         self.available_networks_box = Box(orientation="v", spacing=4, h_expand=True)
@@ -38,14 +38,22 @@ class WifiSubMenu(QuickSubMenu):
             **kwargs,
         )
 
+    def on_scan(self, _, value, *args):
+        """Called when the scan is complete."""
+
+        if value:
+            self.scan_button.play_animation()
+        else:
+            self.scan_button.stop_animation()
+
     def start_new_scan(self, _):
         self.client.wifi_device.scan() if self.client.wifi_device else None
         self.build_wifi_options()
-        self.scan_button.play_animation()
 
     def on_device_ready(self, client: NetworkService):
         self.wifi_device = client.wifi_device
         self.build_wifi_options()
+        self.wifi_device.connect("scanning", self.on_scan)
 
     def build_wifi_options(self):
         self.available_networks_box.children = []

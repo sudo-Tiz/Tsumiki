@@ -497,6 +497,9 @@ class PlayerBox(Box):
     def _on_playback_change(self, player, status):
         status = self.player.playback_status
 
+        if status == "stopped":
+            self.art_animator.stop()
+
         if status == "paused":
             self.play_pause_icon.set_from_icon_name(
                 symbolic_icons["mpris"]["paused"],
