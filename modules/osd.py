@@ -9,7 +9,6 @@ from fabric.widgets.wayland import WaylandWindow as Window
 from gi.repository import GLib, GObject
 from loguru import logger
 
-import utils.functions as helpers
 from services import Brightness, audio_service
 from utils import HyprlandWithMonitors, Keyboard_Mode, symbolic_icons
 from utils.widget_utils import (
@@ -67,13 +66,10 @@ class BrightnessOSDContainer(GenericOSDContainer):
 
     @cooldown(0.1)
     def update_brightness(self):
-        normalized_brightness = helpers.convert_to_percent(
-            self.brightness_service.screen_brightness,
-            self.brightness_service.max_screen,
-        )
-        self.level.set_label(f"{round(normalized_brightness)}%")
-        self.scale.set_value(round(normalized_brightness))
-        self.update_icon(int(normalized_brightness))
+        brightness_percent = self.brightness_service.screen_brightness_percentage
+        self.level.set_label(f"{round(brightness_percent)}%")
+        self.scale.set_value(round(brightness_percent))
+        self.update_icon(int(brightness_percent))
 
     def update_icon(self, current_brightness):
         icon_name = get_brightness_icon_name(current_brightness)["icon"]

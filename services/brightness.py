@@ -128,3 +128,12 @@ class Brightness(Service):
             exec_brightnessctl_async(f"--device '{kbd}' set {value}")
         except GLib.Error as e:
             logger.exception(e.message)
+
+    @Property(int, "readable")
+    def screen_brightness_percentage(self):
+        max_brightness = self.max_screen
+        current_brightness = self.screen_brightness
+
+        if max_brightness <= 0:
+            return 0
+        return int((current_brightness / max_brightness) * 100)
