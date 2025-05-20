@@ -7,7 +7,7 @@ from gi.repository import Gio, GLib
 from loguru import logger
 
 import utils.functions as helpers
-from utils.icons import symbolic_icons
+from utils import symbolic_icons
 
 
 class ScreenRecorder(Service):

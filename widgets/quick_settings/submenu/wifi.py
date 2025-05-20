@@ -5,9 +5,7 @@ from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 
 from services import NetworkService, Wifi
-from shared import QSChevronButton, QuickSubMenu
-from shared.buttons import ScanButton
-from shared.widget_container import HoverButton
+from shared import HoverButton, QSChevronButton, QuickSubMenu, ScanButton
 from utils import symbolic_icons
 
 

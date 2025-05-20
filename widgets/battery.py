@@ -6,9 +6,8 @@ from gi.repository import GdkPixbuf, GLib, Gtk
 
 from services import BatteryService
 from shared import ButtonWidget
-from utils import BarConfig
+from utils import BarConfig, symbolic_icons
 from utils.functions import format_time, send_notification
-from utils.icons import symbolic_icons
 
 NOTIFICATION_TIMEOUT = 60 * 5  # 5 minutes
 

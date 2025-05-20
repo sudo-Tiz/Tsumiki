@@ -2,9 +2,7 @@ from fabric import Service, Signal
 from gi.repository import Gio, GLib
 from loguru import logger
 
-from shared.dbus_helper import GioDBusHelper
-from utils import Colors
-from utils.icons import symbolic_icons
+from utils import Colors, GioDBusHelper, symbolic_icons
 
 
 class PowerProfiles(Service):

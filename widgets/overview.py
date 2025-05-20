@@ -10,8 +10,7 @@ from fabric.widgets.overlay import Overlay
 from gi.repository import Gdk, Gtk
 from loguru import logger
 
-from utils import BarConfig
-from utils.icon_resolver import IconResolver
+from utils import BarConfig, IconResolver, common_text_icons
 from utils.widget_utils import create_surface_from_widget
 
 icon_resolver = IconResolver()
@@ -113,7 +112,7 @@ class WorkspaceEventBox(EventBox):
                 name="overview-add-label",
                 h_expand=True,
                 v_expand=True,
-                markup=icons.common_text_icons["power"],
+                markup=common_text_icons["power"],
             ),
             on_drag_data_received=lambda _w,
             _c,

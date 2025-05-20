@@ -4,8 +4,7 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
 from services import PowerProfiles
-from shared import QSChevronButton, QuickSubMenu
-from shared.widget_container import HoverButton
+from shared import HoverButton, QSChevronButton, QuickSubMenu
 from utils import symbolic_icons
 
 
@@ -122,5 +121,5 @@ class PowerProfileToggle(QSChevronButton):
 
         icon = self.client.get_profile_icon(self.active_pfl)
 
-        self.action_icon.set_from_icon_name(icon, 18)
+        self.action_icon.set_from_icon_name(icon, self.pixel_size)
         self.set_action_label(self.unslug(self.active_pfl))

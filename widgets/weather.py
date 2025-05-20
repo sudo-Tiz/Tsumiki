@@ -11,8 +11,7 @@ from loguru import logger
 
 from services import WeatherService
 from shared import ButtonWidget, Grid, Popover, ScanButton
-from utils import BarConfig
-from utils.icons import weather_icons
+from utils import BarConfig, weather_icons
 from utils.widget_utils import (
     setup_cursor_hover,
     text_icon,

@@ -17,10 +17,9 @@ from fabric.utils import (
 from gi.repository import Gdk, Gio, GLib, Gtk
 from loguru import logger
 
-from utils.exceptions import ExecutableNotFoundError
-
 from .colors import Colors
 from .constants import named_colors
+from .exceptions import ExecutableNotFoundError
 from .icons import text_icons
 from .thread import run_in_thread
 

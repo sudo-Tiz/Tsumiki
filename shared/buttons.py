@@ -6,8 +6,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
-from utils.bezier import cubic_bezier
-from utils.icons import symbolic_icons
+from utils import cubic_bezier, symbolic_icons
 from utils.widget_utils import setup_cursor_hover
 
 from .animator import Animator

@@ -103,7 +103,7 @@ class HyprSunsetToggle(QSChevronButton):
         self.is_running = is_app_running("hyprsunset")
         icon = "redshift-status-on" if self.is_running else "redshift-status-off"
 
-        self.action_icon.set_from_icon_name(icon, 18)
+        self.action_icon.set_from_icon_name(icon, self.pixel_size)
         self.set_action_label("Enabled" if self.is_running else "Disabled")
         if self.is_running:
             self.set_active_style(True)

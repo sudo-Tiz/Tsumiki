@@ -19,8 +19,7 @@ from shared import (
     Popover,
     QSChevronButton,
 )
-from utils import BarConfig
-from utils.icons import symbolic_icons
+from utils import BarConfig, symbolic_icons
 from utils.widget_utils import (
     get_audio_icon_name,
     get_brightness_icon_name,

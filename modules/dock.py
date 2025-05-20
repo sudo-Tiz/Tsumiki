@@ -17,10 +17,8 @@ from fabric.widgets.image import Image
 from fabric.widgets.wayland import WaylandWindow as Window
 from gi.repository import Gdk, GLib
 
-from shared.widget_container import ToggleableWidget
-from utils import HyprlandWithMonitors, check_occlusion
-from utils.icon_resolver import IconResolver
-from utils.icons import symbolic_icons
+from shared import ToggleableWidget
+from utils import HyprlandWithMonitors, IconResolver, check_occlusion, symbolic_icons
 
 
 class Dock(Window, ToggleableWidget):

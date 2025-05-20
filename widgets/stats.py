@@ -6,8 +6,7 @@ from fabric.widgets.overlay import Overlay
 import utils.functions as helpers
 from services import NetworkSpeed
 from shared import ButtonWidget
-from utils import BarConfig
-from utils.icons import common_text_icons
+from utils import BarConfig, common_text_icons
 from utils.widget_utils import (
     get_bar_graph,
     text_icon,

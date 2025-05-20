@@ -3,7 +3,9 @@ from .bezier import *
 from .colors import *
 from .config import *
 from .constants import *
+from .dbus_helper import *
 from .exceptions import *
+from .icon_resolver import *
 from .icons import *
 from .monitors import *
 from .occlusion import *

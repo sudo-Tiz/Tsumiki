@@ -18,9 +18,8 @@ import utils.constants as constants
 import utils.functions as helpers
 from services import notification_service
 from shared import ButtonWidget, CircleImage, HoverButton, Popover, Separator
-from utils import BarConfig, Colors
+from utils import BarConfig, Colors, symbolic_icons
 from utils.functions import uptime
-from utils.icons import symbolic_icons
 from utils.widget_utils import get_icon, util_fabricator
 
 
@@ -440,13 +439,15 @@ class DateTimeWidget(ButtonWidget):
     def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(widget_config["date_time"], name="datetime_menu", **kwargs)
 
+        self.indicator_icon_size = 14
+
         popup = Popover(
             content_factory=lambda: DateNotificationMenu(config=self.config),
             point_to=self,
         )
         self.notification_indicator = Image(
             icon_name=symbolic_icons["notifications"]["noisy"],
-            icon_size=14,
+            icon_size=self.indicator_icon_size,
             visible=self.config["notification"]["enabled"],
         )
 
@@ -503,10 +504,12 @@ class DateTimeWidget(ButtonWidget):
     def on_dnd_switch(self, value):
         if value:
             self.notification_indicator.set_from_icon_name(
-                symbolic_icons["notifications"]["silent"], icon_size=16
+                symbolic_icons["notifications"]["silent"],
+                icon_size=self.indicator_icon_size,
             )
 
         else:
             self.notification_indicator.set_from_icon_name(
-                symbolic_icons["notifications"]["noisy"], icon_size=16
+                symbolic_icons["notifications"]["noisy"],
+                icon_size=self.indicator_icon_size,
             )
