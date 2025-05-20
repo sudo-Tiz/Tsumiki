@@ -9,7 +9,7 @@ from fabric.widgets.label import Label
 from gi.repository import GLib, Gtk
 
 import utils.functions as helpers
-from services import Brightness, MprisPlayerManager, NetworkService, audio_service
+from services import Brightness, MprisPlayerManager, NetworkService, Wifi, audio_service
 from shared import (
     ButtonWidget,
     CircleImage,
@@ -399,7 +399,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
 
         self._timeout_id = None
 
-        self.network = NetworkService()
+        self.network_service = NetworkService()
 
         # Initialize the audio service
         self.brightness_service = Brightness()
@@ -408,6 +408,8 @@ class QuickSettingsButtonWidget(ButtonWidget):
         self.brightness_service.connect(
             "brightness_changed", self.on_brightness_changed
         )
+
+        self.network_service.connect("device-ready", self._get_network_icon)
 
         popup = Popover(
             content_factory=lambda: QuickSettingsMenu(config=self.config),
@@ -439,44 +441,29 @@ class QuickSettingsButtonWidget(ButtonWidget):
             popup.open,
         )
 
-    def start_timeout(self):
-        self.stop_timeout()
-        self._timeout_id = GLib.timeout_add(2000, self.close_notification)
+    def _get_network_icon(self, *_):
+        # Check if the network service is ready
+        if self.network_service.primary_device == "wifi":
+            wifi = self.network_service.wifi_device
 
-    def stop_timeout(self):
-        if self._timeout_id is not None:
-            GLib.source_remove(self._timeout_id)
-            self._timeout_id = None
+            self.network_icon.set_from_icon_name(
+                wifi.icon_name,
+                self.panel_icon_size,
+            )
+            wifi.connect("changed", self.update_status)
 
-        def get_network_icon(*_):
-            if self.network.primary_device == "wifi":
-                wifi = self.network.wifi_device
+        else:
+            ethernet = self.network_service.ethernet_device
+            self.network_icon.set_from_icon_name(
+                ethernet.icon_name,
+                self.panel_icon_size,
+            )
 
-                if wifi:
-                    self.network_icon.set_from_icon_name(
-                        wifi.get_icon_name(),
-                        self.panel_icon_size,
-                    )
-                else:
-                    self.network_icon.set_from_icon_name(
-                        icons["network"]["wifi"]["disconnected"],
-                        self.panel_icon_size,
-                    )
-
-            else:
-                ethernet = self.network.ethernet_device
-                if ethernet:
-                    self.network_icon.set_from_icon_name(
-                        ethernet.get_icon_name(),
-                        self.panel_icon_size,
-                    )
-                else:
-                    self.network_icon.set_from_icon_name(
-                        icons["network"]["wifi"]["disconnected"],
-                        self.panel_icon_size,
-                    )
-
-        self.network.connect("notify::primary-device", get_network_icon)
+    def update_status(self, wifi: Wifi):
+        self.network_icon.set_from_icon_name(
+            wifi.icon_name,
+            self.panel_icon_size,
+        )
 
     def on_speaker_changed(self, *_):
         # Update the progress bar value based on the speaker volume

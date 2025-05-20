@@ -92,6 +92,7 @@ class WifiToggle(QSChevronButton):
         self.client = NetworkService()
         self.client.connect("device-ready", self.update_action_button)
 
+
         self.connect("action-clicked", self.on_action)
 
     def update_action_button(self, client: NetworkService):
@@ -102,6 +103,7 @@ class WifiToggle(QSChevronButton):
                 "notify::enabled",
                 lambda *_: self.set_active_style(wifi.get_property("enabled")),  # type: ignore
             )
+            wifi.connect("changed", self.update_status)
 
             self.action_icon.set_from_icon_name(
                 wifi.get_property("icon-name") + "-symbolic", 18
@@ -115,3 +117,9 @@ class WifiToggle(QSChevronButton):
         wifi: Wifi | None = self.client.wifi_device
         if wifi:
             wifi.toggle_wifi()
+
+    def update_status(self, wifi: Wifi):
+        self.action_icon.set_from_icon_name(
+            wifi.icon_name,
+            self.panel_icon_size,
+        )

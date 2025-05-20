@@ -76,7 +76,6 @@ class Wifi(Service):
     def toggle_wifi(self):
         self._client.wireless_set_enabled(not self._client.wireless_get_enabled())
 
-
     def scan(self):
         """Start scanning for WiFi networks and emit scanning signal"""
         if self._device:
