@@ -16,4 +16,3 @@ from .weather import *
 audio_service = Audio()
 notification_service = CustomNotifications()
 bluetooth_service = BluetoothClient()
-network_service = NetworkClient()

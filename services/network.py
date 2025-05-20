@@ -10,7 +10,7 @@ try:
     gi.require_version("NM", "1.0")
     from gi.repository import NM
 except ValueError:
-    logger.error("Failed to start network manager")
+    logger.error("[NetworkManager] Failed to start network manager")
 
 
 class Wifi(Service):
@@ -21,6 +21,9 @@ class Wifi(Service):
 
     @Signal
     def enabled(self) -> bool: ...
+
+    @Signal
+    def scanning(self, is_scanning: bool) -> None: ...
 
     def __init__(self, client: NM.Client, device: NM.DeviceWifi, **kwargs):
         self._client: NM.Client = client
@@ -38,15 +41,12 @@ class Wifi(Service):
                 self._device,
                 {
                     "notify::active-access-point": self._activate_ap,
-                    "access-point-added": self.emit_changed,
-                    "access-point-removed": self.emit_changed,
+                    "access-point-added": lambda *args: self.emit("changed"),
+                    "access-point-removed": lambda *args: self.emit("changed"),
                     "state-changed": self.ap_update,
                 },
             )
             self._activate_ap()
-
-    def emit_changed(self, *_):
-        self.emit("changed")
 
     def ap_update(self, *_):
         self.emit("changed")
@@ -76,17 +76,19 @@ class Wifi(Service):
     def toggle_wifi(self):
         self._client.wireless_set_enabled(not self._client.wireless_get_enabled())
 
-    # def set_active_ap(self, ap):
-    #     self._device.access
-
     def scan(self):
-        self._device.request_scan_async(
-            None,
-            lambda device, result: [
-                device.request_scan_finish(result),
-                self.emit("changed"),
-            ],
-        )
+        """Start scanning for WiFi networks and emit scanning signal"""
+        if self._device:
+            self.emit("scanning", True)  # Emit signal that scanning has started
+            self._device.request_scan_async(
+                None,
+                lambda device, result: [
+                    device.request_scan_finish(result),
+                    self.emit(
+                        "scanning", False
+                    ),  # Emit signal that scanning has stopped
+                ],
+            )
 
     def notifier(self, name: str, *args):
         self.notify(name)
@@ -94,7 +96,7 @@ class Wifi(Service):
         return
 
     @Property(bool, "read-write", default_value=False)
-    def enabled(self) -> bool:  # type: ignore  # noqa: F811
+    def enabled(self) -> bool:  # noqa: F811
         return bool(self._client.wireless_get_enabled())
 
     @enabled.setter
@@ -149,10 +151,8 @@ class Wifi(Service):
         def make_ap_dict(ap: NM.AccessPoint):
             return {
                 "bssid": ap.get_bssid(),
+                # "address": ap.get_
                 "last_seen": ap.get_last_seen(),
-                "wpa_flags": ap.get_wpa_flags(),
-                "flags": ap.get_flags(),
-                "rsn_flags": ap.get_rsn_flags(),
                 "ssid": NM.utils_ssid_to_utf8(ap.get_ssid().get_data())
                 if ap.get_ssid()
                 else "Unknown",
@@ -237,7 +237,7 @@ class Ethernet(Service):
 
         return "network-wired-disconnected-symbolic"
 
-    def __init__(self, client: NM.Client, device: NM.DeviceEthernet, **kwargs):
+    def __init__(self, client: NM.Client, device: NM.DeviceEthernet, **kwargs) -> None:
         super().__init__(**kwargs)
         self._client: NM.Client = client
         self._device: NM.DeviceEthernet = device
@@ -251,17 +251,22 @@ class Ethernet(Service):
         ):
             self._device.connect(f"notify::{names}", lambda *_: self.notifier(names))
 
-        self._device.connect(
-            "notify::speed", lambda *_: print(_)
-        )  #:TODO see if this is needed
+        self._device.connect("notify::speed", lambda *_: print(_))
 
     def notifier(self, names):
         self.notify(names)
         self.emit("changed")
 
 
-class NetworkClient(Service):
+class NetworkService(Service):
     """A service to manage network devices"""
+
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(NetworkService, cls).__new__(cls)
+        return cls._instance
 
     @Signal
     def device_ready(self) -> None: ...
@@ -323,7 +328,6 @@ class NetworkClient(Service):
         )
 
     def connect_wifi_bssid(self, bssid):
-        # We are using nmcli here, idk im lazy
         exec_shell_command_async(
             f"nmcli device wifi connect {bssid}", lambda *args: print(args)
         )

@@ -4,7 +4,7 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 
-from services import NetworkClient, Wifi, network_service
+from services import NetworkService, Wifi
 from shared import QSChevronButton, QuickSubMenu
 from shared.buttons import ScanButton
 from utils.icons import icons
@@ -14,7 +14,7 @@ class WifiSubMenu(QuickSubMenu):
     """A submenu to display the Wifi settings."""
 
     def __init__(self, **kwargs):
-        self.client = network_service
+        self.client = NetworkService()
         self.wifi_device = self.client.wifi_device
         self.client.connect("device-ready", self.on_device_ready)
 
@@ -44,7 +44,7 @@ class WifiSubMenu(QuickSubMenu):
         self.build_wifi_options()
         self.scan_button.play_animation()
 
-    def on_device_ready(self, client: NetworkClient):
+    def on_device_ready(self, client: NetworkService):
         self.wifi_device = client.wifi_device
         self.build_wifi_options()
 
@@ -87,18 +87,18 @@ class WifiToggle(QSChevronButton):
             submenu=submenu,
             **kwargs,
         )
-        self.client = network_service
+        self.client = NetworkService()
         self.client.connect("device-ready", self.update_action_button)
 
         self.connect("action-clicked", self.on_action)
 
-    def update_action_button(self, client: NetworkClient):
+    def update_action_button(self, client: NetworkService):
         wifi = client.wifi_device
 
         if wifi:
             wifi.connect(
                 "notify::enabled",
-                self.set_active_style(wifi.get_property("enabled")),  # type: ignore
+                lambda *_: self.set_active_style(wifi.get_property("enabled")),  # type: ignore
             )
 
             self.action_icon.set_from_icon_name(
