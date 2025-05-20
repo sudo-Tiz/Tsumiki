@@ -350,7 +350,7 @@ class EmojiPickerWidget(ButtonWidget):
         )
 
         if self.config["label"]:
-            self.box.add(Label(label="Clip", style_classes="panel-text"))
+            self.box.add(Label(label="Emoji", style_classes="panel-text"))
 
         if self.config["tooltip"]:
             self.set_tooltip_text("Emoji Picker")

@@ -385,7 +385,7 @@ class KanbanWidget(ButtonWidget):
         )
 
         if self.config["label"]:
-            self.box.add(Label(label="Clip", style_classes="panel-text"))
+            self.box.add(Label(label="Kanban", style_classes="panel-text"))
 
         if self.config["tooltip"]:
             self.set_tooltip_text("Kanban Board")
