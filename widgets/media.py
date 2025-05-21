@@ -431,7 +431,6 @@ class PlayerBox(Box):
 
         self.children = [*self.children, self.overlay_box]
 
-
         bulk_connect(
             self.player,
             {
@@ -451,7 +450,6 @@ class PlayerBox(Box):
 
         if duration:
             self.length_label.set_label(self.length_str(self.player.length))
-
 
     def _set_notify_value(self, p, *_):
         self.image_box.set_angle(p.value)

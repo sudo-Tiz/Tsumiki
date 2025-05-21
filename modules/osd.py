@@ -123,10 +123,17 @@ class AudioOSDContainer(GenericOSDContainer):
 
         volume = round(self.audio_service.speaker.volume)
 
+        is_over_amplified = volume > 100
+
+        self.scale.add_style_class(
+            "overamplified"
+        ) if is_over_amplified else self.scale.remove_style_class("overamplified")
+
         if self.audio_service.speaker.muted:
             self.update_icon(0)
         else:
             self.update_icon(volume)
+
         self.scale.set_value(volume)
         self.level.set_label(f"{volume}%")
         speaker.handler_unblock_by_func(self.update_volume)

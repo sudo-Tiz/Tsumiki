@@ -289,7 +289,8 @@
 		"controls": {
 			"sliders": [
 				"brightness",
-				"volume"
+				"volume",
+				"microphone"
 			]
 		},
 		"auto_hide": false,
