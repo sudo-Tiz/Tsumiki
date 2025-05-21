@@ -91,12 +91,10 @@ def merge_defaults(data, defaults):
     return merged
 
 
+# Set the scale's adjustment
 def set_scale_adjustment(
     scale, min_value: float = 0, max_value: float = 100, steps: float = 1
 ):
-    """Set the adjustment of a scale widget."""
-    # Set the scale's adjustment
-
     adj = scale.get_adjustment()
     if adj.get_upper() == adj.get_lower():
         scale.set_adjustment(

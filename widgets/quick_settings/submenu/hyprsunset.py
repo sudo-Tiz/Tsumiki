@@ -17,10 +17,10 @@ class HyprSunsetSubMenu(QuickSubMenu):
 
         self.scale = create_scale(
             name="hyprsunset-scale",
-            increments=(100,100),
+            increments=(100, 100),
         )
 
-        self.scale.set_range(1000,10000)
+        self.scale.set_range(1000, 10000)
 
         super().__init__(
             title="HyprSunset",
