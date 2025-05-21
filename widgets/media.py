@@ -431,31 +431,27 @@ class PlayerBox(Box):
 
         self.children = [*self.children, self.overlay_box]
 
-        # Player Signals
+
         bulk_connect(
             self.player,
             {
-                "notify::arturl": self._set_image,
-                "notify::title": self._on_title,
                 "exit": self._on_player_exit,
                 "notify::playback-status": self._on_playback_change,
                 "notify::shuffle": self._on_shuffle_update,
-                "notify::length": self._on_length,
-                "notify::position": self._on_position,
+                "notify::metadata": self._on_metadata,
             },
         )
 
         invoke_repeater(1000, self._move_seekbar)
 
-    def _on_position(self, *_):
-        self.seek_bar.set_value(
-            convert_to_percent(self.player.position, self.player.length)
-        )
-        self.position_label.set_label(self.length_str(self.player.position))
+    def _on_metadata(self, *_):
+        self._set_image()
 
-    def _on_length(self, *_):
-        self.length_label.set_label(self.length_str(self.player.length))
-        self.art_animator.play()
+        duration = self.player.length
+
+        if duration:
+            self.length_label.set_label(self.length_str(self.player.length))
+
 
     def _set_notify_value(self, p, *_):
         self.image_box.set_angle(p.value)
