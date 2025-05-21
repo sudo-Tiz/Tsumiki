@@ -53,9 +53,6 @@ class EmojiPickerMenu(Box):
             on_key_press_event=self.on_search_entry_key_press,
         )
         self.search_entry.props.xalign = 0.5
-        self.header_box = Box(
-            name="header_box", spacing=10, orientation="h", children=[self.search_entry]
-        )
 
         self.picker_box = Box(
             name="picker-box",
@@ -63,7 +60,7 @@ class EmojiPickerMenu(Box):
             h_expand=True,
             orientation="v",
             children=[
-                self.header_box,
+                self.search_entry,
                 self.stack,
             ],
         )
