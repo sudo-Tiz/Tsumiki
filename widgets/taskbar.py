@@ -136,7 +136,7 @@ class TaskBarWidget(ButtonWidget):
                                         if window_class in app_name:
                                             return icon_name
                         except Exception as e:
-                            logger.error(
+                            logger.exception(
                                 f"{Colors.ERROR}Error reading {file_path}: {e}"
                             )
         return None

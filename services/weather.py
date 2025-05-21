@@ -60,7 +60,7 @@ class WeatherService(Service):
 
         except error.HTTPError as e:
             if e.code == 404:
-                logger.error(
+                logger.exception(
                     f"{Colors.ERROR}[WeatherService] Error: City not found. Try a different city."  # noqa: E501
                 )
             return None

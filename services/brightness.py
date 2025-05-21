@@ -18,7 +18,7 @@ try:
     screen_device = os.listdir("/sys/class/backlight")
     screen_device = screen_device[0] if screen_device else ""
 except FileNotFoundError:
-    logger.error(f"{Colors.ERROR}No backlight devices found")
+    logger.exception(f"{Colors.ERROR}No backlight devices found")
     screen_device = ""
 
 # Discover keyboard backlight device
@@ -27,7 +27,7 @@ try:
     kbd = [x for x in kbd if "kbd_backlight" in x]
     kbd = kbd[0] if kbd else ""
 except FileNotFoundError:
-    logger.error(f"{Colors.ERROR}No keyboard backlight devices found")
+    logger.exception(f"{Colors.ERROR}No keyboard backlight devices found")
     kbd = ""
 
 
@@ -110,7 +110,9 @@ class Brightness(Service):
                 f"(out of {self.max_screen})"
             )
         except GLib.Error as e:
-            logger.error(f"{Colors.ERROR}Error setting screen brightness: {e.message}")
+            logger.exception(
+                f"{Colors.ERROR}Error setting screen brightness: {e.message}"
+            )
         except Exception as e:
             logger.exception(f"Unexpected error setting screen brightness: {e}")
 

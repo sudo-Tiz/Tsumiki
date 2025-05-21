@@ -65,7 +65,9 @@ class PowerProfiles(Service):
             value = self.proxy.get_cached_property("ActiveProfile")
             return value.unpack().strip() if value else "balanced"
         except Exception as e:
-            logger.error(f"[PowerProfile] Error retrieving current power profile: {e}")
+            logger.exception(
+                f"[PowerProfile] Error retrieving current power profile: {e}"
+            )
             return "balanced"
 
     def set_power_profile(self, profile: str):
@@ -79,7 +81,7 @@ class PowerProfiles(Service):
             )
             logger.info(f"[PowerProfile] Power profile set to {profile}")
         except Exception as e:
-            logger.error(
+            logger.exception(
                 f"[PowerProfile] Could not change power level to {profile}: {e}"
             )
 

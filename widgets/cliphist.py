@@ -1,7 +1,6 @@
 import os
 import re
 import subprocess
-import sys
 import tempfile
 
 from fabric.utils import remove_handler
@@ -12,6 +11,7 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import Gdk, GdkPixbuf, GLib
+from loguru import logger
 
 from shared import ButtonWidget, Popover
 from utils.widget_settings import BarConfig
@@ -119,9 +119,9 @@ class ClipHistoryMenu(Box):
                 new_items.append(line)
             self._update_items(new_items)
         except subprocess.CalledProcessError as e:
-            print(f"Error loading clipboard history: {e}", file=sys.stderr)
+            logger.exception(f"Error loading clipboard history: {e}")
         except Exception as e:
-            print(f"Unexpected error: {e}", file=sys.stderr)
+            logger.exception(f"Unexpected error: {e}")
         finally:
             self._loading = False
             if self._pending_updates:
@@ -276,7 +276,7 @@ class ClipHistoryMenu(Box):
                     self.image_cache[item_id] = pixbuf
                 self._update_image_button(button, pixbuf)
             except Exception as e:
-                print(f"Error loading image preview: {e}", file=sys.stderr)
+                logger.exception(f"Error loading image preview: {e}")
             return False
 
         GLib.idle_add(load_image)
@@ -334,7 +334,7 @@ class ClipHistoryMenu(Box):
                 subprocess.run(["wl-copy"], input=result.stdout, check=True)
                 GLib.idle_add(self.close)
             except subprocess.CalledProcessError as e:
-                print(f"Error pasting clipboard item: {e}", file=sys.stderr)
+                logger.exception(f"Error pasting clipboard item: {e}")
             return False
 
         GLib.idle_add(paste)
@@ -349,7 +349,7 @@ class ClipHistoryMenu(Box):
                 if not self._loading:
                     GLib.idle_add(self._load_clipboard_items_thread)
             except subprocess.CalledProcessError as e:
-                print(f"Error deleting clipboard item: {e}", file=sys.stderr)
+                logger.exception(f"Error deleting clipboard item: {e}")
             return False
 
         GLib.idle_add(delete)
@@ -364,7 +364,7 @@ class ClipHistoryMenu(Box):
                 if not self._loading:
                     GLib.idle_add(self._load_clipboard_items_thread)
             except subprocess.CalledProcessError as e:
-                print(f"Error clearing clipboard history: {e}", file=sys.stderr)
+                logger.exception(f"Error clearing clipboard history: {e}")
             return False
 
         GLib.idle_add(clear)
@@ -497,7 +497,7 @@ class ClipHistoryMenu(Box):
                 shutil.rmtree(self.tmp_dir)
             self.image_cache.clear()
         except Exception as e:
-            print(f"Error cleaning up temporary files: {e}", file=sys.stderr)
+            logger.exception(f"Error cleaning up temporary files: {e}")
 
 
 class ClipHistoryWidget(ButtonWidget):

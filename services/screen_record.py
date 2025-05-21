@@ -32,7 +32,7 @@ class ScreenRecorder(Service):
         helpers.ensure_directory(self.screenrecord_path)
 
         if self.is_recording:
-            logger.error(
+            logger.exception(
                 "[SCREENRECORD] Another instance of wf-recorder is already running."
             )
             return
@@ -77,7 +77,7 @@ class ScreenRecorder(Service):
             try:
                 _, stdout, stderr = process.communicate_utf8_finish(task)
             except Exception:
-                logger.error(
+                logger.exception(
                     f"[SCREENSHOT] Failed read notification action with error {stderr}"
                 )
                 return
@@ -112,7 +112,7 @@ class ScreenRecorder(Service):
                 file_path=file_path if file_path else None,
             )
         except Exception:
-            logger.error(f"[SCREENSHOT] Failed to run command: {command}")
+            logger.exception(f"[SCREENSHOT] Failed to run command: {command}")
 
     def send_screenrecord_notification(self, file_path):
         cmd = ["notify-send"]
@@ -137,7 +137,7 @@ class ScreenRecorder(Service):
             try:
                 _, stdout, stderr = process.communicate_utf8_finish(task)
             except Exception:
-                logger.error(
+                logger.exception(
                     f"[SCREENRECORD] Failed read notification action with error."
                     f"{stderr}"
                 )

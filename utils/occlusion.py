@@ -1,6 +1,8 @@
 import json
 import subprocess
 
+from loguru import logger
+
 
 def get_current_workspace():
     """
@@ -17,7 +19,7 @@ def get_current_workspace():
             if part == "ID" and i + 1 < len(parts):
                 return int(parts[i + 1])
     except Exception as e:
-        print(f"Error getting current workspace: {e}")
+        logger.exception(f"Error getting current workspace: {e}")
     return -1
 
 
@@ -47,7 +49,7 @@ def get_screen_dimensions():
         if monitors:
             return monitors[0].get("width", 1920), monitors[0].get("height", 1080)
     except Exception as e:
-        print(f"Error getting screen dimensions: {e}")
+        logger.exception(f"Error getting screen dimensions: {e}")
 
     # Default fallback values
     return 1920, 1080
@@ -89,7 +91,7 @@ def check_occlusion(occlusion_region, workspace=None):
 
     # Ensure occlusion_region is in the correct format (x, y, width, height)
     if not isinstance(occlusion_region, tuple) or len(occlusion_region) != 4:
-        print(f"Invalid occlusion region format: {occlusion_region}")
+        logger.exception(f"Invalid occlusion region format: {occlusion_region}")
         return False
 
     try:
@@ -98,7 +100,7 @@ def check_occlusion(occlusion_region, workspace=None):
         )
         clients = json.loads(result.stdout)
     except Exception as e:
-        print(f"Error retrieving client windows: {e}")
+        logger.exception(f"Error retrieving client windows: {e}")
         return False
 
     occ_x, occ_y, occ_width, occ_height = occlusion_region

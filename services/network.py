@@ -10,7 +10,7 @@ try:
     gi.require_version("NM", "1.0")
     from gi.repository import NM
 except ValueError:
-    logger.error("[NetworkManager] Failed to start network manager")
+    logger.exception("[NetworkManager] Failed to start network manager")
 
 
 class Wifi(Service):

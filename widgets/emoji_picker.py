@@ -10,6 +10,7 @@ from fabric.widgets.entry import Entry
 from fabric.widgets.label import Label
 from fabric.widgets.stack import Stack
 from gi.repository import Gdk
+from loguru import logger
 
 from shared import ButtonWidget, Popover
 from utils.widget_settings import BarConfig
@@ -75,7 +76,7 @@ class EmojiPickerMenu(Box):
         emoji_data = {}
         emoji_file_path = get_relative_path("../assets/emoji.json")
         if not os.path.exists(emoji_file_path):
-            print(f"Emoji JSON file not found at: {emoji_file_path}")
+            logger.exception(f"Emoji JSON file not found at: {emoji_file_path}")
             return {}
 
         with open(emoji_file_path, "r") as f:
@@ -324,7 +325,7 @@ class EmojiPickerMenu(Box):
         try:
             subprocess.run(["wl-copy"], input=emoji_char.encode("utf-8"), check=True)
         except subprocess.CalledProcessError as e:
-            print(f"Clipboard copy failed: {e}")
+            logger.exception(f"Clipboard copy failed: {e}")
 
 
 class EmojiPickerWidget(ButtonWidget):

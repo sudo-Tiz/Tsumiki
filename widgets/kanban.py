@@ -10,6 +10,7 @@ from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import Gdk, GLib, GObject, Gtk
+from loguru import logger
 
 from shared import ButtonWidget, Popover
 from utils.widget_settings import BarConfig
@@ -343,7 +344,7 @@ class Kanban(Box):
             with open(self.STATE_FILE, "w") as f:
                 json.dump(state, f, indent=2)
         except Exception as e:
-            print(f"Error saving state: {e}")
+            logger.exception(f"Error saving state: {e}")
 
     def load_state(self):
         try:
@@ -359,7 +360,7 @@ class Kanban(Box):
         except FileNotFoundError:
             pass
         except Exception as e:
-            print(f"Error loading state: {e}")
+            logger.exception(f"Error loading state: {e}")
 
 
 class KanbanWidget(ButtonWidget):

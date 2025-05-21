@@ -75,7 +75,7 @@ class BatteryService(Service):
             result = self.proxy.get_cached_property(property)
             return result.unpack() if result is not None else None
         except Exception as e:
-            logger.error(f"[Battery] Error retrieving '{property}': {e}")
+            logger.exception(f"[Battery] Error retrieving '{property}': {e}")
             return None
 
     def handle_property_change(self, *_):

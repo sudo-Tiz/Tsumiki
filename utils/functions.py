@@ -64,7 +64,7 @@ def copy_theme(theme: str):
         shutil.copyfile(source_file, destination_file)
 
     except FileNotFoundError:
-        logger.error(
+        logger.exception(
             f"{Colors.ERROR}Error: The theme file '{source_file}' was not found."
         )
         exit(1)

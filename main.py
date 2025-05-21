@@ -66,8 +66,8 @@ def process_and_apply_css(app: Application):
         logger.info(f"{Colors.INFO}[Main] CSS applied")
         app.set_stylesheet_from_file(get_relative_path("dist/main.css"))
     else:
-        logger.error(f"{Colors.ERROR}[Main]Failed to compile sass!")
-        logger.error(f"{Colors.ERROR}[Main] {output}")
+        logger.exception(f"{Colors.ERROR}[Main]Failed to compile sass!")
+        logger.exception(f"{Colors.ERROR}[Main] {output}")
         app.set_stylesheet_from_string("")
 
 
@@ -149,7 +149,7 @@ if __name__ == "__main__":
             case "app_launcher":
                 app_launcher.toggle()
             case _:
-                logger.error(
+                logger.exception(
                     f"{Colors.ERROR}[Main] Invalid item '{item}' specified for toggle."
                     "Valid options are: bar, desktop_clock, dock, screen_corners, app_launcher."  # noqa: E501
                 )
