@@ -1,7 +1,7 @@
 from fabric.utils import cooldown, exec_shell_command_async
 
 from shared import QSChevronButton, QuickSubMenu, ScanButton
-from utils.functions import is_app_running, toggle_command
+from utils.functions import is_app_running, set_scale_adjustment, toggle_command
 from utils.widget_utils import (
     create_scale,
     util_fabricator,
@@ -17,10 +17,10 @@ class HyprSunsetSubMenu(QuickSubMenu):
 
         self.scale = create_scale(
             name="hyprsunset-scale",
-            increments=(100, 100),
+            increments=(100,100),
         )
 
-        self.scale.set_range(1000, 10000)
+        self.scale.set_range(1000,10000)
 
         super().__init__(
             title="HyprSunset",
@@ -63,10 +63,10 @@ class HyprSunsetSubMenu(QuickSubMenu):
             if isinstance(moved_pos, str)
             else moved_pos
         )
-        if sanitized_value == self.scale.get_value():
-            return
 
-        self.scale.set_range(1000, 10000)
+        set_scale_adjustment(
+            scale=self.scale, min_value=1000, max_value=10000, steps=200
+        )
 
         self.scale.set_value(sanitized_value)
         self.scale.set_tooltip_text(f"{sanitized_value}K")
