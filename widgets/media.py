@@ -326,7 +326,7 @@ class PlayerBox(Box):
         # Seek Bar
         self.seek_bar = Scale(
             min_value=0,
-            max_value=100,
+            max_value=1,
             increments=(5, 5),
             name="seek-bar",
         )
@@ -552,12 +552,16 @@ class PlayerBox(Box):
     def _move_seekbar(self, *_):
         if self.player.position is None:
             return False
-        position = convert_to_percent(self.player.position, self.player.length)
         self.position_label.set_label(self.length_str(self.player.position))
-        self.seek_bar.set_value(position)
+        self.seek_bar.set_value(
+            self.player.position / self.player.length
+        ) if self.player.length > 0 else self.seek_bar.set_value(
+            0
+        )
 
     @cooldown(1)
     def _on_scale_move(self, scale: Scale, event, pos: int):
-        actual_pos = pos * self.player.length * 0.01
+        actual_pos = pos * self.player.length
         self.player.position = actual_pos
         self.position_label.set_label(self.length_str(actual_pos))
+        self.seek_bar.set_value(pos)
