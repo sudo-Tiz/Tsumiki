@@ -555,9 +555,7 @@ class PlayerBox(Box):
         self.position_label.set_label(self.length_str(self.player.position))
         self.seek_bar.set_value(
             self.player.position / self.player.length
-        ) if self.player.length > 0 else self.seek_bar.set_value(
-            0
-        )
+        ) if self.player.length > 0 else self.seek_bar.set_value(0)
 
     @cooldown(1)
     def _on_scale_move(self, scale: Scale, event, pos: int):

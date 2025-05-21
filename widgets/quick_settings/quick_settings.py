@@ -7,6 +7,7 @@ from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from gi.repository import GLib, Gtk
+from loguru import logger
 
 import utils.functions as helpers
 from services import Brightness, MprisPlayerManager, NetworkService, Wifi, audio_service
@@ -395,20 +396,19 @@ class QuickSettingsButtonWidget(ButtonWidget):
             widget_config["quick_settings"], name="quick_settings", **kwargs
         )
 
-        self.panel_icon_size = 16
-        self.audio = audio_service
-
         self._timeout_id = None
+        self.panel_icon_size = 16
+
+        self.audio_service = audio_service
 
         self.network_service = NetworkService()
 
-        # Initialize the audio service
         self.brightness_service = Brightness()
 
-        self.audio.connect("notify::speaker", self.on_speaker_changed)
-        self.brightness_service.connect(
-            "brightness_changed", self.on_brightness_changed
-        )
+        self.audio_service.connect("notify::speaker", self.on_speaker_changed)
+        self.audio_service.connect("changed", self.check_mute)
+
+        self.brightness_service.connect("brightness_changed", self.update_brightness)
 
         self.network_service.connect("device-ready", self._get_network_icon)
 
@@ -451,7 +451,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
                 wifi.icon_name,
                 self.panel_icon_size,
             )
-            wifi.connect("changed", self.update_status)
+            wifi.connect("changed", self.update_wifi_status)
 
         else:
             ethernet = self.network_service.ethernet_device
@@ -460,7 +460,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
                 self.panel_icon_size,
             )
 
-    def update_status(self, wifi: Wifi):
+    def update_wifi_status(self, wifi: Wifi):
         self.network_icon.set_from_icon_name(
             wifi.icon_name,
             self.panel_icon_size,
@@ -468,34 +468,34 @@ class QuickSettingsButtonWidget(ButtonWidget):
 
     def on_speaker_changed(self, *_):
         # Update the progress bar value based on the speaker volume
-        if not self.audio.speaker:
+        if not self.audio_service.speaker:
             return
 
-        self.audio.speaker.connect("notify::volume", self.update_volume)
-        self.update_volume()
+        self.audio_service.speaker.connect("notify::volume", self.update_volume)
+
+    def check_mute(self, audio):
+        if not self.audio_service.speaker:
+            return
+        self.audio_icon.set_from_icon_name(
+            get_audio_icon_name(
+                self.audio_service.speaker.volume, self.audio_service.speaker.muted
+            )["icon"],
+            self.panel_icon_size,
+        )
 
     def update_volume(self, *_):
-        if self.audio.speaker:
-            volume = round(self.audio.speaker.volume)
+        if self.audio_service.speaker:
+            volume = round(self.audio_service.speaker.volume)
 
             self.audio_icon.set_from_icon_name(
-                get_audio_icon_name(volume, self.audio.speaker.muted)["icon"],
+                get_audio_icon_name(volume, self.audio_service.speaker.muted)["icon"],
                 self.panel_icon_size,
             )
-
-    def on_brightness_changed(self, *_):
-        self.update_brightness()
 
     def update_brightness(self, *_):
         """Update the brightness icon."""
         try:
-            # Convert brightness to percentage (0-100)
-
-            normalized_brightness = helpers.convert_to_percent(
-                self.brightness_service.screen_brightness,
-                self.brightness_service.max_screen,
-            )
-
+            normalized_brightness = self.brightness_service.screen_brightness_percentage
             icon_info = get_brightness_icon_name(normalized_brightness)
             if icon_info:
                 self.brightness_icon.set_from_icon_name(
@@ -509,7 +509,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
                     self.panel_icon_size,
                 )
         except Exception as e:
-            print(f"Error updating brightness icon: {e}")
+            logger.exception(f"Error updating brightness icon: {e}")
             # Fallback icon if something goes wrong
             self.brightness_icon.set_from_icon_name(
                 symbolic_icons["brightness"]["indicator"],
