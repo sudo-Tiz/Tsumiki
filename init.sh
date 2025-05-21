@@ -117,6 +117,7 @@ install_packages() {
 		python-cairo
 		python-loguru
 		python-setproctitle
+		cliphist
 	)
 
 		aur_deps=(
@@ -126,6 +127,7 @@ install_packages() {
 		python-rlottie-python
 		python-pytomlpp
 		python-pyjson5
+		python-ijson
 		slurp
 		imagemagick
 		tesseract

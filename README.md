@@ -133,6 +133,9 @@ hypridle
 ## To use media module on quick settings
 playerctl
 
+## To use the clipboard module
+cliphist
+
 ```
 
 - Clone this repository:
@@ -178,7 +181,7 @@ If you prefer to have more control over the installation process, you can instal
 Run the following command to install the required system packages:
 
 ```sh
-sudo pacman -S --noconfirm --needed pipewire playerctl dart-sass power-profiles-daemon networkmanager brightnessctl pkgconf wf-recorder kitty python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python-pip python-gobject python-psutil python-cairo python-loguru python-setproctitle libnotify
+sudo pacman -S --noconfirm --needed pipewire playerctl dart-sass power-profiles-daemon networkmanager brightnessctl pkgconf wf-recorder kitty python pacman-contrib gtk3 cairo gtk-layer-shell libgirepository gobject-introspection gobject-introspection-runtime python-pip python-gobject python-psutil python-cairo python-loguru python-setproctitle libnotify cliphist
 ```
 
 #### Step 2: Install AUR Packages
@@ -186,7 +189,7 @@ sudo pacman -S --noconfirm --needed pipewire playerctl dart-sass power-profiles-
 Using `yay` to install the required AUR packages:
 
 ```sh
-yay -S --needed gray-git python-fabric gnome-bluetooth-3.0 python-rlottie-python python-pytomlpp slurp imagemagick tesseract tesseract-data-eng python-pyjson5 ttf-jetbrains-mono-nerd grimblast-git
+yay -S --needed gray-git python-fabric gnome-bluetooth-3.0 python-rlottie-python python-pytomlpp slurp imagemagick tesseract tesseract-data-eng python-pyjson5 ttf-jetbrains-mono-nerd grimblast-git python-ijson
 ```
 
 If you have something else besides `yay`, install with the respective aur helper.
@@ -229,9 +232,11 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 | **brightness**        | Widget controls the screen brightness level.                                   |
 | **cava**              | An audio visualizer widget.                                                    |
 | **click_counter**     | Widget tracks the number of mouse clicks.                                      |
+| **cliphist**          | Widget for the clipboard history.                                              |
 | **cpu**               | Widget displays CPU usage and performance statistics.                          |
 | **date_time**         | A menu displaying the current date and notifications.                          |
 | **divider (utility)** | Widget separates sections in a user interface for better organization.         |
+| **emoji_picker**      | Widget that allows users to select and insert emojis.                          |
 | **hypr_idle**         | Widget that tracks idle time or status of the system.                          |
 | **hypr_picker**       | Widget that picks color from images.                                           |
 | **hypr_sunset**       | Widget that adjusts screen settings based on the time of sunset.               |
