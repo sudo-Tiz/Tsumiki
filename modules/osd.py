@@ -98,6 +98,7 @@ class AudioOSDContainer(GenericOSDContainer):
         self.audio_service.connect("notify::speaker", self.on_speaker_changed)
         self.audio_service.connect("changed", self.check_mute)
 
+    @cooldown(0.1)
     def check_mute(self, audio):
         if not audio.speaker:
             return
@@ -111,6 +112,7 @@ class AudioOSDContainer(GenericOSDContainer):
         if speaker := self.audio_service.speaker:
             speaker.connect("notify::volume", self.update_volume)
 
+    @cooldown(0.1)
     def update_volume(self, speaker, _):
         speaker.handler_block_by_func(self.update_volume)
         self.emit(

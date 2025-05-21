@@ -557,7 +557,7 @@ class PlayerBox(Box):
             self.player.position / self.player.length
         ) if self.player.length > 0 else self.seek_bar.set_value(0)
 
-    @cooldown(1)
+    @cooldown(0.1)
     def _on_scale_move(self, scale: Scale, event, pos: int):
         actual_pos = pos * self.player.length
         self.player.position = actual_pos
