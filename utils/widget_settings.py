@@ -194,6 +194,7 @@ General = TypedDict(
     {
         "check_updates": bool,
         "debug": bool,
+        "monitor_styles": bool,
         "location": str,
         "layer": Layer,
     },

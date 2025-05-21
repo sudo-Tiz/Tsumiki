@@ -243,6 +243,7 @@ DEFAULT_CONFIG = {
         "layer": "top",
         "auto_hide": False,
         "debug": True,
+        "monitor_styles": True,
         "location": "top",
         "widget_style": "default",
     },
