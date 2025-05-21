@@ -20,7 +20,7 @@ class HyprSunsetSubMenu(QuickSubMenu):
             increments=(100, 100),
         )
 
-        self.scale.set_range(1000.0, 10000.0)
+        self.scale.set_range(1000, 10000)
 
         super().__init__(
             title="HyprSunset",
@@ -65,6 +65,9 @@ class HyprSunsetSubMenu(QuickSubMenu):
         )
         if sanitized_value == self.scale.get_value():
             return
+
+        self.scale.set_range(1000, 10000)
+
         self.scale.set_value(sanitized_value)
         self.scale.set_tooltip_text(f"{sanitized_value}K")
 

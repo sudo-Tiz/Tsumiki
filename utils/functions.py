@@ -91,6 +91,25 @@ def merge_defaults(data, defaults):
     return merged
 
 
+def set_scale_adjustment(
+    scale, min_value: float = 0, max_value: float = 100, steps: float = 1
+):
+    """Set the adjustment of a scale widget."""
+    # Set the scale's adjustment
+
+    adj = scale.get_adjustment()
+    if adj.get_upper() == adj.get_lower():
+        scale.set_adjustment(
+            Gtk.Adjustment(
+                lower=min_value,
+                upper=max_value,
+                step_increment=steps,
+                page_increment=0,
+                page_size=0,
+            )
+        )
+
+
 # Function to toggle a shell command
 def toggle_command(command: str, full_command: str):
     if is_app_running(command):
