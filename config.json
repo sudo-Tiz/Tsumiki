@@ -240,7 +240,7 @@
 		"check_updates": false,
 		"layer": "top",
 		"auto_hide": false,
-		"debug": false,
+		"debug": true,
 		"location": "top"
 	},
 	"power": {

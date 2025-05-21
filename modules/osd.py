@@ -181,11 +181,9 @@ class OSDContainer(Window):
         self.brightness_container.connect("brightness-changed", self.show_brightness)
 
     def show_audio(self, *_):
-        logger.debug("Audio changed,showing audio OSD")
         self.show_box(box_to_show="audio")
 
     def show_brightness(self, *_):
-        logger.debug("Brightness changed,showing brightness OSD")
         self.show_box(box_to_show="brightness")
 
     def show_box(self, box_to_show: Literal["audio", "brightness"]):
