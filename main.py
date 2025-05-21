@@ -1,9 +1,10 @@
+import traceback
 from typing import Literal
 
 import setproctitle
 from fabric import Application
 from fabric.utils import cooldown, exec_shell_command, get_relative_path, monitor_file
-from gi.repository import Gtk
+from gi.repository import GLib, Gtk
 from loguru import logger
 
 import utils.functions as helpers
@@ -14,6 +15,44 @@ from utils import (
     Colors,
     widget_config,
 )
+
+# Manually map log levels to readable names
+LOG_LEVEL_NAMES = {
+    GLib.LogLevelFlags.LEVEL_ERROR: "ERROR",
+    GLib.LogLevelFlags.LEVEL_CRITICAL: "CRITICAL",
+    GLib.LogLevelFlags.LEVEL_WARNING: "WARNING",
+    GLib.LogLevelFlags.LEVEL_MESSAGE: "MESSAGE",
+    GLib.LogLevelFlags.LEVEL_INFO: "INFO",
+    GLib.LogLevelFlags.LEVEL_DEBUG: "DEBUG",
+}
+
+
+def log_handler(domain, level, message):
+    level_name = LOG_LEVEL_NAMES.get(
+        GLib.LogLevelFlags(
+            level & ~GLib.LogLevelFlags.FLAG_FATAL & ~GLib.LogLevelFlags.FLAG_RECURSION
+        ),
+        f"UNKNOWN({level})",
+    )
+    print(f"\n[{domain or 'Default'}] {level_name}: {message}")
+    traceback.print_stack()
+
+
+# Set log levels
+log_levels = (
+    GLib.LogLevelFlags.LEVEL_ERROR
+    | GLib.LogLevelFlags.LEVEL_CRITICAL
+    | GLib.LogLevelFlags.LEVEL_WARNING
+    | GLib.LogLevelFlags.LEVEL_MESSAGE
+    | GLib.LogLevelFlags.LEVEL_INFO
+    | GLib.LogLevelFlags.LEVEL_DEBUG
+)
+
+# Common GTK/GLib log domains
+domains = [None, "Gtk", "GLib", "GLib-GObject", "Gdk", "Pango"]
+
+for domain in domains:
+    GLib.log_set_handler(domain, log_levels, log_handler)
 
 
 @cooldown(2)
