@@ -65,7 +65,7 @@ class HyprSunsetSubMenu(QuickSubMenu):
         )
 
         set_scale_adjustment(
-            scale=self.scale, min_value=1000, max_value=10000, steps=200
+            scale=self.scale, min_value=1000, max_value=10000, steps=100
         )
 
         self.scale.set_value(sanitized_value)
