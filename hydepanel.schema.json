@@ -221,9 +221,9 @@
 					"type": "boolean",
 					"description": "Determines whether debug mode is enabled."
 				},
-				"monitor_styles":{
-					"type":"boolean",
-					"description":"Determines whether to use monitor stylesheet."
+				"monitor_styles": {
+					"type": "boolean",
+					"description": "Determines whether to use monitor stylesheet."
 				},
 				"check_updates": {
 					"type": "boolean",
