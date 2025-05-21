@@ -40,16 +40,19 @@ class ClipHistoryMenu(Box):
         self._loading = False
         self._pending_updates = False
 
+        self._search_timer_id = 0  # Timer ID for search text change
+
         self.viewport = Box(name="viewport", spacing=4, orientation="v")
 
         self.search_entry = Entry(
             name="search-entry",
             placeholder="Search Clipboard History",
             h_expand=True,
-            notify_text=self.filter_items,
             on_activate=self.use_selected_item,
             on_key_press_event=self.on_search_entry_key_press,
         )
+
+        self.search_entry.connect("notify::text", self._on_search_text_changed)
 
         self.search_entry.props.xalign = 0.5
 
@@ -89,6 +92,23 @@ class ClipHistoryMenu(Box):
 
         self.add(self.history_box)
         self.open()  # Load items when the widget is created
+
+    def _on_search_text_changed(self, entry, pspec):
+        # Remove any existing pending filter operation
+        if self._search_timer_id > 0:
+            GLib.source_remove(self._search_timer_id)
+            self._search_timer_id = 0
+
+        # Start a new timer to filter after a delay
+        self._search_timer_id = GLib.timeout_add(
+            250,  # Milliseconds delay (e.g., 250ms)
+            lambda: self._perform_filter_after_delay(entry),
+        )
+
+    def _perform_filter_after_delay(self, entry):
+        self.filter_items(entry, None)  # Call the actual filter method
+        self._search_timer_id = 0  # Reset the timer ID
+        return False  # Do not repeat the timeout
 
     def close(self, *_):
         """Close the clipboard history panel"""
