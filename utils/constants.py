@@ -28,6 +28,8 @@ DEFAULT_CONFIG = {
         "icon": "",
         "label": False,
         "tooltip": True,
+        "per_row": 9,
+        "per_column": 4,
     },
     "kanban": {
         "icon": "󱞁",

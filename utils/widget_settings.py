@@ -328,7 +328,10 @@ Cliphist = TypedDict("Cliphist", {"icon": str, **BaseConfig.__annotations__})
 
 Kanban = TypedDict("kanban", {"icon": str, **BaseConfig.__annotations__})
 
-EmojiPicker = TypedDict("emoji_picker", {"icon": str, **BaseConfig.__annotations__})
+EmojiPicker = TypedDict(
+    "emoji_picker",
+    {"icon": str, **BaseConfig.__annotations__, "per_row": int, "per_column": int},
+)
 
 
 # DateTime configuration

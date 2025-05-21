@@ -20,14 +20,14 @@ from utils.widget_utils import text_icon
 class EmojiPickerMenu(Box):
     """A widget to display an emoji picker."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, config, **kwargs):
         super().__init__(
             name="emoji-menu",
             **kwargs,
         )
 
         self.selected_index = -1
-        self.emojis_per_page = 9 * 3
+        self.emojis_per_page = config["per_row"] * config["per_column"]
         self.current_page_index = 0
         self.filtered_emojis = []
         self.total_pages = 0
@@ -356,7 +356,7 @@ class EmojiPickerWidget(ButtonWidget):
             self.set_tooltip_text("Emoji Picker")
 
         popup = Popover(
-            content_factory=lambda: EmojiPickerMenu(),
+            content_factory=lambda: EmojiPickerMenu(config=self.config),
             point_to=self,
         )
 
