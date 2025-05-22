@@ -106,9 +106,7 @@
 	"emoji_picker": {
 		"icon": "",
 		"label": false,
-		"tooltip": true,
-		"per_row": 9,
-		"per_column": 4
+		"tooltip": true
 	},
 	"submap": {
 		"icon": "󰌌",
@@ -146,7 +144,7 @@
 		], // this is the left section of the panel
 		"middle_section": [
 			"date_time",
-			"cliphist"
+			"weather"
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
@@ -226,8 +224,8 @@
 			"layer": "bottom",
 			"pinned_apps": [
 				"vivaldi",
-				"persepolis",
 				"wezterm",
+				"persepolis",
 				"code"
 			]
 		},
@@ -291,8 +289,7 @@
 		"controls": {
 			"sliders": [
 				"brightness",
-				"volume",
-				"microphone"
+				"volume"
 			]
 		},
 		"auto_hide": false,

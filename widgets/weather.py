@@ -353,10 +353,10 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
 
         self.update_sunrise_sunset(data)
 
+        weather_icon = weather_icons[self.current_weather["weatherCode"]]
+
         text_icon = (
-            weather_icons[self.current_weather["weatherCode"]]["icon"]
-            if self.check_if_day()
-            else weather_icons[self.current_weather["weatherCode"]]["icon-night"]
+            weather_icon["icon"] if self.check_if_day() else weather_icon["icon-night"]
         )
 
         self.weather_icon.set_label(text_icon)
@@ -365,7 +365,10 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
 
         # Update the tooltip with the city and weather condition if enabled
         if self.config["tooltip"]:
-            self.set_tooltip_text(f"{data['location']}, {self.get_description()}")
+            tool_tip = f"{self.get_temperature()} {self.get_description()}"
+            tool_tip += f"\n{weather_icon['quote']}"
+
+            self.set_tooltip_text(tool_tip)
 
         # Create popover only once
 
