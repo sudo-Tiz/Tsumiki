@@ -368,6 +368,8 @@ class DateNotificationMenu(Box):
         self.clear_icon.set_from_icon_name(
             symbolic_icons["trash"]["empty"], self.pixel_size
         )
+        self.placeholder.set_visible(True)
+        self.notification_list_box.set_visible(False)
 
     def on_notification_closed(self, _, id, reason):
         """Handle notification being closed."""
