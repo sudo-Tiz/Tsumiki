@@ -177,17 +177,26 @@ class ClipHistoryMenu(Box):
                 h_align="center",
                 v_align="center",
                 h_expand=True,
+                spacing=10,
                 v_expand=True,
             )
 
             # Show a message if no clipboard items
             label = Label(
                 name="no-clip",
-                labe="",
+                label="Clipboard history is empty",
+                h_align="center",
+                v_align="center",
+            )
+            image = Image(
+                name="no-clip-icon",
+                icon_name="clipboard-symbolic",
+                icon_size=32,
                 h_align="center",
                 v_align="center",
             )
 
+            container.add(image)
             container.add(label)
             self.viewport.add(container)
             return
