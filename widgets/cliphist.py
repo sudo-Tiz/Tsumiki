@@ -2,6 +2,7 @@ import os
 import re
 import subprocess
 import tempfile
+from urllib.parse import unquote, urlparse
 
 from fabric.utils import remove_handler
 from fabric.widgets.box import Box
@@ -235,6 +236,8 @@ class ClipHistoryMenu(Box):
         # Check if this is an image by examining the content
         is_image = self.is_image_data(content)
 
+        is_file_image = self.is_file_image(content)
+
         if is_image:
             # For images, create item with image preview
             button = Button(
@@ -260,6 +263,34 @@ class ClipHistoryMenu(Box):
             )
             # Load image preview in background
             self._load_image_preview_async(item_id, button)
+
+        elif is_file_image:
+            button = Button(
+                name="slot-button",
+                child=Box(
+                    name="slot-box",
+                    orientation="h",
+                    spacing=10,
+                    children=[
+                        Image(
+                            name="clip-icon",
+                            h_align="start",
+                            image_file=unquote(urlparse(content).path),
+                            size=72,
+                        ),  # Placeholder
+                        Label(
+                            name="clip-label",
+                            label="[File]",
+                            ellipsization="end",
+                            v_align="center",
+                            h_align="start",
+                            h_expand=True,
+                        ),
+                    ],
+                ),
+                tooltip_text="File in clipboard",
+                on_clicked=lambda *_, id=item_id: self.paste_item(id),
+            )
         else:
             # For text, create regular item
             button = self.create_text_item_button(item_id, display_text)
@@ -334,9 +365,16 @@ class ClipHistoryMenu(Box):
             on_clicked=lambda *_: self.paste_item(item_id),
         )
 
+    def is_file_image(self, content):
+        # Check for common image data patterns
+        if content.startswith("file:///") and content.endswith(
+            (".png", ".jpg", ".jpeg", ".bmp", ".gif")
+        ):
+            return True
+
     def is_image_data(self, content):
         """Determine if clipboard content is likely an image"""
-        # Check for common image data patterns
+
         return (
             content.startswith("data:image/")
             or content.startswith("\x89PNG")
