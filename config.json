@@ -226,8 +226,8 @@
 			"layer": "bottom",
 			"pinned_apps": [
 				"vivaldi",
-				"wezterm",
 				"persepolis",
+				"wezterm",
 				"code"
 			]
 		},
