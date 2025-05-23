@@ -66,21 +66,39 @@ class WifiSubMenu(QuickSubMenu):
 
     def make_button_from_ap(self, ap) -> Button:
         def disconnect(*_):
-            self.client.disconnect_wifi_bssid(ap.get("bssid"))
+            self.client.disconnect_wifi_bssid(ap.get("bssid"))  # TODO: Fix this
+
+        ap_container = Box(
+            style="padding: 5px;",
+            orientation="h",
+            spacing=4,
+            children=[
+                Image(
+                    icon_name=ap.get("icon-name"),
+                    icon_size=18,
+                ),
+                Label(
+                    label=ap.get("ssid"),
+                    style_classes="submenu-item-label",
+                ),
+            ],
+        )
 
         ap_button = HoverButton(style_classes="submenu-button", name="wifi-ap-button")
-        ap_button.add(
-            Box(
-                style="padding: 5px;",
-                children=[
-                    Image(
-                        icon_name=ap.get("icon-name"),
-                        icon_size=18,
-                    ),
-                    Label(label=ap.get("ssid"), style_classes="submenu-item-label"),
-                ],
+
+        if self.wifi_device.state == "activated" and ap.get(
+            "ssid"
+        ) == self.wifi_device.get_property("ssid"):
+            ap_container.add(
+                Label(
+                    label="",
+                    style="padding: 0 4px;font-size: 20px;font-weight: bold;",
+                    v_align="center",
+                )
             )
-        )
+
+        ap_button.add(ap_container)
+
         ap_button.connect("clicked", disconnect)
         return ap_button
 
