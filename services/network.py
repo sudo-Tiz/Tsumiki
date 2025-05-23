@@ -152,6 +152,8 @@ class Wifi(Service):
             return {
                 "bssid": ap.get_bssid(),
                 # "address": ap.get_
+                "wpa_flags": ap.get_wpa_flags(),
+                "rsn_flags": ap.get_rsn_flags(),
                 "last_seen": ap.get_last_seen(),
                 "ssid": NM.utils_ssid_to_utf8(ap.get_ssid().get_data())
                 if ap.get_ssid()

@@ -12,6 +12,12 @@ from utils import symbolic_icons
 class WifiSubMenu(QuickSubMenu):
     """A submenu to display the Wifi settings."""
 
+    def is_secured(self,ap) -> bool:
+        wpa_flags = ap.get("wpa_flags", 0)
+        rsn_flags = ap.get("rsn_flags", 0)
+        # Both zero means no security
+        return (wpa_flags != 0) or (rsn_flags != 0)
+
     def __init__(self, **kwargs):
         self.client = NetworkService()
 
@@ -68,6 +74,8 @@ class WifiSubMenu(QuickSubMenu):
         def disconnect(*_):
             self.client.disconnect_wifi_bssid(ap.get("bssid"))  # TODO: Fix this
 
+        security_label = ""
+
         ap_container = Box(
             style="padding: 5px;",
             orientation="h",
@@ -91,16 +99,21 @@ class WifiSubMenu(QuickSubMenu):
 
         ap_button = HoverButton(style_classes="submenu-button", name="wifi-ap-button")
 
+        if self.is_secured(ap):
+            security_label = ""
+
         if self.wifi_device.state == "activated" and ap.get(
             "ssid"
         ) == self.wifi_device.get_property("ssid"):
-            ap_container.add(
-                Label(
-                    label="",
-                    style="font-size: 20px;font-weight: bold;",
-                    v_align="center",
-                )
+            security_label += " "
+
+        ap_container.add(
+            Label(
+                label=security_label,
+                style="font-size: 14px;font-weight: bold;",
+                v_align="center",
             )
+        )
 
         ap_button.add(ap_container)
 
