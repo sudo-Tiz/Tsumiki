@@ -105,7 +105,7 @@ class WifiSubMenu(QuickSubMenu):
         if self.wifi_device.state == "activated" and ap.get(
             "ssid"
         ) == self.wifi_device.get_property("ssid"):
-            security_label += " "
+            security_label = " " + security_label
 
         ap_container.add(
             Label(
