@@ -380,7 +380,7 @@ class KanbanWidget(ButtonWidget):
         self.box.add(
             text_icon(
                 self.config["icon"],
-                props={"style_classes": "panel-icon"},
+                props={"style_classes": "panel-font-icon"},
             )
         )
 

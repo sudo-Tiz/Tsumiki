@@ -46,7 +46,7 @@ class UpdatesWidget(ButtonWidget):
         if self.config["show_icon"]:
             self.icon = text_icon(
                 icon=self.config["icon"],
-                props={"style_classes": "panel-icon"},
+                props={"style_classes": "panel-font-icon"},
             )
             self.box.add(self.icon)
 

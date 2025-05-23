@@ -417,14 +417,14 @@ class QuickSettingsButtonWidget(ButtonWidget):
             point_to=self,
         )
 
-        self.audio_icon = Image(style_classes="panel-icon")
+        self.audio_icon = Image(style_classes="panel-font-icon")
 
         self.network_icon = Image(
-            style_classes="panel-icon",
+            style_classes="panel-font-icon",
         )
 
         self.brightness_icon = Image(
-            style_classes="panel-icon",
+            style_classes="panel-font-icon",
         )
 
         self.update_brightness()

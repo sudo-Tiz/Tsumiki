@@ -67,7 +67,7 @@ class QSToggleButton(Box):
 
         # Action button can hold an icon and a label NOTHING MORE
         self.action_icon = Image(
-            style_classes="panel-icon",
+            style_classes="panel-font-icon",
             icon_name=action_icon,
             icon_size=pixel_size,
         )

@@ -310,7 +310,7 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
         self.weather_icon = text_icon(
             icon="",
             props={
-                "style_classes": "panel-icon",
+                "style_classes": "panel-font-icon",
             },
         )
 

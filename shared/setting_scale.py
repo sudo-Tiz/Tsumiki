@@ -25,7 +25,9 @@ class SettingSlider(Box):
         )
         self.pixel_size = pixel_size
         self.icon = Image(
-            icon_name=icon_name, icon_size=self.pixel_size, style_classes="panel-icon"
+            icon_name=icon_name,
+            icon_size=self.pixel_size,
+            style_classes="panel-font-icon",
         )
         self.icon_button = HoverButton(image=self.icon, name="setting-slider-button")
 

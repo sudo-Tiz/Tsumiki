@@ -40,7 +40,7 @@ class BrightnessWidget(EventBoxWidget):
         self.icon = text_icon(
             icon=text_icons["brightness"]["medium"],
             props={
-                "style_classes": "panel-icon overlay-icon",
+                "style_classes": "panel-font-icon overlay-icon",
             },
         )
 

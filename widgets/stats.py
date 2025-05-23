@@ -59,7 +59,7 @@ class CpuWidget(ButtonWidget):
             self.icon = text_icon(
                 icon=self.config["icon"],
                 props={
-                    "style_classes": "panel-icon overlay-icon",
+                    "style_classes": "panel-font-icon overlay-icon",
                 },
             )
 
@@ -72,7 +72,7 @@ class CpuWidget(ButtonWidget):
             # Create a TextIcon with the specified icon and size
             self.icon = text_icon(
                 icon=self.config["icon"],
-                props={"style_classes": "panel-icon"},
+                props={"style_classes": "panel-font-icon"},
             )
 
             self.cpu_level_label = Label(
@@ -180,7 +180,7 @@ class MemoryWidget(ButtonWidget):
             self.icon = text_icon(
                 icon=self.config["icon"],
                 props={
-                    "style_classes": "panel-icon overlay-icon",
+                    "style_classes": "panel-font-icon overlay-icon",
                 },
             )
 
@@ -193,7 +193,7 @@ class MemoryWidget(ButtonWidget):
             # Create a TextIcon with the specified icon and size
             self.icon = text_icon(
                 icon=self.config["icon"],
-                props={"style_classes": "panel-icon"},
+                props={"style_classes": "panel-font-icon"},
             )
 
             self.memory_level_label = Label(
@@ -286,7 +286,7 @@ class StorageWidget(ButtonWidget):
             self.icon = text_icon(
                 icon=self.config["icon"],
                 props={
-                    "style_classes": "panel-icon overlay-icon",
+                    "style_classes": "panel-font-icon overlay-icon",
                 },
             )
 
@@ -299,7 +299,7 @@ class StorageWidget(ButtonWidget):
             # Create a TextIcon with the specified icon and size
             self.icon = text_icon(
                 icon=self.config["icon"],
-                props={"style_classes": "panel-icon"},
+                props={"style_classes": "panel-font-icon"},
             )
 
             self.storage_level_label = Label(
@@ -369,7 +369,7 @@ class NetworkUsageWidget(ButtonWidget):
         # Create a TextIcon with the specified icon and size
         self.upload_icon = text_icon(
             icon=self.config["upload_icon"],
-            props={"style_classes": "panel-icon", "visible": show_upload},
+            props={"style_classes": "panel-font-icon", "visible": show_upload},
         )
 
         self.upload_label = Label(
@@ -382,7 +382,7 @@ class NetworkUsageWidget(ButtonWidget):
 
         self.download_icon = text_icon(
             icon=self.config["download_icon"],
-            props={"style_classes": "panel-icon", "visible": show_download},
+            props={"style_classes": "panel-font-icon", "visible": show_download},
         )
 
         self.download_label = Label(

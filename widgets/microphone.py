@@ -16,7 +16,7 @@ class MicrophoneIndicatorWidget(ButtonWidget):
 
         self.icon = text_icon(
             icon=MIC_OFF_ICON,
-            props={"style_classes": "panel-icon"},
+            props={"style_classes": "panel-font-icon"},
         )
 
         self.box.add(self.icon)

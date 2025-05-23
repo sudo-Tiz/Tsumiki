@@ -46,7 +46,7 @@ class CommandSwitcher(ButtonWidget):
 
         self.icon = text_icon(
             icon=enabled_icon,
-            props={"style_classes": "panel-icon"},
+            props={"style_classes": "panel-font-icon"},
         )
 
         self.box.add(

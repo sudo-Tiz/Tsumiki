@@ -33,7 +33,7 @@ class VolumeWidget(EventBoxWidget):
         self.icon = text_icon(
             icon=text_icons["volume"]["medium"],
             props={
-                "style_classes": "panel-icon overlay-icon",
+                "style_classes": "panel-font-icon overlay-icon",
             },
         )
 

@@ -152,7 +152,7 @@ class SystemTrayWidget(ButtonWidget):
         self.toggle_icon = Image(
             icon_name=symbolic_icons["ui"]["arrow"]["down"],
             icon_size=self.config["icon_size"],
-            style_classes=["panel-icon", "toggle-icon"],
+            style_classes=["panel-font-icon", "toggle-icon"],
         )
 
         # Set children directly in Box to avoid double styling

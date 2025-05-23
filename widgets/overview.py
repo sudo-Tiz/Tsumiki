@@ -406,7 +406,7 @@ class OverviewWidget(ButtonWidget):
 
         self.box.children = text_icon(
             self.config["icon"],
-            props={"style_classes": "panel-icon"},
+            props={"style_classes": "panel-font-icon"},
         )
 
         if self.config["label"]:
