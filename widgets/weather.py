@@ -2,7 +2,7 @@ import threading
 import time
 from datetime import datetime
 
-from fabric.utils import get_relative_path
+from fabric.utils import cooldown, get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.label import Label
 from fabric.widgets.svg import Svg
@@ -10,7 +10,7 @@ from gi.repository import GLib, Gtk
 from loguru import logger
 
 from services import WeatherService
-from shared import ButtonWidget, Grid, Popover, ScanButton
+from shared import ButtonWidget, Grid, Popover
 from utils import BarConfig, weather_icons
 from utils.widget_utils import (
     setup_cursor_hover,
@@ -108,7 +108,6 @@ class WeatherMenu(Box, BaseWeatherWidget):
             spacing=5,
             **kwargs,
         )
-        self.scan_btn = ScanButton(h_align="start", visible=False)
 
         self.config = config
 
@@ -231,18 +230,18 @@ class WeatherMenu(Box, BaseWeatherWidget):
 
         setup_cursor_hover(expander)
 
-        self.children = (self.scan_btn, self.title_box, expander)
+        self.children = (self.title_box, expander)
 
-        self.update_widget(initial=True)
+        self.update_widget(forced=True)
 
         # reusing the fabricator to call specified intervals
         util_fabricator.connect("changed", self.update_widget)
 
     def update_widget(self, *args, **kwargs):
-        initial = kwargs.get("initial", False)
+        forced = kwargs.get("forced", False)
 
         # Check if the update time is more than 1 minute ago
-        if (datetime.now() - self.update_time).total_seconds() < 60 and not initial:
+        if (datetime.now() - self.update_time).total_seconds() < 60 and not forced:
             return
 
         logger.debug("[Weather] Updating weather widget")
@@ -317,6 +316,8 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
 
         self.popover = None
 
+        self.connect("button-press-event", self.on_button_press)
+
         self.update_time = datetime.now()
 
         self.weather_label = Label(
@@ -325,7 +326,7 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
         )
         self.box.children = (self.weather_icon, self.weather_label)
 
-        self.update_ui(initial=True)
+        self.update_ui(forced=True)
 
         # Set up a fabricator to call the update_label method at specified intervals
         util_fabricator.connect("changed", self.update_ui)
@@ -377,11 +378,6 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
                 content_factory=lambda: WeatherMenu(data=data, config=self.config),
                 point_to=self,
             )
-
-            self._clicked_signal_id = self.connect(
-                "clicked",
-                self.popover.open,
-            )
         else:
             # Just update content_factory with latest data
             self.popover.set_content_factory(
@@ -390,8 +386,16 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
 
         return False
 
+    @cooldown(1)
+    def on_button_press(self, _, event):
+        if event.button == 1:
+            self.popover.open() if self.popover else None
+            return
+        else:
+            self.update_ui(forced=True)
+
     def update_ui(self, *args, **kwargs):
-        initial = kwargs.get("initial", False)
+        forced = kwargs.get("forced", False)
 
         # Check if the update time is more than 5 minutes ago, update the icon
         if (datetime.now() - self.update_time).total_seconds() > 300:
@@ -405,7 +409,7 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
 
         if (datetime.now() - self.update_time).total_seconds() < self.config[
             "interval"
-        ] and not initial:
+        ] and not forced:
             # Check if the update time is more than interval seconds ago
             return
 

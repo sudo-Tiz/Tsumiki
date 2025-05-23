@@ -44,6 +44,9 @@ class WeatherService(Service):
             contents = self.request.open(url, timeout=20).read().decode("utf-8")
 
             # Parse the weather information
+            print(f"{Colors.INFO}[WeatherService] Parsing weather information")
+            # Use json.loads to parse the JSON data
+
             data = json.loads(contents)
 
             current_weather = data["current_condition"][0]
