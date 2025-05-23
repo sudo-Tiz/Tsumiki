@@ -191,12 +191,12 @@ class NotificationWidget(EventBox):
         body_container.add(
             Label(
                 markup=helpers.parse_markup(self._notification.body),
-                line_wrap="char",
                 v_align="start",
                 h_expand=True,
                 h_align="start",
                 style_classes="body",
                 chars_width=20,
+                line_wrap="char",
                 max_chars_width=40,
             ),
         )

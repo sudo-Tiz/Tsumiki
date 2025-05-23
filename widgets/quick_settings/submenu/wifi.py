@@ -72,6 +72,7 @@ class WifiSubMenu(QuickSubMenu):
             style="padding: 5px;",
             orientation="h",
             spacing=4,
+            tooltip_markup=ap.get("ssid"),
             children=[
                 Image(
                     icon_name=ap.get("icon-name"),
@@ -80,6 +81,10 @@ class WifiSubMenu(QuickSubMenu):
                 Label(
                     label=ap.get("ssid"),
                     style_classes="submenu-item-label",
+                    ellipsization="end",
+                    v_align="center",
+                    h_align="start",
+                    h_expand=True,
                 ),
             ],
         )
@@ -92,7 +97,7 @@ class WifiSubMenu(QuickSubMenu):
             ap_container.add(
                 Label(
                     label="",
-                    style="padding: 0 4px;font-size: 20px;font-weight: bold;",
+                    style="font-size: 20px;font-weight: bold;",
                     v_align="center",
                 )
             )
