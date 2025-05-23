@@ -247,6 +247,7 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 | **microphone**        | Widget manages microphone settings and input levels.                           |
 | **network_usage**     | Widget displays the upload/download speeds.                                    |
 | **ocr**               | Widget scans text from an image.                                               |
+| **overview**          | Widget displays running applications in workspaces.                            |
 | **power**             | Widget controls power-related settings, including sleep and shutdown.          |
 | **ram**               | Widget displays information about system RAM usage and performance.            |
 | **recorder**          | Widget for recording video on the system.                                      |

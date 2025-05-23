@@ -309,12 +309,6 @@
 
 }
 
-#overview {
-  border-radius: variable.$bar-widgets-overview-border-radius;
-  border: if(variable.$bar-widgets-overview-border-enabled, variable.$border, none);
-  border-width: variable.$bar-widgets-overview-border-width;
-
-}
 
 
 #recorder {

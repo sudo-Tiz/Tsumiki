@@ -23,7 +23,7 @@ class ScreenShotWidget(ButtonWidget):
         )
 
         if self.config["label"]:
-            self.box.add(Label(label="0", style_classes="panel-text"))
+            self.box.add(Label(label="screenshot", style_classes="panel-text"))
 
         self.connect("clicked", self.handle_click)
 

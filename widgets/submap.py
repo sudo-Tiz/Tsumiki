@@ -13,7 +13,7 @@ class SubMapWidget(ButtonWidget):
     def __init__(self, widget_config: BarConfig, **kwargs):
         super().__init__(widget_config["submap"], name="submap", **kwargs)
 
-        self.submap_label = Label(label="0", style_classes="panel-text")
+        self.submap_label = Label(label="submap", style_classes="panel-text")
 
         if self.config["show_icon"]:
             # Create a TextIcon with the specified icon and size

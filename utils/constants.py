@@ -85,7 +85,11 @@ DEFAULT_CONFIG = {
         "step_size": 5,
     },
     "cava": {"bars": 10, "color": "#89b4fa"},
-    "overview": {},
+    "overview": {
+        "icon": "󰡃",
+        "label": False,
+        "tooltip": True,
+    },
     "click_counter": {"count": 0},
     "cpu": {
         "show_icon": True,

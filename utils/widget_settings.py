@@ -321,7 +321,7 @@ MicroPhone = TypedDict("MicroPhone", {**BaseConfig.__annotations__})
 Cava = TypedDict("Cava", {"bars": int, "color": str})
 
 # Overview configuration
-Overview = TypedDict("Overview", {})
+Overview = TypedDict("Overview", {"icon": str, **BaseConfig.__annotations__})
 
 
 Cliphist = TypedDict("Cliphist", {"icon": str, **BaseConfig.__annotations__})
