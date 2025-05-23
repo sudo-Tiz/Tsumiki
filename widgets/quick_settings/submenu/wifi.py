@@ -49,11 +49,11 @@ class WifiSubMenu(QuickSubMenu):
     def start_new_scan(self, _):
         self.client.wifi_device.scan() if self.client.wifi_device else None
         self.build_wifi_options()
+        self.scan_button.play_animation()
 
     def on_device_ready(self, client: NetworkService):
         self.wifi_device = client.wifi_device
         self.build_wifi_options()
-        self.wifi_device.connect("scanning", self.on_scan)
 
     def build_wifi_options(self):
         self.available_networks_box.children = []

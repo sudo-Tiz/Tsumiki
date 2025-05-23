@@ -23,7 +23,7 @@ class ScanButton(HoverButton):
         super().__init__(name="scan-button", style_classes="submenu-button", **kwargs)
 
         self.scan_image = CircleImage(
-            image_file=get_relative_path("../assets/icons/png/refresh.png"),
+            image_file=get_relative_path("../assets/icons/png/refresh2.png"),
             size=20,
         )
 
@@ -34,7 +34,6 @@ class ScanButton(HoverButton):
             max_value=360,
             tick_widget=self,
             notify_value=self.set_notify_value,
-            repeat=True,
         )
 
         self.set_image(self.scan_image)
