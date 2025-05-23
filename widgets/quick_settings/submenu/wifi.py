@@ -53,7 +53,7 @@ class WifiSubMenu(QuickSubMenu):
 
     def on_device_ready(self, client: NetworkService):
         self.wifi_device = client.wifi_device
-        self.build_wifi_options()
+        self.start_new_scan(None)
 
     def build_wifi_options(self):
         self.available_networks_box.children = []
