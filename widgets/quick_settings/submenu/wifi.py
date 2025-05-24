@@ -12,7 +12,7 @@ from utils import symbolic_icons
 class WifiSubMenu(QuickSubMenu):
     """A submenu to display the Wifi settings."""
 
-    def is_secured(self,ap) -> bool:
+    def is_secured(self, ap) -> bool:
         wpa_flags = ap.get("wpa_flags", 0)
         rsn_flags = ap.get("rsn_flags", 0)
         # Both zero means no security
