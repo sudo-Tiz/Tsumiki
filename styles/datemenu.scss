@@ -3,6 +3,7 @@
 @use "common";
 @use "variable.scss";
 
+
 #datetime_menu {
   #notification-count {
     font-weight: 700;
@@ -80,9 +81,7 @@
   }
 
   separator {
-    background-color: color.mix(
-      variable.$popover-border-color,black, 60%
-    );
+    background-color: color.mix(variable.$popover-border-color, black, 60%);
     border-radius: variable.$radius;
     margin-right: variable.$spacing;
   }
@@ -96,7 +95,7 @@
       }
 
       .uptime {
-        color: color.mix(theme.$text-main,transparent, 80%);
+        color: color.mix(theme.$text-main, transparent, 80%);
       }
     }
 

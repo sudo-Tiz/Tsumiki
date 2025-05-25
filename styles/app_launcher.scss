@@ -1,4 +1,3 @@
-
 @use "theme.scss";
 @use "sass:color";
 @use "variable.scss";
@@ -10,20 +9,20 @@
   border-width: variable.$modules-app_launcher-border-width;
 
 
-    $shadow: 0 0 0 variable.$bar-border-width theme.$shadow-color,
+  $shadow: 0 0 0 variable.$bar-border-width theme.$shadow-color,
     variable.$modules-app_launcher-shadow-offset variable.$modules-app_launcher-shadow-blur variable.$modules-app_launcher-shadow-spread color.adjust(theme.$shadow-color,
       $alpha: calc(variable.$modules-app_launcher-shadow-opacity - 1));
 
   box-shadow: if(variable.$modules-app_launcher-shadow-enabled, $shadow, none);
 
-  &-prompt{
+  &-prompt {
     border-bottom: 1px solid theme.$surface-disabled;
     font-size: 15px;
     margin-bottom: 10px;
     padding: 10px 0;
   }
 
-  &-contents{
+  &-contents {
     border-radius: 15px;
     border: 0.5px solid theme.$surface-disabled;
     background-color: theme.$background-dark;

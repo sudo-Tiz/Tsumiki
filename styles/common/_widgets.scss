@@ -3,7 +3,6 @@
 @use "../theme.scss";
 @use "functions";
 
-// widgets styles
 
 #corner-container {
   min-width: 20px;
@@ -340,8 +339,6 @@
     margin-right: variable.$bar-widgets-submap-spacing;
   }
 }
-
-
 
 
 #theme_switcher {

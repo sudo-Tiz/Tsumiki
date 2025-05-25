@@ -9,8 +9,6 @@
   border: if(variable.$bar-widgets-power-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-power-border-width;
 
-
-
   #nerd-icon.panel-font-icon {
     font-size: variable.$bar-widgets-power-icon_size;
     margin-right: variable.$bar-widgets-power-spacing;

@@ -3,6 +3,7 @@
 @use "common";
 @use "variable.scss";
 
+
 #kanban-board {
   @include common.floating-widget;
   @include common.spacing;
