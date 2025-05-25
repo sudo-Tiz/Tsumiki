@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "theme";
 @use "variable";
 @use "common";
@@ -45,7 +46,7 @@ $base_margin: common.toEm(4);
     .header-label#sunrise-sunset {
       font-size: 0.8em;
       font-weight: 500;
-      color: darken(theme.$text-main, 10%);
+      color: color.adjust(theme.$text-main, $lightness: -10%);
     }
 
     .stats {
