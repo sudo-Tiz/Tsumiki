@@ -229,7 +229,7 @@ class PlayerBox(Box):
 
         self.art_animator = Animator(
             timing_function=partial(cubic_bezier, 0, 0, 1, 1),
-            duration=10,
+            duration=4,
             min_value=0,
             max_value=360,
             tick_widget=self,

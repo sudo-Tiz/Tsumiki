@@ -28,10 +28,6 @@ class GenericOSDContainer(Box):
             **kwargs,
         )
 
-        self.sound_file = get_relative_path(
-            "../assets/sounds/notification4.mp3"
-        )
-
         self.icon = Image(
             icon_name=symbolic_icons["brightness"]["screen"],
             icon_size=config["icon_size"],
@@ -161,6 +157,8 @@ class OSDContainer(Window):
     ):
         self.config = config["modules"]["osd"]
 
+        self.sound_file = get_relative_path("../assets/sounds/notification4.mp3")
+
         self.audio_container = AudioOSDContainer(config=self.config)
         self.brightness_container = BrightnessOSDContainer(config=self.config)
 
@@ -209,7 +207,6 @@ class OSDContainer(Window):
         self.revealer.set_reveal_child(True)
 
         self.set_visible(True)
-
 
         if self.hide_timer_id is not None:
             GLib.source_remove(self.hide_timer_id)
