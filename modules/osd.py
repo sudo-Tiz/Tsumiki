@@ -1,6 +1,6 @@
 from typing import ClassVar, Literal
 
-from fabric.utils import cooldown
+from fabric.utils import cooldown, get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
@@ -26,6 +26,10 @@ class GenericOSDContainer(Box):
             spacing=10,
             name="osd-container",
             **kwargs,
+        )
+
+        self.sound_file = get_relative_path(
+            "../assets/sounds/notification4.mp3"
         )
 
         self.icon = Image(
@@ -205,6 +209,7 @@ class OSDContainer(Window):
         self.revealer.set_reveal_child(True)
 
         self.set_visible(True)
+
 
         if self.hide_timer_id is not None:
             GLib.source_remove(self.hide_timer_id)

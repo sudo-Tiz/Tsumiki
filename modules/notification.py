@@ -30,6 +30,10 @@ class NotificationPopup(Window):
 
         self.widget_config = widget_config
 
+        self.sound_file = get_relative_path(
+            f"../assets/sounds/{self.config['sound_file']}.mp3"
+        )
+
         self.config = widget_config["modules"]["notification"]
 
         self.hyprland_monitor = HyprlandWithMonitors()
@@ -76,7 +80,7 @@ class NotificationPopup(Window):
 
         if self.config["play_sound"]:
             helpers.play_sound(
-                get_relative_path(f"../assets/sounds/{self.config['sound_file']}.mp3")
+                self.sound_file
             )
 
 

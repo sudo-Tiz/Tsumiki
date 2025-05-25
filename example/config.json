@@ -143,7 +143,8 @@
 			"window_title"
 		], // this is the left section of the panel
 		"middle_section": [
-			"date_time"
+			"date_time",
+			"weather"
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
@@ -209,7 +210,8 @@
 			"timeout": 2000,
 			"icon_size": 28,
 			"anchor": "bottom-center", // this is the position of the OSD, you can use top-center, top-left, top-right, bottom-center, bottom-left, bottom-right
-			"percentage": true
+			"percentage": true,
+			"play_sound": false
 		},
 		"screen_corners": {
 			"enabled": false,

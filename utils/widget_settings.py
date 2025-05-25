@@ -146,6 +146,7 @@ OSD = TypedDict(
         "anchor": Anchor,
         "percentage": bool,
         "icon_size": int,
+        "play_sound": bool,
     },
 )
 

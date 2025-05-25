@@ -202,6 +202,7 @@ DEFAULT_CONFIG = {
             "anchor": "bottom-center",
             "percentage": True,
             "icon_size": 28,
+            "play_sound": False,
         },
         "app_launcher": {
             "enabled": False,
