@@ -454,9 +454,6 @@ class PlayerBox(Box):
     def _set_notify_value(self, p, *_):
         self.image_box.set_angle(p.value)
 
-    def _on_title(self, *_):
-        self.track_title.set_label(self.player.title)
-
     def _on_player_exit(self, _, value):
         self.exit = value
         self.destroy()
