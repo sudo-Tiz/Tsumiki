@@ -42,7 +42,6 @@ $base_margin: common.toEm(4);
       font-weight: 600;
     }
 
-
     .header-label#sunrise-sunset {
       font-size: 0.8em;
       font-weight: 500;
@@ -52,7 +51,6 @@ $base_margin: common.toEm(4);
     .stats {
       @extend .header-label;
       margin: 0 10px 0 30px;
-
 
     }
   }
