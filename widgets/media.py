@@ -1,5 +1,4 @@
 # ruff: noqa: N802
-import math
 import os
 import re
 import tempfile
@@ -164,31 +163,6 @@ class PlayerBoxStack(Box):
             ],
         )
         self.buttons_box.add_center(self.player_buttons[-1])
-
-
-def easeOutBounce(t: float) -> float:
-    if t < 4 / 11:
-        return 121 * t * t / 16
-    elif t < 8 / 11:
-        return (363 / 40.0 * t * t) - (99 / 10.0 * t) + 17 / 5.0
-    elif t < 9 / 10:
-        return (4356 / 361.0 * t * t) - (35442 / 1805.0 * t) + 16061 / 1805.0
-    return (54 / 5.0 * t * t) - (513 / 25.0 * t) + 268 / 25.0
-
-
-def easeInBounce(t: float) -> float:
-    return 1 - easeOutBounce(1 - t)
-
-
-def easeInOutBounce(t: float) -> float:
-    if t < 0.5:
-        return (1 - easeInBounce(1 - t * 2)) / 2
-    return (1 + easeOutBounce(t * 2 - 1)) / 2
-
-
-def easeOutElastic(t: float) -> float:
-    c4 = (2 * math.pi) / 3
-    return math.sin((t * 10 - 0.75) * c4) * math.pow(2, -10 * t) + 1
 
 
 class PlayerBox(Box):
