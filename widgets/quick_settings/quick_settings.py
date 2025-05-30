@@ -1,7 +1,7 @@
 import os
 import weakref
 
-from fabric.utils import get_relative_path
+from fabric.utils import get_relative_path, bulk_connect
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.image import Image
@@ -405,8 +405,13 @@ class QuickSettingsButtonWidget(ButtonWidget):
 
         self.brightness_service = Brightness()
 
-        self.audio_service.connect("notify::speaker", self.on_speaker_changed)
-        self.audio_service.connect("changed", self.check_mute)
+        bulk_connect(
+            self.audio_service,
+            {
+                "notify::speaker": self.on_speaker_changed,
+                "changed": self.check_mute,
+            }
+            )
 
         self.brightness_service.connect("brightness_changed", self.update_brightness)
 
