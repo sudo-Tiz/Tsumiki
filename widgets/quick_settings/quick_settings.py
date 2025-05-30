@@ -1,7 +1,7 @@
 import os
 import weakref
 
-from fabric.utils import get_relative_path, bulk_connect
+from fabric.utils import bulk_connect, get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.image import Image

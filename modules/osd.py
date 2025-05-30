@@ -1,6 +1,6 @@
 from typing import ClassVar, Literal
 
-from fabric.utils import cooldown, get_relative_path, bulk_connect
+from fabric.utils import bulk_connect, cooldown, get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label

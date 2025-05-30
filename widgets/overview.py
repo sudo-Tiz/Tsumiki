@@ -2,7 +2,7 @@ import json
 
 import gi
 from fabric.hyprland.service import Hyprland
-from fabric.utils.helpers import get_desktop_applications, bulk_connect
+from fabric.utils.helpers import bulk_connect, get_desktop_applications
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
