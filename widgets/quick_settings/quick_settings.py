@@ -410,8 +410,8 @@ class QuickSettingsButtonWidget(ButtonWidget):
             {
                 "notify::speaker": self.on_speaker_changed,
                 "changed": self.check_mute,
-            }
-            )
+            },
+        )
 
         self.brightness_service.connect("brightness_changed", self.update_brightness)
 
