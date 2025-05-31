@@ -1,9 +1,9 @@
 from fabric.utils import cooldown, exec_shell_command_async
-from gi.repository import Gtk
 
 from shared import QSChevronButton, QuickSubMenu, ScanButton
-from utils.functions import is_app_running, set_scale_adjustment, toggle_command
+from utils.functions import is_app_running, toggle_command
 from utils.widget_utils import (
+    create_scale,
     util_fabricator,
 )
 
@@ -15,24 +15,12 @@ class HyprSunsetSubMenu(QuickSubMenu):
         # Create refresh button first since parent needs it
         self.scan_button = ScanButton(visible=False)
 
-        self.min_value = 1000
-        self.max_value = 9000
-
-        adjustment = Gtk.Adjustment(
-            value=2500,
-            lower=self.min_value,
-            upper=self.max_value,
-            step_increment=100,
-            page_increment=1000,
-        )
-
-        # Create the scale with the adjustment
-        self.scale = Gtk.Scale(
+        self.scale = create_scale(
             name="hyprsunset-scale",
-            orientation=Gtk.Orientation.HORIZONTAL,
-            adjustment=adjustment,
-            visible=True,
-            draw_value=False,
+            increments=(100, 100),
+            max_value=10000,
+            min_value=1000,
+            value=2600,
         )
 
         super().__init__(
@@ -46,7 +34,6 @@ class HyprSunsetSubMenu(QuickSubMenu):
 
         if self.scale:
             self.scale.connect("change-value", self.on_scale_move)
-            self.update_ui(2600)
 
         # reusing the fabricator to call specified intervals
         util_fabricator.connect("changed", self.update_scale)
@@ -76,11 +63,6 @@ class HyprSunsetSubMenu(QuickSubMenu):
             if isinstance(moved_pos, str)
             else moved_pos
         )
-
-        set_scale_adjustment(
-            scale=self.scale, min_value=1000, max_value=10000, steps=100
-        )
-
         self.scale.set_value(sanitized_value)
         self.scale.set_tooltip_text(f"{sanitized_value}K")
 
