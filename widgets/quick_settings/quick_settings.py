@@ -9,6 +9,7 @@ from fabric.widgets.label import Label
 from gi.repository import GLib, Gtk
 from loguru import logger
 
+from shared.popovev1 import PopupWindowV1
 import utils.functions as helpers
 from services import Brightness, MprisPlayerManager, NetworkService, Wifi, audio_service
 from shared import (
@@ -417,9 +418,12 @@ class QuickSettingsButtonWidget(ButtonWidget):
 
         self.network_service.connect("device-ready", self._get_network_icon)
 
-        popup = Popover(
-            content_factory=lambda: QuickSettingsMenu(config=self.config),
+        popup = PopupWindowV1(
+            child= QuickSettingsMenu(config=self.config),
             point_to=self,
+            parent=self,
+            visible=False,
+            all_visible=False
         )
 
         self.audio_icon = Image(style_classes="panel-font-icon")
@@ -444,7 +448,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
 
         self.connect(
             "clicked",
-            popup.open,
+            lambda *_: popup.show() if not popup.is_visible() else popup.hide()
         )
 
     def _get_network_icon(self, *_):
