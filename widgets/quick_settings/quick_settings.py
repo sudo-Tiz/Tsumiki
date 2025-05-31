@@ -9,7 +9,6 @@ from fabric.widgets.label import Label
 from gi.repository import GLib, Gtk
 from loguru import logger
 
-from shared.popovev1 import PopupWindowV1
 import utils.functions as helpers
 from services import Brightness, MprisPlayerManager, NetworkService, Wifi, audio_service
 from shared import (
@@ -18,9 +17,9 @@ from shared import (
     Dialog,
     Grid,
     HoverButton,
-    Popover,
     QSChevronButton,
 )
+from shared.popovev1 import PopupWindowV1
 from utils import BarConfig, symbolic_icons
 from utils.widget_utils import (
     get_audio_icon_name,
