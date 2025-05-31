@@ -1,9 +1,9 @@
 from fabric.utils import cooldown, exec_shell_command_async
+from gi.repository import Gtk
 
 from shared import QSChevronButton, QuickSubMenu, ScanButton
 from utils.functions import is_app_running, set_scale_adjustment, toggle_command
 from utils.widget_utils import (
-    create_scale,
     util_fabricator,
 )
 
@@ -15,12 +15,25 @@ class HyprSunsetSubMenu(QuickSubMenu):
         # Create refresh button first since parent needs it
         self.scan_button = ScanButton(visible=False)
 
-        self.scale = create_scale(
-            name="hyprsunset-scale",
-            increments=(100, 100),
+        self.min_value = 1000
+        self.max_value = 9000
+
+        adjustment = Gtk.Adjustment(
+            value=2500,
+            lower=self.min_value,
+            upper=self.max_value,
+            step_increment=100,
+            page_increment=1000,
         )
 
-        self.scale.set_range(1000, 10000)
+        # Create the scale with the adjustment
+        self.scale = Gtk.Scale(
+            name="hyprsunset-scale",
+            orientation=Gtk.Orientation.HORIZONTAL,
+            adjustment=adjustment,
+            visible=True,
+            draw_value=False,
+        )
 
         super().__init__(
             title="HyprSunset",
