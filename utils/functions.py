@@ -5,16 +5,18 @@ import subprocess
 import time
 from datetime import datetime
 from functools import lru_cache
+from io import BytesIO
 from typing import Dict, List, Literal, Optional
 
 import psutil
+import qrcode
 from fabric.utils import (
     cooldown,
     exec_shell_command,
     exec_shell_command_async,
     get_relative_path,
 )
-from gi.repository import Gdk, Gio, GLib, Gtk
+from gi.repository import Gdk, GdkPixbuf, Gio, GLib, Gtk
 from loguru import logger
 
 from .colors import Colors
@@ -194,7 +196,21 @@ def validate_widgets(parsed_data, default_config):
                 )
 
 
-# Function to exclude keys from a dictionary        )
+def make_qrcode(text: str, size: int = 200) -> bytes:
+    # Generate QR Code image
+    qr = qrcode.make(text)
+    buffer = BytesIO()
+    qr.save(buffer, format="PNG")
+    buffer.seek(0)
+
+    # Load into GTK Image using GdkPixbuf
+    loader = GdkPixbuf.PixbufLoader.new_with_type("png")
+    loader.write(buffer.read())
+    loader.close()
+    return loader.get_pixbuf()
+
+
+# Function to exclude keys from a dictionary
 def exclude_keys(d: Dict, keys_to_exclude: List[str]) -> Dict:
     return {k: v for k, v in d.items() if k not in keys_to_exclude}
 
