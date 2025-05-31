@@ -55,7 +55,7 @@ class ClipHistoryMenu(Box):
 
         self.search_entry.connect("notify::text", self._on_search_text_changed)
 
-        self.search_entry.props.xalign = 0.5
+        self.search_entry.props.xalign = 0.1
 
         self.scrolled_window = ScrolledWindow(
             name="scrolled-window",
