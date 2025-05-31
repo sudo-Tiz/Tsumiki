@@ -6,10 +6,11 @@ from typing import Literal
 import cairo  # For rendering the drag preview
 import psutil
 from fabric import Fabricator
+from fabric.utils import bulk_connect
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scale import ScaleMark
-from gi.repository import GLib, Gtk
+from gi.repository import Gdk, GLib, Gtk
 
 from shared import AnimatedScale
 
@@ -38,13 +39,22 @@ def stats_poll(fabricator):
 def setup_cursor_hover(
     widget, cursor_name: Literal["pointer", "crosshair", "grab"] = "pointer"
 ):
-    widget.connect(
-        "state-flags-changed",
-        lambda btn, *_: (
-            btn.set_cursor(cursor_name)
-            if btn.get_state_flags() & 2  # type: ignore
-            else btn.set_cursor("default"),
-        ),
+    display = Gdk.Display.get_default()
+
+    def on_enter_notify_event(widget, _):
+        cursor = Gdk.Cursor.new_from_name(display, cursor_name)
+        widget.get_window().set_cursor(cursor)
+
+    def on_leave_notify_event(widget, _):
+        cursor = Gdk.Cursor.new_from_name(display, "default")
+        widget.get_window().set_cursor(cursor)
+
+    bulk_connect(
+        widget,
+        {
+            "enter-notify-event": on_enter_notify_event,
+            "leave-notify-event": on_leave_notify_event,
+        },
     )
 
 
