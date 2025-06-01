@@ -1,8 +1,9 @@
+import subprocess
 from typing import Any, List, Literal
 
 import gi
 from fabric.core.service import Property, Service, Signal
-from fabric.utils import bulk_connect, exec_shell_command_async
+from fabric.utils import bulk_connect
 from gi.repository import Gio
 from loguru import logger
 
@@ -329,10 +330,38 @@ class NetworkService(Service):
             else None
         )
 
-    def connect_wifi_bssid(self, bssid):
-        exec_shell_command_async(
-            f"nmcli device wifi connect {bssid}", lambda *args: print(args)
-        )
+    def connect_network(
+        self, ssid: str, password: str = "", remember: bool = True
+    ) -> bool:
+        """Connect to a WiFi network"""
+        if not ssid:
+            logger.error("SSID cannot be empty")
+            return False
+        try:
+            # First try to connect using saved connection
+            try:
+                subprocess.run(["nmcli", "con", "up", ssid], check=True)
+                return True
+            except subprocess.CalledProcessError:
+                # If saved connection fails, try with password if provided
+                if password:
+                    cmd = [
+                        "nmcli",
+                        "device",
+                        "wifi",
+                        "connect",
+                        ssid,
+                        "password",
+                        password,
+                    ]
+                    if not remember:
+                        cmd.extend(["--temporary"])
+                    subprocess.run(cmd, check=True)
+                    return True
+                return False
+        except subprocess.CalledProcessError as e:
+            logger.error(f"Failed connecting to network: {e}")
+            return False
 
     @Property(str, "readable")
     def primary_device(self) -> Literal["wifi", "wired"] | None:
