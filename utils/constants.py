@@ -953,8 +953,6 @@ KBLAYOUT_MAP = {
 
 WINDOW_TITLE_MAP = [
     # Original Entries
-    ["firefox", "󰈹", "Firefox"],
-    ["microsoft-edge", "󰇩", "Edge"],
     ["discord", "", "Discord"],
     ["vesktop", "", "Vesktop"],
     ["org.kde.dolphin", "", "Dolphin"],
@@ -967,6 +965,8 @@ WINDOW_TITLE_MAP = [
     # Browsers
     ["google-chrome", "", "Google Chrome"],
     ["brave-browser", "󰖟", "Brave Browser"],
+    ["firefox", "󰈹", "Firefox"],
+    ["microsoft-edge", "󰇩", "Edge"],
     ["chromium", "", "Chromium"],
     ["opera", "", "Opera"],
     ["vivaldi", "󰖟", "Vivaldi"],
@@ -988,15 +988,18 @@ WINDOW_TITLE_MAP = [
     ["st", "", "st Terminal"],
     ["com.mitchellh.ghostty", "󰊠", "Ghostty"],
     # Development Tools
-    ["code", "󰨞", "Visual Studio Code"],
+    ["cursor", "󰨞", "Cursor"],
     ["vscode", "󰨞", "VS Code"],
+    ["code", "󰨞", "VS Code"],
     ["sublime-text", "", "Sublime Text"],
     ["atom", "", "Atom"],
     ["android-studio", "󰀴", "Android Studio"],
-    ["intellij-idea", "", "IntelliJ IDEA"],
-    ["pycharm", "󱃖", "PyCharm"],
-    ["webstorm", "󱃖", "WebStorm"],
-    ["phpstorm", "󱃖", "PhpStorm"],
+    ["jetbrains-idea", "", "IntelliJ IDEA"],
+    ["jetbrains-pycharm", "󱃖", "PyCharm"],
+    ["jetbrains-webstorm", "󱃖", "WebStorm"],
+    ["zed", "󱃖", "Zed"],
+    ["jetbrains-phpstorm", "󱃖", "PhpStorm"],
+    ["Postman", "󱃖", "Postman"],
     ["eclipse", "", "Eclipse"],
     ["netbeans", "", "NetBeans"],
     ["docker", "", "Docker"],
