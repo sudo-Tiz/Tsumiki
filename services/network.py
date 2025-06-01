@@ -143,14 +143,18 @@ class Wifi(Service):
                     subprocess.check_call(
                         f"nmcli connection delete id '{connection_id}'", shell=True
                     )
-                    logger.info(f"Deleted saved connection: {connection_id}")
+                    logger.info(
+                        f"[NetworkService] Deleted saved connection: {connection_id}"
+                    )
                     return True
 
-            logger.warning(f"No saved connection found for SSID: {ssid}")
+            logger.warning(
+                f"[NetworkService] No saved connection found for SSID: {ssid}"
+            )
             return False
 
         except subprocess.CalledProcessError as e:
-            logger.error(f"Error forgetting connection: {e}")
+            logger.error(f"[NetworkService] Error forgetting connection: {e}")
             return False
 
     def connect_network(
@@ -158,7 +162,7 @@ class Wifi(Service):
     ) -> bool:
         """Connect to a WiFi network"""
         if not ssid:
-            logger.error("SSID cannot be empty")
+            logger.error("[NetworkService] SSID cannot be empty")
             return False
         try:
             # First try to connect using saved connection
@@ -183,19 +187,19 @@ class Wifi(Service):
                     return True
                 return False
         except subprocess.CalledProcessError as e:
-            logger.error(f"Failed connecting to network: {e}")
+            logger.error(f"[NetworkService] Failed connecting to network: {e}")
             return False
 
     def disconnect_network(self, ssid: str) -> bool:
         """Disconnect from a WiFi network"""
         if not ssid:
-            logger.error("SSID cannot be empty")
+            logger.error("[NetworkService] SSID cannot be empty")
             return False
         try:
             subprocess.run(["nmcli", "con", "down", ssid], check=True)
             return True
         except subprocess.CalledProcessError as e:
-            logger.error(f"Failed disconnecting from network: {e}")
+            logger.error(f"[NetworkService] Failed disconnecting from network: {e}")
             return False
 
     @Property(bool, "read-write", default_value=False)
