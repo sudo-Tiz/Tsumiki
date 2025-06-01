@@ -121,10 +121,37 @@ class Wifi(Service):
                 ],
             )
 
+    def is_active_ap(self, name) -> bool:
+        return self._ap.get_bssid() == name if self._ap else False
+
     def notifier(self, name: str, *args):
         self.notify(name)
         self.emit("changed")
         return
+
+    def forget_access_point(self, ssid):
+        try:
+            # List all saved connections
+            result = subprocess.check_output(
+                "nmcli connection show", shell=True, text=True
+            )
+
+            # Find connection ID that matches SSID
+            for line in result.splitlines():
+                if ssid in line:
+                    connection_id = line.split()[0]
+                    subprocess.check_call(
+                        f"nmcli connection delete id '{connection_id}'", shell=True
+                    )
+                    logger.info(f"Deleted saved connection: {connection_id}")
+                    return True
+
+            logger.warning(f"No saved connection found for SSID: {ssid}")
+            return False
+
+        except subprocess.CalledProcessError as e:
+            logger.error(f"Error forgetting connection: {e}")
+            return False
 
     def connect_network(
         self, ssid: str, password: str = "", remember: bool = True
@@ -227,8 +254,6 @@ class Wifi(Service):
         def make_ap_dict(ap: NM.AccessPoint):
             return {
                 "bssid": ap.get_bssid(),
-                "wpa_flags": ap.get_wpa_flags(),
-                "rsn_flags": ap.get_rsn_flags(),
                 "last_seen": ap.get_last_seen(),
                 "ssid": NM.utils_ssid_to_utf8(ap.get_ssid().get_data())
                 if ap.get_ssid()
