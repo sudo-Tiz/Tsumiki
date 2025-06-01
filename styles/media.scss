@@ -38,8 +38,13 @@
     min-height: $image_size;
   }
 
-
   @include common.slider($min-length: $inner_player_width - 80, $height: 7px, $highlight-color: theme.$text-muted);
+  
+  #seek-bar {
+    padding-top: 10px;
+  }
+
+
 
   #inner-player-box {
     background: linear-gradient(135deg, color.mix(theme.$background-alt, white, 80%), theme.$background-alt, #4b2353);
@@ -77,7 +82,7 @@
     color: #7d7178;
   }
 
-  .player-controls {
+  #player-controls {
     margin-top: 5px;
     margin-bottom: 15px;
 

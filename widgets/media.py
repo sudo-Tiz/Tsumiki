@@ -307,7 +307,7 @@ class PlayerBox(Box):
         setup_cursor_hover(self.seek_bar)
 
         self.controls_box = CenterBox(
-            style_classes="player-controls",
+            name="player-controls",
             start_children=self.position_label,
             center_children=self.button_box,
             end_children=self.length_label,
