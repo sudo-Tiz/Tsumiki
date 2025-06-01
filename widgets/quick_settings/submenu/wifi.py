@@ -94,9 +94,10 @@ class WifiSubMenu(QuickSubMenu):
 
         ap_button = HoverButton(style_classes="submenu-button", name="wifi-ap-button")
 
-        if self.wifi_device.state == "activated" and ap.get(
-            "ssid"
-        ) == self.wifi_device.get_property("ssid"):
+        if (
+            self.wifi_device.state == "activated"
+            and ap.get("ssid") == self.wifi_device.ssid
+        ):
             security_label = " " + security_label
 
             if self.wifi_device.get_ap_security(ap.get("active-ap")) != "unsecured":
