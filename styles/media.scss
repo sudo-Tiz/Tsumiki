@@ -39,7 +39,7 @@
   }
 
 
-  @include common.slider($min-length: $inner_player_width - 80, $height: 7px);
+  @include common.slider($min-length: $inner_player_width - 80, $height: 7px, $highlight-color: theme.$text-muted);
 
   #inner-player-box {
     background: linear-gradient(135deg, color.mix(theme.$background-alt, white, 80%), theme.$background-alt, #4b2353);
@@ -111,26 +111,4 @@
     }
   }
 
-  scale {
-    margin-top: 10px;
-
-    trough {
-      border-radius: variable.$radius-large;
-      min-height: 8px;
-      background-color: color.mix(theme.$background, black, 55%);
-
-      highlight {
-        border-radius: variable.$radius-large;
-      }
-
-      &:hover {
-        background-color: color.mix(theme.$background, black, 45%);
-      }
-    }
-  }
-
-  highlight,
-  progress {
-    background: theme.$text-muted;
-  }
 }

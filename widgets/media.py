@@ -411,19 +411,17 @@ class PlayerBox(Box):
             },
         )
 
-        invoke_repeater(1000, self._move_seekbar)
-
     def _on_metadata(self, *_):
         self._set_image()
 
         duration = self.player.length
 
-        print(f"PlayerBox: {self.player.player_name} metadata changed")
-        print("duration", duration)
-        print("length", self.player.length)
-
         if duration:
             self.length_label.set_label(self.length_str(self.player.length))
+
+        self.seek_bar.set_range(0, duration)
+
+        invoke_repeater(1000, self._move_seekbar)
 
     def _set_notify_value(self, p, *_):
         self.image_box.set_angle(p.value)
@@ -459,7 +457,7 @@ class PlayerBox(Box):
         remaining_seconds = seconds % 60
         return f"{minutes:02}:{remaining_seconds:02}"
 
-    def _on_playback_change(self, player, status):
+    def _on_playback_change(self, _, status):
         status = self.player.playback_status
 
         if status == "stopped":
@@ -515,16 +513,16 @@ class PlayerBox(Box):
         return None
 
     def _move_seekbar(self, *_):
-        if self.player.position or self.player.length is None:
-            return False
         self.position_label.set_label(self.length_str(self.player.position))
+
         self.seek_bar.set_value(
-            self.player.position / self.player.length
+            self.player.position
         ) if self.player.length > 0 else self.seek_bar.set_value(0)
+
+        return True
 
     @cooldown(0.1)
     def _on_scale_move(self, scale: Scale, event, pos: int):
-        actual_pos = pos * self.player.length
-        self.player.position = actual_pos
-        self.position_label.set_label(self.length_str(actual_pos))
+        self.player.position = pos
+        self.position_label.set_label(self.length_str(pos))
         self.seek_bar.set_value(pos)
