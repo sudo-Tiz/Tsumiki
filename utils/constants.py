@@ -1039,6 +1039,9 @@ WINDOW_TITLE_MAP = [
     ["sioyek", "", "Sioyek"],
     # Cloud Services and Sync
     ["dropbox", "󰇣", "Dropbox"],
+    # cleanup and maintenance tools
+    ["org.bleachbit.bleachbit", "", "BleachBit"],
+    ["stacer", "", "Stacer"],
     # Desktop
     ["^$", "󰇄", "Desktop"],
 ]
