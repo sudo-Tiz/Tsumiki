@@ -63,11 +63,11 @@ class HyprSunsetSubMenu(QuickSubMenu):
             if isinstance(moved_pos, str)
             else moved_pos
         )
-        adj = self.scale.get_adjustment()
-        print("HyprSunsetSubMenu: Current temperature", sanitized_value)
-        print(f"HyprSunset scale: {self.scale.get_name()}")
-        print("HyprSunsetSubMenu: lower temperature", adj.get_lower())
-        print("HyprSunsetSubMenu: upper temperature", adj.get_upper())
+        # adj = self.scale.get_adjustment()
+        # print("HyprSunsetSubMenu: Current temperature", sanitized_value)
+        # print(f"HyprSunset scale: {self.scale.get_name()}")
+        # print("HyprSunsetSubMenu: lower temperature", adj.get_lower())
+        # print("HyprSunsetSubMenu: upper temperature", adj.get_upper())
         self.scale.set_value(float(sanitized_value))
         self.scale.set_tooltip_text(f"{sanitized_value}K")
 

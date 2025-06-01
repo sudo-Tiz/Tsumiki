@@ -29,6 +29,7 @@ from shared import Animator, CircleImage, HoverButton
 from utils import APP_CACHE_DIRECTORY, cubic_bezier, symbolic_icons
 from utils.functions import ensure_directory
 from utils.widget_utils import (
+    create_scale,
     setup_cursor_hover,
 )
 
@@ -298,12 +299,7 @@ class PlayerBox(Box):
         )
 
         # Seek Bar
-        self.seek_bar = Scale(
-            min_value=0,
-            max_value=1,
-            increments=(5, 5),
-            name="seek-bar",
-        )
+        self.seek_bar = create_scale(name="seek-bar")
 
         self.seek_bar.connect("change-value", self._on_scale_move)
         self.player.bind("can-seek", "sensitive", self.seek_bar)
@@ -421,6 +417,10 @@ class PlayerBox(Box):
         self._set_image()
 
         duration = self.player.length
+
+        print(f"PlayerBox: {self.player.player_name} metadata changed")
+        print("duration", duration)
+        print("length", self.player.length)
 
         if duration:
             self.length_label.set_label(self.length_str(self.player.length))

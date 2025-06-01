@@ -31,16 +31,21 @@
   $image_size: 115px;
   min-height: $image_size + 4;
 
+  $inner_player_width: math.floor(calc($player_width - $image_size / 2));
+
   #outer-player-box {
     min-width: $player_width;
     min-height: $image_size;
   }
 
+
+  @include common.slider($min-length: $inner_player_width - 80, $height: 7px);
+
   #inner-player-box {
     background: linear-gradient(135deg, color.mix(theme.$background-alt, white, 80%), theme.$background-alt, #4b2353);
     border-radius: 15px;
     margin-left: math.floor(calc($image_size / 2));
-    min-width: math.floor(calc($player_width - $image_size / 2));
+    min-width: $inner_player_width;
     min-height: $player_height;
   }
 
