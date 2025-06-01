@@ -1048,7 +1048,7 @@ WINDOW_TITLE_MAP = [
 
 
 # Updated set of named colors
-named_colors = {
+NAMED_COLORS = {
     "alice blue",
     "antique white",
     "aqua",

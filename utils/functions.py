@@ -20,7 +20,7 @@ from gi.repository import Gdk, GdkPixbuf, Gio, GLib, Gtk
 from loguru import logger
 
 from .colors import Colors
-from .constants import named_colors
+from .constants import NAMED_COLORS
 from .exceptions import ExecutableNotFoundError
 from .icons import text_icons
 from .thread import run_in_thread
@@ -415,7 +415,7 @@ def is_app_running(app_name: str) -> bool:
 def is_valid_gjs_color(color: str) -> bool:
     color_lower = color.strip().lower()
 
-    if color_lower in named_colors:
+    if color_lower in NAMED_COLORS:
         return True
 
     hex_color_regex = r"^#(?:[a-fA-F0-9]{3,4}|[a-fA-F0-9]{6,8})$"
