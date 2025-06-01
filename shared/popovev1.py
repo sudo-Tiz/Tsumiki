@@ -1,3 +1,5 @@
+import contextlib
+
 import gi
 from fabric.widgets.wayland import WaylandWindow
 from gi.repository import Gtk, GtkLayerShell
@@ -8,6 +10,8 @@ gi.require_versions(
 
 
 class PopupWindowV1(WaylandWindow):
+    """A Wayland popup window that can point to a specific widget."""
+
     def __init__(
         self,
         parent: WaylandWindow,
@@ -37,10 +41,8 @@ class PopupWindowV1(WaylandWindow):
 
     def set_pointing_to(self, widget: Gtk.Widget | None):
         if self._pointing_widget:
-            try:
+            with contextlib.suppress(Exception):
                 self._pointing_widget.disconnect_by_func(self.do_handle_size_allocate)
-            except Exception:
-                pass
         self._pointing_widget = widget
         return self.do_update_handlers()
 
