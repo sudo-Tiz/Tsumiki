@@ -98,6 +98,51 @@ class Wifi(Service):
         self.emit("changed")
         return
 
+    def connect_network(
+        self, ssid: str, password: str = "", remember: bool = True
+    ) -> bool:
+        """Connect to a WiFi network"""
+        if not ssid:
+            logger.error("SSID cannot be empty")
+            return False
+        try:
+            # First try to connect using saved connection
+            try:
+                subprocess.run(["nmcli", "con", "up", ssid], check=True)
+                return True
+            except subprocess.CalledProcessError:
+                # If saved connection fails, try with password if provided
+                if password:
+                    cmd = [
+                        "nmcli",
+                        "device",
+                        "wifi",
+                        "connect",
+                        ssid,
+                        "password",
+                        password,
+                    ]
+                    if not remember:
+                        cmd.extend(["--temporary"])
+                    subprocess.run(cmd, check=True)
+                    return True
+                return False
+        except subprocess.CalledProcessError as e:
+            logger.error(f"Failed connecting to network: {e}")
+            return False
+
+    def disconnect_network(self, ssid: str) -> bool:
+        """Disconnect from a WiFi network"""
+        if not ssid:
+            logger.error("SSID cannot be empty")
+            return False
+        try:
+            subprocess.run(["nmcli", "con", "down", ssid], check=True)
+            return True
+        except subprocess.CalledProcessError as e:
+            logger.error(f"Failed disconnecting from network: {e}")
+            return False
+
     @Property(bool, "read-write", default_value=False)
     def enabled(self) -> bool:  # noqa: F811
         return bool(self._client.wireless_get_enabled())
@@ -154,7 +199,6 @@ class Wifi(Service):
         def make_ap_dict(ap: NM.AccessPoint):
             return {
                 "bssid": ap.get_bssid(),
-                # "address": ap.get_
                 "wpa_flags": ap.get_wpa_flags(),
                 "rsn_flags": ap.get_rsn_flags(),
                 "last_seen": ap.get_last_seen(),
@@ -359,39 +403,6 @@ class NetworkService(Service):
             in str(self._client.get_primary_connection().get_connection_type())
             else None
         )
-
-    def connect_network(
-        self, ssid: str, password: str = "", remember: bool = True
-    ) -> bool:
-        """Connect to a WiFi network"""
-        if not ssid:
-            logger.error("SSID cannot be empty")
-            return False
-        try:
-            # First try to connect using saved connection
-            try:
-                subprocess.run(["nmcli", "con", "up", ssid], check=True)
-                return True
-            except subprocess.CalledProcessError:
-                # If saved connection fails, try with password if provided
-                if password:
-                    cmd = [
-                        "nmcli",
-                        "device",
-                        "wifi",
-                        "connect",
-                        ssid,
-                        "password",
-                        password,
-                    ]
-                    if not remember:
-                        cmd.extend(["--temporary"])
-                    subprocess.run(cmd, check=True)
-                    return True
-                return False
-        except subprocess.CalledProcessError as e:
-            logger.error(f"Failed connecting to network: {e}")
-            return False
 
     @Property(str, "readable")
     def primary_device(self) -> Literal["wifi", "wired"] | None:
