@@ -7,11 +7,13 @@ from fabric.utils import bulk_connect
 from gi.repository import Gio
 from loguru import logger
 
+from utils.exceptions import NetworkManagerNotFoundError
+
 try:
     gi.require_version("NM", "1.0")
     from gi.repository import NM
 except ValueError:
-    logger.exception("[NetworkManager] Failed to start network manager")
+    raise NetworkManagerNotFoundError()
 
 
 class Wifi(Service):
