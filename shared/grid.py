@@ -53,5 +53,3 @@ class Grid(Gtk.Grid, Widget):
         self.set_column_spacing(column_spacing)
         self.set_column_homogeneous(column_homogeneous)
         self.set_row_homogeneous(row_homogeneous)
-
-
