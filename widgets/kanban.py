@@ -192,7 +192,7 @@ class KanbanColumn(Gtk.Frame):
     }
 
     def __init__(self, title):
-        super().__init__(name="kanban-column",vexpand= True, hexpand=True)
+        super().__init__(name="kanban-column", vexpand=True, hexpand=True)
         self.title = title
         self.setup_ui()
         self.setup_dnd()
