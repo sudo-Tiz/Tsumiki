@@ -115,19 +115,21 @@ class AudioOSDContainer(GenericOSDContainer):
     def check_mute(self, audio):
         if not audio.speaker:
             return
+
+        print("Checking mute status...", audio.speaker.muted) # TODO: fix this
         if audio.speaker.muted:
-            self.update_icon(0)
+            self.update_icon()
             self.emit("volume-changed")
         else:
+            self.emit("volume-changed")
             self.update_icon(audio.speaker.volume)
 
-    def on_speaker_changed(self, audio, _):
+    def on_speaker_changed(self, *_):
         if speaker := self.audio_service.speaker:
             speaker.connect("notify::volume", self.update_volume)
 
     @cooldown(0.1)
-    def update_volume(self, speaker, _):
-        speaker.handler_block_by_func(self.update_volume)
+    def update_volume(self, *_):
         self.emit(
             "volume-changed",
         )
@@ -143,15 +145,14 @@ class AudioOSDContainer(GenericOSDContainer):
         ) if is_over_amplified else self.scale.remove_style_class("overamplified")
 
         if self.audio_service.speaker.muted:
-            self.update_icon(0)
+            self.update_icon()
         else:
             self.update_icon(volume)
 
         self.scale.set_value(volume)
         self.level.set_label(f"{volume}%")
-        speaker.handler_unblock_by_func(self.update_volume)
 
-    def update_icon(self, volume):
+    def update_icon(self, volume = 0):
         icon_name = get_audio_icon_name(volume, self.audio_service.speaker.muted)[
             "icon"
         ]
