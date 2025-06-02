@@ -2,14 +2,16 @@ import os
 import re
 import shutil
 import subprocess
+import threading
 import time
 from datetime import datetime
 from functools import lru_cache
 from io import BytesIO
-from typing import Dict, List, Literal, Optional
+from typing import Callable, Dict, List, Literal, Optional
 
 import psutil
 import qrcode
+from colorthief import ColorThief
 from fabric.utils import (
     cooldown,
     exec_shell_command,
@@ -24,6 +26,32 @@ from .constants import NAMED_COLORS
 from .exceptions import ExecutableNotFoundError
 from .icons import text_icons
 from .thread import run_in_thread
+
+
+def rgb_to_hex(rgb):
+    return "#{:02x}{:02x}{:02x}".format(*rgb)
+
+
+def grab_accent_color_threaded(
+    image_path: str,
+    callback: Callable,
+    quantity: int = 4,
+    quality: int = 10,
+):
+    def thread_function():
+        try:
+            ct = ColorThief(file=image_path).get_palette(
+                quality=quality, color_count=quantity
+            )
+            GLib.idle_add(callback, ct)
+        except Exception:
+            logger.error("[COLORS] Failed to grab an accent color")
+            GLib.idle_add(callback, None)
+        finally:
+            GLib.idle_add(thread.join)
+
+    thread = threading.Thread(target=thread_function)
+    thread.start()
 
 
 # Function to escape the markup

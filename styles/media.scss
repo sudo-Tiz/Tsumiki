@@ -47,7 +47,7 @@
 
 
   #inner-player-box {
-    background: linear-gradient(135deg, color.mix(theme.$background-alt, white, 80%), theme.$background-alt, #4b2353);
+    // background: linear-gradient(135deg, color.mix(theme.$background-alt, white, 80%), theme.$background-alt, #4b2353);
     border-radius: 15px;
     margin-left: math.floor(calc($image_size / 2));
     min-width: $inner_player_width;

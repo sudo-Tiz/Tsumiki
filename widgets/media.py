@@ -27,7 +27,7 @@ from loguru import logger
 from services import MprisPlayer, MprisPlayerManager
 from shared import Animator, CircleImage, HoverButton
 from utils import APP_CACHE_DIRECTORY, cubic_bezier, symbolic_icons
-from utils.functions import ensure_directory
+from utils.functions import ensure_directory, grab_accent_color_threaded, rgb_to_hex
 from utils.widget_utils import (
     create_scale,
     setup_cursor_hover,
@@ -479,8 +479,24 @@ class PlayerBox(Box):
     def _update_image(self, image_path):
         if image_path and os.path.isfile(image_path):
             self.image_box.set_image_from_file(image_path)
+            self.update_colors(image_path)
         else:
             self.image_box.set_image_from_file(self.fallback_cover_path)
+            self.update_colors(self.fallback_cover_path)
+
+    def update_colors(self, image_path):
+        def on_accent_color(palette):
+            # Convert RGB tuples to HEX color strings
+            hex_colors = [rgb_to_hex(color) for color in palette]
+
+            # Join into linear-gradient syntax
+            gradient = f"linear-gradient(135deg, {', '.join(hex_colors)});"
+
+            self.inner_box.set_style(f"background: {gradient};")
+
+        grab_accent_color_threaded(
+            image_path=image_path, quantity=5, callback=on_accent_color
+        )
 
     def _set_image(self, *_):
         art_url = self.player.arturl
