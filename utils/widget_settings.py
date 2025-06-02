@@ -144,6 +144,7 @@ OSD = TypedDict(
         "enabled": bool,
         "timeout": int,
         "anchor": Anchor,
+        "orientation": str,
         "percentage": bool,
         "icon_size": int,
         "play_sound": bool,

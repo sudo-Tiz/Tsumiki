@@ -203,6 +203,7 @@ DEFAULT_CONFIG = {
             "timeout": 1500,
             "anchor": "bottom-center",
             "percentage": True,
+            "orientation": "horizontal",
             "icon_size": 28,
             "play_sound": False,
         },
