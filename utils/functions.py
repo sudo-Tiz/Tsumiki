@@ -31,6 +31,7 @@ from .thread import run_in_thread
 def rgb_to_hex(rgb):
     return "#{:02x}{:02x}{:02x}".format(*rgb)
 
+
 def rgb_to_css(rgb):
     return f"rgb({rgb[0]}, {rgb[1]}, {rgb[2]})"
 

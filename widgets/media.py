@@ -485,6 +485,7 @@ class PlayerBox(Box):
 
     def update_colors(self, image_path):
         colors = (255, 255, 255)  # Default color if no accent is found
+
         def on_accent_color(palette):
             color = palette[0] if palette else colors
             color = f"mix(rgb{color}, #F7EFD1, 0.5)"
@@ -501,9 +502,7 @@ class PlayerBox(Box):
 
             self.inner_box.set_style(f"background: {gradient};")
 
-        grab_accent_color(
-            image_path=image_path, quantity=5, callback=on_accent_color
-        )
+        grab_accent_color(image_path=image_path, quantity=5, callback=on_accent_color)
 
     def _set_image(self, *_):
         art_url = self.player.arturl
@@ -538,9 +537,7 @@ class PlayerBox(Box):
     def _move_seekbar(self, *_):
         self.position_label.set_label(self.length_str(self.player.position))
 
-        self.seek_bar.set_value(
-            self.player.position
-        )
+        self.seek_bar.set_value(self.player.position)
 
         return True
 
