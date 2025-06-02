@@ -418,8 +418,7 @@ class PlayerBox(Box):
 
         if duration:
             self.length_label.set_label(self.length_str(self.player.length))
-
-        self.seek_bar.set_range(0, duration)
+            self.seek_bar.set_range(0, duration)
 
         invoke_repeater(1000, self._move_seekbar)
 
@@ -533,7 +532,7 @@ class PlayerBox(Box):
 
         self.seek_bar.set_value(
             self.player.position
-        ) if self.player.length > 0 else self.seek_bar.set_value(0)
+        )
 
         return True
 
