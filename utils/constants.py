@@ -202,6 +202,7 @@ DEFAULT_CONFIG = {
             "enabled": True,
             "timeout": 1500,
             "anchor": "bottom-center",
+            "orientation": "horizontal",
             "percentage": True,
             "icon_size": 28,
             "play_sound": False,

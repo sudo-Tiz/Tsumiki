@@ -22,9 +22,10 @@ class GenericOSDContainer(Box):
 
     def __init__(self, config, **kwargs):
         super().__init__(
-            orientation="h",
+            orientation=config["orientation"],
             spacing=10,
             name="osd-container",
+            style_classes="vertical" if config["orientation"] == "vertical" else "",
             **kwargs,
         )
 
@@ -34,6 +35,13 @@ class GenericOSDContainer(Box):
         )
         self.scale = create_scale(
             name="osd-scale",
+            orientation=config["orientation"],
+            h_expand=config["orientation"] == "horizontal",
+            v_expand=config["orientation"] == "vertical",
+            inverted=config["orientation"] == "vertical",
+            style="scale {min-height: 150px; min-width: 11px;}"
+            if config["orientation"] == "vertical"
+            else "",
         )
 
         self.children = (self.icon, self.scale)
