@@ -32,7 +32,7 @@ def rgb_to_hex(rgb):
     return "#{:02x}{:02x}{:02x}".format(*rgb)
 
 
-def grab_accent_color_threaded(
+def grab_accent_color(
     image_path: str,
     callback: Callable,
     quantity: int = 4,

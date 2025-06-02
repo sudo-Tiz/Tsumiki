@@ -27,7 +27,7 @@ from loguru import logger
 from services import MprisPlayer, MprisPlayerManager
 from shared import Animator, CircleImage, HoverButton
 from utils import APP_CACHE_DIRECTORY, cubic_bezier, symbolic_icons
-from utils.functions import ensure_directory, grab_accent_color_threaded, rgb_to_hex
+from utils.functions import ensure_directory, grab_accent_color, rgb_to_hex
 from utils.widget_utils import (
     create_scale,
     setup_cursor_hover,
@@ -484,7 +484,15 @@ class PlayerBox(Box):
             self.update_colors(self.fallback_cover_path)
 
     def update_colors(self, image_path):
+        colors = (255, 255, 255)  # Default color if no accent is found
         def on_accent_color(palette):
+            color = palette[0] if palette else colors
+            color = f"mix(rgb{color}, #F7EFD1, 0.5)"
+            bg = f"background-color: {color};"
+            border = f"border-color: {color};"
+            self.seek_bar.set_style(
+                f" trough highlight{{ {bg} {border} }} slider {{ {bg} }}"
+            )
             # Convert RGB tuples to HEX color strings
             hex_colors = [rgb_to_hex(color) for color in palette]
 
@@ -493,7 +501,7 @@ class PlayerBox(Box):
 
             self.inner_box.set_style(f"background: {gradient};")
 
-        grab_accent_color_threaded(
+        grab_accent_color(
             image_path=image_path, quantity=5, callback=on_accent_color
         )
 
