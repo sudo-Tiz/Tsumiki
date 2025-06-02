@@ -208,7 +208,6 @@
 			"enabled": true,
 			"timeout": 2000,
 			"icon_size": 28,
-			"orientation": "horizontal", // this is the orientation of the OSD, you can use vertical or horizontal
 			"anchor": "bottom-center", // this is the position of the OSD, you can use top-center, top-left, top-right, bottom-center, bottom-left, bottom-right
 			"percentage": true
 		},

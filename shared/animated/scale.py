@@ -11,7 +11,6 @@ class AnimatedScale(Scale):
     """A widget to display a scale with animated transitions."""
 
     def __init__(self, name, curve=(0.34, 1.56, 0.64, 1.0), duration=0.8, **kwargs):
-        print(name, kwargs)
         super().__init__(name=name, **kwargs)
 
         self.animator = (
