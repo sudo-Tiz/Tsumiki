@@ -27,7 +27,7 @@ from loguru import logger
 from services import MprisPlayer, MprisPlayerManager
 from shared import Animator, CircleImage, HoverButton
 from utils import APP_CACHE_DIRECTORY, cubic_bezier, symbolic_icons
-from utils.functions import ensure_directory, grab_accent_color, rgb_to_css, rgb_to_hex
+from utils.functions import ensure_directory, grab_accent_color, rgb_to_css
 from utils.widget_utils import (
     create_scale,
     setup_cursor_hover,
