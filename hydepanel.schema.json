@@ -308,10 +308,7 @@
 						},
 						"orientation": {
 							"type": "string",
-							"enum": [
-								"horizontal",
-								"vertical"
-							],
+							"enum": ["horizontal", "vertical"],
 							"description": "Specifies the orientation of the osd."
 						},
 						"duration": {
