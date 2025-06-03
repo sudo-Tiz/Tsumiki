@@ -115,7 +115,7 @@ class DateMenuNotification(Box):
                 style="font-size: 13.5px;",
                 line_wrap="word-char",
                 chars_width=20,
-                max_chars_width=40,
+                max_chars_width=45,
             ),
         )
 

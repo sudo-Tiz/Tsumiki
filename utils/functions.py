@@ -536,6 +536,7 @@ def ensure_file(path: str) -> None:
 
 # Function to ensure the directory exists
 
+
 @run_in_thread
 def ensure_directory(path: str) -> None:
     if not GLib.file_test(path, GLib.FileTest.EXISTS):
