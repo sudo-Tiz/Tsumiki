@@ -116,12 +116,11 @@ class AudioOSDContainer(GenericOSDContainer):
         if not audio.speaker:
             return
 
-        print("Checking mute status...", audio.speaker.muted) # TODO: fix this
+        print("Checking mute status...", audio.speaker.muted) # TODO: fix this, the unmute signal is not working
         if audio.speaker.muted:
             self.update_icon()
             self.emit("volume-changed")
         else:
-            self.emit("volume-changed")
             self.update_icon(audio.speaker.volume)
 
     def on_speaker_changed(self, *_):
