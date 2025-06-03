@@ -21,11 +21,13 @@ class GenericOSDContainer(Box):
     """A generic OSD container to display the OSD for brightness and audio."""
 
     def __init__(self, config, **kwargs):
+        is_vertical = config["orientation"] == "vertical"
+
         super().__init__(
             orientation=config["orientation"],
             spacing=10,
             name="osd-container",
-            style_classes="vertical" if config["orientation"] == "vertical" else "",
+            style_classes="vertical" if is_vertical else "",
             **kwargs,
         )
 
@@ -36,12 +38,10 @@ class GenericOSDContainer(Box):
         self.scale = create_scale(
             name="osd-scale",
             orientation=config["orientation"],
-            h_expand=config["orientation"] == "horizontal",
-            v_expand=config["orientation"] == "vertical",
-            inverted=config["orientation"] == "vertical",
-            style="scale {min-height: 150px; min-width: 11px;}"
-            if config["orientation"] == "vertical"
-            else "",
+            h_expand=is_vertical,
+            v_expand=is_vertical,
+            inverted=is_vertical,
+            style="scale {min-height: 150px; min-width: 11px;}" if is_vertical else "",
         )
 
         self.children = (self.icon, self.scale)
@@ -115,13 +115,11 @@ class AudioOSDContainer(GenericOSDContainer):
     def check_mute(self, audio):
         if not audio.speaker:
             return
-
-        print("Checking mute status...", audio.speaker.muted) # TODO: fix this, the unmute signal is not working
         if audio.speaker.muted:
             self.update_icon()
             self.emit("volume-changed")
         else:
-            self.update_icon(audio.speaker.volume)
+            self.update_icon(round(self.audio_service.speaker.volume))
 
     def on_speaker_changed(self, *_):
         if speaker := self.audio_service.speaker:
@@ -129,13 +127,12 @@ class AudioOSDContainer(GenericOSDContainer):
 
     @cooldown(0.1)
     def update_volume(self, *_):
-        self.emit(
-            "volume-changed",
-        )
         if not self.audio_service.speaker:
             return
 
         volume = round(self.audio_service.speaker.volume)
+
+        print(f"Volume changed: {volume}")
 
         is_over_amplified = volume > 100
 
@@ -143,15 +140,18 @@ class AudioOSDContainer(GenericOSDContainer):
             "overamplified"
         ) if is_over_amplified else self.scale.remove_style_class("overamplified")
 
+        self.scale.set_value(volume)
         if self.audio_service.speaker.muted:
             self.update_icon()
         else:
             self.update_icon(volume)
 
-        self.scale.set_value(volume)
         self.level.set_label(f"{volume}%")
+        self.emit(
+            "volume-changed",
+        )
 
-    def update_icon(self, volume = 0):
+    def update_icon(self, volume=0):
         icon_name = get_audio_icon_name(volume, self.audio_service.speaker.muted)[
             "icon"
         ]
