@@ -7,7 +7,7 @@ from loguru import logger
 
 from services import MprisPlayer, MprisPlayerManager
 from shared import ButtonWidget, Popover
-from utils import BarConfig, Colors
+from utils import Colors
 from widgets.media import PlayerBoxStack
 
 
@@ -16,7 +16,6 @@ class Mpris(ButtonWidget):
 
     def __init__(
         self,
-        widget_config: BarConfig,
         **kwargs,
     ):
         # Initialize the EventBox with specific name and style

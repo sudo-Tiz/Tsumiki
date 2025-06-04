@@ -36,7 +36,7 @@ class WidgetGroup(BoxWidget):
                 # Create widget instance using the constructor from widgets_map
                 # Pass both widget_config and bar to the widget constructor
                 widget = lazy_load_widget(widget_name, widgets_map)
-                children.append(widget(widget_config, bar=bar))
+                children.append(widget())
 
         return cls(
             children=children,

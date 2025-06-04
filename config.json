@@ -301,6 +301,7 @@
 	},
 	"layout": {
 		"left_section": [
+			"@group:0",
 			"window_title"
 		], // this is the left section of the panel
 		"middle_section": [
@@ -308,6 +309,8 @@
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
+			"@group:2",
+			"@group:1",
 			"system_tray"
 		] // this is the right section of the panel
 	},

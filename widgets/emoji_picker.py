@@ -13,7 +13,6 @@ from gi.repository import Gdk
 from loguru import logger
 
 from shared import ButtonWidget, Popover
-from utils.widget_settings import BarConfig
 from utils.widget_utils import text_icon
 
 
@@ -330,7 +329,6 @@ class EmojiPickerWidget(ButtonWidget):
 
     def __init__(
         self,
-        widget_config: BarConfig,
         **kwargs,
     ):
         super().__init__(

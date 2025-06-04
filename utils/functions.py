@@ -216,7 +216,7 @@ def validate_widgets(parsed_data, default_config):
                         "Must be an object with 'widgets' array."
                     )
                 for group_widget in group["widgets"]:
-                    if group_widget not in default_config:
+                    if group_widget not in default_config["widgets"]:
                         raise ValueError(
                             f"Invalid widget '{group_widget}' found in "
                             f"module group {idx}. Please check the widget name."
