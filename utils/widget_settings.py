@@ -485,7 +485,7 @@ class Widgets(TypedDict):
     power: PowerButton
     quick_settings: QuickSettings
     recorder: Recording
-    screen_shot: ScreenShot
+    screenshot: ScreenShot
     spacing: Spacing
     stopwatch: StopWatch
     storage: Storage

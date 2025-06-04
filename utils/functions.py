@@ -190,11 +190,11 @@ def validate_widgets(parsed_data, default_config):
     for section in layout:
         for widget in layout[section]:
             if widget.startswith("@group:"):
-                # Handle module groups
+                # Handle widget groups
                 group_idx = widget.replace("@group:", "", 1)
                 if not group_idx.isdigit():
                     raise ValueError(
-                        "Invalid module group index "
+                        "Invalid widget group index "
                         f"'{group_idx}' in section {section}. Must be a number."
                     )
                 idx = int(group_idx)
@@ -205,21 +205,21 @@ def validate_widgets(parsed_data, default_config):
                     )
                 if not (0 <= idx < len(groups)):
                     raise ValueError(
-                        "Module group index "
+                        "Widget group index "
                         f"{idx} is out of range. Available indices: 0-{len(groups) - 1}"
                     )
                 # Validate widgets inside the group
                 group = groups[idx]
                 if not isinstance(group, dict) or "widgets" not in group:
                     raise ValueError(
-                        f"Invalid module group at index {idx}. "
+                        f"Invalid widget group at index {idx}. "
                         "Must be an object with 'widgets' array."
                     )
                 for group_widget in group["widgets"]:
                     if group_widget not in default_config["widgets"]:
                         raise ValueError(
                             f"Invalid widget '{group_widget}' found in "
-                            f"module group {idx}. Please check the widget name."
+                            f"widget group {idx}. Please check the widget name."
                         )
             elif widget not in default_config["widgets"]:
                 raise ValueError(

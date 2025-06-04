@@ -20,7 +20,7 @@ from .overview import *
 from .power_button import *
 from .quick_settings.quick_settings import *
 from .recorder import *
-from .screen_shot import *
+from .screenshot import *
 from .stats import *
 from .stopwatch import *
 from .submap import *

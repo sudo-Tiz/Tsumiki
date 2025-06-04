@@ -40,7 +40,7 @@ class StatusBar(Window, ToggleableWidget):
             "overview": "widgets.OverviewWidget",
             "power": "widgets.PowerWidget",
             "recorder": "widgets.RecorderWidget",
-            "screen_shot": "widgets.ScreenShotWidget",
+            "screenshot": "widgets.ScreenShotWidget",
             "storage": "widgets.StorageWidget",
             "system_tray": "widgets.SystemTrayWidget",
             "taskbar": "widgets.TaskBarWidget",

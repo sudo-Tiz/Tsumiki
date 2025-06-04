@@ -219,7 +219,7 @@ DEFAULT_CONFIG = {
             "tooltip": True,
             "audio": True,
         },
-        "screen_shot": {
+        "screenshot": {
             "path": "Pictures/Screenshots",
             "icon_size": 16,
             "tooltip": True,

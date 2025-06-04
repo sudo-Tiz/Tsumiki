@@ -251,7 +251,7 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 | **power**             | Widget controls power-related settings, including sleep and shutdown.          |
 | **ram**               | Widget displays information about system RAM usage and performance.            |
 | **recorder**          | Widget for recording video on the system.                                      |
-| **screen_shot**       | Widget for taking screenshot on the system.                                    |
+| **screenshot**       | Widget for taking screenshot on the system.                                    |
 | **spacer (utility)**  | A simple utility for adding space in UI layouts.                               |
 | **storage**           | Widget that displays storage usage and manages disk partitions or drives.      |
 | **submap**            | Widget that displays active submap for hyprland.                               |

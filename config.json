@@ -41,7 +41,7 @@
 			"icon_size": 16,
 			"tooltip": true
 		},
-		"screen_shot": {
+		"screenshot": {
 			"path": "Pictures/Screenshots",
 			"icon_size": 16,
 			"tooltip": true,
