@@ -299,6 +299,9 @@ DEFAULT_CONFIG = {
         "middle_section": ["date_time"],
         "right_section": ["@group:0", "@group:1", "system_tray"],
     },
+    "theme": {
+        "name": "catpuccin-mocha",
+    },
     "modules": {
         "osd": {
             "enabled": True,
