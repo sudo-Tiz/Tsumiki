@@ -578,7 +578,6 @@ class ClipHistoryWidget(ButtonWidget):
         **kwargs,
     ):
         super().__init__(
-            widget_config["cliphist"],
             name="cliphist",
             **kwargs,
         )

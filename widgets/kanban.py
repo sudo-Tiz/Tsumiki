@@ -371,7 +371,6 @@ class KanbanWidget(ButtonWidget):
         **kwargs,
     ):
         super().__init__(
-            widget_config["kanban"],
             name="kanban",
             **kwargs,
         )

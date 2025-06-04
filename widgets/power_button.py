@@ -5,7 +5,6 @@ from fabric.widgets.label import Label
 from fabric.widgets.widget import Widget
 
 from shared import ButtonWidget, Dialog, Grid, HoverButton, PopupWindow
-from utils import BarConfig
 from utils.widget_utils import text_icon
 
 
@@ -119,8 +118,8 @@ class PowerControlButtons(HoverButton):
 class PowerWidget(ButtonWidget):
     """A widget to power off the system."""
 
-    def __init__(self, widget_config: BarConfig, **kwargs):
-        super().__init__(widget_config["power"], name="power", **kwargs)
+    def __init__(self, **kwargs):
+        super().__init__(name="power", **kwargs)
 
         if self.config["show_icon"]:
             # Create a TextIcon with the specified icon and size

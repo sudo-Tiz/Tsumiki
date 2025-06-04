@@ -16,7 +16,7 @@ class StopWatchWidget(ButtonWidget):
         widget_config: BarConfig,
         **kwargs,
     ):
-        super().__init__(widget_config["stop_watch"], title="stop_watch", **kwargs)
+        super().__init__(title="stopwatch", **kwargs)
 
         self.start_time = 0
         self.elapsed_time = 0

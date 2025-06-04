@@ -334,7 +334,6 @@ class EmojiPickerWidget(ButtonWidget):
         **kwargs,
     ):
         super().__init__(
-            widget_config["emoji_picker"],
             name="emoji_picker",
             **kwargs,
         )

@@ -54,13 +54,13 @@
 		"auto_hide": false,
 		"auto_hide_timeout": 2000
 	},
-	"hypr_idle": {
+	"hypridle": {
 		"enabled_icon": "",
 		"disabled_icon": "",
 		"label": true,
 		"tooltip": true
 	},
-	"hypr_sunset": {
+	"hyprsunset": {
 		"temperature": "2800k",
 		"enabled_icon": "󱩌",
 		"disabled_icon": "󰛨",
@@ -329,7 +329,7 @@
 			]
 		}
 	},
-	"stop_watch": {
+	"stopwatch": {
 		"stopped_icon": "󱫞",
 		"running_icon": "󱫠"
 	},
@@ -345,7 +345,7 @@
 		"ignored": [], // do not show these icons in the system tray
 		"hidden": []
 	},
-	"task_bar": {
+	"taskbar": {
 		"icon_size": 22,
 		"ignored": [], // do not show these icons in the task bar
 		"tooltip": true
@@ -370,7 +370,7 @@
 		"tooltip": true,
 		"step_size": 5
 	},
-	"hypr_picker": {
+	"hyprpicker": {
 		"icon": "",
 		"tooltip": true,
 		"label": false,

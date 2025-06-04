@@ -237,9 +237,9 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 | **date_time**         | A menu displaying the current date and notifications.                          |
 | **divider (utility)** | Widget separates sections in a user interface for better organization.         |
 | **emoji_picker**      | Widget that allows users to select and insert emojis.                          |
-| **hypr_idle**         | Widget that tracks idle time or status of the system.                          |
-| **hypr_picker**       | Widget that picks color from images.                                           |
-| **hypr_sunset**       | Widget that adjusts screen settings based on the time of sunset.               |
+| **hypridle**         | Widget that tracks idle time or status of the system.                          |
+| **hyprpicker**       | Widget that picks color from images.                                           |
+| **hyprsunset**       | Widget that adjusts screen settings based on the time of sunset.               |
 | **keyboard**          | Widget that manages and manages the keyboard layout or settings.               |
 | **window_count**      | Widget that shows window count on active workspace.                            |
 | **language**          | Widget allows selection of the system's language or locale settings.           |
@@ -255,7 +255,7 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 | **spacer (utility)**  | A simple utility for adding space in UI layouts.                               |
 | **storage**           | Widget that displays storage usage and manages disk partitions or drives.      |
 | **submap**            | Widget that displays active submap for hyprland.                               |
-| **stop_watch**        | A utility for tracking elapsed time, like a timer or stopwatch.                |
+| **stopwatch**        | A utility for tracking elapsed time, like a timer or stopwatch.                |
 | **system_tray**       | Widget that displays system tray icons and manages notifications.              |
 | **taskbar**           | A bar at the bottom of the screen for quick access to apps and notifications.  |
 | **updates**           | Widget that manages system updates, patches, and version upgrades.             |

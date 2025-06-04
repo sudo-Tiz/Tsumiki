@@ -27,9 +27,9 @@ class StatusBar(Window, ToggleableWidget):
             "click_counter": "widgets.ClickCounterWidget",
             "cpu": "widgets.CpuWidget",
             "date_time": "widgets.DateTimeWidget",
-            "hypr_idle": "widgets.HyprIdleWidget",
-            "hypr_picker": "widgets.HyprPickerWidget",
-            "hypr_sunset": "widgets.HyprSunsetWidget",
+            "hypridle": "widgets.HyprIdleWidget",
+            "hyprpicker": "widgets.HyprPickerWidget",
+            "hyprsunset": "widgets.HyprSunsetWidget",
             "keyboard": "widgets.KeyboardLayoutWidget",
             "language": "widgets.LanguageWidget",
             "memory": "widgets.MemoryWidget",
@@ -43,7 +43,7 @@ class StatusBar(Window, ToggleableWidget):
             "screen_shot": "widgets.ScreenShotWidget",
             "storage": "widgets.StorageWidget",
             "system_tray": "widgets.SystemTrayWidget",
-            "task_bar": "widgets.TaskBarWidget",
+            "taskbar": "widgets.TaskBarWidget",
             "theme_switcher": "widgets.ThemeSwitcherWidget",
             "updates": "widgets.UpdatesWidget",
             "volume": "widgets.VolumeWidget",
@@ -52,7 +52,7 @@ class StatusBar(Window, ToggleableWidget):
             "window_title": "widgets.WindowTitleWidget",
             "workspaces": "widgets.WorkSpacesWidget",
             "spacing": "widgets.SpacingWidget",
-            "stop_watch": "widgets.StopWatchWidget",
+            "stopwatch": "widgets.StopWatchWidget",
             "divider": "widgets.DividerWidget",
             "quick_settings": "widgets.QuickSettingsButtonWidget",
             "window_count": "widgets.WindowCountWidget",
@@ -131,6 +131,6 @@ class StatusBar(Window, ToggleableWidget):
                     # Handle regular widgets
                     if widget_name in self.widgets_list:
                         widget_class = lazy_load_widget(widget_name, self.widgets_list)
-                        layout[key].append(widget_class(widget_config))
+                        layout[key].append(widget_class())
 
         return layout

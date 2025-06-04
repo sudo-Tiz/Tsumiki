@@ -1,13 +1,13 @@
 from shared import CommandSwitcher
-from utils import BarConfig
+from utils.config import widget_config
 
 
 class HyprIdleWidget(CommandSwitcher):
     """A widget to control the hypridle command."""
 
-    def __init__(self, widget_config: BarConfig, **kwargs):
+    def __init__(self, **kwargs):
         # Store the configuration for hypridle
-        self.config = widget_config["hypr_idle"]
+        self.config = widget_config["widgets"]["hypridle"]
 
         # Set the command to hypridle
         self.command = "hypridle"

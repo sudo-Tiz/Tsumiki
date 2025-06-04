@@ -118,7 +118,7 @@ if __name__ == "__main__":
     # Initialize the application with the status bar
     app = Application(APPLICATION_NAME, windows=windows)
 
-    helpers.copy_theme(widget_config["theme"]["name"])
+    ## TODO: see this helpers.copy_theme(widget_config["theme"]["name"])
 
     # Set custom `-symbolic.svg` icons' dir
     icon_theme = Gtk.IconTheme.get_default()

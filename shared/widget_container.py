@@ -56,14 +56,19 @@ class EventBoxWidget(EventBox, ToggleableWidget):
 class ButtonWidget(Button, ToggleableWidget):
     """A container for button widgets. Only used for new widgets that are used on bar"""
 
-    def __init__(self, config, **kwargs):
+    def __init__(self, **kwargs):
         super().__init__(
             style_classes="panel-button",
             **kwargs,
         )
+
+        from utils.config import widget_config
+
+        widget_name = kwargs.get("name", "button")
+
         self.box = Box()
         self.children = (self.box,)
-        self.config = config
+        self.config = widget_config["widgets"].get(widget_name, {})
 
         setup_cursor_hover(self)
 
