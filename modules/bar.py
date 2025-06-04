@@ -109,7 +109,7 @@ class StatusBar(Window, ToggleableWidget):
         for key in layout:
             for widget_name in widget_config["layout"][key]:
                 if widget_name.startswith("@group:"):
-                    # Handle module groups - using index-based lookup
+                    # Handle widget groups - using index-based lookup
                     group_name = widget_name.replace("@group:", "", 1)
                     group_config = None
 

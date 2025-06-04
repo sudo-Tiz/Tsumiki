@@ -314,7 +314,7 @@
 			"system_tray"
 		] // this is the right section of the panel
 	},
-	"widget_groups": [ // module groups are used to group multiple modules together, you can create multiple groups and access as @group:0, @group:1, etc
+	"widget_groups": [ // widget groups are used to group multiple modules together, you can create multiple groups and access as @group:0, @group:1, etc
 		{
 			"widgets": [
 				"workspaces",
