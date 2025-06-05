@@ -3,7 +3,7 @@
 	"definitions": {
 		"style": {
 			"type": "string",
-			"enum": ["default", "wave1", "wave2", "flat", "shadow", "bordered"],
+			"enum": ["default", "leaf", "leaf-inverse", "flat", "shadow", "bordered"],
 			"description": "Determines the style of the widget."
 		},
 		"anchor": {
