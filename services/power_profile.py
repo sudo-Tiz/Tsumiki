@@ -5,7 +5,7 @@ from loguru import logger
 from utils import Colors, GioDBusHelper, symbolic_icons
 
 
-class PowerProfiles(Service):
+class PowerProfilesService(Service):
     """Service to interact with the PowerProfiles service via GIO."""
 
     @Signal
@@ -16,7 +16,7 @@ class PowerProfiles(Service):
 
     def __new__(cls):
         if cls._instance is None:
-            cls._instance = super(PowerProfiles, cls).__new__(cls)
+            cls._instance = super(PowerProfilesService, cls).__new__(cls)
         return cls._instance
 
     def __init__(self, **kwargs):

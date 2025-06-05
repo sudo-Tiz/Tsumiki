@@ -1,6 +1,6 @@
 from fabric.widgets.label import Label
 
-from services.screen_record import ScreenRecorder
+from services.screen_record import ScreenRecorderService
 from shared import ButtonWidget
 from utils.widget_utils import text_icon
 
@@ -14,7 +14,7 @@ class ScreenShotWidget(ButtonWidget):
         if self.config["tooltip"]:
             self.set_tooltip_text("Screen Shot")
 
-        self.recorder_service = ScreenRecorder()
+        self.recorder_service = ScreenRecorderService()
 
         self.box.children = text_icon(
             self.config["icon"],

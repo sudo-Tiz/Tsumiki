@@ -34,7 +34,7 @@ class StatusBar(Window, ToggleableWidget):
             "language": "widgets.LanguageWidget",
             "memory": "widgets.MemoryWidget",
             "microphone": "widgets.MicrophoneIndicatorWidget",
-            "mpris": "widgets.Mpris",
+            "mpris": "widgets.MprisWidget",
             "network_usage": "widgets.NetworkUsageWidget",
             "ocr": "widgets.OCRWidget",
             "overview": "widgets.OverviewWidget",

@@ -31,14 +31,14 @@ except FileNotFoundError:
     kbd = ""
 
 
-class Brightness(Service):
+class BrightnessService(Service):
     """Service to manage screen brightness levels."""
 
     _instance = None
 
     def __new__(cls):
         if cls._instance is None:
-            cls._instance = super(Brightness, cls).__new__(cls)
+            cls._instance = super(BrightnessService, cls).__new__(cls)
         return cls._instance
 
     @Signal

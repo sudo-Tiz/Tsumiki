@@ -9,7 +9,13 @@ from gi.repository import GLib, Gtk
 from loguru import logger
 
 import utils.functions as helpers
-from services import Brightness, MprisPlayerManager, NetworkService, Wifi, audio_service
+from services import (
+    BrightnessService,
+    MprisPlayerManager,
+    NetworkService,
+    Wifi,
+    audio_service,
+)
 from shared import (
     ButtonWidget,
     CircleImage,
@@ -398,7 +404,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
 
         self.network_service = NetworkService()
 
-        self.brightness_service = Brightness()
+        self.brightness_service = BrightnessService()
 
         bulk_connect(
             self.audio_service,

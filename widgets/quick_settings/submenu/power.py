@@ -3,7 +3,7 @@ from fabric.widgets.button import Button
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
-from services import PowerProfiles
+from services import PowerProfilesService
 from shared import HoverButton, QSChevronButton, QuickSubMenu
 from utils import symbolic_icons
 
@@ -39,7 +39,7 @@ class PowerProfileItem(Button):
             ),
         )
 
-        self.power_profile_service = PowerProfiles()
+        self.power_profile_service = PowerProfilesService()
         self.children = (self.box,)
 
         self.connect(
@@ -59,7 +59,7 @@ class PowerProfileSubMenu(QuickSubMenu):
     """A submenu to display power profile options."""
 
     def __init__(self, **kwargs):
-        self.client = PowerProfiles()
+        self.client = PowerProfilesService()
         self.profiles = self.client.power_profiles
         self.active = self.client.get_current_profile()
 
@@ -103,7 +103,7 @@ class PowerProfileToggle(QSChevronButton):
             submenu=submenu,
             **kwargs,
         )
-        self.client = PowerProfiles()
+        self.client = PowerProfilesService()
         self.update_action_button()
         self.set_active_style(True)
         self.action_button.set_sensitive(False)

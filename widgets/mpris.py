@@ -11,7 +11,7 @@ from utils import Colors
 from widgets.media import PlayerBoxStack
 
 
-class Mpris(ButtonWidget):
+class MprisWidget(ButtonWidget):
     """A widget to control the MPRIS."""
 
     def __init__(

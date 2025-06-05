@@ -8,7 +8,7 @@ from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow as Window
 from gi.repository import GLib, GObject
 
-from services import Brightness, audio_service
+from services import BrightnessService, audio_service
 from utils import HyprlandWithMonitors, Keyboard_Mode, symbolic_icons
 from utils.widget_utils import (
     create_scale,
@@ -63,7 +63,7 @@ class BrightnessOSDContainer(GenericOSDContainer):
             config=config,
             **kwargs,
         )
-        self.brightness_service = Brightness()
+        self.brightness_service = BrightnessService()
         self.config = config
         self.update_brightness()
 

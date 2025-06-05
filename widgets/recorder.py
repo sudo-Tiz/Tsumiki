@@ -1,7 +1,7 @@
 from fabric.utils import get_relative_path
 from fabric.widgets.image import Image
 
-from services import ScreenRecorder
+from services import ScreenRecorderService
 from shared import ButtonWidget, LottieAnimation, LottieAnimationWidget
 from utils import symbolic_icons
 from utils.functions import check_executable_exists
@@ -36,7 +36,7 @@ class RecorderWidget(ButtonWidget):
         if self.config["tooltip"]:
             self.set_tooltip_text("Recording stopped")
 
-        self.recorder_service = ScreenRecorder()
+        self.recorder_service = ScreenRecorderService()
 
         self.recorder_service.connect("recording", self.update_ui)
 
