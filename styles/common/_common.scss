@@ -55,7 +55,7 @@
 
   @else if (variable.$bar-style-panel ==scoop) {
     margin: 0rem 4.5rem;
-    border-radius: 0 0 variable.$radius * 2.5 variable.$radius * 2.5;
+    border-radius: 0 0 variable.$radius * 2.2 variable.$radius * 2.2;
   }
 
   @else {
