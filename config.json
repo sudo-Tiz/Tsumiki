@@ -337,6 +337,11 @@
 		}
 	],
 	"modules": {
+		"bar": {
+			"layer": "top",
+			"auto_hide": false,
+			"location": "top"
+		},
 		"app_launcher": {
 			"enabled": true,
 			"tooltip": true,
@@ -390,11 +395,7 @@
 	},
 	"general": {
 		"check_updates": false,
-		"layer": "top",
-		"auto_hide": false,
 		"debug": true,
-		"monitor_styles": true,
-		"location": "top"
+		"monitor_styles": true
 	}
-
 }

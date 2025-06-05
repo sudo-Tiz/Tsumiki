@@ -309,6 +309,7 @@ DEFAULT_CONFIG = {
         "name": "catpuccin-mocha",
     },
     "modules": {
+        "bar": {"layer": "top", "auto_hide": False, "location": "top"},
         "osd": {
             "enabled": True,
             "timeout": 1500,

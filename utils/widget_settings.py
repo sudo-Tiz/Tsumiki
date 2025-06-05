@@ -175,12 +175,24 @@ AppLauncher = TypedDict(
     },
 )
 
+
+Bar = TypedDict(
+    "Bar",
+    {
+        "location": str,
+        "layer": Layer,
+        "auto_hide": bool,
+    },
+)
+
+
 # Modules configuration
 Modules = TypedDict(
     "Modules",
     {
         "screen_corners": ScreenCorners,
         "dock": Dock,
+        "bar": Bar,
         "desktop_clock": DesktopClock,
         "notification": Notification,
         "osd": OSD,
@@ -192,13 +204,7 @@ Modules = TypedDict(
 # Bar configuration
 General = TypedDict(
     "General",
-    {
-        "check_updates": bool,
-        "debug": bool,
-        "monitor_styles": bool,
-        "location": str,
-        "layer": Layer,
-    },
+    {"check_updates": bool, "debug": bool, "monitor_styles": bool},
 )
 
 # Cpu configuration

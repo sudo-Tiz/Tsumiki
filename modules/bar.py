@@ -59,6 +59,7 @@ class StatusBar(Window, ToggleableWidget):
         }
 
         options = config["general"]
+        bar_config = config["modules"]["bar"]
         layout = self.make_layout(config)
 
         self.box = CenterBox(
@@ -80,11 +81,11 @@ class StatusBar(Window, ToggleableWidget):
             ),
         )
 
-        anchor = f"left {options['location']} right"
+        anchor = f"left {bar_config['location']} right"
 
         super().__init__(
             name="panel",
-            layer=options["layer"],
+            layer=bar_config["layer"],
             anchor=anchor,
             pass_through=False,
             monitor=HyprlandWithMonitors().get_current_gdk_monitor_id(),
