@@ -21,7 +21,7 @@
   border: 1.5px solid theme.$surface-disabled;
 }
 
-.leaf{
+.leaf {
   border-radius: 24px 10px;
 }
 
@@ -48,9 +48,19 @@
 
   box-shadow: if(variable.$bar-shadow-enabled, $shadow, none);
 
-  @if (variable.$bar-style-panel !=default) {
+  @if (variable.$bar-style-panel ==floating) {
     margin: 1rem 1.5rem 0rem 1.5rem;
     border-color: theme.$surface-disabled;
+  }
+
+  @else if (variable.$bar-style-panel ==scoop) {
+    margin: 0rem 4.5rem;
+    border-radius: 0 0 variable.$radius * 2.5 variable.$radius * 2.5;
+  }
+
+  @else {
+    border: none;
+
   }
 }
 }

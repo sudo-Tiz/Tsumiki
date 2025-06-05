@@ -255,6 +255,7 @@
     @extend .flat;
   }
 
+
   @else if $type ==shadow {
     @extend .shadow;
   }
