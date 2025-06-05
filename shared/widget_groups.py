@@ -29,7 +29,7 @@ class WidgetGroup(BoxWidget):
                 self.add(child)
 
     @classmethod
-    def from_config(cls, config, widgets_map, bar=None, widget_config=None):
+    def from_config(cls, config, widgets_map):
         children = []
         for widget_name in config.get("widgets", []):
             if widget_name in widgets_map:

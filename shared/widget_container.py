@@ -3,6 +3,7 @@ from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.widget import Widget
 
+from utils.config import widget_config
 from utils.widget_utils import setup_cursor_hover
 
 
@@ -38,16 +39,22 @@ class BoxWidget(Box, ToggleableWidget):
             **kwargs,
         )
 
+        widget_name = kwargs.get("name", "box")
+        self.config = widget_config["widgets"].get(widget_name, {})
+
 
 class EventBoxWidget(EventBox, ToggleableWidget):
     """A container for box widgets."""
 
-    def __init__(self, config, **kwargs):
+    def __init__(self, **kwargs):
         super().__init__(
             style_classes="panel-eventbox",
             **kwargs,
         )
-        self.config = config
+
+        widget_name = kwargs.get("name", "eventbox")
+        self.config = widget_config["widgets"].get(widget_name, {})
+
         self.box = Box(style_classes="panel-box")
         self.children = (self.box,)
         setup_cursor_hover(self)
@@ -62,13 +69,11 @@ class ButtonWidget(Button, ToggleableWidget):
             **kwargs,
         )
 
-        from utils.config import widget_config
-
         widget_name = kwargs.get("name", "button")
+        self.config = widget_config["widgets"].get(widget_name, {})
 
         self.box = Box()
         self.children = (self.box,)
-        self.config = widget_config["widgets"].get(widget_name, {})
 
         setup_cursor_hover(self)
 

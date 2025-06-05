@@ -301,7 +301,7 @@
 	},
 	"layout": {
 		"left_section": [
-			"@group:0",
+			"workspaces",
 			"window_title"
 		], // this is the left section of the panel
 		"middle_section": [
@@ -309,22 +309,12 @@
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
-			"@group:2",
 			"@group:1",
+			"@group:0",
 			"system_tray"
 		] // this is the right section of the panel
 	},
 	"widget_groups": [ // widget groups are used to group multiple modules together, you can create multiple groups and access as @group:0, @group:1, etc
-		{
-			"widgets": [
-				"workspaces",
-				"window_count"
-			],
-			"spacing": 1,
-			"style_classes": [
-				"compact"
-			]
-		},
 		{
 			"widgets": [
 				"updates",

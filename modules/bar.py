@@ -101,13 +101,13 @@ class StatusBar(Window, ToggleableWidget):
                 lambda _: None,
             )
 
-    def make_layout(self, widget_config):
+    def make_layout(self, config):
         """assigns the three sections their respective widgets"""
 
         layout = {"left_section": [], "middle_section": [], "right_section": []}
 
         for key in layout:
-            for widget_name in widget_config["layout"][key]:
+            for widget_name in config["layout"][key]:
                 if widget_name.startswith("@group:"):
                     # Handle widget groups - using index-based lookup
                     group_name = widget_name.replace("@group:", "", 1)
@@ -115,7 +115,7 @@ class StatusBar(Window, ToggleableWidget):
 
                     if group_name.isdigit():
                         idx = int(group_name)
-                        groups = widget_config.get("widget_groups", [])
+                        groups = config.get("widget_groups", [])
                         if isinstance(groups, list) and 0 <= idx < len(groups):
                             group_config = groups[idx]
 
@@ -123,8 +123,6 @@ class StatusBar(Window, ToggleableWidget):
                         group = WidgetGroup.from_config(
                             group_config,
                             self.widgets_list,
-                            bar=self,
-                            widget_config=widget_config,
                         )
                         layout[key].append(group)
                 else:
