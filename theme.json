@@ -101,7 +101,7 @@
 		"scaling": 100,
 		"opacity": 70,
 		"style": {
-			"panel": "default", // this is the style of the panel, can be "default", "floating", "scoop"
+			"panel": "default",
 			"widget": "default"
 		},
 		"shadow": {
