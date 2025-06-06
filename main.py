@@ -8,13 +8,9 @@ from loguru import logger
 
 import utils.functions as helpers
 from modules import StatusBar
-from utils import (
-    APP_CACHE_DIRECTORY,
-    APPLICATION_NAME,
-    Colors,
-    theme_config,
-    widget_config,
-)
+from utils.colors import Colors
+from utils.config import theme_config, widget_config
+from utils.constants import APP_CACHE_DIRECTORY, APPLICATION_NAME
 
 
 @cooldown(2)

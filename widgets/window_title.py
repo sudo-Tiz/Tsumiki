@@ -4,7 +4,7 @@ from fabric.hyprland.widgets import ActiveWindow
 from fabric.utils import FormattedString, truncate
 
 from shared import ButtonWidget
-from utils import WINDOW_TITLE_MAP
+from utils.constants import WINDOW_TITLE_MAP
 
 
 class WindowTitleWidget(ButtonWidget):

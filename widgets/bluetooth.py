@@ -3,7 +3,7 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
 from shared import ButtonWidget
-from utils import symbolic_icons
+from utils.icons import symbolic_icons
 
 
 class BlueToothWidget(ButtonWidget):

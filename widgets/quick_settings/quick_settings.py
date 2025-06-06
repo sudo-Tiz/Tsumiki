@@ -25,7 +25,7 @@ from shared import (
     QSChevronButton,
 )
 from shared.popovev1 import PopupWindowV1
-from utils import symbolic_icons
+from utils.icons import symbolic_icons
 from utils.widget_utils import (
     get_audio_icon_name,
     get_brightness_icon_name,

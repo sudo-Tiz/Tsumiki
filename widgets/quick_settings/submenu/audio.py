@@ -6,7 +6,7 @@ from gi.repository import Gtk
 
 from services import audio_service
 from shared import QuickSubMenu, ScanButton
-from utils import symbolic_icons
+from utils.icons import symbolic_icons
 from widgets.quick_settings.sliders.audio import AudioSlider
 
 

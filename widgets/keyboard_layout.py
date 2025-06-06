@@ -6,7 +6,7 @@ from fabric.widgets.label import Label
 from loguru import logger
 
 from shared import ButtonWidget
-from utils import KBLAYOUT_MAP
+from utils.constants import KBLAYOUT_MAP
 from utils.widget_utils import text_icon
 
 

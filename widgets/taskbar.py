@@ -9,7 +9,7 @@ from gi.repository import GdkPixbuf, GLib, Gtk
 from loguru import logger
 
 from shared import ButtonWidget, HoverButton
-from utils import Colors
+from utils.colors import Colors
 
 
 class PagerClient(TypedDict):

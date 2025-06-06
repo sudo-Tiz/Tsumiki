@@ -9,7 +9,7 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 
 from services import bluetooth_service
 from shared import HoverButton, QSChevronButton, QuickSubMenu, ScanButton
-from utils import symbolic_icons
+from utils.icons import symbolic_icons
 
 
 class BluetoothDeviceBox(CenterBox):

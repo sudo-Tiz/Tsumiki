@@ -1,4 +1,4 @@
-from utils import Colors
+from utils.colors import Colors
 
 
 class ExecutableNotFoundError(ImportError):

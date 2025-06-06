@@ -2,7 +2,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.image import Image
 from fabric.widgets.scale import Scale
 
-from utils import symbolic_icons
+from utils.icons import symbolic_icons
 
 from .widget_container import HoverButton
 

@@ -4,7 +4,7 @@ from fabric import Property, Service, Signal
 from fabric.utils import clamp
 from gi.repository import GLib, Gtk
 
-from utils import ease_linear, lerp
+from utils.bezier import ease_linear, lerp
 
 
 class TimingFunctionCallback(Protocol):

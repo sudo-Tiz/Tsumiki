@@ -6,7 +6,7 @@ from fabric.widgets.overlay import Overlay
 import utils.functions as helpers
 from services import BrightnessService
 from shared import EventBoxWidget
-from utils import text_icons
+from utils.icons import text_icons
 from utils.widget_utils import get_brightness_icon_name, text_icon
 
 

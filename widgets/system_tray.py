@@ -9,7 +9,7 @@ from fabric.widgets.image import Image
 from gi.repository import Gdk, GdkPixbuf, GLib, Gray, Gtk
 
 from shared import ButtonWidget, Grid, HoverButton, Popover, Separator
-from utils import symbolic_icons
+from utils.icons import symbolic_icons
 
 gi.require_version("Gray", "0.1")
 

@@ -7,7 +7,7 @@ from urllib import error, parse, request
 from fabric.core.service import Service
 from loguru import logger
 
-from utils import Colors
+from utils.colors import Colors
 from utils.constants import WEATHER_CACHE_FILE
 
 # Create an SSLContext that ignores certificate validation

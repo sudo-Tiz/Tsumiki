@@ -6,7 +6,7 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 
 from services import NetworkService, Wifi
 from shared import HoverButton, QSChevronButton, QuickSubMenu, ScanButton
-from utils import symbolic_icons
+from utils.icons import symbolic_icons
 
 
 class WifiSubMenu(QuickSubMenu):

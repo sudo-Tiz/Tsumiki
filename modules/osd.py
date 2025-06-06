@@ -9,7 +9,9 @@ from fabric.widgets.wayland import WaylandWindow as Window
 from gi.repository import GLib, GObject
 
 from services import BrightnessService, audio_service
-from utils import HyprlandWithMonitors, Keyboard_Mode, symbolic_icons
+from utils.icons import symbolic_icons
+from utils.monitors import HyprlandWithMonitors
+from utils.types import Keyboard_Mode
 from utils.widget_utils import (
     create_scale,
     get_audio_icon_name,

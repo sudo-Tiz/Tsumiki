@@ -2,8 +2,8 @@ from fabric.utils import cooldown
 
 from services import BrightnessService
 from shared import SettingSlider
-from utils import symbolic_icons
 from utils.functions import set_scale_adjustment
+from utils.icons import symbolic_icons
 
 
 class BrightnessSlider(SettingSlider):

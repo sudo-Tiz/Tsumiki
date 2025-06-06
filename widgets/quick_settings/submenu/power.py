@@ -5,7 +5,7 @@ from fabric.widgets.label import Label
 
 from services import PowerProfilesService
 from shared import HoverButton, QSChevronButton, QuickSubMenu
-from utils import symbolic_icons
+from utils.icons import symbolic_icons
 
 
 class PowerProfileItem(Button):

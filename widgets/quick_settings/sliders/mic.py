@@ -3,8 +3,8 @@ from fabric.widgets.box import Box
 
 from services import audio_service
 from shared import HoverButton, SettingSlider
-from utils import symbolic_icons
 from utils.functions import set_scale_adjustment
+from utils.icons import symbolic_icons
 from utils.widget_utils import text_icon
 
 

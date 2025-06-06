@@ -4,7 +4,7 @@ from fabric import Service, Signal
 from gi.repository import Gio
 from loguru import logger
 
-from utils import GioDBusHelper
+from utils.dbus_helper import GioDBusHelper
 
 DeviceState = {
     0: "UNKNOWN",

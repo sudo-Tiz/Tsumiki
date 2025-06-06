@@ -7,7 +7,7 @@ from loguru import logger
 
 from services import MprisPlayer, MprisPlayerManager
 from shared import ButtonWidget, Popover
-from utils import Colors
+from utils.colors import Colors
 from widgets.media import PlayerBoxStack
 
 

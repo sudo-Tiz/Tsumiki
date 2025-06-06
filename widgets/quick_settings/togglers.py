@@ -4,7 +4,7 @@ from fabric.widgets.label import Label
 
 from services import notification_service
 from shared import CommandSwitcher, HoverButton
-from utils import symbolic_icons
+from utils.icons import symbolic_icons
 
 
 class QuickSettingToggler(CommandSwitcher):

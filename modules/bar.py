@@ -7,7 +7,7 @@ from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow as Window
 
 from shared import ToggleableWidget, WidgetGroup
-from utils import HyprlandWithMonitors
+from utils.monitors import HyprlandWithMonitors
 from utils.widget_utils import lazy_load_widget
 
 

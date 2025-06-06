@@ -3,8 +3,8 @@ from fabric.widgets.image import Image
 
 from services import ScreenRecorderService
 from shared import ButtonWidget, LottieAnimation, LottieAnimationWidget
-from utils import symbolic_icons
 from utils.functions import check_executable_exists
+from utils.icons import symbolic_icons
 
 
 class RecorderWidget(ButtonWidget):

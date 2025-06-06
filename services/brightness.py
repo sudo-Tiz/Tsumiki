@@ -6,7 +6,7 @@ from gi.repository import GLib
 from loguru import logger
 
 import utils.functions as helpers
-from utils import Colors
+from utils.colors import Colors
 
 
 def exec_brightnessctl_async(args: str):

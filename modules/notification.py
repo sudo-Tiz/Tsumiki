@@ -18,7 +18,10 @@ import utils.constants as constants
 import utils.functions as helpers
 from services import notification_service
 from shared import CircleImage
-from utils import BarConfig, Colors, HyprlandWithMonitors, symbolic_icons
+from utils.colors import Colors
+from utils.icons import symbolic_icons
+from utils.monitors import HyprlandWithMonitors
+from utils.widget_settings import BarConfig
 from utils.widget_utils import get_icon
 
 
