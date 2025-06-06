@@ -1,4 +1,3 @@
-
 from .audio import AudioSubMenu
 from .bluetooth import BluetoothSubMenu, BluetoothToggle
 from .power import PowerProfileSubMenu, PowerProfileToggle
