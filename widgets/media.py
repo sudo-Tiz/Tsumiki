@@ -458,8 +458,8 @@ class PlayerBox(Box):
         remaining_seconds = seconds % 60
         return f"{minutes:02}:{remaining_seconds:02}"
 
-    def _on_playback_change(self, _, status):
-        status = self.player.playback_status
+    def _on_playback_change(self, player, status):
+        status = player.get_property("playback-status")
 
         if status == "stopped":
             self.art_animator.stop()
