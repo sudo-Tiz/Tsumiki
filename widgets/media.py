@@ -537,8 +537,10 @@ class PlayerBox(Box):
         return None
 
     def _move_seekbar(self, *_):
-        self.position_label.set_label(self.length_str(self.player.position))
+        if self.player is None or self.exit:
+            return False
 
+        self.position_label.set_label(self.length_str(self.player.position))
         self.seek_bar.set_value(self.player.position)
 
         return True
