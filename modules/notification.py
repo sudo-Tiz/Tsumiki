@@ -324,7 +324,7 @@ class NotificationRevealer(Revealer):
                 style="margin: 12px;",
                 children=[self.notification_box],
             ),
-            transition_duration=500,
+            transition_duration=config["transition_duration"],
             transition_type=config["transition_type"],
             **kwargs,
         )
