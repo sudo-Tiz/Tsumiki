@@ -35,9 +35,7 @@ class NotificationPopup(Window):
 
         self.config = widget_config["modules"]["notification"]
 
-        self.sound_file = get_relative_path(
-            f"../assets/sounds/{self.config['sound_file']}.mp3"
-        )
+
         self.hyprland_monitor = HyprlandWithMonitors()
 
         self.ignored_apps = helpers.unique_list(self.config["ignored"])

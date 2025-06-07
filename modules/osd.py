@@ -168,8 +168,6 @@ class OSDContainer(Window):
     ):
         self.config = config["modules"]["osd"]
 
-        self.sound_file = get_relative_path("../assets/sounds/notification4.mp3")
-
         self.audio_container = AudioOSDContainer(config=self.config)
         self.brightness_container = BrightnessOSDContainer(config=self.config)
 
