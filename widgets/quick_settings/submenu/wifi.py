@@ -13,10 +13,6 @@ from utils.icons import symbolic_icons
 class WifiSubMenu(QuickSubMenu):
     """A submenu to display the Wifi settings."""
 
-    def clear_listbox(self, listbox: Gtk.ListBox):
-        for child in listbox.get_children():
-            listbox.remove(child)
-
     def __init__(self, **kwargs):
         self.client = NetworkService()
 

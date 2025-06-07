@@ -13,6 +13,7 @@ from shared import HoverButton, QSChevronButton, QuickSubMenu, ScanButton
 from utils.icons import symbolic_icons
 
 
+# TODO: finalize the bluetooth submenu
 class BluetoothDeviceBox(CenterBox):
     """A widget to display a Bluetooth device in a box."""
 
