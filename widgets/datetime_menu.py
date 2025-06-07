@@ -349,8 +349,7 @@ class DateNotificationMenu(Box):
             )
             if is_target:
                 if reason in ["dismissed-by-user", "dismissed-by-limit"]:
-                    child.revealer.set_reveal_child(False)
-                    GLib.timeout_add(400, lambda: self._remove_notification(child))
+                    self._remove_notification(child)
                 break
 
     def _remove_notification(self, widget):

@@ -209,16 +209,24 @@ class OSDContainer(Window):
         if self.suppressed:
             return
 
-        if box_to_show == "audio":
-            self.revealer.children = self.audio_container
-        elif box_to_show == "brightness":
-            self.revealer.children = self.brightness_container
+        child_to_show = (
+            self.audio_container
+            if box_to_show == "audio"
+            else self.brightness_container
+        )
+
+        if self.revealer.get_child() != child_to_show:
+            if self.revealer.get_child():
+                self.revealer.remove(self.revealer.get_child())
+            self.revealer.add(child_to_show)
+
         self.revealer.set_reveal_child(True)
 
         self.set_visible(True)
 
         if self.hide_timer_id is not None:
             GLib.source_remove(self.hide_timer_id)
+            self.hide_timer_id = None
 
         self.hide_timer_id = GLib.timeout_add(self.timeout, self._hide)
 
