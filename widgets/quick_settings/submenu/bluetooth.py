@@ -6,6 +6,7 @@ from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
+from gi.repository import Gtk
 
 from services import bluetooth_service
 from shared import HoverButton, QSChevronButton, QuickSubMenu, ScanButton
@@ -75,31 +76,41 @@ class BluetoothSubMenu(QuickSubMenu):
         self.client = bluetooth_service
         self.client.connect("device-added", self.populate_new_device)
 
-        self.paired_devices = Box(
+        self.paired_devices_listbox = Gtk.ListBox(
+            visible=True, name="paired-devices-listbox"
+        )
+
+        self.paired_devices_container = Box(
             orientation="v",
             spacing=10,
             h_expand=True,
-            children=Label(
-                "Paired Devices",
-                h_align="start",
-                style_classes="panel-text",
-            ),
+            children=[
+                Label(
+                    "Paired Devices",
+                    h_align="start",
+                    style_classes="panel-text",
+                ),
+                self.paired_devices_listbox,
+            ],
         )
 
-        for device in self.client.devices:
-            if device.paired:
-                self.paired_devices.add(BluetoothDeviceBox(device))
+        self.available_devices_listbox = Gtk.ListBox(
+            visible=True, name="available-devices-listbox"
+        )
 
-        self.available_devices = Box(
+        self.available_devices_container = Box(
             orientation="v",
             spacing=4,
             h_expand=True,
-            children=Label(
-                "Available Devices",
-                h_align="start",
-                style="margin:12px 0;",
-                style_classes="panel-text",
-            ),
+            children=[
+                Label(
+                    "Available Devices",
+                    h_align="start",
+                    style="margin:12px 0;",
+                    style_classes="panel-text",
+                ),
+                self.available_devices_listbox,
+            ],
         )
 
         self.scan_button = ScanButton()
@@ -112,7 +123,10 @@ class BluetoothSubMenu(QuickSubMenu):
             propagate_height=True,
             child=Box(
                 orientation="v",
-                children=[self.paired_devices, self.available_devices],
+                children=[
+                    self.paired_devices_container,
+                    self.available_devices_container,
+                ],
             ),
         )
 
@@ -130,17 +144,18 @@ class BluetoothSubMenu(QuickSubMenu):
             ["active"]
         ) if self.client.scanning else btn.set_style_classes([""])
 
-        if self.client.scanning:
-            self.scan_button.play_animation()
-        else:
-            self.scan_button.stop_animation()
+        self.scan_button.play_animation()
 
     def populate_new_device(self, client: BluetoothClient, address: str):
         device: BluetoothDevice = client.get_device(address)
+        bt_item = Gtk.ListBoxRow(visible=True)
+
         if device.paired:
-            self.paired_devices.add(BluetoothDeviceBox(device))
+            bt_item.add(BluetoothDeviceBox(device))
+            self.paired_devices_listbox.add(bt_item)
         else:
-            self.available_devices.add(BluetoothDeviceBox(device))
+            bt_item.add(BluetoothDeviceBox(device))
+            self.available_devices_listbox.add(bt_item)
 
 
 class BluetoothToggle(QSChevronButton):
