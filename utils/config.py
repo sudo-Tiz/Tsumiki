@@ -81,7 +81,7 @@ class HydeConfig:
 
     @run_in_thread
     def set_css_settings(self):
-        logger.info("Applying css settings...")
+        logger.info("[CONFIG] Applying css settings...")
 
         css_styles = flatten_dict(exclude_keys(self.theme_config, ["name"]))
 
