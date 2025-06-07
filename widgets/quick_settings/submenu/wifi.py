@@ -3,21 +3,28 @@ from fabric.widgets.button import Button
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
+from gi.repository import Gtk
 
 from services import NetworkService, Wifi
-from shared import HoverButton, QSChevronButton, QuickSubMenu, ScanButton
+from shared import QSChevronButton, QuickSubMenu, ScanButton
 from utils.icons import symbolic_icons
 
 
 class WifiSubMenu(QuickSubMenu):
     """A submenu to display the Wifi settings."""
 
+    def clear_listbox(self, listbox: Gtk.ListBox):
+        for child in listbox.get_children():
+            listbox.remove(child)
+
     def __init__(self, **kwargs):
         self.client = NetworkService()
 
         self.client.connect("device-ready", self.on_device_ready)
 
-        self.available_networks_box = Box(orientation="v", spacing=4, h_expand=True)
+        self.available_networks_listbox = Gtk.ListBox(
+            visible=True, name="available-networks-listbox"
+        )
 
         self.scan_button = ScanButton()
 
@@ -30,7 +37,7 @@ class WifiSubMenu(QuickSubMenu):
             max_content_size=(-1, 190),
             propagate_width=True,
             propagate_height=True,
-            child=self.available_networks_box,
+            child=self.available_networks_listbox,
         )
 
         super().__init__(
@@ -62,11 +69,11 @@ class WifiSubMenu(QuickSubMenu):
             self.wifi_device.connect("changed", self.start_new_scan)
 
     def build_wifi_options(self):
-        self.available_networks_box.children = []
+        self.clear_listbox(self.available_networks_listbox)
         for ap in self.wifi_device.access_points:
             if ap.get("ssid") != "Unknown":
-                btn = self.make_button_from_ap(ap)
-                self.available_networks_box.add(btn)
+                wifi_item = self.make_button_from_ap(ap)
+                self.available_networks_listbox.add(wifi_item)
 
     def make_button_from_ap(self, ap) -> Button:
         security_label = ""
@@ -92,7 +99,7 @@ class WifiSubMenu(QuickSubMenu):
             ],
         )
 
-        ap_button = HoverButton(style_classes="submenu-button", name="wifi-ap-button")
+        wifi_item = Gtk.ListBoxRow(visible=True)
 
         if self.wifi_device.state == "activated" and self.wifi_device.is_active_ap(
             ap.get("ssid")
@@ -110,12 +117,8 @@ class WifiSubMenu(QuickSubMenu):
             )
         )
 
-        ap_button.add(ap_container)
-
-        ap_button.connect(
-            "clicked", lambda *_: self.wifi_device.disconnect_network(ap.get("ssid"))
-        )
-        return ap_button
+        wifi_item.add(ap_container)
+        return wifi_item
 
 
 class WifiToggle(QSChevronButton):
