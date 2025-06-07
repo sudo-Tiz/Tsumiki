@@ -291,10 +291,6 @@
 							"type": "boolean",
 							"description": "Determines whether to play a sound when a notification is received"
 						},
-						"display_actions_on_hover": {
-							"type": "boolean",
-							"description": "Determines whether to display actions on hover"
-						},
 						"sound_file": {
 							"type": "string",
 							"description": "Name of the sound file to play",

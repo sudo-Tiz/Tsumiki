@@ -115,7 +115,6 @@ Notification = TypedDict(
         "max_count": int,
         "dismiss_on_hover": bool,
         "max_actions": int,
-        "display_actions_on_hover": bool,
         "per_app_limits": Dict[str, int],
     },
 )
