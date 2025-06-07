@@ -238,8 +238,8 @@ class DateNotificationMenu(Box):
 
         def handle_clear_click(*_):
             """Handle clear button click."""
-            for child in self.notifications_listbox.get_children():
-                self.notifications_listbox.remove(child)
+
+            self.notifications_listbox.remove_all()
 
             notification_service.clear_all_notifications()
             self.clear_icon.set_from_icon_name(

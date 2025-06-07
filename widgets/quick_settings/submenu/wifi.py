@@ -65,7 +65,7 @@ class WifiSubMenu(QuickSubMenu):
             self.wifi_device.connect("changed", self.start_new_scan)
 
     def build_wifi_options(self):
-        self.clear_listbox(self.available_networks_listbox)
+        self.available_networks_listbox.remove_all()
         for ap in self.wifi_device.access_points:
             if ap.get("ssid") != "Unknown":
                 wifi_item = self.make_button_from_ap(ap)

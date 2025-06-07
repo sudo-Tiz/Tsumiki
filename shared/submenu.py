@@ -77,7 +77,3 @@ class QuickSubMenu(Box):
         self.set_visible(True)
         self.revealer.set_reveal_child(not self.revealer.get_reveal_child())
         return self.revealer.get_reveal_child()
-
-    def clear_listbox(self, listbox):
-        for child in listbox.get_children():
-            listbox.remove(child)

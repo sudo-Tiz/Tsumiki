@@ -45,3 +45,9 @@ class ListBox(Gtk.ListBox, Widget):
             size,
             **kwargs,
         )
+
+
+    def remove_all(self) -> None:
+        """Remove all children from the list box."""
+        for child in self.get_children():
+            self.remove(child)
