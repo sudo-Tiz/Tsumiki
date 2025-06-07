@@ -33,7 +33,7 @@ class DateMenuNotification(Box):
     ):
         super().__init__(
             size=(constants.NOTIFICATION_WIDTH, -1),
-            name="datemenu-notification-eventbox",
+            name="datemenu-notification-box",
             h_expand=True,
             spacing=8,
             orientation="v",
@@ -42,9 +42,6 @@ class DateMenuNotification(Box):
 
         self._notification = notification
         self._id = id
-
-        self._timeout_id = None
-
 
         header_container = Box(
             spacing=8, orientation="h", style_classes="notification-header"
