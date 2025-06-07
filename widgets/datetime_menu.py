@@ -24,7 +24,7 @@ from utils.icons import symbolic_icons
 from utils.widget_utils import get_icon, util_fabricator
 
 
-class DateMenuNotification(EventBox):
+class DateMenuNotification(Box):
     """A widget to display a notification."""
 
     def __init__(
@@ -36,7 +36,9 @@ class DateMenuNotification(EventBox):
         super().__init__(
             size=(constants.NOTIFICATION_WIDTH, -1),
             name="datemenu-notification-eventbox",
-            pass_through=True,
+            h_expand=True,
+            spacing=8,
+            orientation="v",
             **kwargs,
         )
 
@@ -45,21 +47,6 @@ class DateMenuNotification(EventBox):
 
         self._timeout_id = None
 
-        self.notification_box = Box(
-            spacing=8,
-            name="notification",
-            h_expand=True,
-            orientation="v",
-            style="border: 0;",
-        )
-
-        self.revealer = Revealer(
-            name="notification-revealer",
-            transition_type="slide-up",
-            transition_duration=400,
-            child=self.notification_box,
-            child_revealed=True,
-        )
 
         header_container = Box(
             spacing=8, orientation="h", style_classes="notification-header"
@@ -138,24 +125,9 @@ class DateMenuNotification(EventBox):
         )
 
         # Add the header, body, and actions to the notification box
-        self.notification_box.children = (
+        self.children = (
             header_container,
             body_container,
-        )
-
-        # Add the notification box to the EventBox
-        self.add(self.revealer)
-
-        bulk_connect(
-            self,
-            {
-                "enter-notify-event": lambda *_: self.notification_box.set_style(
-                    "border: 1px solid #585b70;"
-                ),
-                "leave-notify-event": lambda *_: self.notification_box.set_style(
-                    "border:none;"
-                ),
-            },
         )
 
         # Handle notification signals
@@ -164,13 +136,11 @@ class DateMenuNotification(EventBox):
     def on_notification_closed(self, notification, reason):
         """Handle notification being closed."""
         if reason in ["dismissed-by-user", "dismissed-by-limit"]:
-            self.revealer.set_reveal_child(False)
-            GLib.timeout_add(400, self.destroy)
+            self.destroy()
 
     def clear_notification(self, *_):
         notification_service.remove_notification(self._id)
-        self.revealer.set_reveal_child(False)
-        GLib.timeout_add(400, self.destroy)
+        self.destroy()
 
 
 class DateNotificationMenu(Box):
