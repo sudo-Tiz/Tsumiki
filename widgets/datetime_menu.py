@@ -355,6 +355,7 @@ class DateNotificationMenu(Box):
     def _remove_notification(self, widget):
         if widget in self.notifications_listbox.get_children():
             self.notifications_listbox.remove(widget)
+            widget.destroy()  # Ensure the object is freed
 
         return False
 

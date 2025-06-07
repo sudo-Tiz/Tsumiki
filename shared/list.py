@@ -50,3 +50,4 @@ class ListBox(Gtk.ListBox, Widget):
         """Remove all children from the list box."""
         for child in self.get_children():
             self.remove(child)
+            child.destroy()
