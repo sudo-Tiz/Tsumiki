@@ -35,7 +35,6 @@ class NotificationPopup(Window):
 
         self.config = widget_config["modules"]["notification"]
 
-
         self.hyprland_monitor = HyprlandWithMonitors()
 
         self.ignored_apps = helpers.unique_list(self.config["ignored"])
@@ -324,6 +323,7 @@ class NotificationRevealer(Revealer):
         reason: NotificationCloseReason,
     ):
         self.set_reveal_child(False)
+        self.destroy()
 
 
 class ActionButton(HoverButton):
