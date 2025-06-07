@@ -5,7 +5,7 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import Gtk
 
 from services import audio_service
-from shared import QuickSubMenu, ScanButton
+from shared import ListBox, QuickSubMenu, ScanButton
 from utils.icons import symbolic_icons
 from widgets.quick_settings.sliders.audio import AudioSlider
 
@@ -21,7 +21,7 @@ class AudioSubMenu(QuickSubMenu):
         self.scan_button.connect("clicked", self.update_apps)
 
         # Create app list container
-        self.app_list = Gtk.ListBox(
+        self.app_list = ListBox(
             selection_mode=Gtk.SelectionMode.NONE,
             name="app-list",
             visible=True,

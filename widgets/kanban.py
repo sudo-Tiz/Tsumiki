@@ -12,7 +12,7 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import Gdk, GLib, GObject, Gtk
 from loguru import logger
 
-from shared import ButtonWidget, Popover
+from shared import ButtonWidget, ListBox, Popover
 from shared.grid import Grid
 from utils.widget_utils import create_surface_from_widget, text_icon
 
@@ -198,7 +198,7 @@ class KanbanColumn(Gtk.Frame):
 
     def setup_ui(self):
         self.box = Box(orientation=Gtk.Orientation.VERTICAL, spacing=4)
-        self.listbox = Gtk.ListBox()
+        self.listbox = ListBox()
         self.listbox.set_selection_mode(Gtk.SelectionMode.NONE)
 
         self.add_btn = Button(

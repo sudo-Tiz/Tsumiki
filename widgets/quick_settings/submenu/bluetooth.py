@@ -9,7 +9,7 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import Gtk
 
 from services import bluetooth_service
-from shared import HoverButton, QSChevronButton, QuickSubMenu, ScanButton
+from shared import HoverButton, ListBox, QSChevronButton, QuickSubMenu, ScanButton
 from utils.icons import symbolic_icons
 
 
@@ -77,7 +77,7 @@ class BluetoothSubMenu(QuickSubMenu):
         self.client = bluetooth_service
         self.client.connect("device-added", self.populate_new_device)
 
-        self.paired_devices_listbox = Gtk.ListBox(
+        self.paired_devices_listbox = ListBox(
             visible=True, name="paired-devices-listbox"
         )
 
@@ -95,7 +95,7 @@ class BluetoothSubMenu(QuickSubMenu):
             ],
         )
 
-        self.available_devices_listbox = Gtk.ListBox(
+        self.available_devices_listbox = ListBox(
             visible=True, name="available-devices-listbox"
         )
 

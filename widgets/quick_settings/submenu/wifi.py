@@ -6,7 +6,7 @@ from fabric.widgets.scrolledwindow import ScrolledWindow
 from gi.repository import Gtk
 
 from services import NetworkService, Wifi
-from shared import QSChevronButton, QuickSubMenu, ScanButton
+from shared import ListBox, QSChevronButton, QuickSubMenu, ScanButton
 from utils.icons import symbolic_icons
 
 
@@ -18,7 +18,7 @@ class WifiSubMenu(QuickSubMenu):
 
         self.client.connect("device-ready", self.on_device_ready)
 
-        self.available_networks_listbox = Gtk.ListBox(
+        self.available_networks_listbox = ListBox(
             visible=True, name="available-networks-listbox"
         )
 

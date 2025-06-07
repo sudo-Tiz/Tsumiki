@@ -10,6 +10,7 @@
   border-radius: variable.$bar-widgets-date_time-border-radius;
   border: if(variable.$bar-widgets-date_time-border-enabled, variable.$border, none);
   border-width: variable.$bar-widgets-date_time-border-width;
+
   #notification-count {
     font-weight: 700;
     font-size: 11px;
@@ -69,8 +70,22 @@
 
 
 
-      .notification-list {
+      #notification-list {
         margin-right: variable.$spacing;
+
+        #notification-list-item {
+          margin-top: 5px;
+          margin-bottom: 5px;
+
+          &:first-child {
+            margin-top: 0;
+          }
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+
       }
 
       .placeholder {

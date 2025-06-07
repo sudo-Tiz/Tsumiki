@@ -6,6 +6,7 @@ from .buttons import QSChevronButton, QSToggleButton, ScanButton
 from .circle_image import CircleImage
 from .dialog import Dialog
 from .grid import Grid
+from .list import ListBox
 from .lottie import LottieAnimation, LottieAnimationWidget
 from .pop_over import Popover, PopoverManager
 from .pop_up import PopupWindow
@@ -34,6 +35,7 @@ __all__ = [
     "EventBoxWidget",
     "Grid",
     "HoverButton",
+    "ListBox",
     "LottieAnimation",
     "LottieAnimationWidget",
     "Popover",

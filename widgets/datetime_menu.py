@@ -17,7 +17,7 @@ from loguru import logger
 import utils.constants as constants
 import utils.functions as helpers
 from services import notification_service
-from shared import ButtonWidget, CircleImage, HoverButton, Popover, Separator
+from shared import ButtonWidget, CircleImage, HoverButton, ListBox, Popover, Separator
 from utils.colors import Colors
 from utils.functions import uptime
 from utils.icons import symbolic_icons
@@ -200,20 +200,23 @@ class DateNotificationMenu(Box):
 
         self.notifications: List[Notification] = notification_service.get_deserialized()
 
-        self.notifications_list = [
-            DateMenuNotification(notification=val, id=val["id"])
-            for val in self.notifications
-        ]
-
-        self.notification_list_box = Box(
+        self.notifications_listbox = ListBox(
+            name="notification-list",
             orientation="v",
             h_align="center",
             spacing=8,
             h_expand=True,
-            style_classes="notification-list",
             visible=len(self.notifications) > 0,
-            children=self.notifications_list,
         )
+
+        for value in self.notifications:
+            notification_item = Gtk.ListBoxRow(
+                visible=True, name="notification-list-item"
+            )
+            notification_item.add(
+                DateMenuNotification(notification=value, id=value["id"])
+            )
+            self.notifications_listbox.add(notification_item)
 
         self.uptime = Label(style_classes="uptime", visible=config["uptime"])
 
@@ -270,9 +273,8 @@ class DateNotificationMenu(Box):
 
         def handle_clear_click(*_):
             """Handle clear button click."""
-            for child in self.notification_list_box.children:
-                self.notification_list_box.remove(child)
-                child.destroy()
+            for child in self.notifications_listbox.get_children():
+                self.notifications_listbox.remove(child)
 
             notification_service.clear_all_notifications()
             self.clear_icon.set_from_icon_name(
@@ -303,7 +305,7 @@ class DateNotificationMenu(Box):
                     style_classes="notification-scrollable",
                     v_scrollbar_policy="automatic",
                     h_scrollbar_policy="never",
-                    child=Box(children=(self.placeholder, self.notification_list_box)),
+                    child=Box(children=(self.placeholder, self.notifications_listbox)),
                 ),
             ),
         )
@@ -370,12 +372,12 @@ class DateNotificationMenu(Box):
             symbolic_icons["trash"]["empty"], self.pixel_size
         )
         self.placeholder.set_visible(True)
-        self.notification_list_box.set_visible(False)
+        self.notifications_listbox.set_visible(False)
 
     def on_notification_closed(self, _, id, reason):
         """Handle notification being closed."""
 
-        for child in self.notification_list_box.children:
+        for child in self.notifications_listbox.get_children():
             is_target = (
                 isinstance(child, DateMenuNotification)
                 and child._notification["id"] == id
@@ -387,9 +389,9 @@ class DateNotificationMenu(Box):
                 break
 
     def _remove_notification(self, widget):
-        if widget in self.notification_list_box.children:
-            self.notification_list_box.remove(widget)
-            widget.destroy()
+        if widget in self.notifications_listbox.get_children():
+            self.notifications_listbox.remove(widget)
+
         return False
 
     def on_new_notification(self, fabric_notification, id):
@@ -400,31 +402,24 @@ class DateNotificationMenu(Box):
             fabric_notification.get_notification_from_id(id)
         )
 
-        # Clean up any destroyed widgets first
-        try:
-            active_children = [
-                child
-                for child in self.notification_list_box.children
-                if child.get_parent() is not None
-            ]
-        except GLib.Error:
-            logger.debug("[DateMenu] Error checking widget validity")
-            active_children = []
-
-        self.notification_list_box.children = active_children
-
         self.clear_icon.set_from_icon_name(
             symbolic_icons["trash"]["full"], self.pixel_size
         )
 
-        self.notification_list_box.add(
+        notification_item = Gtk.ListBoxRow(visible=True)
+        notification_item.add(
             DateMenuNotification(
                 notification=fabric_notification,
                 id=id,
             )
         )
+
+        self.notifications_listbox.add(
+            notification_item,
+        )
+
         self.placeholder.set_visible(False)
-        self.notification_list_box.set_visible(True)
+        self.notifications_listbox.set_visible(True)
 
     def update_ui(self, fabricator, value):
         self.clock_label.set_text(
