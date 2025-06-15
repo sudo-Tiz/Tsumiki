@@ -6,7 +6,7 @@ from utils.functions import is_app_running, toggle_command
 from utils.icons import text_icons
 from utils.widget_utils import (
     create_scale,
-    util_fabricator,
+    reusable_fabricator,
 )
 
 
@@ -40,7 +40,7 @@ class HyprSunsetSubMenu(QuickSubMenu):
         """Handle the revealer being revealed."""
         self.update_scale()
         self.scale.connect("value-changed", self.on_scale_move)
-        util_fabricator.connect("changed", self.update_scale)
+        reusable_fabricator.connect("changed", self.update_scale)
         return True
 
     @cooldown(0.1)
@@ -73,7 +73,7 @@ class HyprSunsetSubMenu(QuickSubMenu):
         # print("HyprSunsetSubMenu: upper temperature", adj.get_upper())
 
         # Avoid unnecessary updates if the value hasn't changed
-        if round(sanitized_value) == round(self.scale.get_value()):
+        if sanitized_value == round(self.scale.get_value()):
             return
 
         self.scale.set_value(sanitized_value)
@@ -96,7 +96,7 @@ class HyprSunsetToggle(QSChevronButton):
         self.connect("action-clicked", self.on_action)
 
         # reusing the fabricator to call specified intervals
-        util_fabricator.connect("changed", self.update_action_button)
+        reusable_fabricator.connect("changed", self.update_action_button)
 
     def on_action(self, *_):
         """Handle the action button click event."""

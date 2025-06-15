@@ -1,3 +1,4 @@
+import json
 import os
 import re
 import shutil
@@ -244,18 +245,24 @@ def validate_widgets(parsed_data, default_config):
                 )
 
 
-def make_qrcode(text: str, size: int = 200) -> bytes:
+@ttl_lru_cache(3600, 10)
+def make_qrcode(text: str, size: int = 200) -> GdkPixbuf.Pixbuf:
     # Generate QR Code image
     qr = qrcode.make(text)
     buffer = BytesIO()
     qr.save(buffer, format="PNG")
     buffer.seek(0)
 
-    # Load into GTK Image using GdkPixbuf
+    # Load into GTK Pixbuf
     loader = GdkPixbuf.PixbufLoader.new_with_type("png")
     loader.write(buffer.read())
     loader.close()
-    return loader.get_pixbuf()
+    pixbuf = loader.get_pixbuf()
+
+    # Scale Pixbuf to the desired size
+    scaled_pixbuf = pixbuf.scale_simple(size, size, GdkPixbuf.InterpType.BILINEAR)
+
+    return scaled_pixbuf
 
 
 # Function to exclude keys from a dictionary
@@ -295,9 +302,8 @@ def check_if_day(sunrise_time, sunset_time, current_time: str | None = None) -> 
     # Compare current time with sunrise and sunset
     return sunrise_time_obj <= current_time_obj < sunset_time_obj
 
-    # wttr.in time are in 300,400...2100 format , we need to convert it to 4:00...21:00
 
-
+# wttr.in time are in 300,400...2100 format , we need to convert it to 4:00...21:00
 def convert_to_12hr_format(time: str) -> str:
     time = int(time)
     hour = time // 100  # Get the hour (e.g., 1200 -> 12)
@@ -429,6 +435,15 @@ def convert_to_percent(
         return int((current / max) * 100)
     else:
         return (current / max) * 100
+
+
+@run_in_thread
+def write_json_file(data: Dict, path: str):
+    try:
+        with open(path, "w") as f:
+            json.dump(data, f, indent=4, ensure_ascii=False)
+    except Exception as e:
+        logger.warning(f"Failed to write json: {e}")
 
 
 # Function to ensure the file exists
