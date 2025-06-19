@@ -3,20 +3,19 @@ from datetime import datetime
 
 from fabric.utils import cooldown, get_relative_path
 from fabric.widgets.box import Box
+from fabric.widgets.grid import Grid
+from fabric.widgets.image import Image
 from fabric.widgets.label import Label
-from fabric.widgets.svg import Svg
 from gi.repository import Gtk
 from loguru import logger
 
 from services.weather import WeatherService
-from shared.grid import Grid
 from shared.popover import Popover
 from shared.widget_container import ButtonWidget
 from utils.icons import weather_icons
 from utils.widget_utils import (
     nerd_font_icon,
     reusable_fabricator,
-    setup_cursor_hover,
 )
 
 
@@ -29,10 +28,21 @@ class BaseWeatherWidget:
     def sunrise_sunset_time(self) -> str:
         return f" {self.sunrise_time}  {self.sunset_time}"
 
-    def update_sunrise_sunset(self, data):
+    def update_app_data(self, data):
+        """Update the weather data."""
+        self.data = data
+
+        # Get the current weather
+        self.current_weather = self.data["current"]
+
+        # Get the hourly forecast
+        self.hourly_forecast = self.data["hourly"]
+
+        # Update sunrise and sunset times
         # Get the sunrise and sunset times
-        self.sunrise_time = data["astronomy"]["sunrise"]
-        self.sunset_time = data["astronomy"]["sunset"]
+        self.sunrise_time = self.data["astronomy"]["sunrise"]
+        self.sunset_time = self.data["astronomy"]["sunset"]
+
         return True
 
     def get_wind_speed(self):
@@ -97,7 +107,6 @@ class WeatherMenu(Box, BaseWeatherWidget):
     def __init__(
         self,
         config,
-        data,
         **kwargs,
     ):
         super().__init__(
@@ -111,25 +120,56 @@ class WeatherMenu(Box, BaseWeatherWidget):
         self.config = config
 
         self.update_time = datetime.now()
-        self.update_sunrise_sunset(data)
-
-        # Get the current weather
-        self.current_weather = data["current"]
-
-        # Get the hourly forecast
-        self.hourly_forecast = data["hourly"]
 
         self.weather_icons_dir = get_relative_path("../assets/icons/svg/weather")
 
-        self.current_weather_image = Svg(
-            svg_file=self.get_weather_asset(self.current_weather["weatherCode"]),
-            size=100,
+        self.current_weather_image = Image(
+            image_file=f"{self.weather_icons_dir}/clear-day.svg",
             v_align="start",
             h_align="start",
+            size=100,
         )
 
         self.title_box = Grid(
             name="weather-header-grid",
+            column_spacing=20,
+        )
+
+        self.location = Label(
+            style_classes="header-label",
+            h_align="start",
+            label="",
+        )
+
+        self.weather_description = Label(
+            style_classes="header-label",
+            h_align="start",
+            label="",
+        )
+
+        self.humidity = Label(
+            style_classes="header-label",
+            h_align="start",
+            label="",
+        )
+
+        self.wind_speed = Label(
+            style_classes="header-label",
+            h_align="start",
+            label="",
+        )
+
+        self.temperature = Label(
+            style_classes="header-label",
+            h_align="start",
+            label="",
+        )
+
+        self.sunset_sunrise = Label(
+            style_classes="header-label",
+            h_align="start",
+            name="sunrise-sunset",
+            label="",
         )
 
         self.title_box.attach(
@@ -141,11 +181,7 @@ class WeatherMenu(Box, BaseWeatherWidget):
         )
 
         self.title_box.attach(
-            Label(
-                style_classes="header-label",
-                h_align="start",
-                label=f"{data['location']}",
-            ),
+            self.location,
             2,
             0,
             1,
@@ -153,11 +189,7 @@ class WeatherMenu(Box, BaseWeatherWidget):
         )
 
         self.title_box.attach(
-            Label(
-                name="condition",
-                h_align="start",
-                label=f"{self.get_description()}",
-            ),
+            self.weather_description,
             2,
             1,
             1,
@@ -165,12 +197,7 @@ class WeatherMenu(Box, BaseWeatherWidget):
         )
 
         self.title_box.attach(
-            Label(
-                style_classes="header-label",
-                name="sunrise-sunset",
-                h_align="start",
-                label=self.sunrise_sunset_time(),
-            ),
+            self.sunset_sunrise,
             2,
             2,
             1,
@@ -178,11 +205,7 @@ class WeatherMenu(Box, BaseWeatherWidget):
         )
 
         self.title_box.attach(
-            Label(
-                style_classes="stats",
-                h_align="center",
-                label=f" {self.get_temperature()}",
-            ),
+            self.temperature,
             3,
             0,
             1,
@@ -190,11 +213,7 @@ class WeatherMenu(Box, BaseWeatherWidget):
         )
 
         self.title_box.attach(
-            Label(
-                style_classes="stats",
-                h_align="center",
-                label=f"󰖎 {self.current_weather['humidity']}%",
-            ),
+            self.humidity,
             3,
             1,
             1,
@@ -202,11 +221,7 @@ class WeatherMenu(Box, BaseWeatherWidget):
         )
 
         self.title_box.attach(
-            Label(
-                style_classes="stats",
-                h_align="center",
-                label=f" {self.get_wind_speed()}",
-            ),
+            self.wind_speed,
             3,
             2,
             1,
@@ -227,19 +242,26 @@ class WeatherMenu(Box, BaseWeatherWidget):
             expanded=self.config["expanded"],
         )
 
-        setup_cursor_hover(expander)
-
         self.children = (self.title_box, expander)
 
-        self.update_widget(forced=True)
+        WeatherService().get_weather_async(
+            location=self.config["location"],
+            ttl=self.config["interval"],
+            callback=self.update_data,
+        )
 
         # reusing the fabricator to call specified intervals
         reusable_fabricator.connect("changed", self.update_widget)
 
+    def update_data(self, data):
+        self.update_app_data(data)
+
+        self.update_widget(forced=True)
+
     def update_widget(self, *args, **kwargs):
         forced = kwargs.get("forced", False)
 
-        # Check if the update time is more than 1 minute ago
+        # Check if the update time is more than 4 minute ago
         if (datetime.now() - self.update_time).total_seconds() < 60 and not forced:
             return
 
@@ -249,10 +271,26 @@ class WeatherMenu(Box, BaseWeatherWidget):
 
         current_time = int(time.strftime("%H00"))
 
+
+        if forced:
+            self.current_weather_image.set_from_file(
+                self.get_weather_asset(self.current_weather["weatherCode"]),
+            )
+            self.location.set_label(self.data["location"])
+            self.weather_description.set_label(self.get_description())
+            self.sunset_sunrise.set_label(self.sunrise_sunset_time())
+            self.humidity.set_label(f"󰖎 {self.current_weather['humidity']}%")
+            self.temperature.set_label(f"  {self.get_temperature()}")
+            self.wind_speed.set_label(f" {self.get_wind_speed()}")
+
         next_values = self.hourly_forecast[:4]
 
         if current_time > 1200:
             next_values = self.hourly_forecast[4:8]
+
+            # clear the forecast box
+            for child in self.forecast_box.get_children():
+                self.forecast_box.remove(child)
 
         # show next 4 hours forecast
         for col in range(4):
@@ -263,8 +301,8 @@ class WeatherMenu(Box, BaseWeatherWidget):
                 label=f"{self.convert_to_12hr_format(column_data['time'])}",
                 h_align="center",
             )
-            icon = Svg(
-                svg_file=self.get_weather_asset(
+            icon = Image(
+                image_file=self.get_weather_asset(
                     column_data["weatherCode"],
                     self.convert_to_12hr_format(column_data["time"]),
                 ),
@@ -339,9 +377,7 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
             return
 
         # Get the current weather
-        self.current_weather = data["current"]
-
-        self.update_sunrise_sunset(data)
+        self.update_app_data(data)
 
         weather_icon = weather_icons[self.current_weather["weatherCode"]]
 
@@ -364,13 +400,8 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
 
         if self.popover is None:
             self.popover = Popover(
-                content=WeatherMenu(data=data, config=self.config),
+                content=WeatherMenu(config=self.config),
                 point_to=self,
-            )
-        else:
-            # Just update content_factory with latest data
-            self.popover.set_content_factory(
-                lambda: WeatherMenu(data=data, config=self.config)
             )
 
         return False

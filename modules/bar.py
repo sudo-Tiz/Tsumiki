@@ -7,7 +7,6 @@ from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow as Window
 
 from shared.widget_container import ToggleableWidget, WidgetGroup
-from utils.monitors import HyprlandWithMonitors
 from widgets.battery import BatteryWidget
 from widgets.bluetooth import BlueToothWidget
 from widgets.brightness import BrightnessWidget
@@ -30,7 +29,13 @@ from widgets.power_button import PowerWidget
 from widgets.quick_settings.quick_settings import QuickSettingsButtonWidget
 from widgets.recorder import RecorderWidget
 from widgets.screenshot import ScreenShotWidget
-from widgets.stats import CpuWidget, MemoryWidget, NetworkUsageWidget, StorageWidget
+from widgets.stats import (
+    CpuWidget,
+    GpuWidget,
+    MemoryWidget,
+    NetworkUsageWidget,
+    StorageWidget,
+)
 from widgets.stopwatch import StopWatchWidget
 from widgets.submap import SubMapWidget
 from widgets.system_tray import SystemTrayWidget
@@ -57,6 +62,7 @@ class StatusBar(Window, ToggleableWidget):
             "brightness": BrightnessWidget,
             "cava": CavaWidget,
             "cliphist": ClipHistoryWidget,
+            "gpu": GpuWidget,
             "kanban": KanbanWidget,
             "emoji_picker": EmojiPickerWidget,
             "click_counter": ClickCounterWidget,
@@ -123,7 +129,6 @@ class StatusBar(Window, ToggleableWidget):
             layer=bar_config["layer"],
             anchor=anchor,
             pass_through=False,
-            monitor=HyprlandWithMonitors().get_current_gdk_monitor_id(),
             exclusivity="auto",
             visible=True,
             all_visible=False,

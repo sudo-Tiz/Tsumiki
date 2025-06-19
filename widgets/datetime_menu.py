@@ -7,6 +7,7 @@ from fabric.widgets.button import Button
 from fabric.widgets.datetime import DateTime
 from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
+from fabric.widgets.separator import Separator
 from gi.repository import GdkPixbuf, GLib, Gtk
 from loguru import logger
 
@@ -17,7 +18,6 @@ from shared.buttons import HoverButton
 from shared.circle_image import CircleImage
 from shared.list import ListBox
 from shared.popover import Popover
-from shared.separator import Separator
 from shared.widget_container import ButtonWidget
 from utils.colors import Colors
 from utils.icons import text_icons
@@ -74,7 +74,7 @@ class DateMenuNotification(Box):
                     "style_classes": ["panel-font-icon", "close-icon"],
                 },
             ),
-            on_clicked=self.clear_notification,
+            on_clicked=self.remove_notification,
         )
 
         header_container.pack_end(
@@ -97,7 +97,6 @@ class DateMenuNotification(Box):
                             constants.NOTIFICATION_IMAGE_SIZE,
                             GdkPixbuf.InterpType.BILINEAR,
                         ),
-                        size=constants.NOTIFICATION_IMAGE_SIZE,
                         h_expand=True,
                         v_expand=True,
                     ),
@@ -126,15 +125,7 @@ class DateMenuNotification(Box):
             body_container,
         )
 
-        # Handle notification signals
-        self._notification.connect("closed", self.on_notification_closed)
-
-    def on_notification_closed(self, notification, reason):
-        """Handle notification being closed."""
-        if reason in ["dismissed-by-user", "dismissed-by-limit"]:
-            self.destroy()
-
-    def clear_notification(self, *_):
+    def remove_notification(self, *_):
         notification_service.remove_notification(self._id)
         self.destroy()
 
@@ -316,14 +307,19 @@ class DateNotificationMenu(Box):
 
     def bake_notification(self, notification):
         """Create a notification widget from a Notification object."""
-        return Gtk.ListBoxRow(
-            visible=True,
-            name="notification-list-item",
-            child=DateMenuNotification(
-                notification=notification,
-                id=notification["id"],
-            ),
+
+        def on_child_destroyed(widget, row):
+            row.destroy()
+
+        item = DateMenuNotification(
+            notification=notification,
+            id=notification["id"],
         )
+
+        row = Gtk.ListBoxRow(visible=True, name="notification-list-item", child=item)
+        item.connect("destroy", on_child_destroyed, row)
+
+        return row
 
     def on_notification_closed(self, _, id, reason):
         """Handle notification being closed."""

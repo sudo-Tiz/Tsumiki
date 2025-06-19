@@ -7,6 +7,7 @@ from fabric.utils import bulk_connect, get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
+from fabric.widgets.grid import Grid
 from fabric.widgets.label import Label
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.wayland import WaylandWindow as Window
@@ -18,10 +19,8 @@ import utils.functions as helpers
 from services import notification_service
 from shared.buttons import HoverButton
 from shared.circle_image import CircleImage
-from shared.grid import Grid
 from utils.colors import Colors
 from utils.icons import text_icons
-from utils.monitors import HyprlandWithMonitors
 from utils.widget_settings import BarConfig
 from utils.widget_utils import get_icon, nerd_font_icon
 
@@ -35,8 +34,6 @@ class NotificationPopup(Window):
         self.widget_config = widget_config
 
         self.config = widget_config["modules"]["notification"]
-
-        self.hyprland_monitor = HyprlandWithMonitors()
 
         self.ignored_apps = helpers.unique_list(self.config["ignored"])
 
@@ -53,7 +50,6 @@ class NotificationPopup(Window):
             anchor=self.config["anchor"],
             layer="overlay",
             all_visible=True,
-            monitor=HyprlandWithMonitors().get_current_gdk_monitor_id(),
             visible=True,
             exclusive=False,
             child=self.notifications,
@@ -174,7 +170,6 @@ class NotificationWidget(EventBox):
                             constants.NOTIFICATION_IMAGE_SIZE,
                             GdkPixbuf.InterpType.BILINEAR,
                         ),
-                        size=constants.NOTIFICATION_IMAGE_SIZE,
                         h_expand=True,
                         v_expand=True,
                     ),
