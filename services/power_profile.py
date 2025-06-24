@@ -56,9 +56,7 @@ class PowerProfilesService(Service):
         # Listen for PropertiesChanged signals
         self.dbus_helper.listen_signal(
             sender=self.bus_name,
-            interface_name="org.freedesktop.DBus.Properties",
             member="PropertiesChanged",
-            object_path=self.object_path,
             callback=self.handle_property_change,
         )
 
@@ -75,9 +73,6 @@ class PowerProfilesService(Service):
     def set_power_profile(self, profile: str):
         try:
             self.dbus_helper.set_property(
-                self.bus_name,
-                self.object_path,
-                self.interface_name,
                 "ActiveProfile",
                 GLib.Variant("s", profile),
             )

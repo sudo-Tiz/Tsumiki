@@ -13,6 +13,7 @@ from typing import Callable, Dict, List, Literal, Optional
 
 import psutil
 import qrcode
+from fabric import Application
 from fabric.utils import (
     cooldown,
     exec_shell_command,
@@ -27,7 +28,7 @@ from .colors import Colors
 from .constants import NAMED_COLORS
 from .exceptions import ExecutableNotFoundError
 from .icons import text_icons
-from .thread import run_in_thread
+from .thread import run_in_thread, thread
 
 
 def rgb_to_hex(rgb):
@@ -119,6 +120,61 @@ def copy_theme(theme: str):
             f"{Colors.ERROR}Error: The theme file '{source_file}' was not found."
         )
         exit(1)
+
+
+def update_theme_config(theme_name: str):
+    """Update the theme.json file with the new theme name."""
+    try:
+        theme_config_file = get_relative_path("../theme.json")
+
+        # Read current theme config
+        with open(theme_config_file, "r") as f:
+            config = json.load(f)
+
+        # Update the theme name
+        config["name"] = theme_name
+
+        # Write back to file
+        with open(theme_config_file, "w") as f:
+            json.dump(config, f, indent=2)
+
+        logger.info(f"{Colors.INFO}[Theme] Updated theme config to {theme_name}")
+    except Exception as e:
+        logger.exception(f"{Colors.ERROR}[Theme] Error updating theme config: {e}")
+
+
+def recompile_and_apply_css():
+    """Recompile SCSS and apply the new CSS to the application."""
+
+    def _apply_css_to_app():
+        try:
+            app = Application.get_default()
+            if app:
+                app.set_stylesheet_from_file(get_relative_path("../dist/main.css"))
+                logger.info(f"{Colors.INFO}[Theme] CSS applied to application")
+        except Exception as e:
+            logger.exception(f"{Colors.ERROR}[Theme] Error applying CSS to app: {e}")
+
+    def _compile_css():
+        """Compile SCSS in background thread."""
+        try:
+            check_executable_exists("sass")
+            logger.info(f"{Colors.INFO}[Theme] Recompiling CSS")
+            output = exec_shell_command(
+                "sass styles/main.scss dist/main.css --no-source-map"
+            )
+
+            if output == "":
+                logger.info(f"{Colors.INFO}[Theme] CSS recompiled successfully")
+                GLib.idle_add(_apply_css_to_app)
+            else:
+                logger.exception(f"{Colors.ERROR}[Theme] Failed to compile sass!")
+                logger.exception(f"{Colors.ERROR}[Theme] {output}")
+        except Exception as e:
+            logger.exception(f"{Colors.ERROR}[Theme] Error recompiling CSS: {e}")
+
+    # Run compilation in background thread
+    thread(_compile_css)
 
 
 # Function to convert celsius to fahrenheit
@@ -492,3 +548,79 @@ def is_valid_gjs_color(color: str) -> bool:
         return True
 
     return bool(re.match(rgb_regex, color_lower) or re.match(rgba_regex, color_lower))
+
+
+def take_snapshot():
+    import tracemalloc
+
+    tracemalloc.start()
+    # Later in code
+    snapshot = tracemalloc.take_snapshot()
+    top_stats = snapshot.statistics("lineno")
+
+    print("stats", tracemalloc.get_traced_memory())
+
+    print("[Top 10 Memory Lines]")
+    for stat in top_stats[:10]:
+        print(stat)
+
+    return True  # Keep the timeout active
+
+
+def set_debug_logger():
+    def log_handler(domain, level, message):
+        import traceback
+
+        level_name = {
+            GLib.LogLevelFlags.LEVEL_ERROR: "ERROR",
+            GLib.LogLevelFlags.LEVEL_CRITICAL: "CRITICAL",
+            GLib.LogLevelFlags.LEVEL_WARNING: "WARNING",
+            GLib.LogLevelFlags.LEVEL_MESSAGE: "MESSAGE",
+            GLib.LogLevelFlags.LEVEL_INFO: "INFO",
+            GLib.LogLevelFlags.LEVEL_DEBUG: "DEBUG",
+        }.get(
+            GLib.LogLevelFlags(
+                level
+                & ~GLib.LogLevelFlags.FLAG_FATAL
+                & ~GLib.LogLevelFlags.FLAG_RECURSION
+            ),
+            f"UNKNOWN({level})",
+        )
+        print(f"\n[{domain or 'Default'}] {level_name}: {message}")
+        traceback.print_stack()
+
+    # Set log levels
+    log_levels = (
+        GLib.LogLevelFlags.LEVEL_ERROR
+        | GLib.LogLevelFlags.LEVEL_CRITICAL
+        | GLib.LogLevelFlags.LEVEL_WARNING
+        | GLib.LogLevelFlags.LEVEL_MESSAGE
+        | GLib.LogLevelFlags.LEVEL_INFO
+        | GLib.LogLevelFlags.LEVEL_DEBUG
+    )
+
+    # Common GTK/GLib and related log domains
+    domains = [
+        None,  # Default domain
+        "Gtk",  # GTK (Graphical Toolkit)
+        "Gdk",  # GDK (Windowing Abstraction Layer)
+        "GLib",  # GLib (Core utility library)
+        "GLib-GObject",  # GObject (Object system and signals)
+        "Pango",  # Pango (Text layout/rendering)
+        "Atk",  # ATK (Accessibility Toolkit)
+        "GIO",  # GIO (I/O and VFS abstraction)
+        "GStreamer",  # GStreamer (Multimedia framework)
+        "Gst",  # GStreamer (sometimes abbreviated domain)
+        "Soup",  # libsoup (HTTP library)
+        "GVfs",  # GNOME Virtual File System
+        "GWeather",  # GNOME Weather library
+        "WebKit",  # WebKitGTK (Web rendering engine)
+        "Vte",  # Virtual Terminal Emulator (GNOME Terminal)
+        "Cogl",  # Cogl (GPU rendering abstraction)
+        "NM",  # NetworkManager
+        "BlueZ",  # Bluetooth stack for Linux
+        "ModemManager",  # Manages mobile broadband connections
+    ]
+
+    for domain in domains:
+        GLib.log_set_handler(domain, log_levels, log_handler)

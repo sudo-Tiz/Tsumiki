@@ -45,15 +45,12 @@ class BatteryService(Service):
             interface_name=self.interface_name,
         )
 
-        self.bus = self.dbus_helper.bus
         self.proxy = self.dbus_helper.proxy
 
         # Listen for PropertiesChanged signals
         self.dbus_helper.listen_signal(
             sender=self.bus_name,
-            interface_name="org.freedesktop.DBus.Properties",
             member="PropertiesChanged",
-            object_path=self.object_path,
             callback=self.handle_property_change,
         )
 
