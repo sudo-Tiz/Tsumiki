@@ -1,10 +1,10 @@
-# Contributing to HydePanel
+# Contributing to Tsumiki
 
-Thank you for your interest in contributing to Hydepanel ! We welcome contributions and are excited to work together to make this project better. To ensure a smooth collaboration, please follow the guidelines below.
+Thank you for your interest in contributing to Tsumiki ! We welcome contributions and are excited to work together to make this project better. To ensure a smooth collaboration, please follow the guidelines below.
 
 ## Table of Contents
 
-- [Contributing to \[Project Name\]](#contributing-to-hydepanel)
+- [Contributing to \[Project Name\]](#contributing-to-tsumiki)
   - [Table of Contents](#table-of-contents)
   - [Code of Conduct](#code-of-conduct)
   - [How to Contribute](#how-to-contribute)
@@ -89,7 +89,7 @@ When creating a new widget:
 - The widget class name should have `Widget` label for sake of consistency. Ex. `XXXWidget`, `YYYWidget`
 - Export the widget in `__init__.py`
 - Create widget config options on `widget_config.py` and add default config on `config.py`
-- Also add the schema definitions on `hydepanel.schema.json` for autocompletions
+- Also add the schema definitions on `tsumiki.schema.json` for autocompletions
 
 ## Getting Started
 

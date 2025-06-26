@@ -3,7 +3,6 @@ from fabric.widgets.label import Label
 from gi.repository import Gdk
 
 from shared.widget_container import ButtonWidget
-from utils.functions import check_executable_exists
 from utils.widget_utils import nerd_font_icon
 
 
@@ -12,8 +11,6 @@ class HyprPickerWidget(ButtonWidget):
 
     def __init__(self, **kwargs):
         super().__init__(name="hyprpicker", **kwargs)
-
-        check_executable_exists("hyprpicker")
 
         if self.config["show_icon"]:
             # Create a TextIcon with the specified icon and size
@@ -29,12 +26,19 @@ class HyprPickerWidget(ButtonWidget):
 
         self.connect("button-press-event", self.on_button_press)
 
-        self.script_file = get_relative_path("../assets/scripts/hyprpicker.sh")
+        self.initialized = False
 
         if self.config["tooltip"]:
             self.set_tooltip_text("Pick a color")
 
+    def lazy_init(self):
+        if not self.initialized:
+            self.script_file = get_relative_path("../assets/scripts/hyprpicker.sh")
+            self.initialized = True
+
     def on_button_press(self, button, event):
+        self.lazy_init()
+
         # Mouse event handler
         if event.type == Gdk.EventType.BUTTON_PRESS:
             if event.button == 1:

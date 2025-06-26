@@ -20,7 +20,7 @@ class OCRWidget(ButtonWidget):
         super().__init__(name="ocr", **kwargs)
 
         self.current_lang = "eng"  # default
-        self.script_file = get_relative_path("../assets/scripts/ocr.sh")
+        self.initialized = False
 
         if self.config["show_icon"]:
             # Create a TextIcon with the specified icon and size
@@ -39,7 +39,14 @@ class OCRWidget(ButtonWidget):
         if self.config["tooltip"]:
             self.set_tooltip_text("Left click to OCR, right click to select language")
 
+    def lazy_init(self):
+        if not self.initialized:
+            self.script_file = get_relative_path("../assets/scripts/ocr.sh")
+            self.initialized = True
+
     def on_button_press(self, _, event):
+        self.lazy_init()
+
         if event.button == 3:  # Right click
             self.show_language_menu()
         else:  # Left click

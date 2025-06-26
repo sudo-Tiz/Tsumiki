@@ -1,4 +1,4 @@
-"$schema" = "./hydepanel.schema.json"
+"$schema" = "./tsumiki.schema.json"
 
 [battery]
 full_battery_level = 100

@@ -64,7 +64,7 @@ def get_icon(app_icon, size=25) -> Image:
             case str(x) if "file://" in x:
                 return Image(
                     name="app-icon",
-                    image_file=GdkPixbuf.Pixbuf.new_from_file_at_size(
+                    pixbuf=GdkPixbuf.Pixbuf.new_from_file_at_size(
                         app_icon[7:], size, size
                     ),
                     size=size,
@@ -72,9 +72,7 @@ def get_icon(app_icon, size=25) -> Image:
             case str(x) if len(x) > 0 and x[0] == "/":
                 return Image(
                     name="app-icon",
-                    image_file=GdkPixbuf.Pixbuf.new_from_file_at_size(
-                        app_icon, size, size
-                    ),
+                    pixbuf=GdkPixbuf.Pixbuf.new_from_file_at_size(app_icon, size, size),
                     size=size,
                 )
             case _:

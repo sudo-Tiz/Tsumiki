@@ -16,14 +16,14 @@ from .functions import (
 from .widget_settings import BarConfig
 
 
-class HydeConfig:
+class TsumikiConfig:
     "A class to read the configuration file and return the default configuration"
 
     _instance = None
 
     def __new__(cls):
         if cls._instance is None:
-            cls._instance = super(HydeConfig, cls).__new__(cls)
+            cls._instance = super(TsumikiConfig, cls).__new__(cls)
         return cls._instance
 
     def __init__(self):
@@ -99,6 +99,6 @@ class HydeConfig:
             f.write(settings)
 
 
-configuration = HydeConfig()
+configuration = TsumikiConfig()
 theme_config = configuration.theme_config
 widget_config = configuration.config

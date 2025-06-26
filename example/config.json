@@ -1,5 +1,5 @@
 {
-	"$schema": "./hydepanel.schema.json",
+	"$schema": "./tsumiki.schema.json",
 	"widgets": {
 		"battery": {
 			"full_battery_level": 100,
@@ -45,6 +45,8 @@
 			"path": "Pictures/Screenshots",
 			"icon_size": 16,
 			"tooltip": true,
+			"label": false,
+			"annotation": true,
 			"icon": "󰄀"
 		},
 		"network_usage": {
@@ -71,9 +73,7 @@
 			"auto_hide_timeout": 2000,
 			"media": {
 				"enabled": true,
-				"ignore": [
-					"vlc"
-				],
+				"ignore": [],
 				"truncation_size": 30,
 				"show_album": true,
 				"show_artist": true,
@@ -96,7 +96,21 @@
 						"command": "firefox",
 						"tooltip": "Launch Firefox",
 						"icon_size": 18
-					}
+					},
+							{
+								"icon": "",
+								"label": "Terminal",
+								"command": "kitty",
+								"tooltip": "Open terminal",
+								"icon_size": 18
+							},
+							{
+								"icon": "",
+								"label": "Browser",
+								"command": "firefox",
+								"tooltip": "Launch Firefox",
+								"icon_size": 18
+							}
 				]
 			}
 		},
@@ -202,6 +216,13 @@
 			"sensor": "acpitz",
 			"graph_length": 4
 		},
+		"gpu": {
+			"show_icon": true,
+			"icon": "",
+			"tooltip": true,
+			"mode": "circular",
+			"graph_length": 4
+		},
 		"date_time": {
 			"format": "%b %d %H:%M",
 			"notification": {
@@ -304,7 +325,8 @@
 			"window_title"
 		], // this is the left section of the panel
 		"middle_section": [
-			"date_time"
+			"date_time",
+			"screenshot"
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
@@ -384,7 +406,6 @@
 			"enabled": false,
 			"anchor": "bottom-right",
 			"date_format": "%A, %d %B %Y",
-			"time_format": "%H:%M",
 			"layer": "bottom"
 		}
 	},
@@ -396,5 +417,4 @@
 		"monitor_styles": true,
 		"location": "top"
 	}
-
 }

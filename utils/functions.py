@@ -15,6 +15,7 @@ import psutil
 import qrcode
 from fabric import Application
 from fabric.utils import (
+    FormattedString,
     cooldown,
     exec_shell_command,
     exec_shell_command_async,
@@ -29,6 +30,18 @@ from .constants import NAMED_COLORS
 from .exceptions import ExecutableNotFoundError
 from .icons import text_icons
 from .thread import run_in_thread, thread
+
+
+def formatted_exec_shell_command(
+    unformatted_cmd: str, **kwargs
+) -> str | Literal[False]:
+    return exec_shell_command(FormattedString(unformatted_cmd).format(**kwargs))
+
+
+def formatted_exec_shell_command_async(
+    unformatted_cmd: str, **kwargs
+) -> tuple[Gio.Subprocess | None, Gio.DataInputStream]:
+    return exec_shell_command_async(FormattedString(unformatted_cmd).format(**kwargs))
 
 
 def rgb_to_hex(rgb):

@@ -62,7 +62,7 @@ class ThemeSwitcherWidget(ButtonWidget):
         ]
 
         if self.config["notify"]:
-            send_notification("hydepanel", f"Theme switched to {self.current_theme}")
+            send_notification("Tsumiki", f"Theme switched to {self.current_theme}")
         copy_theme(self.current_theme)
         update_theme_config(self.current_theme)
         recompile_and_apply_css()

@@ -172,6 +172,7 @@ class NotificationWidget(EventBox):
                         ),
                         h_expand=True,
                         v_expand=True,
+                        size=constants.NOTIFICATION_IMAGE_SIZE,
                     ),
                 )
                 del image_pixbuf

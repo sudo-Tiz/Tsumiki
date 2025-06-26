@@ -6,7 +6,7 @@ NOTIFICATION_WIDTH = 400
 NOTIFICATION_IMAGE_SIZE = 48
 HIGH_POLL_INTERVAL = 3600  # 1 hour in seconds
 
-APPLICATION_NAME = "hydepanel"
+APPLICATION_NAME = "tsumiki"
 SYSTEM_CACHE_DIR = GLib.get_user_cache_dir()
 APP_CACHE_DIRECTORY = f"{SYSTEM_CACHE_DIR}/{APPLICATION_NAME}"
 
@@ -20,7 +20,7 @@ LOG_FORMAT = "{time:YYYY-MM-DD HH:mm:ss} [<level>{level}</level>] {message}"
 
 # Default configuration values
 DEFAULT_CONFIG = {
-    "$schema": "./hydepanel.schema.json",
+    "$schema": f"./{APPLICATION_NAME}.schema.json",
     "widgets": {
         "cliphist": {
             "icon": "",
@@ -228,6 +228,7 @@ DEFAULT_CONFIG = {
             "path": "Pictures/Screenshots",
             "icon_size": 16,
             "tooltip": True,
+            "annotation": True,
             "icon": "󰄀",
         },
         "spacing": {"size": 20},

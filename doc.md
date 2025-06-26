@@ -1,4 +1,4 @@
-Welcome to the HyDePanel wiki!
+Welcome to the Tsumiki wiki!
 
 # System Configuration
 

@@ -1,5 +1,5 @@
 [project]
-name = "HyDEPanel"
+name = "Tsumiki"
 version = "1.0.0"
 description = "A semi-customizable bar written using the Fabric Widget System"
 readme = "README.md"
@@ -118,8 +118,8 @@ line-ending = "auto"
 
 
 [project.urls]
-"Website" = "https://github.com/rubiin/HyDePanel/wiki"
-"Documentation" = "https://github.com/rubiin/HyDePanel/wiki"
-"Source" = "https://github.com/rubiin/HyDePanel"
-"Bug Tracker" = "https://github.com/rubiin/HyDePanel/issues"
-"Changelog" = "https://github.com/rubiin/HyDePanel/blob/master/CHANGELOG.md"
+"Website" = "https://github.com/rubiin/Tsumiki/wiki"
+"Documentation" = "https://github.com/rubiin/Tsumiki/wiki"
+"Source" = "https://github.com/rubiin/Tsumiki"
+"Bug Tracker" = "https://github.com/rubiin/Tsumiki/issues"
+"Changelog" = "https://github.com/rubiin/Tsumiki/blob/master/CHANGELOG.md"

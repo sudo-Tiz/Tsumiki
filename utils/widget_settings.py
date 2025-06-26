@@ -459,7 +459,9 @@ Recording = TypedDict(
 )
 
 # ScreenShot configuration
-ScreenShot = TypedDict("ScreenShot", {"path": str, "icon_size": int, "tooltip": bool})
+ScreenShot = TypedDict(
+    "ScreenShot", {"path": str, "icon_size": int, "tooltip": bool, "annotation": bool}
+)
 
 
 class Widgets(TypedDict):

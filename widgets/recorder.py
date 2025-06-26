@@ -3,7 +3,6 @@ from fabric.utils import get_relative_path
 from services.screen_record import ScreenRecorderService
 from shared.lottie import LottieAnimation, LottieAnimationWidget
 from shared.widget_container import ButtonWidget
-from utils.functions import check_executable_exists
 from utils.icons import text_icons
 from utils.widget_utils import nerd_font_icon
 
@@ -13,8 +12,6 @@ class RecorderWidget(ButtonWidget):
 
     def __init__(self, **kwargs):
         super().__init__(name="recorder", **kwargs)
-
-        check_executable_exists("wf-recorder")
 
         # Initial UI setup
         self.recording_idle_image = nerd_font_icon(

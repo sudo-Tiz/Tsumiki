@@ -1,15 +1,15 @@
-<p align="center"><img src="assets/images/hydepanel.png" align="centre" width="100" height="130"/></p>
-<h1 align="center"><img src="https://raw.githubusercontent.com/JaKooLit/Telegram-Animated-Emojis/refs/heads/main/Activity/Sparkles.webp"/ height=35> HyDePanel <img src="https://raw.githubusercontent.com/JaKooLit/Telegram-Animated-Emojis/refs/heads/main/Activity/Sparkles.webp"/ height=35></h1>
+<p align="center"><img src="assets/images/tsumiki.png" align="centre" width="100" height="130"/></p>
+<h1 align="center"><img src="https://raw.githubusercontent.com/JaKooLit/Telegram-Animated-Emojis/refs/heads/main/Activity/Sparkles.webp"/ height=35> Tsumiki <img src="https://raw.githubusercontent.com/JaKooLit/Telegram-Animated-Emojis/refs/heads/main/Activity/Sparkles.webp"/ height=35></h1>
 <p align="center">
- <a href="https://github.com/rubiin/HyDePanel/blob/master/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/rubiin/HyDePanel"></a>
+ <a href="https://github.com/rubiin/Tsumiki/blob/master/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/rubiin/Tsumiki"></a>
   <a href='http://makeapullrequest.com'><img alt='PRs Welcome' src='https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=shields'/></a>
-  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/rubiin/HyDePanel"/>
-  <img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed/rubiin/HyDePanel"/>
+  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/rubiin/Tsumiki"/>
+  <img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed/rubiin/Tsumiki"/>
   <img alt="discord" src="https://img.shields.io/discord/1200448076620501063" />
 </p>
 
 
-HyDePanel is a modular status bar for the Hyprland Wayland compositor. Built on [Fabric Widget System](https://github.com/Fabric-Development/fabric), it offers a flexible architecture for building custom panels with individual widgets. It’s designed to be lightweight, performant, and user-configurable.
+Tsumiki is a modular status bar for the Hyprland Wayland compositor. Built on [Fabric Widget System](https://github.com/Fabric-Development/fabric), it offers a flexible architecture for building custom panels with individual widgets. It’s designed to be lightweight, performant, and user-configurable.
 
 <h2><sub><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Camera%20with%20Flash.png" alt="Camera with Flash" width="25" height="25" /></sub> Screenshots</h2>
 
@@ -66,7 +66,7 @@ HyDePanel is a modular status bar for the Hyprland Wayland compositor. Built on 
   Display real-time notifications or alerts directly on the screen (e.g., for volume, media, or custom events) in a visually appealing overlay.
 
 - 🛎️ **Notification System**
-  Integrated notification support allows HyDePanel to show alerts from your system, apps, or scripts. Notifications can be styled, timed, and customized based on user preferences.
+  Integrated notification support allows the panel to show alerts from your system, apps, or scripts. Notifications can be styled, timed, and customized based on user preferences.
 
 
 ## Prerequisites
@@ -141,7 +141,7 @@ cliphist
 - Clone this repository:
 
 ```sh
-git clone https://github.com/rubiin/HyDePanel.git ~/.config/hydepanel
+git clone https://github.com/rubiin/Tsumiki.git ~/.config/tsumiki
 cd bar
 ```
 
@@ -207,7 +207,7 @@ Once the dependencies are installed, run the following command to start the bar 
 Add this to your `.config/hyprland.conf`
 
 ```sh
-exec = `~/.config/hydepanel/init.sh -start`
+exec = `~/.config/tsumiki/init.sh -start`
 
 ```
 
@@ -221,7 +221,7 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 
 > **Note**: make sure to keep the config safe just in case
 
-## Check [wiki](https://github.com/rubiin/HyDePanel/wiki) for configuring individual widgets
+## Check [wiki](https://github.com/rubiin/Tsumiki/wiki) for configuring individual widgets
 
 ## **Available Modules**
 
@@ -281,7 +281,7 @@ Be sure to kill other notifications daemon that you may be running. You can kill
 
 ### 3. **Cannot see bar?**
 
-Kill the app with `pkill hydepanel`. Run `init.sh -start`. This should show some logs. If it shows like `ModuleNotFoundError`, run `pip install -r requirements.txt`. If this does not solve the issue, do report a bug with screenshot of the log.
+Kill the app with `pkill tsumiki`. Run `init.sh -start`. This should show some logs. If it shows like `ModuleNotFoundError`, run `pip install -r requirements.txt`. If this does not solve the issue, do report a bug with screenshot of the log.
 
 ### 4. **No Blur?**
 
@@ -303,7 +303,7 @@ Make sure your icon theme has the required icons. One of the recommended icon th
 Add this to your `hyprland.conf`
 
 ```conf
-bind = SUPER, Q, exec,  fabric-cli ia hydepanel toggle bar
+bind = SUPER, Q, exec,  fabric-cli ia tsumiki toggle bar
 ```
 
 
@@ -342,11 +342,11 @@ Thanks for making this project a little bit more awesome! 🚀
 
 ## Star History
 
-<a href="https://star-history.com/#rubiin/HyDePanel&Timeline">
+<a href="https://star-history.com/#rubiin/Tsumiki&Timeline">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=rubiin/HyDePanel&type=Timeline&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=rubiin/HyDePanel&type=Timeline" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=rubiin/HyDePanel&type=Timeline" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=rubiin/Tsumiki&type=Timeline&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=rubiin/Tsumiki&type=Timeline" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=rubiin/Tsumiki&type=Timeline" />
  </picture>
 </a>
 
@@ -360,16 +360,16 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/PixelKhaos"><img src="https://avatars.githubusercontent.com/u/5213174?v=4?s=100" width="100px;" alt="Robin Seger"/><br /><sub><b>Robin Seger</b></sub></a><br /><a href="https://github.com/rubiin/HyDePanel/commits?author=PixelKhaos" title="Code">💻</a> <a href="#design-PixelKhaos" title="Design">🎨</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://zaap.bio/Axenide"><img src="https://avatars.githubusercontent.com/u/66109459?v=4?s=100" width="100px;" alt="Adriano Tisera"/><br /><sub><b>Adriano Tisera</b></sub></a><br /><a href="https://github.com/rubiin/HyDePanel/commits?author=Axenide" title="Code">💻</a> <a href="https://github.com/rubiin/HyDePanel/issues?q=author%3AAxenide" title="Bug reports">🐛</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Anshul-007"><img src="https://avatars.githubusercontent.com/u/81582218?v=4?s=100" width="100px;" alt="Anshul J."/><br /><sub><b>Anshul J.</b></sub></a><br /><a href="https://github.com/rubiin/HyDePanel/commits?author=Anshul-007" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/S4NKALP"><img src="https://avatars.githubusercontent.com/u/98226895?v=4?s=100" width="100px;" alt="Sankalp Tharu"/><br /><sub><b>Sankalp Tharu</b></sub></a><br /><a href="https://github.com/rubiin/HyDePanel/issues?q=author%3AS4NKALP" title="Bug reports">🐛</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/keepo-dot"><img src="https://avatars.githubusercontent.com/u/201014163?v=4?s=100" width="100px;" alt="Keepo"/><br /><sub><b>Keepo</b></sub></a><br /><a href="https://github.com/rubiin/HyDePanel/commits?author=keepo-dot" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://evrenos-dev.vercel.app/"><img src="https://avatars.githubusercontent.com/u/138004078?v=4?s=100" width="100px;" alt="Sayeed Mahmood Evrenos"/><br /><sub><b>Sayeed Mahmood Evrenos</b></sub></a><br /><a href="https://github.com/rubiin/HyDePanel/issues?q=author%3AEvren-os" title="Bug reports">🐛</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="http://xeyossr.github.io"><img src="https://avatars.githubusercontent.com/u/113219171?v=4?s=100" width="100px;" alt="xeyossr"/><br /><sub><b>xeyossr</b></sub></a><br /><a href="https://github.com/rubiin/HyDePanel/commits?author=xeyossr" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/PixelKhaos"><img src="https://avatars.githubusercontent.com/u/5213174?v=4?s=100" width="100px;" alt="Robin Seger"/><br /><sub><b>Robin Seger</b></sub></a><br /><a href="https://github.com/rubiin/Tsumiki/commits?author=PixelKhaos" title="Code">💻</a> <a href="#design-PixelKhaos" title="Design">🎨</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://zaap.bio/Axenide"><img src="https://avatars.githubusercontent.com/u/66109459?v=4?s=100" width="100px;" alt="Adriano Tisera"/><br /><sub><b>Adriano Tisera</b></sub></a><br /><a href="https://github.com/rubiin/Tsumiki/commits?author=Axenide" title="Code">💻</a> <a href="https://github.com/rubiin/Tsumiki/issues?q=author%3AAxenide" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Anshul-007"><img src="https://avatars.githubusercontent.com/u/81582218?v=4?s=100" width="100px;" alt="Anshul J."/><br /><sub><b>Anshul J.</b></sub></a><br /><a href="https://github.com/rubiin/Tsumiki/commits?author=Anshul-007" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/S4NKALP"><img src="https://avatars.githubusercontent.com/u/98226895?v=4?s=100" width="100px;" alt="Sankalp Tharu"/><br /><sub><b>Sankalp Tharu</b></sub></a><br /><a href="https://github.com/rubiin/Tsumiki/issues?q=author%3AS4NKALP" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/keepo-dot"><img src="https://avatars.githubusercontent.com/u/201014163?v=4?s=100" width="100px;" alt="Keepo"/><br /><sub><b>Keepo</b></sub></a><br /><a href="https://github.com/rubiin/Tsumiki/commits?author=keepo-dot" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://evrenos-dev.vercel.app/"><img src="https://avatars.githubusercontent.com/u/138004078?v=4?s=100" width="100px;" alt="Sayeed Mahmood Evrenos"/><br /><sub><b>Sayeed Mahmood Evrenos</b></sub></a><br /><a href="https://github.com/rubiin/Tsumiki/issues?q=author%3AEvren-os" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://xeyossr.github.io"><img src="https://avatars.githubusercontent.com/u/113219171?v=4?s=100" width="100px;" alt="xeyossr"/><br /><sub><b>xeyossr</b></sub></a><br /><a href="https://github.com/rubiin/Tsumiki/commits?author=xeyossr" title="Documentation">📖</a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://dimflix-official.github.io/"><img src="https://avatars.githubusercontent.com/u/112165977?v=4?s=100" width="100px;" alt="DIMFLIX"/><br /><sub><b>DIMFLIX</b></sub></a><br /><a href="https://github.com/rubiin/HyDePanel/issues?q=author%3ADIMFLIX-OFFICIAL" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://dimflix-official.github.io/"><img src="https://avatars.githubusercontent.com/u/112165977?v=4?s=100" width="100px;" alt="DIMFLIX"/><br /><sub><b>DIMFLIX</b></sub></a><br /><a href="https://github.com/rubiin/Tsumiki/issues?q=author%3ADIMFLIX-OFFICIAL" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
 </table>

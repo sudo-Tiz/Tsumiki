@@ -1,5 +1,5 @@
 {
-	"$schema": "./hydepanel.schema.json",
+	"$schema": "./tsumiki.schema.json",
 	"widgets": {
 		"battery": {
 			"full_battery_level": 100,
@@ -45,6 +45,8 @@
 			"path": "Pictures/Screenshots",
 			"icon_size": 16,
 			"tooltip": true,
+			"label": false,
+			"annotation": true,
 			"icon": "󰄀"
 		},
 		"network_usage": {
@@ -94,7 +96,21 @@
 						"command": "firefox",
 						"tooltip": "Launch Firefox",
 						"icon_size": 18
-					}
+					},
+							{
+								"icon": "",
+								"label": "Terminal",
+								"command": "kitty",
+								"tooltip": "Open terminal",
+								"icon_size": 18
+							},
+							{
+								"icon": "",
+								"label": "Browser",
+								"command": "firefox",
+								"tooltip": "Launch Firefox",
+								"icon_size": 18
+							}
 				]
 			}
 		},
@@ -310,7 +326,7 @@
 		], // this is the left section of the panel
 		"middle_section": [
 			"date_time",
-			"weather"
+			"screenshot"
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
