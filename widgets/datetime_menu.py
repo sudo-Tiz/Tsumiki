@@ -264,7 +264,9 @@ class DateNotificationMenu(Box):
                 orientation="v",
                 children=(
                     DateTime(
-                        "%H:%M" if self.config["clock_format"] == "24h" else "%I:%M",
+                        "%H:%M"
+                        if self.config.get("clock_format", "24h") == "24h"
+                        else "%I:%M",
                         name="clock",
                     ),
                     Box(

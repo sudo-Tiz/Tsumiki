@@ -18,7 +18,7 @@ class KeyboardLayoutWidget(ButtonWidget):
 
         self.kb_label = Label(label="keyboard", style_classes="panel-text")
 
-        if self.config["show_icon"]:
+        if self.config.get("show_icon", True):
             # Create a TextIcon with the specified icon and size
             self.icon = nerd_font_icon(
                 icon=self.config["icon"],
@@ -67,7 +67,7 @@ class KeyboardLayoutWidget(ButtonWidget):
 
         layout = main_kb["active_keymap"]
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text(
                 f"Caps Lock 󰪛: {main_kb['capsLock']} | Num Lock : {main_kb['numLock']}"
             )

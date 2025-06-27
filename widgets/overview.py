@@ -407,7 +407,7 @@ class OverviewWidget(ButtonWidget):
         # Initialize as a Box instead of a PopupWindow.
         super().__init__(name="overview1", **kwargs)
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text("Overview")
 
         self.box.children = nerd_font_icon(
@@ -415,7 +415,7 @@ class OverviewWidget(ButtonWidget):
             props={"style_classes": "panel-font-icon"},
         )
 
-        if self.config["label"]:
+        if self.config.get("label", True):
             self.box.add(Label(label="overview", style_classes="panel-text"))
 
         # Create the overview widget

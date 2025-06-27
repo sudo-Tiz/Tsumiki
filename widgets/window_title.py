@@ -29,7 +29,7 @@ class WindowTitleWidget(ButtonWidget):
         # Truncate the window title based on the configured length
         win_title = (
             truncate(win_title, self.config["truncation_size"])
-            if self.config["truncation"]
+            if self.config.get("truncation", True)
             else win_title
         )
 
@@ -48,6 +48,6 @@ class WindowTitleWidget(ButtonWidget):
         # Return the formatted title with or without the icon
         return (
             f"{matched_window[1]} {matched_window[2]}"
-            if self.config["icon"]
+            if self.config.get("icon", True)
             else f"{matched_window[2]}"
         )

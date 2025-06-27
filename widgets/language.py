@@ -21,7 +21,7 @@ class LanguageWidget(ButtonWidget):
             style_classes="panel-text",
         )
 
-        if self.config["show_icon"]:
+        if self.config.get("show_icon", True):
             self.icon = nerd_font_icon(
                 icon=self.config["icon"],
                 props={
@@ -32,5 +32,5 @@ class LanguageWidget(ButtonWidget):
 
         self.box.add(self.lang)
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text(f"Language: {self.lang.get_label()}")

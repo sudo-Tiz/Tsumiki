@@ -24,7 +24,7 @@ class BlueToothWidget(ButtonWidget):
             self.bluetooth_icon,
         )
 
-        if self.config["label"]:
+        if self.config.get("label", True):
             self.bt_label = Label(label="On", style_classes="panel-text")
             self.box.add(self.bt_label)
 
@@ -39,10 +39,10 @@ class BlueToothWidget(ButtonWidget):
 
         self.bluetooth_icon.set_label(icon)
 
-        if self.config["label"]:
+        if self.config.get("label", True):
             self.bt_label.set_text(bt_status.capitalize())
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text(f"Bluetooth is {bt_status}")
 
     def on_destroy(self):

@@ -70,7 +70,7 @@ class TaskBarWidget(ButtonWidget):
                 button = HoverButton(
                     image=icon,
                 )
-                if self.config["tooltip"]:
+                if self.config.get("tooltip", False):
                     button.set_tooltip_text(client["title"])
 
                 if client["address"] != active_window_address:
@@ -146,16 +146,17 @@ class TaskBarWidget(ButtonWidget):
         icon_name: str,
         fallback_icon: str = "image-missing",
     ) -> GdkPixbuf.Pixbuf:
+        icon_size = self.config.get("icon_size", 22)
         try:
             pixbuf = self.icon_theme.load_icon(
                 icon_name,
-                self.config["icon_size"],
+                icon_size,
                 Gtk.IconLookupFlags.FORCE_SIZE,
             )
         except Exception:
             pixbuf = self.icon_theme.load_icon(
                 fallback_icon,
-                self.config["icon_size"],
+                icon_size,
                 Gtk.IconLookupFlags.FORCE_SIZE,
             )
         return pixbuf

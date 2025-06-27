@@ -122,8 +122,12 @@ $slider-height: 12px;
     }
 
     .section-box {
-      margin: 1.4rem 1rem;
+      margin: 0.8rem 1rem;
       margin-bottom: 0;
+
+      &:last-child{
+        margin-bottom: 0.5rem;
+      }
     }
 
     .quicksettings-toggle-action {
@@ -171,8 +175,7 @@ $slider-height: 12px;
 
       #setting-slider {
         &-scale {
-          margin-left: 10px;
-          margin-right: 20px;
+          margin: 10px;
         }
 
         &-label {
@@ -204,7 +207,7 @@ $slider-height: 12px;
       #setting-slider {
         @include common.slider($highlight-color: theme.$accent-blue,
           $slider: variable.$bar-widgets-quick_settings-sliders-slider,
-          $min-length: 230px,
+          $min-length: 250px,
           $height: variable.$bar-widgets-quick_settings-sliders-height );
       }
     }
@@ -212,10 +215,12 @@ $slider-height: 12px;
     .slider-box-shorter {
       @extend %slider-box-base;
 
+      padding: common.toEm(10);
+
       #setting-slider {
         @include common.slider($highlight-color: theme.$accent-blue,
           $slider: variable.$bar-widgets-quick_settings-sliders-slider,
-          $min-length: 140px,
+          $min-length: 180px,
           $height: variable.$bar-widgets-quick_settings-sliders-height );
       }
     }

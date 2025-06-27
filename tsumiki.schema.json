@@ -931,6 +931,7 @@
 						"items": {
 							"type": "array",
 							"description": "List of shortcuts to display",
+							"maxItems": 4,
 							"items": {
 								"type": "object",
 								"properties": {

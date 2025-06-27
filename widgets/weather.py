@@ -46,7 +46,7 @@ class BaseWeatherWidget:
         return True
 
     def get_wind_speed(self):
-        if self.config["wind_speed_unit"] == "kmh":
+        if self.config.get("wind_speed_unit", "kmh") == "kmh":
             return self.current_weather["windspeedKmph"] + " Km/h"
 
         return self.current_weather["windspeedMiles"] + " Mph"
@@ -54,7 +54,7 @@ class BaseWeatherWidget:
     def get_temperature(self):
         """Get the current temperature in the specified unit."""
 
-        if self.config["temperature_unit"] == "celsius":
+        if self.config.get("temperature_unit", "celsius") == "celsius":
             return self.current_weather["temp_C"] + "°C"
 
         return self.current_weather["temp_F"] + "°F"
@@ -62,7 +62,7 @@ class BaseWeatherWidget:
     def get_temperature_hour(self, index):
         """Get the temperature for a specific hour in the specified unit."""
 
-        if self.config["temperature_unit"] == "celsius":
+        if self.config.get("temperature_unit", "celsius") == "celsius":
             return self.hourly_forecast[index]["tempC"] + "°C"
 
         return self.hourly_forecast[index]["tempF"] + "°F"
@@ -373,7 +373,7 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
         if data is None:
             self.weather_label.set_label("")
             self.weather_icon.set_label("")
-            if self.config["tooltip"]:
+            if self.config.get("tooltip", False):
                 self.set_tooltip_text("Error fetching weather data, try again later.")
             return
 
@@ -391,7 +391,7 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
         self.weather_label.set_label(self.get_temperature())
 
         # Update the tooltip with the city and weather condition if enabled
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             tool_tip = f"{self.get_temperature()} {self.get_description()}"
             tool_tip += f"\n\n{weather_icon['quote']}"
 

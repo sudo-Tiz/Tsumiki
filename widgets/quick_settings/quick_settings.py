@@ -138,17 +138,18 @@ class QuickSettingsMenu(Box):
             else os.path.expandvars("$HOME/.face")
         )
 
-        username = (
-            GLib.get_user_name()
-            if self.config["user"]["name"] == "system"
-            else self.config["user"]["name"]
-        )
+        username = self.config.get("user", {}).get("name", "system")
 
-        if self.config["user"]["distro_icon"]:
-            username = f"{helpers.get_distro_icon()} {username}"
+        username_label = GLib.get_user_name() if username == "system" else username
+
+        if self.config.get("user", {}).get("distro_icon", True):
+            username_label = f"{helpers.get_distro_icon()} {username_label}"
 
         username_label = Label(
-            label=username, v_align="center", h_align="start", style_classes="user"
+            label=username_label,
+            v_align="center",
+            h_align="start",
+            style_classes="user",
         )
 
         uptime_label = Label(
@@ -267,12 +268,14 @@ class QuickSettingsMenu(Box):
             main_grid.insert_column(i)
 
         # Determine slider box class based on number of shortcuts
-        if self.config.get("shortcuts"):
-            num_shortcuts = len(self.config["shortcuts"])
-            if num_shortcuts > 2:
+        if self.config.get("shortcuts", {}).get("enabled", False):
+            num_shortcuts = len(self.config["shortcuts"]["items"])
+            if num_shortcuts > 2 and num_shortcuts <= 4:
                 slider_class = "slider-box-shorter"
-            else:
+            elif num_shortcuts <= 2 and num_shortcuts > 0:
                 slider_class = "slider-box-short"
+            else:
+                slider_class = "slider-box-long"
         else:
             slider_class = "slider-box-long"
 
@@ -306,7 +309,7 @@ class QuickSettingsMenu(Box):
                     1,
                 )
 
-        if self.config.get("shortcuts")["enabled"]:
+        if self.config.get("shortcuts", {}).get("enabled", False):
             shortcuts_box = Box(
                 orientation="v",
                 spacing=10,
@@ -342,7 +345,7 @@ class QuickSettingsMenu(Box):
             center_children=center_box,
         )
 
-        if self.config["media"]["enabled"]:
+        if self.config.get("media", {}).get("enabled", False):
             box.end_children = (
                 Box(
                     orientation="v",

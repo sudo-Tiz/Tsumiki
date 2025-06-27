@@ -24,16 +24,16 @@ class BatteryWidget(ButtonWidget):
             **kwargs,
         )
 
-        self.full_battery_level = self.config["full_battery_level"]
+        self.full_battery_level = self.config.get("full_battery_level", 100)
 
         self.battery_icon = Image(
             icon_name=symbolic_icons["battery"]["full"],
-            icon_size=self.config["icon_size"],
+            icon_size=self.config.get("icon_size", 14),
         )
 
         self.box.add(self.battery_icon)
 
-        if self.config["label"]:
+        if self.config.get("label", True):
             self.battery_label = Label(label="100%", style_classes="panel-text")
             self.box.add(self.battery_label)
 
@@ -74,7 +74,7 @@ class BatteryWidget(ButtonWidget):
         )
 
         # Update the label with the battery percentage if enabled
-        if self.config["label"]:
+        if self.config.get("label", True):
             self.battery_label.set_text(f"{battery_percent}%")
 
             ## Hide the label when the battery is full
@@ -85,7 +85,7 @@ class BatteryWidget(ButtonWidget):
                 self.battery_label.hide()
 
         # Update the tooltip with the battery status details if enabled
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             status_text = (
                 "󱠴 Status: Charging" if is_charging else "󱠴 Status: Discharging"
             )

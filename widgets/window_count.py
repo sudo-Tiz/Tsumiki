@@ -21,7 +21,7 @@ class WindowCountWidget(ButtonWidget):
         self.count_label = Label(label="0", style_classes="panel-text")
         self.box.add(self.count_label)
 
-        if self.config["show_icon"]:
+        if self.config.get("show_icon", True):
             self.icon = nerd_font_icon(
                 icon=self.config["icon"],
                 props={"style_classes": "panel-font-icon"},
@@ -60,11 +60,11 @@ class WindowCountWidget(ButtonWidget):
             self.config["label_format"].format(count=data["windows"])
         )
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text(
                 f"Workspace: {data['id']}, Windows: {data['windows']}"
             )
-        if self.config["hide_when_zero"]:
+        if self.config.get("hide_when_zero", False):
             self.hide() if data["windows"] == 0 else self.show()
 
         return (

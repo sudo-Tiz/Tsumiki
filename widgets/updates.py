@@ -33,23 +33,23 @@ class UpdatesWidget(ButtonWidget):
 
         self.base_command = f"{script_file} --{self.config['os']}"
 
-        if self.config["flatpak"]:
+        if self.config.get("flatpak", True):
             self.base_command += " --flatpak"
 
-        if self.config["snap"]:
+        if self.config.get("snap", True):
             self.base_command += " --snap"
 
-        if self.config["brew"]:
+        if self.config.get("brew", True):
             self.base_command += " --brew"
 
-        if self.config["show_icon"]:
+        if self.config.get("show_icon", True):
             self.icon = nerd_font_icon(
                 icon=self.config["icon"],
                 props={"style_classes": "panel-font-icon"},
             )
             self.box.add(self.icon)
 
-        if self.config["label"]:
+        if self.config.get("label", True):
             self.update_label = Label(label="0", style_classes="panel-text")
             self.box.add(self.update_label)
 
@@ -80,9 +80,9 @@ class UpdatesWidget(ButtonWidget):
 
         if value["total"] > "0":
             # Update the label if enabled
-            if self.config["label"]:
+            if self.config.get("label", True):
                 self.update_label.set_label(value["total"])
-            if self.config["show_icon"]:
+            if self.config.get("show_icon", True):
                 self.icon.set_label("󱧘")
 
             self.set_tooltip_text(value["tooltip"])

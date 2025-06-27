@@ -15,7 +15,7 @@ class SubMapWidget(ButtonWidget):
         self.submap_label = Label(label="submap", style_classes="panel-text")
         self.box.add(self.submap_label)
 
-        if self.config["show_icon"]:
+        if self.config.get("show_icon", True):
             # Create a TextIcon with the specified icon and size
             self.icon = nerd_font_icon(
                 icon=self.config["icon"],
@@ -46,7 +46,7 @@ class SubMapWidget(ButtonWidget):
 
         self.submap_label.set_label(submap)
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text(
                 f"Current submap: {submap}",
             )

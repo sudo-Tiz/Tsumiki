@@ -84,33 +84,33 @@
 				"enabled": true,
 				"items": [
 					{
-						"icon": "",
+						"icon": "",
 						"label": "Terminal",
 						"command": "kitty",
 						"tooltip": "Open terminal",
 						"icon_size": 18
 					},
 					{
-						"icon": "",
+						"icon": "",
 						"label": "Browser",
 						"command": "firefox",
 						"tooltip": "Launch Firefox",
 						"icon_size": 18
 					},
-							{
-								"icon": "",
-								"label": "Terminal",
-								"command": "kitty",
-								"tooltip": "Open terminal",
-								"icon_size": 18
-							},
-							{
-								"icon": "",
-								"label": "Browser",
-								"command": "firefox",
-								"tooltip": "Launch Firefox",
-								"icon_size": 18
-							}
+					{
+						"icon": "",
+						"label": "Spotify",
+						"command": "spotify",
+						"tooltip": "Launch Spotify",
+						"icon_size": 18
+					},
+					{
+						"icon": "",
+						"label": "Code",
+						"command": "code",
+						"tooltip": "Launch Code",
+						"icon_size": 18
+					}
 				]
 			}
 		},

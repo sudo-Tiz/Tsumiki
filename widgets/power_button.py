@@ -38,22 +38,18 @@ class PowerMenuPopup(PopupWindow):
             row_homogeneous=True,
         )
 
-        self.row = 0
-        self.column = 0
-        self.max_columns = config["items_per_row"]
-
-        for index, (key, value) in enumerate(power_buttons_list.items()):
-            button = PowerControlButtons(
-                config=config,
-                name=key,
-                command=value,
-                size=self.icon_size,
-            )
-            self.grid.attach(button, self.column, self.row, 1, 1)
-            self.column += 1
-            if self.column >= self.max_columns:
-                self.column = 0
-                self.row += 1
+        self.grid.attach_flow(
+            children=[
+                PowerControlButtons(
+                    config=config,
+                    name=key,
+                    command=value,
+                    size=self.icon_size,
+                )
+                for key, value in power_buttons_list.items()
+            ],
+            columns=config.get("items_per_row", 3),
+        )
 
         self.menu = Box(name="power-button-menu", orientation="v", children=self.grid)
 
@@ -125,7 +121,7 @@ class PowerWidget(ButtonWidget):
     def __init__(self, **kwargs):
         super().__init__(name="power", **kwargs)
 
-        if self.config["show_icon"]:
+        if self.config.get("show_icon", True):
             # Create a TextIcon with the specified icon and size
             self.icon = nerd_font_icon(
                 icon=self.config["icon"],
@@ -133,10 +129,10 @@ class PowerWidget(ButtonWidget):
             )
             self.box.add(self.icon)
 
-        if self.config["label"]:
+        if self.config.get("label", True):
             self.box.add(Label(label="power", style_classes="panel-text"))
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text("Power")
 
         self.connect(

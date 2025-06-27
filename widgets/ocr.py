@@ -22,7 +22,7 @@ class OCRWidget(ButtonWidget):
         self.current_lang = "eng"  # default
         self.initialized = False
 
-        if self.config["show_icon"]:
+        if self.config.get("show_icon", True):
             # Create a TextIcon with the specified icon and size
             self.icon = nerd_font_icon(
                 icon=self.config["icon"],
@@ -30,13 +30,13 @@ class OCRWidget(ButtonWidget):
             )
             self.box.add(self.icon)
 
-        if self.config["label"]:
+        if self.config.get("label", True):
             self.box.add(Label(label="Ocr", style_classes="panel-text"))
 
         # Left click for OCR
         self.connect("button-press-event", self.on_button_press)
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text("Left click to OCR, right click to select language")
 
     def lazy_init(self):

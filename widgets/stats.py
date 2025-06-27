@@ -107,7 +107,7 @@ class CpuWidget(ButtonWidget):
             self.cpu_level_label.set_label(f"{usage}%")
 
         # Update the tooltip with the memory usage details if enabled
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             temp = value.get("temperature")
 
             temp = temp.get(self.config["sensor"])
@@ -118,7 +118,7 @@ class CpuWidget(ButtonWidget):
             # current temperature
             temp = temp.pop()[1]
 
-            temp = round(temp) if self.config["round"] else temp
+            temp = round(temp) if self.config.get("round", True) else temp
 
             is_celsius = self.config["temperature_unit"] == "celsius"
 
@@ -232,7 +232,7 @@ class GpuWidget(ButtonWidget):
             self.gpu_level_label.set_label(usage)
 
         # Update the tooltip with the memory usage details if enabled
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             temp = stats.get("temp")
 
             if temp is None:
@@ -335,7 +335,7 @@ class MemoryWidget(ButtonWidget):
             self.memory_level_label.set_label(f"{self.get_used()}")
 
         # Update the tooltip with the memory usage details if enabled
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text(
                 f"󰾆 {self.percent_used}%\n{text_icons['memory']} {self.ratio()}",
             )
@@ -438,7 +438,7 @@ class StorageWidget(ButtonWidget):
             self.storage_level_label.set_label(f"{self.get_used()}")
 
         # Update the tooltip with the storage usage details if enabled
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text(
                 f"󰾆 {percent}%\n{text_icons['storage']} {self.ratio()}"
             )
@@ -514,7 +514,7 @@ class NetworkUsageWidget(ButtonWidget):
         # Get the current network usage
         network_speed = self.client.get_network_speed()
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             tooltip_text = (
                 f"Download: {round(network_speed.get('download', 0), 2)} MB/s\n"
             )

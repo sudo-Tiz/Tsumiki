@@ -74,7 +74,7 @@ class NotificationPopup(Window):
             self.widget_config, notification, self.config["max_count"]
         )
 
-        if self.config["play_sound"]:
+        if self.config.get("play_sound", False):
             helpers.play_sound(
                 get_relative_path(f"../assets/sounds/{self.config['sound_file']}.mp3")
             )
@@ -232,7 +232,7 @@ class NotificationWidget(EventBox):
             ),
         )
 
-        if self.config["auto_dismiss"]:
+        if self.config.get("auto_dismiss", False):
             self.start_timeout()
 
     def on_close_button_clicked(self, *_):
@@ -275,7 +275,7 @@ class NotificationWidget(EventBox):
         self.pause_timeout()
         self.set_pointer_cursor(self, "hand2")
 
-        if self.config["dismiss_on_hover"]:
+        if self.config.get("dismiss_on_hover", False):
             self.close_notification()
 
     def on_unhover(self, *_):

@@ -77,16 +77,11 @@ class ShortcutsContainer(Box):
         # Use single column for 1-2 shortcuts, 2x2 grid for 3-4
         num_cols = 2 if num_shortcuts > 2 else 1
 
-        for i, shortcut in enumerate(shortcuts_config):
-            button = ShortcutButton(shortcut, h_expand=True)
-
-            if num_cols == 1:
-                # Single column - stack vertically
-                grid.attach(button, 0, i, 1, 1)
-            else:
-                # 2x2 grid - fill vertically first
-                row = i % 2
-                col = i // 2
-                grid.attach(button, col, row, 1, 1)
+        grid.attach_flow(
+            children=[
+                ShortcutButton(shortcut, h_expand=True) for shortcut in shortcuts_config
+            ],
+            columns=num_cols,
+        )
 
         self.add(grid)

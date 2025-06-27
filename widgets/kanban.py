@@ -389,10 +389,10 @@ class KanbanWidget(ButtonWidget):
             )
         )
 
-        if self.config["label"]:
+        if self.config.get("label", True):
             self.box.add(Label(label="Kanban", style_classes="panel-text"))
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text("Kanban Board")
 
         self.popup = None

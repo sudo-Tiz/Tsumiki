@@ -77,7 +77,7 @@ class MprisWidget(ButtonWidget):
             "background-image: url('" + art_url + "');background-size: cover;"
         )
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text(bar_label)
 
     def on_clicked(self, *args):

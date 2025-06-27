@@ -343,10 +343,10 @@ class EmojiPickerWidget(ButtonWidget):
             )
         )
 
-        if self.config["label"]:
+        if self.config.get("label", True):
             self.box.add(Label(label="Emoji", style_classes="panel-text"))
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text("Emoji Picker")
 
         self.popup = None

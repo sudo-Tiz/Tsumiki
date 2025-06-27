@@ -20,7 +20,7 @@ class MicrophoneIndicatorWidget(ButtonWidget):
 
         self.box.add(self.icon)
 
-        if self.config["label"]:
+        if self.config.get("label", True):
             self.mic_label = Label(
                 label="",
                 style_classes="panel-text",
@@ -38,10 +38,10 @@ class MicrophoneIndicatorWidget(ButtonWidget):
             self.icon.set_label(MIC_OFF_ICON if is_muted else MIC_ON_ICON)
 
             # Update the label  if enabled
-            if self.config["label"]:
+            if self.config.get("label", True):
                 self.mic_label.set_label("Off" if is_muted else "On")
 
-            if self.config["tooltip"]:
+            if self.config.get("tooltip", False):
                 self.set_tooltip_text(
                     "Microphone is muted" if is_muted else "Microphone is on"
                 )

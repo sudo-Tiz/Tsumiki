@@ -47,7 +47,7 @@ class VolumeWidget(EventBoxWidget):
         # Connect the event box to handle scroll events
         self.connect("scroll-event", self.on_scroll)
 
-        if self.config["label"]:
+        if self.config.get("label", True):
             self.volume_label = Label(style_classes="panel-text")
             self.box.add(self.volume_label)
 
@@ -66,7 +66,7 @@ class VolumeWidget(EventBoxWidget):
         if not self.audio.speaker:
             return
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text(self.audio.speaker.description)
 
         self.audio.speaker.connect("notify::volume", self.update_volume)
@@ -86,7 +86,7 @@ class VolumeWidget(EventBoxWidget):
             volume = round(self.audio.speaker.volume)
             self.progress_bar.set_value(volume / 100)
 
-            if self.config["label"]:
+            if self.config.get("label", True):
                 self.volume_label.set_text(f"{volume}%")
 
         self.icon.set_text(

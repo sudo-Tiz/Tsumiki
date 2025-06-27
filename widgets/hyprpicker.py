@@ -12,7 +12,7 @@ class HyprPickerWidget(ButtonWidget):
     def __init__(self, **kwargs):
         super().__init__(name="hyprpicker", **kwargs)
 
-        if self.config["show_icon"]:
+        if self.config.get("show_icon", True):
             # Create a TextIcon with the specified icon and size
             self.box.add(
                 nerd_font_icon(
@@ -21,14 +21,14 @@ class HyprPickerWidget(ButtonWidget):
                 )
             )
 
-        if self.config["label"]:
+        if self.config.get("label", True):
             self.box.add(Label(label="picker", style_classes="panel-text"))
 
         self.connect("button-press-event", self.on_button_press)
 
         self.initialized = False
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text("Pick a color")
 
     def lazy_init(self):

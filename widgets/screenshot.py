@@ -18,10 +18,10 @@ class ScreenShotWidget(ButtonWidget):
             props={"style_classes": "panel-font-icon"},
         )
 
-        if self.config["label"]:
+        if self.config.get("label", True):
             self.box.add(Label(label="screenshot", style_classes="panel-text"))
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text("Screen Shot")
 
         self.connect("clicked", self.handle_click)
@@ -37,7 +37,7 @@ class ScreenShotWidget(ButtonWidget):
 
         command = f"{self.script_file} area {self.config['path']}"
 
-        if self.config["annotation"]:
+        if self.config.get("annotation", True):
             command += " --annotate"
 
         exec_shell_command_async(command, lambda *_: None)

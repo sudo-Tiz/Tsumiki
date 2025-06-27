@@ -33,9 +33,11 @@ class GenericOSDContainer(Box):
             **kwargs,
         )
 
+        self.icon_size = config.get("icon_size", 28)
+
         self.icon = Image(
             icon_name=symbolic_icons["brightness"]["screen"],
-            icon_size=config["icon_size"],
+            icon_size=self.icon_size,
         )
         self.scale = create_scale(
             name="osd-scale",
@@ -94,7 +96,7 @@ class BrightnessOSDContainer(GenericOSDContainer):
 
     def update_icon(self, current_brightness):
         icon_name = get_brightness_icon_name(current_brightness)["icon"]
-        self.icon.set_from_icon_name(icon_name, self.config["icon_size"])
+        self.icon.set_from_icon_name(icon_name, self.icon_size)
 
     def on_brightness_changed(self, service, value):
         self.update_brightness()
@@ -164,7 +166,7 @@ class AudioOSDContainer(GenericOSDContainer):
         icon_name = get_audio_icon_name(volume, self.audio_service.speaker.muted)[
             "icon"
         ]
-        self.icon.set_from_icon_name(icon_name, self.config["icon_size"])
+        self.icon.set_from_icon_name(icon_name, self.icon_size)
 
 
 class OSDContainer(Window):

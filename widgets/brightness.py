@@ -56,7 +56,7 @@ class BrightnessWidget(EventBoxWidget):
         # Connect the event box to handle scroll events
         self.connect("scroll-event", self.on_scroll)
 
-        if self.config["label"]:
+        if self.config.get("label", True):
             self.brightness_label = Label(
                 label=f"{normalized_brightness}%",
                 style_classes="panel-text",
@@ -80,10 +80,10 @@ class BrightnessWidget(EventBoxWidget):
         )
         self.progress_bar.set_value(normalized_brightness / 100)
 
-        if self.config["label"]:
+        if self.config.get("label", True):
             self.brightness_label.set_text(f"{normalized_brightness}%")
 
         self.icon.set_text(get_brightness_icon_name(normalized_brightness)["icon_text"])
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text(f"{normalized_brightness}%")

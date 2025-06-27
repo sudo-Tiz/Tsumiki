@@ -618,10 +618,10 @@ class ClipHistoryWidget(ButtonWidget):
             )
         )
 
-        if self.config["label"]:
+        if self.config.get("label", True):
             self.box.add(Label(label="Clip", style_classes="panel-text"))
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text("Clipboard History")
 
         self.popup = None

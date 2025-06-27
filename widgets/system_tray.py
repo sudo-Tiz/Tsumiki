@@ -66,6 +66,9 @@ def resolve_icon(item, icon_size: int = 16):
         )
 
 
+# TODO: make a base class and reuse code
+
+
 class SystemTrayMenu(Box):
     """A widget to display additional system tray items in a grid."""
 
@@ -78,6 +81,8 @@ class SystemTrayMenu(Box):
         )
 
         self.config = config
+
+        self.icon_size = config.get("icon_size", 16)
 
         # Create a grid for the items
         self.grid = Grid(
@@ -126,8 +131,9 @@ class SystemTrayMenu(Box):
         return button
 
     def do_update_item_button(self, item: Gray.Item, button: HoverButton):
-        pixbuf = resolve_icon(item=item, icon_size=self.config["icon_size"])
-        button.set_image(Image(pixbuf=pixbuf))
+        button.set_image(
+            Image(pixbuf=resolve_icon(item=item, icon_size=self.icon_size))
+        )
 
     def on_button_click(self, button, item: Gray.Item, event):
         if event.button in (1, 3):
@@ -151,6 +157,8 @@ class SystemTrayWidget(ButtonWidget):
 
         # Create main tray box and toggle icon
         self.tray_box = Box(name="system-tray-box", orientation="horizontal", spacing=2)
+
+        self.icon_size = self.config.get("icon_size", 16)
 
         self.toggle_icon = nerd_font_icon(
             icon=text_icons["chevron"]["down"],
@@ -228,11 +236,14 @@ class SystemTrayWidget(ButtonWidget):
                 ),
             )
 
-            pixbuf = resolve_icon(
-                item=item,
-                icon_size=self.config["icon_size"],
+            button.set_image(
+                Image(
+                    pixbuf=resolve_icon(
+                        item=item,
+                        icon_size=self.icon_size,
+                    )
+                )
             )
-            button.set_image(Image(pixbuf=pixbuf))
 
             # Connect signals
             item.connect("removed", lambda *args: button.destroy())

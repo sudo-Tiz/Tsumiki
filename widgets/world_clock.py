@@ -17,7 +17,7 @@ class WorldClockWidget(ButtonWidget):
         self.clocks = []
         valid_zones = available_timezones()
 
-        if self.config["show_icon"]:
+        if self.config.get("show_icon", True):
             # Create a TextIcon with the specified icon and size
             self.icon = nerd_font_icon(
                 icon=self.config["icon"],
