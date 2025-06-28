@@ -519,21 +519,30 @@ def write_json_file(data: Dict, path: str):
 
 
 # Function to ensure the file exists
-def ensure_file(path: str):
+@run_in_thread
+def ensure_file(path: str) -> None:
     file = Gio.File.new_for_path(path)
     parent = file.get_parent()
 
-    if parent and not parent.query_exists(None):
-        parent.make_directory_with_parents(None)
+    try:
+        if parent and not parent.query_exists(None):
+            parent.make_directory_with_parents(None)
 
-    if not file.query_exists(None):
-        file.create(Gio.FileCreateFlags.NONE, None)
+        if not file.query_exists(None):
+            file.create(Gio.FileCreateFlags.NONE, None)
+    except GLib.Error as e:
+        print(f"Failed to ensure file '{path}': {e.message}")
 
 
 # Function to ensure the directory exists
+
+@run_in_thread
 def ensure_directory(path: str) -> None:
     if not GLib.file_test(path, GLib.FileTest.EXISTS):
-        Gio.File.new_for_path(path).make_directory_with_parents(None)
+        try:
+            Gio.File.new_for_path(path).make_directory_with_parents(None)
+        except GLib.Error as e:
+            print(f"Failed to create directory {path}: {e.message}")
 
 
 # Function to unique list

@@ -19,6 +19,7 @@ from services.network import NetworkService, Wifi
 from shared.buttons import HoverButton, QSChevronButton
 from shared.circle_image import CircleImage
 from shared.dialog import Dialog
+from shared.media import PlayerBoxStack
 from shared.popover import Popover
 from shared.widget_container import ButtonWidget
 from utils.icons import symbolic_icons
@@ -31,7 +32,6 @@ from widgets.quick_settings.submenu.hyprsunset import (
     HyprSunsetToggle,
 )
 
-from ..media import PlayerBoxStack
 from .shortcuts import ShortcutsContainer
 from .submenu.bluetooth import BluetoothSubMenu, BluetoothToggle
 from .submenu.power_profiles import PowerProfileSubMenu, PowerProfileToggle

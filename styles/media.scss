@@ -12,7 +12,13 @@
 }
 
 #player-stack-button {
-  @extend %dots_dots;
+
+  border-radius: 5px;
+  min-width: 7px;
+  min-height: 7px;
+  margin: 10px 3px;
+  background-color: theme.$text-main;
+
 
   &:hover {
     background-color: #646464;
