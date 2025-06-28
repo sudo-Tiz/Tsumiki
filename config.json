@@ -375,7 +375,7 @@
 			"play_sound": true,
 			"sound_file": "notification4",
 			"display_actions_on_hover": false, // this is to display the actions on hover
-			"dismiss_on_hover": true // this is to dismiss the notification on hover
+			"dismiss_on_hover": false // this is to dismiss the notification on hover
 		},
 		"osd": {
 			"enabled": true,

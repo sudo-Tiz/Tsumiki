@@ -2,7 +2,6 @@ from fabric import Service, Signal
 from gi.repository import Gio, GLib
 from loguru import logger
 
-from utils.colors import Colors
 from utils.dbus_helper import GioDBusHelper
 from utils.icons import text_icons
 
@@ -11,7 +10,7 @@ class PowerProfilesService(Service):
     """Service to interact with the PowerProfiles service via GIO."""
 
     @Signal
-    def profile(self, value: str) -> None:
+    def changed(self) -> None:
         """Signal emitted when profile changes."""
 
     _instance = None
@@ -55,7 +54,6 @@ class PowerProfilesService(Service):
 
         # Listen for PropertiesChanged signals
         self.dbus_helper.listen_signal(
-            sender=self.bus_name,
             member="PropertiesChanged",
             callback=self.handle_property_change,
         )
@@ -73,8 +71,9 @@ class PowerProfilesService(Service):
     def set_power_profile(self, profile: str):
         try:
             self.dbus_helper.set_property(
-                "ActiveProfile",
-                GLib.Variant("s", profile),
+                interface_name=self.interface_name,
+                property_name="ActiveProfile",
+                value_variant=GLib.Variant("s", profile),
             )
             logger.info(f"[PowerProfile] Power profile set to {profile}")
         except Exception as e:
@@ -83,16 +82,7 @@ class PowerProfilesService(Service):
             )
 
     def handle_property_change(self, *_args):
-        """Callback for property change signals.
-        args: (connection, sender_name, object_path,
-        interface_name, signal_name,parameters)"""
-
-        parameters = _args[-1]
-        interface, changed_props, _invalidated = parameters.unpack()
-        if "ActiveProfile" in changed_props:
-            new_profile = changed_props["ActiveProfile"]
-            logger.info(f"{Colors.INFO}Profile changed: {new_profile}")
-            self.emit("profile", new_profile)
+        self.emit("changed")
 
     def get_profile_icon(self, profile: str) -> str:
         return self.power_profiles.get(profile, self.power_profiles["balanced"]).get(

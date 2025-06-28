@@ -66,7 +66,6 @@ class PowerProfileSubMenu(QuickSubMenu):
     def __init__(self, **kwargs):
         self.client = PowerProfilesService()
         self.profiles = self.client.power_profiles
-        self.active = self.client.get_current_profile()
 
         self.profile_items = None
         self.scan_button = HoverButton()
@@ -90,23 +89,25 @@ class PowerProfileSubMenu(QuickSubMenu):
             self.on_child_revealed,
         )
 
-        # Update items when profile changes
-        self.client.connect("profile", self.on_profile_changed)
-
     def on_child_revealed(self, revealer, *_):
         """Callback when the submenu is revealed."""
 
         if self.profile_items is None:
             self.profile_items = [
-                PowerProfileItem(key=key, profile=profile, active=self.active)
+                PowerProfileItem(
+                    key=key, profile=profile, active=self.client.get_current_profile()
+                )
                 for key, profile in self.profiles.items()
             ]
 
             self.profile_box.children = self.profile_items
 
-    def on_profile_changed(self, _, profile):
-        for item in self.profile_items.values():
-            item.set_active(profile)
+        # Update items when profile changes
+        self.client.connect("changed", self.on_profile_changed)
+
+    def on_profile_changed(self, *_):
+        for item in self.profile_items:
+            item.set_active(self.client.get_current_profile())
 
 
 class PowerProfileToggle(QSChevronButton):
@@ -125,7 +126,7 @@ class PowerProfileToggle(QSChevronButton):
         self.action_button.set_sensitive(False)
 
         self.client.connect(
-            "profile",
+            "changed",
             self.update_action_button,
         )
 

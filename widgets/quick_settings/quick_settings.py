@@ -34,7 +34,7 @@ from widgets.quick_settings.submenu.hyprsunset import (
 from ..media import PlayerBoxStack
 from .shortcuts import ShortcutsContainer
 from .submenu.bluetooth import BluetoothSubMenu, BluetoothToggle
-from .submenu.power import PowerProfileSubMenu, PowerProfileToggle
+from .submenu.power_profiles import PowerProfileSubMenu, PowerProfileToggle
 from .submenu.wifi import WifiSubMenu, WifiToggle
 from .togglers import (
     HyprIdleQuickSetting,

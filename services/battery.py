@@ -49,7 +49,6 @@ class BatteryService(Service):
 
         # Listen for PropertiesChanged signals
         self.dbus_helper.listen_signal(
-            sender=self.bus_name,
             member="PropertiesChanged",
             callback=self.handle_property_change,
         )
@@ -77,4 +76,5 @@ class BatteryService(Service):
 
     def handle_property_change(self, *_):
         # You may filter which property changed by checking parameters[1]
+
         self.emit("changed")

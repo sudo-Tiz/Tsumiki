@@ -11,7 +11,6 @@ class ScreenShotWidget(ButtonWidget):
     def __init__(self, **kwargs):
         super().__init__(name="screenshot", **kwargs)
 
-        self.initialized = False
 
         self.box.children = nerd_font_icon(
             self.config["icon"],
