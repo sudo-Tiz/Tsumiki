@@ -358,9 +358,7 @@ class DateNotificationMenu(Box):
             fabric_notification,
         )
 
-        self.notifications_listbox.add(
-            notification_item,
-        )
+        self.notifications_listbox.insert(notification_item, 0)
 
         self.placeholder.set_visible(False)
         self.notifications_listbox.set_visible(True)

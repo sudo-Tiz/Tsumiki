@@ -62,6 +62,8 @@ class CustomNotifications(Notifications):
                 with open(NOTIFICATION_CACHE_FILE, "r") as file:
                     notifications = json.load(file)
 
+                    notifications.reverse()
+
                 def validate_with_id(notif):
                     """Helper to validate and return ID if valid."""
                     try:
