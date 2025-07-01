@@ -387,7 +387,7 @@
 		},
 		"screen_corners": {
 			"enabled": false,
-			"size": 12
+			"size": 20
 		},
 		"dock": {
 			"enabled": false,
