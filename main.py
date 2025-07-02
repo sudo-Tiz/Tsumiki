@@ -1,3 +1,4 @@
+import os
 import setproctitle
 from fabric import Application
 from fabric.utils import exec_shell_command, get_relative_path
@@ -42,7 +43,6 @@ if not general_options["debug"]:
 
 def main():
     """Main function to run the application."""
-    logger.info(f"{Colors.INFO}[Main] Starting {APPLICATION_NAME}...")
 
     helpers.ensure_directory(APP_CACHE_DIRECTORY)
     helpers.copy_theme(theme_config["name"])
@@ -95,6 +95,8 @@ def main():
     # Run the application
     app.run()
 
+    logger.info(f"{Colors.INFO}[Main] Starting {APPLICATION_NAME}...")
+    logger.info(f"Starting shell... pid:{os.getpid()}")
 
 if __name__ == "__main__":
     main()
