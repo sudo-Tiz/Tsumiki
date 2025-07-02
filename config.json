@@ -374,6 +374,7 @@
 			"transition_duration": 350,
 			"play_sound": true,
 			"sound_file": "notification4",
+			"persist": true, // this is to persist the notification
 			"display_actions_on_hover": false, // this is to display the actions on hover
 			"dismiss_on_hover": false // this is to dismiss the notification on hover
 		},

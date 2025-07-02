@@ -11,6 +11,9 @@
 
 Tsumiki is a modular status bar for the Hyprland Wayland compositor. Built on [Fabric Widget System](https://github.com/Fabric-Development/fabric), it offers a flexible architecture for building custom panels with individual widgets. It’s designed to be lightweight, performant, and user-configurable.
 
+
+The name Tsumiki (pronounced as su-me-ki) comes from the Japanese word "tsumiki" (積み木), which means "building blocks". Just like toy blocks that stack together to form something greater, Tsumiki is designed to be modular, lightweight, and easy to build upon
+
 <h2><sub><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Camera%20with%20Flash.png" alt="Camera with Flash" width="25" height="25" /></sub> Screenshots</h2>
 
 <table align="center">

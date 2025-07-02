@@ -273,6 +273,10 @@
 							"type": "boolean",
 							"description": "Determines whether notifications are automatically dismissed"
 						},
+						"persist": {
+							"type": "boolean",
+							"description": "Determines whether notifications are persisted to the notification history"
+						},
 						"timeout": {
 							"type": "integer",
 							"description": "Timeout in milliseconds before notifications are dismissed"

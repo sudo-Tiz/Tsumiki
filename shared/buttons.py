@@ -8,7 +8,7 @@ from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
 from utils.bezier import cubic_bezier
-from utils.icons import symbolic_icons
+from utils.icons import symbolic_icons, text_icons
 from utils.widget_utils import nerd_font_icon, setup_cursor_hover
 
 from .animator import Animator
@@ -68,7 +68,7 @@ class QSToggleButton(Box):
     def __init__(
         self,
         action_label: str = "My Label",
-        action_icon: str = symbolic_icons["fallback"]["package"],
+        action_icon: str = text_icons["ui"]["package"],
         pixel_size: int = 18,
         **kwargs,
     ):
@@ -148,6 +148,7 @@ class QSChevronButton(QSToggleButton):
     ):
         self.submenu = submenu
 
+        # TODO: change to text_icons
         self.button_image = Image(
             icon_name=symbolic_icons["ui"]["arrow"]["right"], icon_size=20
         )

@@ -70,9 +70,11 @@ class NotificationPopup(Window):
             f"{Colors.INFO}[Notification] New notification from "
             f"{Colors.OKGREEN}{notification.app_name}"
         )
-        self._server.cache_notification(
-            self.widget_config, notification, self.config["max_count"]
-        )
+
+        if self.config.get("persist", True):
+            self._server.cache_notification(
+                self.widget_config, notification, self.config["max_count"]
+            )
 
         if self.config.get("play_sound", False):
             helpers.play_sound(

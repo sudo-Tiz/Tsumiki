@@ -15,6 +15,7 @@ text_icons = {
         "printer": "󰐪",
         "camera": "",
         "speakers": "󰓃",
+        "package": "",
     },
     "wifi": {
         "connected": "󰤨",

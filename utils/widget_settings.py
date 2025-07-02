@@ -109,6 +109,7 @@ Notification = TypedDict(
         "timeout": int,
         "anchor": Anchor,
         "auto_dismiss": bool,
+        "persist": bool,
         "play_sound": bool,
         "sound_file": str,
         "max_count": int,
