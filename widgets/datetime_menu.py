@@ -375,52 +375,55 @@ class DateTimeWidget(ButtonWidget):
 
         self.popup = None
 
-        self.notification_indicator = nerd_font_icon(
-            icon=text_icons["notifications"]["noisy"],
-            name="notification-indicator",
-            props={
-                "style_classes": ["panel-font-icon"],
-                "visible": notification_config["enabled"],
-            },
+        outer_box = Box(
+            spacing=10,
+            v_align="center",
         )
 
-        self.count_label = Label(
-            name="notification-count",
-            label=str(notification_service.count),
-            v_align="start",
-            visible=notification_config["enabled"] and notification_config["count"],
-        )
+        self.children = outer_box
 
-        if (
-            notification_config["hide_count_on_zero"]
-            and notification_service.count == 0
-        ):
-            self.count_label.set_visible(False)
+        if notification_config["enabled"]:
+            self.notification_indicator = nerd_font_icon(
+                icon=text_icons["notifications"]["noisy"],
+                name="notification-indicator",
+                props={
+                    "style_classes": ["panel-font-icon"],
+                    "visible": notification_config["enabled"],
+                },
+            )
 
-        self.notification_indicator_box = Box(
-            children=(self.notification_indicator, self.count_label)
-        )
+            self.count_label = Label(
+                name="notification-count",
+                label=str(notification_service.count),
+                v_align="start",
+                visible=notification_config["enabled"] and notification_config["count"],
+            )
+
+            if (
+                notification_config["hide_count_on_zero"]
+                and notification_service.count == 0
+            ):
+                self.count_label.set_visible(False)
+
+            self.notification_indicator_box = Box(
+                children=(self.notification_indicator, self.count_label)
+            )
+
+            bulk_connect(
+                notification_service,
+                {
+                    "notification_count": self.on_notification_count,
+                    "dnd": self.on_dnd_switch,
+                },
+            )
+
+            outer_box.add(self.notification_indicator_box)
+
+        outer_box.add(DateTime(self.config["format"], name="date-time"))
 
         self.connect(
             "clicked",
             self.show_popover,
-        )
-
-        self.children = Box(
-            spacing=10,
-            v_align="center",
-            children=(
-                self.notification_indicator_box,
-                DateTime(self.config["format"], name="date-time"),
-            ),
-        )
-
-        bulk_connect(
-            notification_service,
-            {
-                "notification_count": self.on_notification_count,
-                "dnd": self.on_dnd_switch,
-            },
         )
 
     def on_notification_count(self, _, value, *args):
