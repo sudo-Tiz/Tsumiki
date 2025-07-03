@@ -56,20 +56,22 @@ class KeyboardLayoutWidget(ButtonWidget):
 
     def get_keyboard(self):
         data = json.loads(str(self.connection.send_command("j/devices").reply.decode()))
-        keyboards = data["keyboards"]
-        if len(keyboards) == 0:
+
+        keyboards = data.get("keyboards", [])
+        if not keyboards:
             return "Unknown"
 
-        main_kb = next((kb for kb in keyboards if kb["main"]), None)
-
-        if not main_kb:
-            main_kb = keyboards[len(keyboards) - 1]
+        main_kb = next((kb for kb in keyboards if kb.get("main")), keyboards[-1])
 
         layout = main_kb["active_keymap"]
 
+        label = KBLAYOUT_MAP.get(layout, layout)
+
         if self.config.get("tooltip", False):
+            caps = "On" if main_kb["capsLock"] else "Off"
+            num = "On" if main_kb["numLock"] else "Off"
             self.set_tooltip_text(
-                f"Caps Lock 󰪛: {main_kb['capsLock']} | Num Lock : {main_kb['numLock']}"
+                f"Layout: {layout} | Caps Lock 󰪛: {caps} | Num Lock : {num}"
             )
 
-        self.kb_label.set_label(KBLAYOUT_MAP[layout])
+        self.kb_label.set_label(label)
