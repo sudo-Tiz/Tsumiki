@@ -6,6 +6,7 @@ from gi.repository import Gio, GLib
 from loguru import logger
 
 import utils.functions as helpers
+from utils.constants import APPLICATION_NAME
 from utils.icons import symbolic_icons
 
 
@@ -60,7 +61,7 @@ class ScreenRecorderService(Service):
                 "-i",
                 symbolic_icons["ui"]["camera"],
                 "-a",
-                "HydePanel Screenshot Utility",
+                f"{APPLICATION_NAME} Screenshot Utility",
                 "-h",
                 f"STRING:image-path:{file_path}",
                 "Screenshot Saved",
@@ -126,7 +127,7 @@ class ScreenRecorderService(Service):
                 "-i",
                 symbolic_icons["ui"]["camera-video"],
                 "-a",
-                "HyDePanel Recording Utility",
+                f"{APPLICATION_NAME} Recording Utility",
                 "Screenrecord Saved",
                 f"Saved Screencast at {file_path}",
             ]
