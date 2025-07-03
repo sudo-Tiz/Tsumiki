@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 
@@ -7,8 +5,6 @@ from services.battery import BatteryService
 from shared.widget_container import ButtonWidget
 from utils.functions import format_time
 from utils.icons import symbolic_icons
-
-NOTIFICATION_TIMEOUT = 60 * 5  # 5 minutes
 
 
 class BatteryWidget(ButtonWidget):
@@ -42,7 +38,6 @@ class BatteryWidget(ButtonWidget):
         self.notification_time = 0
 
         self.client.connect("changed", self.update_ui)
-        self.time_since_last_notification = datetime.now()
 
         self.update_ui()
 
