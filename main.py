@@ -1,6 +1,9 @@
+import os
+
 import setproctitle
 from fabric import Application
 from fabric.utils import exec_shell_command, get_relative_path
+from gi.repository import GLib
 from loguru import logger
 
 import utils.functions as helpers
@@ -18,11 +21,11 @@ def process_and_apply_css(app: Application):
 
     if output == "":
         logger.info(f"{Colors.INFO}[Main] CSS applied")
-        app.set_stylesheet_from_file(get_relative_path("dist/main.css"))
+        GLib.idle_add(app.set_stylesheet_from_file, get_relative_path("dist/main.css"))
     else:
         logger.exception(f"{Colors.ERROR}[Main]Failed to compile sass!")
         logger.exception(f"{Colors.ERROR}[Main] {output}")
-        app.set_stylesheet_from_string("")
+        GLib.idle_add(app.set_stylesheet_from_string, "")
 
 
 general_options = widget_config["general"]
@@ -42,7 +45,6 @@ if not general_options["debug"]:
 
 def main():
     """Main function to run the application."""
-    logger.info(f"{Colors.INFO}[Main] Starting {APPLICATION_NAME}...")
 
     helpers.ensure_directory(APP_CACHE_DIRECTORY)
     helpers.copy_theme(theme_config["name"])
@@ -94,6 +96,9 @@ def main():
 
     # Run the application
     app.run()
+
+    logger.info(f"{Colors.INFO}[Main] Starting {APPLICATION_NAME}...")
+    logger.info(f"Starting shell... pid:{os.getpid()}")
 
 
 if __name__ == "__main__":
