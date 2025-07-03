@@ -101,7 +101,7 @@
 		"scaling": 100,
 		"opacity": 70,
 		"style": {
-			"panel": "default",
+			"panel": "scoop",
 			"widget": "default"
 		},
 		"shadow": {
