@@ -1,7 +1,7 @@
 import os
 
 import pyjson5 as json
-import pytomlpp
+import pytomlpp as toml
 from fabric.utils import get_relative_path
 from loguru import logger
 
@@ -27,6 +27,9 @@ class TsumikiConfig:
         return cls._instance
 
     def __init__(self):
+        if getattr(self, "_initialized", False):
+            return
+
         self.json_config_file = get_relative_path("../config.json")
         self.toml_config_file = get_relative_path("../config.toml")
         self.theme_config_file = get_relative_path("../theme.json")
@@ -36,6 +39,7 @@ class TsumikiConfig:
         self.theme_config = self.read_json(self.theme_config_file)
 
         self.set_css_settings()
+        self._initialized = True
 
     def read_json(self, file) -> dict:
         logger.info(f"[Config] Reading json config from {file}")
@@ -48,7 +52,7 @@ class TsumikiConfig:
         logger.info(f"[Config] Reading toml config from {self.toml_config_file}")
         with open(self.toml_config_file) as file:
             # Load JSON data into a Python dictionary
-            data = pytomlpp.load(file)
+            data = toml.load(file)
         return data
 
     def default_config(self) -> BarConfig:
@@ -86,6 +90,7 @@ class TsumikiConfig:
         css_styles = flatten_dict(exclude_keys(self.theme_config, ["name"]))
 
         settings = ""
+
         for setting in css_styles:
             # Convert python boolean to scss boolean
             value = (
