@@ -47,6 +47,12 @@ class BatteryWidget(ButtonWidget):
         """
         is_present = self.client.get_property("IsPresent") == 1
 
+        if not is_present:
+            self.set_tooltip_text("󰂎 No battery present")
+            if self.config.get("label", True):
+                self.battery_label.set_text("N/A")
+            return True
+
         battery_percent = (
             round(self.client.get_property("Percentage")) if is_present else 0
         )
@@ -55,14 +61,14 @@ class BatteryWidget(ButtonWidget):
 
         is_charging = battery_state == 1 if is_present else False
 
-        temperature = self.client.get_property("Temperature")
-        energy = self.client.get_property("Energy")
+        temperature = self.client.get_property("Temperature") or 0
+        energy = self.client.get_property("Energy") or 0
 
         time_remaining = (
             self.client.get_property("TimeToFull")
             if is_charging
             else self.client.get_property("TimeToEmpty")
-        )
+        ) or 0
 
         self.battery_icon.set_from_icon_name(
             self.client.get_property("IconName"), self.config["icon_size"]
@@ -90,9 +96,8 @@ class BatteryWidget(ButtonWidget):
             )
             formatted_time = format_time(time_remaining)
             if battery_percent == self.full_battery_level:
-                self.set_tooltip_text(
-                    f"{status_text}\n󰄉 Time to full: 0\n{tool_tip_text}"
-                )
+                self.set_tooltip_text(f"󱠴 Status: Fully Charged\n{tool_tip_text}")
+
             elif is_charging and battery_percent < self.full_battery_level:
                 self.set_tooltip_text(
                     f"{status_text}\n󰄉 Time to full: {formatted_time}\n{tool_tip_text}"
