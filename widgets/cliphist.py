@@ -53,7 +53,6 @@ class ClipHistoryMenu(Box):
 
         self.viewport = ListBox(name="viewport", spacing=4, orientation="v")
 
-
         self.search_entry = Entry(
             name="search-entry",
             placeholder="Search Clipboard History",
