@@ -9,11 +9,11 @@ from fabric.utils import (
 from fabric.widgets.label import Label
 from loguru import logger
 
-from shared import ButtonWidget
-from utils import BarConfig, Colors, run_in_thread
+from shared.widget_container import ButtonWidget
+from utils.colors import Colors
 from utils.widget_utils import (
-    text_icon,
-    util_fabricator,
+    nerd_font_icon,
+    reusable_fabricator,
 )
 
 
@@ -22,37 +22,35 @@ class UpdatesWidget(ButtonWidget):
 
     def __init__(
         self,
-        widget_config: BarConfig,
         **kwargs,
     ):
         # Initialize the EventBox with specific name and style
-        super().__init__(widget_config["updates"], name="updates", **kwargs)
+        super().__init__(name="updates", **kwargs)
 
         self.update_time = datetime.now()
 
         script_file = get_relative_path("../assets/scripts/systemupdates.sh")
 
-        self.update_label = Label(label="0", style_classes="panel-text")
-
         self.base_command = f"{script_file} --{self.config['os']}"
 
-        if self.config["flatpak"]:
+        if self.config.get("flatpak", True):
             self.base_command += " --flatpak"
 
-        if self.config["snap"]:
+        if self.config.get("snap", True):
             self.base_command += " --snap"
 
-        if self.config["brew"]:
+        if self.config.get("brew", True):
             self.base_command += " --brew"
 
-        if self.config["show_icon"]:
-            self.icon = text_icon(
+        if self.config.get("show_icon", True):
+            self.icon = nerd_font_icon(
                 icon=self.config["icon"],
-                props={"style_classes": "panel-icon"},
+                props={"style_classes": "panel-font-icon"},
             )
             self.box.add(self.icon)
 
-        if self.config["label"]:
+        if self.config.get("label", True):
+            self.update_label = Label(label="0", style_classes="panel-text")
             self.box.add(self.update_label)
 
         self.connect("button-press-event", self.on_button_press)
@@ -61,7 +59,7 @@ class UpdatesWidget(ButtonWidget):
         self.check_update()
 
         # reusing the fabricator to call specified intervals
-        util_fabricator.connect("changed", self.should_update)
+        reusable_fabricator.connect("changed", self.should_update)
 
     def should_update(self, *_):
         """
@@ -80,14 +78,14 @@ class UpdatesWidget(ButtonWidget):
 
         value = json.loads(value)
 
-        # Update the label if enabled
-        if self.config["label"]:
-            self.update_label.set_label(value["total"])
+        if value["total"] > "0":
+            # Update the label if enabled
+            if self.config.get("label", True):
+                self.update_label.set_label(value["total"])
+            if self.config.get("show_icon", True):
+                self.icon.set_label("󱧘")
 
-        # Update the tooltip if enabled
-        if self.config["tooltip"]:
             self.set_tooltip_text(value["tooltip"])
-        return True
 
     def on_button_press(self, _, event):
         if event.button == 1:
@@ -97,7 +95,6 @@ class UpdatesWidget(ButtonWidget):
         return True
 
     @cooldown(1)
-    @run_in_thread
     def check_update(self, update=False):
         # Execute the update script asynchronously and update values
 

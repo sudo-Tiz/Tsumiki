@@ -95,16 +95,7 @@
   border: variable.$border;
 }
 
-%dots_dots {
-  border-radius: 5px;
-  min-width: 7px;
-  min-height: 7px;
-  margin: 10px 3px;
-  background-color: theme.$text-main;
-}
-
-@mixin slider(
-  $height: 11px,
+@mixin slider($height: 11px,
   $highlight-color: white,
   $slider: false,
   $radius: variable.$radius,
@@ -159,6 +150,7 @@
   }
 
   &:disabled {
+
     highlight,
     progress {
       background-color: color.mix(theme.$text-main, transparent, 60%);
@@ -254,6 +246,7 @@
   @if $type ==flat {
     @extend .flat;
   }
+
 
   @else if $type ==shadow {
     @extend .shadow;

@@ -3,15 +3,15 @@ import re
 from fabric.hyprland.widgets import ActiveWindow
 from fabric.utils import FormattedString, truncate
 
-from shared import ButtonWidget
-from utils import WINDOW_TITLE_MAP, BarConfig
+from shared.widget_container import ButtonWidget
+from utils.constants import WINDOW_TITLE_MAP
 
 
 class WindowTitleWidget(ButtonWidget):
     """a widget that displays the title of the active window."""
 
-    def __init__(self, widget_config: BarConfig, **kwargs):
-        super().__init__(widget_config["window_title"], name="window_title", **kwargs)
+    def __init__(self, **kwargs):
+        super().__init__(name="window_title", **kwargs)
 
         # Create an ActiveWindow widget to track the active window
         self.window = ActiveWindow(
@@ -29,7 +29,7 @@ class WindowTitleWidget(ButtonWidget):
         # Truncate the window title based on the configured length
         win_title = (
             truncate(win_title, self.config["truncation_size"])
-            if self.config["truncation"]
+            if self.config.get("truncation", True)
             else win_title
         )
 
@@ -48,6 +48,6 @@ class WindowTitleWidget(ButtonWidget):
         # Return the formatted title with or without the icon
         return (
             f"{matched_window[1]} {matched_window[2]}"
-            if self.config["icon"]
+            if self.config.get("icon", True)
             else f"{matched_window[2]}"
         )

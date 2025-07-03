@@ -1,4 +1,3 @@
-import subprocess
 from datetime import datetime
 
 from fabric.core.service import Property, Service, Signal
@@ -7,21 +6,21 @@ from gi.repository import Gio, GLib
 from loguru import logger
 
 import utils.functions as helpers
-from utils.icons import icons
+from utils.icons import symbolic_icons
 
 
-class ScreenRecorder(Service):
+class ScreenRecorderService(Service):
     """Service to handle screen recording"""
-
-    _instance = None  # Class-level private instance variable
-
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super(ScreenRecorder, cls).__new__(cls)
-        return cls._instance
 
     @Signal
     def recording(self, value: bool) -> None: ...
+
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -29,10 +28,8 @@ class ScreenRecorder(Service):
     def screenrecord_start(self, path, allow_audio, fullscreen=False):
         self.screenrecord_path = f"{GLib.get_home_dir()}/{path}"
 
-        helpers.ensure_directory(self.screenrecord_path)
-
         if self.is_recording:
-            logger.error(
+            logger.exception(
                 "[SCREENRECORD] Another instance of wf-recorder is already running."
             )
             return
@@ -58,8 +55,10 @@ class ScreenRecorder(Service):
                 "view=View",
                 "-A",
                 "edit=Edit",
+                "-t",
+                "5000",
                 "-i",
-                icons["ui"]["camera"],
+                symbolic_icons["ui"]["camera"],
                 "-a",
                 "HydePanel Screenshot Utility",
                 "-h",
@@ -77,7 +76,7 @@ class ScreenRecorder(Service):
             try:
                 _, stdout, stderr = process.communicate_utf8_finish(task)
             except Exception:
-                logger.error(
+                logger.exception(
                     f"[SCREENSHOT] Failed read notification action with error {stderr}"
                 )
                 return
@@ -95,8 +94,6 @@ class ScreenRecorder(Service):
     def screenshot(self, path, fullscreen=False, save_copy=True):
         self.screenshot_path = f"{GLib.get_home_dir()}/{path}"
 
-        helpers.ensure_directory(self.screenshot_path)
-
         time = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
         file_path = f"{self.screenshot_path}/{time}.png"
         command = (
@@ -107,12 +104,14 @@ class ScreenRecorder(Service):
         if not fullscreen:
             command[2] = "area"
         try:
-            subprocess.run(command, check=True)
-            self.send_screenshot_notification(
-                file_path=file_path if file_path else None,
+            exec_shell_command_async(
+                " ".join(command),
+                lambda *_: self.send_screenshot_notification(
+                    file_path=file_path if file_path else None,
+                ),
             )
         except Exception:
-            logger.error(f"[SCREENSHOT] Failed to run command: {command}")
+            logger.exception(f"[SCREENSHOT] Failed to run command: {command}")
 
     def send_screenrecord_notification(self, file_path):
         cmd = ["notify-send"]
@@ -122,8 +121,10 @@ class ScreenRecorder(Service):
                 "files=Show in Files",
                 "-A",
                 "view=View",
+                "-t",
+                "5000",
                 "-i",
-                icons["ui"]["camera-video"],
+                symbolic_icons["ui"]["camera-video"],
                 "-a",
                 "HyDePanel Recording Utility",
                 "Screenrecord Saved",
@@ -137,7 +138,7 @@ class ScreenRecorder(Service):
             try:
                 _, stdout, stderr = process.communicate_utf8_finish(task)
             except Exception:
-                logger.error(
+                logger.exception(
                     f"[SCREENRECORD] Failed read notification action with error."
                     f"{stderr}"
                 )

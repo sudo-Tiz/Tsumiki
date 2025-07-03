@@ -1,10 +1,12 @@
 import subprocess
 
 from fabric.widgets.box import Box
-from fabric.widgets.image import Image
+from fabric.widgets.grid import Grid
 from fabric.widgets.label import Label
+from loguru import logger
 
-from shared import Grid, HoverButton
+from shared.buttons import HoverButton
+from utils.widget_utils import nerd_font_icon
 
 
 class ShortcutButton(HoverButton):
@@ -18,12 +20,14 @@ class ShortcutButton(HoverButton):
         box = Box(orientation="v", spacing=4, v_expand=True)
 
         if "icon" in shortcut_config:
-            icon = Image(
-                icon_name=shortcut_config["icon"],
-                icon_size=shortcut_config["icon_size"],
-                v_align="center",
-                h_align="center",
+            icon = nerd_font_icon(
+                icon=shortcut_config["icon"],
+                props={
+                    "style_classes": ["panel-font-icon", "shortcut-icon"],
+                    "style": f"font-size: {shortcut_config['icon_size']}px;",
+                },
             )
+
             box.add(icon)
 
         if "label" in shortcut_config:
@@ -46,7 +50,7 @@ class ShortcutButton(HoverButton):
         try:
             subprocess.Popen(["hyprctl", "dispatch", "exec", self.command])
         except Exception as e:
-            print(f"Error executing shortcut command: {e}")
+            logger.exception(f"Error executing shortcut command: {e}")
 
 
 class ShortcutsContainer(Box):
@@ -73,16 +77,11 @@ class ShortcutsContainer(Box):
         # Use single column for 1-2 shortcuts, 2x2 grid for 3-4
         num_cols = 2 if num_shortcuts > 2 else 1
 
-        for i, shortcut in enumerate(shortcuts_config):
-            button = ShortcutButton(shortcut, h_expand=True)
-
-            if num_cols == 1:
-                # Single column - stack vertically
-                grid.attach(button, 0, i, 1, 1)
-            else:
-                # 2x2 grid - fill vertically first
-                row = i % 2
-                col = i // 2
-                grid.attach(button, col, row, 1, 1)
+        grid.attach_flow(
+            children=[
+                ShortcutButton(shortcut, h_expand=True) for shortcut in shortcuts_config
+            ],
+            columns=num_cols,
+        )
 
         self.add(grid)

@@ -4,10 +4,9 @@ from fabric.utils import exec_shell_command_async, get_relative_path
 from fabric.widgets.label import Label
 from gi.repository import Gdk, Gtk
 
-from shared import ButtonWidget
-from utils import BarConfig
+from shared.widget_container import ButtonWidget
 from utils.functions import ttl_lru_cache
-from utils.widget_utils import text_icon
+from utils.widget_utils import nerd_font_icon
 
 
 class OCRWidget(ButtonWidget):
@@ -17,32 +16,37 @@ class OCRWidget(ButtonWidget):
     Right-click to select the OCR language from available tesseract language packs.
     """
 
-    def __init__(self, widget_config: BarConfig, **kwargs):
-        super().__init__(widget_config["ocr"], name="ocr", **kwargs)
+    def __init__(self, **kwargs):
+        super().__init__(name="ocr", **kwargs)
 
         self.current_lang = "eng"  # default
-        self.script_file = get_relative_path("../assets/scripts/ocr.sh")
+        self.initialized = False
 
-        self.ocr_label = Label(label="Ocr", style_classes="panel-text")
-
-        if self.config["show_icon"]:
+        if self.config.get("show_icon", True):
             # Create a TextIcon with the specified icon and size
-            self.icon = text_icon(
+            self.icon = nerd_font_icon(
                 icon=self.config["icon"],
-                props={"style_classes": "panel-icon"},
+                props={"style_classes": "panel-font-icon"},
             )
             self.box.add(self.icon)
 
-        if self.config["label"]:
-            self.box.add(self.ocr_label)
+        if self.config.get("label", True):
+            self.box.add(Label(label="Ocr", style_classes="panel-text"))
 
         # Left click for OCR
         self.connect("button-press-event", self.on_button_press)
 
-        if self.config["tooltip"]:
+        if self.config.get("tooltip", False):
             self.set_tooltip_text("Left click to OCR, right click to select language")
 
+    def lazy_init(self):
+        if not self.initialized:
+            self.script_file = get_relative_path("../assets/scripts/ocr.sh")
+            self.initialized = True
+
     def on_button_press(self, _, event):
+        self.lazy_init()
+
         if event.button == 3:  # Right click
             self.show_language_menu()
         else:  # Left click
@@ -51,7 +55,7 @@ class OCRWidget(ButtonWidget):
             )
 
     def show_language_menu(self):
-        menu = Gtk.Menu()
+        menu = Gtk.Menu(visible=True)
         menu.set_name("ocr-menu")  # For CSS targeting
 
         # Get available languages
@@ -59,7 +63,7 @@ class OCRWidget(ButtonWidget):
 
         for lang in langs:
             if lang != "osd":  # Skip the OSD option
-                item = Gtk.MenuItem(label=lang)
+                item = Gtk.MenuItem(label=lang, visible=True)
                 label = item.get_child()
                 label.set_name("ocr-menu-item")  # For CSS targeting
                 if lang == self.current_lang:
@@ -67,7 +71,6 @@ class OCRWidget(ButtonWidget):
                 item.connect("activate", self.on_language_selected, lang)
                 menu.append(item)
 
-        menu.show_all()
         menu.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, None)
 
     @ttl_lru_cache(600, 10)
