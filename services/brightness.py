@@ -56,6 +56,9 @@ class BrightnessService(Service):
         # Path for screen backlight control
         self.screen_backlight_path = f"/sys/class/backlight/{self.screen_device}"
 
+        # Path for keyboard backlight control
+        self.kbd_backlight_path = f"/sys/class/leds/{self.kbd}"
+
         # Initialize maximum brightness level
         self.max_screen = self.do_read_max_brightness(self.screen_backlight_path)
 

@@ -158,15 +158,15 @@ class CustomNotifications(Notifications):
     def _cleanup_invalid_notifications(self):
         """Remove any invalid notifications."""
 
-        def validate_with_id(notif):
+        def validate_with_id(notification):
             """Helper to validate and return result with ID."""
             try:
-                self._deserialize_notification(notif)
-                return (True, notif, None)
+                self._deserialize_notification(notification)
+                return (True, notification, None)
             except Exception as e:
                 msg = f"[Notification] Removing invalid: {str(e)[:50]}"
                 logger.debug(msg)
-                return (False, None, notif.get("id", 0))
+                return (False, None, notification.get("id", 0))
 
         # Validate all notifications at once
         results = [validate_with_id(n) for n in self.all_notifications]
@@ -197,28 +197,32 @@ class CustomNotifications(Notifications):
     def clear_all_notifications(self):
         """Empty the notifications."""
         logger.info("[Notification] Clearing all notifications")
+
         # Clear notifications but preserve the highest ID we've seen
         highest_id = self._count
+
         self.all_notifications = []
         write_json_file(self.all_notifications, NOTIFICATION_CACHE_FILE)
+
         logger.info(f"{Colors.INFO}[Notification] Notifications written successfully.")
 
         self.emit("notification_count", 0)
         self.emit("clear_all", True)
+
         # Restore the ID counter so new notifications get unique IDs
         self._count = highest_id
 
     def get_deserialized(self) -> List[Notification]:
         """Return the notifications."""
 
-        def deserialize_with_id(notif):
+        def deserialize_with_id(notification):
             """Helper to deserialize and return result with ID."""
             try:
-                return (self._deserialize_notification(notif), None)
+                return (self._deserialize_notification(notification), None)
             except Exception as e:
                 msg = f"[Notification] Deserialize failed: {str(e)[:50]}"
                 logger.exception(f"{Colors.INFO}{msg}")
-                return (None, notif.get("id"))
+                return (None, notification.get("id"))
 
         # Process all notifications at once
         results = [

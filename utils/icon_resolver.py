@@ -8,10 +8,8 @@ from loguru import logger
 from utils.thread import run_in_thread
 
 from .colors import Colors
-from .constants import APP_CACHE_DIRECTORY
+from .constants import ICON_CACHE_FILE
 from .icons import symbolic_icons
-
-ICON_CACHE_FILE = APP_CACHE_DIRECTORY + "/icons.json"
 
 
 class IconResolver:
