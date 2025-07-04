@@ -380,10 +380,8 @@ def check_if_day(sunrise_time, sunset_time, current_time: str | None = None) -> 
     # Compare current time with sunrise and sunset
     if sunrise_time_obj <= sunset_time_obj:
         return sunrise_time_obj <= current_time_obj < sunset_time_obj
-    else:
-        return (
-            current_time_obj >= sunrise_time_obj or current_time_obj < sunset_time_obj
-        )
+
+    return current_time_obj >= sunrise_time_obj or current_time_obj < sunset_time_obj
 
 
 # wttr.in time are in 300,400...2100 format , we need to convert it to 4:00...21:00

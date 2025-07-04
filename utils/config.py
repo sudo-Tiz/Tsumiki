@@ -44,7 +44,7 @@ class TsumikiConfig:
     def read_json(self, file) -> dict:
         logger.info(f"[Config] Reading json config from {file}")
         try:
-            with open(file) as file:
+            with open(file, "r") as file:
                 # Load JSON data into a Python dictionary
                 data = json.load(file)
         except Exception as e:
@@ -55,7 +55,7 @@ class TsumikiConfig:
     def read_config_toml(self) -> dict:
         logger.info(f"[Config] Reading toml config from {self.toml_config_file}")
         try:
-            with open(self.toml_config_file) as file:
+            with open(self.toml_config_file, "r") as file:
                 # Load JSON data into a Python dictionary
                 data = toml.load(file)
         except Exception as e:

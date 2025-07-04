@@ -85,7 +85,7 @@ class BrightnessService(Service):
         # Reads the maximum brightness value from the specified path.
         max_brightness_path = os.path.join(path, "max_brightness")
         if os.path.exists(max_brightness_path):
-            with open(max_brightness_path) as f:
+            with open(max_brightness_path, "r") as f:
                 return int(f.readline())
         return -1  # Return -1 if file doesn't exist, indicating an error.
 
@@ -94,7 +94,7 @@ class BrightnessService(Service):
         # Property to get or set the screen brightness.
         brightness_path = os.path.join(self.screen_backlight_path, "brightness")
         if os.path.exists(brightness_path):
-            with open(brightness_path) as f:
+            with open(brightness_path, "r") as f:
                 return int(f.readline())
         logger.warning(
             f"{Colors.WARNING}Brightness file does not exist: {brightness_path}"
@@ -123,7 +123,7 @@ class BrightnessService(Service):
 
     @Property(int, "read-write")
     def keyboard_brightness(self) -> int:  # type: ignore
-        with open(self.kbd_backlight_path + "/brightness") as f:
+        with open(self.kbd_backlight_path + "/brightness", "r") as f:
             brightness = int(f.readline())
         return brightness
 
