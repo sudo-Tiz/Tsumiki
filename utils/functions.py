@@ -9,7 +9,7 @@ from collections import Counter
 from datetime import datetime
 from functools import lru_cache
 from io import BytesIO
-from typing import Callable, Dict, List, Literal, Optional
+from typing import Any, Callable, Dict, List, Literal, Optional
 
 import psutil
 import qrcode
@@ -32,26 +32,31 @@ from .icons import text_icons
 from .thread import run_in_thread, thread
 
 
+# Function to execute a shell command synchronously with formatted string
 def formatted_exec_shell_command(
     unformatted_cmd: str, **kwargs
 ) -> str | Literal[False]:
     return exec_shell_command(FormattedString(unformatted_cmd).format(**kwargs))
 
 
+# Function to execute a shell command asynchronously with formatted string
 def formatted_exec_shell_command_async(
     unformatted_cmd: str, **kwargs
 ) -> tuple[Gio.Subprocess | None, Gio.DataInputStream]:
     return exec_shell_command_async(FormattedString(unformatted_cmd).format(**kwargs))
 
 
+# Function to convert RGB to hex format
 def rgb_to_hex(rgb):
     return "#{:02x}{:02x}{:02x}".format(*rgb)
 
 
+# Function to convert RGB to CSS rgb format
 def rgb_to_css(rgb):
     return f"rgb({rgb[0]}, {rgb[1]}, {rgb[2]})"
 
 
+# Function to mix two RGB colors, with a ratio of 0.5 by default.
 def mix_colors(color1, color2, ratio=0.5):
     r = int(color1[0] * (1 - ratio) + color2[0] * ratio)
     g = int(color1[1] * (1 - ratio) + color2[1] * ratio)
@@ -59,12 +64,14 @@ def mix_colors(color1, color2, ratio=0.5):
     return (r, g, b)
 
 
+# Function to tint a color by mixing it with white
 def tint_color(color, tint_factor=1):
     # tint_factor: 0 means original color, 1 means full white
     white = (255, 255, 255)
     return mix_colors(color, white, tint_factor)
 
 
+# Function to get a simple color palette from an image using threading
 def get_simple_palette_threaded(
     image_path: str,
     callback: Callable[[Optional[list[tuple[int, int, int]]]], None],
@@ -114,6 +121,7 @@ def ttl_lru_cache(seconds_to_live: int, maxsize: int = 128):
     return wrapper
 
 
+# Function to copy the selected theme to the main styles directory
 @run_in_thread
 def copy_theme(theme: str):
     destination_file = get_relative_path("../styles/theme.scss")
@@ -135,6 +143,7 @@ def copy_theme(theme: str):
         exit(1)
 
 
+# Function to update the theme configuration
 def update_theme_config(theme_name: str):
     """Update the theme.json file with the new theme name."""
     try:
@@ -156,6 +165,7 @@ def update_theme_config(theme_name: str):
         logger.exception(f"{Colors.ERROR}[Theme] Error updating theme config: {e}")
 
 
+# Function to recompile SCSS and apply the new CSS
 def recompile_and_apply_css():
     """Recompile SCSS and apply the new CSS to the application."""
 
@@ -317,6 +327,7 @@ def validate_widgets(parsed_data, default_config):
                 )
 
 
+# Function to generate a QR code image
 @ttl_lru_cache(3600, 10)
 def make_qrcode(text: str, size: int = 200) -> GdkPixbuf.Pixbuf:
     # Generate QR Code image
@@ -351,16 +362,11 @@ def format_time(secs: int):
 
 # Function to convert bytes to kilobytes, megabytes, or gigabytes
 def convert_bytes(bytes: int, to: Literal["kb", "mb", "gb"], format_spec=".1f"):
-    multiplier = 1
-
-    if to == "mb":
-        multiplier = 2
-    elif to == "gb":
-        multiplier = 3
-
-    return f"{format(bytes / (1024**multiplier), format_spec)}{to.upper()}"
+    factor = {"kb": 1, "mb": 2, "gb": 3}.get(to, 1)
+    return f"{format(bytes / (1024**factor), format_spec)}{to.upper()}"
 
 
+# Function to check if the current time is between sunrise and sunset
 def check_if_day(sunrise_time, sunset_time, current_time: str | None = None) -> str:
     time_format = "%I:%M %p"
 
@@ -372,7 +378,12 @@ def check_if_day(sunrise_time, sunset_time, current_time: str | None = None) -> 
     sunset_time_obj = datetime.strptime(sunset_time, time_format)
 
     # Compare current time with sunrise and sunset
-    return sunrise_time_obj <= current_time_obj < sunset_time_obj
+    if sunrise_time_obj <= sunset_time_obj:
+        return sunrise_time_obj <= current_time_obj < sunset_time_obj
+    else:
+        return (
+            current_time_obj >= sunrise_time_obj or current_time_obj < sunset_time_obj
+        )
 
 
 # wttr.in time are in 300,400...2100 format , we need to convert it to 4:00...21:00
@@ -509,6 +520,7 @@ def convert_to_percent(
         return (current / max) * 100
 
 
+# Function to write a JSON file
 @run_in_thread
 def write_json_file(data: Dict, path: str):
     try:
@@ -535,8 +547,6 @@ def ensure_file(path: str) -> None:
 
 
 # Function to ensure the directory exists
-
-
 @run_in_thread
 def ensure_directory(path: str) -> None:
     if not GLib.file_test(path, GLib.FileTest.EXISTS):
@@ -547,7 +557,8 @@ def ensure_directory(path: str) -> None:
 
 
 # Function to unique list
-def unique_list(lst) -> List:
+def unique_list(lst: List[Any]) -> List[Any]:
+    """Return a list with unique elements."""
     return list(set(lst))
 
 
@@ -573,6 +584,7 @@ def is_valid_gjs_color(color: str) -> bool:
     return bool(re.match(rgb_regex, color_lower) or re.match(rgba_regex, color_lower))
 
 
+# Function to take a memory snapshot
 def take_snapshot():
     import tracemalloc
 
@@ -590,6 +602,7 @@ def take_snapshot():
     return True  # Keep the timeout active
 
 
+# Function to set a debug logger for GLib
 def set_debug_logger():
     def log_handler(domain, level, message):
         import traceback
