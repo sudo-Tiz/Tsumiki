@@ -23,9 +23,6 @@ class BrightnessService(Service):
             cls._instance = super().__new__(cls)
         return cls._instance
 
-    def __int__(self):
-        return super().__int__()
-
     @Signal
     def brightness_changed(self, value: int) -> None:
         """Signal emitted when screen brightness changes."""
