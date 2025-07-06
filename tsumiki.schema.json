@@ -6,6 +6,15 @@
 			"enum": ["default", "leaf", "leaf-inverse", "flat", "shadow", "bordered"],
 			"description": "Determines the style of the widget."
 		},
+		"mode": {
+							"type": "string",
+							"enum": [
+								"label",
+								"graph",
+								"progress"
+							],
+							"description": "Specifies the mode of the widget."
+						},
 		"anchor": {
 			"type": "string",
 			"enum": [
@@ -601,9 +610,7 @@
 			"type": "object",
 			"properties": {
 				"mode": {
-					"type": "string",
-					"enum": ["label", "graph", "progress"],
-					"description": "Specifies the mode of the widget."
+					"$ref": "#/definitions/mode"
 				},
 				"tooltip": {
 					"type": "boolean",
@@ -648,9 +655,7 @@
 			"type": "object",
 			"properties": {
 				"mode": {
-					"type": "string",
-					"enum": ["label", "graph", "progress"],
-					"description": "Specifies the mode of the widget."
+					"$ref": "#/definitions/mode"
 				},
 				"tooltip": {
 					"type": "boolean",
@@ -678,9 +683,7 @@
 			"type": "object",
 			"properties": {
 				"mode": {
-					"type": "string",
-					"enum": ["label", "graph", "progress"],
-					"description": "Specifies the mode of the widget."
+				"$ref": "#/definitions/mode"
 				},
 				"tooltip": {
 					"type": "boolean",
@@ -1153,6 +1156,10 @@
 			"world_clock": {
 				"type": "object",
 				"properties": {
+					"use_24hr": {
+						"type": "boolean",
+						"description": "Determines whether to use 24-hour format for world clock"
+					},
 					"timezones": {
 						"type": "array",
 						"description": "List of locations for the world clock",

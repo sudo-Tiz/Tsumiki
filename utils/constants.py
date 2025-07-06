@@ -13,6 +13,8 @@ APP_CACHE_DIRECTORY = f"{SYSTEM_CACHE_DIR}/{APPLICATION_NAME}"
 
 NOTIFICATION_CACHE_FILE = f"{APP_CACHE_DIRECTORY}/notifications.json"
 WEATHER_CACHE_FILE = f"{APP_CACHE_DIRECTORY}/weather.json"
+ICON_CACHE_FILE = f"{APP_CACHE_DIRECTORY}/icons.json"
+
 
 LOG_DIR = f"{GLib.get_user_state_dir()}/{APPLICATION_NAME}"
 LOG_FILE = f"{LOG_DIR}/{APPLICATION_NAME}.log"
@@ -301,6 +303,7 @@ DEFAULT_CONFIG = {
         },
         "world_clock": {
             "icon": "󱉊'",
+            "use_24hr": True,
             "show_icon": True,
             "format": "%Y-%m-%d %H:%M:%S",
             "timezones": ["America/New_York", "Europe/London", "Asia/Tokyo"],

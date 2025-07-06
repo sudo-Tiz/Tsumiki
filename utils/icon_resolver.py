@@ -8,10 +8,8 @@ from loguru import logger
 from utils.thread import run_in_thread
 
 from .colors import Colors
-from .constants import APP_CACHE_DIRECTORY
+from .constants import ICON_CACHE_FILE
 from .icons import symbolic_icons
-
-ICON_CACHE_FILE = APP_CACHE_DIRECTORY + "/icons.json"
 
 
 class IconResolver:
@@ -26,7 +24,7 @@ class IconResolver:
 
     def __init__(self):
         if os.path.exists(ICON_CACHE_FILE):
-            with open(ICON_CACHE_FILE) as file:
+            with open(ICON_CACHE_FILE, "r") as file:
                 try:
                     self._icon_dict = json.load(file)
                 except json.JSONDecodeError:
@@ -89,7 +87,7 @@ class IconResolver:
             f.close()
 
     def _get_icon_from_desktop_file(self, desktop_file_path: str):
-        with open(desktop_file_path) as f:
+        with open(desktop_file_path, "r") as f:
             for line in f.readlines():
                 if "Icon=" in line:
                     return "".join(line[5:].split())

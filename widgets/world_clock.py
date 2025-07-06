@@ -20,14 +20,19 @@ class WorldClockWidget(ButtonWidget):
         if self.config.get("show_icon", True):
             # Create a TextIcon with the specified icon and size
             self.icon = nerd_font_icon(
-                icon=self.config["icon"],
+                icon=self.config.get("icon", "󰃰"),  # fallback icon,
                 props={"style_classes": "panel-font-icon"},
             )
             self.box.add(self.icon)
 
         self.box.set_spacing(10)
 
-        for tz_name in self.config["timezones"]:
+        timezones = self.config.get("timezones", [])
+
+        self.is_24hr = self.config.get("use_24hr", True)
+        self.time_format = "%H:%M:%S" if self.is_24hr else "%I:%M:%S %p"
+
+        for tz_name in timezones:
             if tz_name in valid_zones:
                 label = Label(style_classes="world-clock-label")
                 self.box.pack_start(label, True, True, 0)
@@ -40,10 +45,13 @@ class WorldClockWidget(ButtonWidget):
         reusable_fabricator.connect("changed", self.update_ui)
 
     def update_ui(self, *_):
-        utc_now = datetime.now(timezone.utc)
-        for label, tz in self.clocks:
-            local_time = utc_now.astimezone(tz)
-            abbrev = local_time.tzname()  # e.g. 'EST', 'JST'
-            formatted = local_time.strftime("%Y-%m-%d %H:%M:%S")
-            label.set_text(f"{abbrev}: {formatted}")
+        try:
+            utc_now = datetime.now(timezone.utc)
+            for label, tz in self.clocks:
+                local_time = utc_now.astimezone(tz)
+                abbrev = local_time.tzname()
+                formatted = local_time.strftime(self.time_format)
+                label.set_text(f"{abbrev}: {formatted}")
+        except Exception as e:
+            logger.error(f"[world_clock] Failed to update UI: {e}")
         return True
