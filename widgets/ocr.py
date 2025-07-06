@@ -55,12 +55,15 @@ class OCRWidget(ButtonWidget):
         if not self.initialized:
             return  # Early exit if script not available
 
+        base_command = f"{self.script_file} --lang {self.current_lang}"
+
+        if self.config.get("quiet", False):
+            base_command += " --no-notify"
+
         if event.button == 3:  # Right click
             self.show_language_menu()
         else:  # Left click
-            exec_shell_command_async(
-                f"{self.script_file} {self.current_lang}", lambda *_: None
-            )
+            exec_shell_command_async(base_command, lambda *_: None)
 
     def show_language_menu(self):
         menu = Gtk.Menu(visible=True)

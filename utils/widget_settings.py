@@ -380,10 +380,12 @@ WorldClock = TypedDict(
 ThemeSwitcher = TypedDict("ThemeSwitcher", {**BaseConfig.__annotations__, "icon": str})
 
 # Hyprpicker configuration
-HyprPicker = TypedDict("HyprPicker", {**BaseConfig.__annotations__, "icon": str})
+HyprPicker = TypedDict(
+    "HyprPicker", {**BaseConfig.__annotations__, "icon": str, "quiet": bool}
+)
 
 # OCR configuration
-OCR = TypedDict("OCR", {**BaseConfig.__annotations__, "icon": str})
+OCR = TypedDict("OCR", {**BaseConfig.__annotations__, "icon": str, "quiet": bool})
 
 
 # Media configuration

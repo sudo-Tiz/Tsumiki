@@ -204,6 +204,7 @@ DEFAULT_CONFIG = {
             "tooltip": True,
             "label": False,
             "show_icon": True,
+            "quiet": False,
         },
         "power": {
             "icon": "󰐥",
