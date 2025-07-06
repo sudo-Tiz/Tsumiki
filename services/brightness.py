@@ -128,7 +128,7 @@ class BrightnessService(Service):
         return brightness
 
     @keyboard_brightness.setter
-    def keyboard_brightness(self, value):
+    def keyboard_brightness(self, value: int):
         if value < 0 or value > self.max_kbd:
             return
         try:

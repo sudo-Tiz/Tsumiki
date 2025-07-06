@@ -47,9 +47,9 @@ class MprisPlayer(Service):
         )
         self._signal_connectors["metadata"] = self._player.connect(
             "metadata",
-            lambda *args: self.update_status(),
+            lambda *_: self.update_status(),
         )
-        GLib.idle_add(lambda *args: self.update_status_once())
+        GLib.idle_add(self.update_status_once())
 
     def update_status(self):
         # schedule each notifier asynchronously.

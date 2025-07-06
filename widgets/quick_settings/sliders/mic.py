@@ -37,7 +37,7 @@ class MicrophoneSlider(SettingSlider):
 
         if not audio_stream:
 
-            def init_device_audio(*args):
+            def init_device_audio(*_):
                 if not self.client.microphone:
                     return
                 self.audio_stream = self.client.speaker

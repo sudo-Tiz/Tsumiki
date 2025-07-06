@@ -80,7 +80,7 @@ class MprisWidget(ButtonWidget):
         if self.config.get("tooltip", False):
             self.set_tooltip_text(bar_label)
 
-    def on_clicked(self, *args):
+    def on_clicked(self, *_):
         if self.popup is None:
             self.popup = Popover(
                 content=Box(

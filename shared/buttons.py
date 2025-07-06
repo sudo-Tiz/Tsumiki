@@ -122,7 +122,7 @@ class QSToggleButton(Box):
     def do_action(self, *_):
         self.emit("action-clicked")
 
-    def set_active_style(self, action: bool, *args) -> None:
+    def set_active_style(self, action: bool, *_) -> None:
         self.set_style_classes("") if not action else self.set_style_classes("active")
 
     def set_action_label(self, label: str):

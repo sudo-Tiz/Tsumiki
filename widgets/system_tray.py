@@ -137,7 +137,7 @@ class SystemTrayMenu(Box, BaseSystemTray):
         bulk_connect(
             item,
             {
-                "removed": lambda *args: button.destroy(),
+                "removed": lambda *_: button.destroy(),
                 "icon-changed": lambda icon_item: self.do_update_item_button(
                     icon_item, button
                 ),
@@ -234,7 +234,7 @@ class SystemTrayWidget(ButtonWidget, BaseSystemTray):
             bulk_connect(
                 item,
                 {
-                    "removed": lambda *args: button.destroy(),
+                    "removed": lambda *_: button.destroy(),
                     "icon-changed": lambda icon_item: self.do_update_item_button(
                         icon_item, button
                     ),
