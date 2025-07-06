@@ -1,3 +1,5 @@
+import os
+
 from fabric.utils import exec_shell_command_async, get_relative_path
 from fabric.widgets.label import Label
 from gi.repository import Gdk
@@ -34,10 +36,17 @@ class HyprPickerWidget(ButtonWidget):
     def lazy_init(self):
         if not self.initialized:
             self.script_file = get_relative_path("../assets/scripts/hyprpicker.sh")
+            if not os.path.isfile(self.script_file):
+                self.set_sensitive(False)
+                self.set_tooltip_text("Script not found")
+                return
             self.initialized = True
 
     def on_button_press(self, button, event):
         self.lazy_init()
+
+        if not self.initialized:
+            return  # Early exit if script not available
 
         # Mouse event handler
         if event.type == Gdk.EventType.BUTTON_PRESS:

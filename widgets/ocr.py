@@ -1,3 +1,4 @@
+import os
 import subprocess
 
 from fabric.utils import exec_shell_command_async, get_relative_path
@@ -42,10 +43,17 @@ class OCRWidget(ButtonWidget):
     def lazy_init(self):
         if not self.initialized:
             self.script_file = get_relative_path("../assets/scripts/ocr.sh")
+            if not os.path.isfile(self.script_file):
+                self.set_sensitive(False)
+                self.set_tooltip_text("Script not found")
+                return
             self.initialized = True
 
     def on_button_press(self, _, event):
         self.lazy_init()
+
+        if not self.initialized:
+            return  # Early exit if script not available
 
         if event.button == 3:  # Right click
             self.show_language_menu()
