@@ -1156,6 +1156,10 @@
 			"world_clock": {
 				"type": "object",
 				"properties": {
+					"use_24hr": {
+						"type": "boolean",
+						"description": "Determines whether to use 24-hour format for world clock"
+					},
 					"timezones": {
 						"type": "array",
 						"description": "List of locations for the world clock",

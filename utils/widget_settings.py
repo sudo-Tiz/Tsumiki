@@ -371,6 +371,7 @@ WorldClock = TypedDict(
     {
         "timezones": List[str],
         "show_icon": bool,
+        "use_24hr": bool,
         "icon": str,
     },
 )

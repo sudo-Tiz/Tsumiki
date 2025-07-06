@@ -303,6 +303,7 @@ DEFAULT_CONFIG = {
         },
         "world_clock": {
             "icon": "󱉊'",
+            "use_24hr": True,
             "show_icon": True,
             "format": "%Y-%m-%d %H:%M:%S",
             "timezones": ["America/New_York", "Europe/London", "Asia/Tokyo"],

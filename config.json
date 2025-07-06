@@ -310,8 +310,9 @@
 			"tooltip": false
 		},
 		"world_clock": {
-			"icon": "󱉊",
+			"icon": "󰃰",
 			"show_icon": true,
+			"use_24hr": true, // this is to use 24 hour format, if false it will use 12 hour format
 			"timezones": [
 				"America/New_York",
 				"Europe/London",
