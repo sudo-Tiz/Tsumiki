@@ -52,25 +52,21 @@ class WindowCountWidget(ButtonWidget):
 
     def get_window_count(self, _, event: HyprlandEvent):
         """Get the number of windows in the active workspace."""
-        data = json.loads(
-            str(self.connection.send_command("j/activeworkspace").reply.decode())
-        )
+        try:
+            response = self.connection.send_command("j/activeworkspace").reply.decode()
+            data = json.loads(response)
+        except Exception as e:
+            logger.error(f"[WindowCount] Failed to get active workspace: {e}")
+            return
 
-        self.count_label.set_label(
-            self.config["label_format"].format(count=data["windows"])
-        )
+        count = data.get("windows", 0)
+        label_format = self.config.get("label_format", "[{count}]")
+        self.count_label.set_label(label_format.format(count=count))
 
         if self.config.get("tooltip", False):
-            self.set_tooltip_text(
-                f"Workspace: {data['id']}, Windows: {data['windows']}"
-            )
-        if self.config.get("hide_when_zero", False):
-            self.hide() if data["windows"] == 0 else self.show()
+            self.set_tooltip_text(f"Workspace: {data.get('id')}, Windows: {count}")
 
-        return (
-            logger.info("[WindowCount] Could not find active windows for workspace")
-            if not data
-            else logger.info(
-                f"[WindowCount] Set WindowCount for workspace: {data['id']}"
-            )
-        )
+        if self.config.get("hide_when_zero", False):
+            self.set_visible(count != 0)
+
+        logger.info(f"[WindowCount] Workspace: {data.get('id')} | Windows: {count}")
