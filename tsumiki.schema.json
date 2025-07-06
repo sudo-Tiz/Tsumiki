@@ -488,43 +488,50 @@
 			}
 		},
 		"hyprsunset": {
-			"type": "object",
-			"properties": {
-				"$ref": "#/definitions/baseProperties",
-				"temperature": {
-					"type": "string",
-					"pattern": "^[0-9]+k$",
-					"description": "Specifies the color temperature for the sunset widget."
-				},
-				"enabled_icon": {
-					"type": "string",
-					"description": "Icon to display when the widget is enabled."
-				},
-				"disabled_icon": {
-					"type": "string",
-					"description": "Icon to display when the widget is disabled."
+			"allOf": [
+				{ "$ref": "#/definitions/baseProperties" },
+				{
+					"type": "object",
+					"properties": {
+						"temperature": {
+							"type": "string",
+							"pattern": "^[0-9]+k$",
+							"description": "Specifies the color temperature for the sunset widget."
+						},
+						"enabled_icon": {
+							"type": "string",
+							"description": "Icon to display when the widget is enabled."
+						},
+						"disabled_icon": {
+							"type": "string",
+							"description": "Icon to display when the widget is disabled."
+						}
+					}
 				}
-			}
+			]
 		},
 		"hypridle": {
-			"type": "object",
-			"properties": {
-				"$ref": "#/definitions/baseProperties",
-				"enabled_icon": {
-					"type": "string",
-					"description": "Icon to display when the widget is enabled."
-				},
-				"disabled_icon": {
-					"type": "string",
-					"description": "Icon to display when the widget is disabled."
+			"allOf": [
+				{ "$ref": "#/definitions/baseProperties" },
+				{
+					"type": "object",
+					"properties": {
+						"enabled_icon": {
+							"type": "string",
+							"description": "Icon to display when the widget is enabled."
+						},
+						"disabled_icon": {
+							"type": "string",
+							"description": "Icon to display when the widget is disabled."
+						}
+					}
 				}
-			}
+			]
 		},
 		"microphone": {
-			"type": "object",
-			"properties": {
-				"$ref": "#/definitions/baseProperties"
-			}
+			"allOf": [
+				{ "$ref": "#/definitions/baseProperties" }
+			]
 		},
 		"battery": {
 			"type": "object",
@@ -796,77 +803,101 @@
 			}
 		},
 		"hyprpicker": {
-			"type": "object",
-			"properties": {
-				"$ref": "#/definitions/baseProperties",
-				"icon": {
-					"type": "string",
-					"description": "Icon name from icon theme"
-				},
-				"quiet": {
-					"type": "boolean",
-					"description": "Determines whether to show notification when picking a color"
+			"allOf": [
+				{ "$ref": "#/definitions/baseProperties" },
+				{
+					"type": "object",
+					"properties": {
+						"icon": {
+							"type": "string",
+							"description": "Icon name from icon theme"
+						},
+						"quiet": {
+							"type": "boolean",
+							"description": "Determines whether to show notification when picking a color"
+						}
+					}
 				}
-			}
+			]
 		},
 		"ocr": {
-			"type": "object",
-			"properties": {
-				"$ref": "#/definitions/baseProperties",
-				"icon": {
-					"type": "string",
-					"description": "Icon name from icon theme"
+			"allOf": [
+				{ "$ref": "#/definitions/baseProperties" },
+				{
+					"type": "object",
+					"properties": {
+						"icon": {
+							"type": "string",
+							"description": "Icon name from icon theme"
+						}
+					}
 				}
-			}
+			]
 		},
 		"updates": {
-			"type": "object",
-			"properties": {
-				"$ref": "#/definitions/baseProperties",
-				"os": {
-					"type": "string",
-					"enum": ["arch", "fedora", "opensuse", "ubuntu"],
-					"description": "Specifies the OS to check for updates"
-				},
-				"interval": {
-					"type": "integer",
-					"description": "Interval in seconds to check for updates"
+			"allOf": [
+				{ "$ref": "#/definitions/baseProperties" },
+				{
+					"type": "object",
+					"properties": {
+						"os": {
+							"type": "string",
+							"enum": ["arch", "fedora", "opensuse", "ubuntu"],
+							"description": "Specifies the OS to check for updates"
+						},
+						"interval": {
+							"type": "integer",
+							"description": "Interval in seconds to check for updates"
+						}
+					}
 				}
-			}
+			]
 		},
 		"keyboard": {
-			"type": "object",
-			"properties": {
-				"$ref": "#/definitions/baseProperties",
-				"icon": {
-					"type": "string",
-					"description": "Icon name from icon theme"
+			"allOf": [
+				{ "$ref": "#/definitions/baseProperties" },
+				{
+					"type": "object",
+					"properties": {
+						"icon": {
+							"type": "string",
+							"description": "Icon name from icon theme"
+						}
+					}
 				}
-			}
+			]
 		},
 		"window_count": {
-			"type": "object",
-			"properties": {
-				"$ref": "#/definitions/baseProperties",
-				"label_format": {
-					"type": "string",
-					"description": "Format for window count labels. Use '{count}' for the number of windows, or any other string/icon"
-				},
-				"hide_when_zero": {
-					"type": "boolean",
-					"description": "Hide the window count when there are no windows"
+			"allOf": [
+				{ "$ref": "#/definitions/baseProperties" },
+				{
+					"type": "object",
+					"properties": {
+						"label_format": {
+							"type": "string",
+							"description": "Format for window count labels. Use '{count}' for the number of windows, or any other string/icon"
+						},
+						"hide_when_zero": {
+							"type": "boolean",
+							"description": "Hide the window count when there are no windows"
+						}
+					}
 				}
-			}
+			]
 		},
 		"submap": {
-			"type": "object",
-			"properties": {
-				"$ref": "#/definitions/baseProperties",
-				"icon": {
-					"type": "string",
-					"description": "Icon name from icon theme"
+			"allOf": [
+				{ "$ref": "#/definitions/baseProperties" },
+				{
+					"type": "object",
+					"properties": {
+						"icon": {
+							"type": "string",
+							"description": "Icon name from icon theme"
+						}
+					}
 				}
-			}
+			]
 		},
 		"quick_settings": {
 			"type": "object",

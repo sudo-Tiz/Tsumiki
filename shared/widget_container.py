@@ -19,7 +19,6 @@ class ToggleableWidget(Widget):
         else:
             self.show()
 
-
 class BoxWidget(Box, ToggleableWidget):
     """A container for box widgets."""
 
@@ -74,9 +73,6 @@ class ButtonWidget(Button, ToggleableWidget):
 
         self.box = Box()
         self.add(self.box)
-
-
-4
 
 
 class WidgetGroup(BoxWidget):
