@@ -1,3 +1,5 @@
+from typing import Iterable
+
 from fabric.widgets.box import Box
 from fabric.widgets.shapes import Corner
 from fabric.widgets.wayland import WaylandWindow as Window
@@ -8,7 +10,7 @@ from shared.widget_container import ToggleableWidget
 class SideCorner(Box):
     """A container for a corner shape."""
 
-    def __init__(self, corner, size):
+    def __init__(self, corner: Iterable[int] | int, size):
         super().__init__(
             name="corner-container",
             children=Corner(

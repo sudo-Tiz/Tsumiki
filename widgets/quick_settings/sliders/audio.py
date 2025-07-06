@@ -48,7 +48,7 @@ class AudioSlider(SettingSlider):
 
         if not audio_stream:
 
-            def init_device_audio(*args):
+            def init_device_audio(*_):
                 if not self.client.speaker:
                     return
                 self.audio_stream = self.client.speaker
@@ -74,7 +74,7 @@ class AudioSlider(SettingSlider):
             return text_icons["volume"]["high"]
         return text_icons["volume"]["muted" if self.audio_stream.muted else "high"]
 
-    def update_state(self, *args):
+    def update_state(self, *_):
         """Update the slider state from the audio stream."""
         if not self.audio_stream:
             return
@@ -84,7 +84,7 @@ class AudioSlider(SettingSlider):
         self.scale.set_sensitive(not self.audio_stream.muted)
 
         # Avoid unnecessary updates if the value hasn't changed
-        if (volume) == round(self.scale.get_value()):
+        if volume == round(self.scale.get_value()):
             return
 
         self.scale.set_value(volume)

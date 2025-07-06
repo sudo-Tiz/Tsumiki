@@ -366,7 +366,7 @@ class QuickSettingsMenu(Box):
             lambda *_: uptime_label.set_label(helpers.uptime()),
         )
 
-    def show_dialog(self, title, body, command):
+    def show_dialog(self, title: str, body: str, command: str):
         """Show a dialog with the given title and body."""
         self.get_parent().set_visible(False)
 
@@ -471,7 +471,7 @@ class QuickSettingsButtonWidget(ButtonWidget):
 
         self.audio_service.speaker.connect("notify::volume", self.update_volume)
 
-    def check_mute(self, audio):
+    def check_mute(self, *_):
         if not self.audio_service.speaker:
             return
         self.audio_icon.set_from_icon_name(

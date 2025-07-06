@@ -59,7 +59,7 @@ class MicrophoneSlider(SettingSlider):
     def on_scale_move(self, _, __, moved_pos):
         self.client.microphone.volume = moved_pos
 
-    def update_state(self, *args):
+    def update_state(self, *_):
         """Update the slider state from the audio stream."""
         if not self.audio_stream:
             return

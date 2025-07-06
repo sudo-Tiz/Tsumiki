@@ -66,11 +66,6 @@ class HyprSunsetSubMenu(QuickSubMenu):
         sanitized_value = int(
             moved_pos.strip("\n").strip("") if isinstance(moved_pos, str) else moved_pos
         )
-        # adj = self.scale.get_adjustment()
-        # print("HyprSunsetSubMenu: Current temperature", sanitized_value)
-        # print(f"HyprSunset scale: {self.scale.get_name()}")
-        # print("HyprSunsetSubMenu: lower temperature", adj.get_lower())
-        # print("HyprSunsetSubMenu: upper temperature", adj.get_upper())
 
         # Avoid unnecessary updates if the value hasn't changed
         if sanitized_value == round(self.scale.get_value()):

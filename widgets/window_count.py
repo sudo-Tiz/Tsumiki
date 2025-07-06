@@ -1,6 +1,5 @@
 import json
 
-from fabric.hyprland.service import HyprlandEvent
 from fabric.hyprland.widgets import get_hyprland_connection
 from fabric.utils import bulk_connect
 from fabric.widgets.label import Label
@@ -50,7 +49,7 @@ class WindowCountWidget(ButtonWidget):
             "[WindowCount] Connected to the hyprland socket"
         )
 
-    def get_window_count(self, _, event: HyprlandEvent):
+    def get_window_count(self, *_):
         """Get the number of windows in the active workspace."""
         try:
             response = self.connection.send_command("j/activeworkspace").reply.decode()

@@ -286,7 +286,7 @@ class NotificationWidget(EventBox):
         self.set_pointer_cursor(self, "arrow")
 
     @staticmethod
-    def set_pointer_cursor(widget, cursor_name):
+    def set_pointer_cursor(widget, cursor_name: str):
         window = widget.get_window()
         if window:
             cursor = Gdk.Cursor.new_from_name(widget.get_display(), cursor_name)

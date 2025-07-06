@@ -43,7 +43,7 @@ class BrightnessSlider(SettingSlider):
         brightness_percent = int((service.screen_brightness / service.max_screen) * 100)
 
         # Avoid unnecessary updates if the value hasn't changed
-        if (brightness_percent) == round(self.scale.get_value()):
+        if brightness_percent == round(self.scale.get_value()):
             return
 
         self.scale.set_value(brightness_percent)
@@ -51,6 +51,6 @@ class BrightnessSlider(SettingSlider):
 
         self.update_icon(int(brightness_percent))
 
-    def update_icon(self, current_brightness):
+    def update_icon(self, current_brightness: int):
         icon_name = get_brightness_icon_name(current_brightness)["icon_text"]
         self.icon.set_label(icon_name)

@@ -1,3 +1,5 @@
+from typing import Iterable
+
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
@@ -19,7 +21,7 @@ class ToggleableWidget(Widget):
         else:
             self.show()
 
-    def set_has_class(self, class_name, condition):
+    def set_has_class(self, class_name: str | Iterable[str], condition: bool):
         if condition:
             self.add_style_class(class_name)
         else:

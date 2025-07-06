@@ -87,7 +87,7 @@ class CpuWidget(ButtonWidget):
     def set_cpu_name(self, cpu_name):
         self.cpu_name = cpu_name.strip()
 
-    def update_ui(self, _, value):
+    def update_ui(self, _, value: dict):
         # Update the label with the current CPU usage if enabled
         frequency = value.get("cpu_freq")
         usage = value.get("cpu_usage")
@@ -313,7 +313,7 @@ class MemoryWidget(ButtonWidget):
         # Set up a fabricator to call the update_label method  at specified intervals
         util_fabricator.connect("changed", self.update_ui)
 
-    def update_ui(self, _, value):
+    def update_ui(self, _, value: dict):
         # Get the current memory usage
         memory = value.get("memory")
         self.used_memory = memory.used
@@ -418,7 +418,7 @@ class StorageWidget(ButtonWidget):
         # Set up a fabricator to call the update_label method at specified intervals
         util_fabricator.connect("changed", self.update_ui)
 
-    def update_ui(self, _, value):
+    def update_ui(self, _, value: dict):
         # Get the current disk usage
         self.disk = value.get("disk")
         percent = self.disk.percent
@@ -508,7 +508,7 @@ class NetworkUsageWidget(ButtonWidget):
         # Set up a fabricator to call the update_label method at specified intervals
         util_fabricator.connect("changed", self.update_ui)
 
-    def update_ui(self, _, value):
+    def update_ui(self, *_):
         """Update the network usage label with the current network usage."""
 
         # Get the current network usage

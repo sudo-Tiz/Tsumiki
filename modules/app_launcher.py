@@ -101,7 +101,7 @@ class AppLauncher(Window):
         self.search_entry.grab_focus_without_selecting()
         self.hide()
 
-    def _on_key_press(self, widget, event):
+    def _on_key_press(self, _, event):
         if event.keyval == Gdk.KEY_Escape:
             self.destroy()
 

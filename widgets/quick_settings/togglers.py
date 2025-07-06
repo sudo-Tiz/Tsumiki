@@ -75,7 +75,7 @@ class NotificationQuickSetting(HoverButton):
         """Toggle the notification."""
         notification_service.dont_disturb = not notification_service.dont_disturb
 
-    def toggle_notification(self, _, value, *args):
+    def toggle_notification(self, _, value: bool, *args):
         """Toggle the notification."""
 
         if value:

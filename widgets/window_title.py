@@ -26,7 +26,7 @@ class WindowTitleWidget(ButtonWidget):
         # Add the ActiveWindow widget as a child
         self.box.children = self.window
 
-    def get_title(self, win_title, win_class):
+    def get_title(self, win_title: str, win_class: str):
         trunc = self.config.get("truncation", True)
         trunc_size = self.config.get("truncation_size", 50)
         custom_map = self.config.get("title_map", [])

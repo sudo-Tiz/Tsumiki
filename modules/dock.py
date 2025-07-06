@@ -147,7 +147,7 @@ class Dock(Window, ToggleableWidget):
 
         return identifiers
 
-    def _normalize_window_class(self, class_name):
+    def _normalize_window_class(self, class_name: str):
         """Normalize window class by removing common suffixes and lowercase."""
         if not class_name:
             return ""
@@ -162,7 +162,7 @@ class Dock(Window, ToggleableWidget):
 
         return normalized
 
-    def _classes_match(self, class1, class2):
+    def _classes_match(self, class1: str, class2: str):
         """Check if two window class names match with stricter comparison."""
         if not class1 or not class2:
             return False
@@ -174,11 +174,11 @@ class Dock(Window, ToggleableWidget):
         # Direct match after normalization
         return norm1 == norm2
 
-    def _on_hover_enter(self, *args):
+    def _on_hover_enter(self, *_):
         """Handle hover over bottom activation area"""
         self.toggle_dock(show=True)
 
-    def _on_hover_leave(self, *args):
+    def _on_hover_leave(self, *_):
         """Handle leave from bottom activation area"""
         self.delay_hide()
 
@@ -243,7 +243,7 @@ class Dock(Window, ToggleableWidget):
         # Simple string identifier (backward compatibility)
         return self.find_app_by_key(app_identifier)
 
-    def find_app_by_key(self, key_value):
+    def find_app_by_key(self, key_value: str):
         """Find app by a single identifier value"""
         if not key_value:
             return None

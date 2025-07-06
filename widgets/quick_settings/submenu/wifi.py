@@ -75,6 +75,7 @@ class WifiSubMenu(QuickSubMenu):
     def load_more_items(self, aps):
         if self.loading or self.items_loaded >= self.max_items:
             return
+
         self.loading = True
 
         items_to_add = min(self.batch_size, self.max_items - self.items_loaded)
@@ -228,7 +229,7 @@ class WifiToggle(QSChevronButton):
             self.action_button.set_sensitive(False)
             self.action_label.set_label("Wi-Fi device not available.")
 
-    def on_action(self, btn):
+    def on_action(self, _):
         wifi: Wifi | None = self.client.wifi_device
         if wifi:
             wifi.toggle_wifi()

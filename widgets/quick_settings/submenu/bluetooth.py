@@ -82,7 +82,7 @@ class BluetoothDeviceBox(CenterBox):
 
         self.on_device_connect()
 
-    def on_device_connecting(self, device, _):
+    def on_device_connecting(self, *_):
         if self.device.connecting:
             self.connect_button.set_label("Connecting...")
         elif self.device.connected is False:
@@ -223,7 +223,7 @@ class BluetoothToggle(QSChevronButton):
             self.action_icon.set_label(text_icons["bluetooth"]["disabled"])
             self.action_label.set_label("Disabled")
 
-    def new_device(self, client: BluetoothClient, address):
+    def new_device(self, client: BluetoothClient, address: str):
         device: BluetoothDevice = client.get_device(address)
         device.connect("changed", self.device_connected)
 

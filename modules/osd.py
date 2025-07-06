@@ -94,11 +94,11 @@ class BrightnessOSDContainer(GenericOSDContainer):
         self.update_values(brightness_percent)
         self.update_icon(int(brightness_percent))
 
-    def update_icon(self, current_brightness):
+    def update_icon(self, current_brightness: int):
         icon_name = get_brightness_icon_name(current_brightness)["icon"]
         self.icon.set_from_icon_name(icon_name, self.icon_size)
 
-    def on_brightness_changed(self, service, value):
+    def on_brightness_changed(self, *_):
         self.update_brightness()
         self.emit("brightness-changed", 0)
 

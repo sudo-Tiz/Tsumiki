@@ -53,11 +53,8 @@ class PowerProfileItem(Button):
         )
         self.set_active(active)
 
-    def set_active(self, active):
-        if self.key == active:
-            self.box.add_style_class("active")
-        else:
-            self.box.remove_style_class("active")
+    def set_active(self, active: str):
+        self.box.set_has_class("active", self.key == active)
 
 
 class PowerProfileSubMenu(QuickSubMenu):
@@ -89,7 +86,7 @@ class PowerProfileSubMenu(QuickSubMenu):
             self.on_child_revealed,
         )
 
-    def on_child_revealed(self, revealer, *_):
+    def on_child_revealed(self, *_):
         """Callback when the submenu is revealed."""
 
         if self.profile_items is None:
@@ -130,7 +127,7 @@ class PowerProfileToggle(QSChevronButton):
             self.update_action_button,
         )
 
-    def unslug(self, text):
+    def unslug(self, text: str) -> str:
         return " ".join(word.capitalize() for word in text.split("-"))
 
     def update_action_button(self, *_):
