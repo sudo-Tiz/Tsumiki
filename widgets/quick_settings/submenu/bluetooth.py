@@ -88,7 +88,7 @@ class BluetoothDeviceBox(CenterBox):
         elif self.device.connected is False:
             self.connect_button.set_label("Failed to connect")
 
-    def on_device_connect(self, *args):
+    def on_device_connect(self, *_):
         self.connect_button.set_label(
             "Disconnect",
         ) if self.device.connected else self.connect_button.set_label("Connect")

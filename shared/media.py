@@ -168,7 +168,7 @@ class PlayerBoxStack(Box):
         # This will automatically destroy our used button
         player_box.connect(
             "destroy",
-            lambda *args: [
+            lambda *_: [
                 new_button.destroy(),  # type: ignore
                 self.player_buttons.pop(self.player_buttons.index(new_button)),
             ],

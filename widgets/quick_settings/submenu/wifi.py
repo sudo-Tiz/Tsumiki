@@ -127,6 +127,7 @@ class WifiSubMenu(QuickSubMenu):
 
         self.load_more_items(self.wifi_device.access_points)
 
+    # TODO: type ap
     def make_button_from_ap(self, ap) -> Button:
         security_label = ""
 

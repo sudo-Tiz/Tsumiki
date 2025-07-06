@@ -441,7 +441,7 @@ class Dock(Window, ToggleableWidget):
         self.hide_id = None
         return False
 
-    def check_hide(self, *args):
+    def check_hide(self, *_):
         """Determine if dock should auto-hide"""
         clients = self.get_clients()
         current_ws = self.get_workspace()
@@ -454,7 +454,7 @@ class Dock(Window, ToggleableWidget):
         else:
             self.toggle_dock(show=True)
 
-    def update_dock(self, *args):
+    def update_dock(self, *_):
         """Refresh dock contents and clear drag lock."""
         self.update_app_map()  # Update app map before creating buttons
         arranger_handler = getattr(self, "_arranger_handler", None)

@@ -44,8 +44,8 @@ class Wifi(Service):
                 self._device,
                 {
                     "notify::active-access-point": self._activate_ap,
-                    "access-point-added": lambda *args: self.emit("changed"),
-                    "access-point-removed": lambda *args: self.emit("changed"),
+                    "access-point-added": lambda *_: self.emit("changed"),
+                    "access-point-removed": lambda *_: self.emit("changed"),
                     "state-changed": self.ap_update,
                 },
             )
@@ -124,7 +124,7 @@ class Wifi(Service):
     def is_active_ap(self, name) -> bool:
         return self._ap.get_bssid() == name if self._ap else False
 
-    def notifier(self, name: str, *args):
+    def notifier(self, name: str, *_):
         self.notify(name)
         self.emit("changed")
         return

@@ -4,7 +4,7 @@ import threading
 from typing import List
 
 from fabric import Signal
-from fabric.notifications import Notification, Notifications
+from fabric.notifications import Notification, Notifications, NotificationSerializedData
 from loguru import logger
 
 from utils.colors import Colors
@@ -192,7 +192,7 @@ class CustomNotifications(Notifications):
                 self.all_notifications.remove(old)
                 self.emit("notification-closed", old["id"], "dismissed-by-limit")
 
-    def _deserialize_notification(self, notification):
+    def _deserialize_notification(self, notification: NotificationSerializedData):
         """Deserialize a notification."""
         return Notification.deserialize(notification)
 
