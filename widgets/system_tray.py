@@ -9,6 +9,7 @@ from fabric.widgets.grid import Grid
 from fabric.widgets.image import Image
 from fabric.widgets.separator import Separator
 from gi.repository import Gdk, GdkPixbuf, GLib, Gray, Gtk
+from loguru import logger
 
 from shared.buttons import HoverButton
 from shared.popover import Popover
@@ -44,6 +45,11 @@ class BaseSystemTray:
             else:
                 icon_name = item.get_icon_name()
                 icon_theme_path = item.get_icon_theme_path()
+
+                logger.info(
+                    f"""[SystemTray] Resolving icon: {icon_name}, size: {icon_size},
+                    theme path: {icon_theme_path}"""
+                )
 
                 # Use custom theme path if available
                 if icon_theme_path:
