@@ -806,7 +806,11 @@
 				"icon": {
 					"type": "string",
 					"description": "Icon name from icon theme"
-				}
+				},
+				"quiet": {
+					"type": "boolean",
+					"description": "Determines whether to show notification when picking a color"
+				},
 			}
 		},
 		"ocr": {

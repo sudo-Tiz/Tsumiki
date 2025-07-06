@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -euo pipefail
+
+
 # Word of caution: changing this can break update module, be vigilant
 
 # Parse arguments
