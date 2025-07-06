@@ -1,4 +1,6 @@
 #!/bin/bash
+set -euo pipefail
+
 
 #----- Optimized bars animation without much CPU usage increase --------
 bar="▁▂▃▄▅▆▇█"

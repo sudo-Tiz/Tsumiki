@@ -1,100 +1,117 @@
 #!/bin/bash
+set -euo pipefail
 
+# --- Globals ---
+NOTIFY=true
 
-
-# --- Dependency check ---
+# --- Dependency Check ---
 check_dependencies() {
-    local missing=0
+    local required=("hyprpicker" "wl-paste" "magick" "notify-send")
+    local missing=()
 
-    for cmd in hyprpicker; do
-        if ! command -v "$cmd" &> /dev/null; then
-            echo "Error: '$cmd' is not installed or not in PATH."
-            missing=1
+    for cmd in "${required[@]}"; do
+        if ! command -v "$cmd" &>/dev/null; then
+            missing+=("$cmd")
         fi
     done
 
-    if [ "$missing" -eq 1 ]; then
+    if [ "${#missing[@]}" -ne 0 ]; then
+        echo "Missing dependencies: ${missing[*]}"
+        $NOTIFY && notify-send "HyprPicker Error" "Missing: ${missing[*]}"
         exit 1
     fi
 }
 
-pick_rgb(){
 
-# Execute hyprpicker with RGB format and save the output to a variable
-hyprpicker -a -n -f rgb && sleep 0.1
+send_notification_with_color() {
+    local label="$1"
+    local color_display="$2"
+    local color_format="$3"
 
-# Create a temporal 64x64 PNG file with the color in /tmp using convert
-magick -size 64x64 xc:"rgb($(wl-paste))" /tmp/color.png
+    $NOTIFY || return
 
-# Send a notification using the file as an icon
-notify-send "RGB color picked" "rgb($(wl-paste))" -i /tmp/color.png -a "Hyprpicker"
+    # Sanitize input (remove all whitespace)
+    clean_format=$(echo "$color_format" | tr -d '[:space:]')
 
-# Remove the temporal file
-rm /tmp/color.png
+    # Create temp image file
+    tmp_img=$(mktemp --suffix=.png)
 
-# Exit
-exit 0
+    # Set local cleanup trap — after tmp_img is defined
+    trap '[[ -f "$tmp_img" ]] && rm -f "$tmp_img"' RETURN
 
+    # Generate color swatch
+    if ! magick -size 64x64 xc:"$clean_format" "$tmp_img" 2>/dev/null; then
+        notify-send -a "Hyprpicker" "Color Error" "Invalid color: $clean_format"
+        return
+    fi
+
+    notify-send -a "Hyprpicker" "$label" "$color_display" -i "$tmp_img"
 }
 
 
-pick_hex(){
-
-# Execute hyprpicker and save the output to a variable
-hyprpicker -a -n -f hex && sleep 0.1
-
-# Create a temporal 64x64 PNG file with the color in /tmp using convert
-magick -size 64x64 xc:"$(wl-paste)" /tmp/color.png
-
-# Send a notification using the file as an icon
-notify-send "HEX color picked" "$(wl-paste)" -i /tmp/color.png -a "Hyprpicker"
-
-# Remove the temporal file
-rm /tmp/color.png
-
-# Exit
-exit 0
-
+# --- Picker Functions ---
+pick_rgb() {
+    hyprpicker -a -n -f rgb >/dev/null && sleep 0.1
+    rgb_raw=$(wl-paste | tr -d '[:space:]')
+    color="rgb(${rgb_raw})"
+    send_notification_with_color "RGB color picked" "$color" "$color"
 }
 
-
-pick_hsv(){
-
-# Copy the color to the clipboard
-echo -n "$(hyprpicker -n -f hsv)" | wl-copy -n
-
-# Create a temporal 64x64 PNG file with the color in /tmp using convert
-magick -size 64x64 xc:"hsv($(wl-paste))" /tmp/color.png
-
-# Send a notification using the file as an icon
-notify-send "HSV color picked" "hsv($(wl-paste))" -i /tmp/color.png -a "Hyprpicker"
-
-# Remove the temporal file
-rm /tmp/color.png
-
-# Exit
-exit 0
-
+pick_hex() {
+    hyprpicker -a -n -f hex >/dev/null && sleep 0.1
+    color=$(wl-paste | tr -d '[:space:]')
+    send_notification_with_color "HEX color picked" "$color" "$color"
 }
 
+pick_hsv() {
+    hsv_raw=$(hyprpicker -n -f hsv | tr -d '[:space:]')
+    hsv_raw=$(hyprpicker -n -f hsv | tr -d '[:space:]')
+    echo -n "$hsv_raw" | wl-copy -n
+    local formatted="hsv(${hsv_raw})"
+    send_notification_with_color "HSV color picked" "$formatted" "$formatted"
+}
 
-
-case "$1" in
--rgb)
-    check_dependencies
-    pick_rgb
-    ;;
--hsv)
-    check_dependencies
-    pick_hsv
-    ;;
--hex)
-    check_dependencies
-    pick_hex
-    ;;
-
-*)
-    echo "Usage: $0 [-rgb|-hex|-hsv]"
+# --- Usage Help ---
+usage() {
+    echo "Usage: $0 [--no-notify | -q] [-rgb|-hex|-hsv]"
+    echo "  -q | --no-notify   Disable desktop notifications"
+    echo "  -rgb               Pick color in RGB format"
+    echo "  -hex               Pick color in HEX format"
+    echo "  -hsv               Pick color in HSV format"
     exit 1
-    ;;
-esac
+}
+
+# --- Entry Point ---
+main() {
+    local mode=""
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -q|--no-notify)
+                NOTIFY=false
+                shift
+                ;;
+            -rgb|-hex|-hsv)
+                mode="$1"
+                shift
+                ;;
+            *)
+                usage
+                ;;
+        esac
+    done
+
+    if [[ -z "$mode" ]]; then
+        usage
+    fi
+
+    check_dependencies
+
+    case "$mode" in
+        -rgb) pick_rgb ;;
+        -hex) pick_hex ;;
+        -hsv) pick_hsv ;;
+    esac
+}
+
+main "$@"

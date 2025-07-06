@@ -36,4 +36,8 @@ class ScreenShotWidget(ButtonWidget):
     def handle_click(self, *_):
         """Start recording the screen."""
         self.lazy_init()
+
+        if not self.initialized:
+            return  # Early exit if script not available
+
         self.recorder_service.screenshot(path=self.config["path"])

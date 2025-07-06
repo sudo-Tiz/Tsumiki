@@ -303,7 +303,8 @@
 			"icon": "󰐳",
 			"tooltip": true,
 			"label": false,
-			"show_icon": true
+			"show_icon": true,
+			"quiet": false
 		},
 		"mpris": {
 			"truncation_size": 10,

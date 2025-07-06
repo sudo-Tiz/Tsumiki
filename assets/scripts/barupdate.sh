@@ -1,4 +1,7 @@
 #!/bin/bash
+set -euo pipefail
+
+
 
 INSTALL_DIR=$(dirname -- "$0")
 

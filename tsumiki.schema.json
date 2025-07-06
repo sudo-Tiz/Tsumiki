@@ -7,14 +7,10 @@
 			"description": "Determines the style of the widget."
 		},
 		"mode": {
-							"type": "string",
-							"enum": [
-								"label",
-								"graph",
-								"progress"
-							],
-							"description": "Specifies the mode of the widget."
-						},
+			"type": "string",
+			"enum": ["label", "graph", "progress"],
+			"description": "Specifies the mode of the widget."
+		},
 		"anchor": {
 			"type": "string",
 			"enum": [
@@ -683,7 +679,7 @@
 			"type": "object",
 			"properties": {
 				"mode": {
-				"$ref": "#/definitions/mode"
+					"$ref": "#/definitions/mode"
 				},
 				"tooltip": {
 					"type": "boolean",
@@ -806,6 +802,10 @@
 				"icon": {
 					"type": "string",
 					"description": "Icon name from icon theme"
+				},
+				"quiet": {
+					"type": "boolean",
+					"description": "Determines whether to show notification when picking a color"
 				}
 			}
 		},

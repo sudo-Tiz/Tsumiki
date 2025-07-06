@@ -135,6 +135,7 @@ DEFAULT_CONFIG = {
             "icon": "",
             "tooltip": True,
             "label": False,
+            "quiet": False,
             "show_icon": True,
         },
         "hyprsunset": {
@@ -203,6 +204,7 @@ DEFAULT_CONFIG = {
             "tooltip": True,
             "label": False,
             "show_icon": True,
+            "quiet": False,
         },
         "power": {
             "icon": "󰐥",

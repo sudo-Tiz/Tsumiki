@@ -54,6 +54,10 @@ class RecorderWidget(ButtonWidget):
     def handle_click(self, *_):
         """Start or stop recording the screen."""
         self.lazy_init()
+
+        if not self.initialized:
+            return  # Early exit if script not available
+
         if self.recorder_service.is_recording:
             self.recorder_service.screenrecord_stop()
         else:
