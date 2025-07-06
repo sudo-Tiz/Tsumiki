@@ -19,6 +19,12 @@ class ToggleableWidget(Widget):
         else:
             self.show()
 
+    def set_has_class(self, class_name, condition):
+        if condition:
+            self.add_style_class(class_name)
+        else:
+            self.remove_style_class(class_name)
+
 
 class BoxWidget(Box, ToggleableWidget):
     """A container for box widgets."""
@@ -74,9 +80,6 @@ class ButtonWidget(Button, ToggleableWidget):
 
         self.box = Box()
         self.add(self.box)
-
-
-4
 
 
 class WidgetGroup(BoxWidget):

@@ -62,6 +62,7 @@ class CommandSwitcher(ButtonWidget):
 
         # reusing the fabricator to call specified intervals
         reusable_fabricator.connect("changed", self.update_ui)
+        self.update_ui()  # Initial update
 
     # toggle the command on click
     def handle_click(self, *_):
@@ -73,22 +74,17 @@ class CommandSwitcher(ButtonWidget):
         return True
 
     def update_ui(self, *_):
-        is_app_running = helpers.is_app_running(self.command)
+        is_running = helpers.is_app_running(self.command)
 
-        if is_app_running:
-            self.add_style_class("active")
-        else:
-            self.remove_style_class("active")
+        self.set_has_class("active", is_running)
+
+        label = "Enabled" if is_running else "Disabled"
 
         if self.label:
-            self.label_text.set_label("Enabled" if is_app_running else "Disabled")
+            self.label_text.set_label(label)
 
-        self.icon.set_label(self.enabled_icon if is_app_running else self.disabled_icon)
+        self.icon.set_label(self.enabled_icon if is_running else self.disabled_icon)
 
         if self.tooltip:
-            self.set_tooltip_text(
-                f"{self.command} enabled"
-                if is_app_running
-                else f"{self.command} disabled",
-            )
+            self.set_tooltip_text(f"{self.command} {label.lower()}")
         return True
