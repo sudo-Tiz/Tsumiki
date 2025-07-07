@@ -100,11 +100,11 @@ class BatteryWidget(ButtonWidget):
 
             elif is_charging and battery_percent < self.full_battery_level:
                 self.set_tooltip_text(
-                    f"{status_text}\n󰄉 Time to full: {formatted_time}\n{tool_tip_text}"
+                    f"{status_text}\n󰄉 Full in : {formatted_time}\n{tool_tip_text}"
                 )
             else:
                 self.set_tooltip_text(
-                    f"{status_text}\n󰄉 Time to empty: {formatted_time}\n{tool_tip_text}"
+                    f"{status_text}\n󰄉 Empty in : {formatted_time}\n{tool_tip_text}"
                 )
 
         return True
