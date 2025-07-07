@@ -529,9 +529,7 @@
 			]
 		},
 		"microphone": {
-			"allOf": [
-				{ "$ref": "#/definitions/baseProperties" }
-			]
+			"allOf": [{ "$ref": "#/definitions/baseProperties" }]
 		},
 		"battery": {
 			"type": "object",
