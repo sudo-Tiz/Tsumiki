@@ -90,6 +90,9 @@ class CustomNotifications(Notifications):
             self.all_notifications = valid_notifications
             self._count = highest_id
 
+            del valid_notifications
+            del original_data
+
         except (json.JSONDecodeError, KeyError, ValueError, IndexError) as e:
             logger.exception(f"{Colors.INFO}[Notification] {e}")
 
@@ -134,6 +137,7 @@ class CustomNotifications(Notifications):
         if invalid_count > 0:
             self.all_notifications = valid_notifications
             self._persist_and_emit()
+            del valid_notifications
             logger.info(
                 f"{Colors.INFO}[Notification] Cleaned "
                 f"{invalid_count} invalid notifications"
