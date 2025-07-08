@@ -1,3 +1,5 @@
+from typing import Iterable
+
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
