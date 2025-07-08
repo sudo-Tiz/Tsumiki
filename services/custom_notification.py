@@ -60,8 +60,6 @@ class CustomNotifications(Notifications):
     def _load_notifications(self):
         """Read and validate notifications from the cache file."""
         if not os.path.exists(NOTIFICATION_CACHE_FILE):
-            self.all_notifications = []
-            self._count = 0
             return
 
         try:
@@ -94,8 +92,6 @@ class CustomNotifications(Notifications):
 
         except (json.JSONDecodeError, KeyError, ValueError, IndexError) as e:
             logger.exception(f"{Colors.INFO}[Notification] {e}")
-            self.all_notifications = []
-            self._count = 0
 
     def remove_notification(self, id: int):
         """Remove a notification by ID, ensuring thread safety."""
@@ -196,7 +192,7 @@ class CustomNotifications(Notifications):
         # Clear notifications but preserve the highest ID we've seen
         highest_id = self._count
 
-        self.all_notifications = []
+        self.all_notifications.clear()
 
         self._persist_and_emit()
 
