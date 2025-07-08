@@ -32,11 +32,10 @@ class WifiSubMenu(QuickSubMenu):
         )
         self.client.connect("device-ready", self.on_device_ready)
 
-        self.scan_button = ScanButton()
-
-        self.scan_button.set_sensitive(False)
-
-        self.scan_button.connect("clicked", self.start_new_scan)
+        self.scan_button = ScanButton(
+            on_clicked=self.start_new_scan,
+            sensitive=False,
+        )
 
         self.child = ScrolledWindow(
             min_content_size=(-1, 190),
