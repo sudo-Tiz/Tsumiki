@@ -303,15 +303,17 @@
 			"icon": "󰐳",
 			"tooltip": true,
 			"label": false,
-			"show_icon": true
+			"show_icon": true,
+			"quiet": false
 		},
 		"mpris": {
 			"truncation_size": 10,
 			"tooltip": false
 		},
 		"world_clock": {
-			"icon": "󱉊",
+			"icon": "󰃰",
 			"show_icon": true,
+			"use_24hr": true, // this is to use 24 hour format, if false it will use 12 hour format
 			"timezones": [
 				"America/New_York",
 				"Europe/London",
@@ -326,7 +328,7 @@
 		], // this is the left section of the panel
 		"middle_section": [
 			"date_time",
-			"weather"
+			"window_count"
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
