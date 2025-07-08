@@ -70,6 +70,9 @@ class CustomNotifications(Notifications):
 
             original_data.reverse()
 
+            # Deep copy and normalize for comparison
+            original_normalized = [dict(sorted(n.items())) for n in original_data]
+
             valid_notifications = []
             highest_id = self._count
 
@@ -82,8 +85,11 @@ class CustomNotifications(Notifications):
                     msg = f"[Notification] Invalid: {str(e)[:50]}"
                     logger.exception(f"{Colors.INFO}{msg}")
 
-            # Write only if the validated data differs from what was originally loaded
-            if valid_notifications != original_data:
+            validated_normalized = [
+                dict(sorted(n.items())) for n in valid_notifications
+            ]
+
+            if validated_normalized != original_normalized:
                 write_json_file(valid_notifications, NOTIFICATION_CACHE_FILE)
                 logger.info(
                     f"{Colors.INFO}[Notification] Notifications written successfully."
@@ -186,8 +192,9 @@ class CustomNotifications(Notifications):
 
     def _persist_and_emit(self):
         """Persist notifications and emit relevant signals."""
-        write_json_file(self.all_notifications, NOTIFICATION_CACHE_FILE)
-        self.emit("notification_count", len(self.all_notifications))
+        with self._lock:
+            write_json_file(self.all_notifications, NOTIFICATION_CACHE_FILE)
+            self.emit("notification_count", len(self.all_notifications))
 
     def clear_all_notifications(self):
         """Empty the notifications."""
@@ -208,32 +215,20 @@ class CustomNotifications(Notifications):
         self._count = highest_id
 
     def get_deserialized(self) -> List[Notification]:
-        """Return the notifications."""
+        """Return valid deserialized notifications, removing any invalid ones."""
+        deserialized = []
+        invalid_ids = []
 
-        def deserialize_with_id(notification):
-            """Helper to deserialize and return result with ID."""
+        # Iterate over a copy to avoid modifying list during iteration
+        for notification in self.all_notifications[:]:
             try:
-                return (self._deserialize_notification(notification), None)
+                result = self._deserialize_notification(notification)
+                deserialized.append(result)
             except Exception as e:
                 msg = f"[Notification] Deserialize failed: {str(e)[:50]}"
                 logger.exception(f"{Colors.INFO}{msg}")
-                return (None, notification.get("id"))
+                invalid_ids.append(notification.get("id"))
 
-        # Process all notifications at once
-        results = [
-            deserialize_with_id(notification) for notification in self.all_notifications
-        ]
-
-        # Split into successful and failed
-        deserialized = []
-        invalid_ids = []
-        for result, error_id in results:
-            if result is not None:
-                deserialized.append(result)
-            elif error_id is not None:
-                invalid_ids.append(error_id)
-
-        # Clean up invalid notifications
         for invalid_id in invalid_ids:
             self.remove_notification(invalid_id)
 
