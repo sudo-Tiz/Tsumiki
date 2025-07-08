@@ -57,51 +57,48 @@ class CustomNotifications(Notifications):
         self._dont_disturb = False
         self._load_notifications()
 
-    # Load notifications from the cache file
     def _load_notifications(self):
-        """Read notifications from the cache file."""
-        if os.path.exists(NOTIFICATION_CACHE_FILE):
-            try:
-                with open(NOTIFICATION_CACHE_FILE, "r") as file:
-                    notifications = json.load(file)
+        """Read and validate notifications from the cache file."""
+        if not os.path.exists(NOTIFICATION_CACHE_FILE):
+            self.all_notifications = []
+            self._count = 0
+            return
 
-                    notifications.reverse()
+        try:
+            with open(NOTIFICATION_CACHE_FILE, "r") as file:
+                original_data = json.load(file)
 
-                def validate_with_id(notification):
-                    """Helper to validate and return ID if valid."""
-                    try:
-                        self._deserialize_notification(notification)
-                        return (True, notification, notification.get("id", 0))
-                    except Exception as e:
-                        msg = f"[Notification] Invalid: {str(e)[:50]}"
-                        logger.exception(f"{Colors.INFO}{msg}")
-                        return (False, None, 0)
+            original_data.reverse()
 
-                # Validate all notifications at once
-                results = [validate_with_id(n) for n in notifications]
+            valid_notifications = []
+            highest_id = self._count
 
-                # Process results and find highest ID
-                valid_notifications = []
-                highest_id = self._count  # Start with current count
-                for is_valid, notification, notification_id in results:
-                    if is_valid:
-                        valid_notifications.append(notification)
-                        highest_id = max(highest_id, notification_id)
+            for notification in original_data:
+                try:
+                    self._deserialize_notification(notification)
+                    valid_notifications.append(notification)
+                    highest_id = max(highest_id, notification.get("id", 0))
+                except Exception as e:
+                    msg = f"[Notification] Invalid: {str(e)[:50]}"
+                    logger.exception(f"{Colors.INFO}{msg}")
 
-                self.all_notifications = valid_notifications
-                self._count = highest_id  # Update to highest ID seen
-                write_json_file(self.all_notifications, NOTIFICATION_CACHE_FILE)
+            # Write only if the validated data differs from what was originally loaded
+            if valid_notifications != original_data:
+                write_json_file(valid_notifications, NOTIFICATION_CACHE_FILE)
                 logger.info(
                     f"{Colors.INFO}[Notification] Notifications written successfully."
                 )
 
-            except (json.JSONDecodeError, KeyError, ValueError, IndexError) as e:
-                logger.exception(f"{Colors.INFO}[Notification] {e}")
-                self.all_notifications = []
-                self._count = 0
+            self.all_notifications = valid_notifications
+            self._count = highest_id
 
-    # Remove a notification by ID, ensuring thread safety
+        except (json.JSONDecodeError, KeyError, ValueError, IndexError) as e:
+            logger.exception(f"{Colors.INFO}[Notification] {e}")
+            self.all_notifications = []
+            self._count = 0
+
     def remove_notification(self, id: int):
+        """Remove a notification by ID, ensuring thread safety."""
         with self._lock:
             item = next((p for p in self.all_notifications if p["id"] == id), None)
             if item:
@@ -111,8 +108,8 @@ class CustomNotifications(Notifications):
                 if len(self.all_notifications) == 0:
                     self.emit("clear_all", True)
 
-    # Cache a notification, ensuring thread safety
     def cache_notification(self, widget_config, data: Notification, max_count: int):
+        """Cache a notification, ensuring thread safety."""
         with self._lock:
             self._cleanup_invalid_notifications()
             new_notification = self._create_serialized_notification(data)
@@ -124,35 +121,26 @@ class CustomNotifications(Notifications):
     def _cleanup_invalid_notifications(self):
         """Remove any invalid notifications."""
 
-        def validate_with_id(notification):
-            """Helper to validate and return result with ID."""
+        valid_notifications = []
+        invalid_count = 0
+
+        for notification in self.all_notifications:
             try:
                 self._deserialize_notification(notification)
-                return (True, notification, None)
+                valid_notifications.append(notification)
             except Exception as e:
                 msg = f"[Notification] Removing invalid: {str(e)[:50]}"
                 logger.debug(msg)
-                return (False, None, notification.get("id", 0))
-
-        # Validate all notifications at once
-        results = [validate_with_id(n) for n in self.all_notifications]
-
-        # Process results
-        valid_notifications = []
-        invalid_count = 0
-        for is_valid, notification, invalid_id in results:
-            if is_valid:
-                valid_notifications.append(notification)
-            else:
-                invalid_count += 1
+                invalid_id = notification.get("id", 0)
                 self.emit("notification-closed", invalid_id, "dismissed-by-limit")
+                invalid_count += 1
 
         if invalid_count > 0:
             self.all_notifications = valid_notifications
             self._persist_and_emit()
-
             logger.info(
-                f"{Colors.INFO}[Notification] Notifications written successfully."
+                f"{Colors.INFO}[Notification] Cleaned "
+                f"{invalid_count} invalid notifications"
             )
 
     def _create_serialized_notification(self, data: Notification) -> dict:
