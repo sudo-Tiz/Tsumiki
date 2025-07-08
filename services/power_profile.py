@@ -81,7 +81,7 @@ class PowerProfilesService(Service):
                 f"[PowerProfile] Could not change power level to {profile}: {e}"
             )
 
-    def handle_property_change(self, *_args):
+    def handle_property_change(self, *_):
         self.emit("changed")
 
     def get_profile_icon(self, profile: str) -> str:

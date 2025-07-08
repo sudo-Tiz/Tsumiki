@@ -3,7 +3,7 @@ from fabric.widgets.label import Label
 
 from services.battery import BatteryService
 from shared.widget_container import ButtonWidget
-from utils.functions import format_time
+from utils.functions import format_seconds_to_hours_minutes
 from utils.icons import symbolic_icons
 
 
@@ -94,7 +94,7 @@ class BatteryWidget(ButtonWidget):
             tool_tip_text = (
                 f"󱐋 Energy : {round(energy, 2)} Wh\n Temperature: {temperature}°C"
             )
-            formatted_time = format_time(time_remaining)
+            formatted_time = format_seconds_to_hours_minutes(time_remaining)
             if battery_percent == self.full_battery_level:
                 self.set_tooltip_text(f"󱠴 Status: Fully Charged\n{tool_tip_text}")
 

@@ -10,6 +10,7 @@ from gi.repository import GLib, GObject
 
 from services import audio_service
 from services.brightness import BrightnessService
+from shared.widget_container import BaseWidget
 from utils.icons import symbolic_icons
 from utils.types import Keyboard_Mode
 from utils.widget_utils import (
@@ -19,7 +20,7 @@ from utils.widget_utils import (
 )
 
 
-class GenericOSDContainer(Box):
+class GenericOSDContainer(Box, BaseWidget):
     """A generic OSD container to display the OSD for brightness and audio."""
 
     def __init__(self, config, **kwargs):
@@ -149,9 +150,7 @@ class AudioOSDContainer(GenericOSDContainer):
 
         is_over_amplified = volume > 100
 
-        self.scale.add_style_class(
-            "overamplified"
-        ) if is_over_amplified else self.scale.remove_style_class("overamplified")
+        self.set_has_class("overamplified", is_over_amplified)
 
         if not self.audio_service.speaker:
             return

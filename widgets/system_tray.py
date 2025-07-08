@@ -203,14 +203,16 @@ class SystemTrayWidget(ButtonWidget, BaseSystemTray):
             )
 
         visible = self.popup.get_visible()
+
+        self.set_has_class("active", not visible)
+
         if visible:
             self.popup.hide()
             self.toggle_icon.set_label(text_icons["chevron"]["down"])
-            self.toggle_icon.remove_style_class("active")
+
         else:
             self.popup.open()
             self.toggle_icon.set_label(text_icons["chevron"]["up"])
-            self.toggle_icon.add_style_class("active")
 
     def on_item_added(self, _, identifier: str):
         item = self.watcher.get_item_for_identifier(identifier)

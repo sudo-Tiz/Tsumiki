@@ -28,9 +28,7 @@ class WorkSpacesWidget(BoxWidget):
             )
 
             def update_empty_state(*_):
-                button.add_style_class(
-                    "unoccupied"
-                ) if button.empty else button.remove_style_class("unoccupied")
+                self.set_has_class("unoccupied", button.empty)
 
             button.connect("notify::empty", update_empty_state)
             update_empty_state()

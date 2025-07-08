@@ -2,10 +2,10 @@ from fabric.widgets.box import Box
 from fabric.widgets.datetime import DateTime
 from fabric.widgets.wayland import WaylandWindow as Window
 
-from shared.widget_container import ToggleableWidget
+from shared.widget_container import BaseWidget
 
 
-class DesktopClock(Window, ToggleableWidget):
+class DesktopClock(Window, BaseWidget):
     """
     A simple desktop clock widget.
     """

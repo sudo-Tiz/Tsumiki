@@ -26,7 +26,7 @@ class ScreenRecorderService(Service):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    def screenrecord_start(self, path, allow_audio, fullscreen=False):
+    def screenrecord_start(self, path: str, allow_audio: bool, fullscreen=False):
         self.screenrecord_path = f"{GLib.get_home_dir()}/{path}"
 
         if self.is_recording:
@@ -92,7 +92,7 @@ class ScreenRecorderService(Service):
 
         proc.communicate_utf8_async(None, None, do_callback)
 
-    def screenshot(self, path, fullscreen=False, save_copy=True):
+    def screenshot(self, path: str, fullscreen=False, save_copy=True):
         self.screenshot_path = f"{GLib.get_home_dir()}/{path}"
 
         time = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
@@ -114,7 +114,7 @@ class ScreenRecorderService(Service):
         except Exception:
             logger.exception(f"[SCREENSHOT] Failed to run command: {command}")
 
-    def send_screenrecord_notification(self, file_path):
+    def send_screenrecord_notification(self, file_path: str):
         cmd = ["notify-send"]
         cmd.extend(
             [

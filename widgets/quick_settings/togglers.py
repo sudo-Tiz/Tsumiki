@@ -78,11 +78,15 @@ class NotificationQuickSetting(HoverButton):
     def toggle_notification(self, _, value: bool, *args):
         """Toggle the notification."""
 
+        self.set_has_class(
+            "active",
+            not value,
+        )
+
         if value:
             self.notification_label.set_label("Quiet")
             self.notification_icon.set_label(text_icons["notifications"]["silent"])
-            self.remove_style_class("active")
+
         else:
             self.notification_label.set_label("Noisy")
             self.notification_icon.set_label(text_icons["notifications"]["noisy"])
-            self.add_style_class("active")

@@ -8,7 +8,9 @@ from fabric.widgets.widget import Widget
 from utils.config import widget_config
 
 
-class ToggleableWidget(Widget):
+class BaseWidget(Widget):
+    """A base widget class that can be extended for custom widgets."""
+
     """A widget that can be toggled on and off."""
 
     def __init__(self, **kwargs):
@@ -28,7 +30,7 @@ class ToggleableWidget(Widget):
             self.remove_style_class(class_name)
 
 
-class BoxWidget(Box, ToggleableWidget):
+class BoxWidget(Box, BaseWidget):
     """A container for box widgets."""
 
     def __init__(self, spacing=None, style_classes=None, **kwargs):
@@ -50,7 +52,7 @@ class BoxWidget(Box, ToggleableWidget):
         self.config = widget_config["widgets"].get(widget_name, {})
 
 
-class EventBoxWidget(EventBox, ToggleableWidget):
+class EventBoxWidget(EventBox, BaseWidget):
     """A container for box widgets."""
 
     def __init__(self, **kwargs):
@@ -68,7 +70,7 @@ class EventBoxWidget(EventBox, ToggleableWidget):
         )
 
 
-class ButtonWidget(Button, ToggleableWidget):
+class ButtonWidget(Button, BaseWidget):
     """A container for button widgets. Only used for new widgets that are used on bar"""
 
     def __init__(self, **kwargs):

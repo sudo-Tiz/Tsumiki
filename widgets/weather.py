@@ -12,6 +12,7 @@ from loguru import logger
 from services.weather import WeatherService
 from shared.popover import Popover
 from shared.widget_container import ButtonWidget
+from utils.functions import check_if_day
 from utils.icons import weather_icons
 from utils.widget_utils import (
     nerd_font_icon,
@@ -66,19 +67,6 @@ class BaseWeatherWidget:
             return self.hourly_forecast[index]["tempC"] + "°C"
 
         return self.hourly_forecast[index]["tempF"] + "°F"
-
-    def check_if_day(self, current_time: str | None = None) -> str:
-        time_format = "%I:%M %p"
-
-        if current_time is None:
-            current_time = datetime.now().strftime(time_format)
-
-        current_time_obj = datetime.strptime(current_time, time_format)
-        sunrise_time_obj = datetime.strptime(self.sunrise_time, time_format)
-        sunset_time_obj = datetime.strptime(self.sunset_time, time_format)
-
-        # Compare current time with sunrise and sunset
-        return sunrise_time_obj <= current_time_obj < sunset_time_obj
 
         # wttr.in time are in 300,400...2100 format ,
         #  we need to convert it to 4:00...21:00
@@ -323,7 +311,7 @@ class WeatherMenu(Box, BaseWeatherWidget):
                 self.forecast_box.attach(temp, col, 2, 1, 1)
 
     def get_weather_asset(self, code: int, time_str: str | None = None) -> str:
-        is_day = self.check_if_day(
+        is_day = check_if_day(
             current_time=time_str,
         )
         image_name = "image" if is_day else "image-night"
@@ -383,7 +371,7 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
         weather_icon = weather_icons[self.current_weather["weatherCode"]]
 
         text_icon = (
-            weather_icon["icon"] if self.check_if_day() else weather_icon["icon-night"]
+            weather_icon["icon"] if check_if_day() else weather_icon["icon-night"]
         )
 
         self.weather_icon.set_label(text_icon)
@@ -422,7 +410,7 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
         if (datetime.now() - self.update_time).total_seconds() > 300:
             text_icon = (
                 weather_icons[self.current_weather["weatherCode"]]["icon"]
-                if self.check_if_day()
+                if check_if_day()
                 else weather_icons[self.current_weather["weatherCode"]]["icon-night"]
             )
 

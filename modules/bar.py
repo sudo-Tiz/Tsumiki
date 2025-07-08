@@ -6,7 +6,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow as Window
 
-from shared.widget_container import ToggleableWidget, WidgetGroup
+from shared.widget_container import BaseWidget, WidgetGroup
 from widgets.battery import BatteryWidget
 from widgets.bluetooth import BlueToothWidget
 from widgets.brightness import BrightnessWidget
@@ -51,7 +51,7 @@ from widgets.workspaces import WorkSpacesWidget
 from widgets.world_clock import WorldClockWidget
 
 
-class StatusBar(Window, ToggleableWidget):
+class StatusBar(Window, BaseWidget):
     """A widget to display the status bar panel."""
 
     def __init__(self, config, **kwargs):

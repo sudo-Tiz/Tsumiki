@@ -14,9 +14,10 @@ from utils.widget_utils import nerd_font_icon, setup_cursor_hover
 from .animator import Animator
 from .circle_image import CircleImage
 from .submenu import QuickSubMenu
+from .widget_container import BaseWidget
 
 
-class HoverButton(Button):
+class HoverButton(Button, BaseWidget):
     """A container for button with hover effects."""
 
     def __init__(self, **kwargs):
@@ -25,6 +26,12 @@ class HoverButton(Button):
         )
 
         setup_cursor_hover(self)
+
+    def set_has_class(self, class_name, condition):
+        if condition:
+            self.add_style_class(class_name)
+        else:
+            self.remove_style_class(class_name)
 
 
 class ScanButton(HoverButton):
@@ -59,7 +66,7 @@ class ScanButton(HoverButton):
         self.scan_animator.stop()
 
 
-class QSToggleButton(Box):
+class QSToggleButton(Box, BaseWidget):
     """A widget to display a toggle button for quick settings."""
 
     @Signal

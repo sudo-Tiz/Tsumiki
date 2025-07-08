@@ -224,6 +224,155 @@ def deep_merge(data, target):
     return merged
 
 
+# Function to flatten a dictionary
+def flatten_dict(d, parent_key="", sep="-"):
+    """Flatten a nested dictionary into a single level."""
+    items = []
+    for k, v in d.items():
+        new_key = f"{parent_key}{sep}{k}" if parent_key else k
+        if isinstance(v, dict):  # If the value is a dictionary, recurse
+            items.extend(flatten_dict(v, new_key, sep=sep).items())
+        else:
+            items.append((new_key, v))
+    return dict(items)
+
+
+# Function to exclude keys from a dictionary
+def exclude_keys(d: Dict, keys_to_exclude: List[str]) -> Dict:
+    return {k: v for k, v in d.items() if k not in keys_to_exclude}
+
+
+# Function to format time in hours and minutes
+def format_seconds_to_hours_minutes(secs: int):
+    mm, _ = divmod(secs, 60)
+    hh, mm = divmod(mm, 60)
+    return "%d h %02d min" % (hh, mm)
+
+
+# Function to convert bytes to kilobytes, megabytes, or gigabytes
+def convert_bytes(bytes: int, to: Literal["kb", "mb", "gb"], format_spec=".1f"):
+    factor = {"kb": 1, "mb": 2, "gb": 3}.get(to, 1)
+    return f"{format(bytes / (1024**factor), format_spec)}{to.upper()}"
+
+
+# Function to check if the current time is between sunrise and sunset
+def check_if_day(sunrise_time, sunset_time, current_time: str | None = None) -> str:
+    time_format = "%I:%M %p"
+
+    if current_time is None:
+        current_time = datetime.now().strftime(time_format)
+
+    current_time_obj = datetime.strptime(current_time, time_format)
+    sunrise_time_obj = datetime.strptime(sunrise_time, time_format)
+    sunset_time_obj = datetime.strptime(sunset_time, time_format)
+
+    # Compare current time with sunrise and sunset
+    if sunrise_time_obj <= sunset_time_obj:
+        return sunrise_time_obj <= current_time_obj < sunset_time_obj
+
+    return current_time_obj >= sunrise_time_obj or current_time_obj < sunset_time_obj
+
+
+# wttr.in time are in 300,400...2100 format , we need to convert it to 4:00...21:00
+def convert_to_12hr_format(time: str) -> str:
+    time = int(time)
+    hour = time // 100  # Get the hour (e.g., 1200 -> 12)
+    minute = time % 100  # Get the minutes (e.g., 1200 -> 00)
+
+    # Convert to 12-hour format
+    period = "AM" if hour < 12 else "PM"
+
+    # Adjust hour for 12-hour format
+    if hour == 0:
+        hour = 12
+    elif hour > 12:
+        hour -= 12
+
+    # Format the time as a string
+    return f"{hour}:{minute:02d} {period}"
+
+
+# Function to unique list
+def unique_list(lst: List[Any]) -> List[Any]:
+    """Return a list with unique elements."""
+    return list(set(lst))
+
+
+# Function to get the relative time
+def get_relative_time(mins: int) -> str:
+    # Seconds
+    if mins == 0:
+        return "now"
+
+    # Minutes
+    if mins < 60:
+        return f"{mins} minute{'s' if mins > 1 else ''} ago"
+
+    # Hours
+    if mins < 1440:
+        hours = mins // 60
+        return f"{hours} hour{'s' if hours > 1 else ''} ago"
+
+    # Days
+    days = mins // 1440
+    return f"{days} day{'s' if days > 1 else ''} ago"
+
+
+# Function to get the percentage of a value
+def convert_to_percent(
+    current: int | float, max: int | float, is_int=True
+) -> int | float:
+    if max == 0:
+        return 0
+    if is_int:
+        return int((current / max) * 100)
+    else:
+        return (current / max) * 100
+
+
+# Function to check if a color is valid
+def is_valid_gjs_color(color: str) -> bool:
+    color_lower = color.strip().lower()
+
+    if color_lower in NAMED_COLORS:
+        return True
+
+    hex_color_regex = r"^#(?:[a-fA-F0-9]{3,4}|[a-fA-F0-9]{6,8})$"
+    rgb_regex = r"^rgb\(\s*(\d{1,3}%?\s*,\s*){2}\d{1,3}%?\s*\)$"
+    rgba_regex = r"^rgba\(\s*(\d{1,3}%?\s*,\s*){3}(0|1|0?\.\d+)\s*\)$"
+
+    if re.match(hex_color_regex, color):
+        return True
+
+    return bool(re.match(rgb_regex, color_lower) or re.match(rgba_regex, color_lower))
+
+
+# Function to get the system uptime
+def uptime():
+    boot_time = psutil.boot_time()
+    now = datetime.now()
+
+    diff = now.timestamp() - boot_time
+
+    # Convert the difference in seconds to hours and minutes
+    hours, remainder = divmod(diff, 3600)
+    minutes, _ = divmod(remainder, 60)
+
+    return f"{int(hours):02}:{int(minutes):02}"
+
+
+# Function to convert seconds to milliseconds
+def convert_seconds_to_milliseconds(seconds: int):
+    return seconds * 1000
+
+
+# Function to check if an icon exists, otherwise use a fallback icon
+def check_icon_exists(icon_name: str, fallback_icon: str) -> str:
+    if Gtk.IconTheme.get_default().has_icon(icon_name):
+        return icon_name
+    return fallback_icon
+
+
 # Set the scale's adjustment
 def set_scale_adjustment(
     scale, min_value: float = 0, max_value: float = 100, steps: float = 1
@@ -259,19 +408,6 @@ def toggle_command(command: str, full_command: str):
 def kill_process(process_name: str):
     exec_shell_command_async(f"pkill {process_name}", lambda *_: None)
     return True
-
-
-# Function to flatten a dictionary
-def flatten_dict(d, parent_key="", sep="-"):
-    """Flatten a nested dictionary into a single level."""
-    items = []
-    for k, v in d.items():
-        new_key = f"{parent_key}{sep}{k}" if parent_key else k
-        if isinstance(v, dict):  # If the value is a dictionary, recurse
-            items.extend(flatten_dict(v, new_key, sep=sep).items())
-        else:
-            items.append((new_key, v))
-    return dict(items)
 
 
 # Validate the widgets
@@ -348,87 +484,6 @@ def make_qrcode(text: str, size: int = 200) -> GdkPixbuf.Pixbuf:
     return scaled_pixbuf
 
 
-# Function to exclude keys from a dictionary
-def exclude_keys(d: Dict, keys_to_exclude: List[str]) -> Dict:
-    return {k: v for k, v in d.items() if k not in keys_to_exclude}
-
-
-# Function to format time in hours and minutes
-def format_time(secs: int):
-    mm, _ = divmod(secs, 60)
-    hh, mm = divmod(mm, 60)
-    return "%d h %02d min" % (hh, mm)
-
-
-# Function to convert bytes to kilobytes, megabytes, or gigabytes
-def convert_bytes(bytes: int, to: Literal["kb", "mb", "gb"], format_spec=".1f"):
-    factor = {"kb": 1, "mb": 2, "gb": 3}.get(to, 1)
-    return f"{format(bytes / (1024**factor), format_spec)}{to.upper()}"
-
-
-# Function to check if the current time is between sunrise and sunset
-def check_if_day(sunrise_time, sunset_time, current_time: str | None = None) -> str:
-    time_format = "%I:%M %p"
-
-    if current_time is None:
-        current_time = datetime.now().strftime(time_format)
-
-    current_time_obj = datetime.strptime(current_time, time_format)
-    sunrise_time_obj = datetime.strptime(sunrise_time, time_format)
-    sunset_time_obj = datetime.strptime(sunset_time, time_format)
-
-    # Compare current time with sunrise and sunset
-    if sunrise_time_obj <= sunset_time_obj:
-        return sunrise_time_obj <= current_time_obj < sunset_time_obj
-
-    return current_time_obj >= sunrise_time_obj or current_time_obj < sunset_time_obj
-
-
-# wttr.in time are in 300,400...2100 format , we need to convert it to 4:00...21:00
-def convert_to_12hr_format(time: str) -> str:
-    time = int(time)
-    hour = time // 100  # Get the hour (e.g., 1200 -> 12)
-    minute = time % 100  # Get the minutes (e.g., 1200 -> 00)
-
-    # Convert to 12-hour format
-    period = "AM" if hour < 12 else "PM"
-
-    # Adjust hour for 12-hour format
-    if hour == 0:
-        hour = 12
-    elif hour > 12:
-        hour -= 12
-
-    # Format the time as a string
-    return f"{hour}:{minute:02d} {period}"
-
-
-# Function to get the system uptime
-def uptime():
-    boot_time = psutil.boot_time()
-    now = datetime.now()
-
-    diff = now.timestamp() - boot_time
-
-    # Convert the difference in seconds to hours and minutes
-    hours, remainder = divmod(diff, 3600)
-    minutes, _ = divmod(remainder, 60)
-
-    return f"{int(hours):02}:{int(minutes):02}"
-
-
-# Function to convert seconds to milliseconds
-def convert_seconds_to_milliseconds(seconds: int):
-    return seconds * 1000
-
-
-# Function to check if an icon exists, otherwise use a fallback icon
-def check_icon_exists(icon_name: str, fallback_icon: str) -> str:
-    if Gtk.IconTheme.get_default().has_icon(icon_name):
-        return icon_name
-    return fallback_icon
-
-
 # Function to play sound
 @cooldown(1)
 def play_sound(file: str):
@@ -486,38 +541,6 @@ def send_notification(
     return True
 
 
-# Function to get the relative time
-def get_relative_time(mins: int) -> str:
-    # Seconds
-    if mins == 0:
-        return "now"
-
-    # Minutes
-    if mins < 60:
-        return f"{mins} minute{'s' if mins > 1 else ''} ago"
-
-    # Hours
-    if mins < 1440:
-        hours = mins // 60
-        return f"{hours} hour{'s' if hours > 1 else ''} ago"
-
-    # Days
-    days = mins // 1440
-    return f"{days} day{'s' if days > 1 else ''} ago"
-
-
-# Function to get the percentage of a value
-def convert_to_percent(
-    current: int | float, max: int | float, is_int=True
-) -> int | float:
-    if max == 0:
-        return 0
-    if is_int:
-        return int((current / max) * 100)
-    else:
-        return (current / max) * 100
-
-
 # Function to write a JSON file
 @run_in_thread
 def write_json_file(data: Dict, path: str):
@@ -554,32 +577,9 @@ def ensure_directory(path: str) -> None:
             print(f"Failed to create directory {path}: {e.message}")
 
 
-# Function to unique list
-def unique_list(lst: List[Any]) -> List[Any]:
-    """Return a list with unique elements."""
-    return list(set(lst))
-
-
 # Function to check if an app is running
 def is_app_running(app_name: str) -> bool:
     return len(exec_shell_command(f"pidof {app_name}")) != 0
-
-
-# Function to check if a color is valid
-def is_valid_gjs_color(color: str) -> bool:
-    color_lower = color.strip().lower()
-
-    if color_lower in NAMED_COLORS:
-        return True
-
-    hex_color_regex = r"^#(?:[a-fA-F0-9]{3,4}|[a-fA-F0-9]{6,8})$"
-    rgb_regex = r"^rgb\(\s*(\d{1,3}%?\s*,\s*){2}\d{1,3}%?\s*\)$"
-    rgba_regex = r"^rgba\(\s*(\d{1,3}%?\s*,\s*){3}(0|1|0?\.\d+)\s*\)$"
-
-    if re.match(hex_color_regex, color):
-        return True
-
-    return bool(re.match(rgb_regex, color_lower) or re.match(rgba_regex, color_lower))
 
 
 # Function to take a memory snapshot
