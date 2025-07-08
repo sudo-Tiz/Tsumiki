@@ -30,9 +30,9 @@ class MicrophoneSlider(SettingSlider):
             self.chevron_btn = HoverButton(
                 child=Box(
                     children=(self.chevron_icon,),
-                )
+                ),
+                on_clicked=self.on_button_click,
             )
-            self.chevron_btn.connect("clicked", self.on_button_click)
             self.children = (*self.children, self.chevron_btn)
 
         if not audio_stream:

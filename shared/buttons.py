@@ -111,7 +111,8 @@ class QSToggleButton(Box, BaseWidget):
                 v_align="center",
                 style_classes="quicksettings-toggle-action-box",
                 children=[self.action_icon, self.action_label],
-            )
+            ),
+            on_clicked=self.do_action,
         )
 
         self.box.add(self.action_button)
@@ -123,8 +124,6 @@ class QSToggleButton(Box, BaseWidget):
             children=[self.box],
             **kwargs,
         )
-
-        self.action_button.connect("clicked", self.do_action)
 
     def do_action(self, *_):
         self.emit("action-clicked")
@@ -160,7 +159,10 @@ class QSChevronButton(QSToggleButton):
         )
 
         self.reveal_button = HoverButton(
-            style_classes="toggle-revealer", image=self.button_image, h_expand=True
+            style_classes="toggle-revealer",
+            image=self.button_image,
+            h_expand=True,
+            on_clicked=self.do_reveal_toggle,
         )
 
         super().__init__(
@@ -170,8 +172,6 @@ class QSChevronButton(QSToggleButton):
             **kwargs,
         )
         self.box.add(self.reveal_button)
-
-        self.reveal_button.connect("clicked", self.do_reveal_toggle)
 
         self.submenu.revealer.connect(
             "notify::reveal-child",

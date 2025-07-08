@@ -350,26 +350,28 @@ class PlayerBox(Box):
         self.play_pause_button = HoverButton(
             name="player-button",
             child=self.play_pause_icon,
+            on_clicked=self.player.play_pause,
         )
 
-        self.play_pause_button.connect("clicked", self.player.play_pause)
         self.player.bind_property("can_pause", self.play_pause_button, "sensitive")
 
         self.next_button = HoverButton(
-            style_classes=["player-button"], child=self.skip_next_icon
+            style_classes=["player-button"],
+            child=self.skip_next_icon,
+            on_clicked=self._on_player_next,
         )
-        self.next_button.connect("clicked", self._on_player_next)
         self.player.bind_property("can_go_next", self.next_button, "sensitive")
 
         self.prev_button = HoverButton(
-            style_classes=["player-button"], child=self.skip_prev_icon
+            style_classes=["player-button"],
+            child=self.skip_prev_icon,
+            on_clicked=self._on_player_prev,
         )
-        self.prev_button.connect("clicked", self._on_player_prev)
-
         self.shuffle_button = HoverButton(
-            style_classes=["player-button"], child=self.shuffle_icon
+            style_classes=["player-button"],
+            child=self.shuffle_icon,
+            on_clicked=self.player.toggle_shuffle,
         )
-        self.shuffle_button.connect("clicked", self.player.toggle_shuffle)
         self.player.bind_property("can_shuffle", self.shuffle_button, "sensitive")
 
         self.button_box.children = (
