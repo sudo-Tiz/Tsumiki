@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 
 from fabric.core.service import Property, Service, Signal
@@ -25,9 +26,15 @@ class ScreenRecorderService(Service):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.home_dir = GLib.get_home_dir()
 
     def screenrecord_start(self, path: str, allow_audio: bool, fullscreen=False):
-        self.screenrecord_path = f"{GLib.get_home_dir()}/{path}"
+        """Start screen recording using wf-recorder."""
+        if not path:
+            logger.exception("[SCREENRECORD] No path provided for screen recording.")
+            return
+
+        self.screenrecord_path = os.path.join(self.home_dir, path)
 
         if self.is_recording:
             logger.exception(
@@ -35,7 +42,7 @@ class ScreenRecorderService(Service):
             )
             return
         time = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
-        file_path = f"{self.screenrecord_path}/{time}.mp4"
+        file_path = os.path.join(self.screenrecord_path, f"{time}.mp4")
 
         self._current_screencast_path = file_path
         area = "" if fullscreen else f"-g '{exec_shell_command('slurp')}'"
@@ -93,9 +100,15 @@ class ScreenRecorderService(Service):
         proc.communicate_utf8_async(None, None, do_callback)
 
     def screenshot(self, path: str, fullscreen=False, save_copy=True):
-        self.screenshot_path = f"{GLib.get_home_dir()}/{path}"
+        """Take a screenshot using grimblast."""
+        if not path:
+            logger.exception("[SCREENSHOT] No path provided for screenshot.")
+            return
+
+        self.screenshot_path = os.path.join(self.home_dir, path)
 
         time = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
+
         file_path = f"{self.screenshot_path}/{time}.png"
         command = (
             ["grimblast", "copysave", "screen", file_path]

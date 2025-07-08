@@ -1,5 +1,4 @@
 from fabric.widgets.label import Label
-from loguru import logger
 
 import utils.functions as helpers
 from utils.widget_utils import (
@@ -21,9 +20,9 @@ class CommandSwitcher(ButtonWidget):
         disabled_icon: str,
         name: str,
         label=True,
-        args: str = "",
+        args="",
         tooltip=True,
-        style_classes: str = "",
+        style_classes="",
         **kwargs,
     ):
         self.command = command
