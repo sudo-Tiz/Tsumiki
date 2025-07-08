@@ -313,6 +313,8 @@ class WeatherMenu(Box, BaseWeatherWidget):
     def get_weather_asset(self, code: int, time_str: str | None = None) -> str:
         is_day = check_if_day(
             current_time=time_str,
+            sunrise_time=self.sunrise_time,
+            sunset_time=self.sunset_time,
         )
         image_name = "image" if is_day else "image-night"
         return f"{self.weather_icons_dir}/{weather_icons[str(code)][image_name]}.svg"
@@ -371,7 +373,11 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
         weather_icon = weather_icons[self.current_weather["weatherCode"]]
 
         text_icon = (
-            weather_icon["icon"] if check_if_day() else weather_icon["icon-night"]
+            weather_icon["icon"]
+            if check_if_day(
+                sunrise_time=self.sunrise_time, sunset_time=self.sunset_time
+            )
+            else weather_icon["icon-night"]
         )
 
         self.weather_icon.set_label(text_icon)
@@ -410,7 +416,10 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
         if (datetime.now() - self.update_time).total_seconds() > 300:
             text_icon = (
                 weather_icons[self.current_weather["weatherCode"]]["icon"]
-                if check_if_day()
+                if check_if_day(
+                    sunrise_time=self.sunrise_time,
+                    sunset_time=self.sunset_time,
+                )
                 else weather_icons[self.current_weather["weatherCode"]]["icon-night"]
             )
 

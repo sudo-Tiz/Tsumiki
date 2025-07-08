@@ -328,7 +328,7 @@
 		], // this is the left section of the panel
 		"middle_section": [
 			"date_time",
-			"window_count"
+			"weather"
 		], // this is the middle section of the panel
 		"right_section": [
 			"recorder",
