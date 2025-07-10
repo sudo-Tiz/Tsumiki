@@ -101,7 +101,10 @@ class QSToggleButton(Box, BaseWidget):
             h_expand=True,
         )
 
-        self.action_button = HoverButton(style_classes="quicksettings-toggle-action")
+        self.action_button = HoverButton(
+            style_classes="quicksettings-toggle-action",
+            on_clicked=self.do_action,
+        )
 
         self.action_button.set_size_request(170, 20)
 
@@ -112,7 +115,6 @@ class QSToggleButton(Box, BaseWidget):
                 style_classes="quicksettings-toggle-action-box",
                 children=[self.action_icon, self.action_label],
             ),
-            on_clicked=self.do_action,
         )
 
         self.box.add(self.action_button)
