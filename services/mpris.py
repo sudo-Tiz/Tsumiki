@@ -49,7 +49,7 @@ class MprisPlayer(Service):
             "metadata",
             lambda *_: self.update_status(),
         )
-        GLib.idle_add(self.update_status_once())
+        GLib.idle_add(self.update_status_once)
 
     def update_status(self):
         # schedule each notifier asynchronously.
