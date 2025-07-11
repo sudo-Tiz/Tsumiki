@@ -4,8 +4,8 @@ from datetime import datetime
 from fabric.utils import cooldown, get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.grid import Grid
-from fabric.widgets.image import Image
 from fabric.widgets.label import Label
+from fabric.widgets.svg import Svg
 from gi.repository import Gtk
 from loguru import logger
 
@@ -113,8 +113,8 @@ class WeatherMenu(Box, BaseWeatherWidget):
 
         self.weather_icons_dir = get_relative_path("../assets/icons/svg/weather")
 
-        self.current_weather_image = Image(
-            image_file=f"{self.weather_icons_dir}/clear-day.svg",
+        self.current_weather_image = Svg(
+            svg_file=f"{self.weather_icons_dir}/clear-day.svg",
             v_align="start",
             h_align="start",
             size=100,
@@ -265,6 +265,7 @@ class WeatherMenu(Box, BaseWeatherWidget):
             self.current_weather_image.set_from_file(
                 self.get_weather_asset(self.current_weather["weatherCode"]),
             )
+
             self.location.set_label(self.data["location"])
             self.weather_description.set_label(self.get_description())
             self.sunset_sunrise.set_label(self.sunrise_sunset_time())
@@ -290,8 +291,8 @@ class WeatherMenu(Box, BaseWeatherWidget):
                     label=f"{self.convert_to_12hr_format(value['time'])}",
                     h_align="center",
                 )
-                icon = Image(
-                    image_file=self.get_weather_asset(
+                icon = Svg(
+                    svg_file=self.get_weather_asset(
                         value["weatherCode"],
                         self.convert_to_12hr_format(value["time"]),
                     ),
