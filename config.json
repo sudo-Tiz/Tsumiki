@@ -420,7 +420,7 @@
 		"check_updates": false,
 		"layer": "overlay",
 		"auto_hide": false,
-		"debug": true,
+		"debug": false,
 		"monitor_styles": true,
 		"location": "top"
 	}

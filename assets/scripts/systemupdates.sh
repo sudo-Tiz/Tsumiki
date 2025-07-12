@@ -138,34 +138,30 @@ check_opensuse_updates() {
 }
 
 update_arch() {
-    if command -v paru &> /dev/null; then
-		aur_helper="paru"
-	else
-		aur_helper="yay"
-	fi
+    local aur_helper="yay"
+    if command -v paru &>/dev/null; then
+        aur_helper="paru"
+    fi
 
-command="
-    # Cute Penguin ASCII Art with tsumiki text
+    local command="
     echo '      .--.  '
     echo '     |o_o | '
     echo '     |:_/ | '
-    echo '    //   \\ \\ '
+    echo '    //   \\\\ '
     echo '   (|     | )'
-    echo '  /\'\\_   _/\'\\'
-    echo '  \\___)=(___/ '
+    echo '  /'\\\\_   _/\\\\'
+    echo '  \\\\___)=(___/ '
     echo ''
     echo '   tsumiki chan'
-    echo ''\
+    echo ''
 
     $aur_helper -Syyu
     flatpak update -y || true
     read -n 1 -p 'Press any key to continue...'
-"
-
-    kitty --title systemupdate sh -c "${command}"
+    "
+    kitty --title systemupdate sh -c "$command"
     echo "{\"total\":\"0\", \"tooltip\":\"0\"}"
 }
-
 
 update_ubuntu() {
     local command="
