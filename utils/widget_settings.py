@@ -294,6 +294,7 @@ Updates = TypedDict(
         "icon": str,
         "interval": int,
         "pad_zero": bool,
+        "auto_hide": bool,
         "flatpak": bool,
         "snap": bool,
         "brew": bool,
