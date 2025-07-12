@@ -84,7 +84,7 @@ class UpdatesWidget(ButtonWidget):
             # Update the label if enabled
             if self.config.get("label", True):
                 if self.config.get("pad_zero", True):
-                    self.update_label.set_label(value["total"].ljust(2, "0"))
+                    self.update_label.set_label(value["total"].rjust(2, "0"))
                 else:
                     self.update_label.set_label(value["total"])
             if self.config.get("show_icon", True):
