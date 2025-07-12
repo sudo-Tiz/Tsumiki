@@ -116,11 +116,14 @@ class UpdatesWidget(ButtonWidget):
                 f"{Colors.ERROR}[UpdatesWidget] Failed to parse update data: {e}"
             )
 
-        if self.config.get("auto_hide", False):
-            if value["total"] == "0":
-                self.hide()
-            else:
-                self.show()
+            # Auto-hide logic
+            if self.config.get("auto_hide", False):
+                self.set_visible(total > 0)
+
+        except (json.JSONDecodeError, ValueError) as e:
+            logger.error(
+                f"{Colors.ERROR}[UpdatesWidget] Failed to parse update data: {e}"
+            )
 
     def on_button_press(self, _, event):
         """Trigger a manual update check on click."""
