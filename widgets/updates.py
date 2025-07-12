@@ -81,7 +81,10 @@ class UpdatesWidget(ButtonWidget):
         if value["total"] > "0":
             # Update the label if enabled
             if self.config.get("label", True):
-                self.update_label.set_label(value["total"])
+                if self.config.get("pad_zero", True):
+                    self.update_label.set_label(value["total"].ljust(2, "0"))
+                else:
+                    self.update_label.set_label(value["total"])
             if self.config.get("show_icon", True):
                 self.icon.set_label("󱧘")
 
@@ -99,6 +102,7 @@ class UpdatesWidget(ButtonWidget):
         # Execute the update script asynchronously and update values
 
         if update:
+            logger.info(f"{Colors.INFO}[Updates] Updating available updates...")
             exec_shell_command_async(
                 f"{self.base_command} up",
                 self.update_values,

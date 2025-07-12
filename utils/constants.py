@@ -269,6 +269,7 @@ DEFAULT_CONFIG = {
             "os": "arch",
             "interval": HIGH_POLL_INTERVAL,
             "tooltip": True,
+            "pad_zero": True,  # Whether to pad the number of updates with zero
             "label": True,
             "flatpak": False,
             "snap": False,
