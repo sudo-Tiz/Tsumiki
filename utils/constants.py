@@ -265,7 +265,8 @@ DEFAULT_CONFIG = {
         },
         "updates": {
             "show_icon": True,
-            "icon": "󱧘",
+            "available_icon": "󰏗",
+            "no_updates_icon": "󰏖",
             "os": "arch",
             "interval": HIGH_POLL_INTERVAL,
             "tooltip": True,
