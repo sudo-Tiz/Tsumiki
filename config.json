@@ -144,6 +144,7 @@
 			"icon": "󱧘",
 			"os": "arch",
 			"interval": 3600,
+			"pad_zero": true, // this is to pad the number of updates with zero
 			"tooltip": true,
 			"label": true,
 			"flatpak": true,
@@ -414,9 +415,9 @@
 	},
 	"general": {
 		"check_updates": false,
-		"layer": "top",
+		"layer": "overlay",
 		"auto_hide": false,
-		"debug": false,
+		"debug": true,
 		"monitor_styles": true,
 		"location": "top"
 	}

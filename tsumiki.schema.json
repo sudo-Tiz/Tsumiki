@@ -846,6 +846,10 @@
 						"interval": {
 							"type": "integer",
 							"description": "Interval in seconds to check for updates"
+						},
+						"pad_zero": {
+							"type": "boolean",
+							"description": "Determines whether to pad the number of updates with zero"
 						}
 					}
 				}

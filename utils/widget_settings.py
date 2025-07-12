@@ -293,6 +293,7 @@ Updates = TypedDict(
         "os": str,
         "icon": str,
         "interval": int,
+        "pad_zero": bool,
         "flatpak": bool,
         "snap": bool,
         "brew": bool,
