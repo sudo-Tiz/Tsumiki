@@ -271,6 +271,7 @@ DEFAULT_CONFIG = {
             "tooltip": True,
             "pad_zero": True,  # Whether to pad the number of updates with zero
             "label": True,
+            "auto_hide": False,  # Whether to auto-hide there are no updates
             "flatpak": False,
             "snap": False,
             "brew": False,
