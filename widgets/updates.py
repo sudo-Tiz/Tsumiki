@@ -78,8 +78,6 @@ class UpdatesWidget(ButtonWidget):
 
         value = json.loads(value)
 
-        print(f"Updates value: {value}")
-
         if value["total"] > "0":
             # Update the label if enabled
             if self.config.get("label", True):
