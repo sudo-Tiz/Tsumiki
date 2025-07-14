@@ -65,6 +65,13 @@ def main():
 
         windows.append(screen_corners)
 
+    if module_options["quotes"]["enabled"]:
+        from modules.quotes import DesktopQuote
+
+        quotes = DesktopQuote(widget_config)
+
+        windows.append(quotes)
+
     if module_options["dock"]["enabled"]:
         from modules.dock import Dock
 

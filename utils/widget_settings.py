@@ -122,8 +122,20 @@ DesktopClock = TypedDict(
         "anchor": Anchor,
         "layer": Layer,
         "date_format": str,
+        "time_format": str,
     },
 )
+
+# Quotes configuration
+Quotes = TypedDict(
+    "Quotes",
+    {
+        "enabled": bool,
+        "anchor": Anchor,
+        "layer": Layer,
+    },
+)
+
 
 # ScreenCorners configuration
 ScreenCorners = TypedDict(
@@ -188,6 +200,7 @@ Modules = TypedDict(
         "dock": Dock,
         "bar": Bar,
         "desktop_clock": DesktopClock,
+        "quotes": Quotes,
         "notification": Notification,
         "osd": OSD,
         "app_launcher": AppLauncher,
