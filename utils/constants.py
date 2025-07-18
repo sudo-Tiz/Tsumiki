@@ -183,6 +183,7 @@ DEFAULT_CONFIG = {
             "tooltip": True,
             "mode": "circular",
             "graph_length": 4,
+            "unit": "gb",  # Default unit for memory
         },
         "network_usage": {
             "upload_icon": "",
@@ -245,6 +246,7 @@ DEFAULT_CONFIG = {
             "tooltip": True,
             "path": "/",
             "graph_length": 4,
+            "unit": "gb",  # Default unit for storage
         },
         "submap": {
             "icon": "󰌌",

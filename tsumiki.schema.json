@@ -489,7 +489,9 @@
 		},
 		"hyprsunset": {
 			"allOf": [
-				{ "$ref": "#/definitions/baseProperties" },
+				{
+					"$ref": "#/definitions/baseProperties"
+				},
 				{
 					"type": "object",
 					"properties": {
@@ -512,7 +514,9 @@
 		},
 		"hypridle": {
 			"allOf": [
-				{ "$ref": "#/definitions/baseProperties" },
+				{
+					"$ref": "#/definitions/baseProperties"
+				},
 				{
 					"type": "object",
 					"properties": {
@@ -529,7 +533,11 @@
 			]
 		},
 		"microphone": {
-			"allOf": [{ "$ref": "#/definitions/baseProperties" }]
+			"allOf": [
+				{
+					"$ref": "#/definitions/baseProperties"
+				}
+			]
 		},
 		"battery": {
 			"type": "object",
@@ -677,6 +685,11 @@
 				"graph_length": {
 					"type": "integer",
 					"description": "Length of the graph in pixels"
+				},
+				"unit": {
+					"type": "string",
+					"enum": ["kb", "mb", "gb", "tb"],
+					"description": "Specifies the unit to use for memory"
 				}
 			}
 		},
@@ -705,6 +718,11 @@
 				"graph_length": {
 					"type": "integer",
 					"description": "Length of the graph in pixels"
+				},
+				"unit": {
+					"type": "string",
+					"enum": ["kb", "mb", "gb", "tb"],
+					"description": "Specifies the unit to use for storage"
 				}
 			}
 		},
@@ -802,7 +820,9 @@
 		},
 		"hyprpicker": {
 			"allOf": [
-				{ "$ref": "#/definitions/baseProperties" },
+				{
+					"$ref": "#/definitions/baseProperties"
+				},
 				{
 					"type": "object",
 					"properties": {
@@ -820,7 +840,9 @@
 		},
 		"ocr": {
 			"allOf": [
-				{ "$ref": "#/definitions/baseProperties" },
+				{
+					"$ref": "#/definitions/baseProperties"
+				},
 				{
 					"type": "object",
 					"properties": {
@@ -834,7 +856,9 @@
 		},
 		"updates": {
 			"allOf": [
-				{ "$ref": "#/definitions/baseProperties" },
+				{
+					"$ref": "#/definitions/baseProperties"
+				},
 				{
 					"type": "object",
 					"properties": {
@@ -869,7 +893,9 @@
 		},
 		"keyboard": {
 			"allOf": [
-				{ "$ref": "#/definitions/baseProperties" },
+				{
+					"$ref": "#/definitions/baseProperties"
+				},
 				{
 					"type": "object",
 					"properties": {
@@ -883,7 +909,9 @@
 		},
 		"window_count": {
 			"allOf": [
-				{ "$ref": "#/definitions/baseProperties" },
+				{
+					"$ref": "#/definitions/baseProperties"
+				},
 				{
 					"type": "object",
 					"properties": {
@@ -901,7 +929,9 @@
 		},
 		"submap": {
 			"allOf": [
-				{ "$ref": "#/definitions/baseProperties" },
+				{
+					"$ref": "#/definitions/baseProperties"
+				},
 				{
 					"type": "object",
 					"properties": {

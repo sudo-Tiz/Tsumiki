@@ -267,7 +267,7 @@
     - **`auto_hide`**: `bool` (default: false)
     - **`location`**: `str` (default: "top")
   - **`osd`**: `object`
-    - **`enabled`**: `bool` (default: true)
+    - **`enabled`**: `bool` (default: false)
     - **`timeout`**: `int` (default: 1500)
     - **`anchor`**: `str` (default: "bottom-center")
     - **`orientation`**: `str` (default: "horizontal")
@@ -305,11 +305,15 @@
     - **`anchor`**: `str` (default: "bottom-center")
     - **`layer`**: `str` (default: "bottom")
   - **`desktop_clock`**: `object`
-    - **`enabled`**: `bool` (default: true)
+    - **`enabled`**: `bool` (default: false)
     - **`layer`**: `str` (default: "bottom")
     - **`anchor`**: `str` (default: "center")
     - **`date_format`**: `str` (default: "%A, %d %B %Y")
     - **`time_format`**: `str` (default: "%H:%M")
+  - **`quotes`**: `object`
+    - **`enabled`**: `bool` (default: false)
+    - **`anchor`**: `str` (default: "bottom-right")
+    - **`layer`**: `str` (default: "bottom")
 
 - **`general`**: `object`
   - **`check_updates`**: `bool` (default: false)

@@ -417,7 +417,7 @@
 			"time_format": "%H:%M"
 		},
 		"quotes": {
-			"enabled": false,
+			"enabled": true,
 			"anchor": "bottom-right",
 			"layer": "bottom",
 			"update_interval": 600 // this is the interval in seconds to update the quotes, 1 hour is 3600 seconds
