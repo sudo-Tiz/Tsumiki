@@ -343,10 +343,10 @@ class MemoryWidget(ButtonWidget):
         return True
 
     def get_used(self):
-        return helpers.convert_bytes(self.used_memory, "gb")
+        return helpers.convert_bytes(self.used_memory, self.config["unit"])
 
     def get_total(self):
-        return helpers.convert_bytes(self.total_memory, "gb")
+        return helpers.convert_bytes(self.total_memory, self.config["unit"])
 
     def ratio(self):
         return f"{self.get_used()}/{self.get_total()}"
@@ -446,10 +446,10 @@ class StorageWidget(ButtonWidget):
         return True
 
     def get_used(self):
-        return helpers.convert_bytes(self.disk.used, "gb")
+        return helpers.convert_bytes(self.disk.used, self.config["unit"])
 
     def get_total(self):
-        return helpers.convert_bytes(self.disk.total, "gb")
+        return helpers.convert_bytes(self.disk.total, self.config["unit"])
 
     def ratio(self):
         return f"{self.get_used()}/{self.get_total()}"

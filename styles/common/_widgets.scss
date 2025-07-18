@@ -36,15 +36,7 @@
 }
 
 
-#quotes-box {
-  margin: 0 15rem 15rem 15rem;
 
-  label {
-      font-size: 1.5rem;
-      font-weight: 600;
-      @extend %desktop-widget;
-    }
-}
 
 
 #divider {
@@ -181,6 +173,16 @@
   border-radius: variable.$modules-quotes-border-radius;
   border: if(variable.$modules-quotes-border-enabled, variable.$border, none);
   border-width: variable.$modules-quotes-border-width;
+
+  #quotes-box {
+      margin: 0rem 4rem 4rem 0rem;
+
+      label {
+        font-size: 1.5rem;
+        font-weight: 600;
+        @extend %desktop-widget;
+      }
+    }
 
 }
 

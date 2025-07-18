@@ -205,8 +205,7 @@ def recompile_and_apply_css():
 
 # Function to convert celsius to fahrenheit
 def celsius_to_fahrenheit(celsius):
-    fahrenheit = (celsius * 9 / 5) + 32
-    return fahrenheit
+    return (celsius * 9 / 5) + 32
 
 
 # Merge the parsed data with the default configuration
@@ -253,8 +252,8 @@ def format_seconds_to_hours_minutes(secs: int):
 
 
 # Function to convert bytes to kilobytes, megabytes, or gigabytes
-def convert_bytes(bytes: int, to: Literal["kb", "mb", "gb"], format_spec=".1f"):
-    factor = {"kb": 1, "mb": 2, "gb": 3}.get(to, 1)
+def convert_bytes(bytes: int, to: Literal["kb", "mb", "gb", "tb"], format_spec=".1f"):
+    factor = {"kb": 1, "mb": 2, "gb": 3, "tb": 4}.get(to, 1)
     return f"{format(bytes / (1024**factor), format_spec)}{to.upper()}"
 
 
