@@ -26,3 +26,5 @@ Keyboard_Mode = Literal["none", "exclusive", "on-demand"]
 
 
 Power_Options = Literal["shutdown", "reboot", "hibernate", "suspend", "lock", "logout"]
+
+Widget_Mode = Literal["circular", "graph", "label"]

@@ -13,6 +13,7 @@ APP_CACHE_DIRECTORY = f"{SYSTEM_CACHE_DIR}/{APPLICATION_NAME}"
 
 NOTIFICATION_CACHE_FILE = f"{APP_CACHE_DIRECTORY}/notifications.json"
 WEATHER_CACHE_FILE = f"{APP_CACHE_DIRECTORY}/weather.json"
+QUOTES_CACHE_FILE = f"{APP_CACHE_DIRECTORY}/quotes.json"
 ICON_CACHE_FILE = f"{APP_CACHE_DIRECTORY}/icons.json"
 
 
@@ -182,6 +183,7 @@ DEFAULT_CONFIG = {
             "tooltip": True,
             "mode": "circular",
             "graph_length": 4,
+            "unit": "gb",  # Default unit for memory
         },
         "network_usage": {
             "upload_icon": "",
@@ -244,6 +246,7 @@ DEFAULT_CONFIG = {
             "tooltip": True,
             "path": "/",
             "graph_length": 4,
+            "unit": "gb",  # Default unit for storage
         },
         "submap": {
             "icon": "󰌌",
@@ -323,7 +326,7 @@ DEFAULT_CONFIG = {
     "modules": {
         "bar": {"layer": "top", "auto_hide": False, "location": "top"},
         "osd": {
-            "enabled": True,
+            "enabled": False,
             "timeout": 1500,
             "anchor": "bottom-center",
             "orientation": "horizontal",
@@ -366,12 +369,13 @@ DEFAULT_CONFIG = {
             "layer": "bottom",
         },
         "desktop_clock": {
-            "enabled": True,
+            "enabled": False,
             "layer": "bottom",
             "anchor": "center",
             "date_format": "%A, %d %B %Y",
             "time_format": "%H:%M",
         },
+        "quotes": {"enabled": False, "anchor": "bottom-right", "layer": "bottom"},
     },
     "general": {
         "check_updates": False,

@@ -1,6 +1,6 @@
 from typing import Dict, List, Literal, TypedDict
 
-from .types import Anchor, Layer, Temperature_Unit, Wind_Speed_Unit
+from .types import Anchor, Layer, Temperature_Unit, Widget_Mode, Wind_Speed_Unit
 
 # Common configuration fields that will be reused
 BaseConfig = TypedDict("BaseConfig", {"label": bool, "tooltip": bool})
@@ -122,8 +122,20 @@ DesktopClock = TypedDict(
         "anchor": Anchor,
         "layer": Layer,
         "date_format": str,
+        "time_format": str,
     },
 )
+
+# Quotes configuration
+Quotes = TypedDict(
+    "Quotes",
+    {
+        "enabled": bool,
+        "anchor": Anchor,
+        "layer": Layer,
+    },
+)
+
 
 # ScreenCorners configuration
 ScreenCorners = TypedDict(
@@ -184,12 +196,13 @@ Bar = TypedDict(
 Modules = TypedDict(
     "Modules",
     {
-        "screen_corners": ScreenCorners,
         "dock": Dock,
         "bar": Bar,
-        "desktop_clock": DesktopClock,
-        "notification": Notification,
+        "quotes": Quotes,
         "osd": OSD,
+        "desktop_clock": DesktopClock,
+        "screen_corners": ScreenCorners,
+        "notification": Notification,
         "app_launcher": AppLauncher,
     },
 )
@@ -205,7 +218,7 @@ General = TypedDict(
 Cpu = TypedDict(
     "Cpu",
     {
-        "mode": Literal["circular", "graph", "label"],
+        "mode": Widget_Mode,
         "tooltip": bool,
         "show_icon": bool,
         "sensor": str,
@@ -223,12 +236,13 @@ Mpris = TypedDict("Mpris", {**BaseConfig.__annotations__, "truncation_size": int
 Memory = TypedDict(
     "Memory",
     {
-        "mode": Literal["circular", "graph", "label"],
+        "mode": Widget_Mode,
         "tooltip": bool,
         "show_icon": bool,
         "icon": str,
         "graph": bool,
         "graph_length": int,
+        "unit": Literal["kb", "mb", "gb", "tb"],
     },
 )
 
@@ -252,13 +266,14 @@ NetworkUsage = TypedDict(
 Storage = TypedDict(
     "Storage",
     {
-        "mode": Literal["circular", "graph", "label"],
+        "mode": Widget_Mode,
         "tooltip": bool,
         "show_icon": bool,
         "icon": str,
         "path": str,
         "graph": bool,
         "graph_length": int,
+        "unit": Literal["kb", "mb", "gb", "tb"],
     },
 )
 

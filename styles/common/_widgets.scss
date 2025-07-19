@@ -36,6 +36,9 @@
 }
 
 
+
+
+
 #divider {
   min-width: variable.$bar-widgets-divider-size;
   margin: variable.$bar-widgets-divider-margin_x variable.$bar-widgets-divider-margin_y;
@@ -160,9 +163,26 @@
 }
 
 #desktop_clock {
-  border-radius: variable.$bar-widgets-desktop_clock-border-radius;
-  border: if(variable.$bar-widgets-desktop_clock-border-enabled, variable.$border, none);
-  border-width: variable.$bar-widgets-desktop_clock-border-width;
+  border-radius: variable.$modules-desktop_clock-border-radius;
+  border: if(variable.$modules-desktop_clock-border-enabled, variable.$border, none);
+  border-width: variable.$modules-desktop_clock-border-width;
+
+}
+
+#quotes {
+  border-radius: variable.$modules-quotes-border-radius;
+  border: if(variable.$modules-quotes-border-enabled, variable.$border, none);
+  border-width: variable.$modules-quotes-border-width;
+
+  #quotes-box {
+      margin: 0rem 4rem 4rem 0rem;
+
+      label {
+        font-size: 1.5rem;
+        font-weight: 600;
+        @extend %desktop-widget;
+      }
+    }
 
 }
 
