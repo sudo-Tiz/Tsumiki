@@ -308,6 +308,8 @@ Updates = TypedDict(
         "flatpak": bool,
         "snap": bool,
         "brew": bool,
+        "hover_reveal": bool,
+        "reveal_duration": int,
     },
 )
 
