@@ -269,6 +269,8 @@ DEFAULT_CONFIG = {
             "available_icon": "󰏗",
             "no_updates_icon": "󰏖",
             "os": "arch",
+            "hover_reveal": False,  # Whether to reveal the updates on hover
+            "reveal_duration": 500,
             "interval": HIGH_POLL_INTERVAL,
             "tooltip": True,
             "pad_zero": True,  # Whether to pad the number of updates with zero

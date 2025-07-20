@@ -7,6 +7,7 @@ from fabric.utils import (
     get_relative_path,
 )
 from fabric.widgets.label import Label
+from fabric.widgets.revealer import Revealer
 from loguru import logger
 
 from shared.widget_container import ButtonWidget
@@ -40,7 +41,16 @@ class UpdatesWidget(ButtonWidget):
 
         if self.config.get("label", True):
             self.update_label = Label(label="0", style_classes="panel-text")
-            self.box.add(self.update_label)
+
+            if self.config.get("hover_reveal", True):
+                self.revealer = Revealer(
+                    child=self.update_label,
+                    transition_duration=500,
+                    transition_type="slide_right",
+                )
+                self.box.add(self.revealer)
+            else:
+                self.box.add(self.update_label)
 
         self.connect("button-press-event", self.on_button_press)
 
@@ -49,6 +59,15 @@ class UpdatesWidget(ButtonWidget):
 
         # reusing the fabricator to call specified intervals
         reusable_fabricator.connect("changed", self.should_update)
+
+        if self.config.get("hover_reveal", True):
+            # Connect to enter and leave events to toggle the revealer
+            self.connect("enter-notify-event", self._toggle_revealer)
+            self.connect("leave-notify-event", self._toggle_revealer)
+
+    def _toggle_revealer(self, *_):
+        if hasattr(self, "revealer"):
+            self.revealer.set_reveal_child(not self.revealer.get_reveal_child())
 
     def _build_base_command(self) -> str:
         script = get_relative_path("../assets/scripts/systemupdates.sh")

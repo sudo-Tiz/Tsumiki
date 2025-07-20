@@ -143,10 +143,12 @@
 			"show_icon": true,
 			"available_icon": "󰏗",
 			"no_updates_icon": "󰏖",
+			"hover_reveal": true, // this is to display the updates on hover
+			"reveal_duration": 500, // this is the duration in milliseconds to reveal the updates
 			"os": "arch",
 			"auto_hide": false, // this is to auto hide the updates widget when there are no updates available
 			"interval": 3600,
-			"pad_zero": true, // this is to pad the number of updates with zero
+			"pad_zero": false, // this is to pad the number of updates with zero
 			"tooltip": true,
 			"label": true,
 			"flatpak": true,
