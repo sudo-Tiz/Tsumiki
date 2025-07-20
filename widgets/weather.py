@@ -6,6 +6,7 @@ from fabric.utils import cooldown, get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.grid import Grid
 from fabric.widgets.label import Label
+from fabric.widgets.revealer import Revealer
 from fabric.widgets.svg import Svg
 from gi.repository import Gtk
 from loguru import logger
@@ -343,6 +344,7 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
                 "style_classes": "panel-font-icon",
             },
         )
+        self.box.add(self.weather_icon)
 
         self.popover = None
 
@@ -350,16 +352,35 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
 
         self.update_time = datetime.now()
 
-        self.weather_label = Label(
-            label="Fetching weather...",
-            style_classes="panel-text",
-        )
-        self.box.children = (self.weather_icon, self.weather_label)
+        if self.config.get("label", True):
+            self.weather_label = Label(
+                label="Fetching weather...",
+                style_classes="panel-text",
+            )
+
+            if self.config.get("hover_reveal", True):
+                self.revealer = Revealer(
+                    child=self.weather_label,
+                    transition_duration=500,
+                    transition_type="slide_right",
+                )
+                self.box.add(self.revealer)
+            else:
+                self.box.add(self.weather_label)
 
         self.update_ui(forced=True)
 
         # Set up a fabricator to call the update_label method at specified intervals
         reusable_fabricator.connect("changed", self.update_ui)
+
+        if self.config.get("hover_reveal", True):
+            # Connect to enter and leave events to toggle the revealer
+            self.connect("enter-notify-event", self._toggle_revealer)
+            self.connect("leave-notify-event", self._toggle_revealer)
+
+    def _toggle_revealer(self, *_):
+        if hasattr(self, "revealer"):
+            self.revealer.set_reveal_child(not self.revealer.get_reveal_child())
 
     def update_data(self, data):
         self.update_time = datetime.now()
@@ -386,7 +407,8 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
 
         self.weather_icon.set_label(text_icon)
 
-        self.weather_label.set_label(self.get_temperature())
+        if self.config.get("label", True):
+            self.weather_label.set_label(self.get_temperature())
 
         # Update the tooltip with the city and weather condition if enabled
         if self.config.get("tooltip", False):
