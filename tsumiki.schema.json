@@ -471,6 +471,14 @@
 				"tooltip": {
 					"type": "boolean",
 					"description": "Determines whether the widget has a tooltip."
+				},
+				"hover_reveal": {
+					"type": "boolean",
+					"description": "Show the weather details on hover"
+				},
+				"reveal_duration": {
+					"type": "integer",
+					"description": "Determines the duration to auto-hide the widget when there are no updates"
 				}
 			}
 		},
@@ -886,6 +894,14 @@
 						"auto_hide": {
 							"type": "boolean",
 							"description": "Determines whether to auto-hide the widget when there are no updates"
+						},
+						"hover_reveal": {
+							"type": "boolean",
+							"description": "Determines whether to reveal the widget on hover"
+						},
+						"reveal_duration": {
+							"type": "integer",
+							"description": "Determines the duration to reveal the widget on hover"
 						}
 					}
 				}
