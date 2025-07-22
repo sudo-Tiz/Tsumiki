@@ -136,6 +136,7 @@
     - **`tooltip`**: `bool` (default: true)
     - **`mode`**: `str` (default: "circular")
     - **`graph_length`**: `int` (default: 4)
+    - **`unit`**: `str` (default: "gb")
   - **`network_usage`**: `object`
     - **`upload_icon`**: `str` (default: "")
     - **`download_icon`**: `str` (default: "")
@@ -192,6 +193,7 @@
     - **`tooltip`**: `bool` (default: true)
     - **`path`**: `str` (default: "/")
     - **`graph_length`**: `int` (default: 4)
+    - **`unit`**: `str` (default: "gb")
   - **`submap`**: `object`
     - **`icon`**: `str` (default: "󰌌")
     - **`label`**: `bool` (default: true)
@@ -213,6 +215,8 @@
     - **`available_icon`**: `str` (default: "󰏗")
     - **`no_updates_icon`**: `str` (default: "󰏖")
     - **`os`**: `str` (default: "arch")
+    - **`hover_reveal`**: `bool` (default: false)
+    - **`reveal_duration`**: `int` (default: 500)
     - **`interval`**: `int` (default: 3600)
     - **`tooltip`**: `bool` (default: true)
     - **`pad_zero`**: `bool` (default: true)
