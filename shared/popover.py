@@ -3,6 +3,7 @@ from typing import ClassVar
 import gi
 from fabric.hyprland.service import HyprlandEvent
 from fabric.hyprland.widgets import get_hyprland_connection
+from fabric.utils import bulk_connect
 from fabric.widgets.box import Box
 from fabric.widgets.wayland import WaylandWindow
 from fabric.widgets.widget import Widget
@@ -223,9 +224,14 @@ class Popover(Widget):
             Box(style_classes="popover-content", children=self._content)
         )
 
-        self._content_window.connect("focus-out-event", self._on_popover_focus_out)
+        bulk_connect(
+            self._content_window,
+            {
+                "focus-out-event": self._on_popover_focus_out,
+                "key-press-event": self._on_key_press,
+            },
+        )
 
-        self._content_window.connect("key-press-event", self._on_key_press)
         self._manager.activate_popover(self)
         self._content_window.show()
         self._visible = True

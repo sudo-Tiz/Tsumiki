@@ -82,7 +82,7 @@ class ButtonWidget(Button, BaseWidget):
         widget_name = kwargs.get("name", "button")
         self.config = widget_config["widgets"].get(widget_name, {})
 
-        self.box = Box()
+        self.box = Box(style_classes="box")
         self.add(self.box)
 
 

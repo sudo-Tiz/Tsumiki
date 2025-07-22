@@ -256,12 +256,12 @@
     @extend .bordered;
   }
 
-  @else if $type ==wave1 {
-    @extend .wave1;
+  @else if $type ==leaf {
+    @extend .leaf;
   }
 
-  @else if $type ==wave2 {
-    @extend .wave2;
+  @else if $type ==leaf-inverse {
+    @extend .leaf-inverse;
   }
 
   @else {

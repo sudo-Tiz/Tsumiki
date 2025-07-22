@@ -478,7 +478,14 @@ Recording = TypedDict(
 
 # ScreenShot configuration
 ScreenShot = TypedDict(
-    "ScreenShot", {"path": str, "icon_size": int, "tooltip": bool, "annotation": bool}
+    "ScreenShot",
+    {
+        "path": str,
+        "icon_size": int,
+        "tooltip": bool,
+        "annotation": bool,
+        "capture_sound": bool,
+    },
 )
 
 

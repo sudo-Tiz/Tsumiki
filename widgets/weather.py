@@ -2,7 +2,7 @@ import time
 from datetime import datetime
 
 import gi
-from fabric.utils import cooldown, get_relative_path
+from fabric.utils import bulk_connect, cooldown, get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.grid import Grid
 from fabric.widgets.label import Label
@@ -375,8 +375,13 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
 
         if self.config.get("hover_reveal", True):
             # Connect to enter and leave events to toggle the revealer
-            self.connect("enter-notify-event", self._toggle_revealer)
-            self.connect("leave-notify-event", self._toggle_revealer)
+            bulk_connect(
+                self,
+                {
+                    "enter-notify-event": self._toggle_revealer,
+                    "leave-notify-event": self._toggle_revealer,
+                },
+            )
 
     def _toggle_revealer(self, *_):
         if hasattr(self, "revealer"):
@@ -387,7 +392,7 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
 
         if data is None:
             self.weather_label.set_label("")
-            self.weather_icon.set_label("")
+            self.weather_icon.set_label("")
             if self.config.get("tooltip", False):
                 self.set_tooltip_text("Error fetching weather data, try again later.")
             return

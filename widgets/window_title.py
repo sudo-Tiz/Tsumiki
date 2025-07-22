@@ -1,3 +1,4 @@
+import os
 import re
 
 from fabric.hyprland.widgets import ActiveWindow
@@ -15,7 +16,7 @@ class WindowTitleWidget(ButtonWidget):
         super().__init__(name="window_title", **kwargs)
 
         # Create an ActiveWindow widget to track the active window
-        self.window = ActiveWindow(
+        self.active_window = ActiveWindow(
             name="window",
             formatter=FormattedString(
                 "{ get_title(win_title, win_class) }",
@@ -24,7 +25,7 @@ class WindowTitleWidget(ButtonWidget):
         )
 
         # Add the ActiveWindow widget as a child
-        self.box.children = self.window
+        self.box.children = self.active_window
 
     def get_title(self, win_title: str, win_class: str):
         trunc = self.config.get("truncation", True)
@@ -36,6 +37,12 @@ class WindowTitleWidget(ButtonWidget):
         merged_titles = WINDOW_TITLE_MAP + (
             custom_map if isinstance(custom_map, list) else []
         )
+
+        if not os.path.exists("some.log"):
+            with open("some.log", "w") as log_file:
+                log_file.write(f"Window Title: {win_title}\n")
+                log_file.write(f"Window Class: {win_class}\n")
+                log_file.write(f"Custom Map: {custom_map}\n")
 
         for pattern, icon, name in merged_titles:
             try:

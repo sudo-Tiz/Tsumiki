@@ -1,3 +1,4 @@
+from fabric.utils import bulk_connect
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.label import Label
 from gi.repository import GLib
@@ -28,8 +29,13 @@ class ScrollableText(EventBox):
         self.scroll_id = None
 
         # Connect hover signals
-        self.connect("enter-notify-event", self.on_hover_start)
-        self.connect("leave-notify-event", self.on_hover_stop)
+        bulk_connect(
+            self,
+            {
+                "enter-notify-event": self.on_hover_start,
+                "leave-notify-event": self.on_hover_stop,
+            },
+        )
 
     def on_hover_start(self, widget, event):
         if self.scroll_id is None:
