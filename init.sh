@@ -120,6 +120,7 @@ install_packages() {
 		python-setproctitle
 		cliphist
 		noto-fonts-emoji
+		satty
 	)
 
 		aur_deps=(

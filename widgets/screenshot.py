@@ -40,4 +40,8 @@ class ScreenShotWidget(ButtonWidget):
         if not self.initialized:
             return  # Early exit if script not available
 
-        self.recorder_service.screenshot(path=self.config["path"])
+        self.recorder_service.screenshot(
+            path=self.config["path"],
+            annotate=self.config["annotation"],
+            capture_sound=self.config["capture_sound"],
+        )

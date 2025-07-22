@@ -1,4 +1,6 @@
 import os
+import subprocess
+import tempfile
 from datetime import datetime
 
 from fabric.core.service import Property, Service, Signal
@@ -99,31 +101,65 @@ class ScreenRecorderService(Service):
 
         proc.communicate_utf8_async(None, None, do_callback)
 
-    def screenshot(self, path: str, fullscreen=False, save_copy=True):
-        """Take a screenshot using grimblast."""
+    def screenshot(
+        self,
+        path: str,
+        annotate: bool = False,
+        capture_sound: bool = False,
+        fullscreen=False,
+        save_copy=True,
+    ):
+        """Take a screenshot using grimblast and optionally annotate with satty."""
         if not path:
             logger.exception("[SCREENSHOT] No path provided for screenshot.")
             return
 
         self.screenshot_path = os.path.join(self.home_dir, path)
+        timestamp = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
+        file_path = os.path.join(self.screenshot_path, f"{timestamp}.png")
 
-        time = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
+        temp_path = file_path  # Default to final path if no annotation
 
-        file_path = f"{self.screenshot_path}/{time}.png"
+        # Determine the target screenshot file
+        if annotate:
+            with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as temp_file:
+                temp_path = temp_file.name
+
+        # Prepare grimblast command
         command = (
-            ["grimblast", "copysave", "screen", file_path]
+            ["grimblast", "copysave", "screen", temp_path]
             if save_copy
             else ["grimblast", "copyscreen"]
         )
+
         if not fullscreen:
             command[2] = "area"
+
+        def after_screenshot(*_):
+            try:
+                if annotate:
+                    subprocess.run(
+                        [
+                            "satty",
+                            "--filename",
+                            temp_path,
+                            "--output-filename",
+                            file_path,
+                        ],
+                        check=True,
+                    )
+                    os.unlink(temp_path)  # Clean up temp file after use
+
+                # Send notification after annotation or direct capture
+                self.send_screenshot_notification(file_path=file_path)
+
+            except Exception as e:
+                logger.exception(
+                    f"[SCREENSHOT] Error in annotation or notification: {e}"
+                )
+
         try:
-            exec_shell_command_async(
-                " ".join(command),
-                lambda *_: self.send_screenshot_notification(
-                    file_path=file_path if file_path else None,
-                ),
-            )
+            exec_shell_command_async(" ".join(command), after_screenshot)
         except Exception:
             logger.exception(f"[SCREENSHOT] Failed to run command: {command}")
 

@@ -40,6 +40,11 @@ class GenericOSDContainer(Box, BaseWidget):
             icon_name=symbolic_icons["brightness"]["screen"],
             icon_size=self.icon_size,
         )
+
+        scale_style = (
+            "scale {min-height: 150px; min-width: 11px;}" if is_vertical else ""
+        )
+
         self.scale = create_scale(
             name="osd-scale",
             orientation=config["orientation"],
@@ -48,7 +53,7 @@ class GenericOSDContainer(Box, BaseWidget):
             duration=0.8,
             curve=(0.25, 0.1, 0.25, 1.0),
             inverted=is_vertical,
-            style="scale {min-height: 150px; min-width: 11px;}" if is_vertical else "",
+            style=scale_style,
         )
 
         self.children = (self.icon, self.scale)

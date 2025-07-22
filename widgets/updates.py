@@ -2,6 +2,7 @@ import json
 from datetime import datetime
 
 from fabric.utils import (
+    bulk_connect,
     cooldown,
     exec_shell_command_async,
     get_relative_path,
@@ -62,8 +63,13 @@ class UpdatesWidget(ButtonWidget):
 
         if self.config.get("hover_reveal", True):
             # Connect to enter and leave events to toggle the revealer
-            self.connect("enter-notify-event", self._toggle_revealer)
-            self.connect("leave-notify-event", self._toggle_revealer)
+            bulk_connect(
+                self,
+                {
+                    "enter-notify-event": self._toggle_revealer,
+                    "leave-notify-event": self._toggle_revealer,
+                },
+            )
 
     def _toggle_revealer(self, *_):
         if hasattr(self, "revealer"):

@@ -4,6 +4,7 @@ import typing
 from pathlib import Path
 
 import gi
+from fabric.utils import bulk_connect
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.centerbox import CenterBox
@@ -143,10 +144,15 @@ class KanbanNote(EventBox):
             [Gtk.TargetEntry.new("UTF8_STRING", Gtk.TargetFlags.SAME_APP, 0)],
             Gdk.DragAction.MOVE,
         )
-        self.connect("drag-data-get", self.on_drag_data_get)
-        self.connect("drag-data-delete", self.on_drag_data_delete)
-        # Set up drag-begin to display a preview of the card.
-        self.connect("drag-begin", self.on_drag_begin)
+
+        bulk_connect(
+            self,
+            {
+                "drag-data-get": self.on_drag_data_get,
+                "drag-data-delete": self.on_drag_data_delete,
+                "drag-begin": self.on_drag_begin,
+            },
+        )
 
     def on_button_press(self, widget, event):
         if event.type != Gdk.EventType._2BUTTON_PRESS:
@@ -183,8 +189,13 @@ class KanbanNote(EventBox):
             row.add(self)
             row.show_all()
 
-        editor.connect("confirmed", on_confirmed)
-        editor.connect("canceled", on_canceled)
+        bulk_connect(
+            editor,
+            {
+                "confirmed": on_confirmed,
+                "canceled": on_canceled,
+            },
+        )
 
         row.remove(self)
         row.add(editor)
@@ -243,9 +254,14 @@ class KanbanColumn(Gtk.Frame):
             Gdk.DragAction.MOVE,
         )
 
-        self.listbox.connect("drag-data-received", self.on_drag_data_received)
-        self.listbox.connect("drag-motion", self.on_drag_motion)
-        self.listbox.connect("drag-leave", self.on_drag_leave)
+        bulk_connect(
+            self.listbox,
+            {
+                "drag-data-received": self.on_drag_data_received,
+                "drag-motion": self.on_drag_motion,
+                "drag-leave": self.on_drag_leave,
+            },
+        )
 
     def on_add_clicked(self, button):
         editor = InlineEditor()
@@ -266,8 +282,13 @@ class KanbanColumn(Gtk.Frame):
         def on_canceled(editor):
             row.destroy()
 
-        editor.connect("confirmed", on_confirmed)
-        editor.connect("canceled", on_canceled)
+        bulk_connect(
+            editor,
+            {
+                "confirmed": on_confirmed,
+                "canceled": on_canceled,
+            },
+        )
 
     def add_note(self, text, suppress_signal=False):
         note = KanbanNote(text)

@@ -1,3 +1,4 @@
+from fabric.utils import bulk_connect
 from fabric.widgets.box import Box
 from fabric.widgets.entry import Entry
 from fabric.widgets.eventbox import EventBox
@@ -28,8 +29,13 @@ class TagEntry(Box, BaseWidget):
         # Create the active entry
         self.entry = Entry(**kwargs)
 
-        self.entry.connect("key-press-event", self.on_key_press)
-        self.entry.connect("changed", self.on_text_changed)
+        bulk_connect(
+            self.entry,
+            {
+                "key-press-event": self.on_key_press,
+                "changed": self.on_text_changed,
+            },
+        )
 
         # Add entry to the box
         self.pack_start(self.entry, True, True, 0)
