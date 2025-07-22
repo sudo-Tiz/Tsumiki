@@ -140,11 +140,11 @@ class AudioOSDContainer(GenericOSDContainer):
 
     def on_speaker_changed(self, *_):
         if speaker := self.audio_service.speaker:
-            speaker.connect("notify::volume", self.update_volume)
+            speaker.connect("notify::volume", self.update_volume, ignore_missing=False)
 
     @cooldown(0.1)
     def update_volume(self, speaker, _):
-        # speaker.handler_block_by_func(self.update_volume)
+        speaker.handler_block_by_func(self.update_volume)
         self.emit("volume-changed")
         volume = round(self.audio_service.speaker.volume)
 
@@ -159,7 +159,7 @@ class AudioOSDContainer(GenericOSDContainer):
         else:
             self.update_icon(volume)
         self.update_values(volume)
-        # speaker.handler_unblock_by_func(self.update_volume)
+        speaker.handler_unblock_by_func(self.update_volume)
 
     def update_icon(self, volume=0):
         icon_name = get_audio_icon_name(volume, self.audio_service.speaker.muted)[
