@@ -40,10 +40,14 @@
 			"path": "Videos/Screencasting",
 			"audio": true,
 			"icon_size": 16,
-			"tooltip": true
+			"tooltip": true,
+			"delayed": false, 
+			"delayed_timeout": 5000
 		},
 		"screenshot": {
 			"path": "Pictures/Screenshots",
+			"delayed": false, // this is to take a delayed screenshot
+			"delayed_timeout": 5000, // this is the timeout in milliseconds for the delayed screenshot
 			"icon_size": 16,
 			"tooltip": true,
 			"label": false,

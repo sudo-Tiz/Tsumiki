@@ -42,6 +42,5 @@ class ScreenShotWidget(ButtonWidget):
 
         self.recorder_service.screenshot(
             path=self.config["path"],
-            annotate=self.config["annotation"],
-            capture_sound=self.config["capture_sound"],
+            config=self.config,
         )

@@ -1319,12 +1319,61 @@
 					}
 				}
 			},
+			"screenshot": {
+				"type": "object",
+				"properties": {
+					"path": {
+						"type": "string",
+						"description": "Directory to save screenshots"
+					},
+					"icon": {
+						"type": "string",
+						"description": "Icon name from icon theme"
+					},
+					"icon_size": {
+						"type": "integer",
+						"description": "Size of the screenshot icon"
+					},
+					"tooltip": {
+						"type": "boolean",
+						"description": "Determines whether the screenshot widget has a tooltip"
+					},
+					"delayed": {
+						"type": "boolean",
+						"description": "Determines whether to use delayed screenshot"
+					},
+					"delayed_timeout": {
+						"type": "integer",
+						"description": "Timeout in milliseconds for delayed screenshot"
+					},
+					"label": {
+						"type": "boolean",
+						"description": "Determines whether the screenshot widget has a label"
+					},
+					"annotation": {
+						"type": "boolean",
+						"description": "Determines whether to enable annotation after taking a screenshot"
+					},
+					"capture_sound": {
+						"type": "boolean",
+						"description": "Determines whether to play a sound when taking a screenshot"
+					}
+				}
+			},
 			"recorder": {
 				"type": "object",
 				"properties": {
-					"videos": {
+					"path": {
 						"type": "string",
 						"description": "Directory to save videos"
+					},
+					"icon": {
+						"type": "string",
+						"description": "Icon name from icon theme"
+					},
+					"icon_size": {
+						"type": "integer",
+						"description": "Size of the screenshot icon"
 					},
 					"tooltip": {
 						"type": "boolean",
@@ -1333,6 +1382,14 @@
 					"audio": {
 						"type": "boolean",
 						"description": "Determines whether to record audio"
+					},
+					"delayed": {
+						"type": "boolean",
+						"description": "Determines whether to use delayed recording"
+					},
+					"delayed_timeout": {
+						"type": "integer",
+						"description": "Timeout in milliseconds for delayed recording"
 					}
 				}
 			}

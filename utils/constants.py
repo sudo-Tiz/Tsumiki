@@ -230,6 +230,8 @@ DEFAULT_CONFIG = {
             "icon_size": 16,
             "tooltip": True,
             "audio": True,
+            "delayed": False,
+            "delayed_timeout": 5000,
         },
         "screenshot": {
             "path": "Pictures/Screenshots",
@@ -237,6 +239,8 @@ DEFAULT_CONFIG = {
             "tooltip": True,
             "annotation": True,
             "icon": "󰄀",
+            "delayed": False,
+            "delayed_timeout": 5000,
         },
         "spacing": {"size": 20},
         "stopwatch": {"stopped_icon": "󱫞", "running_icon": "󱫠"},
