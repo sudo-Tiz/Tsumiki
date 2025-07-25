@@ -204,6 +204,7 @@
     - **`icon_size`**: `int` (default: 16)
     - **`ignored`**: `list` (default: [])
     - **`hidden`**: `list` (default: [])
+    - **`hide_when_empty`**: `bool` (default: false)
   - **`taskbar`**: `object`
     - **`icon_size`**: `int` (default: 22)
     - **`ignored`**: `list` (default: [])

@@ -259,6 +259,7 @@ DEFAULT_CONFIG = {
             "icon_size": 16,
             "ignored": [],
             "hidden": [],
+            "hide_when_empty": False,
         },
         "taskbar": {"icon_size": 22, "ignored": [], "tooltip": True},
         "theme_switcher": {
