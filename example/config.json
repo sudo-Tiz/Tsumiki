@@ -40,7 +40,9 @@
 			"path": "Videos/Screencasting",
 			"audio": true,
 			"icon_size": 16,
-			"tooltip": true
+			"tooltip": true,
+			"delayed": false, // this is to enable delayed recording, it will start recording after a delay of 5 seconds
+			"delayed_timeout": 5000
 		},
 		"screenshot": {
 			"path": "Pictures/Screenshots",
@@ -49,7 +51,9 @@
 			"label": false,
 			"annotation": true,
 			"capture_sound": true,
-			"icon": "󰄀"
+			"icon": "󰄀",
+			"delayed": false,
+			"delayed_timeout": 5000
 		},
 		"network_usage": {
 			"upload_icon": "",
