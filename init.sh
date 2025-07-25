@@ -225,12 +225,14 @@ case "$1" in
 	setup_venv # Then setup virtual environment
 	;;
 *)
-	echo -e "\033[31mUnknown command. Available options:\033[0m"
-	echo -e "\033[32m  -start\033[0m         Start the bar"
-	echo -e "\033[32m  -update\033[0m        Update from git"
-	echo -e "\033[32m  -install\033[0m       Install system packages only"
-	echo -e "\033[32m  -setup\033[0m         Setup virtual environment and Python dependencies only"
-	echo -e "\033[32m  -install-setup\033[0m Install packages and setup virtual environment"
+	{
+		printf "\033[31mUnknown command. Available options:\033[0m\n"
+		printf "\033[32m  -start\033[0m         Start the bar\n"
+		printf "\033[32m  -update\033[0m        Update from git\n"
+		printf "\033[32m  -install\033[0m       Install system packages only\n"
+		printf "\033[32m  -setup\033[0m         Setup virtual environment and Python dependencies only\n"
+		printf "\033[32m  -install-setup\033[0m Install packages and setup virtual environment\n"
+	} >&2
 	exit 1
 	;;
 esac
