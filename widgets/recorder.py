@@ -62,7 +62,7 @@ class RecorderWidget(ButtonWidget):
             self.recorder_service.screenrecord_stop()
         else:
             self.recorder_service.screenrecord_start(
-                path=self.config["path"], allow_audio=self.config["audio"]
+                path=self.config["path"], config=self.config
             )
 
     def update_ui(self, _, is_recording: bool):

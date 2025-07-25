@@ -27,20 +27,7 @@ class PowerProfilesService(Service):
         self.object_path = "/net/hadess/PowerProfiles"
         self.interface_name = "net.hadess.PowerProfiles"
 
-        self.power_profiles = {
-            "power-saver": {
-                "name": "Power Saver",
-                "icon": text_icons["powerprofiles"]["power-saver"],
-            },
-            "balanced": {
-                "name": "Balanced",
-                "icon": text_icons["powerprofiles"]["balanced"],
-            },
-            "performance": {
-                "name": "Performance",
-                "icon": text_icons["powerprofiles"]["performance"],
-            },
-        }
+        self.power_profiles = {}
 
         self.dbus_helper = GioDBusHelper(
             bus_type=Gio.BusType.SYSTEM,
@@ -57,6 +44,34 @@ class PowerProfilesService(Service):
             member="PropertiesChanged",
             callback=self.handle_property_change,
         )
+
+        for profile in self.get_profiles():
+            profile_name = profile.get("Profile", "")
+
+            if profile_name == "balanced":
+                self.power_profiles[profile_name] = {
+                    "name": "Balanced",
+                    "icon": text_icons["powerprofiles"]["balanced"],
+                }
+            elif profile_name == "performance":
+                self.power_profiles[profile_name] = {
+                    "name": "Performance",
+                    "icon": text_icons["powerprofiles"]["performance"],
+                }
+            elif profile_name == "power-saver":
+                self.power_profiles[profile_name] = {
+                    "name": "Power Saver",
+                    "icon": text_icons["powerprofiles"]["power-saver"],
+                }
+
+    def get_profiles(self):
+        """Retrieve available power profiles."""
+        try:
+            value = self.proxy.get_cached_property("Profiles")
+            return value.unpack() if value else []
+        except Exception as e:
+            logger.exception(f"[PowerProfile] Error retrieving profiles: {e}")
+            return []
 
     def get_current_profile(self):
         try:

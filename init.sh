@@ -12,12 +12,90 @@ fi
 
 INSTALL_DIR=$(dirname -- "$0")
 
-start_bar() {
-	# Navigate to the $HOME/bar directory
+copy_config_files() {
+	# Navigate to the $INSTALL_DIR directory
 	cd "$INSTALL_DIR" || {
 		echo -e "\033[31mDirectory $INSTALL_DIR does not exist.\033[0m\n"
 		exit 1
 	}
+
+	# Copy config.json from example if it doesn't exist
+	if [ ! -f config.json ]; then
+		if [ -f example/config.json ]; then
+			echo -e "\033[33m  config.json not found. Copying from example...\033[0m\n"
+			cp example/config.json config.json
+			echo -e "\033[32m  config.json copied successfully.\033[0m\n"
+		else
+			echo -e "\033[31m  example/config.json not found. Cannot create default config.\033[0m\n"
+			exit 1
+		fi
+	fi
+
+	# Copy theme.json from example if it doesn't exist
+	if [ ! -f theme.json ]; then
+		if [ -f example/theme.json ]; then
+			echo -e "\033[33m  theme.json not found. Copying from example...\033[0m\n"
+			cp example/theme.json theme.json
+			echo -e "\033[32m  theme.json copied successfully.\033[0m\n"
+		else
+			echo -e "\033[31m  example/theme.json not found. Cannot create default theme.\033[0m\n"
+			exit 1
+		fi
+	fi
+}
+
+setup_venv() {
+	# Navigate to the $INSTALL_DIR directory
+	cd "$INSTALL_DIR" || {
+		echo -e "\033[31mDirectory $INSTALL_DIR does not exist.\033[0m\n"
+		exit 1
+	}
+
+	# Check if the virtual environment exists, if not, create it
+	if [ ! -d .venv ]; then
+		echo -e "\033[32m  venv does not exist. Creating venv...\033[0m\n"
+		if ! python3 -m venv .venv; then
+			printf "\033[31m  Failed to create virtual environment. Exiting...\033[0m\n" >&2
+			exit 1
+		fi
+
+		printf "\033[32m  Virtual environment created successfully.\033[0m\n"
+	else
+		printf "\033[33m  Virtual environment already exists.\033[0m\n"
+	fi
+
+	# Activate virtual environment
+	source .venv/bin/activate
+
+	if ! source .venv/bin/activate; then
+		printf "\033[31m  Failed to activate venv. Exiting...\033[0m\n" >&2
+		exit 1
+	fi
+
+
+	# Install Python dependencies
+		printf "\033[32m  Installing python dependencies, brace yourself.\033[0m\n"
+	pip install -r requirements.txt
+
+	if ! pip install -r requirements.txt; then
+		printf "\033[31mFailed to install packages from requirements.txt. Exiting...\033[0m\n" >&2
+		deactivate
+		exit 1
+	fi
+
+		printf "\033[32m  Python dependencies installed successfully.\033[0m\n"
+	deactivate
+}
+
+start_bar() {
+	# Navigate to the $INSTALL_DIR directory
+	cd "$INSTALL_DIR" || {
+		echo -e "\033[31mDirectory $INSTALL_DIR does not exist.\033[0m\n"
+		exit 1
+	}
+
+	# Ensure config files exist
+	copy_config_files
 
 	VERSION=$(git describe --tags --abbrev=0)
 
@@ -174,8 +252,22 @@ case "$1" in
 -install)
 	install_packages # Call the install_packages function
 	;;
+-setup)
+	setup_venv # Call the setup_venv function
+	;;
+-install-setup)
+	install_packages # Install packages first
+	setup_venv # Then setup virtual environment
+	;;
 *)
-	echo -e "\033[31mUnknown command. Use \033[32m'-start'\033[33m, \033[32m'-update'\033[33m, \033[32m'-install'\033[31m.\033[0m\n"
+	{
+		printf "\033[31mUnknown command. Available options:\033[0m\n"
+		printf "\033[32m  -start\033[0m         Start the bar\n"
+		printf "\033[32m  -update\033[0m        Update from git\n"
+		printf "\033[32m  -install\033[0m       Install system packages only\n"
+		printf "\033[32m  -setup\033[0m         Setup virtual environment and Python dependencies only\n"
+		printf "\033[32m  -install-setup\033[0m Install packages and setup virtual environment\n"
+	} >&2
 	exit 1
 	;;
 esac

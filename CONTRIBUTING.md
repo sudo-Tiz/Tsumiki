@@ -90,6 +90,7 @@ When creating a new widget:
 - Export the widget in `__init__.py`
 - Create widget config options on `widget_config.py` and add default config on `config.py`
 - Also add the schema definitions on `tsumiki.schema.json` for autocompletions
+- Run `python doc_gen.py` to generate the documentation for the widgets
 
 ## Getting Started
 
