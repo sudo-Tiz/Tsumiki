@@ -29,7 +29,7 @@ setup_venv() {
 
 		printf "\033[32m  Virtual environment created successfully.\033[0m\n"
 	else
-		echo -e "\033[33m  Virtual environment already exists.\033[0m\n"
+		printf "\033[33m  Virtual environment already exists.\033[0m\n"
 	fi
 
 	# Activate virtual environment
