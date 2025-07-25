@@ -51,7 +51,7 @@ setup_venv() {
 		exit 1
 	fi
 
-	echo -e "\033[32m  Python dependencies installed successfully.\033[0m\n"
+		printf "\033[32m  Python dependencies installed successfully.\033[0m\n"
 	deactivate
 }
 
