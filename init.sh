@@ -71,7 +71,7 @@ setup_venv() {
 		printf "\033[31m  Failed to activate venv. Exiting...\033[0m\n" >&2
 		exit 1
 	fi
-	fi
+
 
 	# Install Python dependencies
 		printf "\033[32m  Installing python dependencies, brace yourself.\033[0m\n"
@@ -81,7 +81,6 @@ setup_venv() {
 		printf "\033[31mFailed to install packages from requirements.txt. Exiting...\033[0m\n" >&2
 		deactivate
 		exit 1
-	fi
 	fi
 
 		printf "\033[32m  Python dependencies installed successfully.\033[0m\n"
