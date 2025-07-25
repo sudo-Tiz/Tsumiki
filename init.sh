@@ -54,37 +54,37 @@ setup_venv() {
 	# Check if the virtual environment exists, if not, create it
 	if [ ! -d .venv ]; then
 		echo -e "\033[32m  venv does not exist. Creating venv...\033[0m\n"
-		python3 -m venv .venv
-
-		if [ $? -ne 0 ]; then
-			echo -e "\033[31m  Failed to create virtual environment. Exiting...\033[0m\n"
+		if ! python3 -m venv .venv; then
+			printf "\033[31m  Failed to create virtual environment. Exiting...\033[0m\n" >&2
 			exit 1
 		fi
 
-		echo -e "\033[32m  Virtual environment created successfully.\033[0m\n"
+		printf "\033[32m  Virtual environment created successfully.\033[0m\n"
 	else
-		echo -e "\033[33m  Virtual environment already exists.\033[0m\n"
+		printf "\033[33m  Virtual environment already exists.\033[0m\n"
 	fi
 
 	# Activate virtual environment
 	source .venv/bin/activate
 
-	if [ $? -ne 0 ]; then
-		echo -e "\033[31m  Failed to activate venv. Exiting...\033[0m\n"
+	if ! source .venv/bin/activate; then
+		printf "\033[31m  Failed to activate venv. Exiting...\033[0m\n" >&2
 		exit 1
+	fi
 	fi
 
 	# Install Python dependencies
-	echo -e "\033[32m  Installing python dependencies, brace yourself.\033[0m\n"
+		printf "\033[32m  Installing python dependencies, brace yourself.\033[0m\n"
 	pip install -r requirements.txt
 
-	if [ $? -ne 0 ]; then
-		echo -e "\033[31mFailed to install packages from requirements.txt. Exiting...\033[0m\n"
+	if ! pip install -r requirements.txt; then
+		printf "\033[31mFailed to install packages from requirements.txt. Exiting...\033[0m\n" >&2
 		deactivate
 		exit 1
 	fi
+	fi
 
-	echo -e "\033[32m  Python dependencies installed successfully.\033[0m\n"
+		printf "\033[32m  Python dependencies installed successfully.\033[0m\n"
 	deactivate
 }
 
@@ -260,17 +260,15 @@ case "$1" in
 	install_packages # Install packages first
 	setup_venv # Then setup virtual environment
 	;;
--config)
-	copy_config_files # Copy config files from example
-	;;
 *)
-	echo -e "\033[31mUnknown command. Available options:\033[0m"
-	echo -e "\033[32m  -start\033[0m         Start the bar"
-	echo -e "\033[32m  -update\033[0m        Update from git"
-	echo -e "\033[32m  -install\033[0m       Install system packages only"
-	echo -e "\033[32m  -setup\033[0m         Setup virtual environment and Python dependencies only"
-	echo -e "\033[32m  -install-setup\033[0m Install packages and setup virtual environment"
-	echo -e "\033[32m  -config\033[0m        Copy default config and theme files from example"
+	{
+		printf "\033[31mUnknown command. Available options:\033[0m\n"
+		printf "\033[32m  -start\033[0m         Start the bar\n"
+		printf "\033[32m  -update\033[0m        Update from git\n"
+		printf "\033[32m  -install\033[0m       Install system packages only\n"
+		printf "\033[32m  -setup\033[0m         Setup virtual environment and Python dependencies only\n"
+		printf "\033[32m  -install-setup\033[0m Install packages and setup virtual environment\n"
+	} >&2
 	exit 1
 	;;
 esac
