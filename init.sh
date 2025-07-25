@@ -12,8 +12,52 @@ fi
 
 INSTALL_DIR=$(dirname -- "$0")
 
+setup_venv() {
+	# Navigate to the $INSTALL_DIR directory
+	cd "$INSTALL_DIR" || {
+		echo -e "\033[31mDirectory $INSTALL_DIR does not exist.\033[0m\n"
+		exit 1
+	}
+
+	# Check if the virtual environment exists, if not, create it
+	if [ ! -d .venv ]; then
+		echo -e "\033[32m  venv does not exist. Creating venv...\033[0m\n"
+		python3 -m venv .venv
+
+		if [ $? -ne 0 ]; then
+			echo -e "\033[31m  Failed to create virtual environment. Exiting...\033[0m\n"
+			exit 1
+		fi
+
+		echo -e "\033[32m  Virtual environment created successfully.\033[0m\n"
+	else
+		echo -e "\033[33m  Virtual environment already exists.\033[0m\n"
+	fi
+
+	# Activate virtual environment
+	source .venv/bin/activate
+
+	if [ $? -ne 0 ]; then
+		echo -e "\033[31m  Failed to activate venv. Exiting...\033[0m\n"
+		exit 1
+	fi
+
+	# Install Python dependencies
+	echo -e "\033[32m  Installing python dependencies, brace yourself.\033[0m\n"
+	pip install -r requirements.txt
+
+	if [ $? -ne 0 ]; then
+		echo -e "\033[31mFailed to install packages from requirements.txt. Exiting...\033[0m\n"
+		deactivate
+		exit 1
+	fi
+
+	echo -e "\033[32m  Python dependencies installed successfully.\033[0m\n"
+	deactivate
+}
+
 start_bar() {
-	# Navigate to the $HOME/bar directory
+	# Navigate to the $INSTALL_DIR directory
 	cd "$INSTALL_DIR" || {
 		echo -e "\033[31mDirectory $INSTALL_DIR does not exist.\033[0m\n"
 		exit 1
@@ -174,8 +218,20 @@ case "$1" in
 -install)
 	install_packages # Call the install_packages function
 	;;
+-setup)
+	setup_venv # Call the setup_venv function
+	;;
+-install-setup)
+	install_packages # Install packages first
+	setup_venv # Then setup virtual environment
+	;;
 *)
-	echo -e "\033[31mUnknown command. Use \033[32m'-start'\033[33m, \033[32m'-update'\033[33m, \033[32m'-install'\033[31m.\033[0m\n"
+	echo -e "\033[31mUnknown command. Available options:\033[0m"
+	echo -e "\033[32m  -start\033[0m         Start the bar"
+	echo -e "\033[32m  -update\033[0m        Update from git"
+	echo -e "\033[32m  -install\033[0m       Install system packages only"
+	echo -e "\033[32m  -setup\033[0m         Setup virtual environment and Python dependencies only"
+	echo -e "\033[32m  -install-setup\033[0m Install packages and setup virtual environment"
 	exit 1
 	;;
 esac
