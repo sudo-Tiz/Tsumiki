@@ -12,6 +12,38 @@ fi
 
 INSTALL_DIR=$(dirname -- "$0")
 
+copy_config_files() {
+	# Navigate to the $INSTALL_DIR directory
+	cd "$INSTALL_DIR" || {
+		echo -e "\033[31mDirectory $INSTALL_DIR does not exist.\033[0m\n"
+		exit 1
+	}
+
+	# Copy config.json from example if it doesn't exist
+	if [ ! -f config.json ]; then
+		if [ -f example/config.json ]; then
+			echo -e "\033[33m  config.json not found. Copying from example...\033[0m\n"
+			cp example/config.json config.json
+			echo -e "\033[32m  config.json copied successfully.\033[0m\n"
+		else
+			echo -e "\033[31m  example/config.json not found. Cannot create default config.\033[0m\n"
+			exit 1
+		fi
+	fi
+
+	# Copy theme.json from example if it doesn't exist
+	if [ ! -f theme.json ]; then
+		if [ -f example/theme.json ]; then
+			echo -e "\033[33m  theme.json not found. Copying from example...\033[0m\n"
+			cp example/theme.json theme.json
+			echo -e "\033[32m  theme.json copied successfully.\033[0m\n"
+		else
+			echo -e "\033[31m  example/theme.json not found. Cannot create default theme.\033[0m\n"
+			exit 1
+		fi
+	fi
+}
+
 setup_venv() {
 	# Navigate to the $INSTALL_DIR directory
 	cd "$INSTALL_DIR" || {
@@ -62,6 +94,9 @@ start_bar() {
 		echo -e "\033[31mDirectory $INSTALL_DIR does not exist.\033[0m\n"
 		exit 1
 	}
+
+	# Ensure config files exist
+	copy_config_files
 
 	VERSION=$(git describe --tags --abbrev=0)
 
@@ -225,6 +260,9 @@ case "$1" in
 	install_packages # Install packages first
 	setup_venv # Then setup virtual environment
 	;;
+-config)
+	copy_config_files # Copy config files from example
+	;;
 *)
 	echo -e "\033[31mUnknown command. Available options:\033[0m"
 	echo -e "\033[32m  -start\033[0m         Start the bar"
@@ -232,6 +270,7 @@ case "$1" in
 	echo -e "\033[32m  -install\033[0m       Install system packages only"
 	echo -e "\033[32m  -setup\033[0m         Setup virtual environment and Python dependencies only"
 	echo -e "\033[32m  -install-setup\033[0m Install packages and setup virtual environment"
+	echo -e "\033[32m  -config\033[0m        Copy default config and theme files from example"
 	exit 1
 	;;
 esac
