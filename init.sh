@@ -42,7 +42,7 @@ setup_venv() {
 	fi
 
 	# Install Python dependencies
-	echo -e "\033[32m  Installing python dependencies, brace yourself.\033[0m\n"
+		printf "\033[32m  Installing python dependencies, brace yourself.\033[0m\n"
 	pip install -r requirements.txt
 
 	if [ $? -ne 0 ]; then
