@@ -179,4 +179,8 @@ todo.md
 
 config.json.bak
 
+# User configuration files (use example versions as templates)
+config.json
+theme.json
+
 # End of https://www.toptal.com/developers/gitignore/api/python
