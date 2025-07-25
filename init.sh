@@ -15,7 +15,7 @@ INSTALL_DIR=$(dirname -- "$0")
 setup_venv() {
 	# Navigate to the $INSTALL_DIR directory
 	cd "$INSTALL_DIR" || {
-		echo -e "\033[31mDirectory $INSTALL_DIR does not exist.\033[0m\n"
+		printf "\033[31mDirectory %s does not exist.\033[0m\n" "$INSTALL_DIR" >&2
 		exit 1
 	}
 
