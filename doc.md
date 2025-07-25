@@ -176,12 +176,16 @@
     - **`icon_size`**: `int` (default: 16)
     - **`tooltip`**: `bool` (default: true)
     - **`audio`**: `bool` (default: true)
+    - **`delayed`**: `bool` (default: false)
+    - **`delayed_timeout`**: `int` (default: 5000)
   - **`screenshot`**: `object`
     - **`path`**: `str` (default: "Pictures/Screenshots")
     - **`icon_size`**: `int` (default: 16)
     - **`tooltip`**: `bool` (default: true)
     - **`annotation`**: `bool` (default: true)
     - **`icon`**: `str` (default: "󰄀")
+    - **`delayed`**: `bool` (default: false)
+    - **`delayed_timeout`**: `int` (default: 5000)
   - **`spacing`**: `object`
     - **`size`**: `int` (default: 20)
   - **`stopwatch`**: `object`

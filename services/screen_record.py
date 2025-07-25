@@ -30,8 +30,13 @@ class ScreenRecorderService(Service):
         super().__init__(**kwargs)
         self.home_dir = GLib.get_home_dir()
 
-    def screenrecord_start(self, path: str, allow_audio: bool, fullscreen=False):
-        """Start screen recording using wf-recorder."""
+    def screenrecord_start(
+        self,
+        path: str,
+        config: dict,
+        fullscreen=False,
+    ):
+        """Start screen recording using wf-recorder with optional GLib-based delay."""
         if not path:
             logger.exception("[SCREENRECORD] No path provided for screen recording.")
             return
@@ -43,17 +48,27 @@ class ScreenRecorderService(Service):
                 "[SCREENRECORD] Another instance of wf-recorder is already running."
             )
             return
-        time = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
-        file_path = os.path.join(self.screenrecord_path, f"{time}.mp4")
 
+        timestamp = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
+        file_path = os.path.join(self.screenrecord_path, f"{timestamp}.mp4")
         self._current_screencast_path = file_path
+
         area = "" if fullscreen else f"-g '{exec_shell_command('slurp')}'"
-        audio = "--audio" if allow_audio else ""
+        audio = "--audio" if config.get("audio", False) else ""
         command = (
             f"wf-recorder {audio} --file={file_path} --pixel-format yuv420p {area}"
         )
-        exec_shell_command_async(command, lambda *_: None)
-        self.emit("recording", True)
+
+        def start_recording():
+            exec_shell_command_async(command, lambda *_: None)
+            self.emit("recording", True)
+            return False  # Only run once
+
+        if config.get("delayed", False):
+            timeout = config.get("delayed_timeout", 5000)
+            GLib.timeout_add(timeout, start_recording)
+        else:
+            start_recording()
 
     def send_screenshot_notification(self, file_path=None):
         cmd = ["notify-send"]
@@ -104,8 +119,7 @@ class ScreenRecorderService(Service):
     def screenshot(
         self,
         path: str,
-        annotate: bool = False,
-        capture_sound: bool = False,
+        config: dict,
         fullscreen=False,
         save_copy=True,
     ):
@@ -117,6 +131,8 @@ class ScreenRecorderService(Service):
         self.screenshot_path = os.path.join(self.home_dir, path)
         timestamp = datetime.today().strftime("%Y-%m-%d_%H-%M-%S")
         file_path = os.path.join(self.screenshot_path, f"{timestamp}.png")
+
+        annotate = config.get("annotate", False)
 
         temp_path = file_path  # Default to final path if no annotation
 
@@ -158,10 +174,18 @@ class ScreenRecorderService(Service):
                     f"[SCREENSHOT] Error in annotation or notification: {e}"
                 )
 
-        try:
-            exec_shell_command_async(" ".join(command), after_screenshot)
-        except Exception:
-            logger.exception(f"[SCREENSHOT] Failed to run command: {command}")
+        def take_screenshot():
+            try:
+                exec_shell_command_async(" ".join(command), after_screenshot)
+            except Exception:
+                logger.exception(f"[SCREENSHOT] Failed to run command: {command}")
+            return False
+
+        if config.get("delayed", False):
+            timeout = config.get("delayed_timeout", 5000)
+            GLib.timeout_add(timeout, take_screenshot)
+        else:
+            take_screenshot()
 
     def send_screenrecord_notification(self, file_path: str):
         cmd = ["notify-send"]
