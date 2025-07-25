@@ -22,10 +22,8 @@ setup_venv() {
 	# Check if the virtual environment exists, if not, create it
 	if [ ! -d .venv ]; then
 		echo -e "\033[32m  venv does not exist. Creating venv...\033[0m\n"
-		python3 -m venv .venv
-
-		if [ $? -ne 0 ]; then
-			echo -e "\033[31m  Failed to create virtual environment. Exiting...\033[0m\n"
+		if ! python3 -m venv .venv; then
+			printf "\033[31m  Failed to create virtual environment. Exiting...\033[0m\n" >&2
 			exit 1
 		fi
 
