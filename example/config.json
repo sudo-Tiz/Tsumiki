@@ -4,6 +4,7 @@
 		"battery": {
 			"full_battery_level": 100,
 			"hide_label_when_full": true,
+			"hide_when_missing": true,
 			"label": true,
 			"tooltip": true,
 			"orientation": "vertical",
@@ -423,7 +424,7 @@
 			"time_format": "%H:%M"
 		},
 		"quotes": {
-			"enabled": true,
+			"enabled": false,
 			"anchor": "bottom-right",
 			"layer": "bottom",
 			"update_interval": 600 // this is the interval in seconds to update the quotes, 1 hour is 3600 seconds
