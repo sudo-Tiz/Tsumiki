@@ -35,9 +35,10 @@ setup_venv() {
 	# Activate virtual environment
 	source .venv/bin/activate
 
-	if [ $? -ne 0 ]; then
-		echo -e "\033[31m  Failed to activate venv. Exiting...\033[0m\n"
+	if ! source .venv/bin/activate; then
+		printf "\033[31m  Failed to activate venv. Exiting...\033[0m\n" >&2
 		exit 1
+	fi
 	fi
 
 	# Install Python dependencies
