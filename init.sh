@@ -45,10 +45,11 @@ setup_venv() {
 		printf "\033[32m  Installing python dependencies, brace yourself.\033[0m\n"
 	pip install -r requirements.txt
 
-	if [ $? -ne 0 ]; then
-		echo -e "\033[31mFailed to install packages from requirements.txt. Exiting...\033[0m\n"
+	if ! pip install -r requirements.txt; then
+		printf "\033[31mFailed to install packages from requirements.txt. Exiting...\033[0m\n" >&2
 		deactivate
 		exit 1
+	fi
 	fi
 
 		printf "\033[32m  Python dependencies installed successfully.\033[0m\n"
