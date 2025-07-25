@@ -41,7 +41,7 @@ class WorkSpacesWidget(BoxWidget):
                 button.connect("notify::empty", update_empty_state)
                 button.connect("notify::active", update_empty_state)  # Also update on active state changes
                 update_empty_state()
-            
+
             return button
 
         # Create a HyperlandWorkspace widget to manage workspace buttons

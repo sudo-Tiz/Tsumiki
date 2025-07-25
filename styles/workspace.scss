@@ -57,7 +57,7 @@ $workspace-transition: padding 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     &.occupied {
       opacity: 1;
       background-color: rgba(theme.$text-main, 0.15);
-      
+
       label {
         color: theme.$text-main;
         font-weight: 600;
@@ -65,7 +65,7 @@ $workspace-transition: padding 0.3s cubic-bezier(0.4, 0, 0.2, 1),
 
       &:hover {
         background-color: theme.$ws-hover;
-        
+
         label {
           color: theme.$background-dark;
         }
