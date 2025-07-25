@@ -41,7 +41,7 @@
 			"audio": true,
 			"icon_size": 16,
 			"tooltip": true,
-			"delayed": false, 
+			"delayed": false,
 			"delayed_timeout": 5000
 		},
 		"screenshot": {

@@ -9,4 +9,3 @@ doc_gen:
 
 restore_config:
     cp config.json.bak config.json
-
