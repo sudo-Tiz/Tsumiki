@@ -27,7 +27,7 @@ setup_venv() {
 			exit 1
 		fi
 
-		echo -e "\033[32m  Virtual environment created successfully.\033[0m\n"
+		printf "\033[32m  Virtual environment created successfully.\033[0m\n"
 	else
 		echo -e "\033[33m  Virtual environment already exists.\033[0m\n"
 	fi
