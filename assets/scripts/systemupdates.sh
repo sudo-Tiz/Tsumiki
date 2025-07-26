@@ -141,11 +141,20 @@ check_opensuse_updates() {
 # Function to execute command in terminal
 execute_in_terminal() {
     local command="$1"
-    # Restore --title for kitty for a better user experience.
+    # Only allow safe terminal names (no spaces, no shell metacharacters)
+    if [[ ! "$TERMINAL" =~ ^[a-zA-Z0-9._-]+$ ]]; then
+        echo "Error: Terminal name contains invalid characters."
+        exit 1
+    fi
+    # Check if terminal exists in PATH
+    if ! command -v "$TERMINAL" >/dev/null 2>&1; then
+        echo "Error: Terminal '$TERMINAL' not found in PATH."
+        exit 1
+    fi
     if [[ "$(basename "$TERMINAL")" == "kitty" ]]; then
         $TERMINAL --title systemupdate sh -c "${command}"
     else
-        $TERMINAL sh -c "${command}"
+        "$TERMINAL" sh -c "${command}"
     fi
 }
 
@@ -216,7 +225,16 @@ for arg in "$@"; do
         os=ubuntu) DISTRO="ubuntu" ;;
         os=fedora) DISTRO="fedora" ;;
         os=suse)   DISTRO="suse" ;;
-        --terminal=*) TERMINAL="${arg#*=}" ;;
+        --terminal=*)
+            # Extract terminal value and validate it contains only safe characters
+            terminal_value="${arg#*=}"
+            if [[ "$terminal_value" =~ ^[a-zA-Z0-9_-]+$ ]]; then
+                TERMINAL="$terminal_value"
+            else
+                echo "Error: Terminal name contains invalid characters. Only alphanumeric, underscore, and dash allowed."
+                exit 1
+            fi
+            ;;
         --flatpak) CHECK_FLATPAK=1 ;;
         --snap)    CHECK_SNAP=1 ;;
         --brew)    CHECK_BREW=1 ;;
