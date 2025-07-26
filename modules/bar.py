@@ -13,7 +13,7 @@ from widgets.brightness import BrightnessWidget
 from widgets.cava import CavaWidget
 from widgets.click_counter import ClickCounterWidget
 from widgets.cliphist import ClipHistoryWidget
-from widgets.custom_button import CustomButtonGroup
+from widgets.custom_button import CustomButtonGroupWidget
 from widgets.datetime_menu import DateTimeWidget
 from widgets.emoji_picker import EmojiPickerWidget
 from widgets.hypridle import HyprIdleWidget
@@ -68,7 +68,7 @@ class StatusBar(Window, BaseWidget):
             "emoji_picker": EmojiPickerWidget,
             "click_counter": ClickCounterWidget,
             "cpu": CpuWidget,
-            "custom_button_group": CustomButtonGroup,
+            "custom_button_group": CustomButtonGroupWidget,
             "date_time": DateTimeWidget,
             "hypridle": HyprIdleWidget,
             "hyprpicker": HyprPickerWidget,
