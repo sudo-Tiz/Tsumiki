@@ -516,21 +516,29 @@ class NetworkUsageWidget(ButtonWidget):
     def update_ui(self, *_):
         """Update the network usage label with the current network usage."""
 
-        # Get the current network usage
+        def format_speed(speed):
+            # speed is in bytes/ms, so *1000 = bytes/s
+            speed_bps = speed * 1000
+            if speed_bps < 1024:
+                return f"{speed_bps:.0f} B/s"
+            elif speed_bps < 1024 * 1024:
+                return f"{speed_bps/1024:.0f} KB/s"
+            else:
+                return f"{speed_bps/(1024*1024):.2f} MB/s"
+
         network_speed = self.client.get_network_speed()
+
+        download_speed = network_speed.get("download", 0)
+        upload_speed = network_speed.get("upload", 0)
+
+        self.upload_label.set_label(format_speed(upload_speed))
+        self.download_label.set_label(format_speed(download_speed))
 
         if self.config.get("tooltip", False):
             tooltip_text = (
-                f"Download: {round(network_speed.get('download', 0), 2)} MB/s\n"
+                f"Download: {format_speed(download_speed)}\n"
+                f"Upload: {format_speed(upload_speed)}"
             )
-            tooltip_text += f"Upload: {round(network_speed.get('upload', 0), 2)} MB/s"
             self.set_tooltip_text(tooltip_text)
-
-        download_speed = network_speed.get("download", "0")
-        upload_speed = network_speed.get("upload", "0")
-
-        self.upload_label.set_label(f"{round(upload_speed, 2)} MB/s")
-
-        self.download_label.set_label(f"{round(download_speed, 2)} MB/s")
 
         return True
