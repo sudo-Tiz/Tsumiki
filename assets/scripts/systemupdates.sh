@@ -141,7 +141,12 @@ check_opensuse_updates() {
 # Function to execute command in terminal
 execute_in_terminal() {
     local command="$1"
-    $TERMINAL sh -c "${command}"
+    # Restore --title for kitty for a better user experience.
+    if [[ "$(basename "$TERMINAL")" == "kitty" ]]; then
+        $TERMINAL --title systemupdate sh -c "${command}"
+    else
+        $TERMINAL sh -c "${command}"
+    fi
 }
 
 update_arch() {
