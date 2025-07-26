@@ -29,6 +29,7 @@ class WorkSpacesWidget(BoxWidget):
 
             # Only add empty state styling when showing all workspaces
             if not hide_unoccupied:
+
                 def update_empty_state(*_):
                     style_context = button.get_style_context()
                     if button.empty:
@@ -39,7 +40,9 @@ class WorkSpacesWidget(BoxWidget):
                         style_context.add_class("occupied")
 
                 button.connect("notify::empty", update_empty_state)
-                button.connect("notify::active", update_empty_state)  # Also update on active state changes
+                button.connect(
+                    "notify::active", update_empty_state
+                )  # Also update on active state changes
                 update_empty_state()
 
             return button
