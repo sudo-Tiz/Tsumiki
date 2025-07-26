@@ -134,7 +134,8 @@
 		"system_tray": {
 			"icon_size": 16,
 			"ignored": [], // do not show these icons in the system tray
-			"hidden": []
+			"hidden": [],
+			"hide_when_empty": false // set to true to hide the system tray when no items are present
 		},
 		"taskbar": {
 			"icon_size": 22,
@@ -192,7 +193,7 @@
 		},
 		"workspaces": {
 			"count": 8, // this is the number of workspaces to show
-			"hide_unoccupied": false,
+			"hide_unoccupied": true,
 			"default_label_format": "{id}",
 			"ignored": [
 				-99

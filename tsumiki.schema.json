@@ -1138,6 +1138,10 @@
 						"items": {
 							"type": "string"
 						}
+					},
+					"hide_when_empty": {
+						"type": "boolean",
+						"description": "Hide the system tray widget when there are no tray items to display"
 					}
 				}
 			},
