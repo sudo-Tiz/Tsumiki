@@ -305,7 +305,7 @@ for arg in "$@"; do
 		;;
 	*)
 		printf "\033[31mUnknown command: %s\033[0m\n" "$arg" >&2
-		usage
+		usage >&2
 		exit 1
 		;;
 	esac
