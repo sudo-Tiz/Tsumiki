@@ -93,12 +93,12 @@ class HyprSunsetToggle(QSChevronButton):
         # reusing the fabricator to call specified intervals
         reusable_fabricator.connect("changed", self.update_action_button)
 
+
     def on_action(self, *_):
         """Handle the action button click event."""
-        toggle_command(
-            "hyprsunset",
-            full_command="hyprsunset -t 2600",
-        )
+        # Get current slider value for dynamic command
+        current_temp = int(self.submenu.scale.get_value())
+        toggle_command("hyprsunset", f"hyprsunset -t {current_temp}")
         return True
 
     def update_action_button(self, *_):
