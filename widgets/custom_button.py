@@ -118,10 +118,10 @@ class CustomButtonGroupWidget(WidgetGroup):
             "command": command,
             "show_icon": button_config.get("show_icon", True),
             "icon": button_config.get("icon", ""),
-            "label": button_config.get("show_label", True),
-            "label_text": button_config.get("label", "Button"),
-            "tooltip": button_config.get("show_tooltip", True),
-            "tooltip_text": button_config.get("tooltip", f"Execute: {command}")
+            "label": button_config.get("label", True),
+            "label_text": button_config.get("label_text", "Button"),
+            "tooltip": button_config.get("tooltip", True),
+            "tooltip_text": button_config.get("tooltip_text", f"Execute: {command}")
         }
 
         # Create a custom button widget

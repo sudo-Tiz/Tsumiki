@@ -97,6 +97,11 @@
 						"type": "string",
 						"pattern": "^@group:\\d+$",
 						"description": "Specifies a group of widgets to display."
+					},
+					{
+						"type": "string",
+						"pattern": "^@custom_button:\\d+$",
+						"description": "Specifies an individual custom button by index (e.g., @custom_button:0, @custom_button:1)."
 					}
 				]
 			}
