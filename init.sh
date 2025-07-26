@@ -277,7 +277,6 @@ if [ $# -eq 0 ]; then
   usage >&2
   exit 1
 fi
-fi
 
 # Process each argument in sequence
 for arg in "$@"; do
