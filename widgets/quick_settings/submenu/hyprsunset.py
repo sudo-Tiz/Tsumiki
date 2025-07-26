@@ -34,20 +34,22 @@ class HyprSunsetSubMenu(QuickSubMenu):
             **kwargs,
         )
 
+        # Connect the slider immediately
+        self.scale.connect("value-changed", self.on_scale_move)
         self.revealer.connect("notify::revealed", self.on_revealer_revealed)
 
     def on_revealer_revealed(self, *_):
         """Handle the revealer being revealed."""
         self.update_scale()
-        self.scale.connect("value-changed", self.on_scale_move)
         reusable_fabricator.connect("changed", self.update_scale)
         return True
 
     @cooldown(0.1)
-    def on_scale_move(self, _, __, moved_pos):
+    def on_scale_move(self, scale):
+        temperature = int(scale.get_value())
         exec_shell_command_async(
-            f"hyprctl hyprsunset temperature {int(moved_pos)}",
-            lambda *_: self.update_ui(int(moved_pos)),
+            f"hyprctl hyprsunset temperature {temperature}",
+            lambda *_: self.update_ui(temperature),
         )
         return True
 
