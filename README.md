@@ -236,6 +236,7 @@ Updating to latest commit is fairly simple, just git pull the latest changes.
 | **cava**              | An audio visualizer widget.                                                    |
 | **click_counter**     | Widget tracks the number of mouse clicks.                                      |
 | **cliphist**          | Widget for the clipboard history.                                              |
+| **custom_button_group** | Widget that displays a customizable group of buttons for executing shell commands. Each button can have custom icons, labels, tooltips, and execute different commands when clicked. |
 | **cpu**               | Widget displays CPU usage and performance statistics.                          |
 | **date_time**         | A menu displaying the current date and notifications.                          |
 | **divider (utility)** | Widget separates sections in a user interface for better organization.         |
