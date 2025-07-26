@@ -261,7 +261,6 @@ usage() {
 
 # Function to kill existing instances
 kill_existing() {
-kill_existing() {
 	echo -e "\033[33m  Stopping existing Tsumiki instances...\033[0m"
 	pkill tsumiki || true
 	# Wait for the process to terminate completely
@@ -270,13 +269,11 @@ kill_existing() {
 	done
 	echo -e "\033[32m  Existing instances stopped.\033[0m\n"
 }
-}
 
 # Check if no arguments provided
 	if [ $# -eq 0 ]; then
 	usage >&2
 	exit 1
-fi
 fi
 
 # Process each argument in sequence
