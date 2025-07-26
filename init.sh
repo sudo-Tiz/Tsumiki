@@ -10,7 +10,9 @@ if ! grep -q "arch" /etc/os-release; then
 	exit 1
 fi
 
-INSTALL_DIR=$(dirname -- "$0")
+# Get the absolute path of the script's directory
+SCRIPT_PATH=$(readlink -f "$0")
+INSTALL_DIR=$(dirname "$SCRIPT_PATH")
 
 copy_config_files() {
 	# Navigate to the $INSTALL_DIR directory
@@ -271,9 +273,9 @@ kill_existing() {
 }
 
 # Check if no arguments provided
-	if [ $# -eq 0 ]; then
-	usage >&2
-	exit 1
+if [ $# -eq 0 ]; then
+  usage >&2
+  exit 1
 fi
 
 # Process each argument in sequence
@@ -281,25 +283,25 @@ for arg in "$@"; do
 	case "$arg" in
 	-start)
 		echo -e "\033[34m=== Starting Bar ===\033[0m"
-		start_bar # Call the start_bar function
+		start_bar
 		;;
 	-update)
 		echo -e "\033[34m=== Updating from Git ===\033[0m"
-		git pull origin # Update from git
+		cd $INSTALL_DIR && git pull
 		echo -e "\033[32m  Update completed.\033[0m\n"
 		;;
 	-install)
 		echo -e "\033[34m=== Installing System Packages ===\033[0m"
-		install_packages # Call the install_packages function
+		install_packages
 		;;
 	-setup)
 		echo -e "\033[34m=== Setting up Virtual Environment ===\033[0m"
-		setup_venv # Call the setup_venv function
+		setup_venv
 		;;
 	-install-setup)
 		echo -e "\033[34m=== Installing Packages and Setting up Environment ===\033[0m"
-		install_packages # Install packages first
-		setup_venv # Then setup virtual environment
+		install_packages
+		setup_venv
 		;;
 	-restart)
 		echo -e "\033[34m=== Restarting Bar ===\033[0m"
