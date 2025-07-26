@@ -474,6 +474,9 @@ class NetworkUsageWidget(ButtonWidget):
 
         show_download = self.config["download"]
         show_upload = self.config["upload"]
+        # Thresholds (in bytes/ms)
+        self.download_threshold = self.config.get("download_threshold", 0)
+        self.upload_threshold = self.config.get("upload_threshold", 0)
 
         # Create a TextIcon with the specified icon and size
         self.upload_icon = nerd_font_icon(
@@ -531,8 +534,15 @@ class NetworkUsageWidget(ButtonWidget):
         download_speed = network_speed.get("download", 0)
         upload_speed = network_speed.get("upload", 0)
 
-        self.upload_label.set_label(format_speed(upload_speed))
-        self.download_label.set_label(format_speed(download_speed))
+        if upload_speed >= self.upload_threshold:
+            self.upload_label.set_label(format_speed(upload_speed))
+        else:
+            self.upload_label.set_label("")
+
+        if download_speed >= self.download_threshold:
+            self.download_label.set_label(format_speed(download_speed))
+        else:
+            self.download_label.set_label("")
 
         if self.config.get("tooltip", False):
             tooltip_text = (
