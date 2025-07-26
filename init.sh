@@ -282,7 +282,7 @@ for arg in "$@"; do
 		;;
 	-update)
 		echo -e "\033[34m=== Updating from Git ===\033[0m"
-		git pull origin master # Update from git
+		git pull origin # Update from git
 		echo -e "\033[32m  Update completed.\033[0m\n"
 		;;
 	-install)
