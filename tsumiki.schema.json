@@ -88,8 +88,7 @@
 							"window_count",
 							"quick_settings",
 							"world_clock",
-							"theme_switcher",
-							"custom_button_group"
+							"theme_switcher"
 						],
 						"description": "Specifies the widget to display."
 					},

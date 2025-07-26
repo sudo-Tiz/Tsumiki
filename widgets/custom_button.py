@@ -2,9 +2,8 @@
 
 from fabric.utils import exec_shell_command_async
 from fabric.widgets.label import Label
-from loguru import logger
 
-from shared.widget_container import ButtonWidget, WidgetGroup
+from shared.widget_container import ButtonWidget
 from utils.widget_utils import nerd_font_icon
 
 
@@ -72,65 +71,3 @@ class CustomButtonWidget(ButtonWidget):
                 self.command,
                 lambda _: None  # No callback needed
             )
-
-
-class CustomButtonGroupWidget(WidgetGroup):
-    """A widget group that displays custom buttons defined in configuration."""
-
-    def __init__(self, **kwargs):
-        """Initialize the custom button group.
-
-        Args:
-            **kwargs: Additional arguments passed to the parent
-        """
-        widget_name = kwargs.get("name", "custom_button_group")
-        super().__init__(name=widget_name, **kwargs)
-
-        # Get buttons configuration from config
-        buttons_config = self.config.get("buttons", [])
-
-        if not buttons_config:
-            return
-
-        # Create custom buttons from configuration
-        for i, button_config in enumerate(buttons_config):
-            button = self._create_custom_button(button_config, i)
-            if button:
-                self.add(button)
-
-    def _create_custom_button(self, button_config: dict, index: int):
-        """Create a single custom button from configuration.
-
-        Args:
-            button_config: Configuration dictionary for the button
-            index: Index of the button in the list
-
-        Returns:
-            CustomButtonWidget instance or None if invalid config
-        """
-        command = button_config.get("command", "")
-        if not command:
-            logger.warning(f"Custom button at index {index} has no command")
-            return None
-
-        # Create a temporary config for this button
-        temp_config = {
-            "command": command,
-            "show_icon": button_config.get("show_icon", True),
-            "icon": button_config.get("icon", ""),
-            "label": button_config.get("label", True),
-            "label_text": button_config.get("label_text", "Button"),
-            "tooltip": button_config.get("tooltip", True),
-            "tooltip_text": button_config.get("tooltip_text", f"Execute: {command}")
-        }
-
-        # Create a custom button widget
-        button = CustomButtonWidget(config=temp_config)
-
-        # Add custom style classes if specified
-        style_classes = button_config.get("style_classes", [])
-        if style_classes:
-            for style_class in style_classes:
-                button.add_style_class(style_class)
-
-        return button
