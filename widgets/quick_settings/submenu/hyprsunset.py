@@ -36,13 +36,7 @@ class HyprSunsetSubMenu(QuickSubMenu):
 
         # Connect the slider immediately
         self.scale.connect("value-changed", self.on_scale_move)
-        self.revealer.connect("notify::revealed", self.on_revealer_revealed)
-
-    def on_revealer_revealed(self, *_):
-        """Handle the revealer being revealed."""
-        self.update_scale()
         reusable_fabricator.connect("changed", self.update_scale)
-        return True
 
     @cooldown(0.1)
     def on_scale_move(self, scale):
@@ -93,6 +87,7 @@ class HyprSunsetToggle(QSChevronButton):
         self.connect("action-clicked", self.on_action)
 
         # reusing the fabricator to call specified intervals
+        reusable_fabricator.connect("changed", self.update_action_button)
         reusable_fabricator.connect("changed", self.update_action_button)
 
 
