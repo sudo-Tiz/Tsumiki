@@ -183,7 +183,4 @@ config.json.bak
 config.json
 theme.json
 
-# Auto-generated GitHub Actions files
-.github/workflows/sync-fork.yaml
-
 # End of https://www.toptal.com/developers/gitignore/api/python
