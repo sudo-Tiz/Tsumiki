@@ -261,10 +261,15 @@ usage() {
 
 # Function to kill existing instances
 kill_existing() {
+kill_existing() {
 	echo -e "\033[33m  Stopping existing Tsumiki instances...\033[0m"
 	pkill tsumiki || true
-	sleep 1
+	# Wait for the process to terminate completely
+	while pgrep -x "tsumiki" >/dev/null; do
+		sleep 0.1
+	done
 	echo -e "\033[32m  Existing instances stopped.\033[0m\n"
+}
 }
 
 # Check if no arguments provided
