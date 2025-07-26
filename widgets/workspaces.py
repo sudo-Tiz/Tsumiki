@@ -27,11 +27,24 @@ class WorkSpacesWidget(BoxWidget):
                 visible=ws_id not in ignored_ws,
             )
 
-            def update_empty_state(*_):
-                self.set_has_class("unoccupied", button.empty)
+            # Only add empty state styling when showing all workspaces
+            if not hide_unoccupied:
 
-            button.connect("notify::empty", update_empty_state)
-            update_empty_state()
+                def update_empty_state(*_):
+                    style_context = button.get_style_context()
+                    if button.empty:
+                        style_context.add_class("unoccupied")
+                        style_context.remove_class("occupied")
+                    else:
+                        style_context.remove_class("unoccupied")
+                        style_context.add_class("occupied")
+
+                button.connect("notify::empty", update_empty_state)
+                button.connect(
+                    "notify::active", update_empty_state
+                )  # Also update on active state changes
+                update_empty_state()
+
             return button
 
         # Create a HyperlandWorkspace widget to manage workspace buttons
