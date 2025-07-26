@@ -1235,48 +1235,7 @@
 						"type": "array",
 						"description": "Array of custom buttons to display in the group",
 						"items": {
-							"type": "object",
-							"properties": {
-								"command": {
-									"type": "string",
-									"description": "Bash command to execute when button is clicked"
-								},
-								"icon": {
-									"type": "string",
-									"description": "Icon to display on the button"
-								},
-								"label": {
-									"type": "string",
-									"description": "Text to display on the button"
-								},
-								"tooltip": {
-									"type": "string",
-									"description": "Tooltip text to show on hover"
-								},
-								"show_icon": {
-									"type": "boolean",
-									"description": "Whether to show the icon",
-									"default": true
-								},
-								"show_label": {
-									"type": "boolean",
-									"description": "Whether to show the label",
-									"default": true
-								},
-								"show_tooltip": {
-									"type": "boolean",
-									"description": "Whether to show the tooltip",
-									"default": true
-								},
-								"style_classes": {
-									"type": "array",
-									"items": {
-										"type": "string"
-									},
-									"description": "CSS style classes to apply to the button"
-								}
-							},
-							"required": ["command"]
+							"$ref": "#/properties/custom_button"
 						}
 					},
 					"spacing": {
@@ -1473,24 +1432,42 @@
 						"description": "Icon to display on the button"
 					},
 					"label": {
-						"type": "boolean",
-						"description": "Whether to show a label on the button"
-					},
-					"label_text": {
 						"type": "string",
-						"description": "Text to display on the button label"
+						"description": "Text to display on the button"
 					},
 					"tooltip": {
-						"type": "boolean",
-						"description": "Whether to show a tooltip"
-					},
-					"tooltip_text": {
 						"type": "string",
-						"description": "Custom tooltip text"
+						"description": "Tooltip text to show on hover"
 					},
 					"show_icon": {
 						"type": "boolean",
-						"description": "Whether to show the icon"
+						"description": "Whether to show the icon",
+						"default": true
+					},
+					"show_label": {
+						"type": "boolean",
+						"description": "Whether to show the label",
+						"default": true
+					},
+					"show_tooltip": {
+						"type": "boolean",
+						"description": "Whether to show the tooltip",
+						"default": true
+					},
+					"style_classes": {
+						"type": "array",
+						"items": {
+							"type": "string"
+						},
+						"description": "CSS style classes to apply to the button"
+					},
+					"label_text": {
+						"type": "string",
+						"description": "Text to display on the button label (deprecated, use 'label' instead)"
+					},
+					"tooltip_text": {
+						"type": "string",
+						"description": "Custom tooltip text (deprecated, use 'tooltip' instead)"
 					}
 				},
 				"required": ["command"]
