@@ -184,7 +184,7 @@ class StatusBar(Window, BaseWidget):
                             # Create individual button
                             button = CustomButtonWidget(
                                 widget_name=f"custom_button_{button_index}",
-                                config=button_config
+                                config=button_config,
                             )
                             layout[key].append(button)
                 else:
