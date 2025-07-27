@@ -11,10 +11,7 @@ class CustomButtonWidget(ButtonWidget):
     """A widget that executes a custom bash command when clicked."""
 
     def __init__(
-        self,
-        widget_name: str = "custom_button",
-        config: dict | None = None,
-        **kwargs
+        self, widget_name: str = "custom_button", config: dict | None = None, **kwargs
     ):
         """Initialize the custom button widget.
 
@@ -50,10 +47,7 @@ class CustomButtonWidget(ButtonWidget):
         # Setup label if specified
         if self.config.get("label", True):
             label_text = self.config.get("label_text", "Button")
-            self.label = Label(
-                label=label_text,
-                style_classes="panel-text"
-            )
+            self.label = Label(label=label_text, style_classes="panel-text")
             self.box.add(self.label)
 
         # Connect click handler
@@ -69,5 +63,5 @@ class CustomButtonWidget(ButtonWidget):
         if self.command:
             exec_shell_command_async(
                 self.command,
-                lambda _: None  # No callback needed
+                lambda _: None,  # No callback needed
             )
