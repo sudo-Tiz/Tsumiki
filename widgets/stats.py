@@ -525,7 +525,7 @@ class NetworkUsageWidget(ButtonWidget):
             if speed_bps < 1024:
                 return f"{speed_bps:.0f} B/s"
             elif speed_bps < 1024 * 1024:
-                return f"{speed_bps/1024:.0f} KB/s"
+                return f"{speed_bps/1024:.2f} KB/s"
             else:
                 return f"{speed_bps/(1024*1024):.2f} MB/s"
 
