@@ -273,8 +273,9 @@ class OSDContainer(Window):
 
         self.revealer = Revealer(
             name="osd-revealer",
-            transition_type="slide-up",
+            transition_type="slide-right",
             transition_duration=transition_duration,
+            child_revealed=False,
         )
 
         super().__init__(
