@@ -478,7 +478,6 @@ class NetworkUsageWidget(ButtonWidget):
         self.download_threshold = self.config.get("download_threshold", 0)
         self.upload_threshold = self.config.get("upload_threshold", 0)
 
-
         # Number of digits for formatting
         self.kb_digits = self.config.get("kb_digits", 0)
         self.mb_digits = self.config.get("mb_digits", 2)
@@ -522,7 +521,6 @@ class NetworkUsageWidget(ButtonWidget):
 
     def update_ui(self, *_):
         """Update the network usage label with the current network usage."""
-
 
         def format_speed(speed):
             # speed is in bytes/ms, so *1000 = bytes/s

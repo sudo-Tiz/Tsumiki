@@ -1,4 +1,4 @@
-from fabric.hyprland.widgets import Language
+from fabric.hyprland.widgets import HyprlandLanguage as Language
 from fabric.utils import FormattedString, truncate
 
 from shared.widget_container import ButtonWidget
