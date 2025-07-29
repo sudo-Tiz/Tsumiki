@@ -6,7 +6,7 @@ set -u          # Treat unset variables as an error
 set -o pipefail # Prevent errors in a pipeline from being masked
 
 if ! grep -q "arch" /etc/os-release; then
-	echo "This script is designed to run on Arch Linux."
+	echo "This script is designed to run on Arch Linux 󰣇."
 	exit 1
 fi
 
@@ -17,18 +17,18 @@ INSTALL_DIR=$(dirname "$SCRIPT_PATH")
 copy_config_files() {
 	# Navigate to the $INSTALL_DIR directory
 	cd "$INSTALL_DIR" || {
-		echo -e "\033[31mDirectory $INSTALL_DIR does not exist.\033[0m\n"
+		echo -e "\033[31m  Directory $INSTALL_DIR does not exist.\033[0m\n"
 		exit 1
 	}
 
 	# Copy config.json from example if it doesn't exist
 	if [ ! -f config.json ]; then
 		if [ -f example/config.json ]; then
-			echo -e "\033[33m  config.json not found. Copying from example...\033[0m\n"
+			echo -e "\033[33m  config.json not found. Copying from example...\033[0m\n"
 			cp example/config.json config.json
-			echo -e "\033[32m  config.json copied successfully.\033[0m\n"
+			echo -e "\033[32m 󰄴 config.json copied successfully.\033[0m\n"
 		else
-			echo -e "\033[31m  example/config.json not found. Cannot create default config.\033[0m\n"
+			echo -e "\033[31m  example/config.json not found. Cannot create default config.\033[0m\n"
 			exit 1
 		fi
 	fi
@@ -36,11 +36,11 @@ copy_config_files() {
 	# Copy theme.json from example if it doesn't exist
 	if [ ! -f theme.json ]; then
 		if [ -f example/theme.json ]; then
-			echo -e "\033[33m  theme.json not found. Copying from example...\033[0m\n"
+			echo -e "\033[33m   theme.json not found. Copying from example...\033[0m\n"
 			cp example/theme.json theme.json
-			echo -e "\033[32m  theme.json copied successfully.\033[0m\n"
+			echo -e "\033[32m 󰄴 theme.json copied successfully.\033[0m\n"
 		else
-			echo -e "\033[31m  example/theme.json not found. Cannot create default theme.\033[0m\n"
+			echo -e "\033[31m   example/theme.json not found. Cannot create default theme.\033[0m\n"
 			exit 1
 		fi
 	fi
@@ -49,50 +49,50 @@ copy_config_files() {
 setup_venv() {
 	# Navigate to the $INSTALL_DIR directory
 	cd "$INSTALL_DIR" || {
-		echo -e "\033[31mDirectory $INSTALL_DIR does not exist.\033[0m\n"
+		echo -e "\033[31m   Directory $INSTALL_DIR does not exist.\033[0m\n"
 		exit 1
 	}
 
 	# Check if the virtual environment exists, if not, create it
 	if [ ! -d .venv ]; then
-		echo -e "\033[32m  venv does not exist. Creating venv...\033[0m\n"
+		echo -e "\033[32m  venv does not exist. Creating venv...\033[0m\n"
 		if ! python3 -m venv .venv; then
-			printf "\033[31m  Failed to create virtual environment. Exiting...\033[0m\n" >&2
+			printf "\033[31m  Failed to create virtual environment. Exiting...\033[0m\n" >&2
 			exit 1
 		fi
 
-		printf "\033[32m  Virtual environment created successfully.\033[0m\n"
+		printf "\033[32m  Virtual environment created successfully.\033[0m\n"
 	else
-		printf "\033[33m  Virtual environment already exists.\033[0m\n"
+		printf "\033[33m  Virtual environment already exists.\033[0m\n"
 	fi
 
 	# Activate virtual environment
 	source .venv/bin/activate
 
 	if ! source .venv/bin/activate; then
-		printf "\033[31m  Failed to activate venv. Exiting...\033[0m\n" >&2
+		printf "\033[31m  Failed to activate venv. Exiting...\033[0m\n" >&2
 		exit 1
 	fi
 
 
 	# Install Python dependencies
-		printf "\033[32m  Installing python dependencies, brace yourself.\033[0m\n"
+		printf "\033[32m  Installing python dependencies, brace yourself.\033[0m\n"
 	pip install -r requirements.txt
 
 	if ! pip install -r requirements.txt; then
-		printf "\033[31mFailed to install packages from requirements.txt. Exiting...\033[0m\n" >&2
+		printf "\033[31m  Failed to install packages from requirements.txt. Exiting...\033[0m\n" >&2
 		deactivate
 		exit 1
 	fi
 
-		printf "\033[32m  Python dependencies installed successfully.\033[0m\n"
+		printf "\033[32m  Python dependencies installed successfully.\033[0m\n"
 	deactivate
 }
 
 start_bar() {
 	# Navigate to the $INSTALL_DIR directory
 	cd "$INSTALL_DIR" || {
-		echo -e "\033[31mDirectory $INSTALL_DIR does not exist.\033[0m\n"
+		echo -e "\033[31m  Directory $INSTALL_DIR does not exist.\033[0m\n"
 		exit 1
 	}
 
@@ -141,11 +141,11 @@ start_bar() {
    ██║   ███████║╚██████╔╝██║ ╚═╝ ██║██║██║  ██╗██║
    ╚═╝   ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═╝╚═╝
 
-version:	$VERSION
+version: $VERSION
 
 
 EOF
-	echo -e "\e[32mUsing python:\e[0m \e[34m$(which python)\e[0m\n"
+	echo -e "\e[32m  Using python:\e[0m \e[34m$(which python)\e[0m\n"
 	python3 main.py
 	deactivate
 }
@@ -169,7 +169,7 @@ install_packages() {
 	echo "								  "
 
 	# Notify user about the installation process
-	echo -e "\e[1;34mInstalling the pre-requisites, may take a while....\e[0m\n"
+	echo -e "\e[1;34 󱧘 mInstalling the pre-requisites, may take a while....\e[0m\n"
 
 	# Install packages using pacman
 	pacman_deps=(
@@ -263,13 +263,13 @@ usage() {
 
 # Function to kill existing instances
 kill_existing() {
-	echo -e "\033[33m  Stopping existing Tsumiki instances...\033[0m"
+	echo -e "\033[33m 󱤸 Stopping existing Tsumiki instances...\033[0m"
 	pkill tsumiki || true
 	# Wait for the process to terminate completely
 	while pgrep -x "tsumiki" >/dev/null; do
 		sleep 0.1
 	done
-	echo -e "\033[32m  Existing instances stopped.\033[0m\n"
+	echo -e "\033[32m 󱤸 Existing instances stopped.\033[0m\n"
 }
 
 # Check if no arguments provided
@@ -282,34 +282,34 @@ fi
 for arg in "$@"; do
 	case "$arg" in
 	-start)
-		echo -e "\033[34m=== Starting Bar ===\033[0m"
+		echo -e "\033[34m=== 󰓅 Starting Bar ===\033[0m"
 		start_bar
 		;;
 	-update)
-		echo -e "\033[34m=== Updating from Git ===\033[0m"
+		echo -e "\033[34m===  Updating from Git ===\033[0m"
 		cd $INSTALL_DIR && git pull
-		echo -e "\033[32m  Update completed.\033[0m\n"
+		echo -e "\033[32m    Update completed.\033[0m\n"
 		;;
 	-install)
-		echo -e "\033[34m=== Installing System Packages ===\033[0m"
+		echo -e "\033[34m=== 󱧘 Installing System Packages ===\033[0m"
 		install_packages
 		;;
 	-setup)
-		echo -e "\033[34m=== Setting up Virtual Environment ===\033[0m"
+		echo -e "\033[34m===  Setting up Virtual Environment ===\033[0m"
 		setup_venv
 		;;
 	-install-setup)
-		echo -e "\033[34m=== Installing Packages and Setting up Environment ===\033[0m"
+		echo -e "\033[34m=== 󱧘 Installing Packages and Setting up Environment ===\033[0m"
 		install_packages
 		setup_venv
 		;;
 	-restart)
-		echo -e "\033[34m=== Restarting Bar ===\033[0m"
+		echo -e "\033[34m===  Restarting Bar ===\033[0m"
 		kill_existing
 		start_bar
 		;;
 	*)
-		printf "\033[31mUnknown command: %s\033[0m\n" "$arg" >&2
+		printf "\033[31m  Unknown command: %s\033[0m\n" "$arg" >&2
 		usage >&2
 		exit 1
 		;;

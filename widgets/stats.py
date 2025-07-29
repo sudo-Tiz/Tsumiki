@@ -528,9 +528,9 @@ class NetworkUsageWidget(ButtonWidget):
             if speed_bps < 1024:
                 return f"{speed_bps:.0f} B/s"
             elif speed_bps < 1024 * 1024:
-                return f"{speed_bps/1024:.{self.kb_digits}f} KB/s"
+                return f"{speed_bps / 1024:.{self.kb_digits}f} KB/s"
             else:
-                return f"{speed_bps/(1024*1024):.{self.mb_digits}f} MB/s"
+                return f"{speed_bps / (1024 * 1024):.{self.mb_digits}f} MB/s"
 
         network_speed = self.client.get_network_speed()
 

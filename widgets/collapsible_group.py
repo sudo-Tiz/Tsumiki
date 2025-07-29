@@ -56,10 +56,7 @@ class CollapsibleGroupWidget(ButtonWidget):
             self.box.add(icon)
 
         if self.show_label:
-            label = Label(
-                label=self.label_text,
-                style_classes="panel-text"
-            )
+            label = Label(label=self.label_text, style_classes="panel-text")
             self.box.add(label)
 
     def _setup_popup(self):
@@ -70,16 +67,13 @@ class CollapsibleGroupWidget(ButtonWidget):
             spacing=self.config.get("spacing", 4),
             style_classes=[
                 "panel-collapsible-group",
-                *self.config.get("style_classes", [])
-            ]
+                *self.config.get("style_classes", []),
+            ],
         )
 
         self._populate_widgets()
 
-        self.popup = Popover(
-            content=self.widgets_box,
-            point_to=self
-        )
+        self.popup = Popover(content=self.widgets_box, point_to=self)
 
     def _set_expanded(self, expanded: bool):
         """Sets the expanded state of the widget."""
@@ -102,7 +96,7 @@ class CollapsibleGroupWidget(ButtonWidget):
 
     def _populate_widgets(self):
         """Populate the widgets box with configured widgets."""
-        if not self.widgets_list or not hasattr(self, 'widgets_box'):
+        if not self.widgets_list or not hasattr(self, "widgets_box"):
             return
 
         # Fix: Properly destroy child widgets to prevent memory leaks
