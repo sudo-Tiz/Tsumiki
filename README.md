@@ -288,7 +288,7 @@ Be sure to kill other notifications daemon that you may be running. You can kill
 Kill the app with `pkill tsumiki`. Run `init.sh -start`. This should show some logs. If it shows like `ModuleNotFoundError`, run `pip install -r requirements.txt`. If this does not solve the issue, do report a bug with screenshot of the log.
 
 ### 4. **Sass compilation error or UI not rendering?**
-Your `theme.json` may be incorrect or outdated. You can copy the latest `theme.json` from the `example/` directory
+Your `theme.json` may be incorrect or outdated. You can copy the latest `theme.json` from the `example/` directory. Be aware that this will overwrite any custom changes you've made.
 
 ### 5. **No Blur?**
 
