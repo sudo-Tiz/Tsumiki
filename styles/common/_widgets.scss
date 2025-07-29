@@ -334,6 +334,17 @@
 
 }
 
+#screenshot {
+  border-radius: variable.$bar-widgets-screenshot-border-radius;
+  border: if(variable.$bar-widgets-screenshot-border-enabled, variable.$border, none);
+  border-width: variable.$bar-widgets-screenshot-border-width;
+
+  #nerd-icon.panel-font-icon {
+    font-size: variable.$bar-widgets-screenshot-icon_size;
+    margin-right: variable.$bar-widgets-screenshot-spacing;
+  }
+}
+
 
 
 #recorder {

@@ -81,7 +81,6 @@ DEFAULT_CONFIG = {
             },  # Empty list by default - shortcuts are optional
         },
         "bluetooth": {
-            "icon_size": 14,
             "label": True,
             "tooltip": True,
         },
@@ -227,7 +226,6 @@ DEFAULT_CONFIG = {
         },
         "recorder": {
             "path": "Videos/Screencasting",
-            "icon_size": 16,
             "tooltip": True,
             "audio": True,
             "delayed": False,
@@ -235,7 +233,6 @@ DEFAULT_CONFIG = {
         },
         "screenshot": {
             "path": "Pictures/Screenshots",
-            "icon_size": 16,
             "tooltip": True,
             "annotation": True,
             "icon": "󰄀",

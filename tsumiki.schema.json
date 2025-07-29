@@ -477,7 +477,7 @@
 							"icon_size": {
 								"type": "integer",
 								"default": 16,
-								"description": "Size of the icon"
+								"description": "Size of the collapsible icon"
 							},
 							"widgets": {
 								"type": "array",
@@ -1441,10 +1441,6 @@
 						"type": "string",
 						"description": "Icon name from icon theme"
 					},
-					"icon_size": {
-						"type": "integer",
-						"description": "Size of the screenshot icon"
-					},
 					"tooltip": {
 						"type": "boolean",
 						"description": "Determines whether the screenshot widget has a tooltip"
@@ -1481,10 +1477,6 @@
 					"icon": {
 						"type": "string",
 						"description": "Icon name from icon theme"
-					},
-					"icon_size": {
-						"type": "integer",
-						"description": "Size of the screenshot icon"
 					},
 					"tooltip": {
 						"type": "boolean",

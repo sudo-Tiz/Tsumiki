@@ -39,14 +39,12 @@
 		"recorder": {
 			"path": "Videos/Screencasting",
 			"audio": true,
-			"icon_size": 16,
 			"tooltip": true,
 			"delayed": false, // this is to enable delayed recording, it will start recording after a delay of 5 seconds
 			"delayed_timeout": 5000
 		},
 		"screenshot": {
 			"path": "Pictures/Screenshots",
-			"icon_size": 16,
 			"tooltip": true,
 			"label": false,
 			"annotation": true,
@@ -366,14 +364,13 @@
 	"layout": {
 		"left_section": [
 			"workspaces",
-			"@custom_button:0"
+			"window_title"
 		], // this is the left section of the panel
 		"middle_section": [
 			"date_time",
 			"weather"
 		], // this is the middle section of the panel
 		"right_section": [
-			"recorder",
 			"@custom_button:1",
 			"@collapsible:0",
 			"@group:0",
@@ -433,6 +430,7 @@
 			"auto_dismiss": true,
 			"ignored": [],
 			"timeout": 3000,
+			"max_actions": 3,
 			"transition_type": "slide-left",
 			"transition_duration": 350,
 			"play_sound": true,
