@@ -478,7 +478,11 @@ class NetworkUsageWidget(ButtonWidget):
         self.download_threshold = self.config.get("download_threshold", 0)
         self.upload_threshold = self.config.get("upload_threshold", 0)
 
-        # Create a TextIcon with the specified icon and size
+
+        # Number of digits for formatting
+        self.kb_digits = self.config.get("kb_digits", 0)
+        self.mb_digits = self.config.get("mb_digits", 2)
+
         self.upload_icon = nerd_font_icon(
             icon=self.config["upload_icon"],
             props={"style_classes": "panel-font-icon", "visible": show_upload},
@@ -519,15 +523,16 @@ class NetworkUsageWidget(ButtonWidget):
     def update_ui(self, *_):
         """Update the network usage label with the current network usage."""
 
+
         def format_speed(speed):
             # speed is in bytes/ms, so *1000 = bytes/s
             speed_bps = speed * 1000
             if speed_bps < 1024:
                 return f"{speed_bps:.0f} B/s"
             elif speed_bps < 1024 * 1024:
-                return f"{speed_bps/1024:.2f} KB/s"
+                return f"{speed_bps/1024:.{self.kb_digits}f} KB/s"
             else:
-                return f"{speed_bps/(1024*1024):.2f} MB/s"
+                return f"{speed_bps/(1024*1024):.{self.mb_digits}f} MB/s"
 
         network_speed = self.client.get_network_speed()
 
