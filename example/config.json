@@ -458,11 +458,13 @@
 			"size": 20
 		},
 		"dock": {
-			"enabled": false,
-			"icon_size": 30,
+			"enabled": true,
+			"icon_size": 40,
+			"tooltip": true,
+			"preview_size": [200, 130], // this is the size of the preview, width and height in pixels
 			"anchor": "bottom-center",
 			"ignored_apps": [],
-			"layer": "bottom",
+			"layer": "top",
 			"pinned_apps": [
 				"vivaldi",
 				"wezterm",

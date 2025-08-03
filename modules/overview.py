@@ -431,7 +431,6 @@ class OverViewOverlay(PopupWindow):
             child=Box(
                 orientation="v",
                 children=[OverviewMenu()],
-                style_classes=["cool-border", "window-basic"],
             ),
             transition_duration=300,
             transition_type="crossfade",

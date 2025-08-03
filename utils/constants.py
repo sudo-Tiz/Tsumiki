@@ -379,10 +379,15 @@ DEFAULT_CONFIG = {
         "dock": {
             "enabled": False,
             "pinned_apps": [],
-            "ignored_apps": [],
+            "ignored_apps": [],  # Todo: implement ignored apps functionality
             "icon_size": 30,
             "anchor": "bottom-center",
-            "layer": "bottom",
+            "tooltip": True,
+            "layer": "top",
+            "preview_size": [
+                200,
+                130,
+            ],  # this is the size of the preview, width and height in pixels
         },
         "desktop_clock": {
             "enabled": False,

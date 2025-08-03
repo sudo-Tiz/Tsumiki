@@ -1,4 +1,4 @@
-from typing import Dict, List, Literal, TypedDict
+from typing import Dict, List, Literal, Tuple, TypedDict
 
 from .types import Anchor, Layer, Temperature_Unit, Widget_Mode, Wind_Speed_Unit
 
@@ -180,10 +180,12 @@ Dock = TypedDict(
     {
         "enabled": bool,
         "icon_size": int,
+        "preview_size": Tuple[int, int],
         "pinned_apps": List[str],
         "ignored_apps": List[str],
         "layer": Layer,
         "anchor": Anchor,
+        "tooltip": bool,
     },
 )
 

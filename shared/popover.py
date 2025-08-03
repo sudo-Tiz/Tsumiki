@@ -157,6 +157,10 @@ class Popover(Widget):
         """Set the content for the popover."""
         self._content = content
 
+    def set_pointing_to(self, widget):
+        """Set the widget to point the popover at."""
+        self._point_to = widget
+
     def _on_key_press(self, widget, event):
         if event.keyval == Gdk.KEY_Escape and self._manager.active_popover:
             self._manager.active_popover.hide_popover()

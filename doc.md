@@ -318,7 +318,9 @@
     - **`ignored_apps`**: `list` (default: [])
     - **`icon_size`**: `int` (default: 30)
     - **`anchor`**: `str` (default: "bottom-center")
-    - **`layer`**: `str` (default: "bottom")
+    - **`tooltip`**: `bool` (default: true)
+    - **`layer`**: `str` (default: "top")
+    - **`preview_size`**: `list[int]` (default: [200, 130])
   - **`desktop_clock`**: `object`
     - **`enabled`**: `bool` (default: false)
     - **`layer`**: `str` (default: "bottom")

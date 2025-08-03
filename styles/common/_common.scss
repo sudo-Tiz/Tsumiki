@@ -382,3 +382,47 @@ scrolledwindow {
 
   }
 }
+
+
+.window-basic {
+  background-color: theme.$background-alt;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+
+.sleek-border {
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 0.3px;
+  border-color: theme.$surface-disabled;
+}
+
+
+.buttons {
+  &-basic {
+    background-color: theme.$background-dark;
+    border-radius: 20px;
+
+    color: theme.$text-main;
+    font-weight: 700;
+
+    &:hover {
+      background-color: theme.$surface-highlight;
+      box-shadow: 0 0 5px -3px transparentize(theme.$text-main, 0.8);
+    }
+
+    &:active {
+      border-color: theme.$surface-highlight;
+
+      background-color: theme.$background-alt;
+      box-shadow: 0 0 5px -3px transparentize(theme.$text-main, 0.5);
+    }
+  }
+}
+
+.buttons-transition {
+  transition-property: background-color, color, box-shadow;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-in-out;
+}
