@@ -96,6 +96,17 @@ When creating a new widget:
 - Add widget documentation to the README.md widgets table
 - Run `python doc_gen.py` to generate the documentation for the widgets
 
+# Installing extra stubs (Optional)
+Install gengir with the following command:
+```sh
+cargo install --git https://github.com/santiagocezar/gengir
+```
+
+Then run the following command from the root of the repo to generate the stubs:
+```sh
+gengir Glace-0.1 Gray-0.1
+```
+
 ## Getting Started
 
 To start contributing, you can clone the repository and set up your local development environment:

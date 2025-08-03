@@ -1,9 +1,11 @@
 import gi
+from fabric.utils import get_desktop_applications
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
 from fabric.widgets.image import Image
 from fabric.widgets.revealer import Revealer
+from fabric.widgets.separator import Separator
 from fabric.widgets.wayland import WaylandWindow as Window
 from gi.repository import Glace
 
@@ -20,6 +22,9 @@ class AppBar(Box):
     def __init__(self, parent: Window):
         self.client_buttons = {}
         self._parent = parent
+
+        self._all_apps = get_desktop_applications()
+        self.app_identifiers = self._build_app_identifiers_map()
 
         self.config = parent.config
 
@@ -48,7 +53,24 @@ class AppBar(Box):
         self._preview_image = Image()
         self._hyp = HyprlandWithMonitors()
 
-        self.connect("notify::visible", lambda *_: print(self.is_visible()))
+        for item in self.config.get("pinned_apps", []):
+            app = self.find_app(item)
+
+            if app:
+                self.add(
+                    Button(
+                        style_classes=["buttons-basic"],
+                        image=Image(
+                            pixbuf=app.get_icon_pixbuf(self.icon_size),
+                        ),
+                        tooltip_text=app.display_name or app.name
+                        if self.config.get("tooltip", True)
+                        else None,
+                        on_clicked=lambda *_, app=app: app.launch(),
+                    )
+                )
+
+        self.add(Separator())
 
         self.popup_revealer = Revealer(
             child=Box(
@@ -89,6 +111,58 @@ class AppBar(Box):
             callback=capture_callback,
             user_data=None,
         )
+
+    def _build_app_identifiers_map(self):
+        identifiers = {}
+        for app in self._all_apps:
+            if app.name:
+                identifiers[app.name.lower()] = app
+            if app.display_name:
+                identifiers[app.display_name.lower()] = app
+            if app.window_class:
+                identifiers[app.window_class.lower()] = app
+            if app.executable:
+                identifiers[app.executable.split("/")[-1].lower()] = app
+            if app.command_line:
+                identifiers[app.command_line.split()[0].split("/")[-1].lower()] = app
+        return identifiers
+
+    def find_app(self, app_identifier):
+        if not app_identifier:
+            return None
+        if isinstance(app_identifier, dict):
+            for key in [
+                "window_class",
+                "executable",
+                "command_line",
+                "name",
+                "display_name",
+            ]:
+                if app_identifier.get(key):
+                    app = self.find_app_by_key(app_identifier[key])
+                    if app:
+                        return app
+            return None
+        return self.find_app_by_key(app_identifier)
+
+    def find_app_by_key(self, key_value):
+        if not key_value:
+            return None
+        normalized_id = str(key_value).lower()
+        if normalized_id in self.app_identifiers:
+            return self.app_identifiers[normalized_id]
+        for app in self._all_apps:
+            if app.name and normalized_id in app.name.lower():
+                return app
+            if app.display_name and normalized_id in app.display_name.lower():
+                return app
+            if app.window_class and normalized_id in app.window_class.lower():
+                return app
+            if app.executable and normalized_id in app.executable.lower():
+                return app
+            if app.command_line and normalized_id in app.command_line.lower():
+                return app
+        return None
 
     def on_client_added(self, _, client: Glace.Client):
         client_image = Image()
