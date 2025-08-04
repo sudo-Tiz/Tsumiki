@@ -297,11 +297,6 @@
 			"label": false,
 			"tooltip": true
 		},
-		"wallpaper": {
-			"icon": "󰸉",
-			"label": false,
-			"tooltip": true
-		},
 		"kanban": {
 			"icon": "󱞁",
 			"label": false,
@@ -374,7 +369,8 @@
 		], // this is the left section of the panel
 		"middle_section": [
 			"date_time",
-			"weather"
+			"weather",
+			"overview"
 		], // this is the middle section of the panel
 		"right_section": [
 			"@collapsible:0",
@@ -459,14 +455,12 @@
 		},
 		"dock": {
 			"enabled": true,
-			"icon_size": 40,
-			"tooltip": true,
-			"preview_size": [200, 130], // this is the size of the preview, width and height in pixels
+			"icon_size": 30,
 			"anchor": "bottom-center",
 			"ignored_apps": [],
 			"layer": "top",
 			"pinned_apps": [
-				"vivaldi",
+				"zen",
 				"wezterm",
 				"persepolis",
 				"code"

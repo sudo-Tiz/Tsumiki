@@ -1,5 +1,5 @@
 import gi
-from fabric.utils import get_desktop_applications
+from fabric.utils import bulk_connect, get_desktop_applications
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
@@ -19,7 +19,7 @@ gi.require_version("Glace", "0.1")
 class AppBar(Box):
     """A simple app bar widget for the dock."""
 
-    def __init__(self, parent: Window):
+    def __init__(self, parent):
         self.client_buttons = {}
         self._parent = parent
 
@@ -53,22 +53,7 @@ class AppBar(Box):
         self._preview_image = Image()
         self._hyp = HyprlandWithMonitors()
 
-        for item in self.config.get("pinned_apps", []):
-            app = self.find_app(item)
-
-            if app:
-                self.add(
-                    Button(
-                        style_classes=["buttons-basic"],
-                        image=Image(
-                            pixbuf=app.get_icon_pixbuf(self.icon_size),
-                        ),
-                        tooltip_text=app.display_name or app.name
-                        if self.config.get("tooltip", True)
-                        else None,
-                        on_clicked=lambda *_, app=app: app.launch(),
-                    )
-                )
+        self._add_pinned_apps()
 
         self.add(Separator())
 
@@ -112,22 +97,44 @@ class AppBar(Box):
             user_data=None,
         )
 
+    def _add_pinned_apps(self):
+        """Add user-configured pinned apps."""
+        for item in self.config.get("pinned_apps", []):
+            app = self.find_app(item)
+            if app:
+                self.add(
+                    Button(
+                        style_classes=["buttons-basic"],
+                        image=Image(pixbuf=app.get_icon_pixbuf(self.icon_size)),
+                        tooltip_text=app.display_name
+                        if self.config.get("tooltip", True)
+                        else None,
+                        on_clicked=lambda *_, app=app: app.launch(),
+                    )
+                )
+
+    # -------------------------
+    # App Lookup Helpers
+    # -------------------------
+
     def _build_app_identifiers_map(self):
+        """Create a fast lookup dictionary for app identifiers."""
         identifiers = {}
         for app in self._all_apps:
-            if app.name:
-                identifiers[app.name.lower()] = app
-            if app.display_name:
-                identifiers[app.display_name.lower()] = app
-            if app.window_class:
-                identifiers[app.window_class.lower()] = app
-            if app.executable:
-                identifiers[app.executable.split("/")[-1].lower()] = app
-            if app.command_line:
-                identifiers[app.command_line.split()[0].split("/")[-1].lower()] = app
+            for key in [
+                app.name,
+                app.display_name,
+                app.window_class,
+                getattr(app, "executable", None) and app.executable.split("/")[-1],
+                getattr(app, "command_line", None)
+                and app.command_line.split()[0].split("/")[-1],
+            ]:
+                if key:
+                    identifiers[key.lower()] = app
         return identifiers
 
     def find_app(self, app_identifier):
+        """Find an app by dict or direct identifier."""
         if not app_identifier:
             return None
         if isinstance(app_identifier, dict):
@@ -146,25 +153,47 @@ class AppBar(Box):
         return self.find_app_by_key(app_identifier)
 
     def find_app_by_key(self, key_value):
+        """Find app by identifier or partial match."""
         if not key_value:
             return None
         normalized_id = str(key_value).lower()
         if normalized_id in self.app_identifiers:
             return self.app_identifiers[normalized_id]
-        for app in self._all_apps:
-            if app.name and normalized_id in app.name.lower():
-                return app
-            if app.display_name and normalized_id in app.display_name.lower():
-                return app
-            if app.window_class and normalized_id in app.window_class.lower():
-                return app
-            if app.executable and normalized_id in app.executable.lower():
-                return app
-            if app.command_line and normalized_id in app.command_line.lower():
-                return app
-        return None
+
+        # Fallback partial matching
+        return next(
+            (
+                app
+                for app in self._all_apps
+                if any(
+                    normalized_id in (getattr(app, attr) or "").lower()
+                    for attr in [
+                        "name",
+                        "display_name",
+                        "window_class",
+                        "executable",
+                        "command_line",
+                    ]
+                )
+            ),
+            None,
+        )
 
     def on_client_added(self, _, client: Glace.Client):
+        def on_app_id_changed(*_):
+            client_image.set_from_pixbuf(
+                self.icon_resolver.get_icon_pixbuf(client.get_app_id(), self.icon_size)
+            )
+
+            client_button.set_tooltip_window(
+                Window(
+                    child=Box(style="min-height: 50px; min-width: 50px;"),
+                    visible=False,
+                    all_visible=False,
+                )
+            )
+            return True
+
         client_image = Image()
 
         client_button = Button(
@@ -180,32 +209,17 @@ class AppBar(Box):
         )
         self.client_buttons[client.get_id()] = client_button
 
-        client.connect(
-            "notify::app-id",
-            lambda *_: client_image.set_from_pixbuf(
-                self.icon_resolver.get_icon_pixbuf(client.get_app_id(), self.icon_size)
-            ),
+        bulk_connect(
+            client,
+            {
+                "notify::app-id": on_app_id_changed,
+                "notify::activated": lambda *_: client_button.add_style_class("active")
+                if client.get_activated()
+                else client_button.remove_style_class("active"),
+                "close": lambda *_: self.remove(client_button),
+            },
         )
 
-        client.connect(
-            "notify::app-id",
-            lambda *_: client_button.set_tooltip_window(
-                Window(
-                    child=Box(style="min-height: 50px; min-width: 50px;"),
-                    visible=False,
-                    all_visible=False,
-                )
-            ),
-        )
-
-        client.connect(
-            "notify::activated",
-            lambda *_: client_button.add_style_class("active")
-            if client.get_activated()
-            else client_button.remove_style_class("active"),
-        )
-
-        client.connect("close", lambda *_: self.remove(client_button))
         self.add(client_button)
 
 
