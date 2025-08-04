@@ -180,20 +180,6 @@ class AppBar(Box):
         )
 
     def on_client_added(self, _, client: Glace.Client):
-        def on_app_id_changed(*_):
-            client_image.set_from_pixbuf(
-                self.icon_resolver.get_icon_pixbuf(client.get_app_id(), self.icon_size)
-            )
-
-            client_button.set_tooltip_window(
-                Window(
-                    child=Box(style="min-height: 50px; min-width: 50px;"),
-                    visible=False,
-                    all_visible=False,
-                )
-            )
-            return True
-
         client_image = Image()
 
         client_button = Button(
@@ -212,7 +198,11 @@ class AppBar(Box):
         bulk_connect(
             client,
             {
-                "notify::app-id": on_app_id_changed,
+                "notify::app-id": lambda *_: client_image.set_from_pixbuf(
+                    self.icon_resolver.get_icon_pixbuf(
+                        client.get_app_id(), self.icon_size
+                    )
+                ),
                 "notify::activated": lambda *_: client_button.add_style_class("active")
                 if client.get_activated()
                 else client_button.remove_style_class("active"),
