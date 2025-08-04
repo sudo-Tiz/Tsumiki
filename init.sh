@@ -99,7 +99,7 @@ start_bar() {
 	# Ensure config files exist
 	copy_config_files
 
-	VERSION=$(git describe --tags --abbrev=0)
+	VERSION=$(git tag --sort=-v:refname | head -n 1)
 
 	# Check if the virtual environment exists, if not, create it
 	if [ ! -d .venv ]; then
