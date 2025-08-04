@@ -198,10 +198,15 @@ class AppBar(Box):
         bulk_connect(
             client,
             {
-                "notify::app-id": lambda *_: client_image.set_from_pixbuf(
-                    self.icon_resolver.get_icon_pixbuf(
-                        client.get_app_id(), self.icon_size
-                    )
+                "notify::app-id": lambda *_: (
+                    client_image.set_from_pixbuf(
+                        self.icon_resolver.get_icon_pixbuf(
+                            client.get_app_id(), self.icon_size
+                        )
+                    ),
+                    client_button.set_tooltip_text(
+                        client.get_title() if self.config.get("tooltip", True) else None
+                    ),
                 ),
                 "notify::activated": lambda *_: client_button.add_style_class("active")
                 if client.get_activated()
