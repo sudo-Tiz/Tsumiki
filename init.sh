@@ -169,7 +169,7 @@ install_packages() {
 	echo "								  "
 
 	# Notify user about the installation process
-	echo -e "\e[1;34 󱧘 mInstalling the pre-requisites, may take a while....\e[0m\n"
+	echo -e "\e[1;34m 󱧘  Installing the pre-requisites, may take a while....\e[0m\n"
 
 	# Install packages using pacman
 	pacman_deps=(
