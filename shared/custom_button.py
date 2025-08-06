@@ -3,8 +3,9 @@
 from fabric.utils import exec_shell_command_async
 from fabric.widgets.label import Label
 
-from shared.widget_container import ButtonWidget
 from utils.widget_utils import nerd_font_icon
+
+from .widget_container import ButtonWidget
 
 
 class CustomButtonWidget(ButtonWidget):
@@ -51,14 +52,14 @@ class CustomButtonWidget(ButtonWidget):
             self.box.add(self.label)
 
         # Connect click handler
-        self.connect("clicked", self.on_clicked)
+        self.connect("clicked", self._on_click)
 
         # Setup tooltip
         if self.config.get("tooltip", True):
             tooltip_text = self.config.get("tooltip_text", f"Execute: {self.command}")
             self.set_tooltip_text(tooltip_text)
 
-    def on_clicked(self, *_):
+    def _on_click(self, *_):
         """Execute the custom command when button is clicked."""
         if self.command:
             exec_shell_command_async(

@@ -1,5 +1,5 @@
 import gi
-from fabric.utils import bulk_connect, get_desktop_applications
+from fabric.utils import bulk_connect
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
@@ -7,13 +7,16 @@ from fabric.widgets.image import Image
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.separator import Separator
 from fabric.widgets.wayland import WaylandWindow as Window
-from gi.repository import Glace
+from gi.repository import Glace, Gtk
 
 from shared.popoverv1 import PopupWindow
+from utils.app import AppUtils
+from utils.constants import PINNED_APPS_FILE
+from utils.functions import read_json_file, write_json_file
 from utils.icon_resolver import IconResolver
 from utils.monitors import HyprlandWithMonitors
 
-gi.require_version("Glace", "0.1")
+gi.require_versions({"Glace": "0.1", "Gtk": "3.0"})
 
 
 class AppBar(Box):
@@ -23,10 +26,13 @@ class AppBar(Box):
         self.client_buttons = {}
         self._parent = parent
 
-        self._all_apps = get_desktop_applications()
-        self.app_identifiers = self._build_app_identifiers_map()
+        self.app_util = AppUtils()
+        self._all_apps = self.app_util.all_applications
+        self.app_identifiers = self.app_util.app_identifiers
 
         self.config = parent.config
+
+        self.menu = Gtk.Menu()
 
         self.icon_size = self.config.get("icon_size", 30)
         self.preview_size = self.config.get("preview_size", [40, 50])
@@ -36,49 +42,59 @@ class AppBar(Box):
             name="app-bar",
             style_classes=["window-basic", "sleek-border"],
             children=[
-                Button(
-                    image=Image(
-                        icon_name="view-app-grid-symbolic",
-                        icon_size=self.icon_size,
-                    ),
-                    on_button_press_event=lambda *_: print(
-                        self._parent.get_application().actions["toggle-appmenu"][0]()
-                    ),
-                )
+                # Button(
+                #     image=Image(
+                #         icon_name="view-app-grid-symbolic",
+                #         icon_size=self.icon_size,
+                #     ),
+                #     on_button_press_event=lambda *_: print(
+                #         self._parent.get_application().actions["toggle-appmenu"][0]()
+                #     ),
+                # )
             ],
         )
         self.icon_resolver = IconResolver()
         self._manager = Glace.Manager()
-        self._manager.connect("client-added", self.on_client_added)
+        self._manager.connect("client-added", self._on_client_added)
         self._preview_image = Image()
         self._hyp = HyprlandWithMonitors()
 
-        self._add_pinned_apps()
+        self.pinned_apps_container = Box()
+
+        self.add(self.pinned_apps_container)
+
+        self.pinned_apps = read_json_file(PINNED_APPS_FILE)
+
+        if self.pinned_apps is None:
+            self.pinned_apps = []
+
+        self._populate_pinned_apps(self.pinned_apps)
 
         self.add(Separator())
 
-        self.popup_revealer = Revealer(
-            child=Box(
-                children=self._preview_image,
-                style_classes=["window-basic", "sleek-border"],
-            ),
-            transition_type="crossfade",
-            transition_duration=400,
-        )
+        if self.config.get("preview_apps", True):
+            self.popup_revealer = Revealer(
+                child=Box(
+                    children=self._preview_image,
+                    style_classes=["window-basic", "sleek-border"],
+                ),
+                transition_type="crossfade",
+                transition_duration=400,
+            )
 
-        self.popup = PopupWindow(
-            parent,
-            child=self.popup_revealer,
-            margin="0px 0px 80px 0px",
-            visible=False,
-        )
+            self.popup = PopupWindow(
+                parent,
+                child=self.popup_revealer,
+                margin="0px 0px 80px 0px",
+                visible=False,
+            )
 
-        self.popup_revealer.connect(
-            "notify::child-revealed",
-            lambda *_: self.popup.set_visible(False)
-            if not self.popup_revealer.child_revealed
-            else None,
-        )
+            self.popup_revealer.connect(
+                "notify::child-revealed",
+                lambda *_: self.popup.set_visible(False)
+                if not self.popup_revealer.child_revealed
+                else None,
+            )
 
     def update_preview_image(self, client, client_button: Button):
         self.popup.set_pointing_to(client_button)
@@ -97,12 +113,14 @@ class AppBar(Box):
             user_data=None,
         )
 
-    def _add_pinned_apps(self):
+    def _populate_pinned_apps(self, apps):
+        self.pinned_apps_container.children = []
+
         """Add user-configured pinned apps."""
-        for item in self.config.get("pinned_apps", []):
-            app = self.find_app(item)
+        for item in apps:
+            app = self.app_util.find_app(item)
             if app:
-                self.add(
+                self.pinned_apps_container.add(
                     Button(
                         style_classes=["buttons-basic"],
                         image=Image(pixbuf=app.get_icon_pixbuf(self.icon_size)),
@@ -113,85 +131,92 @@ class AppBar(Box):
                     )
                 )
 
-    # -------------------------
-    # App Lookup Helpers
-    # -------------------------
+    def check_if_pinned(self, client: Glace.Client) -> bool:
+        """Check if a client is pinned."""
+        return client.get_app_id() in self.pinned_apps
 
-    def _build_app_identifiers_map(self):
-        """Create a fast lookup dictionary for app identifiers."""
-        identifiers = {}
-        for app in self._all_apps:
-            for key in [
-                app.name,
-                app.display_name,
-                app.window_class,
-                getattr(app, "executable", None) and app.executable.split("/")[-1],
-                getattr(app, "command_line", None)
-                and app.command_line.split()[0].split("/")[-1],
-            ]:
-                if key:
-                    identifiers[key.lower()] = app
-        return identifiers
+    def show_menu(self, client: Glace.Client):
+        """Show the context menu for a client."""
 
-    def find_app(self, app_identifier):
-        """Find an app by dict or direct identifier."""
-        if not app_identifier:
-            return None
-        if isinstance(app_identifier, dict):
-            for key in [
-                "window_class",
-                "executable",
-                "command_line",
-                "name",
-                "display_name",
-            ]:
-                if app_identifier.get(key):
-                    app = self.find_app_by_key(app_identifier[key])
-                    if app:
-                        return app
-            return None
-        return self.find_app_by_key(app_identifier)
+        for item in self.menu.get_children():
+            self.menu.remove(item)
+            item.destroy()
 
-    def find_app_by_key(self, key_value):
-        """Find app by identifier or partial match."""
-        if not key_value:
-            return None
-        normalized_id = str(key_value).lower()
-        if normalized_id in self.app_identifiers:
-            return self.app_identifiers[normalized_id]
+        pin_item = Gtk.MenuItem(label="Pin")
 
-        # Fallback partial matching
-        return next(
-            (
-                app
-                for app in self._all_apps
-                if any(
-                    normalized_id in (getattr(app, attr) or "").lower()
-                    for attr in [
-                        "name",
-                        "display_name",
-                        "window_class",
-                        "executable",
-                        "command_line",
-                    ]
-                )
-            ),
-            None,
+        if self.check_if_pinned(client):
+            pin_item.set_label("Unpin")
+            pin_item.connect("activate", lambda *_: self._unpin_app(client))
+
+        else:
+            pin_item.connect("activate", lambda *_: self._pin_app(client))
+
+        self.menu.add(pin_item)
+        self.menu.show_all()
+
+    def _unpin_app(self, client: Glace.Client):
+        """Unpin an application from the dock."""
+        if not self.check_if_pinned(client):
+            return False
+
+        self.pinned_apps.remove(client.get_app_id())
+
+        write_json_file(
+            self.pinned_apps,
+            PINNED_APPS_FILE,
         )
 
-    def on_client_added(self, _, client: Glace.Client):
+        self._populate_pinned_apps(self.pinned_apps)
+
+        return True
+
+    def _pin_app(self, client: Glace.Client):
+        """Pin an application to the dock."""
+        if self.check_if_pinned(client):
+            return False
+
+        self.pinned_apps.append(client.get_app_id())
+
+        write_json_file(
+            self.pinned_apps,
+            PINNED_APPS_FILE,
+        )
+
+        self._populate_pinned_apps(self.pinned_apps)
+
+        return True
+
+    def _on_client_added(self, _, client: Glace.Client):
         client_image = Image()
+
+        def on_button_press_event(event, client):
+            if event.button == 1:
+                client.activate()
+            else:
+                # self._pin_app(client)
+                self.show_menu(client)
+                self.menu.popup_at_pointer(event)
+
+        def on_app_id(*_):
+            if client.get_app_id() in self.config.get("ignored_apps", []):
+                client_button.destroy()
+                client_image.destroy()
+                return
+            client_image.set_from_pixbuf(
+                self.icon_resolver.get_icon_pixbuf(client.get_app_id(), self.icon_size)
+            )
+            client_button.set_tooltip_text(
+                client.get_title() if self.config.get("tooltip", True) else None
+            )
 
         client_button = Button(
             style_classes=["buttons-basic", "buttons-transition"],
             image=client_image,
-            on_button_press_event=lambda _, event: client.activate()
-            if event.button == 1
-            else None,
-            on_enter_notify_event=lambda *_: self.update_preview_image(
-                client, client_button
-            ),
-            on_leave_notify_event=lambda *_: self.popup_revealer.unreveal(),
+            on_button_press_event=lambda _, event: on_button_press_event(event, client),
+            on_enter_notify_event=lambda *_: self.config.get("preview_apps", True)
+            and self.update_preview_image(client, client_button),
+            on_leave_notify_event=lambda *_: self.config.get("preview_apps", True)
+            and self.popup_revealer.unreveal(),
         )
         self.client_buttons[client.get_id()] = client_button
 
