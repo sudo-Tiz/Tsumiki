@@ -8,6 +8,7 @@ from fabric.utils import bulk_connect
 from gi.repository import Gio
 from loguru import logger
 
+from utils.constants import NETWORK_RECENCY_THRESHOLD_SECONDS
 from utils.exceptions import NetworkManagerNotFoundError
 
 try:
@@ -289,7 +290,7 @@ class Wifi(Service):
                 "ssid": ssid,
                 "last_seen": last_seen,
                 "is_recent": last_seen == 0
-                or (current_time - last_seen) <= 300,  # 5 minutes
+                or (current_time - last_seen) <= NETWORK_RECENCY_THRESHOLD_SECONDS,
             }
 
             # For duplicate SSIDs, keep the one with the strongest signal
@@ -297,7 +298,9 @@ class Wifi(Service):
             if ssid in unique_networks:
                 existing = unique_networks[ssid]
                 # Prefer recent networks, then strength
-                new_is_more_recent = network_info["is_recent"] and not existing["is_recent"]
+                new_is_more_recent = (
+                    network_info["is_recent"] and not existing["is_recent"]
+                )
                 is_stronger_with_same_recency = (
                     network_info["is_recent"] == existing["is_recent"]
                     and strength > existing["strength"]
