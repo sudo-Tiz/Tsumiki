@@ -268,7 +268,7 @@ class OSDContainer(Window):
         self.hide_timer_id = None
         self.config = config["modules"]["osd"]
 
-        osds = self.config.get("osds", ["brightness", "volume", "microphone"])
+        osds = self.config.get("osds", ["brightness", "volume"])
 
         if "volume" in osds:
             self.audio_container = AudioOSDContainer(config=self.config)
