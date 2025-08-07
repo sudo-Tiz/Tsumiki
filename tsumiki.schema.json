@@ -3,23 +3,12 @@
 	"definitions": {
 		"style": {
 			"type": "string",
-			"enum": [
-				"default",
-				"leaf",
-				"leaf-inverse",
-				"flat",
-				"shadow",
-				"bordered"
-			],
+			"enum": ["default", "leaf", "leaf-inverse", "flat", "shadow", "bordered"],
 			"description": "Determines the style of the widget."
 		},
 		"mode": {
 			"type": "string",
-			"enum": [
-				"label",
-				"graph",
-				"progress"
-			],
+			"enum": ["label", "graph", "progress"],
 			"description": "Specifies the mode of the widget."
 		},
 		"transition_type": {
@@ -203,10 +192,7 @@
 							"description": "Determines the layer of the bar."
 						},
 						"location": {
-							"enum": [
-								"top",
-								"bottom"
-							],
+							"enum": ["top", "bottom"],
 							"location": "string",
 							"description": "Specifies the location of the bar."
 						},
@@ -260,11 +246,7 @@
 						},
 						"anchor": {
 							"type": "string",
-							"enum": [
-								"bottom-center",
-								"left-center",
-								"right-center"
-							],
+							"enum": ["bottom-center", "left-center", "right-center"],
 							"description": "Specifies the anchor position of the dock."
 						},
 						"pinned_apps": {
@@ -283,12 +265,7 @@
 						},
 						"layer": {
 							"type": "string",
-							"enum": [
-								"background",
-								"bottom",
-								"top",
-								"overlay"
-							],
+							"enum": ["background", "bottom", "top", "overlay"],
 							"description": "Determines the layer of the dock."
 						}
 					}
@@ -403,20 +380,13 @@
 							"minItems": 1,
 							"items": {
 								"type": "string",
-								"enum": [
-									"brightness",
-									"volume",
-									"microphone"
-								]
+								"enum": ["brightness", "volume", "microphone"]
 							},
 							"description": "List of OSDs to enable"
 						},
 						"orientation": {
 							"type": "string",
-							"enum": [
-								"horizontal",
-								"vertical"
-							],
+							"enum": ["horizontal", "vertical"],
 							"description": "Specifies the orientation of the osd."
 						},
 						"duration": {
@@ -508,9 +478,7 @@
 								"description": "Style classes to apply to the group (e.g. 'bordered', 'compact')"
 							}
 						},
-						"required": [
-							"widgets"
-						]
+						"required": ["widgets"]
 					}
 				},
 				"collapsible_groups": {
@@ -565,9 +533,7 @@
 								"description": "Style classes to apply to the group"
 							}
 						},
-						"required": [
-							"widgets"
-						]
+						"required": ["widgets"]
 					}
 				}
 			}
@@ -589,18 +555,12 @@
 				},
 				"temperature_unit": {
 					"type": "string",
-					"enum": [
-						"celsius",
-						"fahrenheit"
-					],
+					"enum": ["celsius", "fahrenheit"],
 					"description": "Specifies the temperature unit to use."
 				},
 				"wind_speed_unit": {
 					"type": "string",
-					"enum": [
-						"kmh",
-						"mph"
-					],
+					"enum": ["kmh", "mph"],
 					"description": "Specifies the wind speed unit to use."
 				},
 				"label": {
@@ -707,10 +667,7 @@
 				},
 				"orientation": {
 					"type": "string",
-					"enum": [
-						"horizontal",
-						"vertical"
-					],
+					"enum": ["horizontal", "vertical"],
 					"description": "Specifies the orientation of the battery widget."
 				},
 				"hide_label_when_full": {
@@ -802,10 +759,7 @@
 				},
 				"temperature_unit": {
 					"type": "string",
-					"enum": [
-						"celsius",
-						"fahrenheit"
-					],
+					"enum": ["celsius", "fahrenheit"],
 					"description": "Specifies the temperature unit to use."
 				},
 				"round": {
@@ -858,12 +812,7 @@
 				},
 				"unit": {
 					"type": "string",
-					"enum": [
-						"kb",
-						"mb",
-						"gb",
-						"tb"
-					],
+					"enum": ["kb", "mb", "gb", "tb"],
 					"description": "Specifies the unit to use for memory"
 				}
 			}
@@ -896,12 +845,7 @@
 				},
 				"unit": {
 					"type": "string",
-					"enum": [
-						"kb",
-						"mb",
-						"gb",
-						"tb"
-					],
+					"enum": ["kb", "mb", "gb", "tb"],
 					"description": "Specifies the unit to use for storage"
 				}
 			}
@@ -1052,12 +996,7 @@
 						},
 						"os": {
 							"type": "string",
-							"enum": [
-								"arch",
-								"fedora",
-								"opensuse",
-								"ubuntu"
-							],
+							"enum": ["arch", "fedora", "opensuse", "ubuntu"],
 							"description": "Specifies the OS to check for updates"
 						},
 						"terminal": {
@@ -1164,11 +1103,7 @@
 									"type": "boolean"
 								}
 							},
-							"required": [
-								"avatar",
-								"name",
-								"distro_icon"
-							],
+							"required": ["avatar", "name", "distro_icon"],
 							"additionalProperties": false
 						}
 					}
@@ -1462,10 +1397,7 @@
 					},
 					"clock_format": {
 						"type": "string",
-						"enum": [
-							"12h",
-							"24h"
-						],
+						"enum": ["12h", "24h"],
 						"description": "Specifies the clock format"
 					}
 				}
@@ -1656,9 +1588,7 @@
 						"description": "CSS style classes to apply to the button"
 					}
 				},
-				"required": [
-					"command"
-				]
+				"required": ["command"]
 			}
 		}
 	}
