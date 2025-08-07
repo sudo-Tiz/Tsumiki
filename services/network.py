@@ -297,10 +297,12 @@ class Wifi(Service):
             if ssid in unique_networks:
                 existing = unique_networks[ssid]
                 # Prefer recent networks, then strength
-                if (network_info["is_recent"] and not existing["is_recent"]) or (
+                new_is_more_recent = network_info["is_recent"] and not existing["is_recent"]
+                is_stronger_with_same_recency = (
                     network_info["is_recent"] == existing["is_recent"]
                     and strength > existing["strength"]
-                ):
+                )
+                if new_is_more_recent or is_stronger_with_same_recency:
                     unique_networks[ssid] = network_info
             else:
                 unique_networks[ssid] = network_info
