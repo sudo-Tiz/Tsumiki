@@ -101,7 +101,7 @@ class BatteryWidget(ButtonWidget):
                 "󱠴 Status: Charging" if is_charging else "󱠴 Status: Discharging"
             )
             tool_tip_text = (
-                f"󱐋 Energy : {round(energy, 2)} Wh\n Temperature: {temperature}°C"
+                f"󱐋 Energy : {round(energy, 2)} Wh\n Temperature: {temperature}°C"
             )
             formatted_time = format_seconds_to_hours_minutes(time_remaining)
             if battery_percent == self.full_battery_level:
