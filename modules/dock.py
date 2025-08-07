@@ -272,7 +272,9 @@ class Dock(Window):
                 },
             )
 
-    def check_for_windows(self):
+            self.check_for_windows()
+
+    def check_for_windows(self, *_):
         try:
             response = self._hypr.send_command("j/activeworkspace").reply.decode()
             data = json.loads(response)
