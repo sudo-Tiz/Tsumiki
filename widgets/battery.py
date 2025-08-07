@@ -3,7 +3,7 @@ from fabric.widgets.label import Label
 
 from services.battery import BatteryService
 from shared.widget_container import ButtonWidget
-from utils.functions import format_seconds_to_hours_minutes
+from utils.functions import format_seconds_to_hours_minutes, send_notification
 from utils.icons import symbolic_icons
 
 
@@ -35,7 +35,14 @@ class BatteryWidget(ButtonWidget):
 
         self.client = BatteryService()
 
-        self.notification_time = 0
+        # Simple notification tracking
+        self.last_percentage = None
+        self.last_charging_state = None
+        self.low_battery_notified = False
+        self.full_battery_notified = False
+        self.charging_notified = False
+        self.discharging_notified = False
+        self.initialized = False  # Pour éviter les notifications au démarrage
 
         self.client.connect("changed", self.update_ui)
 
@@ -94,7 +101,7 @@ class BatteryWidget(ButtonWidget):
                 "󱠴 Status: Charging" if is_charging else "󱠴 Status: Discharging"
             )
             tool_tip_text = (
-                f"󱐋 Energy : {round(energy, 2)} Wh\n Temperature: {temperature}°C"
+                f"󱐋 Energy : {round(energy, 2)} Wh\n Temperature: {temperature}°C"
             )
             formatted_time = format_seconds_to_hours_minutes(time_remaining)
             if battery_percent == self.full_battery_level:
@@ -109,4 +116,92 @@ class BatteryWidget(ButtonWidget):
                     f"{status_text}\n󰄉 Empty in : {formatted_time}\n{tool_tip_text}"
                 )
 
+        # Check for notifications
+        if self.initialized:  # Seulement après l'initialisation
+            self._check_notifications(battery_percent, is_charging)
+
+        # Update tracking variables
+        self.last_percentage = battery_percent
+        self.last_charging_state = is_charging
+        self.initialized = True  # Marquer comme initialisé après le premier update
+
         return True
+
+    def _check_notifications(self, percentage, is_charging):
+        """Simple notification checking."""
+        notifications = self.config.get("notifications", {})
+
+        # Charging/Discharging notifications
+        charging_enabled = notifications.get("charging", False)
+        last_state_available = self.last_charging_state is not None
+        if charging_enabled and last_state_available:
+            # Charging notification (charger plugged in)
+            if (
+                is_charging
+                and not self.last_charging_state
+                and not self.charging_notified
+            ):
+                send_notification(
+                    title="Charger Connected",
+                    body=f"Battery at {percentage}% - Charging",
+                    urgency="normal",
+                    icon="battery-charging",
+                    app_name="Battery"
+                )
+                self.charging_notified = True
+                self.discharging_notified = False
+
+            # Discharging notification (charger unplugged)
+            elif (
+                not is_charging
+                and self.last_charging_state
+                and not self.discharging_notified
+            ):
+                send_notification(
+                    title="Charger Disconnected",
+                    body=f"Battery at {percentage}% - On battery power",
+                    urgency="normal",
+                    icon="battery",
+                    app_name="Battery"
+                )
+                self.discharging_notified = True
+                self.charging_notified = False
+
+        # Low battery notification
+        if notifications.get("low_battery", False):
+            threshold = notifications.get("low_threshold", 10)
+            if (
+                percentage <= threshold
+                and not is_charging
+                and not self.low_battery_notified
+                and (self.last_percentage is None or self.last_percentage > threshold)
+            ):
+                send_notification(
+                    title="Low Battery",
+                    body=f"Battery at {percentage}%",
+                    urgency="critical",
+                    icon="battery-caution",
+                    app_name="Battery"
+                )
+                self.low_battery_notified = True
+            elif percentage > threshold or is_charging:
+                self.low_battery_notified = False
+
+        # Full battery notification
+        if notifications.get("full_battery", False):
+            if (
+                percentage >= self.full_battery_level
+                and self.last_charging_state
+                and not is_charging
+                and not self.full_battery_notified
+            ):
+                send_notification(
+                    title="Battery Full",
+                    body=f"Battery charged to {percentage}%",
+                    urgency="normal",
+                    icon="battery-full",
+                    app_name="Battery"
+                )
+                self.full_battery_notified = True
+            elif percentage < self.full_battery_level:
+                self.full_battery_notified = False
