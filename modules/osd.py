@@ -265,11 +265,22 @@ class OSDContainer(Window):
         keyboard_mode: Keyboard_Mode = "none",
         **kwargs,
     ):
+        self.hide_timer_id = None
         self.config = config["modules"]["osd"]
 
-        self.audio_container = AudioOSDContainer(config=self.config)
-        self.brightness_container = BrightnessOSDContainer(config=self.config)
-        self.microphone_container = MicrophoneOSDContainer(config=self.config)
+        osds = self.config.get("osds", ["brightness", "volume", "microphone"])
+
+        if "volume" in osds:
+            self.audio_container = AudioOSDContainer(config=self.config)
+            self.audio_container.connect("volume-changed", self.show_audio)
+        if "brightness" in osds:
+            self.brightness_container = BrightnessOSDContainer(config=self.config)
+            self.brightness_container.connect(
+                "brightness-changed", self.show_brightness
+            )
+        if "microphone" in osds:
+            self.microphone_container = MicrophoneOSDContainer(config=self.config)
+            self.microphone_container.connect("mic-changed", self.show_microphone)
 
         self.timeout = self.config.get("timeout", 3000)
 
@@ -290,15 +301,6 @@ class OSDContainer(Window):
             **kwargs,
         )
 
-        self.hide_timer_id = None
-        self.suppressed: bool = False
-
-        self.audio_container.connect("volume-changed", self.show_audio)
-
-        self.brightness_container.connect("brightness-changed", self.show_brightness)
-
-        self.microphone_container.connect("mic-changed", self.show_microphone)
-
     def show_audio(self, *_):
         self.show_box(box_to_show="audio")
 
@@ -309,9 +311,6 @@ class OSDContainer(Window):
         self.show_box(box_to_show="microphone")
 
     def show_box(self, box_to_show: Literal["audio", "brightness", "microphone"]):
-        if self.suppressed:
-            return
-
         if box_to_show == "audio":
             child_to_show = self.audio_container
         elif box_to_show == "brightness":

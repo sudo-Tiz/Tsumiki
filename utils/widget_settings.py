@@ -181,6 +181,7 @@ OSD = TypedDict(
         "play_sound": bool,
         "transition_type": Reveal_Animations,
         "transition_duration": int,
+        "osds": List[Literal["brightness", "volume", "microphone"]],
     },
 )
 

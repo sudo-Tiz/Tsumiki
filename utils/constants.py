@@ -352,6 +352,7 @@ DEFAULT_CONFIG = {
             "play_sound": False,
             "transition_type": "slide-up",
             "transition_duration": 500,
+            "osds": ["brightness", "volume"],
         },
         "app_launcher": {
             "enabled": False,
