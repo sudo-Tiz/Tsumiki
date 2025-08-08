@@ -8,11 +8,13 @@ from fabric.widgets.grid import Grid
 from fabric.widgets.image import Image
 from fabric.widgets.label import Label
 from fabric.widgets.scrolledwindow import ScrolledWindow
+from PIL import Image as PILImage
 
 from shared.buttons import HoverButton
 from shared.popup import PopupWindow
 from utils.constants import WALLPAPER_DIR, WALLPAPER_THUMBS_DIR
 from utils.functions import ensure_directory
+from utils.thread import run_in_thread
 
 
 class ImageButton(HoverButton):
@@ -21,7 +23,7 @@ class ImageButton(HoverButton):
     @Signal
     def wallpaper_change(self, wp_path: str) -> str: ...
 
-    def __init__(self, wallpaper_name, thumb_size=300, **kwargs):
+    def __init__(self, wallpaper_name, thumb_size=200, **kwargs):
         self.wallpaper_name = wallpaper_name
         self.wp_path = os.path.join(WALLPAPER_DIR, self.wallpaper_name)
         self.thumb_size = thumb_size
@@ -33,7 +35,7 @@ class ImageButton(HoverButton):
             name="wallpaper-button",
             **kwargs,
         )
-        self._generate_wp_thumbnail()
+        self._load_thumbnail()
 
     def _set_wallpaper_from_image(self):
         def on_wallpaper_change(*_):
@@ -43,17 +45,36 @@ class ImageButton(HoverButton):
             f"hyprctl hyprpaper reload ,'{self.wp_path}'", on_wallpaper_change
         )
 
-    def _generate_wp_thumbnail(self):
+    @run_in_thread
+    def _create_thumbnail(self):
+        try:
+            # Open original image
+            with PILImage.open(self.wp_path) as img:
+                # Resize to thumbnail
+                width, height = img.size
+                side = min(width, height)
+                left = (img.width - side) // 2
+                top = (height - side) // 2
+                right = left + side
+                bottom = top + side
+                img_cropped = img.crop((left, top, right, bottom))
+                img_cropped.thumbnail(
+                    (self.thumb_size, self.thumb_size), PILImage.Resampling.LANCZOS
+                )
+                img_cropped.save(self.wp_thumb_path)
+            self.set_image(
+                Image(image_file=self.wp_thumb_path, tooltip_text=self.wallpaper_name)
+            )
+        except Exception as e:
+            print(f"Error creating thumbnail: {e}")
+
+    def _load_thumbnail(self):
         if os.path.exists(self.wp_thumb_path):
             self.set_image(
                 Image(image_file=self.wp_thumb_path, tooltip_text=self.wallpaper_name)
             )
             return
-
-        exec_shell_command_async(
-            f"ffmpegthumbnailer -i {self.wp_path} -s {self.thumb_size} -o {self.wp_thumb_path}",  # noqa: E501
-            lambda *_: self.set_image(Image(image_file=self.wp_thumb_path)),
-        )
+        self._create_thumbnail()
 
 
 class WallpaperPickerBox(ScrolledWindow):
@@ -68,7 +89,7 @@ class WallpaperPickerBox(ScrolledWindow):
             max_content_size=(-1, 500),
         )
 
-        self.column_size = 3
+        self.column_size = 4
         self.batch_size = 6
         self._wallpapers = self._fetch_wallpaper_list()
         self._loaded_count = 0
