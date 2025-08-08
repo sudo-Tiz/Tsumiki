@@ -11,7 +11,7 @@ from fabric.widgets.image import Image
 from fabric.widgets.revealer import Revealer
 from fabric.widgets.separator import Separator
 from fabric.widgets.wayland import WaylandWindow as Window
-from gi.repository import Glace, Gtk
+from gi.repository import Glace, GLib, Gtk
 from loguru import logger
 
 from shared.popoverv1 import PopupWindow
@@ -98,6 +98,10 @@ class AppBar(Box):
                 if not self.popup_revealer.child_revealed
                 else None,
             )
+
+    def _close_popup(self, *_):
+        self.popup_revealer.unreveal()
+        return False
 
     def update_preview_image(self, client, client_button: Button):
         self.popup.set_pointing_to(client_button)
@@ -239,7 +243,7 @@ class AppBar(Box):
             on_enter_notify_event=lambda *_: self.config.get("preview_apps", True)
             and self.update_preview_image(client, client_button),
             on_leave_notify_event=lambda *_: self.config.get("preview_apps", True)
-            and self.popup_revealer.unreveal(),
+            and GLib.timeout_add(100, self._close_popup),
         )
         self.client_buttons[client.get_id()] = client_button
 
