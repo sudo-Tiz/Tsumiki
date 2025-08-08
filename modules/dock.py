@@ -1,8 +1,9 @@
+import contextlib
 import json
 
 import gi
 from fabric.hyprland.widgets import get_hyprland_connection
-from fabric.utils import bulk_connect
+from fabric.utils import bulk_connect, exec_shell_command
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
@@ -139,6 +140,22 @@ class AppBar(Box):
         """Check if a client is pinned."""
         return client.get_app_id() in self.pinned_apps
 
+    def _close_running_app(self, client):
+        try:
+            # Try to close the client gracefully first
+            client.close()
+        except Exception:
+            # If that fails, try to get the app_id and use hyprctl to kill the window
+            try:
+                app_id = client.get_app_id()
+                if app_id:
+                    # Use hyprctl to kill windows of this application class
+                    exec_shell_command(f"hyprctl dispatch closewindow class:{app_id}")
+            except Exception:
+                # Last resort: kill active window (not ideal but better than nothing)
+                with contextlib.suppress(Exception):
+                    exec_shell_command("hyprctl dispatch killactive")
+
     def show_menu(self, client: Glace.Client):
         """Show the context menu for a client."""
 
@@ -147,6 +164,7 @@ class AppBar(Box):
             item.destroy()
 
         pin_item = Gtk.MenuItem(label="Pin")
+        close_item = Gtk.MenuItem(label="Close")
 
         if self.check_if_pinned(client):
             pin_item.set_label("Unpin")
@@ -155,7 +173,10 @@ class AppBar(Box):
         else:
             pin_item.connect("activate", lambda *_: self._pin_app(client))
 
+        close_item.connect("activate", lambda *_: self._close_running_app(client))
+
         self.menu.add(pin_item)
+        self.menu.add(close_item)
         self.menu.show_all()
 
     def _unpin_app(self, client: Glace.Client):
@@ -174,7 +195,7 @@ class AppBar(Box):
 
         return True
 
-    def _pin_app(self, client: Glace.Client):
+    def _pin_running_app(self, client: Glace.Client):
         """Pin an application to the dock."""
         if self.check_if_pinned(client):
             return False
@@ -197,7 +218,6 @@ class AppBar(Box):
             if event.button == 1:
                 client.activate()
             else:
-                # self._pin_app(client)
                 self.show_menu(client)
                 self.menu.popup_at_pointer(event)
 
