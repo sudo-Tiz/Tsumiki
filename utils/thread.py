@@ -1,27 +1,21 @@
-import threading
 from collections.abc import Callable
+from concurrent.futures import ThreadPoolExecutor
+
+# Create a shared thread pool
+_executor = ThreadPoolExecutor(max_workers=4)
 
 
-# taken from ignis
-def thread(target: Callable, *args, **kwargs) -> threading.Thread:
+def thread(target: Callable, *args, **kwargs):
     """
-    Simply run the given function in a thread.
-    The provided args and kwargs will be passed to the function.
-
-    Args:
-        target: The function to run.
-
-    Returns:
-        The thread in which the function is running.
+    Submit the given function to the thread pool.
+    Returns a Future instead of a Thread.
     """
-    th = threading.Thread(target=target, args=args, kwargs=kwargs, daemon=True)
-    th.start()
-    return th
+    return _executor.submit(target, *args, **kwargs)
 
 
 def run_in_thread(func: Callable) -> Callable:
     """
-    Decorator to run the decorated function in a thread.
+    Decorator to run the decorated function in the thread pool.
     """
 
     def wrapper(*args, **kwargs):
