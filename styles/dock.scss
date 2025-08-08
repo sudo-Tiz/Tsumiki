@@ -50,6 +50,7 @@ box-shadow: if(variable.$modules-dock-shadow-enabled, $shadow, none);
   background-color: var(--surface-bright);
   border-top: variable.$modules-dock-border-width solid theme.$accent-blue;
   padding-top: 3px;
+  -gtk-icon-effect: highlight;
 }
 
 #dock-app-button:active,
