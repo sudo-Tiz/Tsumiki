@@ -75,8 +75,6 @@ class AppBar(Box):
 
         self._populate_pinned_apps(self.pinned_apps)
 
-        self.add(Separator())
-
         if self.config.get("preview_apps", True):
             self.popup_revealer = Revealer(
                 child=Box(
@@ -135,6 +133,7 @@ class AppBar(Box):
                         on_clicked=lambda *_, app=app: app.launch(),
                     )
                 )
+        self.add(Separator())
 
     def check_if_pinned(self, client: Glace.Client) -> bool:
         """Check if a client is pinned."""
