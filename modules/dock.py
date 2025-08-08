@@ -170,7 +170,7 @@ class AppBar(Box):
             pin_item.connect("activate", lambda *_: self._unpin_app(client))
 
         else:
-            pin_item.connect("activate", lambda *_: self._pin_app(client))
+            pin_item.connect("activate", lambda *_: self._pin_running_app(client))
 
         close_item.connect("activate", lambda *_: self._close_running_app(client))
 
