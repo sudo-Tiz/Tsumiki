@@ -23,7 +23,7 @@ class ImageButton(HoverButton):
     @Signal
     def wallpaper_change(self, wp_path: str) -> str: ...
 
-    def __init__(self, wallpaper_name, thumb_size=300, **kwargs):
+    def __init__(self, wallpaper_name, thumb_size=200, **kwargs):
         self.wallpaper_name = wallpaper_name
         self.wp_path = os.path.join(WALLPAPER_DIR, self.wallpaper_name)
         self.thumb_size = thumb_size
@@ -51,8 +51,17 @@ class ImageButton(HoverButton):
             # Open original image
             with PILImage.open(self.wp_path) as img:
                 # Resize to thumbnail
-                img.thumbnail((self.thumb_size, self.thumb_size))
-                img.save(self.wp_thumb_path)
+                width, height = img.size
+                side = min(width, height)
+                left = (img.width - side) // 2
+                top = (height - side) // 2
+                right = left + side
+                bottom = top + side
+                img_cropped = img.crop((left, top, right, bottom))
+                img_cropped.thumbnail(
+                    (self.thumb_size, self.thumb_size), PILImage.Resampling.LANCZOS
+                )
+                img_cropped.save(self.wp_thumb_path)
             self.set_image(
                 Image(image_file=self.wp_thumb_path, tooltip_text=self.wallpaper_name)
             )
@@ -80,7 +89,7 @@ class WallpaperPickerBox(ScrolledWindow):
             max_content_size=(-1, 500),
         )
 
-        self.column_size = 3
+        self.column_size = 4
         self.batch_size = 6
         self._wallpapers = self._fetch_wallpaper_list()
         self._loaded_count = 0

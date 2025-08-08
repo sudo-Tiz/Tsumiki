@@ -23,8 +23,8 @@ class HyprlandWithMonitors(Hyprland):
         return HyprlandWithMonitors.instance
 
     def __init__(self, commands_only: bool = False, **kwargs):
-        self.display: Gdk.Display = Gdk.Display.get_default()
         super().__init__(commands_only, **kwargs)
+        self.display: Gdk.Display = Gdk.Display.get_default()
 
     @ttl_lru_cache(100, 5)
     def get_all_monitors(self) -> Dict:
