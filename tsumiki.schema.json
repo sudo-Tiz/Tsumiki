@@ -958,24 +958,6 @@
 				}
 			}
 		},
-		"spacing": {
-			"type": "object",
-			"properties": {
-				"size": {
-					"type": "integer",
-					"description": "Size of the spacing"
-				}
-			}
-		},
-		"divider": {
-			"type": "object",
-			"properties": {
-				"size": {
-					"type": "integer",
-					"description": "Size of the divider"
-				}
-			}
-		},
 		"click_counter": {
 			"type": "object",
 			"properties": {

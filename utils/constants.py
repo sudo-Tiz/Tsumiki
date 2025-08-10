@@ -252,7 +252,6 @@ DEFAULT_CONFIG = {
             "label": False,
             "capture_sound": False,  # TODO: implement this
         },
-        "spacing": {"size": 20},
         "stopwatch": {"stopped_icon": "󱫞", "running_icon": "󱫠"},
         "storage": {
             "path": "/",
