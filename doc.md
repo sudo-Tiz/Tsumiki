@@ -25,13 +25,10 @@
     - **`tooltip`**: `bool` (default: true)
     - **`icon_size`**: `int` (default: 14)
     - **`notifications`**: `object`
-      - **`enabled`**: `bool` (default: true)
-      - **`discharging`**: `object`
-        - **`title`**: `str` (default: "Charger Unplugged!")
-        - **`body`**: `str` (default: "Battery is at _LEVEL_%")
-      - **`charging`**: `object`
-        - **`title`**: `str` (default: "Charger Plugged In")
-        - **`body`**: `str` (default: "Battery is at _LEVEL_%")
+      - **`low_threshold`**: `int` (default: 10)
+      - **`full_battery`**: `bool` (default: false)
+      - **`low_battery`**: `bool` (default: false)
+      - **`charging`**: `bool` (default: false)
   - **`quick_settings`**: `object`
     - **`hover_reveal`**: `bool` (default: false)
     - **`user`**: `object`
@@ -41,8 +38,9 @@
     - **`controls`**: `object`
       - **`sliders`**: `list[str]` (default: ["brightness", "volume"])
     - **`media`**: `object`
+      - **`enabled`**: `bool` (default: true)
       - **`ignore`**: `list` (default: [])
-      - **`truncation_size`**: `int` (default: 26)
+      - **`truncation_size`**: `int` (default: 30)
       - **`show_album`**: `bool` (default: true)
       - **`show_artist`**: `bool` (default: true)
       - **`show_time`**: `bool` (default: true)
@@ -66,8 +64,9 @@
     - **`color`**: `str` (default: "#89b4fa")
   - **`overview`**: `object`
     - **`icon`**: `str` (default: "󰡃")
-    - **`label`**: `bool` (default: false)
     - **`tooltip`**: `bool` (default: true)
+    - **`label`**: `bool` (default: false)
+    - **`show_occupied`**: `bool` (default: true)
   - **`click_counter`**: `object`
     - **`count`**: `int` (default: 0)
   - **`cpu`**: `object`
@@ -145,14 +144,18 @@
     - **`upload_icon`**: `str` (default: "")
     - **`download_icon`**: `str` (default: "")
     - **`tooltip`**: `bool` (default: true)
-    - **`download`**: `bool` (default: true)
     - **`upload`**: `bool` (default: true)
+    - **`download`**: `bool` (default: true)
+    - **`upload_threshold`**: `int` (default: 100)
+    - **`download_threshold`**: `int` (default: 1024)
+    - **`kb_digits`**: `int` (default: 0)
+    - **`mb_digits`**: `int` (default: 2)
   - **`microphone`**: `object`
     - **`label`**: `bool` (default: false)
     - **`tooltip`**: `bool` (default: true)
     - **`show_icon`**: `bool` (default: true)
   - **`mpris`**: `object`
-    - **`truncation_size`**: `int` (default: 30)
+    - **`truncation_size`**: `int` (default: 20)
     - **`tooltip`**: `bool` (default: true)
   - **`ocr`**: `object`
     - **`icon`**: `str` (default: "󰐳")
@@ -187,17 +190,19 @@
     - **`icon`**: `str` (default: "󰄀")
     - **`delayed`**: `bool` (default: false)
     - **`delayed_timeout`**: `int` (default: 5000)
+    - **`label`**: `bool` (default: false)
+    - **`capture_sound`**: `bool` (default: false)
   - **`spacing`**: `object`
     - **`size`**: `int` (default: 20)
   - **`stopwatch`**: `object`
     - **`stopped_icon`**: `str` (default: "󱫞")
     - **`running_icon`**: `str` (default: "󱫠")
   - **`storage`**: `object`
+    - **`path`**: `str` (default: "/")
     - **`show_icon`**: `bool` (default: true)
     - **`icon`**: `str` (default: "󰋊")
     - **`mode`**: `str` (default: "circular")
     - **`tooltip`**: `bool` (default: true)
-    - **`path`**: `str` (default: "/")
     - **`graph_length`**: `int` (default: 4)
     - **`unit`**: `str` (default: "gb")
   - **`submap`**: `object`
@@ -226,6 +231,7 @@
     - **`reveal_duration`**: `int` (default: 500)
     - **`interval`**: `int` (default: 3600)
     - **`tooltip`**: `bool` (default: true)
+    - **`terminal`**: `str` (default: "kitty")
     - **`pad_zero`**: `bool` (default: true)
     - **`label`**: `bool` (default: true)
     - **`auto_hide`**: `bool` (default: false)
@@ -245,10 +251,12 @@
     - **`temperature_unit`**: `str` (default: "celsius")
     - **`wind_speed_unit`**: `str` (default: "kmh")
     - **`interval`**: `int` (default: 3600)
+    - **`hover_reveal`**: `bool` (default: false)
   - **`window_title`**: `object`
     - **`icon`**: `bool` (default: true)
     - **`truncation`**: `bool` (default: true)
     - **`truncation_size`**: `int` (default: 30)
+    - **`tooltip`**: `bool` (default: true)
     - **`title_map`**: `list` (default: [])
   - **`workspaces`**: `object`
     - **`count`**: `int` (default: 10)
@@ -262,8 +270,7 @@
     - **`icon`**: `str` (default: "󱉊'")
     - **`use_24hr`**: `bool` (default: true)
     - **`show_icon`**: `bool` (default: true)
-    - **`format`**: `str` (default: "%Y-%m-%d %H:%M:%S")
-    - **`timezones`**: `list[str]` (default: ["America/New_York", "Europe/London", "Asia/Tokyo"])
+    - **`timezones`**: `list[str]` (default: ["America/New_York", "Asia/Tokyo"])
   - **`custom_button_group`**: `object`
     - **`buttons`**: `list` (default: [])
     - **`spacing`**: `int` (default: 4)
@@ -311,6 +318,7 @@
     - **`max_actions`**: `int` (default: 5)
     - **`dismiss_on_hover`**: `bool` (default: false)
     - **`sound_file`**: `str` (default: "notification4")
+    - **`persist`**: `bool` (default: true)
   - **`screen_corners`**: `object`
     - **`enabled`**: `bool` (default: false)
     - **`size`**: `int` (default: 20)
@@ -337,9 +345,8 @@
 
 - **`general`**: `object`
   - **`check_updates`**: `bool` (default: false)
-  - **`layer`**: `str` (default: "top")
+  - **`layer`**: `str` (default: "overlay")
   - **`auto_hide`**: `bool` (default: false)
   - **`debug`**: `bool` (default: true)
   - **`monitor_styles`**: `bool` (default: true)
   - **`location`**: `str` (default: "top")
-  - **`widget_style`**: `str` (default: "default")

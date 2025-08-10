@@ -62,7 +62,7 @@ DEFAULT_CONFIG = {
                 "low_threshold": 10,
                 "full_battery": False,
                 "low_battery": False,
-                "charging": False
+                "charging": False,
             },
         },
         "quick_settings": {
@@ -72,8 +72,9 @@ DEFAULT_CONFIG = {
                 "sliders": ["brightness", "volume"],
             },
             "media": {
+                "enabled": True,
                 "ignore": [],
-                "truncation_size": 26,
+                "truncation_size": 30,
                 "show_album": True,
                 "show_artist": True,
                 "show_time": True,
@@ -97,8 +98,9 @@ DEFAULT_CONFIG = {
         "cava": {"bars": 10, "color": "#89b4fa"},
         "overview": {
             "icon": "󰡃",
-            "label": False,
             "tooltip": True,
+            "label": False,
+            "show_occupied": True,
         },
         "click_counter": {"count": 0},
         "cpu": {
@@ -194,8 +196,12 @@ DEFAULT_CONFIG = {
             "upload_icon": "",
             "download_icon": "",
             "tooltip": True,
-            "download": True,
             "upload": True,
+            "download": True,
+            "upload_threshold": 100,
+            "download_threshold": 1024,
+            "kb_digits": 0,
+            "mb_digits": 2,
         },
         "microphone": {
             "label": False,
@@ -203,7 +209,7 @@ DEFAULT_CONFIG = {
             "show_icon": True,
         },
         "mpris": {
-            "truncation_size": 30,
+            "truncation_size": 20,
             "tooltip": True,
         },
         "ocr": {
@@ -243,15 +249,17 @@ DEFAULT_CONFIG = {
             "icon": "󰄀",
             "delayed": False,
             "delayed_timeout": 5000,
+            "label": False,
+            "capture_sound": False,  # TODO: implement this
         },
         "spacing": {"size": 20},
         "stopwatch": {"stopped_icon": "󱫞", "running_icon": "󱫠"},
         "storage": {
+            "path": "/",
             "show_icon": True,
             "icon": "󰋊",
             "mode": "circular",
             "tooltip": True,
-            "path": "/",
             "graph_length": 4,
             "unit": "gb",  # Default unit for storage
         },
@@ -281,6 +289,7 @@ DEFAULT_CONFIG = {
             "reveal_duration": 500,
             "interval": HIGH_POLL_INTERVAL,
             "tooltip": True,
+            "terminal": "kitty",
             "pad_zero": True,  # Whether to pad the number of updates with zero
             "label": True,
             "auto_hide": False,  # Whether to auto-hide there are no updates
@@ -302,11 +311,13 @@ DEFAULT_CONFIG = {
             "temperature_unit": "celsius",
             "wind_speed_unit": "kmh",
             "interval": HIGH_POLL_INTERVAL,
+            "hover_reveal": False,
         },
         "window_title": {
             "icon": True,
             "truncation": True,
             "truncation_size": 30,
+            "tooltip": True,  # TODO: implement this
             "title_map": [],
         },
         "workspaces": {
@@ -322,8 +333,7 @@ DEFAULT_CONFIG = {
             "icon": "󱉊'",
             "use_24hr": True,
             "show_icon": True,
-            "format": "%Y-%m-%d %H:%M:%S",
-            "timezones": ["America/New_York", "Europe/London", "Asia/Tokyo"],
+            "timezones": ["America/New_York", "Asia/Tokyo"],
         },
         "custom_button_group": {
             "buttons": [],
@@ -372,6 +382,7 @@ DEFAULT_CONFIG = {
             "max_actions": 5,
             "dismiss_on_hover": False,
             "sound_file": "notification4",
+            "persist": True,  # TODO: implement this
         },
         "screen_corners": {
             "enabled": False,
@@ -402,12 +413,11 @@ DEFAULT_CONFIG = {
     },
     "general": {
         "check_updates": False,
-        "layer": "top",
+        "layer": "overlay",
         "auto_hide": False,
         "debug": True,
         "monitor_styles": True,
         "location": "top",
-        "widget_style": "default",
     },
 }
 
