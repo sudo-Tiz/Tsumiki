@@ -670,11 +670,6 @@
 					"type": "integer",
 					"description": "Specifies the size of the battery icon."
 				},
-				"orientation": {
-					"type": "string",
-					"enum": ["horizontal", "vertical"],
-					"description": "Specifies the orientation of the battery widget."
-				},
 				"hide_label_when_full": {
 					"type": "boolean",
 					"description": "Determines whether to hide the label when the battery is full."

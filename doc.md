@@ -25,13 +25,10 @@
     - **`tooltip`**: `bool` (default: true)
     - **`icon_size`**: `int` (default: 14)
     - **`notifications`**: `object`
-      - **`enabled`**: `bool` (default: true)
-      - **`discharging`**: `object`
-        - **`title`**: `str` (default: "Charger Unplugged!")
-        - **`body`**: `str` (default: "Battery is at _LEVEL_%")
-      - **`charging`**: `object`
-        - **`title`**: `str` (default: "Charger Plugged In")
-        - **`body`**: `str` (default: "Battery is at _LEVEL_%")
+      - **`low_threshold`**: `int` (default: 10)
+      - **`full_battery`**: `bool` (default: false)
+      - **`low_battery`**: `bool` (default: false)
+      - **`charging`**: `bool` (default: false)
   - **`quick_settings`**: `object`
     - **`hover_reveal`**: `bool` (default: false)
     - **`user`**: `object`
