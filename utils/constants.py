@@ -83,7 +83,7 @@ DEFAULT_CONFIG = {
             "shortcuts": {
                 "enabled": True,
                 "items": [],
-            },  # Empty list by default - shortcuts are optional
+            },
         },
         "bluetooth": {
             "label": True,
@@ -190,7 +190,7 @@ DEFAULT_CONFIG = {
             "tooltip": True,
             "mode": "circular",
             "graph_length": 4,
-            "unit": "gb",  # Default unit for memory
+            "unit": "gb"
         },
         "network_usage": {
             "upload_icon": "",
@@ -244,9 +244,9 @@ DEFAULT_CONFIG = {
         },
         "screenshot": {
             "path": "Pictures/Screenshots",
+            "icon": "󰄀",
             "tooltip": True,
             "annotation": True,
-            "icon": "󰄀",
             "delayed": False,
             "delayed_timeout": 5000,
             "label": False,
@@ -396,7 +396,7 @@ DEFAULT_CONFIG = {
             "preview_size": [
                 200,
                 130,
-            ],  # this is the size of the preview, width and height in pixels
+            ]
         },
         "desktop_clock": {
             "enabled": False,
