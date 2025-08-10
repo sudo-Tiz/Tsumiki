@@ -25,7 +25,6 @@ PINNED_APPS_FILE = f"{APP_DATA_DIRECTORY}/pinned_apps.json"
 WALLPAPER_DIR = f"{HOME_DIR}/Pictures/Wallpapers"
 WALLPAPER_THUMBS_DIR = f"{WALLPAPER_DIR}/.thumbs"
 
-
 LOG_DIR = f"{GLib.get_user_state_dir()}/{APPLICATION_NAME}/logs"
 LOG_FILE = f"{LOG_DIR}/{APPLICATION_NAME}.log"
 LOG_FORMAT = "{time:YYYY-MM-DD HH:mm:ss} [<level>{level}</level>] {message}"

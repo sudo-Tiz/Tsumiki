@@ -13,6 +13,7 @@ class SubMapWidget(ButtonWidget):
         super().__init__(name="submap", **kwargs)
 
         self.submap_label = Label(label="submap", style_classes="panel-text")
+
         self.box.add(self.submap_label)
 
         if self.config.get("show_icon", True):

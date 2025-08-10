@@ -11,7 +11,7 @@ class WallpaperWidget(ButtonWidget):
     def __init__(self, **kwargs):
         super().__init__(name="wallpaper", **kwargs)
 
-        cfg = self.config  # Local reference for cleaner code
+        cfg = self.config
 
         # Optional tooltip
         if cfg.get("tooltip"):
