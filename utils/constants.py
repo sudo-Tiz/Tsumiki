@@ -335,9 +335,6 @@ DEFAULT_CONFIG = {
         "middle_section": ["date_time"],
         "right_section": ["system_tray"],
     },
-    "theme": {
-        "name": "catpuccin-mocha",
-    },
     "modules": {
         "bar": {"layer": "top", "auto_hide": False, "location": "top"},
         "osd": {
