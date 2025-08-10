@@ -886,7 +886,7 @@
 				"path": {
 					"type": "string",
 					"description": "Path to the storage device or directory to monitor"
-				},
+				}
 			}
 		},
 		"workspaces": {

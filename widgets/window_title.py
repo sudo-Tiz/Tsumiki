@@ -32,6 +32,9 @@ class WindowTitleWidget(ButtonWidget):
         custom_map = self.config.get("title_map", [])
         icon_enabled = self.config.get("icon", True)
 
+        if self.config.get("tooltip", True):
+            self.set_tooltip_text(win_title)
+
         win_title = truncate(win_title, trunc_size) if trunc else win_title
         merged_titles = WINDOW_TITLE_MAP + (
             custom_map if isinstance(custom_map, list) else []

@@ -317,7 +317,7 @@ DEFAULT_CONFIG = {
             "icon": True,
             "truncation": True,
             "truncation_size": 30,
-            "tooltip": True,  # TODO: implement this
+            "tooltip": True,
             "title_map": [],
         },
         "workspaces": {
