@@ -62,7 +62,7 @@ DEFAULT_CONFIG = {
                 "low_threshold": 10,
                 "full_battery": False,
                 "low_battery": False,
-                "charging": False
+                "charging": False,
             },
         },
         "quick_settings": {

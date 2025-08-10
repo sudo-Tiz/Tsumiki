@@ -117,13 +117,13 @@ class BatteryWidget(ButtonWidget):
                 )
 
         # Check for notifications
-        if self.initialized:  # Seulement après l'initialisation
+        if self.initialized:
             self._check_notifications(battery_percent, is_charging)
 
         # Update tracking variables
         self.last_percentage = battery_percent
         self.last_charging_state = is_charging
-        self.initialized = True  # Marquer comme initialisé après le premier update
+        self.initialized = True
 
         return True
 
