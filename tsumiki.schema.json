@@ -882,7 +882,11 @@
 					"type": "string",
 					"enum": ["kb", "mb", "gb", "tb"],
 					"description": "Specifies the unit to use for storage"
-				}
+				},
+				"path": {
+					"type": "string",
+					"description": "Path to the storage device or directory to monitor"
+				},
 			}
 		},
 		"workspaces": {
@@ -929,6 +933,10 @@
 		"window_title": {
 			"type": "object",
 			"properties": {
+				"tooltip": {
+					"type": "boolean",
+					"description": "Determines whether the widget has a tooltip"
+				},
 				"icon": {
 					"type": "boolean",
 					"description": "Determines whether to enable the icon in the window title widget"
@@ -1440,6 +1448,10 @@
 			"world_clock": {
 				"type": "object",
 				"properties": {
+					"icon": {
+						"type": "string",
+						"description": "Icon name from icon theme"
+					},
 					"use_24hr": {
 						"type": "boolean",
 						"description": "Determines whether to use 24-hour format for world clock"
@@ -1450,10 +1462,6 @@
 						"items": {
 							"type": "string"
 						}
-					},
-					"format": {
-						"type": "string",
-						"description": "Format for world clock time display"
 					},
 					"show_icon": {
 						"type": "boolean",
