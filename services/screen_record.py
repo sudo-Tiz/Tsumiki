@@ -4,7 +4,7 @@ import tempfile
 from datetime import datetime
 
 from fabric.core.service import Property, Service, Signal
-from fabric.utils import exec_shell_command, exec_shell_command_async
+from fabric.utils import exec_shell_command, exec_shell_command_async, get_relative_path
 from gi.repository import Gio, GLib
 from loguru import logger
 
@@ -29,13 +29,14 @@ class ScreenRecorderService(Service):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.home_dir = GLib.get_home_dir()
+        self.shutter_sound = get_relative_path("../assets/sounds/camera-shutter.mp3")
 
     def screenrecord_start(
         self,
         config: dict,
         fullscreen=False,
     ):
-        path = (self.config.get("path", ""),)
+        path = config.get("path", "")
         """Start screen recording using wf-recorder with optional GLib-based delay."""
         if not path:
             logger.exception("[SCREENRECORD] No path provided for screen recording.")
@@ -122,7 +123,7 @@ class ScreenRecorderService(Service):
         fullscreen=False,
         save_copy=True,
     ):
-        path = (self.config.get("path", ""),)
+        path = config.get("path", "")
         """Take a screenshot using grimblast and optionally annotate with satty."""
         if not path:
             logger.exception("[SCREENSHOT] No path provided for screenshot.")
@@ -165,6 +166,9 @@ class ScreenRecorderService(Service):
                         check=True,
                     )
                     os.unlink(temp_path)  # Clean up temp file after use
+
+                if config.get("capture_sound", False):
+                    helpers.play_sound(self.shutter_sound)
 
                 # Send notification after annotation or direct capture
                 self.send_screenshot_notification(file_path=file_path)

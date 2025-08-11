@@ -249,7 +249,7 @@ DEFAULT_CONFIG = {
             "delayed": False,
             "delayed_timeout": 5000,
             "label": False,
-            "capture_sound": False,  # TODO: implement this
+            "capture_sound": False,
         },
         "stopwatch": {"stopped_icon": "󱫞", "running_icon": "󱫠"},
         "storage": {
