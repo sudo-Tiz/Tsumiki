@@ -401,23 +401,16 @@ scrolledwindow {
 
 .buttons {
   &-basic {
-    background-color: theme.$background-dark;
     border-radius: 20px;
-
     color: theme.$text-main;
     font-weight: 700;
+    border: none;
 
     &:hover {
       background-color: theme.$surface-highlight;
       box-shadow: 0 0 5px -3px transparentize(theme.$text-main, 0.8);
     }
 
-    &:active {
-      border-color: theme.$surface-highlight;
-
-      background-color: theme.$background-alt;
-      box-shadow: 0 0 5px -3px transparentize(theme.$text-main, 0.5);
-    }
   }
 }
 
@@ -426,3 +419,5 @@ scrolledwindow {
   transition-duration: 0.15s;
   transition-timing-function: ease-in-out;
 }
+
+
