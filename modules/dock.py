@@ -64,13 +64,9 @@ class AppBar(Box):
         self._hyp = HyprlandWithMonitors()
 
         self.pinned_apps_container = Box(spacing=7)
-
         self.add(self.pinned_apps_container)
 
-        self.pinned_apps = read_json_file(PINNED_APPS_FILE)
-
-        if self.pinned_apps is None:
-            self.pinned_apps = []
+        self.pinned_apps = read_json_file(PINNED_APPS_FILE) or []
 
         self._populate_pinned_apps(self.pinned_apps)
 

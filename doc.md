@@ -185,15 +185,13 @@
     - **`delayed_timeout`**: `int` (default: 5000)
   - **`screenshot`**: `object`
     - **`path`**: `str` (default: "Pictures/Screenshots")
+    - **`icon`**: `str` (default: "󰄀")
     - **`tooltip`**: `bool` (default: true)
     - **`annotation`**: `bool` (default: true)
-    - **`icon`**: `str` (default: "󰄀")
     - **`delayed`**: `bool` (default: false)
     - **`delayed_timeout`**: `int` (default: 5000)
     - **`label`**: `bool` (default: false)
     - **`capture_sound`**: `bool` (default: false)
-  - **`spacing`**: `object`
-    - **`size`**: `int` (default: 20)
   - **`stopwatch`**: `object`
     - **`stopped_icon`**: `str` (default: "󱫞")
     - **`running_icon`**: `str` (default: "󱫠")
@@ -279,9 +277,6 @@
   - **`left_section`**: `list[str]` (default: ["workspaces", "window_title"])
   - **`middle_section`**: `list[str]` (default: ["date_time"])
   - **`right_section`**: `list[str]` (default: ["system_tray"])
-
-- **`theme`**: `object`
-  - **`name`**: `str` (default: "catpuccin-mocha")
 
 - **`modules`**: `object`
   - **`bar`**: `object`
