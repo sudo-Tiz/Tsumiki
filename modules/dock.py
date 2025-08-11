@@ -28,7 +28,6 @@ class AppBar(Box):
     """A simple app bar widget for the dock."""
 
     def __init__(self, parent):
-        self.client_buttons = {}
         self._parent = parent
 
         self.app_util = AppUtils()
@@ -44,7 +43,7 @@ class AppBar(Box):
 
         super().__init__(
             spacing=10,
-            name="app-bar",
+            name="dock",
             style_classes=["window-basic", "sleek-border"],
             children=[
                 # Button(
@@ -245,7 +244,6 @@ class AppBar(Box):
             on_leave_notify_event=lambda *_: self.config.get("preview_apps", True)
             and GLib.timeout_add(100, self._close_popup),
         )
-        self.client_buttons[client.get_id()] = client_button
 
         bulk_connect(
             client,
