@@ -189,7 +189,7 @@ DEFAULT_CONFIG = {
             "tooltip": True,
             "mode": "circular",
             "graph_length": 4,
-            "unit": "gb"
+            "unit": "gb",
         },
         "network_usage": {
             "upload_icon": "",
@@ -395,7 +395,7 @@ DEFAULT_CONFIG = {
             "preview_size": [
                 200,
                 130,
-            ]
+            ],
         },
         "desktop_clock": {
             "enabled": False,

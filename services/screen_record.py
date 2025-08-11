@@ -32,10 +32,10 @@ class ScreenRecorderService(Service):
 
     def screenrecord_start(
         self,
-        path: str,
         config: dict,
         fullscreen=False,
     ):
+        path = (self.config.get("path", ""),)
         """Start screen recording using wf-recorder with optional GLib-based delay."""
         if not path:
             logger.exception("[SCREENRECORD] No path provided for screen recording.")
@@ -118,11 +118,11 @@ class ScreenRecorderService(Service):
 
     def screenshot(
         self,
-        path: str,
         config: dict,
         fullscreen=False,
         save_copy=True,
     ):
+        path = (self.config.get("path", ""),)
         """Take a screenshot using grimblast and optionally annotate with satty."""
         if not path:
             logger.exception("[SCREENSHOT] No path provided for screenshot.")
