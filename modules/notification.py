@@ -4,7 +4,7 @@ from fabric.notifications import (
     NotificationAction,
     NotificationCloseReason,
 )
-from fabric.utils import bulk_connect, get_relative_path
+from fabric.utils import bulk_connect, get_relative_path, truncate
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
@@ -340,7 +340,7 @@ class ActionButton(HoverButton):
         **kwargs,
     ):
         super().__init__(
-            label=action.label,
+            label=truncate(action.label, 20, "..."),
             h_expand=True,
             on_clicked=self._on_click,
             style_classes="notification-action",
