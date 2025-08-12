@@ -1,4 +1,3 @@
-import contextlib
 import json
 
 import gi
@@ -94,6 +93,16 @@ class AppBar(Box):
                 else None,
             )
 
+    def get_client_data(self, class_name):
+        try:
+            clients = json.loads(self._hyp.send_command("j/clients").reply.decode())
+
+            matches = list(filter(lambda app: app.get("class") == class_name, clients))
+            return matches[0] if matches else clients
+        except Exception as e:
+            logger.error(f"[Dock] Failed to get active workspace: {e}")
+            return None
+
     def _close_popup(self, *_):
         self.popup_revealer.unreveal()
         return False
@@ -150,9 +159,7 @@ class AppBar(Box):
                     # Use hyprctl to kill windows of this application class
                     exec_shell_command(f"hyprctl dispatch closewindow class:{app_id}")
             except Exception:
-                # Last resort: kill active window (not ideal but better than nothing)
-                with contextlib.suppress(Exception):
-                    exec_shell_command("hyprctl dispatch killactive")
+                logger.error(f"[Dock] Failed to close client {client.get_app_id()}")
 
     def show_menu(self, client: Glace.Client):
         """Show the context menu for a client."""
