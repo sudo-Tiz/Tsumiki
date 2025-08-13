@@ -97,29 +97,30 @@ class CollapsibleGroupWidget(ButtonWidget):
 
     def _populate_widgets(self):
         """Populate the widgets box with configured widgets."""
-        if not self.widgets_list or not hasattr(self, "widgets_box"):
+        if not hasattr(self, "widgets_box") or not hasattr(self, "_resolver_context"):
             return
 
-        # Fix: Properly destroy child widgets to prevent memory leaks
+        # Clear existing widgets
         for child in self.widgets_box.get_children():
             child.destroy()
 
-        for widget_name in self.widgets_config:
-            if widget_name in self.widgets_list:
-                widget_class = self.widgets_list[widget_name]
-                try:
-                    widget_instance = widget_class()
-                    self.widgets_box.add(widget_instance)
-                except Exception as e:
-                    print(f"Failed to create widget {widget_name}: {e}")
-                    continue
+        # Use the widget factory system
+        from utils.widget_factory import WidgetResolver
 
-    def set_widgets(self, widgets_list):
-        """Set the widgets to be displayed in the collapsible group.
+        resolver = WidgetResolver(self.widgets_list or {})
+        widgets = resolver.batch_resolve(self.widgets_config, self._resolver_context)
+
+        for widget in widgets:
+            self.widgets_box.add(widget)
+
+    def set_context(self, config: dict, widgets_list: dict):
+        """Set resolution context for widget creation.
 
         Args:
+            config: Main configuration dictionary
             widgets_list: Dictionary mapping widget names to widget classes
         """
+        self._resolver_context = {"config": config}
         self.widgets_list = widgets_list
 
     def collapse(self):
