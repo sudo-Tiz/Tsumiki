@@ -150,31 +150,39 @@
 							"type": "boolean"
 						},
 						"hide_when_missing": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"icon_size": {
-							"type": "number"
+							"type": "number",
+							"default": 14
 						},
 						"notifications": {
 							"type": "object",
 							"properties": {
 								"low_threshold": {
-									"type": "number"
+									"type": "number",
+									"default": 10
 								},
 								"full_battery": {
-									"type": "boolean"
+									"type": "boolean",
+									"default": false
 								},
 								"low_battery": {
-									"type": "boolean"
+									"type": "boolean",
+									"default": false
 								},
 								"charging": {
-									"type": "boolean"
+									"type": "boolean",
+									"default": false
 								}
 							},
 							"required": [
@@ -198,16 +206,20 @@
 					"type": "object",
 					"properties": {
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": "󰡃"
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"show_occupied": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						}
 					},
 					"required": ["icon", "tooltip", "label", "show_occupied"]
@@ -216,43 +228,55 @@
 					"type": "object",
 					"properties": {
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": "󰐥"
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"items_per_row": {
-							"type": "number"
+							"type": "number",
+							"default": 3
 						},
 						"icon_size": {
-							"type": "number"
+							"type": "number",
+							"default": 100
 						},
 						"show_icon": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"buttons": {
 							"type": "object",
 							"properties": {
 								"shutdown": {
-									"type": "string"
+									"type": "string",
+									"default": "systemctl poweroff"
 								},
 								"reboot": {
-									"type": "string"
+									"type": "string",
+									"default": "systemctl reboot"
 								},
 								"hibernate": {
-									"type": "string"
+									"type": "string",
+									"default": "systemctl hibernate"
 								},
 								"suspend": {
-									"type": "string"
+									"type": "string",
+									"default": "systemctl suspend"
 								},
 								"lock": {
-									"type": "string"
+									"type": "string",
+									"default": "loginctl lock-session"
 								},
 								"logout": {
-									"type": "string"
+									"type": "string",
+									"default": "loginctl terminate-user $USER"
 								}
 							},
 							"required": [
@@ -279,19 +303,24 @@
 					"type": "object",
 					"properties": {
 						"path": {
-							"type": "string"
+							"type": "string",
+							"default": "Videos/Screencasting"
 						},
 						"audio": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"delayed": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"delayed_timeout": {
-							"type": "number"
+							"type": "number",
+							"default": 5000
 						}
 					},
 					"required": ["path", "audio", "tooltip", "delayed", "delayed_timeout"]
@@ -300,28 +329,36 @@
 					"type": "object",
 					"properties": {
 						"path": {
-							"type": "string"
+							"type": "string",
+							"default": "Pictures/Screenshots"
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"annotation": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"capture_sound": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": "󰄀"
 						},
 						"delayed": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"delayed_timeout": {
-							"type": "number"
+							"type": "number",
+							"default": 5000
 						}
 					},
 					"required": [
@@ -339,31 +376,40 @@
 					"type": "object",
 					"properties": {
 						"upload_icon": {
-							"type": "string"
+							"type": "string",
+							"default": ""
 						},
 						"download_icon": {
-							"type": "string"
+							"type": "string",
+							"default": ""
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"upload": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"download": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"upload_threshold": {
-							"type": "number"
+							"type": "number",
+							"default": 100
 						},
 						"download_threshold": {
-							"type": "number"
+							"type": "number",
+							"default": 1024
 						},
 						"kb_digits": {
-							"type": "number"
+							"type": "number",
+							"default": 0
 						},
 						"mb_digits": {
-							"type": "number"
+							"type": "number",
+							"default": 2
 						}
 					},
 					"required": [
@@ -382,19 +428,23 @@
 					"type": "object",
 					"properties": {
 						"hover_reveal": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"user": {
 							"type": "object",
 							"properties": {
 								"avatar": {
-									"type": "string"
+									"type": "string",
+									"default": "~/.face"
 								},
 								"name": {
-									"type": "string"
+									"type": "string",
+									"default": "system"
 								},
 								"distro_icon": {
-									"type": "boolean"
+									"type": "boolean",
+									"default": true
 								}
 							},
 							"required": ["avatar", "name", "distro_icon"]
@@ -406,41 +456,51 @@
 									"type": "array",
 									"items": {
 										"type": "string"
-									}
+									},
+									"default": ["brightness", "volume"]
 								}
 							},
 							"required": ["sliders"]
 						},
 						"auto_hide": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"auto_hide_timeout": {
-							"type": "number"
+							"type": "number",
+							"default": 2000
 						},
 						"media": {
 							"type": "object",
 							"properties": {
 								"enabled": {
-									"type": "boolean"
+									"type": "boolean",
+									"default": true
 								},
 								"ignore": {
 									"type": "array",
-									"items": {}
+									"items": {},
+									"default": []
 								},
 								"truncation_size": {
-									"type": "number"
+									"type": "number",
+									"default": 30
 								},
 								"show_album": {
-									"type": "boolean"
+									"type": "boolean",
+									"default": true
 								},
 								"show_artist": {
-									"type": "boolean"
+									"type": "boolean",
+									"default": true
 								},
 								"show_time": {
-									"type": "boolean"
+									"type": "boolean",
+									"default": true
 								},
 								"show_time_tooltip": {
-									"type": "boolean"
+									"type": "boolean",
+									"default": true
 								}
 							},
 							"required": [
@@ -457,7 +517,8 @@
 							"type": "object",
 							"properties": {
 								"enabled": {
-									"type": "boolean"
+									"type": "boolean",
+									"default": true
 								},
 								"items": {
 									"type": "array",
@@ -487,7 +548,37 @@
 											"tooltip",
 											"icon_size"
 										]
-									}
+									},
+									"default": [
+										{
+											"icon": "",
+											"label": "Terminal",
+											"command": "kitty",
+											"tooltip": "Open terminal",
+											"icon_size": 18
+										},
+										{
+											"icon": "",
+											"label": "Browser",
+											"command": "firefox",
+											"tooltip": "Launch Firefox",
+											"icon_size": 18
+										},
+										{
+											"icon": "",
+											"label": "Spotify",
+											"command": "spotify",
+											"tooltip": "Launch Spotify",
+											"icon_size": 18
+										},
+										{
+											"icon": "",
+											"label": "Code",
+											"command": "code",
+											"tooltip": "Launch Code",
+											"icon_size": 18
+										}
+									]
 								}
 							},
 							"required": ["enabled", "items"]
@@ -507,10 +598,12 @@
 					"type": "object",
 					"properties": {
 						"stopped_icon": {
-							"type": "string"
+							"type": "string",
+							"default": "󱫞"
 						},
 						"running_icon": {
-							"type": "string"
+							"type": "string",
+							"default": "󱫠"
 						}
 					},
 					"required": ["stopped_icon", "running_icon"]
@@ -519,25 +612,32 @@
 					"type": "object",
 					"properties": {
 						"path": {
-							"type": "string"
+							"type": "string",
+							"default": "/"
 						},
 						"show_icon": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": "󰋊"
 						},
 						"mode": {
-							"$ref": "#/definitions/mode"
+							"$ref": "#/definitions/mode",
+							"default": "label"
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"graph_length": {
-							"type": "number"
+							"type": "number",
+							"default": 4
 						},
 						"unit": {
-							"type": "string"
+							"type": "string",
+							"default": "gb"
 						}
 					},
 					"required": [
@@ -554,18 +654,22 @@
 					"type": "object",
 					"properties": {
 						"icon_size": {
-							"type": "number"
+							"type": "number",
+							"default": 16
 						},
 						"ignored": {
 							"type": "array",
-							"items": {}
+							"items": {},
+							"default": []
 						},
 						"hidden": {
 							"type": "array",
-							"items": {}
+							"items": {},
+							"default": []
 						},
 						"hide_when_empty": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						}
 					},
 					"required": ["icon_size", "ignored", "hidden", "hide_when_empty"]
@@ -574,14 +678,17 @@
 					"type": "object",
 					"properties": {
 						"icon_size": {
-							"type": "number"
+							"type": "number",
+							"default": 22
 						},
 						"ignored": {
 							"type": "array",
-							"items": {}
+							"items": {},
+							"default": []
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						}
 					},
 					"required": ["icon_size", "ignored", "tooltip"]
@@ -590,10 +697,12 @@
 					"type": "object",
 					"properties": {
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": ""
 						},
 						"notify": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						}
 					},
 					"required": ["icon", "notify"]
@@ -602,49 +711,64 @@
 					"type": "object",
 					"properties": {
 						"show_icon": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"available_icon": {
-							"type": "string"
+							"type": "string",
+							"default": "󰏗"
 						},
 						"no_updates_icon": {
-							"type": "string"
+							"type": "string",
+							"default": "󰏖"
 						},
 						"hover_reveal": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"reveal_duration": {
-							"type": "number"
+							"type": "number",
+							"default": 500
 						},
 						"os": {
-							"type": "string"
+							"type": "string",
+							"default": "arch"
 						},
 						"terminal": {
-							"type": "string"
+							"type": "string",
+							"default": "kitty"
 						},
 						"auto_hide": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"interval": {
-							"type": "number"
+							"type": "number",
+							"default": 3600
 						},
 						"pad_zero": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"flatpak": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"snap": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"brew": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						}
 					},
 					"required": [
@@ -669,13 +793,16 @@
 					"type": "object",
 					"properties": {
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"step_size": {
-							"type": "number"
+							"type": "number",
+							"default": 5
 						}
 					},
 					"required": ["label", "tooltip", "step_size"]
@@ -684,19 +811,24 @@
 					"type": "object",
 					"properties": {
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": ""
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"show_icon": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"quiet": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						}
 					},
 					"required": ["icon", "tooltip", "label", "show_icon", "quiet"]
@@ -705,34 +837,44 @@
 					"type": "object",
 					"properties": {
 						"location": {
-							"type": "string"
+							"type": "string",
+							"default": "kathmandu"
 						},
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"temperature_unit": {
-							"type": "string"
+							"type": "string",
+							"default": "celsius"
 						},
 						"label_format": {
-							"type": "string"
+							"type": "string",
+							"default": "{temperature} {condition}"
 						},
 						"wind_speed_unit": {
-							"type": "string"
+							"type": "string",
+							"default": "kmh"
 						},
 						"hover_reveal": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"reveal_duration": {
-							"type": "number"
+							"type": "number",
+							"default": 500
 						},
 						"expanded": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"interval": {
-							"type": "number"
+							"type": "number",
+							"default": 3600
 						}
 					},
 					"required": [
@@ -1038,19 +1180,24 @@
 					"type": "object",
 					"properties": {
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": ""
 						},
 						"label_format": {
-							"type": "string"
+							"type": "string",
+							"default": "[{count}]"
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"show_icon": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"hide_when_zero": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						}
 					},
 					"required": [
@@ -1065,16 +1212,20 @@
 					"type": "object",
 					"properties": {
 						"truncation_size": {
-							"type": "number"
+							"type": "number",
+							"default": 2
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": ""
 						},
 						"show_icon": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						}
 					},
 					"required": ["truncation_size", "tooltip", "icon", "show_icon"]
@@ -1083,22 +1234,28 @@
 					"type": "object",
 					"properties": {
 						"show_icon": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": ""
 						},
 						"mode": {
-							"$ref": "#/definitions/mode"
+							"$ref": "#/definitions/mode",
+							"default": "label"
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"graph_length": {
-							"type": "number"
+							"type": "number",
+							"default": 4
 						},
 						"unit": {
-							"type": "string"
+							"type": "string",
+							"default": "gb"
 						}
 					},
 					"required": [
@@ -1114,13 +1271,16 @@
 					"type": "object",
 					"properties": {
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": ""
 						},
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						}
 					},
 					"required": ["icon", "label", "tooltip"]
@@ -1129,13 +1289,16 @@
 					"type": "object",
 					"properties": {
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": "󱞁"
 						},
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						}
 					},
 					"required": ["icon", "label", "tooltip"]
@@ -1144,19 +1307,24 @@
 					"type": "object",
 					"properties": {
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": ""
 						},
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"per_row": {
-							"type": "number"
+							"type": "number",
+							"default": 9
 						},
 						"per_column": {
-							"type": "number"
+							"type": "number",
+							"default": 4
 						}
 					},
 					"required": ["icon", "label", "tooltip", "per_row", "per_column"]
@@ -1165,16 +1333,20 @@
 					"type": "object",
 					"properties": {
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": "󰌌"
 						},
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"show_icon": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						}
 					},
 					"required": ["icon", "label", "tooltip", "show_icon"]
@@ -1183,13 +1355,16 @@
 					"type": "object",
 					"properties": {
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"show_icon": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						}
 					},
 					"required": ["label", "tooltip", "show_icon"]
@@ -1198,19 +1373,24 @@
 					"type": "object",
 					"properties": {
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": "󰐳"
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"show_icon": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"quiet": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						}
 					},
 					"required": ["icon", "tooltip", "label", "show_icon", "quiet"]
@@ -1219,10 +1399,12 @@
 					"type": "object",
 					"properties": {
 						"truncation_size": {
-							"type": "number"
+							"type": "number",
+							"default": 10
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						}
 					},
 					"required": ["truncation_size", "tooltip"]
@@ -1231,19 +1413,23 @@
 					"type": "object",
 					"properties": {
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": "󰃰"
 						},
 						"show_icon": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"use_24hr": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true
 						},
 						"timezones": {
 							"type": "array",
 							"items": {
 								"type": "string"
-							}
+							},
+							"default": ["America/New_York", "Asia/Tokyo"]
 						}
 					},
 					"required": ["icon", "show_icon", "use_24hr", "timezones"]
@@ -1649,7 +1835,8 @@
 					"type": "object",
 					"properties": {
 						"enabled": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false
 						},
 						"anchor": {
 							"$ref": "#/definitions/anchor",
