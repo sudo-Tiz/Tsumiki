@@ -159,8 +159,10 @@ EOF
 
 	if [ "$DETACHED_MODE" = true ]; then
 		log_warning "Running in detached mode..."
-		setsid python3 main.py >/dev/null 2>&1 &
-		if [ $? -ne 0 ]; then
+setsid python3 main.py >/dev/null 2>&1 &
+		pid=$!
+		sleep 0.1 # Give a moment for the process to potentially fail on startup.
+		if ! ps -p "$pid" > /dev/null; then
 			log_error "Failed to start Tsumiki Bar in detached mode."
 			exit 1
 		fi
