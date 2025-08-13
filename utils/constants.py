@@ -413,6 +413,7 @@ DEFAULT_CONFIG = {
         "debug": True,
         "monitor_styles": True,
         "location": "top",
+        "auto_reload": True,
     },
 }
 
