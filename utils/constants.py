@@ -408,11 +408,8 @@ DEFAULT_CONFIG = {
     },
     "general": {
         "check_updates": False,
-        "layer": "overlay",
-        "auto_hide": False,
         "debug": True,
         "monitor_styles": True,
-        "location": "top",
         "auto_reload": True,
     },
 }

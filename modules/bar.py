@@ -128,7 +128,7 @@ class StatusBar(Window):
             ),
         )
 
-        anchor = f"left {bar_config.get('location', 'center')} right"
+        anchor = f"left {bar_config.get('location', 'top')} right"
 
         super().__init__(
             name="panel",
