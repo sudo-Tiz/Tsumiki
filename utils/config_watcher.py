@@ -11,10 +11,18 @@ from gi.repository import Gio, GLib
 from loguru import logger
 
 from utils.colors import Colors
+from utils.constants import APPLICATION_NAME
 
 
 class ConfigWatcher:
     """Simple file watcher that monitors config files and restarts Tsumiki."""
+
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
 
     def __init__(self):
         self.monitors: List[Gio.FileMonitor] = []
@@ -26,6 +34,8 @@ class ConfigWatcher:
             get_relative_path("../config.toml"),
             get_relative_path("../theme.json"),
         ]
+
+        self.RESTART_DELAY_MS = 1500
 
         # Set up monitors for existing files
         for config_file in config_files:
@@ -47,7 +57,7 @@ class ConfigWatcher:
                 f"{Colors.ERROR}[ConfigWatcher] Failed to monitor {file_path}: {e}"
             )
 
-    def _on_file_changed(self, monitor, file, other_file, event_type, file_path):
+    def _on_file_changed(self, monitor, file, other_file, event_type, file_path: str):
         """Handle file change events."""
         if (
             event_type == Gio.FileMonitorEvent.CHANGES_DONE_HINT
@@ -62,13 +72,16 @@ class ConfigWatcher:
             )
 
             # Delay restart slightly to handle multiple rapid changes
-            GLib.timeout_add(1500, self._restart_tsumiki)
+            GLib.timeout_add(self.RESTART_DELAY_MS, self._restart_tsumiki)
 
     def _restart_tsumiki(self):
         """Restart Tsumiki using the init script."""
         try:
             init_script = get_relative_path("../init.sh")
-            logger.info(f"{Colors.INFO}[ConfigWatcher] Restarting Tsumiki...")
+
+            logger.info(
+                f"{Colors.INFO}[ConfigWatcher] Restarting {APPLICATION_NAME.title()}..."
+            )
 
             # Run restart in background to avoid blocking
             subprocess.Popen(
