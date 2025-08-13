@@ -10,126 +10,136 @@ if ! grep -q "arch" /etc/os-release; then
 	exit 1
 fi
 
-# Get the absolute path of the script's directory
 SCRIPT_PATH=$(readlink -f "$0")
 INSTALL_DIR=$(dirname "$SCRIPT_PATH")
 
-copy_config_files() {
-	# Navigate to the $INSTALL_DIR directory
-	cd "$INSTALL_DIR" || {
-		echo -e "\033[31m  Directory $INSTALL_DIR does not exist.\033[0m\n"
+readonly RED="\033[31m"
+readonly GREEN="\033[32m"
+readonly YELLOW="\033[33m"
+readonly BLUE="\033[34m"
+readonly CYAN="\033[36m"
+readonly RESET="\033[0m"
+
+DETACHED_MODE=false
+
+SHOULD_START=false
+SHOULD_UPDATE=false
+SHOULD_INSTALL=false
+SHOULD_SETUP=false
+SHOULD_STOP=false
+
+log_info() { echo -e "${BLUE}$1${RESET}"; }
+log_success() { echo -e "${GREEN}$1${RESET}"; }
+log_warning() { echo -e "${YELLOW}$1${RESET}"; }
+log_error() { echo -e "${RED}$1${RESET}" >&2; }
+
+check_prerequisites() {
+	if ! command -v git &>/dev/null; then
+		log_error "Git is not installed. Please install git first."
 		exit 1
-	}
-
-	# Copy config.json from example if it doesn't exist
-	if [ ! -f config.json ]; then
-		if [ -f example/config.json ]; then
-			echo -e "\033[33m  config.json not found. Copying from example...\033[0m\n"
-			cp example/config.json config.json
-			echo -e "\033[32m 󰄴 config.json copied successfully.\033[0m\n"
-		else
-			echo -e "\033[31m  example/config.json not found. Cannot create default config.\033[0m\n"
-			exit 1
-		fi
 	fi
 
-	# Copy theme.json from example if it doesn't exist
-	if [ ! -f theme.json ]; then
-		if [ -f example/theme.json ]; then
-			echo -e "\033[33m   theme.json not found. Copying from example...\033[0m\n"
-			cp example/theme.json theme.json
-			echo -e "\033[32m 󰄴 theme.json copied successfully.\033[0m\n"
-		else
-			echo -e "\033[31m   example/theme.json not found. Cannot create default theme.\033[0m\n"
-			exit 1
-		fi
+	if ! command -v python3 &>/dev/null; then
+		log_error "Python3 is not installed. Please install python3 first."
+		exit 1
 	fi
+}
+
+ensure_venv() {
+    local action=${1:-"check"}
+
+    cd "$INSTALL_DIR" || {
+        log_error "Directory $INSTALL_DIR does not exist."
+        exit 1
+    }
+
+    case "$action" in
+        check)
+            if [ ! -d .venv ]; then
+                log_error "Virtual environment does not exist. Please set it up first."
+                exit 1
+            fi
+            ;;
+        setup)
+            if [ ! -d .venv ]; then
+                log_info "Creating virtual environment..."
+                if ! python3 -m venv .venv; then
+                    log_error "Failed to create virtual environment."
+                    exit 1
+                fi
+                log_success "Virtual environment created successfully."
+            else
+                log_info "Using existing virtual environment."
+            fi
+            ;;
+        activate)
+            if ! source .venv/bin/activate; then
+                log_error "Failed to activate virtual environment."
+                exit 1
+            fi
+            ;;
+        *)
+            log_error "Invalid action for ensure_venv: $action"
+            exit 1
+            ;;
+    esac
 }
 
 setup_venv() {
-	# Navigate to the $INSTALL_DIR directory
+    ensure_venv setup
+    ensure_venv activate
+
+    log_info "Installing Python dependencies..."
+    if ! pip install -r requirements.txt; then
+        log_error "Failed to install packages from requirements.txt."
+        deactivate
+        exit 1
+    fi
+    log_success "Python dependencies installed successfully."
+
+    deactivate
+}
+
+copy_config_files() {
 	cd "$INSTALL_DIR" || {
-		echo -e "\033[31m   Directory $INSTALL_DIR does not exist.\033[0m\n"
+		log_error "Directory $INSTALL_DIR does not exist."
 		exit 1
 	}
 
-	# Check if the virtual environment exists, if not, create it
-	if [ ! -d .venv ]; then
-		echo -e "\033[32m  venv does not exist. Creating venv...\033[0m\n"
-		if ! python3 -m venv .venv; then
-			printf "\033[31m  Failed to create virtual environment. Exiting...\033[0m\n" >&2
+	if [ ! -f config.json ]; then
+		if [ -f example/config.json ]; then
+			log_warning "config.json not found. Copying from example..."
+			cp example/config.json config.json
+			log_success "config.json copied successfully."
+		else
+			log_error "example/config.json not found. Cannot create default config."
 			exit 1
 		fi
-
-		printf "\033[32m  Virtual environment created successfully.\033[0m\n"
-	else
-		printf "\033[33m  Virtual environment already exists.\033[0m\n"
 	fi
 
-	# Activate virtual environment
-	source .venv/bin/activate
-
-	if ! source .venv/bin/activate; then
-		printf "\033[31m  Failed to activate venv. Exiting...\033[0m\n" >&2
-		exit 1
+	if [ ! -f theme.json ]; then
+		if [ -f example/theme.json ]; then
+			log_warning "theme.json not found. Copying from example..."
+			cp example/theme.json theme.json
+			log_success "theme.json copied successfully."
+		else
+			log_error "example/theme.json not found. Cannot create default theme."
+			exit 1
+		fi
 	fi
-
-
-	# Install Python dependencies
-		printf "\033[32m  Installing python dependencies, brace yourself.\033[0m\n"
-	pip install -r requirements.txt
-
-	if ! pip install -r requirements.txt; then
-		printf "\033[31m  Failed to install packages from requirements.txt. Exiting...\033[0m\n" >&2
-		deactivate
-		exit 1
-	fi
-
-		printf "\033[32m  Python dependencies installed successfully.\033[0m\n"
-	deactivate
 }
 
 start_bar() {
-	# Navigate to the $INSTALL_DIR directory
 	cd "$INSTALL_DIR" || {
-		echo -e "\033[31m  Directory $INSTALL_DIR does not exist.\033[0m\n"
+		log_error "Directory $INSTALL_DIR does not exist."
 		exit 1
 	}
 
-	# Ensure config files exist
 	copy_config_files
 
 	VERSION=$(git tag --sort=-v:refname | head -n 1)
 
-	# Check if the virtual environment exists, if not, create it
-	if [ ! -d .venv ]; then
-		echo -e "\033[32m  venv does not exist. Creating venv...\033[0m\n"
-		python3 -m venv .venv
-
-		if [ $? -ne 0 ]; then
-			echo -e "\033[31m  Failed to create virtual environment. Exiting...\033[0m\n"
-			exit 1
-		fi
-
-		source .venv/bin/activate
-
-		if [ $? -ne 0 ]; then
-			echo -e "\033[31m  Failed to activate venv. Exiting...\033[0m\n"
-			exit 1
-		fi
-
-		echo -e "\033[32m  Installing python dependencies, brace yourself.\033[0m\n"
-		pip install -r requirements.txt
-
-		if [ $? -ne 0 ]; then
-			echo -e "\033[31mFailed to install packages from requirements.txt. Exiting...\033[0m\n"
-			exit 1
-		fi
-		echo -e "\033[32m  All done, starting bar.\033[0m\n"
-	else
-		echo -e "\033[32m  Using existing venv.\033[0m\n"
-		source .venv/bin/activate
-	fi
+	ensure_venv activate
 
 	cat <<EOF
 
@@ -143,10 +153,25 @@ start_bar() {
 
 version: $VERSION
 
-
 EOF
-	echo -e "\e[32m  Using python:\e[0m \e[34m$(which python)\e[0m\n"
-	python3 main.py
+
+	log_success "Using python: $(which python)"
+
+	if [ "$DETACHED_MODE" = true ]; then
+		log_warning "Running in detached mode..."
+		setsid python3 main.py >/dev/null 2>&1 &
+		if [ $? -ne 0 ]; then
+			log_error "Failed to start Tsumiki Bar in detached mode."
+			exit 1
+		fi
+	else
+		log_info "Starting Tsumiki Bar..."
+		python3 main.py || {
+			log_error "Failed to start Tsumiki Bar"
+			exit 1
+		}
+	fi
+
 	deactivate
 }
 
@@ -223,96 +248,121 @@ install_packages() {
 
 	sudo pacman -S --noconfirm --needed "${pacman_deps[@]}"  || true
 
-	if command -v yay &>/dev/null; then
-		aur_helper="yay"
-	elif command -v paru &>/dev/null; then
+	if command -v paru &>/dev/null; then
 		aur_helper="paru"
+	elif command -v yay &>/dev/null; then
+		aur_helper="yay"
 	else
-		echo -e "\033[33myay or paru not found. Install the aur packages \033[36mgray-git \033[36mpython-fabric \033[33mwith the aur helper installed.\033[0m\n"
+		log_error "AUR helper (yay or paru) not found. Please install one first."
+		log_warning "You can manually install: gray-git python-fabric-git"
 		exit 1
 	fi
 
-	if command -v paru &>/dev/null; then
-		aur_helper="paru"
-	else
-		aur_helper="yay"
-	fi
+	$aur_helper -S --noconfirm --needed "${aur_deps[@]}" || {
+		log_error "Failed to install some AUR dependencies."
+		exit 1
+	}
 
-	# Install packages using yay (AUR helper)
-
-	$aur_helper -S --noconfirm --needed "${aur_deps[@]}"  || true
-
+	log_success "System packages installed successfully."
 }
 
-# Function to display usage information
 usage() {
-	printf "\033[31mUsage: %s [OPTION]...\033[0m\n" "$0"
-	printf "Execute one or more operations in sequence.\n\n"
-	printf "\033[32mAvailable options:\033[0m\n"
-	printf "\033[32m  -start\033[0m         Start the bar\n"
-	printf "\033[32m  -update\033[0m        Update from git\n"
-	printf "\033[32m  -install\033[0m       Install system packages only\n"
-	printf "\033[32m  -setup\033[0m         Setup virtual environment and Python dependencies only\n"
-	printf "\033[32m  -install-setup\033[0m Install packages and setup virtual environment\n"
-	printf "\033[32m  -restart\033[0m       Kill existing instances and start the bar\n"
-	printf "\n\033[33mExamples:\033[0m\n"
-	printf "  %s -start                    # Just start the bar\n" "$0"
-	printf "  %s -update -start            # Update and then start\n" "$0"
-	printf "  %s -install -setup -start    # Full setup and start\n" "$0"
-	printf "  %s -restart                  # Restart the bar\n" "$0"
+    log_error "Usage: $0 [OPTION]..."
+    log_info "Execute one or more operations in sequence."
+    log_success "Available options:"
+    log_success "  -start         Start the bar"
+    log_success "  -d             Enable detached mode (run in background)"
+    log_success "  -stop          Stop running instances"
+    log_success "  -update        Update from git"
+    log_success "  -install       Install system packages"
+    log_success "  -setup         Setup virtual environment and Python dependencies"
+    log_success "  -install-setup Install packages and setup virtual environment"
+    log_success "  -restart       Kill existing instances and start the bar"
+    log_warning "Examples:"
+    log_info "  $0 -start                    # Just start the bar"
+    log_info "  $0 -d -start                 # Start the bar in detached mode"
+    log_info "  $0 -stop                     # Stop running instances"
+    log_info "  $0 -update -start            # Update and then start"
+    log_info "  $0 -install -setup -start    # Full setup and start"
+    log_info "  $0 -restart                  # Restart the bar"
 }
 
-# Function to kill existing instances
 kill_existing() {
-	echo -e "\033[33m 󱤸 Stopping existing Tsumiki instances...\033[0m"
+	log_warning "Stopping existing Tsumiki instances..."
 	pkill tsumiki || true
 	# Wait for the process to terminate completely
 	while pgrep -x "tsumiki" >/dev/null; do
 		sleep 0.1
 	done
-	echo -e "\033[32m 󱤸 Existing instances stopped.\033[0m\n"
+	log_success "Existing instances stopped."
 }
 
-# Check if no arguments provided
 if [ $# -eq 0 ]; then
   usage >&2
   exit 1
 fi
 
-# Process each argument in sequence
+check_prerequisites
+
 for arg in "$@"; do
 	case "$arg" in
 	-start)
-		echo -e "\033[34m=== 󰓅 Starting Bar ===\033[0m"
-		start_bar
+		SHOULD_START=true
+		;;
+	-d)
+		echo -e "\033[33m Detached mode enabled\033[0m"
+		DETACHED_MODE=true
+		;;
+	-stop)
+		SHOULD_STOP=true
 		;;
 	-update)
-		echo -e "\033[34m===  Updating from Git ===\033[0m"
-		cd $INSTALL_DIR && git pull
-		echo -e "\033[32m    Update completed.\033[0m\n"
+		SHOULD_UPDATE=true
 		;;
 	-install)
-		echo -e "\033[34m=== 󱧘 Installing System Packages ===\033[0m"
-		install_packages
+		SHOULD_INSTALL=true
 		;;
 	-setup)
-		echo -e "\033[34m===  Setting up Virtual Environment ===\033[0m"
-		setup_venv
+		SHOULD_SETUP=true
 		;;
 	-install-setup)
-		echo -e "\033[34m=== 󱧘 Installing Packages and Setting up Environment ===\033[0m"
-		install_packages
-		setup_venv
+		SHOULD_INSTALL=true
+		SHOULD_SETUP=true
 		;;
 	-restart)
-		echo -e "\033[34m===  Restarting Bar ===\033[0m"
-		kill_existing
-		start_bar
+		SHOULD_STOP=true
+		SHOULD_START=true
 		;;
 	*)
-		printf "\033[31m  Unknown command: %s\033[0m\n" "$arg" >&2
+		printf "\033[31m Unknown command: %s\033[0m\n" "$arg" >&2
 		usage >&2
 		exit 1
 		;;
 	esac
 done
+
+if [ "$SHOULD_STOP" = true ]; then
+	log_info "===  Stopping Tsumiki ==="
+	kill_existing
+fi
+
+if [ "$SHOULD_UPDATE" = true ]; then
+	log_info "===  Updating from Git ==="
+	cd $INSTALL_DIR && git pull
+	log_success "    Update completed."
+fi
+
+if [ "$SHOULD_INSTALL" = true ]; then
+	log_info "=== 󱧘 Installing System Packages ==="
+	install_packages
+fi
+
+if [ "$SHOULD_SETUP" = true ]; then
+	log_info "===  Setting up Virtual Environment ==="
+	setup_venv
+fi
+
+if [ "$SHOULD_START" = true ]; then
+	log_info "=== 󰓅 Starting Bar ==="
+	start_bar
+fi
