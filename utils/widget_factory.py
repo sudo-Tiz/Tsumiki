@@ -7,6 +7,40 @@ from loguru import logger
 from shared.custom_button import CustomButtonWidget
 
 
+class IndexedWidgetHelper:
+    """Helper class to eliminate duplication in indexed widget handling."""
+
+    @staticmethod
+    def validate_and_get_index(
+        identifier: str, collection: list, collection_name: str
+    ) -> Optional[int]:
+        """Unified index validation - DRY principle.
+
+        Returns:
+            Valid index or None if invalid
+        """
+        try:
+            index = int(identifier)
+            if not isinstance(collection, list) or not (0 <= index < len(collection)):
+                logger.error(
+                    f"{collection_name} index {index} out of range "
+                    f"(0-{len(collection)-1})"
+                )
+                return None
+            return index
+        except (ValueError, TypeError):
+            logger.error(f"Invalid {collection_name} index: {identifier}")
+            return None
+
+    @staticmethod
+    def get_config_path(config: dict, *path_parts: str) -> list:
+        """Navigate config path safely - DRY principle."""
+        result = config
+        for part in path_parts:
+            result = result.get(part, {})
+        return result if isinstance(result, list) else []
+
+
 class WidgetResolver:
     """Universal widget resolver with unified handling for all widget types."""
 
@@ -17,6 +51,7 @@ class WidgetResolver:
             widgets_list: Dictionary mapping widget names to widget classes
         """
         self.widgets_list = widgets_list
+        self.helper = IndexedWidgetHelper()
 
     def resolve_widget(
         self, widget_spec: str, context: Dict[str, Any]
@@ -54,9 +89,21 @@ class WidgetResolver:
         """Unified resolution by type - all widgets follow the same pattern."""
         resolvers = {
             "widget": lambda: self._create_simple_widget(identifier),
-            "custom_button": lambda: self._create_custom_button(identifier, context),
-            "group": lambda: self._create_widget_group(identifier, context),
-            "collapsible": lambda: self._create_collapsible_group(identifier, context),
+            "custom_button": lambda: self._create_indexed_widget(
+                identifier, context, "custom_button",
+                ["widgets", "custom_button_group", "buttons"],
+                self._instantiate_custom_button
+            ),
+            "group": lambda: self._create_indexed_widget(
+                identifier, context, "widget_group",
+                ["widget_groups"],
+                self._instantiate_widget_group
+            ),
+            "collapsible": lambda: self._create_indexed_widget(
+                identifier, context, "collapsible_group",
+                ["collapsible_groups"],
+                self._instantiate_collapsible_group
+            ),
         }
 
         resolver = resolvers.get(widget_type)
@@ -67,85 +114,51 @@ class WidgetResolver:
         widget_class = self.widgets_list.get(widget_name)
         return widget_class() if widget_class else None
 
-    def _create_custom_button(
-        self, identifier: str, context: Dict[str, Any]
-    ) -> Optional[CustomButtonWidget]:
-        """Create custom button - unified pattern."""
-        try:
-            index = int(identifier)
-            config = context.get("config", {})
-            buttons = (
-                config.get("widgets", {})
-                .get("custom_button_group", {})
-                .get("buttons", [])
-            )
-
-            # Validate bounds before access
-            if not isinstance(buttons, list) or not (0 <= index < len(buttons)):
-                logger.error(
-                    f"Custom button index {index} out of range "
-                    f"(0-{len(buttons)-1})"
-                )
-                return None
-
-            return CustomButtonWidget(
-                widget_name=f"custom_button_{index}",
-                config=buttons[index]
-            )
-        except (ValueError, IndexError, TypeError) as e:
-            logger.error(f"Invalid custom button index: {identifier} - {e}")
-            return None
-
-    def _create_widget_group(
-        self, identifier: str, context: Dict[str, Any]
+    def _create_indexed_widget(
+        self, identifier: str, context: Dict[str, Any],
+        widget_type: str, config_path: list, instantiator_func
     ) -> Optional[Any]:
-        """Create widget group - unified pattern."""
-        try:
-            from shared.widget_container import WidgetGroup
+        """Unified indexed widget creation - DRY principle."""
+        config = context.get("config", {})
+        collection = self.helper.get_config_path(config, *config_path)
 
-            index = int(identifier)
-            config = context.get("config", {})
-            groups = config.get("widget_groups", [])
-
-            if not isinstance(groups, list) or not (0 <= index < len(groups)):
-                logger.error(f"Widget group index {index} out of range")
-                return None
-
-            group_config = groups[index]
-            return WidgetGroup.from_config(
-                group_config,
-                self.widgets_list,
-                main_config=config,
-            )
-        except (ValueError, IndexError, TypeError) as e:
-            logger.error(f"Invalid widget group index: {identifier} - {e}")
+        index = self.helper.validate_and_get_index(identifier, collection, widget_type)
+        if index is None:
             return None
 
-    def _create_collapsible_group(
-        self, identifier: str, context: Dict[str, Any]
-    ) -> Optional[Any]:
-        """Create collapsible group - unified pattern."""
-        try:
-            from shared.collapsible_group import CollapsibleGroupWidget
+        return instantiator_func(collection[index], config, index)
 
-            index = int(identifier)
-            config = context.get("config", {})
-            groups = config.get("collapsible_groups", [])
+    def _instantiate_custom_button(
+        self, button_config: dict, config: dict, index: int
+    ) -> CustomButtonWidget:
+        """Create CustomButtonWidget instance."""
+        return CustomButtonWidget(
+            widget_name=f"custom_button_{index}",
+            config=button_config
+        )
 
-            if not isinstance(groups, list) or not (0 <= index < len(groups)):
-                logger.error(f"Collapsible group index {index} out of range")
-                return None
+    def _instantiate_widget_group(
+        self, group_config: dict, config: dict, index: int
+    ) -> Any:
+        """Create WidgetGroup instance."""
+        from shared.widget_container import WidgetGroup
+        return WidgetGroup.from_config(
+            group_config,
+            self.widgets_list,
+            main_config=config,
+        )
 
-            group_config = groups[index]
-            collapsible_group = CollapsibleGroupWidget()
-            collapsible_group.update_config(group_config)
-            collapsible_group.widgets_config = group_config.get("widgets", [])
-            collapsible_group.set_context(config, self.widgets_list)
+    def _instantiate_collapsible_group(
+        self, group_config: dict, config: dict, index: int
+    ) -> Any:
+        """Create CollapsibleGroupWidget instance."""
+        from shared.collapsible_group import CollapsibleGroupWidget
 
-            return collapsible_group
-        except (ValueError, IndexError, TypeError) as e:
-            logger.error(f"Invalid collapsible group index: {identifier} - {e}")
-            return None
+        collapsible_group = CollapsibleGroupWidget()
+        collapsible_group.update_config(group_config)
+        collapsible_group.widgets_config = group_config.get("widgets", [])
+        collapsible_group.set_context(config, self.widgets_list)
+        return collapsible_group
 
     def batch_resolve(
         self, widget_specs: list[str], context: Dict[str, Any]

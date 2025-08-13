@@ -427,6 +427,21 @@ def kill_process(process_name: str):
     return True
 
 
+def _get_config_collection(parsed_data: dict, widget_type: str) -> list:
+    """Get collection for widget type - DRY principle."""
+    collections = {
+        "custom_button": lambda: (
+            parsed_data.get("widgets", {})
+            .get("custom_button_group", {})
+            .get("buttons", [])
+        ),
+        "group": lambda: parsed_data.get("widget_groups", []),
+        "collapsible": lambda: parsed_data.get("collapsible_groups", []),
+    }
+    getter = collections.get(widget_type, lambda: [])
+    return getter()
+
+
 def _validate_indexed_reference(
     identifier: str, collection: list, collection_name: str, section: str
 ) -> int:
@@ -464,27 +479,18 @@ def _validate_indexed_reference(
     return idx
 
 
-def _validate_custom_button(identifier: str, parsed_data: dict, section: str) -> None:
-    """Validate custom button reference."""
-    widgets_config = parsed_data.get("widgets", {})
-    custom_button_config = widgets_config.get("custom_button_group", {})
-    buttons = custom_button_config.get("buttons", [])
-
-    _validate_indexed_reference(identifier, buttons, "custom button", section)
-
-
-def _validate_widget_group(identifier: str, parsed_data: dict, section: str) -> None:
-    """Validate widget group reference."""
-    groups = parsed_data.get("widget_groups", [])
-    _validate_indexed_reference(identifier, groups, "widget group", section)
-
-
-def _validate_collapsible_group(
-    identifier: str, parsed_data: dict, section: str
+def _validate_special_widget(
+    widget_type: str, identifier: str, parsed_data: dict, section: str
 ) -> None:
-    """Validate collapsible group reference."""
-    groups = parsed_data.get("collapsible_groups", [])
-    _validate_indexed_reference(identifier, groups, "collapsible group", section)
+    """Unified validation for special widget types - DRY principle."""
+    collection = _get_config_collection(parsed_data, widget_type)
+    collection_names = {
+        "custom_button": "custom button",
+        "group": "widget group",
+        "collapsible": "collapsible group",
+    }
+    collection_name = collection_names.get(widget_type, widget_type)
+    _validate_indexed_reference(identifier, collection, collection_name, section)
 
 
 def _validate_regular_widget(
@@ -522,16 +528,9 @@ def validate_widget_reference(
 
         widget_type, identifier = widget_spec[1:].split(":", 1)
 
-        # Dispatcher pattern for validation
-        validators = {
-            "custom_button": _validate_custom_button,
-            "group": _validate_widget_group,
-            "collapsible": _validate_collapsible_group,
-        }
-
-        validator = validators.get(widget_type)
-        if validator:
-            validator(identifier, parsed_data, section)
+        # Unified validation for all special widget types
+        if widget_type in ["custom_button", "group", "collapsible"]:
+            _validate_special_widget(widget_type, identifier, parsed_data, section)
         else:
             raise ValueError(
                 f"Unknown widget type '{widget_type}' in section {section}"
