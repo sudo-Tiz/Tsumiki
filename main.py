@@ -88,6 +88,12 @@ def main():
 
     process_and_apply_css(app)
 
+    # Start config file watching if enabled
+    if general_options.get("auto_reload", True):
+        from utils.config_watcher import start_config_watching
+        start_config_watching()
+        logger.info(f"{Colors.INFO}[Main] Config auto-reload enabled")
+
     # Run the application
     app.run()
 
