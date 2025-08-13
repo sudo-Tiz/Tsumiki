@@ -61,9 +61,7 @@ class RecorderWidget(ButtonWidget):
         if self.recorder_service.is_recording:
             self.recorder_service.screenrecord_stop()
         else:
-            self.recorder_service.screenrecord_start(
-                path=self.config.get("path", ""), config=self.config
-            )
+            self.recorder_service.screenrecord_start(config=self.config)
 
     def update_ui(self, _, is_recording: bool):
         current_children = self.box.get_children()

@@ -41,6 +41,5 @@ class ScreenShotWidget(ButtonWidget):
             return  # Early exit if script not available
 
         self.recorder_service.screenshot(
-            path=self.config.get("path", ""),
             config=self.config,
         )

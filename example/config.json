@@ -49,7 +49,7 @@
 			"tooltip": true,
 			"label": false,
 			"annotation": true,
-			"capture_sound": true,
+			"capture_sound": false,
 			"icon": "󰄀",
 			"delayed": false,
 			"delayed_timeout": 5000
@@ -188,7 +188,7 @@
 			"temperature_unit": "celsius",
 			"label_format": "{temperature} {condition}",
 			"wind_speed_unit": "kmh",
-			"hover_reveal": false,
+			"hover_reveal": true,
 			"reveal_duration": 500,
 			"expanded": true, // this is to show the expanded weather widget
 			"interval": 3600 // this is the interval in seconds to update the weather, 1 hour is 3600 seconds,

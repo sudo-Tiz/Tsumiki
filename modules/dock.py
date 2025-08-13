@@ -1,4 +1,3 @@
-import contextlib
 import json
 
 import gi
@@ -19,7 +18,6 @@ from utils.app import AppUtils
 from utils.constants import PINNED_APPS_FILE
 from utils.functions import read_json_file, write_json_file
 from utils.icon_resolver import IconResolver
-from utils.monitors import HyprlandWithMonitors
 
 gi.require_versions({"Glace": "0.1", "Gtk": "3.0"})
 
@@ -28,7 +26,6 @@ class AppBar(Box):
     """A simple app bar widget for the dock."""
 
     def __init__(self, parent):
-        self.client_buttons = {}
         self._parent = parent
 
         self.app_util = AppUtils()
@@ -44,7 +41,7 @@ class AppBar(Box):
 
         super().__init__(
             spacing=10,
-            name="app-bar",
+            name="dock",
             style_classes=["window-basic", "sleek-border"],
             children=[
                 # Button(
@@ -62,16 +59,12 @@ class AppBar(Box):
         self._manager = Glace.Manager()
         self._manager.connect("client-added", self._on_client_added)
         self._preview_image = Image()
-        self._hyp = HyprlandWithMonitors()
+        self._hyp = get_hyprland_connection()
 
         self.pinned_apps_container = Box(spacing=7)
-
         self.add(self.pinned_apps_container)
 
-        self.pinned_apps = read_json_file(PINNED_APPS_FILE)
-
-        if self.pinned_apps is None:
-            self.pinned_apps = []
+        self.pinned_apps = read_json_file(PINNED_APPS_FILE) or []
 
         self._populate_pinned_apps(self.pinned_apps)
 
@@ -98,6 +91,16 @@ class AppBar(Box):
                 if not self.popup_revealer.child_revealed
                 else None,
             )
+
+    def get_client_data(self, class_name):
+        try:
+            clients = json.loads(self._hyp.send_command("j/clients").reply.decode())
+
+            matches = list(filter(lambda app: app.get("class") == class_name, clients))
+            return matches[0] if matches else clients
+        except Exception as e:
+            logger.error(f"[Dock] Failed to get active workspace: {e}")
+            return None
 
     def _close_popup(self, *_):
         self.popup_revealer.unreveal()
@@ -155,9 +158,7 @@ class AppBar(Box):
                     # Use hyprctl to kill windows of this application class
                     exec_shell_command(f"hyprctl dispatch closewindow class:{app_id}")
             except Exception:
-                # Last resort: kill active window (not ideal but better than nothing)
-                with contextlib.suppress(Exception):
-                    exec_shell_command("hyprctl dispatch killactive")
+                logger.error(f"[Dock] Failed to close client {client.get_app_id()}")
 
     def show_menu(self, client: Glace.Client):
         """Show the context menu for a client."""
@@ -245,7 +246,6 @@ class AppBar(Box):
             on_leave_notify_event=lambda *_: self.config.get("preview_apps", True)
             and GLib.timeout_add(100, self._close_popup),
         )
-        self.client_buttons[client.get_id()] = client_button
 
         bulk_connect(
             client,
