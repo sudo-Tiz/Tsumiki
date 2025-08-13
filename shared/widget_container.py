@@ -118,10 +118,7 @@ class WidgetGroup(BoxWidget):
         resolver = WidgetResolver(widgets_list)
         context = {"config": main_config} if main_config else {}
 
-        widgets = resolver.batch_resolve(
-            config.get("widgets", []),
-            context
-        )
+        widgets = resolver.batch_resolve(config.get("widgets", []), context)
 
         return cls(
             children=widgets,

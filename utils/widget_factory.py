@@ -24,7 +24,7 @@ class IndexedWidgetHelper:
             if not isinstance(collection, list) or not (0 <= index < len(collection)):
                 logger.error(
                     f"{collection_name} index {index} out of range "
-                    f"(0-{len(collection)-1})"
+                    f"(0-{len(collection) - 1})"
                 )
                 return None
             return index
@@ -90,19 +90,25 @@ class WidgetResolver:
         resolvers = {
             "widget": lambda: self._create_simple_widget(identifier),
             "custom_button": lambda: self._create_indexed_widget(
-                identifier, context, "custom_button",
+                identifier,
+                context,
+                "custom_button",
                 ["widgets", "custom_button_group", "buttons"],
-                self._instantiate_custom_button
+                self._instantiate_custom_button,
             ),
             "group": lambda: self._create_indexed_widget(
-                identifier, context, "widget_group",
+                identifier,
+                context,
+                "widget_group",
                 ["widget_groups"],
-                self._instantiate_widget_group
+                self._instantiate_widget_group,
             ),
             "collapsible": lambda: self._create_indexed_widget(
-                identifier, context, "collapsible_group",
+                identifier,
+                context,
+                "collapsible_group",
                 ["collapsible_groups"],
-                self._instantiate_collapsible_group
+                self._instantiate_collapsible_group,
             ),
         }
 
@@ -115,8 +121,12 @@ class WidgetResolver:
         return widget_class() if widget_class else None
 
     def _create_indexed_widget(
-        self, identifier: str, context: Dict[str, Any],
-        widget_type: str, config_path: list, instantiator_func
+        self,
+        identifier: str,
+        context: Dict[str, Any],
+        widget_type: str,
+        config_path: list,
+        instantiator_func,
     ) -> Optional[Any]:
         """Unified indexed widget creation - DRY principle."""
         config = context.get("config", {})
@@ -133,8 +143,7 @@ class WidgetResolver:
     ) -> CustomButtonWidget:
         """Create CustomButtonWidget instance."""
         return CustomButtonWidget(
-            widget_name=f"custom_button_{index}",
-            config=button_config
+            widget_name=f"custom_button_{index}", config=button_config
         )
 
     def _instantiate_widget_group(
@@ -142,6 +151,7 @@ class WidgetResolver:
     ) -> Any:
         """Create WidgetGroup instance."""
         from shared.widget_container import WidgetGroup
+
         return WidgetGroup.from_config(
             group_config,
             self.widgets_list,

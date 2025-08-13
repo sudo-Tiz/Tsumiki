@@ -554,6 +554,8 @@ def validate_widget_reference(
     else:
         # Regular widget validation
         _validate_regular_widget(widget_spec, default_config, section)
+
+
 def validate_widgets(parsed_data, default_config):
     """Validates the widgets defined in the layout configuration.
 
@@ -582,8 +584,7 @@ def validate_widgets(parsed_data, default_config):
                 if isinstance(group, dict) and "widgets" in group:
                     for widget in group["widgets"]:
                         validate_widget_reference(
-                            widget, parsed_data, default_config,
-                            f"{group_type}[{idx}]"
+                            widget, parsed_data, default_config, f"{group_type}[{idx}]"
                         )
 
 
