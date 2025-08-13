@@ -155,9 +155,11 @@ class ClipHistoryMenu(Box):
         """Worker for loading clipboard items, now runs in main loop via idle_add"""
         try:
             result = subprocess.run(
-                ["cliphist", "list"], capture_output=True, text=True, check=True
+                ["cliphist", "list"], capture_output=True, check=True
             )
-            lines = result.stdout.strip().split("\n")
+            # Decode stdout with error handling
+            stdout_str = result.stdout.decode("utf-8", errors="replace")
+            lines = stdout_str.strip().split("\n")
             new_items = []
             for line in lines:
                 if not line or "<meta http-equiv" in line:
