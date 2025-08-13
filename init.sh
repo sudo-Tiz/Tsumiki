@@ -236,7 +236,6 @@ install_packages() {
 		gnome-bluetooth-3.0
 		python-rlottie-python
 		python-pytomlpp
-		python-pyjson5
 		python-ijson
 		slurp
 		imagemagick

@@ -1,7 +1,6 @@
+import json
 import os
 
-import pyjson5 as json
-import pytomlpp as toml
 from fabric.utils import get_relative_path
 from loguru import logger
 
@@ -10,6 +9,8 @@ from .functions import (
     deep_merge,
     exclude_keys,
     flatten_dict,
+    read_json_file,
+    read_toml_file,
     run_in_thread,
     validate_widgets,
 )
@@ -37,30 +38,10 @@ class TsumikiConfig:
 
         self.config = self.default_config()
 
-        self.theme_config = self.read_json(self.theme_config_file)
+        self.theme_config = read_json_file(file_path=self.theme_config_file)
 
         self.set_css_settings()
         self._initialized = True
-
-    def read_json(self, file) -> dict:
-        logger.info(f"[Config] Reading json config from {file}")
-        try:
-            with open(file, "r") as file:
-                # Load JSON data into a Python dictionary
-                return json.load(file)
-        except Exception as e:
-            logger.error(f"[Config] Failed to read json config from {file}: {e}")
-
-    def read_config_toml(self) -> dict:
-        logger.info(f"[Config] Reading toml config from {self.toml_config_file}")
-        try:
-            with open(self.toml_config_file, "r") as file:
-                # Load JSON data into a Python dictionary
-                return toml.load(file)
-        except Exception as e:
-            logger.error(
-                f"[Config] Failed to read toml config from {self.toml_config_file}: {e}"
-            )
 
     def default_config(self) -> BarConfig:
         # Read the configuration from the JSON file
@@ -71,9 +52,9 @@ class TsumikiConfig:
             raise FileNotFoundError("Please provide either a json or toml config.")
 
         parsed_data = (
-            self.read_json(file=self.json_config_file)
+            read_json_file(file_path=self.json_config_file)
             if check_json
-            else self.read_config_toml()
+            else read_toml_file(file_path=self.toml_config_file)
         )
 
         validate_widgets(parsed_data, DEFAULT_CONFIG)
