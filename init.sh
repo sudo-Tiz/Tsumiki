@@ -353,7 +353,7 @@ fi
 
 if [ "$SHOULD_UPDATE" = true ]; then
 	log_info "===  Updating from Git ==="
-	cd $INSTALL_DIR && git pull
+	cd "$INSTALL_DIR" && git pull
 	log_success "    Update completed."
 fi
 
