@@ -55,23 +55,28 @@ class KeyboardLayoutWidget(ButtonWidget):
         )
 
     def get_keyboard(self):
-        data = json.loads(str(self.connection.send_command("j/devices").reply.decode()))
-
-        keyboards = data.get("keyboards", [])
-        if not keyboards:
-            return "Unknown"
-
-        main_kb = next((kb for kb in keyboards if kb.get("main")), keyboards[-1])
-
-        layout = main_kb["active_keymap"]
-
-        label = KBLAYOUT_MAP.get(layout, layout)
-
-        if self.config.get("tooltip", False):
-            caps = "On" if main_kb["capsLock"] else "Off"
-            num = "On" if main_kb["numLock"] else "Off"
-            self.set_tooltip_text(
-                f"Layout: {layout} | Caps Lock 󰪛: {caps} | Num Lock : {num}"
+        try:
+            data = json.loads(
+                str(self.connection.send_command("j/devices").reply.decode())
             )
 
-        self.kb_label.set_label(label)
+            keyboards = data.get("keyboards", [])
+            if not keyboards:
+                return "Unknown"
+
+            main_kb = next((kb for kb in keyboards if kb.get("main")), keyboards[-1])
+
+            layout = main_kb["active_keymap"]
+
+            label = KBLAYOUT_MAP.get(layout, layout)
+
+            if self.config.get("tooltip", False):
+                caps = "On" if main_kb["capsLock"] else "Off"
+                num = "On" if main_kb["numLock"] else "Off"
+                self.set_tooltip_text(
+                    f"Layout: {layout} | Caps Lock 󰪛: {caps} | Num Lock : {num}"
+                )
+
+            self.kb_label.set_label(label)
+        except Exception as e:
+            logger.error(f"[Keyboard] Error getting keyboard layout: {e}")
