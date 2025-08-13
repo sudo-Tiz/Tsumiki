@@ -427,10 +427,82 @@ def kill_process(process_name: str):
     return True
 
 
+def _validate_indexed_reference(
+    identifier: str, collection: list, collection_name: str, section: str
+) -> int:
+    """Helper function to validate indexed references (groups, buttons, etc.).
+
+    Args:
+        identifier: String identifier that should be a digit
+        collection: List to validate against
+        collection_name: Name of collection for error messages
+        section: Section name for error reporting
+
+    Returns:
+        Validated index
+
+    Raises:
+        ValueError: If validation fails
+    """
+    if not identifier.isdigit():
+        raise ValueError(
+            f"Invalid {collection_name} index '{identifier}' in section {section}. "
+            "Must be a number."
+        )
+
+    idx = int(identifier)
+
+    if not isinstance(collection, list):
+        raise ValueError(f"{collection_name} must be an array")
+
+    if not (0 <= idx < len(collection)):
+        raise ValueError(
+            f"{collection_name.title()} index {idx} is out of range "
+            f"in section {section}. Available indices: 0-{len(collection) - 1}"
+        )
+
+    return idx
+
+
+def _validate_custom_button(identifier: str, parsed_data: dict, section: str) -> None:
+    """Validate custom button reference."""
+    widgets_config = parsed_data.get("widgets", {})
+    custom_button_config = widgets_config.get("custom_button_group", {})
+    buttons = custom_button_config.get("buttons", [])
+
+    _validate_indexed_reference(identifier, buttons, "custom button", section)
+
+
+def _validate_widget_group(identifier: str, parsed_data: dict, section: str) -> None:
+    """Validate widget group reference."""
+    groups = parsed_data.get("widget_groups", [])
+    _validate_indexed_reference(identifier, groups, "widget group", section)
+
+
+def _validate_collapsible_group(
+    identifier: str, parsed_data: dict, section: str
+) -> None:
+    """Validate collapsible group reference."""
+    groups = parsed_data.get("collapsible_groups", [])
+    _validate_indexed_reference(identifier, groups, "collapsible group", section)
+
+
+def _validate_regular_widget(
+    widget_spec: str, default_config: dict, section: str
+) -> None:
+    """Validate regular widget reference."""
+    widgets_list = default_config.get("widgets", {})
+    if widget_spec not in widgets_list:
+        raise ValueError(
+            f"Invalid widget '{widget_spec}' in section {section}. "
+            "Please check the widget name."
+        )
+
+
 def validate_widget_reference(
     widget_spec: str, parsed_data: dict, default_config: dict, section: str = "layout"
 ):
-    """Unified validation for any widget reference without circular imports.
+    """Unified validation for any widget reference using dispatcher pattern.
 
     Args:
         widget_spec: Widget specification to validate
@@ -450,80 +522,23 @@ def validate_widget_reference(
 
         widget_type, identifier = widget_spec[1:].split(":", 1)
 
-        if widget_type == "custom_button":
-            # Validate custom button reference
-            if not identifier.isdigit():
-                raise ValueError(
-                    f"Invalid custom button index '{identifier}' in section {section}. "
-                    "Must be a number."
-                )
+        # Dispatcher pattern for validation
+        validators = {
+            "custom_button": _validate_custom_button,
+            "group": _validate_widget_group,
+            "collapsible": _validate_collapsible_group,
+        }
 
-            idx = int(identifier)
-            widgets_config = parsed_data.get("widgets", {})
-            custom_button_config = widgets_config.get("custom_button_group", {})
-            buttons = custom_button_config.get("buttons", [])
-
-            if not isinstance(buttons, list):
-                raise ValueError("custom_button_group.buttons must be an array")
-
-            if not (0 <= idx < len(buttons)):
-                raise ValueError(
-                    f"Custom button index {idx} is out of range in section {section}. "
-                    f"Available indices: 0-{len(buttons) - 1}"
-                )
-
-        elif widget_type == "group":
-            # Validate widget group reference
-            if not identifier.isdigit():
-                raise ValueError(
-                    f"Invalid group index '{identifier}' in section {section}"
-                )
-
-            idx = int(identifier)
-            groups = parsed_data.get("widget_groups", [])
-
-            if not isinstance(groups, list):
-                raise ValueError("widget_groups must be an array")
-
-            if not (0 <= idx < len(groups)):
-                raise ValueError(
-                    f"Widget group index {idx} is out of range in section {section}"
-                )
-
-        elif widget_type == "collapsible":
-            # Validate collapsible group reference
-            if not identifier.isdigit():
-                raise ValueError(
-                    f"Invalid collapsible index '{identifier}' in section {section}"
-                )
-
-            idx = int(identifier)
-            groups = parsed_data.get("collapsible_groups", [])
-
-            if not isinstance(groups, list):
-                raise ValueError("collapsible_groups must be an array")
-
-            if not (0 <= idx < len(groups)):
-                raise ValueError(
-                    f"Collapsible group index {idx} is out of range "
-                    f"in section {section}"
-                )
-
+        validator = validators.get(widget_type)
+        if validator:
+            validator(identifier, parsed_data, section)
         else:
             raise ValueError(
                 f"Unknown widget type '{widget_type}' in section {section}"
             )
-
     else:
-        # Regular widget - check if it exists in available widgets
-        widgets_list = default_config.get("widgets", {})
-        if widget_spec not in widgets_list:
-            raise ValueError(
-                f"Invalid widget '{widget_spec}' in section {section}. "
-                "Please check the widget name."
-            )
-
-
+        # Regular widget validation
+        _validate_regular_widget(widget_spec, default_config, section)
 def validate_widgets(parsed_data, default_config):
     """Validates the widgets defined in the layout configuration.
 
