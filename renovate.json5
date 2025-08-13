@@ -1,6 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "prCreation": "immediate",
+    rangeStrategy: 'bump',
+   labels: [
+    'dependencies',
+  ],
   "extends": [
     "config:recommended",
     "schedule:weekly"
