@@ -40,14 +40,19 @@ class SubMapWidget(ButtonWidget):
         )
 
     def get_submap(self, *_):
-        submap = str(self.connection.send_command("submap").reply.decode()).strip("\n")
-
-        if submap == "unknown request":
-            submap = "default"
-
-        self.submap_label.set_label(submap)
-
-        if self.config.get("tooltip", False):
-            self.set_tooltip_text(
-                f"Current submap: {submap}",
+        try:
+            submap = str(self.connection.send_command("submap").reply.decode()).strip(
+                "\n"
             )
+
+            if submap == "unknown request":
+                submap = "default"
+
+            self.submap_label.set_label(submap)
+
+            if self.config.get("tooltip", False):
+                self.set_tooltip_text(
+                    f"Current submap: {submap}",
+                )
+        except Exception as e:
+            logger.error(f"[Submap] Error getting submap: {e}")
