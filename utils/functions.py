@@ -117,6 +117,22 @@ def read_json_file(file_path: str) -> Optional[Dict | List]:
             return None
 
 
+def read_toml_file(file_path: str) -> dict:
+    import pytomlpp as toml
+
+    if not os.path.exists(file_path):
+        logger.error(f"TOML file {file_path} does not exist.")
+        return None
+
+    logger.info(f"[Config] Reading TOML config from {file_path}")
+    try:
+        with open(file_path, "r") as file:
+            return toml.load(file)
+    except Exception as e:
+        logger.error(f"Failed to read TOML file {file_path}: {e}")
+        return None
+
+
 # support for multiple monitors
 def for_monitors(widget):
     n = Gdk.Display.get_default().get_n_monitors() if Gdk.Display.get_default() else 1

@@ -340,8 +340,6 @@
 
 - **`general`**: `object`
   - **`check_updates`**: `bool` (default: false)
-  - **`layer`**: `str` (default: "overlay")
-  - **`auto_hide`**: `bool` (default: false)
   - **`debug`**: `bool` (default: true)
   - **`monitor_styles`**: `bool` (default: true)
-  - **`location`**: `str` (default: "top")
+  - **`auto_reload`**: `bool` (default: true)
