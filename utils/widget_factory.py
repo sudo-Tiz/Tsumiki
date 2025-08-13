@@ -98,9 +98,8 @@ class WidgetResolver:
         Returns:
             List of successfully created widget instances
         """
-        widgets = []
-        for spec in widget_specs:
-            widget = self.resolve_widget(spec, context)
-            if widget:
-                widgets.append(widget)
-        return widgets
+        return [
+            widget
+            for spec in widget_specs
+            if (widget := self.resolve_widget(spec, context))
+        ]
