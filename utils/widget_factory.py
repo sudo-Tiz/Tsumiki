@@ -50,7 +50,7 @@ class WidgetResolver:
 
     def _resolve_by_type(
         self, widget_type: str, identifier: str, context: Dict[str, Any]
-    ):
+    ) -> Optional[Any]:
         """Unified resolution by type - all widgets follow the same pattern."""
         resolvers = {
             "widget": lambda: self._create_simple_widget(identifier),
