@@ -189,16 +189,19 @@
 					"properties": {
 						"layer": {
 							"type": "string",
-							"description": "Determines the layer of the bar."
+							"description": "Determines the layer of the bar.",
+							"default": "top"
 						},
 						"location": {
 							"enum": ["top", "bottom"],
 							"location": "string",
-							"description": "Specifies the location of the bar."
+							"description": "Specifies the location of the bar.",
+							"default": "top"
 						},
 						"auto_hide": {
 							"type": "boolean",
-							"description": "Determines whether the bar should auto-hide."
+							"description": "Determines whether the bar should auto-hide.",
+							"default": false
 						}
 					}
 				},
@@ -207,11 +210,13 @@
 					"properties": {
 						"enabled": {
 							"type": "boolean",
-							"description": "Determines whether screen corners are enabled."
+							"description": "Determines whether screen corners are enabled.",
+							"default": false
 						},
 						"size": {
 							"type": "integer",
-							"description": "Specifies the size of the screen corners."
+							"description": "Specifies the size of the screen corners.",
+							"default": 20
 						}
 					}
 				},
@@ -220,15 +225,18 @@
 					"properties": {
 						"enabled": {
 							"type": "boolean",
-							"description": "Determines whether screen corners are enabled."
+							"description": "Determines whether screen corners are enabled.",
+							"default": true
 						},
 						"tooltip": {
 							"type": "boolean",
-							"description": "Determines whether the dock has a tooltip."
+							"description": "Determines whether the dock has a tooltip.",
+							"default": true
 						},
 						"icon_size": {
 							"type": "integer",
-							"description": "Specifies the size of the dock icons."
+							"description": "Specifies the size of the dock icons.",
+							"default": 40
 						},
 						"preview_apps": {
 							"type": "boolean",
@@ -242,6 +250,7 @@
 						},
 						"preview_size": {
 							"type": "array",
+							"default": [200, 130],
 							"items": {
 								"type": "integer",
 								"maxItems": 2,
@@ -252,25 +261,21 @@
 						"anchor": {
 							"type": "string",
 							"enum": ["bottom-center", "left-center", "right-center"],
-							"description": "Specifies the anchor position of the dock."
-						},
-						"pinned_apps": {
-							"type": "array",
-							"items": {
-								"type": "string",
-								"description": "List of pinned applications."
-							}
+							"description": "Specifies the anchor position of the dock.",
+							"default": "bottom-center"
 						},
 						"ignored_apps": {
 							"type": "array",
 							"items": {
 								"type": "string",
 								"description": "List of ignored applications."
-							}
+							},
+							"default": []
 						},
 						"layer": {
 							"type": "string",
 							"enum": ["background", "bottom", "top", "overlay"],
+							"default": "top",
 							"description": "Determines the layer of the dock."
 						}
 					}
@@ -280,19 +285,23 @@
 					"properties": {
 						"enabled": {
 							"type": "boolean",
-							"description": "Determines whether the desktop clock is enabled."
+							"description": "Determines whether the desktop clock is enabled.",
+							"default": false
 						},
 						"anchor": {
 							"$ref": "#/definitions/anchor",
-							"description": "Specifies the anchor position of the desktop clock."
+							"description": "Specifies the anchor position of the desktop clock.",
+							"default": "bottom-right"
 						},
 						"date_format": {
 							"type": "string",
-							"description": "Specifies the format of the date displayed on the desktop clock."
+							"description": "Specifies the format of the date displayed on the desktop clock.",
+							"default": "YYYY-MM-DD"
 						},
 						"time_format": {
 							"type": "string",
-							"description": "Specifies the format of the time displayed on the desktop clock."
+							"description": "Specifies the format of the time displayed on the desktop clock.",
+							"default": "HH:mm"
 						}
 					}
 				},
@@ -304,32 +313,40 @@
 							"description": "List of notification IDs to ignore",
 							"items": {
 								"type": "string"
-							}
+							},
+							"default": []
 						},
 						"transition_type": {
-							"$ref": "#/definitions/transition_type"
+							"$ref": "#/definitions/transition_type",
+							"default": "crossfade"
 						},
 						"transition_duration": {
-							"$ref": "#/definitions/transition_duration"
+							"$ref": "#/definitions/transition_duration",
+							"default": 350
 						},
 						"anchor": {
-							"$ref": "#/definitions/anchor"
+							"$ref": "#/definitions/anchor",
+							"default": "top-right"
 						},
 						"auto_dismiss": {
 							"type": "boolean",
-							"description": "Determines whether notifications are automatically dismissed"
+							"description": "Determines whether notifications are automatically dismissed",
+							"default": true
 						},
 						"persist": {
 							"type": "boolean",
-							"description": "Determines whether notifications are persisted to the notification history"
+							"description": "Determines whether notifications are persisted to the notification history",
+							"default": true
 						},
 						"timeout": {
 							"type": "integer",
-							"description": "Timeout in milliseconds before notifications are dismissed"
+							"description": "Timeout in milliseconds before notifications are dismissed",
+							"default": 3000
 						},
 						"max_count": {
 							"type": "integer",
-							"description": "Maximum total number of notifications to keep across all apps"
+							"description": "Maximum total number of notifications to keep across all apps",
+							"default": 200
 						},
 						"per_app_limits": {
 							"type": "object",
@@ -343,7 +360,8 @@
 						},
 						"play_sound": {
 							"type": "boolean",
-							"description": "Determines whether to play a sound when a notification is received"
+							"description": "Determines whether to play a sound when a notification is received",
+							"default": true
 						},
 						"sound_file": {
 							"type": "string",
@@ -368,17 +386,21 @@
 					"properties": {
 						"anchor": {
 							"$ref": "#/definitions/anchor",
-							"description": "Specifies the anchor position of the OSD"
+							"description": "Specifies the anchor position of the OSD",
+							"default": "bottom-center"
 						},
 						"transition_duration": {
-							"$ref": "#/definitions/transition_duration"
+							"$ref": "#/definitions/transition_duration",
+							"default": 500
 						},
 						"transition_type": {
-							"$ref": "#/definitions/transition_type"
+							"$ref": "#/definitions/transition_type",
+							"default": "slide-left"
 						},
 						"enabled": {
 							"type": "boolean",
-							"description": "Determines whether the OSD is enabled"
+							"description": "Determines whether the OSD is enabled",
+							"default": true
 						},
 						"osds": {
 							"type": "array",
@@ -387,24 +409,29 @@
 								"type": "string",
 								"enum": ["brightness", "volume", "microphone"]
 							},
+							"default": ["brightness", "volume"],
 							"description": "List of OSDs to enable"
 						},
 						"orientation": {
 							"type": "string",
 							"enum": ["horizontal", "vertical"],
-							"description": "Specifies the orientation of the osd."
+							"description": "Specifies the orientation of the osd.",
+							"default": "horizontal"
 						},
 						"duration": {
 							"type": "integer",
-							"description": "Duration in milliseconds to show the OSD"
+							"description": "Duration in milliseconds to show the OSD",
+							"default": 3000
 						},
 						"icon_size": {
 							"type": "integer",
-							"description": "Size of the OSD icons"
+							"description": "Size of the OSD icons",
+							"default": 40
 						},
 						"percentage": {
 							"type": "boolean",
-							"description": "Determines whether to show the percentage in the OSD"
+							"description": "Determines whether to show the percentage in the OSD",
+							"default": true
 						},
 						"style": {
 							"$ref": "#/definitions/style"
@@ -416,15 +443,18 @@
 					"properties": {
 						"enabled": {
 							"type": "boolean",
-							"description": "Determines whether the app launcher is enabled"
+							"description": "Determines whether the app launcher is enabled",
+							"default": false
 						},
 						"tooltip": {
 							"type": "boolean",
-							"description": "Determines whether the app launcher has a tooltip"
+							"description": "Determines whether the app launcher has a tooltip",
+							"default": false
 						},
 						"icon_size": {
 							"type": "integer",
-							"description": "Size of the app launcher icon"
+							"description": "Size of the app launcher icon",
+							"default": 24
 						}
 					}
 				}
@@ -435,15 +465,18 @@
 			"properties": {
 				"debug": {
 					"type": "boolean",
-					"description": "Determines whether debug mode is enabled."
+					"description": "Determines whether debug mode is enabled.",
+					"default": false
 				},
 				"monitor_styles": {
 					"type": "boolean",
-					"description": "Determines whether to use monitor stylesheet."
+					"description": "Determines whether to use monitor stylesheet.",
+					"default": false
 				},
 				"check_updates": {
 					"type": "boolean",
-					"description": "Determines whether to check for updates on startup."
+					"description": "Determines whether to check for updates on startup.",
+					"default": false
 				}
 			}
 		},
