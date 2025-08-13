@@ -248,7 +248,10 @@ install_packages() {
 	)
 
 
-	sudo pacman -S --noconfirm --needed "${pacman_deps[@]}"  || true
+	sudo pacman -S --noconfirm --needed "${pacman_deps[@]}" || {
+		log_error "Failed to install pacman dependencies."
+		exit 1
+	}
 
 	if command -v paru &>/dev/null; then
 		aur_helper="paru"
