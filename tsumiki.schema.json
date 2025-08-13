@@ -557,9 +557,8 @@
 							"widgets": {
 								"type": "array",
 								"items": {
-									"type": "string"
-								},
-								"description": "List of widget names to include in the collapsible group"
+									"$ref": "#/definitions/widgets"
+								}
 							},
 							"spacing": {
 								"type": "integer",

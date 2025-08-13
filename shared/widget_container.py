@@ -112,17 +112,19 @@ class WidgetGroup(BoxWidget):
                 self.add(child)
 
     @classmethod
-    def from_config(cls, config, widgets_map):
-        children = []
-        for widget_name in config.get("widgets", []):
-            if widget_name in widgets_map:
-                # Create widget instance using the constructor from widgets_map
-                # Pass both widget_config and bar to the widget constructor
-                widget = widgets_map[widget_name]
-                children.append(widget())
+    def from_config(cls, config, widgets_list, main_config=None):
+        from utils.widget_factory import WidgetResolver
+
+        resolver = WidgetResolver(widgets_list)
+        context = {"config": main_config} if main_config else {}
+
+        widgets = resolver.batch_resolve(
+            config.get("widgets", []),
+            context
+        )
 
         return cls(
-            children=children,
+            children=widgets,
             spacing=config.get("spacing", 4),
             style_classes=config.get("style_classes", []),
         )

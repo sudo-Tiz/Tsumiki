@@ -7,7 +7,6 @@ from fabric.widgets.centerbox import CenterBox
 from fabric.widgets.wayland import WaylandWindow as Window
 
 from shared.collapsible_group import CollapsibleGroupWidget
-from shared.custom_button import CustomButtonWidget
 from shared.widget_container import WidgetGroup
 from widgets.battery import BatteryWidget
 from widgets.bluetooth import BlueToothWidget
@@ -150,8 +149,13 @@ class StatusBar(Window):
 
     def make_layout(self, config):
         """assigns the three sections their respective widgets"""
+        from utils.widget_factory import WidgetResolver
 
         layout = {"left_section": [], "middle_section": [], "right_section": []}
+
+        # Create a single resolver for all widgets
+        resolver = WidgetResolver(self.widgets_list)
+        context = {"config": config}
 
         for key in layout:
             for widget_name in config["layout"][key]:
@@ -164,6 +168,7 @@ class StatusBar(Window):
                         group = WidgetGroup.from_config(
                             group_config,
                             self.widgets_list,
+                            main_config=config,
                         )
                         layout[key].append(group)
                 elif widget_name.startswith("@collapsible:"):
@@ -179,35 +184,15 @@ class StatusBar(Window):
                         collapsible_group.widgets_config = group_config.get(
                             "widgets", []
                         )
-                        # Set widgets list for lazy initialization
-                        collapsible_group.set_widgets(self.widgets_list)
+                        # Set context for widget resolution
+                        collapsible_group.set_context(config, self.widgets_list)
                         # Add button to layout
                         layout[key].append(collapsible_group)
-                elif widget_name.startswith("@custom_button:"):
-                    # Handle individual custom buttons
-                    button_index_str = widget_name.replace("@custom_button:", "", 1)
-                    if button_index_str.isdigit():
-                        button_index = int(button_index_str)
-                        # Get buttons from custom_button_group config
-                        custom_button_config = config.get("widgets", {}).get(
-                            "custom_button_group", {}
-                        )
-                        buttons = custom_button_config.get("buttons", [])
-
-                        if 0 <= button_index < len(buttons):
-                            button_config = buttons[button_index]
-
-                            # Create individual button
-                            button = CustomButtonWidget(
-                                widget_name=f"custom_button_{button_index}",
-                                config=button_config,
-                            )
-                            layout[key].append(button)
                 else:
-                    # Handle regular widgets
-                    if widget_name in self.widgets_list:
-                        widget_class = self.widgets_list[widget_name]
-                        layout[key].append(widget_class())
+                    # Use unified widget resolver for all other widgets
+                    widget = resolver.resolve_widget(widget_name, context)
+                    if widget:
+                        layout[key].append(widget)
 
         return layout
 
