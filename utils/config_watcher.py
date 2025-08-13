@@ -1,0 +1,109 @@
+"""
+Simple configuration file watcher for auto-reloading Tsumiki when config files change.
+"""
+
+import os
+import subprocess
+from typing import List
+
+from fabric.utils import get_relative_path
+from gi.repository import Gio, GLib
+from loguru import logger
+
+from utils.colors import Colors
+
+
+class ConfigWatcher:
+    """Simple file watcher that monitors config files and restarts Tsumiki."""
+
+    def __init__(self):
+        self.monitors: List[Gio.FileMonitor] = []
+        self.restart_pending = False
+
+        # Files to monitor
+        config_files = [
+            get_relative_path("../config.json"),
+            get_relative_path("../config.toml"),
+            get_relative_path("../theme.json"),
+        ]
+
+        # Set up monitors for existing files
+        for config_file in config_files:
+            if os.path.exists(config_file):
+                self._monitor_file(config_file)
+
+    def _monitor_file(self, file_path: str):
+        """Monitor a single file for changes."""
+        try:
+            file_obj = Gio.File.new_for_path(file_path)
+            monitor = file_obj.monitor_file(Gio.FileMonitorFlags.NONE, None)
+            monitor.connect("changed", self._on_file_changed, file_path)
+            self.monitors.append(monitor)
+            logger.info(
+                f"{Colors.INFO}[ConfigWatcher] Monitoring {os.path.basename(file_path)}"
+            )
+        except Exception as e:
+            logger.error(
+                f"{Colors.ERROR}[ConfigWatcher] Failed to monitor {file_path}: {e}"
+            )
+
+    def _on_file_changed(self, monitor, file, other_file, event_type, file_path):
+        """Handle file change events."""
+        if (
+            event_type == Gio.FileMonitorEvent.CHANGES_DONE_HINT
+            and not self.restart_pending
+        ):
+            self.restart_pending = True
+            logger.info(
+                (
+                    f"{Colors.INFO}[ConfigWatcher] Config changed: "
+                    f"{os.path.basename(file_path)}"
+                )
+            )
+
+            # Delay restart slightly to handle multiple rapid changes
+            GLib.timeout_add(1500, self._restart_tsumiki)
+
+    def _restart_tsumiki(self):
+        """Restart Tsumiki using the init script."""
+        try:
+            init_script = get_relative_path("../init.sh")
+            logger.info(f"{Colors.INFO}[ConfigWatcher] Restarting Tsumiki...")
+
+            # Run restart in background to avoid blocking
+            subprocess.Popen(
+                [init_script, "-restart"],
+                cwd=os.path.dirname(init_script),
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+                start_new_session=True,
+            )
+        except Exception as e:
+            logger.error(f"{Colors.ERROR}[ConfigWatcher] Failed to restart: {e}")
+
+        return False  # Don't repeat
+
+    def stop(self):
+        """Stop monitoring files."""
+        for monitor in self.monitors:
+            monitor.cancel()
+        self.monitors.clear()
+
+
+# Global watcher instance
+_watcher = None
+
+
+def start_config_watching():
+    """Start watching config files for changes."""
+    global _watcher
+    if _watcher is None:
+        _watcher = ConfigWatcher()
+
+
+def stop_config_watching():
+    """Stop watching config files."""
+    global _watcher
+    if _watcher:
+        _watcher.stop()
+        _watcher = None

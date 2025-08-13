@@ -150,6 +150,7 @@ auto_hide = false
 debug = true
 location = "top"
 widget_style = "default"
+auto_reload = true
 
   [general.screen_corners]
   enabled = false

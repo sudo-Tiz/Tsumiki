@@ -475,8 +475,11 @@
 				},
 				"check_updates": {
 					"type": "boolean",
-					"description": "Determines whether to check for updates on startup.",
-					"default": false
+					"description": "Determines whether to check for updates on startup."
+				},
+				"auto_reload": {
+					"type": "boolean",
+					"description": "Determines whether to automatically reload the application when configuration files change."
 				}
 			}
 		},
