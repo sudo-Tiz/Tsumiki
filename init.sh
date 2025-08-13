@@ -339,7 +339,7 @@ for arg in "$@"; do
 		SHOULD_START=true
 		;;
 	*)
-		printf "\033[31m Unknown command: %s\033[0m\n" "$arg" >&2
+		log_error "Unknown command: $arg"
 		usage >&2
 		exit 1
 		;;
