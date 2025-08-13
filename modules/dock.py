@@ -18,7 +18,6 @@ from utils.app import AppUtils
 from utils.constants import PINNED_APPS_FILE
 from utils.functions import read_json_file, write_json_file
 from utils.icon_resolver import IconResolver
-from utils.monitors import HyprlandWithMonitors
 
 gi.require_versions({"Glace": "0.1", "Gtk": "3.0"})
 
@@ -60,7 +59,7 @@ class AppBar(Box):
         self._manager = Glace.Manager()
         self._manager.connect("client-added", self._on_client_added)
         self._preview_image = Image()
-        self._hyp = HyprlandWithMonitors()
+        self._hyp = get_hyprland_connection()
 
         self.pinned_apps_container = Box(spacing=7)
         self.add(self.pinned_apps_container)
