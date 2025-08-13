@@ -315,7 +315,7 @@ for arg in "$@"; do
 		SHOULD_START=true
 		;;
 	-d)
-		echo -e "\033[33m Detached mode enabled\033[0m"
+		log_warning "Detached mode enabled"
 		DETACHED_MODE=true
 		;;
 	-stop)
