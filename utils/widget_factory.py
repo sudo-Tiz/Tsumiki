@@ -39,8 +39,8 @@ class WidgetResolver:
                 # Normal widget: treated as special "widget" type
                 return self._resolve_by_type("widget", widget_spec, context)
 
-        except Exception as e:
-            logger.error(f"Failed to resolve widget '{widget_spec}': {e}")
+        except Exception:
+            logger.exception(f"Failed to resolve widget '{widget_spec}'")
             return None
 
     def _parse_reference(self, widget_spec: str) -> tuple[str, str]:
