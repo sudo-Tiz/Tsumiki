@@ -499,6 +499,7 @@
 		"auto_hide": false,
 		"debug": false,
 		"monitor_styles": true,
-		"location": "top"
+		"location": "top",
+		"auto_reload": true
 	}
 }

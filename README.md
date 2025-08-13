@@ -62,6 +62,9 @@ The name Tsumiki (pronounced as su-me-ki) comes from the Japanese word "tsumiki"
 - ⚙️ **Highly Configurable**
   Control the positioning, behavior, and appearance of every widget and element. Tailor the experience to fit your exact needs.
 
+- 🔄 **Auto-Reload**
+  Automatically restarts when configuration files are modified, making development and customization seamless.
+
 - ⚡ **Lightweight & Fast**
   Designed with performance in mind — minimal memory and CPU usage.
 
