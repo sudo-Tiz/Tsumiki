@@ -4,17 +4,33 @@
 	"definitions": {
 		"style": {
 			"type": "string",
-			"enum": ["default", "leaf", "leaf-inverse", "flat", "shadow", "bordered"],
+			"enum": [
+				"default",
+				"leaf",
+				"leaf-inverse",
+				"flat",
+				"shadow",
+				"bordered"
+			],
 			"description": "Determines the style of the widget."
 		},
 		"layer": {
 			"type": "string",
-			"enum": ["top", "overlay", "bottom", "background"],
+			"enum": [
+				"top",
+				"overlay",
+				"bottom",
+				"background"
+			],
 			"description": "Determines the layer of the widget."
 		},
 		"mode": {
 			"type": "string",
-			"enum": ["label", "graph", "progress"],
+			"enum": [
+				"label",
+				"graph",
+				"progress"
+			],
 			"description": "Specifies the mode of the widget."
 		},
 		"transition_type": {
@@ -147,42 +163,52 @@
 					"type": "object",
 					"properties": {
 						"hide_label_when_full": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Determines whether to hide the label when the battery is full."
 						},
 						"hide_when_missing": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to hide the widget when the battery is not present."
 						},
 						"label": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the label."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the tooltip."
 						},
 						"icon_size": {
 							"type": "number",
-							"default": 14
+							"default": 14,
+							"description": "The size of the icon displayed in the battery widget."
 						},
 						"notifications": {
 							"type": "object",
 							"properties": {
 								"low_threshold": {
 									"type": "number",
-									"default": 10
+									"default": 10,
+									"description": "The battery level percentage at which to trigger low battery notifications."
 								},
 								"full_battery": {
 									"type": "boolean",
-									"default": false
+									"default": false,
+									"description": "Determines whether to show notifications when the battery is full."
 								},
 								"low_battery": {
 									"type": "boolean",
-									"default": false
+									"default": false,
+									"description": "Determines whether to show notifications when the battery is low."
 								},
 								"charging": {
 									"type": "boolean",
-									"default": false
+									"default": false,
+									"description": "Determines whether to show notifications when the battery is charging."
 								}
 							},
 							"required": [
@@ -207,49 +233,64 @@
 					"properties": {
 						"icon": {
 							"type": "string",
-							"default": "󰡃"
+							"default": "󰡃",
+							"description": "The icon displayed in the overview widget."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the tooltip."
 						},
 						"label": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Determines whether to show the label."
 						},
 						"show_occupied": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the occupied status."
 						}
 					},
-					"required": ["icon", "tooltip", "label", "show_occupied"]
+					"required": [
+						"icon",
+						"tooltip",
+						"label",
+						"show_occupied"
+					]
 				},
 				"power": {
 					"type": "object",
 					"properties": {
 						"icon": {
 							"type": "string",
-							"default": "󰐥"
+							"default": "󰐥",
+							"description": "The icon displayed in the power widget."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the tooltip."
 						},
 						"items_per_row": {
 							"type": "number",
-							"default": 3
+							"default": 3,
+							"description": "The number of items displayed per row in the power widget."
 						},
 						"icon_size": {
 							"type": "number",
-							"default": 100
+							"default": 100,
+							"description": "The size of the icon displayed in the power widget."
 						},
 						"show_icon": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the icon."
 						},
 						"label": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Determines whether to show the label."
 						},
 						"buttons": {
 							"type": "object",
@@ -304,61 +345,80 @@
 					"properties": {
 						"path": {
 							"type": "string",
-							"default": "Videos/Screencasting"
+							"default": "Videos/Screencasting",
+							"description": "The default path for saving screencasts."
 						},
 						"audio": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to record audio."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the tooltip."
 						},
 						"delayed": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Determines whether to enable delayed recording."
 						},
 						"delayed_timeout": {
 							"type": "number",
-							"default": 5000
+							"default": 5000,
+							"description": "The timeout duration for delayed recording."
 						}
 					},
-					"required": ["path", "audio", "tooltip", "delayed", "delayed_timeout"]
+					"required": [
+						"path",
+						"audio",
+						"tooltip",
+						"delayed",
+						"delayed_timeout"
+					]
 				},
 				"screenshot": {
 					"type": "object",
 					"properties": {
 						"path": {
 							"type": "string",
-							"default": "Pictures/Screenshots"
+							"default": "Pictures/Screenshots",
+							"description": "The default path for saving screenshots."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the tooltip."
 						},
 						"label": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Determines whether to show the label."
 						},
 						"annotation": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Determines whether to show the annotation."
 						},
 						"capture_sound": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Determines whether to capture sound."
 						},
 						"icon": {
 							"type": "string",
-							"default": "󰄀"
+							"default": "󰄀",
+							"description": "The icon displayed in the screenshot widget."
 						},
 						"delayed": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Determines whether to enable delayed screenshot capture."
 						},
 						"delayed_timeout": {
 							"type": "number",
-							"default": 5000
+							"default": 5000,
+							"description": "The timeout duration for delayed screenshot capture."
 						}
 					},
 					"required": [
@@ -377,39 +437,48 @@
 					"properties": {
 						"upload_icon": {
 							"type": "string",
-							"default": ""
+							"default": "",
+							"description": "The icon displayed for upload activity."
 						},
 						"download_icon": {
 							"type": "string",
-							"default": ""
+							"default": "",
+							"description": "The icon displayed for download activity."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the tooltip."
 						},
 						"upload": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the upload activity."
 						},
 						"download": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the download activity."
 						},
 						"upload_threshold": {
 							"type": "number",
-							"default": 100
+							"default": 100,
+							"description": "The threshold for upload activity."
 						},
 						"download_threshold": {
 							"type": "number",
-							"default": 1024
+							"default": 1024,
+							"description": "The threshold for download activity."
 						},
 						"kb_digits": {
 							"type": "number",
-							"default": 0
+							"default": 0,
+							"description": "The number of digits to display for kilobytes."
 						},
 						"mb_digits": {
 							"type": "number",
-							"default": 2
+							"default": 2,
+							"description": "The number of digits to display for megabytes."
 						}
 					},
 					"required": [
@@ -429,25 +498,33 @@
 					"properties": {
 						"hover_reveal": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Determines whether to reveal the quick settings on hover."
 						},
 						"user": {
 							"type": "object",
 							"properties": {
 								"avatar": {
 									"type": "string",
-									"default": "~/.face"
+									"default": "~/.face",
+									"description": "The path to the user's avatar image."
 								},
 								"name": {
 									"type": "string",
-									"default": "system"
+									"default": "system",
+									"description": "The name of the user."
 								},
 								"distro_icon": {
 									"type": "boolean",
-									"default": true
+									"default": true,
+									"description": "Determines whether to show the distribution icon."
 								}
 							},
-							"required": ["avatar", "name", "distro_icon"]
+							"required": [
+								"avatar",
+								"name",
+								"distro_icon"
+							]
 						},
 						"controls": {
 							"type": "object",
@@ -457,50 +534,65 @@
 									"items": {
 										"type": "string"
 									},
-									"default": ["brightness", "volume"]
+									"default": [
+										"brightness",
+										"volume"
+									],
+									"description": "The list of sliders to display in the quick settings."
 								}
 							},
-							"required": ["sliders"]
+							"required": [
+								"sliders"
+							]
 						},
 						"auto_hide": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Determines whether to automatically hide the quick settings."
 						},
 						"auto_hide_timeout": {
 							"type": "number",
-							"default": 2000
+							"default": 2000,
+							"description": "The timeout duration for automatically hiding the quick settings."
 						},
 						"media": {
 							"type": "object",
 							"properties": {
 								"enabled": {
 									"type": "boolean",
-									"default": true
+									"default": true,
+									"description": "Determines whether media controls are enabled."
 								},
 								"ignore": {
 									"type": "array",
 									"items": {},
-									"default": []
+									"default": [],
+									"description": "The list of media types to ignore."
 								},
 								"truncation_size": {
 									"type": "number",
-									"default": 30
+									"default": 30,
+									"description": "The maximum length of media titles before truncation."
 								},
 								"show_album": {
 									"type": "boolean",
-									"default": true
+									"default": true,
+									"description": "Determines whether to show the album information."
 								},
 								"show_artist": {
 									"type": "boolean",
-									"default": true
+									"default": true,
+									"description": "Determines whether to show the artist information."
 								},
 								"show_time": {
 									"type": "boolean",
-									"default": true
+									"default": true,
+									"description": "Determines whether to show the current playback time."
 								},
 								"show_time_tooltip": {
 									"type": "boolean",
-									"default": true
+									"default": true,
+									"description": "Determines whether to show the current playback time."
 								}
 							},
 							"required": [
@@ -518,7 +610,8 @@
 							"properties": {
 								"enabled": {
 									"type": "boolean",
-									"default": true
+									"default": true,
+									"description": "Determines whether shortcuts are enabled."
 								},
 								"items": {
 									"type": "array",
@@ -526,19 +619,24 @@
 										"type": "object",
 										"properties": {
 											"icon": {
-												"type": "string"
+												"type": "string",
+												"description": "The icon to display for the shortcut."
 											},
 											"label": {
-												"type": "string"
+												"type": "string",
+												"description": "The label for the shortcut."
 											},
 											"command": {
-												"type": "string"
+												"type": "string",
+												"description": "The command to execute when the shortcut is activated."
 											},
 											"tooltip": {
-												"type": "string"
+												"type": "string",
+												"description": "The tooltip to display for the shortcut."
 											},
 											"icon_size": {
-												"type": "number"
+												"type": "number",
+												"description": "The size of the icon for the shortcut."
 											}
 										},
 										"required": [
@@ -581,7 +679,10 @@
 									]
 								}
 							},
-							"required": ["enabled", "items"]
+							"required": [
+								"enabled",
+								"items"
+							]
 						}
 					},
 					"required": [
@@ -599,29 +700,37 @@
 					"properties": {
 						"stopped_icon": {
 							"type": "string",
-							"default": "󱫞"
+							"default": "󱫞",
+							"description": "The icon displayed when the stopwatch is stopped."
 						},
 						"running_icon": {
 							"type": "string",
-							"default": "󱫠"
+							"default": "󱫠",
+							"description": "The icon displayed when the stopwatch is running."
 						}
 					},
-					"required": ["stopped_icon", "running_icon"]
+					"required": [
+						"stopped_icon",
+						"running_icon"
+					]
 				},
 				"storage": {
 					"type": "object",
 					"properties": {
 						"path": {
 							"type": "string",
-							"default": "/"
+							"default": "/",
+							"description": "The path to the storage device."
 						},
 						"show_icon": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the icon for the storage device."
 						},
 						"icon": {
 							"type": "string",
-							"default": "󰋊"
+							"default": "󰋊",
+							"description": "The icon to display for the storage device."
 						},
 						"mode": {
 							"$ref": "#/definitions/mode",
@@ -629,15 +738,18 @@
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the tooltip for the storage device."
 						},
 						"graph_length": {
 							"type": "number",
-							"default": 4
+							"default": 4,
+							"description": "The length of the graph for the storage device."
 						},
 						"unit": {
 							"type": "string",
-							"default": "gb"
+							"default": "gb",
+							"description": "The unit of measurement for the storage device."
 						}
 					},
 					"required": [
@@ -655,120 +767,156 @@
 					"properties": {
 						"icon_size": {
 							"type": "number",
-							"default": 16
+							"default": 16,
+							"description": "The size of the icons in the system tray."
 						},
 						"ignored": {
 							"type": "array",
 							"items": {},
-							"default": []
+							"default": [],
+							"description": "A list of applications to ignore in the system tray."
 						},
 						"hidden": {
 							"type": "array",
 							"items": {},
-							"default": []
+							"default": [],
+							"description": "A list of applications to hide in the system tray."
 						},
 						"hide_when_empty": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Determines whether to hide the system tray when there are no visible icons."
 						}
 					},
-					"required": ["icon_size", "ignored", "hidden", "hide_when_empty"]
+					"required": [
+						"icon_size",
+						"ignored",
+						"hidden",
+						"hide_when_empty"
+					]
 				},
 				"taskbar": {
 					"type": "object",
 					"properties": {
 						"icon_size": {
 							"type": "number",
-							"default": 22
+							"default": 22,
+							"description": "The size of the icons in the taskbar."
 						},
 						"ignored": {
 							"type": "array",
 							"items": {},
-							"default": []
+							"default": [],
+							"description": "A list of applications to ignore in the taskbar."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the tooltip for the taskbar."
 						}
 					},
-					"required": ["icon_size", "ignored", "tooltip"]
+					"required": [
+						"icon_size",
+						"ignored",
+						"tooltip"
+					]
 				},
 				"theme_switcher": {
 					"type": "object",
 					"properties": {
 						"icon": {
 							"type": "string",
-							"default": ""
+							"default": "",
+							"description": "The icon displayed in the theme switcher."
 						},
 						"notify": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Determines whether to show notifications for theme changes."
 						}
 					},
-					"required": ["icon", "notify"]
+					"required": [
+						"icon",
+						"notify"
+					]
 				},
 				"updates": {
 					"type": "object",
 					"properties": {
 						"show_icon": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the icon for updates."
 						},
 						"available_icon": {
 							"type": "string",
-							"default": "󰏗"
+							"default": "󰏗",
+							"description": "The icon displayed when updates are available."
 						},
 						"no_updates_icon": {
 							"type": "string",
-							"default": "󰏖"
+							"default": "󰏖",
+							"description": "The icon displayed when there are no updates."
 						},
 						"hover_reveal": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to reveal the updates section on hover."
 						},
 						"reveal_duration": {
 							"type": "number",
-							"default": 500
+							"default": 500,
+							"description": "The duration of the reveal animation for the updates section."
 						},
 						"os": {
 							"type": "string",
-							"default": "arch"
+							"default": "arch",
+							"description": "The operating system for updates."
 						},
 						"terminal": {
 							"type": "string",
-							"default": "kitty"
+							"default": "kitty",
+							"description": "The terminal emulator to use for updates."
 						},
 						"auto_hide": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Determines whether to automatically hide the updates section."
 						},
 						"interval": {
 							"type": "number",
-							"default": 3600
+							"default": 3600,
+							"description": "The interval for checking updates."
 						},
 						"pad_zero": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Determines whether to pad the update version numbers with leading zeros."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the tooltip for updates."
 						},
 						"label": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the label for updates."
 						},
 						"flatpak": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to include Flatpak updates."
 						},
 						"snap": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Determines whether to include Snap updates."
 						},
 						"brew": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Determines whether to include Homebrew updates."
 						}
 					},
 					"required": [
@@ -794,87 +942,115 @@
 					"properties": {
 						"label": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the label for volume."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the tooltip for volume."
 						},
 						"step_size": {
 							"type": "number",
-							"default": 5
+							"default": 5,
+							"description": "The step size for volume adjustments."
 						}
 					},
-					"required": ["label", "tooltip", "step_size"]
+					"required": [
+						"label",
+						"tooltip",
+						"step_size"
+					]
 				},
 				"hyprpicker": {
 					"type": "object",
 					"properties": {
 						"icon": {
 							"type": "string",
-							"default": ""
+							"default": "",
+							"description": "The icon displayed in the Hyprpicker widget."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the tooltip for the Hyprpicker widget."
 						},
 						"label": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Determines whether to show the label for the Hyprpicker widget."
 						},
 						"show_icon": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the icon in the Hyprpicker widget."
 						},
 						"quiet": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Determines whether to run the Hyprpicker in quiet mode, suppressing notifications."
 						}
 					},
-					"required": ["icon", "tooltip", "label", "show_icon", "quiet"]
+					"required": [
+						"icon",
+						"tooltip",
+						"label",
+						"show_icon",
+						"quiet"
+					]
 				},
 				"weather": {
 					"type": "object",
 					"properties": {
 						"location": {
 							"type": "string",
-							"default": "kathmandu"
+							"default": "kathmandu",
+							"description": "The location for which to display the weather information."
 						},
 						"label": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the label for the weather information."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the tooltip for the weather information."
 						},
 						"temperature_unit": {
 							"type": "string",
-							"default": "celsius"
+							"default": "celsius",
+							"description": "The unit of temperature to display."
 						},
 						"label_format": {
 							"type": "string",
-							"default": "{temperature} {condition}"
+							"default": "{temperature} {condition}",
+							"description": "The format for the weather label."
 						},
 						"wind_speed_unit": {
 							"type": "string",
-							"default": "kmh"
+							"default": "kmh",
+							"description": "The unit of wind speed to display."
 						},
 						"hover_reveal": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the hover effect for the weather information."
 						},
 						"reveal_duration": {
 							"type": "number",
-							"default": 500
+							"default": 500,
+							"description": "The duration of the reveal effect for the weather information."
 						},
 						"expanded": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Determines whether to show the expanded view for the weather information."
 						},
 						"interval": {
 							"type": "number",
-							"default": 3600
+							"default": 3600,
+							"description": "The interval at which to refresh the weather information."
 						}
 					},
 					"required": [
@@ -894,20 +1070,30 @@
 					"type": "object",
 					"properties": {
 						"icon": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Whether to display an icon alongside the window title."
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Whether to show a tooltip with the full window title when hovered."
 						},
 						"truncation": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Whether to truncate long window titles."
 						},
 						"truncation_size": {
-							"type": "number"
+							"type": "number",
+							"default": 50,
+							"description": "Maximum number of characters before truncation is applied."
 						},
 						"title_map": {
 							"type": "array",
-							"items": {}
+							"items": {},
+							"default": [],
+							"description": "Custom mapping rules for window titles."
 						}
 					},
 					"required": [
@@ -922,30 +1108,46 @@
 					"type": "object",
 					"properties": {
 						"count": {
-							"type": "number"
+							"type": "number",
+							"default": 10,
+							"description": "Number of workspaces to display."
 						},
 						"hide_unoccupied": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Hide workspaces that do not contain any windows."
 						},
 						"default_label_format": {
-							"type": "string"
+							"type": "string",
+							"default": "{id}",
+							"description": "Format string for workspace labels."
 						},
 						"ignored": {
 							"type": "array",
 							"items": {
 								"type": "number"
-							}
+							},
+							"default": [
+								-99
+							],
+							"description": "List of workspace IDs to ignore."
 						},
 						"reverse_scroll": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false,
+							"description": "Reverse scroll direction for workspace switching."
 						},
 						"empty_scroll": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false,
+							"description": "Allow scrolling to empty workspaces."
 						},
 						"icon_map": {
 							"type": "object",
 							"properties": {},
-							"required": []
+							"required": [],
+							"default": {},
+							"description": "Mapping of workspace IDs to icons."
 						}
 					},
 					"required": [
@@ -962,79 +1164,124 @@
 					"type": "object",
 					"properties": {
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Show the Bluetooth device name."
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Show a tooltip with Bluetooth connection details."
 						}
 					},
-					"required": ["label", "tooltip"]
+					"required": [
+						"label",
+						"tooltip"
+					]
 				},
 				"brightness": {
 					"type": "object",
 					"properties": {
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Display brightness percentage as text."
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Show a tooltip with brightness information."
 						},
 						"step_size": {
-							"type": "number"
+							"type": "number",
+							"default": 5,
+							"description": "Step size percentage for brightness adjustments."
 						}
 					},
-					"required": ["label", "tooltip", "step_size"]
+					"required": [
+						"label",
+						"tooltip",
+						"step_size"
+					]
 				},
 				"cava": {
 					"type": "object",
 					"properties": {
 						"bars": {
-							"type": "number"
+							"type": "number",
+							"default": 10,
+							"description": "Number of bars in the CAVA visualizer."
 						},
 						"color": {
-							"type": "string"
+							"type": "string",
+							"default": "#89b4fa",
+							"description": "Color of the CAVA visualizer bars."
 						}
 					},
-					"required": ["bars", "color"]
+					"required": [
+						"bars",
+						"color"
+					]
 				},
 				"click_counter": {
 					"type": "object",
 					"properties": {
 						"count": {
-							"type": "number"
+							"type": "number",
+							"default": 0,
+							"description": "The current value of the click counter."
 						}
 					},
-					"required": ["count"]
+					"required": [
+						"count"
+					]
 				},
 				"cpu": {
 					"type": "object",
 					"properties": {
 						"show_icon": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Whether to show an icon for CPU usage."
 						},
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": "",
+							"description": "Icon to use for CPU display."
 						},
 						"mode": {
-							"$ref": "#/definitions/mode"
+							"$ref": "#/definitions/mode",
+							"default": "label"
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Show tooltip with detailed CPU usage info."
 						},
 						"temperature_unit": {
-							"type": "string"
+							"type": "string",
+							"default": "celsius",
+							"description": "Temperature unit for CPU readings."
 						},
 						"round": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Round CPU usage values."
 						},
 						"show_unit": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Show measurement unit next to CPU value."
 						},
 						"sensor": {
-							"type": "string"
+							"type": "string",
+							"default": "acpitz",
+							"description": "Sensor name to use for CPU temperature."
 						},
 						"graph_length": {
-							"type": "number"
+							"type": "number",
+							"default": 4,
+							"description": "Number of points in CPU usage graph."
 						}
 					},
 					"required": [
@@ -1053,55 +1300,90 @@
 					"type": "object",
 					"properties": {
 						"show_icon": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Whether to show an icon for GPU usage."
 						},
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": "",
+							"description": "Icon to use for GPU display."
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Show tooltip with detailed GPU usage info."
 						},
 						"mode": {
-							"$ref": "#/definitions/mode"
+							"$ref": "#/definitions/mode",
+							"default": "circular"
 						},
 						"graph_length": {
-							"type": "number"
+							"type": "number",
+							"default": 4,
+							"description": "Number of points in GPU usage graph."
 						}
 					},
-					"required": ["show_icon", "icon", "tooltip", "mode", "graph_length"]
+					"required": [
+						"show_icon",
+						"icon",
+						"tooltip",
+						"mode",
+						"graph_length"
+					]
 				},
 				"date_time": {
 					"type": "object",
 					"properties": {
 						"format": {
-							"type": "string"
+							"type": "string",
+							"default": "%b %d %H:%M",
+							"description": "Date/time display format string."
 						},
 						"calendar": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Enable calendar pop-up."
 						},
 						"clock_format": {
-							"type": "string"
+							"type": "string",
+							"default": "24h",
+							"description": "Clock format (12h or 24h)."
 						},
 						"auto_hide": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false,
+							"description": "Hide date/time when inactive."
 						},
 						"auto_hide_timeout": {
-							"type": "number"
+							"type": "number",
+							"default": 2000,
+							"description": "Delay in milliseconds before auto-hide."
 						},
 						"notification": {
 							"type": "object",
 							"properties": {
 								"enabled": {
-									"type": "boolean"
+									"type": "boolean",
+									"default": true,
+									"description": "Enable event notifications."
 								},
 								"count": {
-									"type": "boolean"
+									"type": "boolean",
+									"default": true,
+									"description": "Show number of upcoming events."
 								},
 								"hide_count_on_zero": {
-									"type": "boolean"
+									"type": "boolean",
+									"default": true,
+									"description": "Hide event count if zero."
 								}
 							},
-							"required": ["enabled", "count", "hide_count_on_zero"]
+							"required": [
+								"enabled",
+								"count",
+								"hide_count_on_zero"
+							]
 						}
 					},
 					"required": [
@@ -1117,37 +1399,60 @@
 					"type": "object",
 					"properties": {
 						"enabled_icon": {
-							"type": "string"
+							"type": "string",
+							"default": "",
+							"description": "Icon shown when idle mode is active."
 						},
 						"disabled_icon": {
-							"type": "string"
+							"type": "string",
+							"default": "",
+							"description": "Icon shown when idle mode is inactive."
 						},
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Show label for idle mode."
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Show tooltip with idle mode details."
 						}
 					},
-					"required": ["enabled_icon", "disabled_icon", "label", "tooltip"]
+					"required": [
+						"enabled_icon",
+						"disabled_icon",
+						"label",
+						"tooltip"
+					]
 				},
 				"hyprsunset": {
 					"type": "object",
 					"properties": {
 						"temperature": {
-							"type": "string"
+							"type": "string",
+							"default": "2800k",
+							"description": "Color temperature for sunset mode."
 						},
 						"enabled_icon": {
-							"type": "string"
+							"type": "string",
+							"default": "󱩌",
+							"description": "Icon shown when sunset mode is active."
 						},
 						"disabled_icon": {
-							"type": "string"
+							"type": "string",
+							"default": "󰛨",
+							"description": "Icon shown when sunset mode is inactive."
 						},
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Show label for sunset mode."
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Show tooltip with sunset mode details."
 						}
 					},
 					"required": [
@@ -1162,19 +1467,32 @@
 					"type": "object",
 					"properties": {
 						"icon": {
-							"type": "string"
+							"type": "string",
+							"default": "󰌌",
+							"description": "Icon for the keyboard layout indicator."
 						},
 						"label": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Show the current keyboard layout label."
 						},
 						"tooltip": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": true,
+							"description": "Show tooltip with keyboard layout details."
 						},
 						"show_icon": {
-							"type": "boolean"
+							"type": "boolean",
+							"default": false,
+							"description": "Whether to display the keyboard icon."
 						}
 					},
-					"required": ["icon", "label", "tooltip", "show_icon"]
+					"required": [
+						"icon",
+						"label",
+						"tooltip",
+						"show_icon"
+					]
 				},
 				"window_count": {
 					"type": "object",
@@ -1228,7 +1546,12 @@
 							"default": false
 						}
 					},
-					"required": ["truncation_size", "tooltip", "icon", "show_icon"]
+					"required": [
+						"truncation_size",
+						"tooltip",
+						"icon",
+						"show_icon"
+					]
 				},
 				"memory": {
 					"type": "object",
@@ -1283,7 +1606,11 @@
 							"default": true
 						}
 					},
-					"required": ["icon", "label", "tooltip"]
+					"required": [
+						"icon",
+						"label",
+						"tooltip"
+					]
 				},
 				"kanban": {
 					"type": "object",
@@ -1301,138 +1628,197 @@
 							"default": false
 						}
 					},
-					"required": ["icon", "label", "tooltip"]
+					"required": [
+						"icon",
+						"label",
+						"tooltip"
+					]
 				},
 				"emoji_picker": {
 					"type": "object",
 					"properties": {
 						"icon": {
 							"type": "string",
-							"default": ""
+							"default": "",
+							"description": "The icon displayed for the emoji picker."
 						},
 						"label": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Whether to display the label for the emoji picker."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Whether to display the tooltip for the emoji picker."
 						},
 						"per_row": {
 							"type": "number",
-							"default": 9
+							"default": 9,
+							"description": "The number of emoji to display per row."
 						},
 						"per_column": {
 							"type": "number",
-							"default": 4
+							"default": 4,
+							"description": "The number of emoji to display per column."
 						}
 					},
-					"required": ["icon", "label", "tooltip", "per_row", "per_column"]
+					"required": [
+						"icon",
+						"label",
+						"tooltip",
+						"per_row",
+						"per_column"
+					]
 				},
 				"submap": {
 					"type": "object",
 					"properties": {
 						"icon": {
 							"type": "string",
-							"default": "󰌌"
+							"default": "󰌌",
+							"description": "The icon displayed for the submap."
 						},
 						"label": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Whether to display the label for the submap."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Whether to display the tooltip for the submap."
 						},
 						"show_icon": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Whether to show the icon in the submap."
 						}
 					},
-					"required": ["icon", "label", "tooltip", "show_icon"]
+					"required": [
+						"icon",
+						"label",
+						"tooltip",
+						"show_icon"
+					]
 				},
 				"microphone": {
 					"type": "object",
 					"properties": {
 						"label": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Whether to display the label for the microphone."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Whether to display the tooltip for the microphone."
 						},
 						"show_icon": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Whether to show the icon for the microphone."
 						}
 					},
-					"required": ["label", "tooltip", "show_icon"]
+					"required": [
+						"label",
+						"tooltip",
+						"show_icon"
+					]
 				},
 				"ocr": {
 					"type": "object",
 					"properties": {
 						"icon": {
 							"type": "string",
-							"default": "󰐳"
+							"default": "󰐳",
+							"description": "The icon displayed for the OCR."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Whether to display the tooltip for the OCR."
 						},
 						"label": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Whether to display the label for the OCR."
 						},
 						"show_icon": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Whether to show the icon for the OCR."
 						},
 						"quiet": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Whether to enable quiet mode for the OCR."
 						}
 					},
-					"required": ["icon", "tooltip", "label", "show_icon", "quiet"]
+					"required": [
+						"icon",
+						"tooltip",
+						"label",
+						"show_icon",
+						"quiet"
+					]
 				},
 				"mpris": {
 					"type": "object",
 					"properties": {
 						"truncation_size": {
 							"type": "number",
-							"default": 10
+							"default": 10,
+							"description": "Maximum number of characters for truncating song titles."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Whether to display the tooltip for the MPRIS."
 						}
 					},
-					"required": ["truncation_size", "tooltip"]
+					"required": [
+						"truncation_size",
+						"tooltip"
+					]
 				},
 				"world_clock": {
 					"type": "object",
 					"properties": {
 						"icon": {
 							"type": "string",
-							"default": "󰃰"
+							"default": "󰃰",
+							"description": "The icon displayed for the world clock."
 						},
 						"show_icon": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Whether to show the icon for the world clock."
 						},
 						"use_24hr": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Whether to use 24-hour format for the world clock."
 						},
 						"timezones": {
 							"type": "array",
+							"description": "The timezones to display in the world clock.",
 							"items": {
 								"type": "string"
 							},
-							"default": ["America/New_York", "Asia/Tokyo"]
+							"default": [
+								"America/New_York",
+								"Asia/Tokyo"
+							]
 						}
 					},
-					"required": ["icon", "show_icon", "use_24hr", "timezones"]
+					"required": [
+						"icon",
+						"show_icon",
+						"use_24hr",
+						"timezones"
+					]
 				},
 				"custom_button_group": {
 					"type": "object",
@@ -1448,7 +1834,10 @@
 							"type": "number"
 						}
 					},
-					"required": ["buttons", "spacing"]
+					"required": [
+						"buttons",
+						"spacing"
+					]
 				}
 			},
 			"required": [
@@ -1499,21 +1888,35 @@
 			"properties": {
 				"left_section": {
 					"$ref": "#/definitions/widgets",
-					"default": ["workspaces", "window_title"],
+					"default": [
+						"workspaces",
+						"window_title"
+					],
 					"description": "Widgets on the left section."
 				},
 				"middle_section": {
 					"$ref": "#/definitions/widgets",
-					"default": ["date_time", "weather"],
+					"default": [
+						"date_time",
+						"weather"
+					],
 					"description": "Widgets on the middle section."
 				},
 				"right_section": {
 					"$ref": "#/definitions/widgets",
-					"default": ["@collapsible:0", "@group:0", "system_tray"],
+					"default": [
+						"@collapsible:0",
+						"@group:0",
+						"system_tray"
+					],
 					"description": "Widgets on the right section."
 				}
 			},
-			"required": ["left_section", "middle_section", "right_section"]
+			"required": [
+				"left_section",
+				"middle_section",
+				"right_section"
+			]
 		},
 		"widget_groups": {
 			"type": "array",
@@ -1523,11 +1926,13 @@
 					"widgets": {
 						"type": "array",
 						"items": {
-							"$ref": "#/definitions/widgets"
+							"$ref": "#/definitions/widgets",
+							"description": "List of widgets in the group."
 						}
 					},
 					"spacing": {
-						"type": "number"
+						"type": "number",
+						"description": "Spacing between widgets in the group."
 					},
 					"style_classes": {
 						"type": "array",
@@ -1536,7 +1941,11 @@
 						}
 					}
 				},
-				"required": ["widgets", "spacing", "style_classes"]
+				"required": [
+					"widgets",
+					"spacing",
+					"style_classes"
+				]
 			}
 		},
 		"collapsible_groups": {
@@ -1566,7 +1975,13 @@
 						}
 					}
 				},
-				"required": ["widgets", "spacing", "icon", "tooltip", "style_classes"]
+				"required": [
+					"widgets",
+					"spacing",
+					"icon",
+					"tooltip",
+					"style_classes"
+				]
 			}
 		},
 		"modules": {
@@ -1577,103 +1992,138 @@
 					"properties": {
 						"auto_hide": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Automatically hide the bar when not in use."
 						},
 						"layer": {
 							"$ref": "#/definitions/layer",
-							"default": "top"
+							"default": "top",
+							"description": "Layer on which the bar is displayed."
 						},
 						"location": {
 							"type": "string",
-							"enum": ["top", "bottom"],
-							"default": "bottom"
+							"enum": [
+								"top",
+								"bottom"
+							],
+							"default": "bottom",
+							"description": "Location of the bar."
 						}
 					},
-					"required": ["location", "layer", "auto_hide"]
+					"required": [
+						"location",
+						"layer",
+						"auto_hide"
+					]
 				},
 				"app_launcher": {
 					"type": "object",
 					"properties": {
 						"enabled": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Whether to enable the app launcher."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Whether to display the tooltip for the app launcher."
 						},
 						"icon_size": {
 							"type": "number",
-							"default": 30
+							"default": 30,
+							"description": "The size of the icons in the app launcher."
 						},
 						"ignored": {
 							"type": "array",
-							"default": []
+							"default": [],
+							"description": "List of applications to ignore in the app launcher."
 						}
 					},
-					"required": ["enabled", "tooltip", "icon_size", "ignored"]
+					"required": [
+						"enabled",
+						"tooltip",
+						"icon_size",
+						"ignored"
+					]
 				},
 				"notification": {
 					"type": "object",
 					"properties": {
 						"enabled": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Whether to enable notifications."
 						},
 						"dnd_on_screencast": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Whether to enable Do Not Disturb mode on screen cast."
 						},
 						"anchor": {
-							"type": "string"
+							"type": "string",
+							"default": "top-bottom",
+							"description": "Anchor position for the notification."
 						},
 						"auto_dismiss": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Whether to enable automatic dismissal of notifications."
 						},
 						"ignored": {
 							"type": "array",
-							"items": {}
+							"items": {},
+							"description": "List of applications to ignore in the app launcher."
 						},
 						"timeout": {
 							"type": "number",
-							"default": 3000
+							"default": 3000,
+							"description": "Timeout in milliseconds for notifications."
 						},
 						"max_actions": {
 							"type": "number",
-							"default": 3
+							"default": 3,
+							"description": "Maximum number of actions to display in a notification."
 						},
 						"transition_type": {
 							"$ref": "#/definitions/transition_type",
-							"default": "crossfade"
+							"default": "crossfade",
+							"description": "Transition type for notifications."
 						},
 						"transition_duration": {
 							"$ref": "#/definitions/transition_duration",
-							"default": 200
+							"default": 200,
+							"description": "Duration of the transition animation for notifications."
 						},
 						"play_sound": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Whether to play a sound for notifications."
 						},
 						"per_app_limits": {
 							"type": "object",
 							"properties": {},
-							"required": []
+							"required": [],
+							"description": "Per-application notification limits."
 						},
 						"sound_file": {
-							"type": "string"
+							"type": "string",
+							"description": "Path to the sound file to play for notifications."
 						},
 						"persist": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Whether to persist notifications until dismissed."
 						},
 						"display_actions_on_hover": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Whether to display actions when hovering over a notification."
 						},
 						"dismiss_on_hover": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Whether to dismiss the notification when hovering over it."
 						}
 					},
 					"required": [
@@ -1699,15 +2149,18 @@
 					"properties": {
 						"enabled": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Whether to enable on-screen display."
 						},
 						"timeout": {
 							"type": "number",
-							"default": 3000
+							"default": 3000,
+							"description": "Timeout in milliseconds for on-screen display."
 						},
 						"icon_size": {
 							"type": "number",
-							"default": 28
+							"default": 28,
+							"description": "Icon size for on-screen display."
 						},
 						"transition_type": {
 							"$ref": "#/definitions/transition_type",
@@ -1719,12 +2172,17 @@
 						},
 						"play_sound": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Whether to play a sound for on-screen display."
 						},
 						"orientation": {
 							"type": "string",
-							"enum": ["horizontal", "vertical"],
-							"default": "horizontal"
+							"enum": [
+								"horizontal",
+								"vertical"
+							],
+							"default": "horizontal",
+							"description": "Orientation of the on-screen display."
 						},
 						"anchor": {
 							"$ref": "#/definitions/anchor",
@@ -1732,14 +2190,23 @@
 						},
 						"percentage": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Whether to display the percentage value for on-screen display."
 						},
 						"osds": {
 							"type": "array",
+							"description": "On-screen display elements.",
 							"items": {
 								"type": "string",
-								"enum": ["brightness", "volume", "microphone"],
-								"default": ["brightness", "volume"]
+								"enum": [
+									"brightness",
+									"volume",
+									"microphone"
+								],
+								"default": [
+									"brightness",
+									"volume"
+								]
 							}
 						}
 					},
@@ -1761,29 +2228,37 @@
 					"properties": {
 						"enabled": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Whether to enable screen corners."
 						},
 						"size": {
 							"type": "number",
-							"default": 20
+							"default": 20,
+							"description": "Size of the screen corners."
 						}
 					},
-					"required": ["enabled", "size"]
+					"required": [
+						"enabled",
+						"size"
+					]
 				},
 				"dock": {
 					"type": "object",
 					"properties": {
 						"enabled": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Whether to enable the dock."
 						},
 						"tooltip": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Whether to show tooltips for docked apps."
 						},
 						"icon_size": {
 							"type": "number",
-							"default": 40
+							"default": 40,
+							"description": "Size of the icons in the dock."
 						},
 						"anchor": {
 							"$ref": "#/definitions/anchor",
@@ -1791,30 +2266,40 @@
 						},
 						"show_when_no_windows": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Whether to show the dock when no windows are open."
 						},
 						"ignored": {
 							"type": "array",
 							"items": {},
-							"default": []
+							"default": [],
+							"description": "Apps to be ignored by the dock."
 						},
 						"hide_special_workspace_apps": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Whether to hide apps that are special to the workspace."
 						},
 						"layer": {
 							"$ref": "#/definitions/layer"
 						},
 						"preview_apps": {
 							"type": "boolean",
-							"default": true
+							"default": true,
+							"description": "Whether to show previews for docked apps."
 						},
 						"preview_size": {
 							"type": "array",
+							"minItems": 2,
+							"maxItems": 2,
+							"description": "The size of the preview for docked apps.",
 							"items": {
 								"type": "number"
 							},
-							"default": [200, 130]
+							"default": [
+								200,
+								130
+							]
 						}
 					},
 					"required": [
@@ -1836,7 +2321,8 @@
 					"properties": {
 						"enabled": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Enable or disable the desktop clock widget."
 						},
 						"anchor": {
 							"$ref": "#/definitions/anchor",
@@ -1844,7 +2330,8 @@
 						},
 						"date_format": {
 							"type": "string",
-							"default": "%A, %d %B %Y"
+							"default": "%A, %d %B %Y",
+							"description": "The format of the date displayed in the desktop clock."
 						},
 						"layer": {
 							"$ref": "#/definitions/layer",
@@ -1852,7 +2339,8 @@
 						},
 						"time_format": {
 							"type": "string",
-							"default": "%H:%M"
+							"default": "%H:%M",
+							"description": "The format of the time displayed in the desktop clock."
 						}
 					},
 					"required": [
@@ -1868,22 +2356,31 @@
 					"properties": {
 						"enabled": {
 							"type": "boolean",
-							"default": false
+							"default": false,
+							"description": "Enable or disable the quotes widget."
 						},
 						"anchor": {
 							"$ref": "#/definitions/anchor",
-							"default": "bottom-right"
+							"default": "bottom-right",
+							"description": "The anchor position of the quotes widget."
 						},
 						"layer": {
 							"$ref": "#/definitions/layer",
-							"default": "bottom"
+							"default": "bottom",
+							"description": "The layer in which the quotes widget will be displayed."
 						},
 						"update_interval": {
 							"type": "number",
-							"default": 600
+							"default": 600,
+							"description": "The interval at which quotes are updated, in seconds."
 						}
 					},
-					"required": ["enabled", "anchor", "layer", "update_interval"]
+					"required": [
+						"enabled",
+						"anchor",
+						"layer",
+						"update_interval"
+					]
 				}
 			},
 			"required": [
@@ -1901,22 +2398,31 @@
 			"properties": {
 				"check_updates": {
 					"type": "boolean",
-					"default": false
+					"default": false,
+					"description": "Enable or disable checking for updates automatically."
 				},
 				"debug": {
 					"type": "boolean",
-					"default": false
+					"default": false,
+					"description": "Enable or disable debug mode for more verbose logging."
 				},
 				"monitor_styles": {
 					"type": "boolean",
-					"default": false
+					"default": false,
+					"description": "Enable or disable custom monitor styles."
 				},
 				"auto_reload": {
 					"type": "boolean",
-					"default": true
+					"default": true,
+					"description": "Enable or disable automatic reloading of the configuration."
 				}
 			},
-			"required": ["check_updates", "auto_reload", "debug", "monitor_styles"]
+			"required": [
+				"check_updates",
+				"auto_reload",
+				"debug",
+				"monitor_styles"
+			]
 		}
 	},
 	"required": [
