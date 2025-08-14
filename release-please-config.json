@@ -33,7 +33,7 @@
 				{
 					"type": "revert",
 					"section": "↩️ Reverts",
-					"hidden": true
+					"hidden": false
 				},
 				{
 					"type": "docs",
@@ -68,6 +68,11 @@
 				{
 					"type": "ci",
 					"section": "🚀 CI Improvements",
+					"hidden": false
+				},
+				{
+					"type": "deps",
+					"section": "📦 Dependency Updates",
 					"hidden": false
 				}
 			]

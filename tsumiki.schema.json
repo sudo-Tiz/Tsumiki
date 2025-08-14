@@ -4,33 +4,17 @@
 	"definitions": {
 		"style": {
 			"type": "string",
-			"enum": [
-				"default",
-				"leaf",
-				"leaf-inverse",
-				"flat",
-				"shadow",
-				"bordered"
-			],
+			"enum": ["default", "leaf", "leaf-inverse", "flat", "shadow", "bordered"],
 			"description": "Determines the style of the widget."
 		},
 		"layer": {
 			"type": "string",
-			"enum": [
-				"top",
-				"overlay",
-				"bottom",
-				"background"
-			],
+			"enum": ["top", "overlay", "bottom", "background"],
 			"description": "Determines the layer of the widget."
 		},
 		"mode": {
 			"type": "string",
-			"enum": [
-				"label",
-				"graph",
-				"progress"
-			],
+			"enum": ["label", "graph", "progress"],
 			"description": "Specifies the mode of the widget."
 		},
 		"transition_type": {
@@ -252,12 +236,7 @@
 							"description": "Determines whether to show the occupied status."
 						}
 					},
-					"required": [
-						"icon",
-						"tooltip",
-						"label",
-						"show_occupied"
-					]
+					"required": ["icon", "tooltip", "label", "show_occupied"]
 				},
 				"power": {
 					"type": "object",
@@ -369,13 +348,7 @@
 							"description": "The timeout duration for delayed recording."
 						}
 					},
-					"required": [
-						"path",
-						"audio",
-						"tooltip",
-						"delayed",
-						"delayed_timeout"
-					]
+					"required": ["path", "audio", "tooltip", "delayed", "delayed_timeout"]
 				},
 				"screenshot": {
 					"type": "object",
@@ -520,11 +493,7 @@
 									"description": "Determines whether to show the distribution icon."
 								}
 							},
-							"required": [
-								"avatar",
-								"name",
-								"distro_icon"
-							]
+							"required": ["avatar", "name", "distro_icon"]
 						},
 						"controls": {
 							"type": "object",
@@ -534,16 +503,11 @@
 									"items": {
 										"type": "string"
 									},
-									"default": [
-										"brightness",
-										"volume"
-									],
+									"default": ["brightness", "volume"],
 									"description": "The list of sliders to display in the quick settings."
 								}
 							},
-							"required": [
-								"sliders"
-							]
+							"required": ["sliders"]
 						},
 						"auto_hide": {
 							"type": "boolean",
@@ -679,10 +643,7 @@
 									]
 								}
 							},
-							"required": [
-								"enabled",
-								"items"
-							]
+							"required": ["enabled", "items"]
 						}
 					},
 					"required": [
@@ -709,10 +670,7 @@
 							"description": "The icon displayed when the stopwatch is running."
 						}
 					},
-					"required": [
-						"stopped_icon",
-						"running_icon"
-					]
+					"required": ["stopped_icon", "running_icon"]
 				},
 				"storage": {
 					"type": "object",
@@ -788,12 +746,7 @@
 							"description": "Determines whether to hide the system tray when there are no visible icons."
 						}
 					},
-					"required": [
-						"icon_size",
-						"ignored",
-						"hidden",
-						"hide_when_empty"
-					]
+					"required": ["icon_size", "ignored", "hidden", "hide_when_empty"]
 				},
 				"taskbar": {
 					"type": "object",
@@ -815,11 +768,7 @@
 							"description": "Determines whether to show the tooltip for the taskbar."
 						}
 					},
-					"required": [
-						"icon_size",
-						"ignored",
-						"tooltip"
-					]
+					"required": ["icon_size", "ignored", "tooltip"]
 				},
 				"theme_switcher": {
 					"type": "object",
@@ -835,10 +784,7 @@
 							"description": "Determines whether to show notifications for theme changes."
 						}
 					},
-					"required": [
-						"icon",
-						"notify"
-					]
+					"required": ["icon", "notify"]
 				},
 				"updates": {
 					"type": "object",
@@ -956,11 +902,7 @@
 							"description": "The step size for volume adjustments."
 						}
 					},
-					"required": [
-						"label",
-						"tooltip",
-						"step_size"
-					]
+					"required": ["label", "tooltip", "step_size"]
 				},
 				"hyprpicker": {
 					"type": "object",
@@ -991,13 +933,7 @@
 							"description": "Determines whether to run the Hyprpicker in quiet mode, suppressing notifications."
 						}
 					},
-					"required": [
-						"icon",
-						"tooltip",
-						"label",
-						"show_icon",
-						"quiet"
-					]
+					"required": ["icon", "tooltip", "label", "show_icon", "quiet"]
 				},
 				"weather": {
 					"type": "object",
@@ -1127,9 +1063,7 @@
 							"items": {
 								"type": "number"
 							},
-							"default": [
-								-99
-							],
+							"default": [-99],
 							"description": "List of workspace IDs to ignore."
 						},
 						"reverse_scroll": {
@@ -1174,10 +1108,7 @@
 							"description": "Show a tooltip with Bluetooth connection details."
 						}
 					},
-					"required": [
-						"label",
-						"tooltip"
-					]
+					"required": ["label", "tooltip"]
 				},
 				"brightness": {
 					"type": "object",
@@ -1198,11 +1129,7 @@
 							"description": "Step size percentage for brightness adjustments."
 						}
 					},
-					"required": [
-						"label",
-						"tooltip",
-						"step_size"
-					]
+					"required": ["label", "tooltip", "step_size"]
 				},
 				"cava": {
 					"type": "object",
@@ -1218,10 +1145,7 @@
 							"description": "Color of the CAVA visualizer bars."
 						}
 					},
-					"required": [
-						"bars",
-						"color"
-					]
+					"required": ["bars", "color"]
 				},
 				"click_counter": {
 					"type": "object",
@@ -1232,9 +1156,7 @@
 							"description": "The current value of the click counter."
 						}
 					},
-					"required": [
-						"count"
-					]
+					"required": ["count"]
 				},
 				"cpu": {
 					"type": "object",
@@ -1324,13 +1246,7 @@
 							"description": "Number of points in GPU usage graph."
 						}
 					},
-					"required": [
-						"show_icon",
-						"icon",
-						"tooltip",
-						"mode",
-						"graph_length"
-					]
+					"required": ["show_icon", "icon", "tooltip", "mode", "graph_length"]
 				},
 				"date_time": {
 					"type": "object",
@@ -1379,11 +1295,7 @@
 									"description": "Hide event count if zero."
 								}
 							},
-							"required": [
-								"enabled",
-								"count",
-								"hide_count_on_zero"
-							]
+							"required": ["enabled", "count", "hide_count_on_zero"]
 						}
 					},
 					"required": [
@@ -1419,12 +1331,7 @@
 							"description": "Show tooltip with idle mode details."
 						}
 					},
-					"required": [
-						"enabled_icon",
-						"disabled_icon",
-						"label",
-						"tooltip"
-					]
+					"required": ["enabled_icon", "disabled_icon", "label", "tooltip"]
 				},
 				"hyprsunset": {
 					"type": "object",
@@ -1487,12 +1394,7 @@
 							"description": "Whether to display the keyboard icon."
 						}
 					},
-					"required": [
-						"icon",
-						"label",
-						"tooltip",
-						"show_icon"
-					]
+					"required": ["icon", "label", "tooltip", "show_icon"]
 				},
 				"window_count": {
 					"type": "object",
@@ -1546,12 +1448,7 @@
 							"default": false
 						}
 					},
-					"required": [
-						"truncation_size",
-						"tooltip",
-						"icon",
-						"show_icon"
-					]
+					"required": ["truncation_size", "tooltip", "icon", "show_icon"]
 				},
 				"memory": {
 					"type": "object",
@@ -1606,11 +1503,7 @@
 							"default": true
 						}
 					},
-					"required": [
-						"icon",
-						"label",
-						"tooltip"
-					]
+					"required": ["icon", "label", "tooltip"]
 				},
 				"kanban": {
 					"type": "object",
@@ -1628,11 +1521,7 @@
 							"default": false
 						}
 					},
-					"required": [
-						"icon",
-						"label",
-						"tooltip"
-					]
+					"required": ["icon", "label", "tooltip"]
 				},
 				"emoji_picker": {
 					"type": "object",
@@ -1663,13 +1552,7 @@
 							"description": "The number of emoji to display per column."
 						}
 					},
-					"required": [
-						"icon",
-						"label",
-						"tooltip",
-						"per_row",
-						"per_column"
-					]
+					"required": ["icon", "label", "tooltip", "per_row", "per_column"]
 				},
 				"submap": {
 					"type": "object",
@@ -1695,12 +1578,7 @@
 							"description": "Whether to show the icon in the submap."
 						}
 					},
-					"required": [
-						"icon",
-						"label",
-						"tooltip",
-						"show_icon"
-					]
+					"required": ["icon", "label", "tooltip", "show_icon"]
 				},
 				"microphone": {
 					"type": "object",
@@ -1721,11 +1599,7 @@
 							"description": "Whether to show the icon for the microphone."
 						}
 					},
-					"required": [
-						"label",
-						"tooltip",
-						"show_icon"
-					]
+					"required": ["label", "tooltip", "show_icon"]
 				},
 				"ocr": {
 					"type": "object",
@@ -1756,13 +1630,7 @@
 							"description": "Whether to enable quiet mode for the OCR."
 						}
 					},
-					"required": [
-						"icon",
-						"tooltip",
-						"label",
-						"show_icon",
-						"quiet"
-					]
+					"required": ["icon", "tooltip", "label", "show_icon", "quiet"]
 				},
 				"mpris": {
 					"type": "object",
@@ -1778,10 +1646,7 @@
 							"description": "Whether to display the tooltip for the MPRIS."
 						}
 					},
-					"required": [
-						"truncation_size",
-						"tooltip"
-					]
+					"required": ["truncation_size", "tooltip"]
 				},
 				"world_clock": {
 					"type": "object",
@@ -1807,18 +1672,10 @@
 							"items": {
 								"type": "string"
 							},
-							"default": [
-								"America/New_York",
-								"Asia/Tokyo"
-							]
+							"default": ["America/New_York", "Asia/Tokyo"]
 						}
 					},
-					"required": [
-						"icon",
-						"show_icon",
-						"use_24hr",
-						"timezones"
-					]
+					"required": ["icon", "show_icon", "use_24hr", "timezones"]
 				},
 				"custom_button_group": {
 					"type": "object",
@@ -1834,10 +1691,7 @@
 							"type": "number"
 						}
 					},
-					"required": [
-						"buttons",
-						"spacing"
-					]
+					"required": ["buttons", "spacing"]
 				}
 			},
 			"required": [
@@ -1888,35 +1742,21 @@
 			"properties": {
 				"left_section": {
 					"$ref": "#/definitions/widgets",
-					"default": [
-						"workspaces",
-						"window_title"
-					],
+					"default": ["workspaces", "window_title"],
 					"description": "Widgets on the left section."
 				},
 				"middle_section": {
 					"$ref": "#/definitions/widgets",
-					"default": [
-						"date_time",
-						"weather"
-					],
+					"default": ["date_time", "weather"],
 					"description": "Widgets on the middle section."
 				},
 				"right_section": {
 					"$ref": "#/definitions/widgets",
-					"default": [
-						"@collapsible:0",
-						"@group:0",
-						"system_tray"
-					],
+					"default": ["@collapsible:0", "@group:0", "system_tray"],
 					"description": "Widgets on the right section."
 				}
 			},
-			"required": [
-				"left_section",
-				"middle_section",
-				"right_section"
-			]
+			"required": ["left_section", "middle_section", "right_section"]
 		},
 		"widget_groups": {
 			"type": "array",
@@ -1941,11 +1781,7 @@
 						}
 					}
 				},
-				"required": [
-					"widgets",
-					"spacing",
-					"style_classes"
-				]
+				"required": ["widgets", "spacing", "style_classes"]
 			}
 		},
 		"collapsible_groups": {
@@ -1975,13 +1811,7 @@
 						}
 					}
 				},
-				"required": [
-					"widgets",
-					"spacing",
-					"icon",
-					"tooltip",
-					"style_classes"
-				]
+				"required": ["widgets", "spacing", "icon", "tooltip", "style_classes"]
 			}
 		},
 		"modules": {
@@ -2002,19 +1832,12 @@
 						},
 						"location": {
 							"type": "string",
-							"enum": [
-								"top",
-								"bottom"
-							],
+							"enum": ["top", "bottom"],
 							"default": "bottom",
 							"description": "Location of the bar."
 						}
 					},
-					"required": [
-						"location",
-						"layer",
-						"auto_hide"
-					]
+					"required": ["location", "layer", "auto_hide"]
 				},
 				"app_launcher": {
 					"type": "object",
@@ -2040,12 +1863,7 @@
 							"description": "List of applications to ignore in the app launcher."
 						}
 					},
-					"required": [
-						"enabled",
-						"tooltip",
-						"icon_size",
-						"ignored"
-					]
+					"required": ["enabled", "tooltip", "icon_size", "ignored"]
 				},
 				"notification": {
 					"type": "object",
@@ -2177,10 +1995,7 @@
 						},
 						"orientation": {
 							"type": "string",
-							"enum": [
-								"horizontal",
-								"vertical"
-							],
+							"enum": ["horizontal", "vertical"],
 							"default": "horizontal",
 							"description": "Orientation of the on-screen display."
 						},
@@ -2198,15 +2013,8 @@
 							"description": "On-screen display elements.",
 							"items": {
 								"type": "string",
-								"enum": [
-									"brightness",
-									"volume",
-									"microphone"
-								],
-								"default": [
-									"brightness",
-									"volume"
-								]
+								"enum": ["brightness", "volume", "microphone"],
+								"default": ["brightness", "volume"]
 							}
 						}
 					},
@@ -2237,10 +2045,7 @@
 							"description": "Size of the screen corners."
 						}
 					},
-					"required": [
-						"enabled",
-						"size"
-					]
+					"required": ["enabled", "size"]
 				},
 				"dock": {
 					"type": "object",
@@ -2296,10 +2101,7 @@
 							"items": {
 								"type": "number"
 							},
-							"default": [
-								200,
-								130
-							]
+							"default": [200, 130]
 						}
 					},
 					"required": [
@@ -2375,12 +2177,7 @@
 							"description": "The interval at which quotes are updated, in seconds."
 						}
 					},
-					"required": [
-						"enabled",
-						"anchor",
-						"layer",
-						"update_interval"
-					]
+					"required": ["enabled", "anchor", "layer", "update_interval"]
 				}
 			},
 			"required": [
@@ -2417,12 +2214,7 @@
 					"description": "Enable or disable automatic reloading of the configuration."
 				}
 			},
-			"required": [
-				"check_updates",
-				"auto_reload",
-				"debug",
-				"monitor_styles"
-			]
+			"required": ["check_updates", "auto_reload", "debug", "monitor_styles"]
 		}
 	},
 	"required": [
