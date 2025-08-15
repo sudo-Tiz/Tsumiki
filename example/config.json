@@ -47,7 +47,7 @@
 			"path": "Pictures/Screenshots",
 			"tooltip": true,
 			"label": false,
-			"annotation": true,
+			"annotation": false,
 			"capture_sound": false,
 			"icon": "󰄀",
 			"delayed": false,
@@ -502,7 +502,6 @@
 		"check_updates": false,
 		"debug": false,
 		"monitor_styles": true,
-		"location": "top",
 		"auto_reload": true
 	}
 }
