@@ -41,15 +41,11 @@ check_prerequisites() {
 		exit 1
 	fi
 
-
-  if ! command -v python3 &>/dev/null && ! command -v python &>/dev/null; then
-    log_error "Python 3 is not installed. Please install python first."
-    exit 1
-  fi
+	if ! command -v python3 &>/dev/null; then
+		log_error "Python3 is not installed. Please install python3 first."
+		exit 1
+	fi
 }
-
-# Detect python binary
-PYTHON=$(command -v python3 || command -v python)
 
 ensure_venv() {
     local action=${1:-"check"}
@@ -69,7 +65,7 @@ ensure_venv() {
         setup)
             if [ ! -d .venv ]; then
                 log_info "Creating virtual environment..."
-                if ! "$PYTHON" -m venv .venv; then
+                if ! python3 -m venv .venv; then
                     log_error "Failed to create virtual environment."
                     exit 1
                 fi
@@ -157,17 +153,15 @@ start_bar() {
    ██║   ███████║╚██████╔╝██║ ╚═╝ ██║██║██║  ██╗██║
    ╚═╝   ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═╝╚═╝
 
-Welcome to Tsumiki Bar!
-
 version: $VERSION
 
 EOF
 
-	log_success "Using python: $(which "$PYTHON")"
+	log_success "Using python: $(which python)"
 
 	if [ "$DETACHED_MODE" = true ]; then
 		log_warning "Running in detached mode..."
-setsid "$PYTHON" main.py >/dev/null 2>&1 &
+setsid python3 main.py >/dev/null 2>&1 &
 		pid=$!
 		sleep 0.1 # Give a moment for the process to potentially fail on startup.
 		if ! ps -p "$pid" > /dev/null; then
@@ -176,7 +170,7 @@ setsid "$PYTHON" main.py >/dev/null 2>&1 &
 		fi
 	else
 		log_info "Starting Tsumiki Bar..."
-		"$PYTHON" main.py || {
+		python3 main.py || {
 			log_error "Failed to start Tsumiki Bar"
 			exit 1
 		}
@@ -361,7 +355,7 @@ fi
 if [ "$SHOULD_UPDATE" = true ]; then
 	log_info "===  Updating from Git ==="
 	cd "$INSTALL_DIR" && git fetch --all && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)
-	log_success "    Update completed."
+	log_success "Update completed."
 fi
 
 if [ "$SHOULD_INSTALL" = true ]; then
