@@ -1891,12 +1891,6 @@
 							},
 							"description": "Specifies the size of the dock preview icons."
 						},
-						"anchor": {
-							"type": "string",
-							"enum": ["bottom-center", "left-center", "right-center"],
-							"description": "Specifies the anchor position of the dock.",
-							"default": "bottom-center"
-						},
 						"ignored_apps": {
 							"type": "array",
 							"items": {

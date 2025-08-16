@@ -387,7 +387,6 @@ DEFAULT_CONFIG = {
             "enabled": False,
             "ignored_apps": [],
             "icon_size": 40,
-            "anchor": "bottom-center",
             "tooltip": False,
             "layer": "top",
             "show_when_no_windows": False,
