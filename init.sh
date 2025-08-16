@@ -5,10 +5,12 @@ set -e          # Exit immediately if a command exits with a non-zero status
 set -u          # Treat unset variables as an error
 set -o pipefail # Prevent errors in a pipeline from being masked
 
-if ! grep -q "arch" /etc/os-release; then
-	echo "This script is designed to run on Arch Linux 󰣇."
-	exit 1
+# --- Check Arch-based distro ---
+if ! grep -qiE "arch|manjaro|endeavouros" /etc/os-release; then
+    echo "This script is designed to run on Arch-based systems (Arch, Manjaro, EndeavourOS)."
+    exit 1
 fi
+
 
 SCRIPT_PATH=$(readlink -f "$0")
 INSTALL_DIR=$(dirname "$SCRIPT_PATH")
@@ -39,11 +41,15 @@ check_prerequisites() {
 		exit 1
 	fi
 
-	if ! command -v python3 &>/dev/null; then
-		log_error "Python3 is not installed. Please install python3 first."
-		exit 1
-	fi
+
+  if ! command -v python3 &>/dev/null && ! command -v python &>/dev/null; then
+    log_error "Python 3 is not installed. Please install python first."
+    exit 1
+  fi
 }
+
+# Detect python binary
+PYTHON=$(command -v python3 || command -v python)
 
 ensure_venv() {
     local action=${1:-"check"}
@@ -63,7 +69,7 @@ ensure_venv() {
         setup)
             if [ ! -d .venv ]; then
                 log_info "Creating virtual environment..."
-                if ! python3 -m venv .venv; then
+                if ! "$PYTHON" -m venv .venv; then
                     log_error "Failed to create virtual environment."
                     exit 1
                 fi
@@ -151,15 +157,17 @@ start_bar() {
    ██║   ███████║╚██████╔╝██║ ╚═╝ ██║██║██║  ██╗██║
    ╚═╝   ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═╝╚═╝
 
+Welcome to Tsumiki Bar!
+
 version: $VERSION
 
 EOF
 
-	log_success "Using python: $(which python)"
+	log_success "Using python: $(which "$PYTHON")"
 
 	if [ "$DETACHED_MODE" = true ]; then
 		log_warning "Running in detached mode..."
-setsid python3 main.py >/dev/null 2>&1 &
+setsid "$PYTHON" main.py >/dev/null 2>&1 &
 		pid=$!
 		sleep 0.1 # Give a moment for the process to potentially fail on startup.
 		if ! ps -p "$pid" > /dev/null; then
@@ -168,7 +176,7 @@ setsid python3 main.py >/dev/null 2>&1 &
 		fi
 	else
 		log_info "Starting Tsumiki Bar..."
-		python3 main.py || {
+		"$PYTHON" main.py || {
 			log_error "Failed to start Tsumiki Bar"
 			exit 1
 		}
@@ -293,7 +301,7 @@ usage() {
 
 kill_existing() {
 	log_warning "Stopping existing Tsumiki instances..."
-	pkill tsumiki || true
+	pkill -x tsumiki || true
 	# Wait for the process to terminate completely
 	while pgrep -x "tsumiki" >/dev/null; do
 		sleep 0.1
@@ -352,7 +360,7 @@ fi
 
 if [ "$SHOULD_UPDATE" = true ]; then
 	log_info "===  Updating from Git ==="
-	cd "$INSTALL_DIR" && git pull
+	cd "$INSTALL_DIR" && git fetch --all && git reset --hard origin/$(git rev-parse --abbrev-ref HEAD)
 	log_success "    Update completed."
 fi
 
