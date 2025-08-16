@@ -6,8 +6,8 @@ set -u          # Treat unset variables as an error
 set -o pipefail # Prevent errors in a pipeline from being masked
 
 # --- Check Arch-based distro ---
-if ! grep -qiE "arch|manjaro|endeavouros" /etc/os-release; then
-    echo "This script is designed to run on Arch-based systems (Arch, Manjaro, EndeavourOS)."
+if ! grep -qiE "arch|manjaro|endeavouros|arcolinux|garuda|artix|rebornos|archcraft|parabola|blackarch|chakra|cachyos" /etc/os-release; then
+    echo "This script is designed to run on Arch-based systems (Arch, Manjaro, EndeavourOS, ArcoLinux, Garuda, Artix, RebornOS, Archcraft, Parabola, BlackArch, Chakra, CachyOS)."
     exit 1
 fi
 
