@@ -345,6 +345,7 @@ class OverViewOverlay(PopupWindow):
             transition_type="crossfade",
             anchor="center",
             enable_inhibitor=True,
+            keyboard_mode="exclusive"
         )
 
     def toggle_popup(self, monitor: bool = False):
