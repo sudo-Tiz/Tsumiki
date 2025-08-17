@@ -63,7 +63,6 @@ class EventBoxWidget(EventBox, BaseWidget):
 
         widget_name = kwargs.get("name", "eventbox")
         self.config: dict = widget_config["widgets"].get(widget_name, {})
-
         self.box = Box(style_classes="panel-box")
         self.add(
             self.box,
