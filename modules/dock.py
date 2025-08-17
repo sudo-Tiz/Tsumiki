@@ -34,7 +34,7 @@ class AppBar(Box):
 
         self.config = parent.config
 
-        self.menu = Gtk.Menu()
+        self.menu = None
 
         self.icon_size = self.config.get("icon_size", 30)
         self.preview_size = self.config.get("preview_size", [40, 50])
@@ -166,6 +166,9 @@ class AppBar(Box):
 
     def show_menu(self, client: Glace.Client):
         """Show the context menu for a client."""
+
+        if not self.menu:
+            self.menu = Gtk.Menu()
 
         for item in self.menu.get_children():
             self.menu.remove(item)
