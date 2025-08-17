@@ -51,7 +51,7 @@ class HyprlandWindowButton(Button):
         icon_size_main = int(min(self.size) * 0.5)  # adjust factor as needed
 
         # Enhanced icon resolution using desktop apps
-        desktop_app = AppUtils().find_app_by_class(app_id)
+        desktop_app = AppUtils().find_app(app_id)
 
         # Get icon using improved method with fallbacks
         icon_pixbuf = None
