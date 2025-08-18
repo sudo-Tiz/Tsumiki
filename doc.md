@@ -208,6 +208,7 @@
     - **`label`**: `bool` (default: true)
     - **`tooltip`**: `bool` (default: true)
     - **`show_icon`**: `bool` (default: true)
+    - **`hide_on_default`**: `bool` (default: false)
   - **`system_tray`**: `object`
     - **`icon_size`**: `int` (default: 16)
     - **`ignored`**: `list` (default: [])

@@ -1567,6 +1567,11 @@
 							"default": false,
 							"description": "Whether to display the label for the submap."
 						},
+						"hide_when_default": {
+							"type": "boolean",
+							"default": false,
+							"description": "Hide the submap when it is in the default state."
+						},
 						"tooltip": {
 							"type": "boolean",
 							"default": true,

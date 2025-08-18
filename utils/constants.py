@@ -266,6 +266,7 @@ DEFAULT_CONFIG = {
             "label": True,
             "tooltip": True,
             "show_icon": True,
+            "hide_on_default": False
         },
         "system_tray": {
             "icon_size": 16,
