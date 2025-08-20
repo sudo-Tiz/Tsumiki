@@ -315,7 +315,7 @@ DEFAULT_CONFIG = {
         "window_title": {
             "icon": True,
             "truncation": True,
-            "truncation_size": 30,
+            "truncation_size": 20,
             "tooltip": True,
             "mappings": True,
             "title_map": [],

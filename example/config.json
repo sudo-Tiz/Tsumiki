@@ -195,8 +195,8 @@
 			"icon": true,
 			"tooltip": true,
 			"truncation": true,
-			"truncation_size": 50,
-			"mappings": true,
+			"truncation_size": 20,
+			"mappings": false,
 			"title_map": []
 		},
 		"workspaces": {
