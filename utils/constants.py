@@ -1065,6 +1065,7 @@ WINDOW_TITLE_MAP = [
     ["org.telegram.desktop", "", "Telegram"],
     ["whatsapp", "󰖣", "WhatsApp"],
     ["teams", "󰊻", "Microsoft Teams"],
+    ["teamspeak", "", "TeamSpeak"],
     ["skype", "󰒯", "Skype"],
     ["thunderbird", "", "Thunderbird"],
     # File Managers
