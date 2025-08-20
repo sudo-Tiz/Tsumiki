@@ -32,7 +32,7 @@ class WindowTitleWidget(ButtonWidget):
         trunc_size = self.config.get("truncation_size", 50)
 
         if not mappings_enabled:
-            return truncate(win_title, trunc_size)
+            return truncate(win_title, trunc_size) if trunc else win_title
 
         custom_map = self.config.get("title_map", [])
         icon_enabled = self.config.get("icon", True)
