@@ -97,14 +97,14 @@ When creating a new widget:
 - Run `python doc_gen.py` to generate the documentation for the widgets
 
 # Installing extra stubs (Optional)
-Install gengir with the following command:
+Install fabric-cli with the following command:
 ```sh
-cargo install --git https://github.com/santiagocezar/gengir
+yay -S fabric-cli-git
 ```
 
 Then run the following command from the root of the repo to generate the stubs:
 ```sh
-gengir Glace-0.1 Gray-0.1
+fabric-cli gs Glace-0.1 Gray-0.1 GtkLayerShell-0.1 Playerctl-2.0 NM-1.0
 ```
 
 ## Getting Started
