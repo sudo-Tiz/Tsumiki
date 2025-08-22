@@ -1687,6 +1687,50 @@
 					},
 					"required": ["icon", "show_icon", "use_24hr", "timezones"]
 				},
+				"custom_button": {
+					"type": "object",
+					"properties": {
+						"command": {
+							"type": "string",
+							"description": "Bash command to execute when button is clicked"
+						},
+						"icon": {
+							"type": "string",
+							"description": "Icon to display on the button"
+						},
+						"label_text": {
+							"type": "string",
+							"description": "Text to display on the button"
+						},
+						"tooltip_text": {
+							"type": "string",
+							"description": "Tooltip text to show on hover"
+						},
+						"show_icon": {
+							"type": "boolean",
+							"description": "Whether to show the icon",
+							"default": true
+						},
+						"label": {
+							"type": "boolean",
+							"description": "Whether to show the label",
+							"default": true
+						},
+						"tooltip": {
+							"type": "boolean",
+							"description": "Whether to show the tooltip",
+							"default": true
+						},
+						"style_classes": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							},
+							"description": "CSS style classes to apply to the button"
+						}
+					},
+					"required": ["command"]
+				},
 				"custom_button_group": {
 					"type": "object",
 					"properties": {
