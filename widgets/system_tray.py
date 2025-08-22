@@ -227,7 +227,7 @@ class SystemTrayWidget(ButtonWidget, BaseSystemTray):
 
         visible = self.popup.get_visible()
 
-        self.set_has_class("active", not visible)
+        self.toggle_css_class("active", not visible)
 
         if visible:
             self.popup.hide()

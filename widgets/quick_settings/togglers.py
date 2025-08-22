@@ -78,7 +78,7 @@ class NotificationQuickSetting(HoverButton):
     def toggle_notification(self, _, value: bool, *args):
         """Toggle the notification."""
 
-        self.set_has_class(
+        self.toggle_css_class(
             "active",
             not value,
         )

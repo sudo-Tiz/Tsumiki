@@ -166,7 +166,7 @@ class AudioOSDContainer(GenericOSDContainer):
             is_over_amplified = volume > 100
             self.previous_volume = volume
 
-            self.scale.set_has_class("overamplified", is_over_amplified)
+            self.scale.toggle_css_class("overamplified", is_over_amplified)
 
             if self.audio_service.speaker.muted or volume == 0:
                 self.update_icon()
@@ -237,7 +237,7 @@ class MicrophoneOSDContainer(GenericOSDContainer):
             is_over_amplified = volume > 100
             self.previous_volume = volume
 
-            self.scale.set_has_class("overamplified", is_over_amplified)
+            self.scale.toggle_css_class("overamplified", is_over_amplified)
 
             if self.audio_service.microphone.muted or volume == 0:
                 self.update_icon()

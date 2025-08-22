@@ -89,7 +89,7 @@ class CollapsibleGroupWidget(ButtonWidget):
             self.popup.hide_popover()
 
         self.is_expanded = expanded
-        self.set_has_class("active", self.is_expanded)
+        self.toggle_css_class("active", self.is_expanded)
 
     def _on_toggle_clicked(self, button):
         """Handle the toggle button click."""

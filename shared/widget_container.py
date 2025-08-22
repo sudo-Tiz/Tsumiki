@@ -23,7 +23,7 @@ class BaseWidget(Widget):
         else:
             self.show()
 
-    def set_has_class(self, class_name: str | Iterable[str], condition: bool):
+    def toggle_css_class(self, class_name: str | Iterable[str], condition: bool):
         if condition:
             self.add_style_class(class_name)
         else:

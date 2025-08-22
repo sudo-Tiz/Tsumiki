@@ -76,7 +76,7 @@ class CommandSwitcher(ButtonWidget):
     def update_ui(self, *_):
         is_running = helpers.is_app_running(self.command)
 
-        self.set_has_class("active", is_running)
+        self.toggle_css_class("active", is_running)
 
         label = "Enabled" if is_running else "Disabled"
 
