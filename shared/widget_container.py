@@ -3,6 +3,7 @@ from typing import Iterable
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
+from fabric.widgets.wayland import WaylandWindow as Window
 from fabric.widgets.widget import Widget
 
 from utils.config import widget_config
@@ -26,6 +27,13 @@ class BaseWidget(Widget):
             self.add_style_class(class_name)
         else:
             self.remove_style_class(class_name)
+
+
+class BaseWindow(Window, BaseWidget):
+    """A base window class that can be extended for custom windows."""
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
 
 
 class BoxWidget(Box, BaseWidget):
