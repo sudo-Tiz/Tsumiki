@@ -11,8 +11,6 @@ from utils.config import widget_config
 class BaseWidget(Widget):
     """A base widget class that can be extended for custom widgets."""
 
-    """A widget that can be toggled on and off."""
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
