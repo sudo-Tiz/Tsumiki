@@ -195,8 +195,7 @@
 			"icon": true,
 			"tooltip": true,
 			"truncation": true,
-			"truncation_size": 20,
-			"mappings": false,
+			"truncation_size": 50,
 			"title_map": []
 		},
 		"workspaces": {
@@ -250,6 +249,8 @@
 			"clock_format": "24h",
 			"auto_hide": false,
 			"auto_hide_timeout": 2000,
+			"hover_reveal": false,
+			"reveal_duration": 500,
 			"notification": {
 				"enabled": true,
 				"count": true,

@@ -125,6 +125,7 @@ DEFAULT_CONFIG = {
             "calendar": True,
             "clock_format": "12h",
             "hover_reveal": False,
+            "reveal_duration": 500,
             "notification": {
                 "enabled": True,
                 "count": True,

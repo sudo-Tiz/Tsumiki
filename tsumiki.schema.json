@@ -1281,6 +1281,16 @@
 							"default": 2000,
 							"description": "Delay in milliseconds before auto-hide."
 						},
+						"hover_reveal": {
+							"type": "boolean",
+							"default": true,
+							"description": "Determines whether to reveal the updates section on hover."
+						},
+						"reveal_duration": {
+							"type": "number",
+							"default": 500,
+							"description": "The duration of the reveal animation for the updates section."
+						},
 						"notification": {
 							"type": "object",
 							"properties": {

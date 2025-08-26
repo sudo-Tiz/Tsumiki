@@ -90,6 +90,7 @@
     - **`calendar`**: `bool` (default: true)
     - **`clock_format`**: `str` (default: "12h")
     - **`hover_reveal`**: `bool` (default: false)
+    - **`reveal_duration`**: `int` (default: 500)
     - **`notification`**: `object`
       - **`enabled`**: `bool` (default: true)
       - **`count`**: `bool` (default: true)
@@ -254,7 +255,7 @@
   - **`window_title`**: `object`
     - **`icon`**: `bool` (default: true)
     - **`truncation`**: `bool` (default: true)
-    - **`truncation_size`**: `int` (default: 30)
+    - **`truncation_size`**: `int` (default: 20)
     - **`tooltip`**: `bool` (default: true)
     - **`mappings`**: `bool` (default: true)
     - **`title_map`**: `list` (default: [])

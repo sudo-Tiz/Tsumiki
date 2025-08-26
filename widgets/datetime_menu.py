@@ -5,6 +5,7 @@ from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.datetime import DateTime
 from fabric.widgets.label import Label
+from fabric.widgets.revealer import Revealer
 from fabric.widgets.scrolledwindow import ScrolledWindow
 from fabric.widgets.separator import Separator
 from gi.repository import GdkPixbuf, GLib, Gtk
@@ -381,13 +382,6 @@ class DateTimeWidget(ButtonWidget):
 
         self.popup = None
 
-        outer_box = Box(
-            spacing=10,
-            v_align="center",
-        )
-
-        self.children = outer_box
-
         if notification_config.get("enabled", True):
             self.notification_indicator = nerd_font_icon(
                 icon=text_icons["notifications"]["noisy"],
@@ -424,11 +418,21 @@ class DateTimeWidget(ButtonWidget):
                 },
             )
 
-            outer_box.add(self.notification_indicator_box)
+            self.container_box.add(self.notification_indicator_box)
 
-        outer_box.add(
-            DateTime(self.config.get("format", "%m-%d %H:%M"), name="date-time")
-        )
+        if self.config.get("hover_reveal", True):
+            self.revealer = Revealer(
+                child=DateTime(
+                    self.config.get("format", "%m-%d %H:%M"), name="date-time"
+                ),
+                transition_duration=500,
+                transition_type="slide_right",
+            )
+            self.container_box.add(self.revealer)
+        else:
+            self.container_box.add(
+                DateTime(self.config.get("format", "%m-%d %H:%M"), name="date-time")
+            )
 
         self.connect(
             "clicked",
