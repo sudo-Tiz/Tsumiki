@@ -404,6 +404,8 @@ DateTimeMenu = TypedDict(
         "auto_hide_timeout": int,
         "transition_type": str,
         "transition_duration": int,
+        "hover_reveal": bool,
+        "reveal_duration": int,
     },
 )
 

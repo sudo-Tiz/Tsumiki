@@ -45,7 +45,7 @@ class UpdatesWidget(ButtonWidget):
             if self.config.get("hover_reveal", True):
                 self.revealer = Revealer(
                     child=self.update_label,
-                    transition_duration=500,
+                    transition_duration=self.config.get("reveal_duration", 500),
                     transition_type="slide_right",
                 )
                 self.container_box.add(self.revealer)

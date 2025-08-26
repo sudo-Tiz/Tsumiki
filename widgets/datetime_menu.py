@@ -425,7 +425,7 @@ class DateTimeWidget(ButtonWidget):
                 child=DateTime(
                     self.config.get("format", "%m-%d %H:%M"), name="date-time"
                 ),
-                transition_duration=500,
+                transition_duration=self.config.get("reveal_duration", 500),
                 transition_type="slide_right",
             )
             self.container_box.add(self.revealer)
