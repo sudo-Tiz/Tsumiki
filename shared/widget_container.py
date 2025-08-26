@@ -1,5 +1,6 @@
 from typing import Iterable
 
+from fabric.utils import bulk_connect
 from fabric.widgets.box import Box
 from fabric.widgets.button import Button
 from fabric.widgets.eventbox import EventBox
@@ -74,6 +75,20 @@ class EventBoxWidget(EventBox, BaseWidget):
             self.box,
         )
 
+        if self.config.get("hover_reveal", True):
+            # Connect to enter and leave events to toggle the revealer
+            bulk_connect(
+                self,
+                {
+                    "enter-notify-event": self._toggle_revealer,
+                    "leave-notify-event": self._toggle_revealer,
+                },
+            )
+
+    def _toggle_revealer(self, *_):
+        if hasattr(self, "revealer"):
+            self.revealer.set_reveal_child(not self.revealer.get_reveal_child())
+
 
 class ButtonWidget(Button, BaseWidget):
     """A container for button widgets. Only used for new widgets that are used on bar"""
@@ -89,6 +104,20 @@ class ButtonWidget(Button, BaseWidget):
 
         self.box = Box(style_classes="box")
         self.add(self.box)
+
+        if self.config.get("hover_reveal", True):
+            # Connect to enter and leave events to toggle the revealer
+            bulk_connect(
+                self,
+                {
+                    "enter-notify-event": self._toggle_revealer,
+                    "leave-notify-event": self._toggle_revealer,
+                },
+            )
+
+    def _toggle_revealer(self, *_):
+        if hasattr(self, "revealer"):
+            self.revealer.set_reveal_child(not self.revealer.get_reveal_child())
 
 
 class WidgetGroup(BoxWidget):

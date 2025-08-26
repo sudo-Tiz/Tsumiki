@@ -61,19 +61,6 @@ class UpdatesWidget(ButtonWidget):
         # reusing the fabricator to call specified intervals
         reusable_fabricator.connect("changed", self.should_update)
 
-        if self.config.get("hover_reveal", True):
-            # Connect to enter and leave events to toggle the revealer
-            bulk_connect(
-                self,
-                {
-                    "enter-notify-event": self._toggle_revealer,
-                    "leave-notify-event": self._toggle_revealer,
-                },
-            )
-
-    def _toggle_revealer(self, *_):
-        if hasattr(self, "revealer"):
-            self.revealer.set_reveal_child(not self.revealer.get_reveal_child())
 
     def _build_base_command(self) -> str:
         script = get_relative_path("../assets/scripts/systemupdates.sh")

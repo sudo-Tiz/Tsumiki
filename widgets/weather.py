@@ -2,7 +2,7 @@ import time
 from datetime import datetime
 
 import gi
-from fabric.utils import bulk_connect, cooldown, get_relative_path
+from fabric.utils import cooldown, get_relative_path
 from fabric.widgets.box import Box
 from fabric.widgets.grid import Grid
 from fabric.widgets.label import Label
@@ -374,20 +374,6 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
 
         # Set up a fabricator to call the update_label method at specified intervals
         reusable_fabricator.connect("changed", self.update_ui)
-
-        if self.config.get("hover_reveal", True):
-            # Connect to enter and leave events to toggle the revealer
-            bulk_connect(
-                self,
-                {
-                    "enter-notify-event": self._toggle_revealer,
-                    "leave-notify-event": self._toggle_revealer,
-                },
-            )
-
-    def _toggle_revealer(self, *_):
-        if hasattr(self, "revealer"):
-            self.revealer.set_reveal_child(not self.revealer.get_reveal_child())
 
     def update_data(self, data):
         self.update_time = datetime.now()
