@@ -283,8 +283,8 @@ class Dock(Window):
         self.children = EventBox(
             events=["enter-notify", "leave-notify"],
             child=Box(style="min-height: 1px", children=self.revealer),
-            on_enter_notify_event=lambda *_: self.revealer.reveal(),
-            on_leave_notify_event=lambda *_: self.revealer.unreveal(),
+            on_enter_notify_event=lambda *_: self.revealer.set_reveal_child(True),
+            on_leave_notify_event=lambda *_: self.revealer.set_reveal_child(False),
         )
 
         if self.config.get("show_when_no_windows", False):
@@ -313,6 +313,6 @@ class Dock(Window):
             return
 
         if data.get("windows", 0) == 0:
-            self.revealer.reveal()
+            self.revealer.set_reveal_child(True)
         else:
-            self.revealer.unreveal()
+            self.revealer.set_reveal_child(False)

@@ -188,7 +188,7 @@ class Popover(Widget):
             self._manager.activate_popover(self)
             self._content_window.show()
             if self._revealer:
-                self._revealer.reveal()
+                self._revealer.set_reveal_child(True)
             self._visible = True
 
         self.emit("popover-opened")
@@ -276,7 +276,7 @@ class Popover(Widget):
             return False
 
         if self._revealer:
-            self._revealer.unreveal()
+            self._revealer.set_reveal_child(False)
             # Wait for animation to finish before hiding window
             GLib.timeout_add(
                 self._revealer.get_transition_duration(), self._finalize_hide
