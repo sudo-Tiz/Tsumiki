@@ -261,11 +261,11 @@ class PopupWindow(Window):
     def on_key_release(self, _, event_key: Gdk.EventKey):
         if event_key.keyval == Gdk.KEY_Escape:
             self.popup_visible = False
-            self.reveal_child.revealer.set_reveal_child(self.popup_visible)
+            self.reveal_child.revealer.unreveal()
 
     def on_inhibit_click(self, *_):
         self.popup_visible = False
-        self.reveal_child.revealer.set_reveal_child(self.popup_visible)
+        self.reveal_child.revealer.unreveal()
 
     def toggle_popup(self, monitor: bool = False):
         if monitor:
@@ -294,13 +294,13 @@ class PopupWindow(Window):
             self.current_timeout = 0
             return
         self.popup_visible = True
-        self.reveal_child.revealer.set_reveal_child(self.popup_visible)
+        self.reveal_child.revealer.reveal()
         self.popup_running = True
 
         def popup_func():
             if self.current_timeout >= self.timeout:
                 self.popup_visible = False
-                self.reveal_child.revealer.set_reveal_child(self.popup_visible)
+                self.reveal_child.revealer.unreveal()
                 self.current_timeout = 0
                 self.popup_running = False
                 return False

@@ -332,13 +332,12 @@ class OSDContainer(Window):
             self.hide_timer_id = None
 
         # Delay reveal to ensure animation plays
-        self.revealer.set_reveal_child(False)
-        GLib.idle_add(lambda: self.revealer.set_reveal_child(True))
+        self.revealer.unreveal()
 
         self.hide_timer_id = GLib.timeout_add(self.timeout, self._hide)
 
     def _hide(self):
-        self.revealer.set_reveal_child(False)  # Trigger hide animation
+        self.revealer.unreveal()  # Trigger hide animation
 
         # Wait for the animation to finish before hiding the window completely
         GLib.timeout_add(self.revealer.get_transition_duration(), self._finalize_hide)
