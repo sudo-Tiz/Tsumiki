@@ -54,11 +54,11 @@ class CollapsibleGroupWidget(ButtonWidget):
                 icon=self.icon_name,
                 props={"style_classes": "panel-font-icon"},
             )
-            self.box.add(icon)
+            self.container_box.add(icon)
 
         if self.show_label:
             label = Label(label=self.label_text, style_classes="panel-text")
-            self.box.add(label)
+            self.container_box.add(label)
 
     def _setup_popup(self):
         """Set up the popup that contains the grouped widgets."""
@@ -137,7 +137,7 @@ class CollapsibleGroupWidget(ButtonWidget):
         self._read_config()
 
         # Clear and rebuild button content with new config
-        for child in self.box.get_children():
+        for child in self.container_box.get_children():
             child.destroy()
 
         self._setup_button_content()

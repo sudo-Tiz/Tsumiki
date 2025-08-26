@@ -2,7 +2,6 @@ import json
 from datetime import datetime
 
 from fabric.utils import (
-    bulk_connect,
     cooldown,
     exec_shell_command_async,
     get_relative_path,
@@ -38,7 +37,7 @@ class UpdatesWidget(ButtonWidget):
                 icon=self.config.get("no_updates_icon", "󰒲"),
                 props={"style_classes": "panel-font-icon"},
             )
-            self.box.add(self.icon)
+            self.container_box.add(self.icon)
 
         if self.config.get("label", True):
             self.update_label = Label(label="0", style_classes="panel-text")
@@ -49,9 +48,9 @@ class UpdatesWidget(ButtonWidget):
                     transition_duration=500,
                     transition_type="slide_right",
                 )
-                self.box.add(self.revealer)
+                self.container_box.add(self.revealer)
             else:
-                self.box.add(self.update_label)
+                self.container_box.add(self.update_label)
 
         self.connect("button-press-event", self.on_button_press)
 
@@ -60,7 +59,6 @@ class UpdatesWidget(ButtonWidget):
 
         # reusing the fabricator to call specified intervals
         reusable_fabricator.connect("changed", self.should_update)
-
 
     def _build_base_command(self) -> str:
         script = get_relative_path("../assets/scripts/systemupdates.sh")

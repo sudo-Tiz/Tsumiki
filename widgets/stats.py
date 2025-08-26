@@ -43,7 +43,7 @@ class CpuWidget(ButtonWidget):
                 label="0%",
                 style_classes="panel-text",
             )
-            self.box.children = self.cpu_level_label
+            self.container_box.children = self.cpu_level_label
 
         elif self.current_mode == "progress":
             # Create a circular progress bar to display the volume level
@@ -64,7 +64,7 @@ class CpuWidget(ButtonWidget):
             )
 
             # Create an event box to handle scroll events for volume control
-            self.box.children = (
+            self.container_box.children = (
                 Overlay(child=self.progress_bar, overlays=self.icon, name="overlay"),
             )
 
@@ -79,7 +79,7 @@ class CpuWidget(ButtonWidget):
                 label="0%",
                 style_classes="panel-text",
             )
-            self.box.children = (self.icon, self.cpu_level_label)
+            self.container_box.children = (self.icon, self.cpu_level_label)
 
         # Set up a fabricator to call the update_label method when the CPU usage changes
         util_fabricator.connect("changed", self.update_ui)
@@ -167,7 +167,7 @@ class GpuWidget(ButtonWidget):
                 label="0%",
                 style_classes="panel-text",
             )
-            self.box.children = self.gpu_level_label
+            self.container_box.children = self.gpu_level_label
 
         elif self.current_mode == "progress":
             # Create a circular progress bar to display the volume level
@@ -188,7 +188,7 @@ class GpuWidget(ButtonWidget):
             )
 
             # Create an event box to handle scroll events for volume control
-            self.box.children = (
+            self.container_box.children = (
                 Overlay(child=self.progress_bar, overlays=self.icon, name="overlay"),
             )
 
@@ -203,7 +203,7 @@ class GpuWidget(ButtonWidget):
                 label="0%",
                 style_classes="panel-text",
             )
-            self.box.children = (self.icon, self.gpu_level_label)
+            self.container_box.children = (self.icon, self.gpu_level_label)
 
         # Set up a fabricator to call the update_label method when the CPU usage changes
         util_fabricator.connect("changed", self.update_ui)
@@ -277,7 +277,7 @@ class MemoryWidget(ButtonWidget):
                 label="0%", style_classes="panel-text", visible=False
             )
 
-            self.box.children = self.memory_level_label
+            self.container_box.children = self.memory_level_label
 
         elif self.current_mode == "progress":
             # Create a circular progress bar to display the volume level
@@ -298,7 +298,7 @@ class MemoryWidget(ButtonWidget):
             )
 
             # Create an event box to handle scroll events for volume control
-            self.box.children = (
+            self.container_box.children = (
                 Overlay(child=self.progress_bar, overlays=self.icon, name="overlay"),
             )
 
@@ -313,7 +313,7 @@ class MemoryWidget(ButtonWidget):
                 label="0%",
                 style_classes="panel-text",
             )
-            self.box.children = (self.icon, self.memory_level_label)
+            self.container_box.children = (self.icon, self.memory_level_label)
 
         # Set up a fabricator to call the update_label method  at specified intervals
         util_fabricator.connect("changed", self.update_ui)
@@ -381,7 +381,7 @@ class StorageWidget(ButtonWidget):
                 style_classes="panel-text",
             )
 
-            self.box.children = self.storage_level_label
+            self.container_box.children = self.storage_level_label
 
         elif self.current_mode == "progress":
             # Create a circular progress bar to display the volume level
@@ -402,7 +402,7 @@ class StorageWidget(ButtonWidget):
             )
 
             # Create an event box to handle scroll events for volume control
-            self.box.children = (
+            self.container_box.children = (
                 Overlay(child=self.progress_bar, overlays=self.icon, name="overlay"),
             )
 
@@ -418,7 +418,7 @@ class StorageWidget(ButtonWidget):
                 style_classes="panel-text",
             )
 
-            self.box.children = (self.icon, self.storage_level_label)
+            self.container_box.children = (self.icon, self.storage_level_label)
 
         # Set up a fabricator to call the update_label method at specified intervals
         util_fabricator.connect("changed", self.update_ui)
@@ -507,7 +507,7 @@ class NetworkUsageWidget(ButtonWidget):
             visible=show_download,
         )
 
-        self.box.children = (
+        self.container_box.children = (
             self.upload_icon,
             self.upload_label,
             self.download_icon,

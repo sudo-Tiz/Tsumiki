@@ -28,9 +28,9 @@ class LanguageWidget(ButtonWidget):
                     "style_classes": "panel-font-icon",
                 },
             )
-            self.box.add(self.icon)
+            self.container_box.add(self.icon)
 
-        self.box.add(self.lang)
+        self.container_box.add(self.lang)
 
         if self.config.get("tooltip", False):
             self.set_tooltip_text(f"Language: {self.lang.get_label()}")

@@ -334,7 +334,7 @@ class EmojiPickerWidget(ButtonWidget):
             **kwargs,
         )
 
-        self.box.add(
+        self.container_box.add(
             nerd_font_icon(
                 icon=self.config.get("icon", "󰕸"),
                 props={"style_classes": "panel-font-icon"},
@@ -342,7 +342,7 @@ class EmojiPickerWidget(ButtonWidget):
         )
 
         if self.config.get("label", True):
-            self.box.add(Label(label="Emoji", style_classes="panel-text"))
+            self.container_box.add(Label(label="Emoji", style_classes="panel-text"))
 
         if self.config.get("tooltip", False):
             self.set_tooltip_text("Emoji Picker")

@@ -47,7 +47,7 @@ class CommandSwitcher(ButtonWidget):
             props={"style_classes": "panel-font-icon"},
         )
 
-        self.box.add(
+        self.container_box.add(
             self.icon,
         )
 
@@ -56,7 +56,7 @@ class CommandSwitcher(ButtonWidget):
                 label="Enabled",
                 style_classes="panel-text",
             )
-            self.box.add(self.label_text)
+            self.container_box.add(self.label_text)
 
         self.connect("clicked", self.handle_click)
 

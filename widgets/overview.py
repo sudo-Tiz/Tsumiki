@@ -13,13 +13,13 @@ class OverviewWidget(ButtonWidget):
         if self.config.get("tooltip", False):
             self.set_tooltip_text("Overview")
 
-        self.box.children = nerd_font_icon(
+        self.container_box.children = nerd_font_icon(
             icon=self.config.get("icon", "󰕸"),
             props={"style_classes": "panel-font-icon"},
         )
 
         if self.config.get("label", True):
-            self.box.add(Label(label="overview", style_classes="panel-text"))
+            self.container_box.add(Label(label="overview", style_classes="panel-text"))
 
         # Lazy-init overview popup
         self._overview_popup = None

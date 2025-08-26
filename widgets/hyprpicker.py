@@ -16,7 +16,7 @@ class HyprPickerWidget(ButtonWidget):
 
         if self.config.get("show_icon", True):
             # Create a TextIcon with the specified icon and size
-            self.box.add(
+            self.container_box.add(
                 nerd_font_icon(
                     icon=self.config.get("icon", "󰕸"),
                     props={"style_classes": "panel-font-icon"},
@@ -24,7 +24,7 @@ class HyprPickerWidget(ButtonWidget):
             )
 
         if self.config.get("label", True):
-            self.box.add(Label(label="picker", style_classes="panel-text"))
+            self.container_box.add(Label(label="picker", style_classes="panel-text"))
 
         self.connect("button-press-event", self.on_button_press)
 

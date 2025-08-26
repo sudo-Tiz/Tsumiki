@@ -24,7 +24,7 @@ class WindowTitleWidget(ButtonWidget):
         )
 
         # Add the ActiveWindow widget as a child
-        self.box.children = self.active_window
+        self.container_box.children = self.active_window
 
     def get_title(self, win_title: str, win_class: str):
         mappings_enabled = self.config.get("mappings", True)

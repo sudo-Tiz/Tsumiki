@@ -102,11 +102,12 @@ class ButtonWidget(Button, BaseWidget):
         widget_name = kwargs.get("name", "button")
         self.config = widget_config["widgets"].get(widget_name, {})
 
-        self.box = Box(style_classes="box")
-        self.add(self.box)
+        self.container_box = Box(style_classes="box")
+        self.add(self.container_box)
 
         if self.config.get("hover_reveal", True):
             # Connect to enter and leave events to toggle the revealer
+
             bulk_connect(
                 self,
                 {

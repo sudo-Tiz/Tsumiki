@@ -14,7 +14,7 @@ class SubMapWidget(ButtonWidget):
 
         self.submap_label = Label(label="submap", style_classes="panel-text")
 
-        self.box.add(self.submap_label)
+        self.container_box.add(self.submap_label)
 
         if self.config.get("show_icon", True):
             # Create a TextIcon with the specified icon and size
@@ -22,7 +22,7 @@ class SubMapWidget(ButtonWidget):
                 icon=self.config.get("icon", "󰕸"),
                 props={"style_classes": "panel-font-icon"},
             )
-            self.box.add(self.icon)
+            self.container_box.add(self.icon)
 
         self._hyprland_connection = get_hyprland_connection()
 

@@ -24,9 +24,9 @@ class KeyboardLayoutWidget(ButtonWidget):
                 icon=self.config.get("icon", "󰕸"),
                 props={"style_classes": "panel-font-icon"},
             )
-            self.box.add(self.icon)
+            self.container_box.add(self.icon)
 
-        self.box.add(self.kb_label)
+        self.container_box.add(self.kb_label)
 
         self._hyprland_connection = get_hyprland_connection()
 

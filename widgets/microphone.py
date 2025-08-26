@@ -18,14 +18,14 @@ class MicrophoneIndicatorWidget(ButtonWidget):
             props={"style_classes": "panel-font-icon"},
         )
 
-        self.box.add(self.icon)
+        self.container_box.add(self.icon)
 
         if self.config.get("label", True):
             self.mic_label = Label(
                 label="",
                 style_classes="panel-text",
             )
-            self.box.add(self.mic_label)
+            self.container_box.add(self.mic_label)
 
         self.audio_service.connect("microphone_changed", self.update_status)
         self.update_status()

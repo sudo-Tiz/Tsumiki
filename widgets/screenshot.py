@@ -15,13 +15,15 @@ class ScreenShotWidget(ButtonWidget):
 
         self.recorder_service = None
 
-        self.box.children = nerd_font_icon(
+        self.container_box.children = nerd_font_icon(
             icon=self.config.get("icon", "󰕸"),
             props={"style_classes": "panel-font-icon"},
         )
 
         if self.config.get("label", True):
-            self.box.add(Label(label="screenshot", style_classes="panel-text"))
+            self.container_box.add(
+                Label(label="screenshot", style_classes="panel-text")
+            )
 
         if self.config.get("tooltip", False):
             self.set_tooltip_text("Screen Shot")

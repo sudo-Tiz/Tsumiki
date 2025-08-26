@@ -23,9 +23,9 @@ class WorldClockWidget(ButtonWidget):
                 icon=self.config.get("icon", "󰃰"),  # fallback icon,
                 props={"style_classes": "panel-font-icon"},
             )
-            self.box.add(self.icon)
+            self.container_box.add(self.icon)
 
-        self.box.set_spacing(10)
+        self.container_box.set_spacing(10)
 
         timezones = self.config.get("timezones", [])
 
@@ -35,7 +35,7 @@ class WorldClockWidget(ButtonWidget):
         for tz_name in timezones:
             if tz_name in valid_zones:
                 label = Label(style_classes="world-clock-label")
-                self.box.pack_start(label, True, True, 0)
+                self.container_box.pack_start(label, True, True, 0)
                 tz = ZoneInfo(tz_name)
                 self.clocks.append((label, tz))
             else:

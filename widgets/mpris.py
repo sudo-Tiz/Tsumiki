@@ -29,7 +29,7 @@ class MprisWidget(ButtonWidget):
         self.label = Label(label="Nothing playing", style_classes="panel-text")
 
         self.cover = Box(style_classes="cover")
-        self.box.children = [self.cover, self.label]
+        self.container_box.children = [self.cover, self.label]
 
         # Services
         self.mpris_manager = MprisPlayerManager()

@@ -346,7 +346,7 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
                 "style_classes": "panel-font-icon",
             },
         )
-        self.box.add(self.weather_icon)
+        self.container_box.add(self.weather_icon)
 
         self.popover = None
 
@@ -366,9 +366,9 @@ class WeatherWidget(ButtonWidget, BaseWeatherWidget):
                     transition_duration=500,
                     transition_type="slide_right",
                 )
-                self.box.add(self.revealer)
+                self.container_box.add(self.revealer)
             else:
-                self.box.add(self.weather_label)
+                self.container_box.add(self.weather_label)
 
         self.update_ui(forced=True)
 

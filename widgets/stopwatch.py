@@ -26,7 +26,7 @@ class StopWatchWidget(ButtonWidget):
         )
 
         self.time_label = Label(label="00:00", style_classes="panel-text")
-        self.box.children = (self.icon, self.time_label)
+        self.container_box.children = (self.icon, self.time_label)
 
         self.connect("clicked", self.handle_click)
 

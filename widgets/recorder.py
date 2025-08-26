@@ -17,7 +17,7 @@ class RecorderWidget(ButtonWidget):
             icon=text_icons["recorder"],
             props={"style_classes": "panel-font-icon"},
         )
-        self.box.add(self.recording_idle_image)
+        self.container_box.add(self.recording_idle_image)
 
         if self.config.get("tooltip"):
             self.set_tooltip_text("Recording stopped")
@@ -65,12 +65,12 @@ class RecorderWidget(ButtonWidget):
             self.recorder_service.screenrecord_start(config=self.config)
 
     def update_ui(self, _, is_recording: bool):
-        current_children = self.box.get_children()
+        current_children = self.container_box.get_children()
 
         if is_recording:
             if self.recording_idle_image in current_children:
-                self.box.remove(self.recording_idle_image)
-                self.box.add(self.recording_ongoing_lottie)
+                self.container_box.remove(self.recording_idle_image)
+                self.container_box.add(self.recording_ongoing_lottie)
 
             self.recording_ongoing_lottie.play_loop()
 
@@ -81,8 +81,8 @@ class RecorderWidget(ButtonWidget):
                 self._recording_lottie
                 and self.recording_ongoing_lottie in current_children
             ):
-                self.box.remove(self.recording_ongoing_lottie)
-                self.box.add(self.recording_idle_image)
+                self.container_box.remove(self.recording_ongoing_lottie)
+                self.container_box.add(self.recording_idle_image)
 
                 self.recording_ongoing_lottie.stop_play()
 

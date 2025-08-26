@@ -33,7 +33,7 @@ class CavaWidget(ButtonWidget):
 
         script_path = get_relative_path("../assets/scripts/cava.sh")
 
-        self.box.children = Box(spacing=1, children=[cava_label]).build(
+        self.container_box.children = Box(spacing=1, children=[cava_label]).build(
             lambda box, _: Fabricator(
                 poll_from=f"bash -c '{script_path} {bars}'",
                 stream=True,

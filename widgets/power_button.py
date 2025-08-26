@@ -126,10 +126,10 @@ class PowerWidget(ButtonWidget):
                 icon=self.config.get("icon", "󰕸"),
                 props={"style_classes": "panel-font-icon"},
             )
-            self.box.add(self.icon)
+            self.container_box.add(self.icon)
 
         if self.config.get("label", True):
-            self.box.add(Label(label="power", style_classes="panel-text"))
+            self.container_box.add(Label(label="power", style_classes="panel-text"))
 
         if self.config.get("tooltip", False):
             self.set_tooltip_text("Power")
