@@ -7,10 +7,9 @@ set -o pipefail # 🛠️ Prevent errors in a pipeline from being masked
 
 # --- Check Arch-based distro ---
 if ! grep -qiE "arch|manjaro|endeavouros|arcolinux|garuda|artix|rebornos|archcraft|parabola|blackarch|chakra|cachyos" /etc/os-release; then
-    echo "⚠️  This script is designed to run on Arch-based systems (Arch, Manjaro, EndeavourOS, ArcoLinux, Garuda, Artix, RebornOS, Archcraft, Parabola, BlackArch, Chakra, CachyOS)."
-    exit 1
+	echo "⚠️  This script is designed to run on Arch-based systems (Arch, Manjaro, EndeavourOS, ArcoLinux, Garuda, Artix, RebornOS, Archcraft, Parabola, BlackArch, Chakra, CachyOS)."
+	exit 1
 fi
-
 
 SCRIPT_PATH=$(readlink -f "$0")
 INSTALL_DIR=$(dirname "$SCRIPT_PATH")
@@ -48,58 +47,58 @@ check_prerequisites() {
 }
 
 ensure_venv() {
-    local action=${1:-"check"}
+	local action=${1:-"check"}
 
-    cd "$INSTALL_DIR" || {
-        log_error "📂 Directory $INSTALL_DIR does not exist."
-        exit 1
-    }
+	cd "$INSTALL_DIR" || {
+		log_error "📂 Directory $INSTALL_DIR does not exist."
+		exit 1
+	}
 
-    case "$action" in
-        check)
-            if [ ! -d .venv ]; then
-                log_error "❌ Virtual environment does not exist. Please set it up first."
-                exit 1
-            fi
-            ;;
-        setup)
-            if [ ! -d .venv ]; then
-                log_info "⚙️  Creating virtual environment..."
-                if ! python3 -m venv .venv; then
-                    log_error "❌ Failed to create virtual environment."
-                    exit 1
-                fi
-                log_success "🎉 Virtual environment created successfully."
-            else
-                log_info "♻️  Using existing virtual environment."
-            fi
-            ;;
-        activate)
-            if ! source .venv/bin/activate; then
-                log_error "❌ Failed to activate virtual environment."
-                exit 1
-            fi
-            ;;
-        *)
-            log_error "Invalid action for ensure_venv: $action"
-            exit 1
-            ;;
-    esac
+	case "$action" in
+	check)
+		if [ ! -d .venv ]; then
+			log_error "❌ Virtual environment does not exist. Please set it up first."
+			exit 1
+		fi
+		;;
+	setup)
+		if [ ! -d .venv ]; then
+			log_info "⚙️  Creating virtual environment..."
+			if ! python3 -m venv .venv; then
+				log_error "❌ Failed to create virtual environment."
+				exit 1
+			fi
+			log_success "🎉 Virtual environment created successfully."
+		else
+			log_info "♻️  Using existing virtual environment."
+		fi
+		;;
+	activate)
+		if ! source .venv/bin/activate; then
+			log_error "❌ Failed to activate virtual environment."
+			exit 1
+		fi
+		;;
+	*)
+		log_error "Invalid action for ensure_venv: $action"
+		exit 1
+		;;
+	esac
 }
 
 setup_venv() {
-    ensure_venv setup
-    ensure_venv activate
+	ensure_venv setup
+	ensure_venv activate
 
-    log_info "📦 Installing Python dependencies..."
-    if ! pip install -r requirements.txt; then
-        log_error "❌ Failed to install packages from requirements.txt."
-        deactivate
-        exit 1
-    fi
-    log_success "✅ Python dependencies installed successfully."
+	log_info "📦 Installing Python dependencies..."
+	if ! pip install -r requirements.txt; then
+		log_error "❌ Failed to install packages from requirements.txt."
+		deactivate
+		exit 1
+	fi
+	log_success "✅ Python dependencies installed successfully."
 
-    deactivate
+	deactivate
 }
 
 copy_config_files() {
@@ -165,7 +164,7 @@ EOF
 		setsid python3 main.py >/dev/null 2>&1 &
 		pid=$!
 		sleep 0.1 # Give a moment for the process to potentially fail on startup.
-		if ! ps -p "$pid" > /dev/null; then
+		if ! ps -p "$pid" >/dev/null; then
 			log_error "❌ Failed to start Tsumiki Bar in detached mode."
 			exit 1
 		fi
@@ -187,8 +186,53 @@ install_packages() {
 	echo -e "\e[1;34m 📦 Installing the pre-requisites, may take a while....\e[0m\n"
 
 	# Install packages using pacman
-	pacman_deps=( ... )
-	aur_deps=( ... )
+	pacman_deps=(
+		pipewire
+		playerctl
+		dart-sass
+		power-profiles-daemon
+		networkmanager
+		brightnessctl
+		pkgconf
+		wf-recorder
+		kitty
+		python
+		pacman-contrib
+		gtk3
+		cairo
+		gtk-layer-shell
+		libgirepository
+		noto-fonts-emoji
+		gobject-introspection
+		gobject-introspection-runtime
+		python-pip
+		python-gobject
+		python-psutil
+		python-cairo
+		python-loguru
+		python-setproctitle
+		libnotify
+		cliphist
+		python-requests
+		satty
+	)
+
+	# Install packages from AUR using yay
+	aur_deps=(
+		gray-git
+		python-fabric-git
+		gnome-bluetooth-3.0
+		python-rlottie-python
+		python-pytomlpp
+		slurp
+		imagemagick
+		tesseract
+		tesseract-data-eng
+		ttf-jetbrains-mono-nerd
+		grimblast-git
+		python-ijson
+		glace-git
+	)
 
 	sudo pacman -S --noconfirm --needed "${pacman_deps[@]}" || {
 		log_error "❌ Failed to install pacman dependencies."
@@ -214,24 +258,24 @@ install_packages() {
 }
 
 usage() {
-    log_error "❌ Usage: $0 [OPTION]..."
-    log_info "ℹ️  Execute one or more operations in sequence."
-    log_success "✅ Available options:"
-    log_success "  ▶️  -start         Start the bar"
-    log_success "  🔄  -d             Enable detached mode (run in background)"
-    log_success "  🛑  -stop          Stop running instances"
-    log_success "  ⬆️  -update        Update from git"
-    log_success "  📦  -install       Install system packages"
-    log_success "  🐍  -setup         Setup virtual environment and Python dependencies"
-    log_success "  🛠️  -install-setup Install packages and setup virtual environment"
-    log_success "  🔁  -restart       Kill existing instances and start the bar"
-    log_warning "⚡ Examples:"
-    log_info "  $0 -start                    # ▶️ Just start the bar"
-    log_info "  $0 -d -start                 # ▶️ Detached start"
-    log_info "  $0 -stop                     # 🛑 Stop running instances"
-    log_info "  $0 -update -start            # ⬆️ Update then start"
-    log_info "  $0 -install -setup -start    # 📦 Full setup and start"
-    log_info "  $0 -restart                  # 🔁 Restart the bar"
+	log_error "❌ Usage: $0 [OPTION]..."
+	log_info "ℹ️  Execute one or more operations in sequence."
+	log_success "✅ Available options:"
+	log_success "  ▶️  -start         Start the bar"
+	log_success "  🔄  -d             Enable detached mode (run in background)"
+	log_success "  🛑  -stop          Stop running instances"
+	log_success "  ⬆️  -update        Update from git"
+	log_success "  📦  -install       Install system packages"
+	log_success "  🐍  -setup         Setup virtual environment and Python dependencies"
+	log_success "  🛠️  -install-setup Install packages and setup virtual environment"
+	log_success "  🔁  -restart       Kill existing instances and start the bar"
+	log_warning "⚡ Examples:"
+	log_info "  $0 -start                    # ▶️ Just start the bar"
+	log_info "  $0 -d -start                 # ▶️ Detached start"
+	log_info "  $0 -stop                     # 🛑 Stop running instances"
+	log_info "  $0 -update -start            # ⬆️ Update then start"
+	log_info "  $0 -install -setup -start    # 📦 Full setup and start"
+	log_info "  $0 -restart                  # 🔁 Restart the bar"
 }
 
 kill_existing() {
@@ -242,7 +286,6 @@ kill_existing() {
 	done
 	log_success "✅ Existing instances stopped."
 }
-
 
 check_prerequisites
 
