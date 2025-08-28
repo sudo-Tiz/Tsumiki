@@ -348,6 +348,15 @@ Just click the shiny "Star" button at the top right (it’s begging for your att
 
 Thanks for making this project a little bit more awesome! 🚀
 
+# My other projects
+- [pokego](https://github.com/rubiin/pokego)
+- [nfdl](https://github.com/rubiin/nfdl)
+- [unprofane](https://github.com/rubiin/unprofane)
+- [url-minify](https://github.com/rubiin/url-minify)
+
+  My dotfiles are [here](https://github.com/rubiin/dotfiles) 
+
+
 ## Star History
 
 <a href="https://star-history.com/#rubiin/Tsumiki&Timeline">
