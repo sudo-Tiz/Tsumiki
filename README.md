@@ -148,7 +148,6 @@ cliphist
 
 ```sh
 git clone https://github.com/rubiin/Tsumiki.git ~/.config/tsumiki
-cd bar
 ```
 
 - Run the following command to install the required packages for particular os, few of them are already installed if you have a working system:
