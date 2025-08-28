@@ -72,8 +72,6 @@ class QuickSettingsButtonBox(Box):
 
         self.active_submenu = None
 
-        self.connect("unmap", lambda *_: self.close_all_submenus())
-
         # Bluetooth
         self.bluetooth_toggle = BluetoothToggle(
             submenu=BluetoothSubMenu(),
@@ -117,11 +115,15 @@ class QuickSettingsButtonBox(Box):
         self.power_pfl.connect("reveal-clicked", self.set_active_submenu)
         self.hyprsunset.connect("reveal-clicked", self.set_active_submenu)
 
-        self.add(self.grid)
-        self.add(self.wifi_toggle.submenu)
-        self.add(self.bluetooth_toggle.submenu)
-        self.add(self.power_pfl.submenu)
-        self.add(self.hyprsunset.submenu)
+        self.children = (
+            self.grid,
+            self.wifi_toggle.submenu,
+            self.bluetooth_toggle.submenu,
+            self.power_pfl.submenu,
+            self.hyprsunset.submenu,
+        )
+
+        self.connect("unmap", self.close_all_submenus)
 
     def set_active_submenu(self, btn: QSChevronButton):
         if btn.submenu != self.active_submenu and self.active_submenu is not None:
