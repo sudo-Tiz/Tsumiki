@@ -47,6 +47,11 @@ gi.require_versions({"Gtk": "3.0"})
 class QuickSettingsButtonBox(Box):
     """A box to display the quick settings buttons."""
 
+    def close_all_submenus(self, *_):
+        if self.active_submenu is not None:
+            self.active_submenu._reveal(False)
+            self.active_submenu = None
+
     def __init__(self, **kwargs):
         super().__init__(
             orientation="v",
@@ -66,6 +71,8 @@ class QuickSettingsButtonBox(Box):
         )
 
         self.active_submenu = None
+
+        self.connect("unmap", lambda *_: self.close_all_submenus())
 
         # Bluetooth
         self.bluetooth_toggle = BluetoothToggle(
