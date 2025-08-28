@@ -134,8 +134,8 @@ class QuickSettingsMenu(Box):
 
         self.config = config
 
-        avatar_path = os.path.expandvars(
-            self.config.get("user", {}).get("avatar", "$HOME/.face"))
+        raw_avatar_path = self.config.get("user", {}).get("avatar", "$HOME/.face")
+        avatar_path = os.path.expanduser(os.path.expandvars(raw_avatar_path))
         default_image = get_relative_path("../../assets/images/banner.jpg")
         user_image = avatar_path if os.path.exists(avatar_path) else default_image
         if user_image == default_image:
