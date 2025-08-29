@@ -354,7 +354,7 @@ Thanks for making this project a little bit more awesome! 🚀
 - [unprofane](https://github.com/rubiin/unprofane)
 - [url-minify](https://github.com/rubiin/url-minify)
 
-  My dotfiles are [here](https://github.com/rubiin/dotfiles) 
+  My dotfiles are [here](https://github.com/rubiin/dotfiles)
 
 
 ## Star History
