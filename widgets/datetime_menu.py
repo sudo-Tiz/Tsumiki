@@ -301,10 +301,8 @@ class DateNotificationMenu(Box):
             self.dnd_switch.connect("notify::active", self.on_dnd_switch_toggled)
 
     def on_dnd_switch_toggled(self, switch, state):
-        if switch.get_active():
-            notification_service.dont_disturb = True
-        else:
-            notification_service.dont_disturb = False
+        notification_service.dont_disturb = switch.get_active()
+
 
     def on_dnd_switch(self, _, value, *args):
         self.dnd_switch.set_active(value)
@@ -334,14 +332,11 @@ class DateNotificationMenu(Box):
     def on_notification_closed(self, _, id, reason):
         """Handle notification being closed."""
 
-        for child in self.notifications_listbox.get_children():
-            is_target = (
-                isinstance(child, DateMenuNotification)
-                and child._notification["id"] == id
-            )
-            if is_target:
-                if reason in ["dismissed-by-user", "dismissed-by-limit"]:
-                    self._remove_notification(child)
+        for row in self.notifications_listbox.get_children():
+            item = row.get_child()  # unwrap the ListBoxRow to get the actual widget
+            if isinstance(item, DateMenuNotification) and item._id == id:
+                if reason in {"dismissed-by-user", "dismissed-by-limit"}:
+                    self._remove_notification(row)
                 break
 
     def _remove_notification(self, widget):
@@ -442,7 +437,7 @@ class DateTimeWidget(ButtonWidget):
     def on_notification_count(self, _, value, *args):
         if value > 0:
             self.count_label.set_text(str(value))
-            self.count_label.set_visible(str(value))
+            self.count_label.set_visible(True)
         else:
             self.count_label.set_visible(False)
 
