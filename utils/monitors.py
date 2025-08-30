@@ -54,3 +54,12 @@ class HyprlandWithMonitors(Hyprland):
         except Exception as e:
             logger.error(f"[Monitors] Error getting current GDK monitor ID: {e}")
             return None
+
+    def get_monitor_names(self) -> list[str]:
+        """Get list of all connected monitor names."""
+        try:
+            monitors = json.loads(self.send_command("j/monitors").reply)
+            return [monitor["name"] for monitor in monitors]
+        except Exception as e:
+            logger.error(f"[Monitors] Error getting monitor names: {e}")
+            return []

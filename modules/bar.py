@@ -164,3 +164,39 @@ class StatusBar(Window):
                     layout[key].append(widget)
 
         return layout
+
+    @staticmethod
+    def create_bars(config):
+        """Crée une ou plusieurs barres selon la config multi_monitor"""
+        if config["general"].get("multi_monitor", False):
+            # Multi-monitor
+            from loguru import logger
+
+            from utils.colors import Colors
+            from utils.monitors import HyprlandWithMonitors
+
+            monitor_util = HyprlandWithMonitors()
+            monitor_names = monitor_util.get_monitor_names()
+
+            if not monitor_names:
+                logger.warning(
+                    f"{Colors.WARNING}[StatusBar] No monitors detected, "
+                    "creating single bar"
+                )
+                return [StatusBar(config)]
+
+            bars = []
+            for monitor_name in monitor_names:
+                monitor_id = monitor_util.get_gdk_monitor_id_from_name(monitor_name)
+                if monitor_id is not None:
+                    bars.append(StatusBar(config, monitor=monitor_id))
+                else:
+                    logger.warning(
+                        f"{Colors.WARNING}[StatusBar] Could not get ID for monitor: "
+                        f"{monitor_name}"
+                    )
+
+            return bars if bars else [StatusBar(config)]
+        else:
+            # Single monitor
+            return [StatusBar(config)]

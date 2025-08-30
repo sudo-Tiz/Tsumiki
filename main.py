@@ -48,8 +48,13 @@ def main():
     helpers.copy_theme(theme_config["name"])
     helpers.check_executable_exists("sass")
 
-    # Initialize the application with the status bar
-    app = Application(APPLICATION_NAME, StatusBar(widget_config))
+    # Initialize the application
+    app = Application(APPLICATION_NAME)
+
+    # Create status bars
+    bars = StatusBar.create_bars(widget_config)
+    for bar in bars:
+        app.add_window(bar)
 
     if module_options["notification"]["enabled"]:
         from modules.notification import NotificationPopup
