@@ -52,9 +52,7 @@ def main():
     app = Application(APPLICATION_NAME)
 
     # Create status bars
-    bars = StatusBar.create_bars(widget_config)
-    for bar in bars:
-        app.add_window(bar)
+    StatusBar.create_bars(app, widget_config)
 
     if module_options["notification"]["enabled"]:
         from modules.notification import NotificationPopup
